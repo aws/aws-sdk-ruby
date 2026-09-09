@@ -474,6 +474,63 @@ module Aws::SESV2
 
     # @!group API Operations
 
+    # Associates an S/MIME certificate with an email identity. After the
+    # certificate is active, Amazon SES API v2 can add an S/MIME signature
+    # to messages that you send from the associated address when signing is
+    # enabled on the configuration set used to send the message.
+    #
+    # The certificate is an X.509 certificate that you manage in Certificate
+    # Manager (ACM). You identify it by its Amazon Resource Name (ARN).
+    #
+    # * If the email identity is a domain, you must specify a `FromAddress`
+    #   that belongs to that domain or one of its subdomains. The
+    #   certificate applies to messages sent from that address.
+    #
+    # * If the email identity is an email address, `FromAddress` is
+    #   optional. If you specify it, it must exactly match the email
+    #   identity.
+    #
+    # When the association is created, the certificate begins provisioning
+    # and its status is `PROVISIONING`. The status changes to `ACTIVE` when
+    # the certificate is ready to use for signing. Each email address can
+    # have only one certificate association. If an association already
+    # exists for the address, this operation returns an error, unless the
+    # existing association is in the `DEPROVISIONING` state.
+    #
+    # @option params [required, String] :email_identity
+    #   The email identity, either an email address or a domain, to associate
+    #   the certificate with.
+    #
+    # @option params [String] :from_address
+    #   The email address that the certificate applies to. This value is
+    #   required when the email identity is a domain, and the address must
+    #   belong to that domain or one of its subdomains. When the email
+    #   identity is an email address, this value is optional. If you specify
+    #   it, it must exactly match the email identity.
+    #
+    # @option params [required, String] :certificate_arn
+    #   The Amazon Resource Name (ARN) of the Certificate Manager (ACM)
+    #   certificate to associate with the email identity.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_email_identity_certificate({
+    #     email_identity: "Identity", # required
+    #     from_address: "EmailAddress",
+    #     certificate_arn: "CertificateArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/AssociateEmailIdentityCertificate AWS API Documentation
+    #
+    # @overload associate_email_identity_certificate(params = {})
+    # @param [Hash] params ({})
+    def associate_email_identity_certificate(params = {}, options = {})
+      req = build_request(:associate_email_identity_certificate, params)
+      req.send_request(options)
+    end
+
     # Retrieves batches of metric data collected based on your sending
     # activity.
     #
@@ -604,6 +661,11 @@ module Aws::SESV2
     #   An object that defines the MailManager archiving options for emails
     #   that you send using the configuration set.
     #
+    # @option params [Types::MessageSecurityOptions] :message_security_options
+    #   The message security options to apply to the configuration set, such
+    #   as the signing scheme used for messages that you send with the
+    #   configuration set.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -654,6 +716,15 @@ module Aws::SESV2
     #     },
     #     archiving_options: {
     #       archive_arn: "ArchiveArn",
+    #     },
+    #     message_security_options: {
+    #       signing_scheme: {
+    #         default_scheme: {
+    #         },
+    #         smime_scheme: {
+    #           signature_format: "DETACHED", # accepts DETACHED
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -2012,6 +2083,45 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Removes the association between an S/MIME certificate and an email
+    # identity. After the association is removed, Amazon SES API v2 stops
+    # adding an S/MIME signature to messages sent from that address.
+    #
+    # If the email identity is a domain, specify the `FromAddress` whose
+    # certificate association you want to remove.
+    #
+    # This operation is idempotent. If the specified email identity exists
+    # but there's no matching certificate association, the operation
+    # succeeds without making any changes. Amazon SES API v2 returns a
+    # `NotFoundException` only when the specified email identity doesn't
+    # exist.
+    #
+    # @option params [required, String] :email_identity
+    #   The email identity whose certificate association you want to remove.
+    #
+    # @option params [String] :from_address
+    #   The email address whose certificate association you want to remove.
+    #   This value is required when the email identity is a domain. When the
+    #   email identity is an email address, this value is optional.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_email_identity_certificate({
+    #     email_identity: "Identity", # required
+    #     from_address: "EmailAddress",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DisassociateEmailIdentityCertificate AWS API Documentation
+    #
+    # @overload disassociate_email_identity_certificate(params = {})
+    # @param [Hash] params ({})
+    def disassociate_email_identity_certificate(params = {}, options = {})
+      req = build_request(:disassociate_email_identity_certificate, params)
+      req.send_request(options)
+    end
+
     # Obtain information about the email-sending status and capabilities of
     # your Amazon SES account in the current Amazon Web Services Region.
     #
@@ -2122,6 +2232,7 @@ module Aws::SESV2
     #   * {Types::GetConfigurationSetResponse#suppression_options #suppression_options} => Types::SuppressionOptions
     #   * {Types::GetConfigurationSetResponse#vdm_options #vdm_options} => Types::VdmOptions
     #   * {Types::GetConfigurationSetResponse#archiving_options #archiving_options} => Types::ArchivingOptions
+    #   * {Types::GetConfigurationSetResponse#message_security_options #message_security_options} => Types::MessageSecurityOptions
     #
     # @example Request syntax with placeholder values
     #
@@ -2151,6 +2262,7 @@ module Aws::SESV2
     #   resp.vdm_options.dashboard_options.engagement_metrics #=> String, one of "ENABLED", "DISABLED"
     #   resp.vdm_options.guardian_options.optimized_shared_delivery #=> String, one of "ENABLED", "DISABLED"
     #   resp.archiving_options.archive_arn #=> String
+    #   resp.message_security_options.signing_scheme.smime_scheme.signature_format #=> String, one of "DETACHED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetConfigurationSet AWS API Documentation
     #
@@ -3824,6 +3936,67 @@ module Aws::SESV2
     # @param [Hash] params ({})
     def list_email_identities(params = {}, options = {})
       req = build_request(:list_email_identities, params)
+      req.send_request(options)
+    end
+
+    # Lists the S/MIME certificates that are associated with the specified
+    # email identity. The results include certificates in all states, such
+    # as `PROVISIONING`, `ACTIVE`, `INACTIVE`, `DEPROVISIONING`, and
+    # `FAILED`.
+    #
+    # If a certificate has passed its expiration time, it's returned with a
+    # status of `FAILED`.
+    #
+    # We recommend using pagination to ensure that the operation returns
+    # quickly and successfully. When there are more results than fit in a
+    # single response, the response includes a `NextToken` value that you
+    # use in a subsequent call to retrieve the next set of results.
+    #
+    # @option params [required, String] :email_identity
+    #   The email identity whose certificate associations you want to list.
+    #
+    # @option params [String] :next_token
+    #   A token returned from a previous call to
+    #   `ListEmailIdentityCertificates` to indicate the position in the list
+    #   of certificates.
+    #
+    # @option params [Integer] :page_size
+    #   The number of results to show in a single call to
+    #   `ListEmailIdentityCertificates`. If the number of results is larger
+    #   than the number you specified in this parameter, then the response
+    #   includes a `NextToken` element, which you can use to obtain additional
+    #   results.
+    #
+    # @return [Types::ListEmailIdentityCertificatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEmailIdentityCertificatesResponse#certificates #certificates} => Array&lt;Types::IdentityCertificate&gt;
+    #   * {Types::ListEmailIdentityCertificatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_email_identity_certificates({
+    #     email_identity: "Identity", # required
+    #     next_token: "NextToken",
+    #     page_size: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificates #=> Array
+    #   resp.certificates[0].from_address #=> String
+    #   resp.certificates[0].status #=> String, one of "PROVISIONING", "INACTIVE", "DEPROVISIONING", "ACTIVE", "FAILED"
+    #   resp.certificates[0].certificate_arn #=> String
+    #   resp.certificates[0].certificate_expiry_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListEmailIdentityCertificates AWS API Documentation
+    #
+    # @overload list_email_identity_certificates(params = {})
+    # @param [Hash] params ({})
+    def list_email_identity_certificates(params = {}, options = {})
+      req = build_request(:list_email_identity_certificates, params)
       req.send_request(options)
     end
 
@@ -6022,6 +6195,45 @@ module Aws::SESV2
       req.send_request(options)
     end
 
+    # Updates an existing configuration set.
+    #
+    # This operation performs a partial update. Only the attributes that you
+    # include in the request are updated; any omitted attribute is left
+    # unchanged.
+    #
+    # @option params [required, String] :configuration_set_name
+    #   The name of the configuration set to update.
+    #
+    # @option params [Types::MessageSecurityOptions] :message_security_options
+    #   The security options that apply to the MIME message itself for
+    #   messages sent with the configuration set.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_configuration_set({
+    #     configuration_set_name: "ConfigurationSetName", # required
+    #     message_security_options: {
+    #       signing_scheme: {
+    #         default_scheme: {
+    #         },
+    #         smime_scheme: {
+    #           signature_format: "DETACHED", # accepts DETACHED
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateConfigurationSet AWS API Documentation
+    #
+    # @overload update_configuration_set(params = {})
+    # @param [Hash] params ({})
+    def update_configuration_set(params = {}, options = {})
+      req = build_request(:update_configuration_set, params)
+      req.send_request(options)
+    end
+
     # Update the configuration of an event destination for a configuration
     # set.
     #
@@ -6446,7 +6658,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.106.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

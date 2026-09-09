@@ -1178,7 +1178,7 @@ module Aws::MarketplaceDiscovery
     #   resp.pricing_model.display_name #=> String
     #   resp.badges #=> Array
     #   resp.badges[0].display_name #=> String
-    #   resp.badges[0].badge_type #=> String, one of "PRIVATE_PRICING", "FUTURE_DATED", "REPLACEMENT_OFFER"
+    #   resp.badges[0].badge_type #=> String, one of "PRIVATE_PRICING", "FUTURE_DATED", "REPLACEMENT_OFFER", "AUTO_RENEW"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/GetOffer AWS API Documentation
     #
@@ -1291,7 +1291,7 @@ module Aws::MarketplaceDiscovery
     #   resp.seller_of_record.display_name #=> String
     #   resp.badges #=> Array
     #   resp.badges[0].display_name #=> String
-    #   resp.badges[0].badge_type #=> String, one of "PRIVATE_PRICING", "FUTURE_DATED", "REPLACEMENT_OFFER"
+    #   resp.badges[0].badge_type #=> String, one of "PRIVATE_PRICING", "FUTURE_DATED", "REPLACEMENT_OFFER", "AUTO_RENEW"
     #   resp.associated_entities #=> Array
     #   resp.associated_entities[0].product.product_id #=> String
     #   resp.associated_entities[0].product.product_name #=> String
@@ -1690,7 +1690,84 @@ module Aws::MarketplaceDiscovery
     #       {
     #         renewal_term: {
     #           type: "RenewalTerm", 
+    #           adjustment_deadline: "P30D", 
     #           id: "term-renewal-001", 
+    #           lockout_period: "P30D", 
+    #           max_renewals: 3, 
+    #           price_increase: {
+    #             percentage_range: {
+    #               default_value: "5.00", 
+    #               maximum_value: "10.00", 
+    #               minimum_value: "3.00", 
+    #             }, 
+    #           }, 
+    #           term_templates: [
+    #             {
+    #               payment_schedule_term_template: {
+    #                 schedule: [
+    #                   {
+    #                     charge_date_offset: "P0D", 
+    #                     charge_percentage: "50.00", 
+    #                   }, 
+    #                   {
+    #                     charge_date_offset: "P6M", 
+    #                     charge_percentage: "25.00", 
+    #                     day_of_month: 1, 
+    #                   }, 
+    #                   {
+    #                     charge_date_offset: "P12M", 
+    #                     charge_percentage: "25.00", 
+    #                     day_of_month: 1, 
+    #                   }, 
+    #                 ], 
+    #               }, 
+    #             }, 
+    #           ], 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: GetOfferTerms for renewal term with fixed percentage
+    #
+    #   resp = client.get_offer_terms({
+    #     offer_id: "offer-sampleRenewalFixedId", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     offer_terms: [
+    #       {
+    #         renewal_term: {
+    #           type: "RenewalTerm", 
+    #           id: "term-renewal-002", 
+    #           lockout_period: "P60D", 
+    #           max_renewals: 5, 
+    #           price_increase: {
+    #             fixed_percentage: {
+    #               percentage_value: "5.00", 
+    #             }, 
+    #           }, 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: GetOfferTerms for renewal term with identical pricing (no price increase)
+    #
+    #   resp = client.get_offer_terms({
+    #     offer_id: "offer-sampleRenewalNoPriceIncreaseId", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     offer_terms: [
+    #       {
+    #         renewal_term: {
+    #           type: "RenewalTerm", 
+    #           id: "term-renewal-003", 
+    #           lockout_period: "P30D", 
+    #           max_renewals: 2, 
     #         }, 
     #       }, 
     #     ], 
@@ -1833,6 +1910,18 @@ module Aws::MarketplaceDiscovery
     #   resp.offer_terms[0].recurring_payment_term.price #=> String
     #   resp.offer_terms[0].renewal_term.id #=> String
     #   resp.offer_terms[0].renewal_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
+    #   resp.offer_terms[0].renewal_term.max_renewals #=> Integer
+    #   resp.offer_terms[0].renewal_term.lockout_period #=> String
+    #   resp.offer_terms[0].renewal_term.adjustment_deadline #=> String
+    #   resp.offer_terms[0].renewal_term.price_increase.fixed_percentage.percentage_value #=> String
+    #   resp.offer_terms[0].renewal_term.price_increase.percentage_range.minimum_value #=> String
+    #   resp.offer_terms[0].renewal_term.price_increase.percentage_range.maximum_value #=> String
+    #   resp.offer_terms[0].renewal_term.price_increase.percentage_range.default_value #=> String
+    #   resp.offer_terms[0].renewal_term.term_templates #=> Array
+    #   resp.offer_terms[0].renewal_term.term_templates[0].payment_schedule_term_template.schedule #=> Array
+    #   resp.offer_terms[0].renewal_term.term_templates[0].payment_schedule_term_template.schedule[0].charge_date_offset #=> String
+    #   resp.offer_terms[0].renewal_term.term_templates[0].payment_schedule_term_template.schedule[0].charge_percentage #=> String
+    #   resp.offer_terms[0].renewal_term.term_templates[0].payment_schedule_term_template.schedule[0].day_of_month #=> Integer
     #   resp.offer_terms[0].support_term.id #=> String
     #   resp.offer_terms[0].support_term.type #=> String, one of "ByolPricingTerm", "ConfigurableUpfrontPricingTerm", "FixedUpfrontPricingTerm", "UsageBasedPricingTerm", "FreeTrialPricingTerm", "LegalTerm", "PaymentScheduleTerm", "RecurringPaymentTerm", "RenewalTerm", "SupportTerm", "ValidityTerm", "VariablePaymentTerm", "NetPaymentTerm"
     #   resp.offer_terms[0].support_term.refund_policy #=> String
@@ -2876,7 +2965,7 @@ module Aws::MarketplaceDiscovery
     #   resp.purchase_options[0].seller_of_record.display_name #=> String
     #   resp.purchase_options[0].badges #=> Array
     #   resp.purchase_options[0].badges[0].display_name #=> String
-    #   resp.purchase_options[0].badges[0].badge_type #=> String, one of "PRIVATE_PRICING", "FUTURE_DATED", "REPLACEMENT_OFFER"
+    #   resp.purchase_options[0].badges[0].badge_type #=> String, one of "PRIVATE_PRICING", "FUTURE_DATED", "REPLACEMENT_OFFER", "AUTO_RENEW"
     #   resp.purchase_options[0].associated_entities #=> Array
     #   resp.purchase_options[0].associated_entities[0].product.product_id #=> String
     #   resp.purchase_options[0].associated_entities[0].product.product_name #=> String
@@ -3307,7 +3396,7 @@ module Aws::MarketplaceDiscovery
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacediscovery'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

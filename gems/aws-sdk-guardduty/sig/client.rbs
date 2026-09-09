@@ -110,6 +110,32 @@ module Aws
                             ) -> _ArchiveFindingsResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ArchiveFindingsResponseSuccess
 
+      interface _CreateCustomDetectionRuleAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomDetectionRuleAssociationResponse]
+        def rule_association: () -> Types::AssociationDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#create_custom_detection_rule_association-instance_method
+      def create_custom_detection_rule_association: (
+                                                      rule_id: ::String,
+                                                      mode: ("LIVE" | "DRY_RUN"),
+                                                      ?client_token: ::String,
+                                                      ?tags: Hash[::String, ::String]
+                                                    ) -> _CreateCustomDetectionRuleAssociationResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomDetectionRuleAssociationResponseSuccess
+
+      interface _CreateCustomDetectionRuleOrgConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCustomDetectionRuleOrgConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#create_custom_detection_rule_org_configuration-instance_method
+      def create_custom_detection_rule_org_configuration: (
+                                                            rule_id: ::String,
+                                                            mode: ("LIVE" | "DRY_RUN"),
+                                                            ?include_account_ids: Array[::String],
+                                                            ?exclude_account_ids: Array[::String],
+                                                            ?client_token: ::String
+                                                          ) -> _CreateCustomDetectionRuleOrgConfigurationResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomDetectionRuleOrgConfigurationResponseSuccess
+
       interface _CreateDetectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDetectorResponse]
         def detector_id: () -> ::String
@@ -300,6 +326,26 @@ module Aws
                                  account_ids: Array[::String]
                                ) -> _DeclineInvitationsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeclineInvitationsResponseSuccess
+
+      interface _DeleteCustomDetectionRuleAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCustomDetectionRuleAssociationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#delete_custom_detection_rule_association-instance_method
+      def delete_custom_detection_rule_association: (
+                                                      rule_id: ::String,
+                                                      association_id: ::String
+                                                    ) -> _DeleteCustomDetectionRuleAssociationResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomDetectionRuleAssociationResponseSuccess
+
+      interface _DeleteCustomDetectionRuleOrgConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteCustomDetectionRuleOrgConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#delete_custom_detection_rule_org_configuration-instance_method
+      def delete_custom_detection_rule_org_configuration: (
+                                                            rule_id: ::String,
+                                                            mode: ("LIVE" | "DRY_RUN")
+                                                          ) -> _DeleteCustomDetectionRuleOrgConfigurationResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomDetectionRuleOrgConfigurationResponseSuccess
 
       interface _DeleteDetectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDetectorResponse]
@@ -527,6 +573,39 @@ module Aws
                                      statistics_type: Array[("COUNT_BY_RESOURCE_TYPE" | "COUNT_BY_COVERAGE_STATUS")]
                                    ) -> _GetCoverageStatisticsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCoverageStatisticsResponseSuccess
+
+      interface _GetCustomDetectionRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCustomDetectionRuleResponse]
+        def rule: () -> Types::RuleDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_custom_detection_rule-instance_method
+      def get_custom_detection_rule: (
+                                       rule_id: ::String
+                                     ) -> _GetCustomDetectionRuleResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomDetectionRuleResponseSuccess
+
+      interface _GetCustomDetectionRuleAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCustomDetectionRuleAssociationResponse]
+        def rule_association: () -> Types::AssociationDetail
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_custom_detection_rule_association-instance_method
+      def get_custom_detection_rule_association: (
+                                                   rule_id: ::String,
+                                                   association_id: ::String
+                                                 ) -> _GetCustomDetectionRuleAssociationResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomDetectionRuleAssociationResponseSuccess
+
+      interface _GetCustomDetectionRuleOrgConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCustomDetectionRuleOrgConfigurationResponse]
+        def configuration: () -> Types::DetectionRuleOrgConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_custom_detection_rule_org_configuration-instance_method
+      def get_custom_detection_rule_org_configuration: (
+                                                         rule_id: ::String,
+                                                         mode: ("LIVE" | "DRY_RUN")
+                                                       ) -> _GetCustomDetectionRuleOrgConfigurationResponseSuccess
+                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCustomDetectionRuleOrgConfigurationResponseSuccess
 
       interface _GetDetectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDetectorResponse]
@@ -845,6 +924,52 @@ module Aws
                          ) -> _ListCoverageResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCoverageResponseSuccess
 
+      interface _ListCustomDetectionRuleAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomDetectionRuleAssociationsResponse]
+        def rule_associations: () -> ::Array[Types::AssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_custom_detection_rule_associations-instance_method
+      def list_custom_detection_rule_associations: (
+                                                     ?max_results: ::Integer,
+                                                     ?next_token: ::String,
+                                                     ?rule_id: ::String,
+                                                     ?mode: ("LIVE" | "DRY_RUN")
+                                                   ) -> _ListCustomDetectionRuleAssociationsResponseSuccess
+                                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomDetectionRuleAssociationsResponseSuccess
+
+      interface _ListCustomDetectionRuleOrgConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomDetectionRuleOrgConfigurationsResponse]
+        def configurations: () -> ::Array[Types::DetectionRuleOrgConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_custom_detection_rule_org_configurations-instance_method
+      def list_custom_detection_rule_org_configurations: (
+                                                           ?max_results: ::Integer,
+                                                           ?next_token: ::String,
+                                                           ?status: ("ACTIVE" | "PROCESSING" | "FAILED")
+                                                         ) -> _ListCustomDetectionRuleOrgConfigurationsResponseSuccess
+                                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomDetectionRuleOrgConfigurationsResponseSuccess
+
+      interface _ListCustomDetectionRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCustomDetectionRulesResponse]
+        def rules: () -> ::Array[Types::RuleSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_custom_detection_rules-instance_method
+      def list_custom_detection_rules: (
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String,
+                                         ?filters: Array[
+                                           {
+                                             name: ("name" | "description" | "dataSource" | "severity" | "tactic" | "technique" | "service"),
+                                             values: Array[::String],
+                                             condition: ("EQUALS" | "CONTAINS")?
+                                           }
+                                         ]
+                                       ) -> _ListCustomDetectionRulesResponseSuccess
+                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomDetectionRulesResponseSuccess
+
       interface _ListDetectorsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDetectorsResponse]
         def detector_ids: () -> ::Array[::String]
@@ -1145,6 +1270,29 @@ module Aws
                             tag_keys: Array[::String]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
+
+      interface _UpdateCustomDetectionRuleAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCustomDetectionRuleAssociationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_custom_detection_rule_association-instance_method
+      def update_custom_detection_rule_association: (
+                                                      rule_id: ::String,
+                                                      association_id: ::String,
+                                                      mode: ("LIVE" | "DRY_RUN")
+                                                    ) -> _UpdateCustomDetectionRuleAssociationResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomDetectionRuleAssociationResponseSuccess
+
+      interface _UpdateCustomDetectionRuleOrgConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCustomDetectionRuleOrgConfigurationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#update_custom_detection_rule_org_configuration-instance_method
+      def update_custom_detection_rule_org_configuration: (
+                                                            rule_id: ::String,
+                                                            mode: ("LIVE" | "DRY_RUN"),
+                                                            ?include_account_ids: Array[::String],
+                                                            ?exclude_account_ids: Array[::String]
+                                                          ) -> _UpdateCustomDetectionRuleOrgConfigurationResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomDetectionRuleOrgConfigurationResponseSuccess
 
       interface _UpdateDetectorResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDetectorResponse]

@@ -431,6 +431,41 @@ module Aws
                                        ) -> _CreateConfigurationBundleResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationBundleResponseSuccess
 
+      interface _CreateConsentPortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateConsentPortalResponse]
+        def sources: () -> ::Array[Types::ConsentPortalSource]
+        def consent_portal_arn: () -> ::String
+        def consent_portal_id: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def execution_role_arn: () -> ::String
+        def idp_config: () -> Types::ConsentPortalIdpConfig
+        def name: () -> ::String
+        def portal_url: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "FAILED")
+        def status_reason: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_consent_portal-instance_method
+      def create_consent_portal: (
+                                   execution_role_arn: ::String,
+                                   idp_config: {
+                                     credential_provider_arn: ::String,
+                                     scopes: Array[::String],
+                                     audience: ::String?
+                                   },
+                                   name: ::String,
+                                   sources: Array[
+                                     {
+                                       identifier: ::String,
+                                       type: ("agentcore-gateway")
+                                     }
+                                   ],
+                                   ?description: ::String,
+                                   ?tags: Hash[::String, ::String]
+                                 ) -> _CreateConsentPortalResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConsentPortalResponseSuccess
+
       interface _CreateDatasetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDatasetResponse]
         def dataset_arn: () -> ::String
@@ -748,7 +783,8 @@ module Aws
                                              rule: Params::rule,
                                              data_source_config: {
                                                cloud_watch_logs: {
-                                                 log_group_names: Array[::String],
+                                                 log_group_names: Array[::String]?,
+                                                 log_group_name_prefixes: Array[::String]?,
                                                  service_names: Array[::String]
                                                }?
                                              },
@@ -764,6 +800,13 @@ module Aws
                                              ],
                                              ?clustering_config: {
                                                frequencies: Array[("DAILY" | "WEEKLY" | "MONTHLY")]
+                                             },
+                                             ?output_config: {
+                                               cloud_watch_config: {
+                                                 log_group_name: ::String?,
+                                                 metrics_namespace: ::String?,
+                                                 result_destination: ("DEDICATED_LOG_GROUP" | "SOURCE_LOG_GROUP")?
+                                               }
                                              },
                                              evaluation_execution_role_arn: ::String,
                                              enable_on_create: bool,
@@ -1066,6 +1109,15 @@ module Aws
                                          bundle_id: ::String
                                        ) -> _DeleteConfigurationBundleResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConfigurationBundleResponseSuccess
+
+      interface _DeleteConsentPortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteConsentPortalResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_consent_portal-instance_method
+      def delete_consent_portal: (
+                                   consent_portal_identifier: ::String
+                                 ) -> _DeleteConsentPortalResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteConsentPortalResponseSuccess
 
       interface _DeleteDatasetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDatasetResponse]
@@ -1519,6 +1571,27 @@ module Aws
                                               version_id: ::String
                                             ) -> _GetConfigurationBundleVersionResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConfigurationBundleVersionResponseSuccess
+
+      interface _GetConsentPortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetConsentPortalResponse]
+        def sources: () -> ::Array[Types::ConsentPortalSource]
+        def consent_portal_arn: () -> ::String
+        def consent_portal_id: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def execution_role_arn: () -> ::String
+        def idp_config: () -> Types::ConsentPortalIdpConfig
+        def name: () -> ::String
+        def portal_url: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "FAILED")
+        def status_reason: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_consent_portal-instance_method
+      def get_consent_portal: (
+                                consent_portal_identifier: ::String
+                              ) -> _GetConsentPortalResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetConsentPortalResponseSuccess
 
       interface _GetDatasetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDatasetResponse]
@@ -2136,6 +2209,18 @@ module Aws
                                       ) -> _ListConfigurationBundlesResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationBundlesResponseSuccess
 
+      interface _ListConsentPortalsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListConsentPortalsResponse]
+        def consent_portals: () -> ::Array[Types::ConsentPortalSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_consent_portals-instance_method
+      def list_consent_portals: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListConsentPortalsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConsentPortalsResponseSuccess
+
       interface _ListDatasetExamplesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDatasetExamplesResponse]
         def dataset_arn: () -> ::String
@@ -2716,7 +2801,7 @@ module Aws
                                              configuration: {
                                              }
                                            }],
-                                         ?parent_version_ids: Array[::String],
+                                         parent_version_ids: Array[::String],
                                          ?branch_name: ::String,
                                          ?commit_message: ::String,
                                          ?created_by: {
@@ -2726,6 +2811,34 @@ module Aws
                                          ?kms_key_arn: ::String
                                        ) -> _UpdateConfigurationBundleResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationBundleResponseSuccess
+
+      interface _UpdateConsentPortalResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateConsentPortalResponse]
+        def sources: () -> ::Array[Types::ConsentPortalSource]
+        def consent_portal_arn: () -> ::String
+        def consent_portal_id: () -> ::String
+        def created_at: () -> ::Time
+        def description: () -> ::String
+        def execution_role_arn: () -> ::String
+        def idp_config: () -> Types::ConsentPortalIdpConfig
+        def name: () -> ::String
+        def portal_url: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "FAILED")
+        def status_reason: () -> ::String
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_consent_portal-instance_method
+      def update_consent_portal: (
+                                   consent_portal_identifier: ::String,
+                                   ?execution_role_arn: ::String,
+                                   ?idp_config: {
+                                     credential_provider_arn: ::String,
+                                     scopes: Array[::String],
+                                     audience: ::String?
+                                   },
+                                   ?description: ::String
+                                 ) -> _UpdateConsentPortalResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConsentPortalResponseSuccess
 
       interface _UpdateDatasetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDatasetResponse]
@@ -3119,7 +3232,8 @@ module Aws
                                              ?rule: Params::rule,
                                              ?data_source_config: {
                                                cloud_watch_logs: {
-                                                 log_group_names: Array[::String],
+                                                 log_group_names: Array[::String]?,
+                                                 log_group_name_prefixes: Array[::String]?,
                                                  service_names: Array[::String]
                                                }?
                                              },
@@ -3135,6 +3249,13 @@ module Aws
                                              ],
                                              ?clustering_config: {
                                                frequencies: Array[("DAILY" | "WEEKLY" | "MONTHLY")]
+                                             },
+                                             ?output_config: {
+                                               cloud_watch_config: {
+                                                 log_group_name: ::String?,
+                                                 metrics_namespace: ::String?,
+                                                 result_destination: ("DEDICATED_LOG_GROUP" | "SOURCE_LOG_GROUP")?
+                                               }
                                              },
                                              ?evaluation_execution_role_arn: ::String,
                                              ?execution_status: ("ENABLED" | "DISABLED")

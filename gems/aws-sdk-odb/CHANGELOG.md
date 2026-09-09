@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2026-09-02)
+------------------
+
+* Feature - Adds the ListFlexComponents API for listing the flex components available for a given DB system shape.
+
 1.27.0 (2026-08-12)
 ------------------
 

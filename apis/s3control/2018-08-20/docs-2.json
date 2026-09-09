@@ -344,7 +344,7 @@
         "Region$BucketAccountId": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.</p>",
         "RegionReport$BucketAccountId": "<p>The Amazon Web Services account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.</p>",
         "S3BucketDestination$AccountId": "<p>The account ID of the owner of the S3 Storage Lens metrics export bucket.</p>",
-        "S3JobManifestGenerator$ExpectedBucketOwner": "<p>The Amazon Web Services account ID that owns the bucket the generated manifest is written to. If provided the generated manifest bucket's owner Amazon Web Services account ID must match this value, else the job fails.</p>",
+        "S3JobManifestGenerator$ExpectedBucketOwner": "<p>The Amazon Web Services account ID that owns the source bucket specified in <code>SourceBucket</code>. If provided, the manifest source bucket owner's Amazon Web Services account ID must match this value, else the job fails.</p>",
         "S3ManifestOutputLocation$ExpectedManifestBucketOwner": "<p>The Account ID that owns the bucket the generated manifest is written to.</p>",
         "SubmitMultiRegionAccessPointRoutesRequest$AccountId": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
         "TagResourceRequest$AccountId": "<p> The Amazon Web Services account ID that created the S3 resource that you're trying to add tags to or the requester's account ID. </p>",
@@ -1956,7 +1956,7 @@
     "MinStorageBytesPercentage": {
       "base": null,
       "refs": {
-        "SelectionCriteria$MinStorageBytesPercentage": "<p>The minimum number of storage bytes percentage whose metrics will be selected.</p> <note> <p>You must choose a value greater than or equal to <code>1.0</code>.</p> </note>"
+        "SelectionCriteria$MinStorageBytesPercentage": "<p>The minimum percentage of total bucket storage that a prefix must hold for its metrics to be included.</p>"
       }
     },
     "Minutes": {
@@ -2763,6 +2763,12 @@
         "GetAccessPointResult$AccessPointArn": "<p>The ARN of the access point.</p>"
       }
     },
+    "S3AnnotationDirective": {
+      "base": null,
+      "refs": {
+        "S3CopyObjectOperation$AnnotationDirective": "<p>Specifies whether the Batch Operations copy job copies object annotations from the source object or skips them. If this property isn't specified, <code>COPY</code> is the default behavior.</p> <p>Valid Values: <code>COPY | EXCLUDE</code> </p> <note> <p>This functionality is not supported by directory buckets.</p> </note>"
+      }
+    },
     "S3BucketArnString": {
       "base": null,
       "refs": {
@@ -2890,6 +2896,30 @@
         "S3CopyObjectOperation$MetadataDirective": "<p/>"
       }
     },
+    "S3ObjectLockEventHold": {
+      "base": null,
+      "refs": {
+        "S3CopyObjectOperation$ObjectLockEventHold": "<p>The event hold status to be applied to all objects in the Batch Operations copy job. Set to <code>ON</code> to enable an event hold or <code>OFF</code> to disable it.</p> <note> <p>This functionality is not supported by directory buckets.</p> </note>"
+      }
+    },
+    "S3ObjectLockEventHoldDuration": {
+      "base": "<p>Contains the duration configuration for an event hold, specified in either days or years.</p>",
+      "refs": {
+        "S3CopyObjectOperation$ObjectLockEventHoldDuration": "<p>The event hold duration to be applied to all objects in the Batch Operations copy job. The duration specifies how long the object remains protected after the event hold is released.</p> <note> <p>This functionality is not supported by directory buckets.</p> </note>"
+      }
+    },
+    "S3ObjectLockEventHoldDurationDays": {
+      "base": null,
+      "refs": {
+        "S3ObjectLockEventHoldDuration$Days": "<p>The number of days for the event hold duration. The minimum value is 1 and the maximum value is 36,500.</p>"
+      }
+    },
+    "S3ObjectLockEventHoldDurationYears": {
+      "base": null,
+      "refs": {
+        "S3ObjectLockEventHoldDuration$Years": "<p>The number of years for the event hold duration. The minimum value is 1 and the maximum value is 100.</p>"
+      }
+    },
     "S3ObjectLockLegalHold": {
       "base": "<p>Whether S3 Object Lock legal hold will be applied to objects in an S3 Batch Operations job.</p>",
       "refs": {
@@ -2907,6 +2937,30 @@
       "base": null,
       "refs": {
         "S3CopyObjectOperation$ObjectLockMode": "<p>The retention mode to be applied to all objects in the Batch Operations job.</p> <note> <p>This functionality is not supported by directory buckets.</p> </note>"
+      }
+    },
+    "S3ObjectLockRetentionEventHold": {
+      "base": null,
+      "refs": {
+        "S3Retention$EventHold": "<p>The event hold status to be applied to all objects in the Batch Operations job. Set to <code>ON</code> to enable an event hold or <code>OFF</code> to disable it.</p>"
+      }
+    },
+    "S3ObjectLockRetentionEventHoldDuration": {
+      "base": "<p>Contains the duration configuration for an event hold, specified in either days or years.</p>",
+      "refs": {
+        "S3Retention$EventHoldDuration": "<p>The event hold duration to be applied to all objects in the Batch Operations job. The duration specifies how long the object remains protected after the event hold is released.</p>"
+      }
+    },
+    "S3ObjectLockRetentionEventHoldDurationDays": {
+      "base": null,
+      "refs": {
+        "S3ObjectLockRetentionEventHoldDuration$Days": "<p>The number of days for the event hold duration. The minimum value is 1 and the maximum value is 36,500.</p>"
+      }
+    },
+    "S3ObjectLockRetentionEventHoldDurationYears": {
+      "base": null,
+      "refs": {
+        "S3ObjectLockRetentionEventHoldDuration$Years": "<p>The number of years for the event hold duration. The minimum value is 1 and the maximum value is 100.</p>"
       }
     },
     "S3ObjectLockRetentionMode": {

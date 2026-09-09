@@ -344,7 +344,7 @@
     "DescribeImportSnapshotTasks": "<p>Describes your import snapshot tasks.</p>",
     "DescribeInstanceAttribute": "<p>Describes the specified attribute of the specified instance. You can specify only one attribute at a time. Available attributes include SQL license exemption configuration for instances registered with the SQL LE service. </p>",
     "DescribeInstanceConnectEndpoints": "<p>Describes the specified EC2 Instance Connect Endpoints or all EC2 Instance Connect Endpoints.</p>",
-    "DescribeInstanceCreditSpecifications": "<p>Describes the credit option for CPU usage of the specified burstable performance instances. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>If you do not specify an instance ID, Amazon EC2 returns burstable performance instances with the <code>unlimited</code> credit option, as well as instances that were previously configured as T2, T3, and T3a with the <code>unlimited</code> credit option. For example, if you resize a T2 instance, while it is configured as <code>unlimited</code>, to an M4 instance, Amazon EC2 returns the M4 instance.</p> <p>If you specify one or more instance IDs, Amazon EC2 returns the credit option (<code>standard</code> or <code>unlimited</code>) of those instances. If you specify an instance ID that is not valid, such as an instance that is not a burstable performance instance, an error is returned.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p> <p>If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+    "DescribeInstanceCreditSpecifications": "<p>Describes the credit option for CPU usage of the specified burstable performance instances. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>If you do not specify an instance ID, Amazon EC2 returns burstable performance instances with the <code>unlimited</code> credit option, as well as instances that were previously configured as T2, T3, and T3a with the <code>unlimited</code> credit option. For example, if you resize a T2 instance, while it is configured as <code>unlimited</code>, to an M4 instance, Amazon EC2 returns the M4 instance.</p> <p>If you specify one or more instance IDs, Amazon EC2 returns the credit option (<code>standard</code> or <code>unlimited</code>) of those instances. If you specify an instance ID that is not a burstable performance instance, Amazon EC2 returns the <code>standard</code> credit option.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p> <p>If an Availability Zone is experiencing a service disruption and you specify instance IDs in the affected zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs in an unaffected zone, the call works normally.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable performance instances</a> in the <i>Amazon EC2 User Guide</i>.</p>",
     "DescribeInstanceEventNotificationAttributes": "<p>Describes the tag keys that are registered to appear in scheduled event notifications for resources in the current Region.</p>",
     "DescribeInstanceEventWindows": "<p>Describes the specified event windows or all event windows.</p> <p>If you specify event window IDs, the output includes information for only the specified event windows. If you specify filters, the output includes information for only those event windows that meet the filter criteria. If you do not specify event windows IDs or filters, the output includes information for all event windows, which can affect performance. We recommend that you use pagination to ensure that the operation returns quickly and successfully. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html\">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>",
     "DescribeInstanceImageMetadata": "<p>Describes the AMI that was used to launch an instance, even if the AMI is deprecated, deregistered, made private (no longer public or shared with your account), or not allowed.</p> <p>If you specify instance IDs, the output includes information for only the specified instances. If you specify filters, the output includes information for only those instances that meet the filter criteria. If you do not specify instance IDs or filters, the output includes information for all instances, which can affect performance.</p> <p>If you specify an instance ID that is not valid, an instance that doesn't exist, or an instance that you do not own, an error (<code>InvalidInstanceID.NotFound</code>) is returned.</p> <p>Recently terminated instances might appear in the returned results. This interval is usually less than one hour.</p> <p>In the rare case where an Availability Zone is experiencing a service disruption and you specify instance IDs that are in the affected Availability Zone, or do not specify any instance IDs at all, the call fails. If you specify only instance IDs that are in an unaffected Availability Zone, the call works normally.</p> <note> <p>The order of the elements in the response, including those within nested structures, might vary. Applications should not assume the elements appear in a particular order.</p> </note>",
@@ -802,6 +802,7 @@
     "UpdateInterruptibleCapacityReservationAllocation": "<p> Modifies the number of instances allocated to an interruptible reservation, allowing you to add more capacity or reclaim capacity to your source Capacity Reservation. </p>",
     "UpdateSecurityGroupRuleDescriptionsEgress": "<p>Updates the description of an egress (outbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You can remove a description for a security group rule by omitting the description parameter in the request.</p>",
     "UpdateSecurityGroupRuleDescriptionsIngress": "<p>Updates the description of an ingress (inbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You can remove a description for a security group rule by omitting the description parameter in the request.</p>",
+    "ValidateSecurityGroupQuotasForInterface": "<p>Validates whether the specified security groups can be associated with a single network interface. The operation checks Amazon Virtual Private Cloud (Amazon VPC) quotas for inbound or outbound rules per security group and security groups per network interface. Only authorized AWS services can call this operation.</p> <p>For more information about security group quotas, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-security-groups\">Amazon VPC quotas</a> in the <i>Amazon VPC User Guide</i>.</p>",
     "WithdrawByoipCidr": "<p>Stops advertising an address range that is provisioned as an address pool.</p> <p>You can perform this operation at most once every 10 seconds, even if you specify different address ranges each time.</p> <p>It can take a few minutes before traffic to the specified addresses stops routing to Amazon Web Services because of BGP propagation delays.</p>"
   },
   "shapes": {
@@ -1602,7 +1603,7 @@
     "ApplicationStatusSummary": {
       "base": "<p>Provides a summary of the application-level health status for an instance.</p>",
       "refs": {
-        "InstanceStatus$ApplicationStatus": "<p>Reports impaired functionality that stems from issues with applications running on the instance.</p>"
+        "InstanceStatus$ApplicationStatus": "<p>Reports the application-level health status for the instance.</p>"
       }
     },
     "ApplicationStatusesResponseType": {
@@ -3799,6 +3800,8 @@
         "UpdateSecurityGroupRuleDescriptionsEgressResult$Return": "<p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>",
         "UpdateSecurityGroupRuleDescriptionsIngressRequest$DryRun": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
         "UpdateSecurityGroupRuleDescriptionsIngressResult$Return": "<p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>",
+        "ValidateSecurityGroupQuotasForInterfaceRequest$DryRun": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+        "ValidateSecurityGroupQuotasForInterfaceResult$Valid": "<p>The operation returns <code>true</code> if the specified security groups can be associated with a single network interface without exceeding the quotas. It returns an error if associating the security groups would exceed a quota.</p>",
         "VerifiedAccessInstance$FipsEnabled": "<p>Indicates whether support for Federal Information Processing Standards (FIPS) is enabled on the instance.</p>",
         "VerifiedAccessInstanceUserTrustProviderClientConfiguration$PkceEnabled": "<p>Indicates whether Proof of Key Code Exchange (PKCE) is enabled.</p>",
         "VerifiedAccessLogCloudWatchLogsDestination$Enabled": "<p>Indicates whether logging is enabled.</p>",
@@ -21082,6 +21085,18 @@
         "NetworkInfo$NetworkCards": "<p>Describes the network cards for the instance type.</p>"
       }
     },
+    "NetworkCardInterfaceType": {
+      "base": null,
+      "refs": {
+        "NetworkCardInterfaceTypeList$member": null
+      }
+    },
+    "NetworkCardInterfaceTypeList": {
+      "base": null,
+      "refs": {
+        "NetworkCardInfo$InterfaceTypes": "<p>The supported interface types for the network card.</p>"
+      }
+    },
     "NetworkInfo": {
       "base": "<p>Describes the networking features of the instance type.</p>",
       "refs": {
@@ -25029,11 +25044,11 @@
       "base": null,
       "refs": {
         "S3Storage$UploadPolicy": "<p>An Amazon S3 upload policy that gives Amazon EC2 permission to upload items into Amazon S3 on your behalf.</p>",
-        "SecureBlobAttributeValue$Value": null
+        "SecureBlobAttributeValue$Value": "<p>The attribute value.</p>"
       }
     },
     "SecureBlobAttributeValue": {
-      "base": null,
+      "base": "<p>Describes a value for a resource attribute that is a Base64-encoded binary data object.</p>",
       "refs": {
         "ModifyInstanceAttributeRequest$UserData": "<p>Changes the instance's user data to the specified value. User data must be base64-encoded. Depending on the tool or SDK that you're using, the base64-encoding might be performed for you. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instancedata-add-user-data.html\">Work with instance user data</a>.</p>"
       }
@@ -25092,6 +25107,7 @@
       "base": null,
       "refs": {
         "CreateVerifiedAccessEndpointRequest$SecurityGroupIds": "<p>The IDs of the security groups to associate with the Verified Access endpoint. Required if <code>AttachmentType</code> is set to <code>vpc</code>.</p>",
+        "ValidateSecurityGroupQuotasForInterfaceRequest$SecurityGroupIds": "<p>The IDs of the security groups to validate for association with a single network interface. You must specify at least one ID, and each ID must be unique. The number of IDs cannot exceed the maximum number of security groups allowed per network interface.</p>",
         "VerifiedAccessEndpoint$SecurityGroupIds": "<p>The IDs of the security groups for the endpoint.</p>"
       }
     },
@@ -26688,8 +26704,8 @@
         "DescribeFastSnapshotRestoreSuccessItem$StateTransitionReason": "<p>The reason for the state transition. The possible values are as follows:</p> <ul> <li> <p> <code>Client.UserInitiated</code> - The state successfully transitioned to <code>enabling</code> or <code>disabling</code>.</p> </li> <li> <p> <code>Client.UserInitiated - Lifecycle state transition</code> - The state successfully transitioned to <code>optimizing</code>, <code>enabled</code>, or <code>disabled</code>.</p> </li> </ul>",
         "DescribeFastSnapshotRestoreSuccessItem$OwnerId": "<p>The ID of the Amazon Web Services account that enabled fast snapshot restores on the snapshot.</p>",
         "DescribeFastSnapshotRestoreSuccessItem$OwnerAlias": "<p>The Amazon Web Services owner alias that enabled fast snapshot restores on the snapshot. This is intended for future use.</p>",
-        "DescribeFleetError$ErrorCode": "<p>The error code that indicates why the instance could not be launched. For more information about error codes, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html\">Error codes</a>.</p>",
-        "DescribeFleetError$ErrorMessage": "<p>The error message that describes why the instance could not be launched. For more information about error messages, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html\">Error codes</a>.</p>",
+        "DescribeFleetError$ErrorCode": "<p>The error code that indicates why the instance could not be launched. For more information about error codes, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html\">Error codes</a>.</p>",
+        "DescribeFleetError$ErrorMessage": "<p>The error message that describes why the instance could not be launched. For more information about error messages, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html\">Error codes</a>.</p>",
         "DescribeFleetHistoryRequest$NextToken": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>",
         "DescribeFleetHistoryResult$NextToken": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there are no more items to return.</p>",
         "DescribeFleetInstancesRequest$NextToken": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>",
@@ -27467,6 +27483,7 @@
         "IpamInternetRegistryAssociation$IpamRegion": "<p>The Amazon Web Services Region of the IPAM.</p>",
         "IpamInternetRegistryAssociation$OrganizationHandle": "<p>The organization handle at the internet registry.</p>",
         "IpamInternetRegistryAssociation$Description": "<p>The description of the internet registry association.</p>",
+        "IpamInternetRegistryAssociation$StateMessage": "<p>A message describing the current state of the internet registry association, including additional details such as the reason for a failure.</p>",
         "IpamInternetRegistryAssociation$ChildRequestXml": "<p>The XML content for the child request to be submitted to the internet registry to complete the BPKI setup.</p>",
         "IpamInternetRegistryAssociationAsn$Asn": "<p>The Autonomous System Number.</p>",
         "IpamInternetRegistryAssociationCidr$Cidr": "<p>The IP address prefix in CIDR notation.</p>",
@@ -31059,6 +31076,16 @@
         "InstanceTypeInfo$VCpuInfo": "<p>Describes the vCPU configurations for the instance type.</p>"
       }
     },
+    "ValidateSecurityGroupQuotasForInterfaceRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ValidateSecurityGroupQuotasForInterfaceResult": {
+      "base": null,
+      "refs": {
+      }
+    },
     "ValidationError": {
       "base": "<p>The error code and error message that is returned for a parameter or parameter combination that is not valid when a new launch template or new version of a launch template is created.</p>",
       "refs": {
@@ -32631,6 +32658,15 @@
       "base": null,
       "refs": {
         "GpuDeviceInfo$Workloads": "<p>A list of workload types this GPU supports.</p>"
+      }
+    },
+    "ZeroSizePreference": {
+      "base": null,
+      "refs": {
+        "CapacityReservation$ZeroSizePreference": "<p> The zero-size preference configured for the interruptible Capacity Reservation. A value of <code>retain</code> keeps the interruptible Capacity Reservation active at zero capacity when you reduce its allocation to zero. A value of <code>default</code> cancels the interruptible Capacity Reservation when you reduce its allocation to zero. </p>",
+        "CreateInterruptibleCapacityReservationAllocationRequest$ZeroSizePreference": "<p> Specifies the behavior for the interruptible Capacity Reservation when you reduce its allocation to zero instances. Specify <code>retain</code> to keep the interruptible Capacity Reservation active at zero capacity so that you can allocate instances to it again later. Specify <code>default</code> to cancel the interruptible Capacity Reservation and return the capacity to your source Capacity Reservation. The default value is <code>default</code>. </p>",
+        "InterruptibleCapacityAllocation$ZeroSizePreference": "<p> Specifies how Amazon EC2 handles the interruptible Capacity Reservation when you reduce its allocation to zero instances. A value of <code>retain</code> keeps the interruptible Capacity Reservation active at zero capacity so that you can allocate instances to it again later. A value of <code>default</code> cancels the interruptible Capacity Reservation and returns the capacity to your source Capacity Reservation. </p>",
+        "UpdateInterruptibleCapacityReservationAllocationRequest$ZeroSizePreference": "<p> Specifies the updated behavior for the interruptible Capacity Reservation when you reduce its allocation to zero instances. Specify <code>retain</code> to keep the interruptible Capacity Reservation active at zero capacity so that you can allocate instances to it again later. Specify <code>default</code> to cancel the interruptible Capacity Reservation and return the capacity to your source Capacity Reservation. </p>"
       }
     },
     "ZoneIdStringList": {

@@ -25,6 +25,8 @@ module Aws::SocialMessaging
     AssociateWhatsAppBusinessAccountInput = Shapes::StructureShape.new(name: 'AssociateWhatsAppBusinessAccountInput')
     AssociateWhatsAppBusinessAccountOutput = Shapes::StructureShape.new(name: 'AssociateWhatsAppBusinessAccountOutput')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BusinessPublicKeyPem = Shapes::StringShape.new(name: 'BusinessPublicKeyPem')
+    BusinessPublicKeySignatureStatus = Shapes::StringShape.new(name: 'BusinessPublicKeySignatureStatus')
     ButtonType = Shapes::StringShape.new(name: 'ButtonType')
     CodeExpirationMinutes = Shapes::IntegerShape.new(name: 'CodeExpirationMinutes')
     CreateWhatsAppDatasetInput = Shapes::StructureShape.new(name: 'CreateWhatsAppDatasetInput')
@@ -58,6 +60,8 @@ module Aws::SocialMessaging
     GetLinkedWhatsAppBusinessAccountOutput = Shapes::StructureShape.new(name: 'GetLinkedWhatsAppBusinessAccountOutput')
     GetLinkedWhatsAppBusinessAccountPhoneNumberInput = Shapes::StructureShape.new(name: 'GetLinkedWhatsAppBusinessAccountPhoneNumberInput')
     GetLinkedWhatsAppBusinessAccountPhoneNumberOutput = Shapes::StructureShape.new(name: 'GetLinkedWhatsAppBusinessAccountPhoneNumberOutput')
+    GetWhatsAppBusinessPublicKeyInput = Shapes::StructureShape.new(name: 'GetWhatsAppBusinessPublicKeyInput')
+    GetWhatsAppBusinessPublicKeyOutput = Shapes::StructureShape.new(name: 'GetWhatsAppBusinessPublicKeyOutput')
     GetWhatsAppFlowInput = Shapes::StructureShape.new(name: 'GetWhatsAppFlowInput')
     GetWhatsAppFlowOutput = Shapes::StructureShape.new(name: 'GetWhatsAppFlowOutput')
     GetWhatsAppFlowPreviewInput = Shapes::StructureShape.new(name: 'GetWhatsAppFlowPreviewInput')
@@ -71,6 +75,7 @@ module Aws::SocialMessaging
     InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
     InvalidParametersException = Shapes::StructureShape.new(name: 'InvalidParametersException')
     IsoCountryCode = Shapes::StringShape.new(name: 'IsoCountryCode')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LibraryTemplateBodyInputs = Shapes::StructureShape.new(name: 'LibraryTemplateBodyInputs')
     LibraryTemplateButtonInput = Shapes::StructureShape.new(name: 'LibraryTemplateButtonInput')
     LibraryTemplateButtonList = Shapes::StructureShape.new(name: 'LibraryTemplateButtonList')
@@ -167,6 +172,8 @@ module Aws::SocialMessaging
     PublishWhatsAppFlowOutput = Shapes::StructureShape.new(name: 'PublishWhatsAppFlowOutput')
     PutWhatsAppBusinessAccountEventDestinationsInput = Shapes::StructureShape.new(name: 'PutWhatsAppBusinessAccountEventDestinationsInput')
     PutWhatsAppBusinessAccountEventDestinationsOutput = Shapes::StructureShape.new(name: 'PutWhatsAppBusinessAccountEventDestinationsOutput')
+    PutWhatsAppBusinessPublicKeyInput = Shapes::StructureShape.new(name: 'PutWhatsAppBusinessPublicKeyInput')
+    PutWhatsAppBusinessPublicKeyOutput = Shapes::StructureShape.new(name: 'PutWhatsAppBusinessPublicKeyOutput')
     RegistrationStatus = Shapes::StringShape.new(name: 'RegistrationStatus')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
@@ -261,6 +268,7 @@ module Aws::SocialMessaging
     CreateWhatsAppFlowInput.add_member(:flow_json, Shapes::ShapeRef.new(shape: MetaFlowJsonBlob, location_name: "flowJson"))
     CreateWhatsAppFlowInput.add_member(:publish, Shapes::ShapeRef.new(shape: Boolean, location_name: "publish"))
     CreateWhatsAppFlowInput.add_member(:clone_flow_id, Shapes::ShapeRef.new(shape: MetaFlowId, location_name: "cloneFlowId"))
+    CreateWhatsAppFlowInput.add_member(:endpoint_uri, Shapes::ShapeRef.new(shape: MetaFlowEndpointUri, location_name: "endpointUri"))
     CreateWhatsAppFlowInput.struct_class = Types::CreateWhatsAppFlowInput
 
     CreateWhatsAppFlowOutput.add_member(:flow_id, Shapes::ShapeRef.new(shape: MetaFlowId, location_name: "flowId"))
@@ -342,6 +350,13 @@ module Aws::SocialMessaging
     GetLinkedWhatsAppBusinessAccountPhoneNumberOutput.add_member(:phone_number, Shapes::ShapeRef.new(shape: WhatsAppPhoneNumberDetail, location_name: "phoneNumber"))
     GetLinkedWhatsAppBusinessAccountPhoneNumberOutput.add_member(:linked_whats_app_business_account_id, Shapes::ShapeRef.new(shape: LinkedWhatsAppBusinessAccountId, location_name: "linkedWhatsAppBusinessAccountId"))
     GetLinkedWhatsAppBusinessAccountPhoneNumberOutput.struct_class = Types::GetLinkedWhatsAppBusinessAccountPhoneNumberOutput
+
+    GetWhatsAppBusinessPublicKeyInput.add_member(:origination_phone_number_id, Shapes::ShapeRef.new(shape: WhatsAppPhoneNumberId, required: true, location: "querystring", location_name: "originationPhoneNumberId"))
+    GetWhatsAppBusinessPublicKeyInput.struct_class = Types::GetWhatsAppBusinessPublicKeyInput
+
+    GetWhatsAppBusinessPublicKeyOutput.add_member(:business_public_key, Shapes::ShapeRef.new(shape: BusinessPublicKeyPem, location_name: "businessPublicKey"))
+    GetWhatsAppBusinessPublicKeyOutput.add_member(:business_public_key_signature_status, Shapes::ShapeRef.new(shape: BusinessPublicKeySignatureStatus, location_name: "businessPublicKeySignatureStatus"))
+    GetWhatsAppBusinessPublicKeyOutput.struct_class = Types::GetWhatsAppBusinessPublicKeyOutput
 
     GetWhatsAppFlowInput.add_member(:id, Shapes::ShapeRef.new(shape: LinkedWhatsAppBusinessAccountId, required: true, location: "querystring", location_name: "id"))
     GetWhatsAppFlowInput.add_member(:flow_id, Shapes::ShapeRef.new(shape: MetaFlowId, required: true, location: "querystring", location_name: "flowId"))
@@ -612,6 +627,13 @@ module Aws::SocialMessaging
 
     PutWhatsAppBusinessAccountEventDestinationsOutput.struct_class = Types::PutWhatsAppBusinessAccountEventDestinationsOutput
 
+    PutWhatsAppBusinessPublicKeyInput.add_member(:origination_phone_number_id, Shapes::ShapeRef.new(shape: WhatsAppPhoneNumberId, required: true, location_name: "originationPhoneNumberId"))
+    PutWhatsAppBusinessPublicKeyInput.add_member(:business_public_key, Shapes::ShapeRef.new(shape: BusinessPublicKeyPem, location_name: "businessPublicKey"))
+    PutWhatsAppBusinessPublicKeyInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
+    PutWhatsAppBusinessPublicKeyInput.struct_class = Types::PutWhatsAppBusinessPublicKeyInput
+
+    PutWhatsAppBusinessPublicKeyOutput.struct_class = Types::PutWhatsAppBusinessPublicKeyOutput
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
@@ -691,6 +713,8 @@ module Aws::SocialMessaging
     UpdateWhatsAppFlowInput.add_member(:flow_id, Shapes::ShapeRef.new(shape: MetaFlowId, required: true, location_name: "flowId"))
     UpdateWhatsAppFlowInput.add_member(:flow_name, Shapes::ShapeRef.new(shape: MetaFlowName, location_name: "flowName"))
     UpdateWhatsAppFlowInput.add_member(:categories, Shapes::ShapeRef.new(shape: MetaFlowCategoryList, location_name: "categories"))
+    UpdateWhatsAppFlowInput.add_member(:endpoint_uri, Shapes::ShapeRef.new(shape: MetaFlowEndpointUri, location_name: "endpointUri"))
+    UpdateWhatsAppFlowInput.add_member(:meta_app_id, Shapes::ShapeRef.new(shape: MetaFlowApplicationId, location_name: "metaAppId"))
     UpdateWhatsAppFlowInput.struct_class = Types::UpdateWhatsAppFlowInput
 
     UpdateWhatsAppFlowOutput.struct_class = Types::UpdateWhatsAppFlowOutput
@@ -990,6 +1014,22 @@ module Aws::SocialMessaging
         o.errors << Shapes::ShapeRef.new(shape: DependencyException)
       end)
 
+      api.add_operation(:get_whats_app_business_public_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetWhatsAppBusinessPublicKey"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/whatsapp/business-public-key"
+        o.input = Shapes::ShapeRef.new(shape: GetWhatsAppBusinessPublicKeyInput)
+        o.output = Shapes::ShapeRef.new(shape: GetWhatsAppBusinessPublicKeyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedByMetaException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
+      end)
+
       api.add_operation(:get_whats_app_flow, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetWhatsAppFlow"
         o.http_method = "GET"
@@ -1218,6 +1258,22 @@ module Aws::SocialMessaging
         o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:put_whats_app_business_public_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutWhatsAppBusinessPublicKey"
+        o.http_method = "PUT"
+        o.http_request_uri = "/v1/whatsapp/business-public-key"
+        o.input = Shapes::ShapeRef.new(shape: PutWhatsAppBusinessPublicKeyInput)
+        o.output = Shapes::ShapeRef.new(shape: PutWhatsAppBusinessPublicKeyOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParametersException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedByMetaException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyException)
       end)
 
       api.add_operation(:send_whats_app_conversion_event, Seahorse::Model::Operation.new.tap do |o|

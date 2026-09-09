@@ -76,6 +76,14 @@ module Aws::MediaConvert
     #   your output for clarify by applying speech gates.
     #   @return [String]
     #
+    # @!attribute [rw] passthrough_control
+    #   When set to WHEN\_POSSIBLE, input AAC audio will be passed through
+    #   if it is present on the input. This detection is dynamic over the
+    #   life of the transcode. Inputs that alternate between AAC and non-AAC
+    #   content will have a consistent AAC output as the system alternates
+    #   between passthrough and encoding.
+    #   @return [String]
+    #
     # @!attribute [rw] rap_interval
     #   Specify the RAP (Random Access Point) interval for your xHE-AAC
     #   audio output. A RAP allows a decoder to decode audio data
@@ -135,6 +143,7 @@ module Aws::MediaConvert
       :codec_profile,
       :coding_mode,
       :loudness_measurement_mode,
+      :passthrough_control,
       :rap_interval,
       :rate_control_mode,
       :raw_format,
@@ -520,6 +529,33 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # An aspect ratio expressed as a fraction with numerator and denominator
+    # values, reduced to lowest terms. Used for the sample (pixel) aspect
+    # ratio and the display aspect ratio of a video track. For example, a
+    # 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a
+    # display aspect ratio of 16 / 9.
+    #
+    # @!attribute [rw] denominator
+    #   The denominator, or bottom number, in the fractional aspect ratio.
+    #   For example, for a display aspect ratio of 16 / 9, the denominator
+    #   would be 9.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] numerator
+    #   The numerator, or top number, in the fractional aspect ratio. For
+    #   example, for a display aspect ratio of 16 / 9, the numerator would
+    #   be 16.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/AspectRatio AWS API Documentation
+    #
+    class AspectRatio < Struct.new(
+      :denominator,
+      :numerator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Associates the Amazon Resource Name (ARN) of an AWS Certificate
     # Manager (ACM) certificate with an AWS Elemental MediaConvert resource.
     #
@@ -603,10 +639,10 @@ module Aws::MediaConvert
     #   @return [Types::AiffSettings]
     #
     # @!attribute [rw] codec
-    #   Choose the audio codec for this output. Note that the option Dolby
-    #   Digital passthrough applies only to Dolby Digital and Dolby Digital
-    #   Plus audio inputs. Make sure that you choose a codec that's
-    #   supported with your output container:
+    #   Choose the audio codec for this output. Note that the option
+    #   passthrough applies only to Dolby Digital, Dolby Digital Plus, AAC
+    #   LC, AAC HEV1, and AAC HEV2 audio inputs. Make sure that you choose a
+    #   codec that's supported with your output container:
     #   https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#reference-codecs-containers-output-audio
     #   For audio-only outputs, make sure that both your input audio codec
     #   and your output audio codec are supported for audio-only workflows.
@@ -896,6 +932,12 @@ module Aws::MediaConvert
     #   The bit rate of the audio track, in bits per second.
     #   @return [Integer]
     #
+    # @!attribute [rw] channel_layout
+    #   The audio channel layout of the track, such as "mono", "stereo",
+    #   "5.1", or "7.1". Object-based or immersive audio is reported as
+    #   "5.1.4" or "7.1.4".
+    #   @return [String]
+    #
     # @!attribute [rw] channels
     #   The number of audio channels in the audio track.
     #   @return [Integer]
@@ -927,6 +969,7 @@ module Aws::MediaConvert
     class AudioProperties < Struct.new(
       :bit_depth,
       :bit_rate,
+      :channel_layout,
       :channels,
       :frame_rate,
       :language_code,
@@ -3127,7 +3170,11 @@ module Aws::MediaConvert
     #   Ignore this setting unless you have SCTE-35 markers in your input
     #   video file. Choose Passthrough if you want SCTE-35 markers that
     #   appear in your input to also appear in this output. Choose None if
-    #   you don't want those SCTE-35 markers in this output.
+    #   you don't want those SCTE-35 markers in this output. When your
+    #   input is an HLS manifest, choose Manifest cues to pass through CUE
+    #   markers in your HLS manifest as segment boundaries and SCTE-35
+    #   markers in this output at each EXT-X-CUE-OUT splice point in the
+    #   input manifest.
     #   @return [String]
     #
     # @!attribute [rw] signing_kms_key
@@ -3239,6 +3286,11 @@ module Aws::MediaConvert
     #   is not indicated by the source.
     #   @return [String]
     #
+    # @!attribute [rw] hdr_10_plus_presence
+    #   Indicates that HDR10+ (SMPTE ST 2094-40) dynamic metadata was
+    #   detected in the HEVC bitstream. Present only when detected.
+    #   @return [String]
+    #
     # @!attribute [rw] height
     #   The height in pixels as coded by the codec. This represents the
     #   actual encoded video height as specified in the video stream
@@ -3298,6 +3350,7 @@ module Aws::MediaConvert
       :color_primaries,
       :content_light_level,
       :field_order,
+      :hdr_10_plus_presence,
       :height,
       :level,
       :matrix_coefficients,
@@ -3511,9 +3564,10 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] format
     #   The format of your media file. For example: MP4, QuickTime (MOV),
-    #   Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, or MP3. Note
-    #   that this will be blank if your media file has a format that the
-    #   MediaConvert Probe operation does not recognize.
+    #   Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, MP3, FLAC,
+    #   ASF (Windows Media / WMA), OGG. Note that this will be blank if your
+    #   media file has a format that the MediaConvert Probe operation does
+    #   not recognize.
     #   @return [String]
     #
     # @!attribute [rw] start_timecode
@@ -4057,12 +4111,12 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] playback_device_compatibility
     #   This setting can improve the compatibility of your output with video
-    #   players on obsolete devices. It applies only to DASH H.264 outputs
-    #   with DRM encryption. Choose Unencrypted SEI only to correct problems
-    #   with playback on older devices. Otherwise, keep the default setting
-    #   CENC v1. If you choose Unencrypted SEI, for that output, the service
-    #   will exclude the access unit delimiter and will leave the SEI NAL
-    #   units unencrypted.
+    #   players on obsolete devices. It applies only to DASH outputs with
+    #   DRM encryption. Choose Unencrypted SEI only to correct problems with
+    #   playback on older H.264 devices. Choose CENC v1 unencrypted headers
+    #   to leave NAL unit headers and slice headers unencrypted for H.265
+    #   outputs, improving compatibility with strict HEVC decoders.
+    #   Otherwise, keep the default setting CENC v1.
     #   @return [String]
     #
     # @!attribute [rw] speke_key_provider
@@ -10140,6 +10194,9 @@ module Aws::MediaConvert
     #   PASSTHROUGH \| FLAC) * videoCodec - Your output's video codec.
     #   (AV1 \| AVC\_INTRA \| FRAME\_CAPTURE \| H\_264 \| H\_265 \| MPEG2 \|
     #   PASSTHROUGH \| PRORES \| UNCOMPRESSED \| VC3 \| VP8 \| VP9 \| XAVC)
+    #   * errorCode - The error code that your job failed with. For
+    #   example, 1010. For more information, see
+    #   https://docs.aws.amazon.com/mediaconvert/latest/ug/mediaconvert\_error\_codes.html
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -10884,10 +10941,13 @@ module Aws::MediaConvert
     #   For SCTE-35 markers from your input-- Choose Passthrough if you want
     #   SCTE-35 markers that appear in your input to also appear in this
     #   output. Choose None if you don't want SCTE-35 markers in this
-    #   output. For SCTE-35 markers from an ESAM XML document-- Choose None.
-    #   Also provide the ESAM XML as a string in the setting Signal
-    #   processing notification XML. Also enable ESAM SCTE-35 (include the
-    #   property scte35Esam).
+    #   output. When your input is an HLS manifest, choose Manifest cues to
+    #   pass through CUE markers in your HLS manifest as segment boundaries
+    #   and SCTE-35 markers in this output at each EXT-X-CUE-OUT splice
+    #   point in the input manifest. For SCTE-35 markers from an ESAM XML
+    #   document-- Choose None. Also provide the ESAM XML as a string in the
+    #   setting Signal processing notification XML. Also enable ESAM SCTE-35
+    #   (include the property scte35Esam).
     #   @return [String]
     #
     # @!attribute [rw] segmentation_markers
@@ -11115,7 +11175,10 @@ module Aws::MediaConvert
     #   if you don't want manifest conditioning. Choose Passthrough and
     #   choose Ad markers if you do want manifest conditioning. In both
     #   cases, also provide the ESAM XML as a string in the setting Signal
-    #   processing notification XML.
+    #   processing notification XML. For SCTE-35 markers from your input HLS
+    #   manifest-- Choose Manifest cues to pass through CUE markers in your
+    #   HLS manifest as segment boundaries and SCTE-35 markers in this
+    #   output at each EXT-X-CUE-OUT splice point in the input manifest.
     #   @return [String]
     #
     # @!attribute [rw] timed_metadata
@@ -11766,7 +11829,11 @@ module Aws::MediaConvert
     #   Ignore this setting unless you have SCTE-35 markers in your input
     #   video file. Choose Passthrough if you want SCTE-35 markers that
     #   appear in your input to also appear in this output. Choose None if
-    #   you don't want those SCTE-35 markers in this output.
+    #   you don't want those SCTE-35 markers in this output. When your
+    #   input is an HLS manifest, choose Manifest cues to pass through CUE
+    #   markers in your HLS manifest as segment boundaries and SCTE-35
+    #   markers in this output at each EXT-X-CUE-OUT splice point in the
+    #   input manifest.
     #   @return [String]
     #
     # @!attribute [rw] signing_kms_key
@@ -14653,15 +14720,82 @@ module Aws::MediaConvert
     # your video. For more information, see
     # https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html.
     #
+    # @!attribute [rw] background_color
+    #   Specify the color of the rectangle behind the captions. If Style
+    #   passthrough is set to enabled, leave blank or set to Auto to pass
+    #   through the background color from your input captions. If Style
+    #   passthrough is set to disabled, leave blank or set to Auto to use
+    #   the default black.
+    #   @return [String]
+    #
+    # @!attribute [rw] background_opacity
+    #   Specify the opacity of the background rectangle. Enter a value from
+    #   0 to 255, where 0 is transparent and 255 is opaque. If Style
+    #   passthrough is set to enabled, leave blank to pass through the
+    #   background style information in your input captions to your output
+    #   captions. If Style passthrough is set to disabled and
+    #   backgroundColor is set, leave blank to use a value of 255 (opaque).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] font_color
+    #   Specify the color of the captions text. If Style passthrough is set
+    #   to enabled, leave blank or set to Auto to pass through the font
+    #   color from your input captions. If Style passthrough is set to
+    #   disabled, leave blank or set to Auto to use the default white.
+    #   @return [String]
+    #
+    # @!attribute [rw] font_opacity
+    #   Specify the opacity of the captions. Enter a value from 0 to 255,
+    #   where 0 is transparent and 255 is opaque. If Style passthrough is
+    #   set to enabled, leave blank to pass through the font opacity
+    #   information in your input captions to your output captions. If Style
+    #   passthrough is set to disabled and fontColor is set, leave blank to
+    #   use a value of 255 (opaque).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] font_size
+    #   Specify the Font size in pixels. Must be a positive integer. Set to
+    #   0, or leave blank, for automatic font size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] font_style
+    #   Specify the font style of the caption text. If Style passthrough is
+    #   set to enabled, leave blank to pass through the font style from your
+    #   input captions. If Style passthrough is set to disabled, leave blank
+    #   to use the default normal style.
+    #   @return [String]
+    #
+    # @!attribute [rw] font_weight
+    #   Specify the font weight of the caption text. If Style passthrough is
+    #   set to enabled, leave blank to pass through the font weight from
+    #   your input captions. If Style passthrough is set to disabled, leave
+    #   blank to use the default normal weight.
+    #   @return [String]
+    #
     # @!attribute [rw] style_passthrough
     #   Pass through style and position information from a TTML-like input
     #   source (TTML, IMSC, SMPTE-TT) to the TTML output.
     #   @return [String]
     #
+    # @!attribute [rw] text_decoration
+    #   Specify the text decoration of the caption text. If Style
+    #   passthrough is set to enabled, leave blank to pass through the text
+    #   decoration from your input captions. If Style passthrough is set to
+    #   disabled, leave blank to use the default of none.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/TtmlDestinationSettings AWS API Documentation
     #
     class TtmlDestinationSettings < Struct.new(
-      :style_passthrough)
+      :background_color,
+      :background_opacity,
+      :font_color,
+      :font_opacity,
+      :font_size,
+      :font_style,
+      :font_weight,
+      :style_passthrough,
+      :text_decoration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15889,6 +16023,14 @@ module Aws::MediaConvert
     #   and transcoding.
     #   @return [String]
     #
+    # @!attribute [rw] display_aspect_ratio
+    #   An aspect ratio expressed as a fraction with numerator and
+    #   denominator values, reduced to lowest terms. Used for the sample
+    #   (pixel) aspect ratio and the display aspect ratio of a video track.
+    #   For example, a 720x576 anamorphic track has a sample aspect ratio of
+    #   64 / 45 and a display aspect ratio of 16 / 9.
+    #   @return [Types::AspectRatio]
+    #
     # @!attribute [rw] frame_rate
     #   The frame rate of the video or audio track, expressed as a fraction
     #   with numerator and denominator values.
@@ -15920,6 +16062,14 @@ module Aws::MediaConvert
     #   MP4, non-standard transformation matrices also yield null.
     #   @return [Integer]
     #
+    # @!attribute [rw] sample_aspect_ratio
+    #   An aspect ratio expressed as a fraction with numerator and
+    #   denominator values, reduced to lowest terms. Used for the sample
+    #   (pixel) aspect ratio and the display aspect ratio of a video track.
+    #   For example, a 720x576 anamorphic track has a sample aspect ratio of
+    #   64 / 45 and a display aspect ratio of 16 / 9.
+    #   @return [Types::AspectRatio]
+    #
     # @!attribute [rw] transfer_characteristics
     #   The color space transfer characteristics of the video track,
     #   defining the relationship between linear light values and the
@@ -15938,11 +16088,13 @@ module Aws::MediaConvert
       :bit_rate,
       :codec_metadata,
       :color_primaries,
+      :display_aspect_ratio,
       :frame_rate,
       :hdr_metadata,
       :height,
       :matrix_coefficients,
       :rotation,
+      :sample_aspect_ratio,
       :transfer_characteristics,
       :width)
       SENSITIVE = []
@@ -16671,6 +16823,21 @@ module Aws::MediaConvert
 
     # Required when you set Profile to the value XAVC\_HD\_INTRA\_CBG.
     #
+    # @!attribute [rw] interlace_mode
+    #   Choose the scan line type for the output. Keep the default value,
+    #   Progressive to create a progressive output, regardless of the scan
+    #   type of your input. Use Top field first or Bottom field first to
+    #   create an output that's interlaced with the same field polarity
+    #   throughout. Use Follow, default top or Follow, default bottom to
+    #   produce outputs with the same field polarity as the source. For jobs
+    #   that have multiple inputs, the output field polarity might change
+    #   over the course of the output. Follow behavior depends on the input
+    #   scan type. If the source is interlaced, the output will be
+    #   interlaced with the same polarity as the source. If the source is
+    #   progressive, the output will be interlaced with top field bottom
+    #   field first, depending on which of the Follow options you choose.
+    #   @return [String]
+    #
     # @!attribute [rw] xavc_class
     #   Specify the XAVC Intra HD (CBG) Class to set the bitrate of your
     #   output. Outputs of the same class have similar image quality over
@@ -16680,6 +16847,7 @@ module Aws::MediaConvert
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/XavcHdIntraCbgProfileSettings AWS API Documentation
     #
     class XavcHdIntraCbgProfileSettings < Struct.new(
+      :interlace_mode,
       :xavc_class)
       SENSITIVE = []
       include Aws::Structure

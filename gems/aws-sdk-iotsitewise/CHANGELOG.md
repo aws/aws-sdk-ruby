@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2026-09-01)
+------------------
+
+* Feature - AWS IoT SiteWise Scenario Discovery now supports mounting Amazon S3 data directly into pipeline task containers via S3 Access Points, and configuring additional ephemeral storage per task. Mount configurations can be overridden at execution time. See the API guide for details.
+
 1.107.0 (2026-07-29)
 ------------------
 

@@ -561,6 +561,10 @@ module Aws::Kinesis
     # You must specify either `S3DestinationConfiguration` or
     # `S3TablesDestinationConfiguration`, but not both.
     #
+    # To use this operation, you must have permission to pass the specified
+    # service execution IAM role to Amazon Kinesis Data Streams (the
+    # `iam:PassRole` permission on that role).
+    #
     # Creating a channel is an asynchronous operation. Upon receiving the
     # request, Amazon Kinesis Data Streams returns immediately with the
     # channel in the `CREATING` state. After provisioning is complete,
@@ -570,8 +574,8 @@ module Aws::Kinesis
     # This operation is only supported for data streams with the on-demand
     # capacity mode.
     #
-    # This API has a call limit of 5 transactions per second (TPS) for each
-    # Amazon Web Services account. Exceeding 5 TPS results in a
+    # This operation has a call limit of 5 transactions per second (TPS) for
+    # each Amazon Web Services account. Exceeding 5 TPS results in a
     # `LimitExceededException`.
     #
     # @option params [required, String] :channel_name
@@ -1106,8 +1110,8 @@ module Aws::Kinesis
     # stream, first delete all channels attached to it. To find them, use
     # ListChannels with a stream filter.
     #
-    # This API has a call limit of 5 transactions per second (TPS) for each
-    # Amazon Web Services account. Exceeding 5 TPS results in a
+    # This operation has a call limit of 5 transactions per second (TPS) for
+    # each Amazon Web Services account. Exceeding 5 TPS results in a
     # `LimitExceededException`.
     #
     # @option params [required, String] :channel_arn
@@ -1323,8 +1327,8 @@ module Aws::Kinesis
     # after creation, or to diagnose a channel in the `FAILED` state by
     # reading the `ChannelStatusReason`.
     #
-    # This API has a call limit of 5 transactions per second (TPS) for each
-    # Amazon Web Services account. Exceeding 5 TPS results in a
+    # This operation has a call limit of 5 transactions per second (TPS) for
+    # each Amazon Web Services account. Exceeding 5 TPS results in a
     # `LimitExceededException`.
     #
     # @option params [required, String] :channel_arn
@@ -1993,6 +1997,10 @@ module Aws::Kinesis
     # @option params [String] :stream_id
     #   Not Implemented. Reserved for future use.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
     # @return [Types::GetRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRecordsOutput#records #records} => Array&lt;Types::Record&gt;
@@ -2007,6 +2015,7 @@ module Aws::Kinesis
     #     limit: 1,
     #     stream_arn: "StreamARN",
     #     stream_id: "StreamId",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -2177,6 +2186,10 @@ module Aws::Kinesis
     # @option params [String] :stream_id
     #   Not Implemented. Reserved for future use.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
     # @return [Types::GetShardIteratorOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetShardIteratorOutput#shard_iterator #shard_iterator} => String
@@ -2191,6 +2204,7 @@ module Aws::Kinesis
     #     timestamp: Time.now,
     #     stream_arn: "StreamARN",
     #     stream_id: "StreamId",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -2266,8 +2280,8 @@ module Aws::Kinesis
     # Use this operation to find channels before deleting a stream, or to
     # audit the channels configured in an Amazon Web Services Region.
     #
-    # This API has a call limit of 5 transactions per second (TPS) for each
-    # Amazon Web Services account. Exceeding 5 TPS results in a
+    # This operation has a call limit of 5 transactions per second (TPS) for
+    # each Amazon Web Services account. Exceeding 5 TPS results in a
     # `LimitExceededException`.
     #
     # @option params [Array<Types::StreamFilter>] :stream_filter
@@ -2998,6 +3012,10 @@ module Aws::Kinesis
     # @option params [String] :stream_id
     #   Not Implemented. Reserved for future use.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
     # @return [Types::PutRecordOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutRecordOutput#shard_id #shard_id} => String
@@ -3014,6 +3032,7 @@ module Aws::Kinesis
     #     sequence_number_for_ordering: "SequenceNumber",
     #     stream_arn: "StreamARN",
     #     stream_id: "StreamId",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -3130,6 +3149,10 @@ module Aws::Kinesis
     # @option params [String] :stream_id
     #   Not Implemented. Reserved for future use.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
     # @return [Types::PutRecordsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutRecordsOutput#failed_record_count #failed_record_count} => Integer
@@ -3149,6 +3172,7 @@ module Aws::Kinesis
     #     stream_name: "StreamName",
     #     stream_arn: "StreamARN",
     #     stream_id: "StreamId",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -3763,8 +3787,8 @@ module Aws::Kinesis
     # Amazon Kinesis Data Streams sets the channel back to the `ACTIVE`
     # state.
     #
-    # This API has a call limit of 5 transactions per second (TPS) for each
-    # Amazon Web Services account. Exceeding 5 TPS results in a
+    # This operation has a call limit of 5 transactions per second (TPS) for
+    # each Amazon Web Services account. Exceeding 5 TPS results in a
     # `LimitExceededException`.
     #
     # @option params [required, String] :channel_arn
@@ -4236,7 +4260,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

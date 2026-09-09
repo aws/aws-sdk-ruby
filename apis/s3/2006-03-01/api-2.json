@@ -2645,6 +2645,21 @@
           "location":"header",
           "locationName":"x-amz-object-lock-legal-hold"
         },
+        "ObjectLockEventHold":{
+          "shape":"ObjectLockEventHold",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold"
+        },
+        "ObjectLockEventHoldDurationDays":{
+          "shape":"ObjectLockEventHoldDurationDays",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold-duration-days"
+        },
+        "ObjectLockEventHoldDurationYears":{
+          "shape":"ObjectLockEventHoldDurationYears",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold-duration-years"
+        },
         "ExpectedBucketOwner":{
           "shape":"AccountId",
           "location":"header",
@@ -3082,6 +3097,21 @@
           "location":"header",
           "locationName":"x-amz-object-lock-legal-hold"
         },
+        "ObjectLockEventHold":{
+          "shape":"ObjectLockEventHold",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold"
+        },
+        "ObjectLockEventHoldDurationDays":{
+          "shape":"ObjectLockEventHoldDurationDays",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold-duration-days"
+        },
+        "ObjectLockEventHoldDurationYears":{
+          "shape":"ObjectLockEventHoldDurationYears",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold-duration-years"
+        },
         "ExpectedBucketOwner":{
           "shape":"AccountId",
           "location":"header",
@@ -3191,7 +3221,8 @@
       "members":{
         "Mode":{"shape":"ObjectLockRetentionMode"},
         "Days":{"shape":"Days"},
-        "Years":{"shape":"Years"}
+        "Years":{"shape":"Years"},
+        "DefaultEventHold":{"shape":"EventHoldDuration"}
       }
     },
     "Delete":{
@@ -3942,12 +3973,20 @@
         "s3:ObjectTagging:Delete",
         "s3:ObjectAnnotation:*",
         "s3:ObjectAnnotation:Put",
-        "s3:ObjectAnnotation:Delete"
+        "s3:ObjectAnnotation:Delete",
+        "s3:ObjectRetention:Put"
       ]
     },
     "EventBridgeConfiguration":{
       "type":"structure",
       "members":{}
+    },
+    "EventHoldDuration":{
+      "type":"structure",
+      "members":{
+        "Days":{"shape":"Days"},
+        "Years":{"shape":"Years"}
+      }
     },
     "EventList":{
       "type":"list",
@@ -3987,7 +4026,7 @@
       "type":"boolean",
       "box":true
     },
-    "Expires":{"type":"timestamp"},
+    "Expires":{"type":"string"},
     "ExposeHeader":{"type":"string"},
     "ExposeHeaders":{
       "type":"list",
@@ -5273,6 +5312,21 @@
           "shape":"ObjectLockLegalHoldStatus",
           "location":"header",
           "locationName":"x-amz-object-lock-legal-hold"
+        },
+        "ObjectLockEventHold":{
+          "shape":"ObjectLockEventHold",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold"
+        },
+        "ObjectLockEventHoldDurationDays":{
+          "shape":"ObjectLockEventHoldDurationDays",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold-duration-days"
+        },
+        "ObjectLockEventHoldDurationYears":{
+          "shape":"ObjectLockEventHoldDurationYears",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold-duration-years"
         }
       },
       "payload":"Body"
@@ -5867,6 +5921,21 @@
           "shape":"ObjectLockLegalHoldStatus",
           "location":"header",
           "locationName":"x-amz-object-lock-legal-hold"
+        },
+        "ObjectLockEventHold":{
+          "shape":"ObjectLockEventHold",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold"
+        },
+        "ObjectLockEventHoldDurationDays":{
+          "shape":"ObjectLockEventHoldDurationDays",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold-duration-days"
+        },
+        "ObjectLockEventHoldDurationYears":{
+          "shape":"ObjectLockEventHoldDurationYears",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold-duration-years"
         }
       }
     },
@@ -6223,6 +6292,8 @@
         "ObjectLockRetainUntilDate",
         "ObjectLockMode",
         "ObjectLockLegalHoldStatus",
+        "ObjectLockEventHoldStatus",
+        "ObjectLockEventHoldDuration",
         "IntelligentTieringAccessTier",
         "BucketKeyStatus",
         "ChecksumAlgorithm",
@@ -7549,6 +7620,15 @@
       "type":"boolean",
       "box":true
     },
+    "ObjectLockEventHold":{
+      "type":"string",
+      "enum":[
+        "ON",
+        "OFF"
+      ]
+    },
+    "ObjectLockEventHoldDurationDays":{"type":"integer"},
+    "ObjectLockEventHoldDurationYears":{"type":"integer"},
     "ObjectLockLegalHold":{
       "type":"structure",
       "members":{
@@ -7577,7 +7657,9 @@
       "type":"structure",
       "members":{
         "Mode":{"shape":"ObjectLockRetentionMode"},
-        "RetainUntilDate":{"shape":"Date"}
+        "RetainUntilDate":{"shape":"Date"},
+        "EventHold":{"shape":"ObjectLockEventHold"},
+        "EventHoldDuration":{"shape":"EventHoldDuration"}
       }
     },
     "ObjectLockRetentionMode":{
@@ -9388,6 +9470,21 @@
           "shape":"ObjectLockLegalHoldStatus",
           "location":"header",
           "locationName":"x-amz-object-lock-legal-hold"
+        },
+        "ObjectLockEventHold":{
+          "shape":"ObjectLockEventHold",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold"
+        },
+        "ObjectLockEventHoldDurationDays":{
+          "shape":"ObjectLockEventHoldDurationDays",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold-duration-days"
+        },
+        "ObjectLockEventHoldDurationYears":{
+          "shape":"ObjectLockEventHoldDurationYears",
+          "location":"header",
+          "locationName":"x-amz-object-lock-event-hold-duration-years"
         },
         "ExpectedBucketOwner":{
           "shape":"AccountId",

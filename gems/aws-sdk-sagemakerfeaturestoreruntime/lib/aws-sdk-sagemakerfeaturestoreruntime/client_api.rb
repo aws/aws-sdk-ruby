@@ -30,6 +30,7 @@ module Aws::SageMakerFeatureStoreRuntime
     BatchWriteRecordRequest = Shapes::StructureShape.new(name: 'BatchWriteRecordRequest')
     BatchWriteRecordResponse = Shapes::StructureShape.new(name: 'BatchWriteRecordResponse')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     DeleteRecordRequest = Shapes::StructureShape.new(name: 'DeleteRecordRequest')
     DeletionMode = Shapes::StringShape.new(name: 'DeletionMode')
     ExpirationTimeResponse = Shapes::StringShape.new(name: 'ExpirationTimeResponse')
@@ -59,6 +60,7 @@ module Aws::SageMakerFeatureStoreRuntime
     TtlDurationValue = Shapes::IntegerShape.new(name: 'TtlDurationValue')
     UnprocessedBatchWriteRecordEntries = Shapes::ListShape.new(name: 'UnprocessedBatchWriteRecordEntries')
     UnprocessedIdentifiers = Shapes::ListShape.new(name: 'UnprocessedIdentifiers')
+    UpdateRecordRequest = Shapes::StructureShape.new(name: 'UpdateRecordRequest')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
     ValueAsString = Shapes::StringShape.new(name: 'ValueAsString')
     ValueAsStringList = Shapes::ListShape.new(name: 'ValueAsStringList')
@@ -120,6 +122,9 @@ module Aws::SageMakerFeatureStoreRuntime
     BatchWriteRecordResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchWriteRecordErrors, required: true, location_name: "Errors"))
     BatchWriteRecordResponse.add_member(:unprocessed_entries, Shapes::ShapeRef.new(shape: UnprocessedBatchWriteRecordEntries, required: true, location_name: "UnprocessedEntries"))
     BatchWriteRecordResponse.struct_class = Types::BatchWriteRecordResponse
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
 
     DeleteRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location: "uri", location_name: "FeatureGroupName"))
     DeleteRecordRequest.add_member(:record_identifier_value_as_string, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location: "querystring", location_name: "RecordIdentifierValueAsString"))
@@ -185,6 +190,13 @@ module Aws::SageMakerFeatureStoreRuntime
     UnprocessedBatchWriteRecordEntries.member = Shapes::ShapeRef.new(shape: BatchWriteRecordEntry)
 
     UnprocessedIdentifiers.member = Shapes::ShapeRef.new(shape: BatchGetRecordIdentifier)
+
+    UpdateRecordRequest.add_member(:feature_group_name, Shapes::ShapeRef.new(shape: FeatureGroupNameOrArn, required: true, location: "uri", location_name: "FeatureGroupName"))
+    UpdateRecordRequest.add_member(:record_identifier_value_as_string, Shapes::ShapeRef.new(shape: ValueAsString, required: true, location_name: "RecordIdentifierValueAsString"))
+    UpdateRecordRequest.add_member(:features, Shapes::ShapeRef.new(shape: Record, required: true, location_name: "Features"))
+    UpdateRecordRequest.add_member(:target_stores, Shapes::ShapeRef.new(shape: TargetStores, location_name: "TargetStores"))
+    UpdateRecordRequest.add_member(:ttl_duration, Shapes::ShapeRef.new(shape: TtlDuration, location_name: "TtlDuration"))
+    UpdateRecordRequest.struct_class = Types::UpdateRecordRequest
 
     ValidationError.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ValidationError.struct_class = Types::ValidationError
@@ -290,6 +302,20 @@ module Aws::SageMakerFeatureStoreRuntime
         o.errors << Shapes::ShapeRef.new(shape: InternalFailure)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailable)
         o.errors << Shapes::ShapeRef.new(shape: AccessForbidden)
+      end)
+
+      api.add_operation(:update_record, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateRecord"
+        o.http_method = "POST"
+        o.http_request_uri = "/FeatureGroup/{FeatureGroupName}/Record"
+        o.input = Shapes::ShapeRef.new(shape: UpdateRecordRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationError)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailure)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailable)
+        o.errors << Shapes::ShapeRef.new(shape: AccessForbidden)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2026-09-03)
+------------------
+
+* Feature - AWS Transfer Family SFTP Connectors now support specifying an ordered list of AWS Secrets Manager version stages for secret retrieval. This enables seamless credential rotation workflows where external partners may take time to update their systems with new credentials.
+
 1.142.0 (2026-07-09)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2026-09-02)
+------------------
+
+* Feature - Enabled customers to clear optional S3 paths (plugins, requirements, and startup script) for their Amazon MWAA environments by accepting empty strings for the associated fields in UpdateEnvironment requests.
+
 1.78.0 (2026-07-09)
 ------------------
 

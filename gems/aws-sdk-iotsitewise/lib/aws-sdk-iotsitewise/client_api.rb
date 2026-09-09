@@ -233,6 +233,7 @@ module Aws::IoTSiteWise
     ComputeNodeExecutionStateDetails = Shapes::StructureShape.new(name: 'ComputeNodeExecutionStateDetails')
     ComputeNodeExecutionStatus = Shapes::StructureShape.new(name: 'ComputeNodeExecutionStatus')
     ComputeNodeList = Shapes::ListShape.new(name: 'ComputeNodeList')
+    ComputeNodeMountsMap = Shapes::MapShape.new(name: 'ComputeNodeMountsMap')
     ComputeNodeNameList = Shapes::ListShape.new(name: 'ComputeNodeNameList')
     ConfigurationErrorDetails = Shapes::StructureShape.new(name: 'ConfigurationErrorDetails')
     ConfigurationState = Shapes::StringShape.new(name: 'ConfigurationState')
@@ -440,6 +441,8 @@ module Aws::IoTSiteWise
     EnvironmentVariableName = Shapes::StringShape.new(name: 'EnvironmentVariableName')
     EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
     EnvironmentVariablesMap = Shapes::MapShape.new(name: 'EnvironmentVariablesMap')
+    EphemeralStorageConfiguration = Shapes::StructureShape.new(name: 'EphemeralStorageConfiguration')
+    EphemeralStorageConfigurationStorageSizeInGiBInteger = Shapes::IntegerShape.new(name: 'EphemeralStorageConfigurationStorageSizeInGiBInteger')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorDetails = Shapes::StructureShape.new(name: 'ErrorDetails')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
@@ -667,6 +670,14 @@ module Aws::IoTSiteWise
     MonitorErrorCode = Shapes::StringShape.new(name: 'MonitorErrorCode')
     MonitorErrorDetails = Shapes::StructureShape.new(name: 'MonitorErrorDetails')
     MonitorErrorMessage = Shapes::StringShape.new(name: 'MonitorErrorMessage')
+    Mount = Shapes::StructureShape.new(name: 'Mount')
+    MountList = Shapes::ListShape.new(name: 'MountList')
+    MountOverrides = Shapes::StructureShape.new(name: 'MountOverrides')
+    MountRelativePath = Shapes::StringShape.new(name: 'MountRelativePath')
+    MountS3AccessPointArn = Shapes::StringShape.new(name: 'MountS3AccessPointArn')
+    MountS3KeyPrefix = Shapes::StringShape.new(name: 'MountS3KeyPrefix')
+    MountSource = Shapes::UnionShape.new(name: 'MountSource')
+    MountStorageType = Shapes::StringShape.new(name: 'MountStorageType')
     Mp4 = Shapes::StructureShape.new(name: 'Mp4')
     MultiLayerStorage = Shapes::StructureShape.new(name: 'MultiLayerStorage')
     Name = Shapes::StringShape.new(name: 'Name')
@@ -772,6 +783,7 @@ module Aws::IoTSiteWise
     Row = Shapes::StructureShape.new(name: 'Row')
     RowList = Shapes::ListShape.new(name: 'RowList')
     Rows = Shapes::ListShape.new(name: 'Rows')
+    S3AccessPointSource = Shapes::StructureShape.new(name: 'S3AccessPointSource')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SSOApplicationId = Shapes::StringShape.new(name: 'SSOApplicationId')
     ScalarType = Shapes::StringShape.new(name: 'ScalarType')
@@ -799,6 +811,7 @@ module Aws::IoTSiteWise
     StartQueryResponse = Shapes::StructureShape.new(name: 'StartQueryResponse')
     StartSearchRequest = Shapes::StructureShape.new(name: 'StartSearchRequest')
     StartSearchResponse = Shapes::StructureShape.new(name: 'StartSearchResponse')
+    StorageClass = Shapes::StringShape.new(name: 'StorageClass')
     StorageType = Shapes::StringShape.new(name: 'StorageType')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -1580,6 +1593,7 @@ module Aws::IoTSiteWise
     ComputeNodeExecutionDetails.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     ComputeNodeExecutionDetails.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     ComputeNodeExecutionDetails.add_member(:execution_environment_variables, Shapes::ShapeRef.new(shape: ExecutionEnvironmentVariablesMap, location_name: "executionEnvironmentVariables"))
+    ComputeNodeExecutionDetails.add_member(:execution_mounts, Shapes::ShapeRef.new(shape: MountList, location_name: "executionMounts"))
     ComputeNodeExecutionDetails.struct_class = Types::ComputeNodeExecutionDetails
 
     ComputeNodeExecutionDetailsList.member = Shapes::ShapeRef.new(shape: ComputeNodeExecutionDetails)
@@ -1594,6 +1608,9 @@ module Aws::IoTSiteWise
     ComputeNodeExecutionStatus.struct_class = Types::ComputeNodeExecutionStatus
 
     ComputeNodeList.member = Shapes::ShapeRef.new(shape: ComputeNode)
+
+    ComputeNodeMountsMap.key = Shapes::ShapeRef.new(shape: ResourceName)
+    ComputeNodeMountsMap.value = Shapes::ShapeRef.new(shape: MountList)
 
     ComputeNodeNameList.member = Shapes::ShapeRef.new(shape: ResourceName)
 
@@ -1614,9 +1631,11 @@ module Aws::IoTSiteWise
     ContainerTaskConfiguration.add_member(:task_execution_role, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "taskExecutionRole"))
     ContainerTaskConfiguration.add_member(:processing_type, Shapes::ShapeRef.new(shape: ProcessingType, required: true, location_name: "processingType"))
     ContainerTaskConfiguration.add_member(:processing_unit, Shapes::ShapeRef.new(shape: ProcessingUnit, required: true, location_name: "processingUnit"))
+    ContainerTaskConfiguration.add_member(:ephemeral_storage_configuration, Shapes::ShapeRef.new(shape: EphemeralStorageConfiguration, location_name: "ephemeralStorageConfiguration"))
     ContainerTaskConfiguration.add_member(:command, Shapes::ShapeRef.new(shape: CommandList, location_name: "command"))
     ContainerTaskConfiguration.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: TimeoutSeconds, location_name: "timeoutSeconds"))
     ContainerTaskConfiguration.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: "environmentVariables"))
+    ContainerTaskConfiguration.add_member(:mounts, Shapes::ShapeRef.new(shape: MountList, location_name: "mounts"))
     ContainerTaskConfiguration.struct_class = Types::ContainerTaskConfiguration
 
     Content.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "text"))
@@ -2404,6 +2423,7 @@ module Aws::IoTSiteWise
     DescribePipelineExecutionResponse.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     DescribePipelineExecutionResponse.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
     DescribePipelineExecutionResponse.add_member(:request_environment_variables, Shapes::ShapeRef.new(shape: ExecutionEnvironmentVariables, required: true, location_name: "requestEnvironmentVariables"))
+    DescribePipelineExecutionResponse.add_member(:request_mount_overrides, Shapes::ShapeRef.new(shape: MountOverrides, location_name: "requestMountOverrides"))
     DescribePipelineExecutionResponse.add_member(:execution_priority, Shapes::ShapeRef.new(shape: ExecutionPriority, location_name: "executionPriority"))
     DescribePipelineExecutionResponse.add_member(:compute_node_execution_details, Shapes::ShapeRef.new(shape: ComputeNodeExecutionDetailsList, required: true, location_name: "computeNodeExecutionDetails"))
     DescribePipelineExecutionResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
@@ -2602,6 +2622,10 @@ module Aws::IoTSiteWise
 
     EnvironmentVariablesMap.key = Shapes::ShapeRef.new(shape: EnvironmentVariableName)
     EnvironmentVariablesMap.value = Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
+
+    EphemeralStorageConfiguration.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, required: true, location_name: "storageClass"))
+    EphemeralStorageConfiguration.add_member(:storage_size_in_gi_b, Shapes::ShapeRef.new(shape: EphemeralStorageConfigurationStorageSizeInGiBInteger, required: true, location_name: "storageSizeInGiB"))
+    EphemeralStorageConfiguration.struct_class = Types::EphemeralStorageConfiguration
 
     ErrorDetails.add_member(:code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "code"))
     ErrorDetails.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
@@ -3361,6 +3385,23 @@ module Aws::IoTSiteWise
     MonitorErrorDetails.add_member(:message, Shapes::ShapeRef.new(shape: MonitorErrorMessage, location_name: "message"))
     MonitorErrorDetails.struct_class = Types::MonitorErrorDetails
 
+    Mount.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
+    Mount.add_member(:relative_path, Shapes::ShapeRef.new(shape: MountRelativePath, required: true, location_name: "relativePath"))
+    Mount.add_member(:source, Shapes::ShapeRef.new(shape: MountSource, required: true, location_name: "source"))
+    Mount.add_member(:storage_type, Shapes::ShapeRef.new(shape: MountStorageType, required: true, location_name: "storageType"))
+    Mount.struct_class = Types::Mount
+
+    MountList.member = Shapes::ShapeRef.new(shape: Mount)
+
+    MountOverrides.add_member(:compute_nodes, Shapes::ShapeRef.new(shape: ComputeNodeMountsMap, required: true, location_name: "computeNodes"))
+    MountOverrides.struct_class = Types::MountOverrides
+
+    MountSource.add_member(:s3_access_point, Shapes::ShapeRef.new(shape: S3AccessPointSource, location_name: "s3AccessPoint"))
+    MountSource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    MountSource.add_member_subclass(:s3_access_point, Types::MountSource::S3AccessPoint)
+    MountSource.add_member_subclass(:unknown, Types::MountSource::Unknown)
+    MountSource.struct_class = Types::MountSource
+
     Mp4.struct_class = Types::Mp4
 
     MultiLayerStorage.add_member(:customer_managed_s3_storage, Shapes::ShapeRef.new(shape: CustomerManagedS3Storage, required: true, location_name: "customerManagedS3Storage"))
@@ -3609,6 +3650,10 @@ module Aws::IoTSiteWise
 
     Rows.member = Shapes::ShapeRef.new(shape: Row)
 
+    S3AccessPointSource.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: MountS3AccessPointArn, required: true, location_name: "accessPointArn"))
+    S3AccessPointSource.add_member(:prefix, Shapes::ShapeRef.new(shape: MountS3KeyPrefix, location_name: "prefix"))
+    S3AccessPointSource.struct_class = Types::S3AccessPointSource
+
     SearchFilters.add_member(:time_series_ids, Shapes::ShapeRef.new(shape: TimeSeriesIdList, location_name: "timeSeriesIds"))
     SearchFilters.add_member(:dataset_ids, Shapes::ShapeRef.new(shape: DataSetIdList, location_name: "datasetIds"))
     SearchFilters.add_member(:time_intervals, Shapes::ShapeRef.new(shape: TimeIntervalList, location_name: "timeIntervals"))
@@ -3662,6 +3707,7 @@ module Aws::IoTSiteWise
     StartPipelineExecutionRequest.add_member(:workspace_name, Shapes::ShapeRef.new(shape: WorkspaceName, required: true, location: "uri", location_name: "workspaceName"))
     StartPipelineExecutionRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "pipelineName"))
     StartPipelineExecutionRequest.add_member(:execution_environment_variable_overrides, Shapes::ShapeRef.new(shape: ExecutionEnvironmentVariables, location_name: "executionEnvironmentVariableOverrides"))
+    StartPipelineExecutionRequest.add_member(:execution_mount_overrides, Shapes::ShapeRef.new(shape: MountOverrides, location_name: "executionMountOverrides"))
     StartPipelineExecutionRequest.add_member(:execution_priority, Shapes::ShapeRef.new(shape: ExecutionPriority, location_name: "executionPriority"))
     StartPipelineExecutionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     StartPipelineExecutionRequest.struct_class = Types::StartPipelineExecutionRequest

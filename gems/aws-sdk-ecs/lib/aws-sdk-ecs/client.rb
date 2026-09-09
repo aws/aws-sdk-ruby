@@ -1240,6 +1240,25 @@ module Aws::ECS
     #   request. It must be unique and is case sensitive. Up to 36 ASCII
     #   characters in the range of 33-126 (inclusive) are allowed.
     #
+    # @option params [Boolean] :critical
+    #   If the `critical` parameter of a daemon is `true`, and the daemon task
+    #   fails, stops, or becomes unhealthy, Amazon ECS drains the container
+    #   instance and stops the other tasks running on it. If the `critical`
+    #   parameter is `false`, the daemon task failure doesn't affect the
+    #   other tasks on the instance. The default value is `true`.
+    #
+    #   A non-critical daemon doesn't block instance registration. The
+    #   container instance becomes active and continues to run your other
+    #   tasks, whether the daemon task fails during scale-out or during a
+    #   deployment.
+    #
+    #   Amazon ECS emits an EventBridge event when a daemon task fails to
+    #   start, for both critical and non-critical daemons.
+    #
+    #   Daemon task launch failures during a deployment are still counted by
+    #   the deployment circuit breaker. The circuit breaker can roll back an
+    #   unstable target revision.
+    #
     # @return [Types::CreateDaemonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDaemonResponse#daemon_arn #daemon_arn} => String
@@ -1299,6 +1318,7 @@ module Aws::ECS
     #     enable_ecs_managed_tags: false,
     #     enable_execute_command: false,
     #     client_token: "String",
+    #     critical: false,
     #   })
     #
     # @example Response structure
@@ -5565,7 +5585,9 @@ module Aws::ECS
     #   resp.daemon.current_revisions[0].capacity_providers #=> Array
     #   resp.daemon.current_revisions[0].capacity_providers[0].arn #=> String
     #   resp.daemon.current_revisions[0].capacity_providers[0].running_count #=> Integer
+    #   resp.daemon.current_revisions[0].capacity_providers[0].without_daemon_count #=> Integer
     #   resp.daemon.current_revisions[0].total_running_count #=> Integer
+    #   resp.daemon.current_revisions[0].total_without_daemon_count #=> Integer
     #   resp.daemon.deployment_arn #=> String
     #   resp.daemon.created_at #=> Time
     #   resp.daemon.updated_at #=> Time
@@ -5684,16 +5706,20 @@ module Aws::ECS
     #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers #=> Array
     #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers[0].arn #=> String
     #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers[0].running_instance_count #=> Integer
+    #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers[0].without_daemon_instance_count #=> Integer
     #   resp.daemon_deployments[0].target_daemon_revision.capacity_providers[0].draining_instance_count #=> Integer
     #   resp.daemon_deployments[0].target_daemon_revision.total_running_instance_count #=> Integer
+    #   resp.daemon_deployments[0].target_daemon_revision.total_without_daemon_instance_count #=> Integer
     #   resp.daemon_deployments[0].target_daemon_revision.total_draining_instance_count #=> Integer
     #   resp.daemon_deployments[0].source_daemon_revisions #=> Array
     #   resp.daemon_deployments[0].source_daemon_revisions[0].arn #=> String
     #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers #=> Array
     #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers[0].arn #=> String
     #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers[0].running_instance_count #=> Integer
+    #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers[0].without_daemon_instance_count #=> Integer
     #   resp.daemon_deployments[0].source_daemon_revisions[0].capacity_providers[0].draining_instance_count #=> Integer
     #   resp.daemon_deployments[0].source_daemon_revisions[0].total_running_instance_count #=> Integer
+    #   resp.daemon_deployments[0].source_daemon_revisions[0].total_without_daemon_instance_count #=> Integer
     #   resp.daemon_deployments[0].source_daemon_revisions[0].total_draining_instance_count #=> Integer
     #   resp.daemon_deployments[0].circuit_breaker.failure_count #=> Integer
     #   resp.daemon_deployments[0].circuit_breaker.status #=> String, one of "TRIGGERED", "MONITORING", "MONITORING_COMPLETE", "DISABLED"
@@ -5806,6 +5832,7 @@ module Aws::ECS
     #   resp.daemon_revisions[0].propagate_tags #=> String, one of "DAEMON", "NONE"
     #   resp.daemon_revisions[0].enable_ecs_managed_tags #=> Boolean
     #   resp.daemon_revisions[0].enable_execute_command #=> Boolean
+    #   resp.daemon_revisions[0].critical #=> Boolean
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -14570,6 +14597,25 @@ module Aws::ECS
     #   tasks in the daemon. If `false`, the execute command functionality is
     #   turned off.
     #
+    # @option params [Boolean] :critical
+    #   If the `critical` parameter of a daemon is `true`, and the daemon task
+    #   fails, stops, or becomes unhealthy, Amazon ECS drains the container
+    #   instance and stops the other tasks running on it. If the `critical`
+    #   parameter is `false`, the daemon task failure doesn't affect the
+    #   other tasks on the instance. The default value is `true`.
+    #
+    #   A non-critical daemon doesn't block instance registration. The
+    #   container instance becomes active and continues to run your other
+    #   tasks, whether the daemon task fails during scale-out or during a
+    #   deployment.
+    #
+    #   Amazon ECS emits an EventBridge event when a daemon task fails to
+    #   start, for both critical and non-critical daemons.
+    #
+    #   Daemon task launch failures during a deployment are still counted by
+    #   the deployment circuit breaker. The circuit breaker can roll back an
+    #   unstable target revision.
+    #
     # @return [Types::UpdateDaemonResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDaemonResponse#daemon_arn #daemon_arn} => String
@@ -14621,6 +14667,7 @@ module Aws::ECS
     #     propagate_tags: "DAEMON", # accepts DAEMON, NONE
     #     enable_ecs_managed_tags: false,
     #     enable_execute_command: false,
+    #     critical: false,
     #   })
     #
     # @example Response structure
@@ -16272,7 +16319,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.244.0'
+      context[:gem_version] = '1.245.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

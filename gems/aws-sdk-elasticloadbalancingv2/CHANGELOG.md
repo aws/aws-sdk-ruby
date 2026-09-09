@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.157.0 (2026-09-03)
+------------------
+
+* Feature - This release adds support for sending TCP resets for Gateway Load Balancer when a flow's idle timeout expires, or when a target becomes unhealthy or is deregistered. This adds updates the CLI documentation.
+
 1.156.0 (2026-07-22)
 ------------------
 

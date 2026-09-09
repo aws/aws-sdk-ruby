@@ -72,13 +72,13 @@ module Aws::Kinesis
     # @!attribute [rw] channel_status
     #   The current status of the channel. Valid values:
     #
-    #   * `CREATING`
+    #   * `CREATING` - The channel is being created.
     #
-    #   * `ACTIVE`
+    #   * `ACTIVE` - The channel is ready to deliver records.
     #
-    #   * `UPDATING`
+    #   * `UPDATING` - The channel configuration is being updated.
     #
-    #   * `DELETING`
+    #   * `DELETING` - The channel is being deleted.
     #
     #   * `FAILED` - See `ChannelStatusReason` for the failure cause.
     #   @return [String]
@@ -139,7 +139,8 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
-    # The server-side encryption configuration for a channel.
+    # Specifies the Amazon Web Services KMS key that Amazon Kinesis Data
+    # Streams uses to encrypt data delivered to the channel's destination.
     #
     # @!attribute [rw] encryption_type
     #   The encryption type. The only valid value is `KMS`.
@@ -269,13 +270,13 @@ module Aws::Kinesis
     # @!attribute [rw] channel_status
     #   The current status of the channel. Valid values:
     #
-    #   * `CREATING`
+    #   * `CREATING` - The channel is being created.
     #
-    #   * `ACTIVE`
+    #   * `ACTIVE` - The channel is ready to deliver records.
     #
-    #   * `UPDATING`
+    #   * `UPDATING` - The channel configuration is being updated.
     #
-    #   * `DELETING`
+    #   * `DELETING` - The channel is being deleted.
     #
     #   * `FAILED` - See `ChannelStatusReason` for the failure cause.
     #   @return [String]
@@ -1031,6 +1032,19 @@ module Aws::Kinesis
       include Aws::Structure
     end
 
+    # The request was rejected because the DryRun parameter was specified.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/DryRunOperationException AWS API Documentation
+    #
+    class DryRunOperationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents the input for EnableEnhancedMonitoring.
     #
     # @!attribute [rw] stream_name
@@ -1210,13 +1224,19 @@ module Aws::Kinesis
     #   Not Implemented. Reserved for future use.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetRecordsInput AWS API Documentation
     #
     class GetRecordsInput < Struct.new(
       :shard_iterator,
       :limit,
       :stream_arn,
-      :stream_id)
+      :stream_id,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1346,6 +1366,11 @@ module Aws::Kinesis
     #   Not Implemented. Reserved for future use.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/GetShardIteratorInput AWS API Documentation
     #
     class GetShardIteratorInput < Struct.new(
@@ -1355,7 +1380,8 @@ module Aws::Kinesis
       :starting_sequence_number,
       :timestamp,
       :stream_arn,
-      :stream_id)
+      :stream_id,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2224,6 +2250,11 @@ module Aws::Kinesis
     #   Not Implemented. Reserved for future use.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordInput AWS API Documentation
     #
     class PutRecordInput < Struct.new(
@@ -2233,7 +2264,8 @@ module Aws::Kinesis
       :explicit_hash_key,
       :sequence_number_for_ordering,
       :stream_arn,
-      :stream_id)
+      :stream_id,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2289,13 +2321,19 @@ module Aws::Kinesis
     #   Not Implemented. Reserved for future use.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/PutRecordsInput AWS API Documentation
     #
     class PutRecordsInput < Struct.new(
       :records,
       :stream_name,
       :stream_arn,
-      :stream_id)
+      :stream_id,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2717,11 +2755,14 @@ module Aws::Kinesis
     # @!attribute [rw] storage_class
     #   The Amazon S3 storage class for delivered objects. Valid values:
     #
-    #   * `STANDARD` (default)
+    #   * `STANDARD` - Default storage class for frequently accessed data.
+    #     (default)
     #
-    #   * `INTELLIGENT_TIERING`
+    #   * `INTELLIGENT_TIERING` - Automatically moves objects to the most
+    #     cost-effective access tier based on usage patterns.
     #
-    #   * `GLACIER_IR`
+    #   * `GLACIER_IR` - Low-cost storage for rarely accessed data that
+    #     requires millisecond retrieval.
     #   @return [String]
     #
     # @!attribute [rw] compression_type
@@ -3530,13 +3571,19 @@ module Aws::Kinesis
     #   streaming.
     #   @return [Types::StartingPosition]
     #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesis-2013-12-02/SubscribeToShardInput AWS API Documentation
     #
     class SubscribeToShardInput < Struct.new(
       :consumer_arn,
       :stream_id,
       :shard_id,
-      :starting_position)
+      :starting_position,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2026-09-04)
+------------------
+
+* Feature - Service Quotas adds the AdjustableAtLevel property to QuotaContext, indicating whether a quota is adjustable at the account or resource level.
+
 1.75.0 (2026-07-09)
 ------------------
 

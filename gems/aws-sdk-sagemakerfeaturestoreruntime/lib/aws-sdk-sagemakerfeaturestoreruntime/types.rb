@@ -267,6 +267,22 @@ module Aws::SageMakerFeatureStoreRuntime
       include Aws::Structure
     end
 
+    # The service rejected the update because the provided `EventTime` is
+    # older than the record's current `EventTime`. To persist the update,
+    # retrieve the record's latest `EventTime` and resubmit the request
+    # with an `EventTime` that is equal to or newer than the current value.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] feature_group_name
     #   The name or Amazon Resource Name (ARN) of the feature group to
     #   delete the record from.
@@ -542,6 +558,56 @@ module Aws::SageMakerFeatureStoreRuntime
     class TtlDuration < Struct.new(
       :unit,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] feature_group_name
+    #   The identifier for the feature group that contains the record to
+    #   update. You can specify one of the following:
+    #
+    #   * The feature group name.
+    #
+    #   * The feature group Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] record_identifier_value_as_string
+    #   The value that uniquely identifies the record in the feature group.
+    #   This must match the value defined by the feature group's record
+    #   identifier feature.
+    #   @return [String]
+    #
+    # @!attribute [rw] features
+    #   The feature values to write to the record.
+    #   @return [Array<Types::FeatureValue>]
+    #
+    # @!attribute [rw] target_stores
+    #   The target stores for the record update. By default, Amazon
+    #   SageMaker Feature Store updates the record in all stores associated
+    #   with the `FeatureGroup`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ttl_duration
+    #   The time-to-live (TTL) duration for the record. Amazon SageMaker
+    #   Feature Store deletes the record when `EventTime` + `TtlDuration`
+    #   elapses. If you omit this parameter, the record's existing TTL
+    #   setting remains unchanged. For information about `HardDelete`, see
+    #   the [DeleteRecord][1] operation in the Amazon SageMaker API
+    #   Reference.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
+    #   @return [Types::TtlDuration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-featurestore-runtime-2020-07-01/UpdateRecordRequest AWS API Documentation
+    #
+    class UpdateRecordRequest < Struct.new(
+      :feature_group_name,
+      :record_identifier_value_as_string,
+      :features,
+      :target_stores,
+      :ttl_duration)
       SENSITIVE = []
       include Aws::Structure
     end

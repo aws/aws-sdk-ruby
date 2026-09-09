@@ -401,6 +401,7 @@ module Aws::ECS
       attr_accessor enable_ecs_managed_tags: bool
       attr_accessor enable_execute_command: bool
       attr_accessor client_token: ::String
+      attr_accessor critical: bool
       SENSITIVE: []
     end
 
@@ -516,6 +517,7 @@ module Aws::ECS
     class DaemonCapacityProvider
       attr_accessor arn: ::String
       attr_accessor running_count: ::Integer
+      attr_accessor without_daemon_count: ::Integer
       SENSITIVE: []
     end
 
@@ -594,6 +596,7 @@ module Aws::ECS
     class DaemonDeploymentCapacityProvider
       attr_accessor arn: ::String
       attr_accessor running_instance_count: ::Integer
+      attr_accessor without_daemon_instance_count: ::Integer
       attr_accessor draining_instance_count: ::Integer
       SENSITIVE: []
     end
@@ -609,6 +612,7 @@ module Aws::ECS
       attr_accessor arn: ::String
       attr_accessor capacity_providers: ::Array[Types::DaemonDeploymentCapacityProvider]
       attr_accessor total_running_instance_count: ::Integer
+      attr_accessor total_without_daemon_instance_count: ::Integer
       attr_accessor total_draining_instance_count: ::Integer
       SENSITIVE: []
     end
@@ -666,6 +670,7 @@ module Aws::ECS
       attr_accessor propagate_tags: ("DAEMON" | "NONE")
       attr_accessor enable_ecs_managed_tags: bool
       attr_accessor enable_execute_command: bool
+      attr_accessor critical: bool
       SENSITIVE: []
     end
 
@@ -673,6 +678,7 @@ module Aws::ECS
       attr_accessor arn: ::String
       attr_accessor capacity_providers: ::Array[Types::DaemonCapacityProvider]
       attr_accessor total_running_count: ::Integer
+      attr_accessor total_without_daemon_count: ::Integer
       SENSITIVE: []
     end
 
@@ -2898,6 +2904,7 @@ module Aws::ECS
       attr_accessor propagate_tags: ("DAEMON" | "NONE")
       attr_accessor enable_ecs_managed_tags: bool
       attr_accessor enable_execute_command: bool
+      attr_accessor critical: bool
       SENSITIVE: []
     end
 

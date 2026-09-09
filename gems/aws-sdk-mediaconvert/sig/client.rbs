@@ -581,7 +581,7 @@ module Aws
       def start_jobs_query: (
                               ?filter_list: Array[
                                 {
-                                  key: ("queue" | "status" | "fileInput" | "jobEngineVersionRequested" | "jobEngineVersionUsed" | "audioCodec" | "videoCodec")?,
+                                  key: ("queue" | "status" | "fileInput" | "jobEngineVersionRequested" | "jobEngineVersionUsed" | "audioCodec" | "videoCodec" | "errorCode")?,
                                   values: Array[::String]?
                                 }
                               ],

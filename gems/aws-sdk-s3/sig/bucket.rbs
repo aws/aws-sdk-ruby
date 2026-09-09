@@ -152,6 +152,9 @@ module Aws
                         ?object_lock_mode: ("GOVERNANCE" | "COMPLIANCE"),
                         ?object_lock_retain_until_date: ::Time,
                         ?object_lock_legal_hold_status: ("ON" | "OFF"),
+                        ?object_lock_event_hold: ("ON" | "OFF"),
+                        ?object_lock_event_hold_duration_days: ::Integer,
+                        ?object_lock_event_hold_duration_years: ::Integer,
                         ?expected_bucket_owner: ::String
                       ) -> Object
                     | (?Hash[Symbol, untyped]) -> Object

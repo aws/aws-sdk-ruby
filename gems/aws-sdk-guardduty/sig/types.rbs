@@ -100,6 +100,12 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class Activity
+      attr_accessor type: ("API_CALL")
+      attr_accessor api: Types::ApiCall
+      SENSITIVE: []
+    end
+
     class Actor
       attr_accessor id: ::String
       attr_accessor user: Types::User
@@ -164,6 +170,14 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class ApiCall
+      attr_accessor operation: ::String
+      attr_accessor service: ::String
+      attr_accessor error: ::String
+      attr_accessor user_agent: ::String
+      SENSITIVE: []
+    end
+
     class ArchiveFindingsRequest
       attr_accessor detector_id: ::String
       attr_accessor finding_ids: ::Array[::String]
@@ -171,6 +185,29 @@ module Aws::GuardDuty
     end
 
     class ArchiveFindingsResponse < Aws::EmptyStructure
+    end
+
+    class AssociationDetail
+      attr_accessor association_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor account_id: ::String
+      attr_accessor mode: ("LIVE" | "DRY_RUN")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AssociationSummary
+      attr_accessor association_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor mode: ("LIVE" | "DRY_RUN")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor expires_at: ::Time
+      SENSITIVE: []
     end
 
     class AutonomousSystem
@@ -399,6 +436,31 @@ module Aws::GuardDuty
       attr_accessor count_by_resource_type: ::Hash[("EKS" | "ECS" | "EC2"), ::Integer]
       attr_accessor count_by_coverage_status: ::Hash[("HEALTHY" | "UNHEALTHY"), ::Integer]
       SENSITIVE: []
+    end
+
+    class CreateCustomDetectionRuleAssociationRequest
+      attr_accessor rule_id: ::String
+      attr_accessor mode: ("LIVE" | "DRY_RUN")
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateCustomDetectionRuleAssociationResponse
+      attr_accessor rule_association: Types::AssociationDetail
+      SENSITIVE: []
+    end
+
+    class CreateCustomDetectionRuleOrgConfigurationRequest
+      attr_accessor rule_id: ::String
+      attr_accessor mode: ("LIVE" | "DRY_RUN")
+      attr_accessor include_account_ids: ::Array[::String]
+      attr_accessor exclude_account_ids: ::Array[::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCustomDetectionRuleOrgConfigurationResponse < Aws::EmptyStructure
     end
 
     class CreateDetectorRequest
@@ -634,6 +696,24 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class DeleteCustomDetectionRuleAssociationRequest
+      attr_accessor rule_id: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteCustomDetectionRuleAssociationResponse < Aws::EmptyStructure
+    end
+
+    class DeleteCustomDetectionRuleOrgConfigurationRequest
+      attr_accessor rule_id: ::String
+      attr_accessor mode: ("LIVE" | "DRY_RUN")
+      SENSITIVE: []
+    end
+
+    class DeleteCustomDetectionRuleOrgConfigurationResponse < Aws::EmptyStructure
+    end
+
     class DeleteDetectorRequest
       attr_accessor detector_id: ::String
       SENSITIVE: []
@@ -786,6 +866,37 @@ module Aws::GuardDuty
     class Detection
       attr_accessor anomaly: Types::Anomaly
       attr_accessor sequence: Types::Sequence
+      SENSITIVE: []
+    end
+
+    class DetectionRuleFilter
+      attr_accessor name: ("name" | "description" | "dataSource" | "severity" | "tactic" | "technique" | "service")
+      attr_accessor values: ::Array[::String]
+      attr_accessor condition: ("EQUALS" | "CONTAINS")
+      SENSITIVE: []
+    end
+
+    class DetectionRuleOrgConfiguration
+      attr_accessor rule_id: ::String
+      attr_accessor mode: ("LIVE" | "DRY_RUN")
+      attr_accessor status: ("ACTIVE" | "PROCESSING" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor include_account_ids: ::Array[::String]
+      attr_accessor exclude_account_ids: ::Array[::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class DetectionRuleOrgConfigurationSummary
+      attr_accessor rule_id: ::String
+      attr_accessor mode: ("LIVE" | "DRY_RUN")
+      attr_accessor status: ("ACTIVE" | "PROCESSING" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor expires_at: ::Time
       SENSITIVE: []
     end
 
@@ -1118,6 +1229,39 @@ module Aws::GuardDuty
 
     class GetCoverageStatisticsResponse
       attr_accessor coverage_statistics: Types::CoverageStatistics
+      SENSITIVE: []
+    end
+
+    class GetCustomDetectionRuleAssociationRequest
+      attr_accessor rule_id: ::String
+      attr_accessor association_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCustomDetectionRuleAssociationResponse
+      attr_accessor rule_association: Types::AssociationDetail
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetCustomDetectionRuleOrgConfigurationRequest
+      attr_accessor rule_id: ::String
+      attr_accessor mode: ("LIVE" | "DRY_RUN")
+      SENSITIVE: []
+    end
+
+    class GetCustomDetectionRuleOrgConfigurationResponse
+      attr_accessor configuration: Types::DetectionRuleOrgConfiguration
+      SENSITIVE: []
+    end
+
+    class GetCustomDetectionRuleRequest
+      attr_accessor rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetCustomDetectionRuleResponse
+      attr_accessor rule: Types::RuleDetail
       SENSITIVE: []
     end
 
@@ -1685,6 +1829,46 @@ module Aws::GuardDuty
 
     class ListCoverageResponse
       attr_accessor resources: ::Array[Types::CoverageResource]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomDetectionRuleAssociationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor mode: ("LIVE" | "DRY_RUN")
+      SENSITIVE: []
+    end
+
+    class ListCustomDetectionRuleAssociationsResponse
+      attr_accessor rule_associations: ::Array[Types::AssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomDetectionRuleOrgConfigurationsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor status: ("ACTIVE" | "PROCESSING" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class ListCustomDetectionRuleOrgConfigurationsResponse
+      attr_accessor configurations: ::Array[Types::DetectionRuleOrgConfigurationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCustomDetectionRulesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor filters: ::Array[Types::DetectionRuleFilter]
+      SENSITIVE: []
+    end
+
+    class ListCustomDetectionRulesResponse
+      attr_accessor rules: ::Array[Types::RuleSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -2449,6 +2633,46 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class RuleDefinition
+      attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class RuleDetail
+      attr_accessor rule_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW")
+      attr_accessor data_source: ("CloudTrailManagementEvent")
+      attr_accessor tactic: ::String
+      attr_accessor technique: ::String
+      attr_accessor service: ::String
+      attr_accessor definition: Types::RuleDefinition
+      attr_accessor language: ("SQL")
+      attr_accessor schema: ("CloudTrail")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class RuleSummary
+      attr_accessor rule_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW")
+      attr_accessor data_source: ("CloudTrailManagementEvent")
+      attr_accessor tactic: ::String
+      attr_accessor technique: ::String
+      attr_accessor service: ::String
+      attr_accessor language: ("SQL")
+      attr_accessor schema: ("CloudTrail")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class RuntimeContext
       attr_accessor modifying_process: Types::ProcessDetails
       attr_accessor modified_at: ::Time
@@ -2761,6 +2985,7 @@ module Aws::GuardDuty
       attr_accessor actor_ids: ::Array[::String]
       attr_accessor endpoint_ids: ::Array[::String]
       attr_accessor signal_indicators: ::Array[Types::Indicator]
+      attr_accessor activities: ::Array[Types::Activity]
       SENSITIVE: []
     end
 
@@ -2896,6 +3121,27 @@ module Aws::GuardDuty
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCustomDetectionRuleAssociationRequest
+      attr_accessor rule_id: ::String
+      attr_accessor association_id: ::String
+      attr_accessor mode: ("LIVE" | "DRY_RUN")
+      SENSITIVE: []
+    end
+
+    class UpdateCustomDetectionRuleAssociationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateCustomDetectionRuleOrgConfigurationRequest
+      attr_accessor rule_id: ::String
+      attr_accessor mode: ("LIVE" | "DRY_RUN")
+      attr_accessor include_account_ids: ::Array[::String]
+      attr_accessor exclude_account_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class UpdateCustomDetectionRuleOrgConfigurationResponse < Aws::EmptyStructure
     end
 
     class UpdateDetectorRequest

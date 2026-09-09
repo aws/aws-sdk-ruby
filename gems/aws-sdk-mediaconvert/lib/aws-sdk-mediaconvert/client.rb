@@ -745,6 +745,7 @@ module Aws::MediaConvert
     #               codec_profile: "LC", # accepts LC, HEV1, HEV2, XHE
     #               coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1, CODING_MODE_AUTO
     #               loudness_measurement_mode: "PROGRAM", # accepts PROGRAM, ANCHOR
+    #               passthrough_control: "WHEN_POSSIBLE", # accepts WHEN_POSSIBLE, NO_PASSTHROUGH
     #               rap_interval: 1,
     #               rate_control_mode: "CBR", # accepts CBR, VBR
     #               raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
@@ -968,7 +969,15 @@ module Aws::MediaConvert
     #               page_types: ["PAGE_TYPE_INITIAL"], # accepts PAGE_TYPE_INITIAL, PAGE_TYPE_SUBTITLE, PAGE_TYPE_ADDL_INFO, PAGE_TYPE_PROGRAM_SCHEDULE, PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE
     #             },
     #             ttml_destination_settings: {
+    #               background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
+    #               background_opacity: 1,
+    #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, AUTO
+    #               font_opacity: 1,
+    #               font_size: 1,
+    #               font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #               font_weight: "NORMAL", # accepts NORMAL, BOLD
     #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #               text_decoration: "NONE", # accepts NONE, UNDERLINE
     #             },
     #             webvtt_destination_settings: {
     #               accessibility: "DISABLED", # accepts DISABLED, ENABLED
@@ -992,7 +1001,7 @@ module Aws::MediaConvert
     #           klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           manifest_metadata_signaling: "ENABLED", # accepts ENABLED, DISABLED
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
-    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE, MANIFEST_CUES
     #           signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata_box_version: "VERSION_0", # accepts VERSION_0, VERSION_1
@@ -1053,7 +1062,7 @@ module Aws::MediaConvert
     #             scte_35_esam_pid: 1,
     #           },
     #           scte_35_pid: 1,
-    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE, MANIFEST_CUES
     #           segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #           segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #           segmentation_time: 1.0,
@@ -1079,7 +1088,7 @@ module Aws::MediaConvert
     #           pts_offset: 1,
     #           pts_offset_mode: "AUTO", # accepts AUTO, SECONDS, MILLISECONDS
     #           scte_35_pid: 1,
-    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE, MANIFEST_CUES
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata_pid: 1,
     #           transport_stream_id: 1,
@@ -1113,7 +1122,7 @@ module Aws::MediaConvert
     #           klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #           manifest_metadata_signaling: "ENABLED", # accepts ENABLED, DISABLED
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
-    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE, MANIFEST_CUES
     #           signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata_box_version: "VERSION_0", # accepts VERSION_0, VERSION_1
@@ -1437,6 +1446,7 @@ module Aws::MediaConvert
     #               slices: 1,
     #             },
     #             xavc_hd_intra_cbg_profile_settings: {
+    #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
     #               xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
     #             },
     #             xavc_hd_profile_settings: {
@@ -1615,6 +1625,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2", "XHE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.loudness_measurement_mode #=> String, one of "PROGRAM", "ANCHOR"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.passthrough_control #=> String, one of "WHEN_POSSIBLE", "NO_PASSTHROUGH"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rap_interval #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rate_control_mode #=> String, one of "CBR", "VBR"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.raw_format #=> String, one of "LATM_LOAS", "NONE"
@@ -1791,7 +1802,15 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.background_opacity #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_opacity #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_size #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_weight #=> String, one of "NORMAL", "BOLD"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.text_decoration #=> String, one of "NONE", "UNDERLINE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT", "MERGE"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
@@ -1807,7 +1826,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
-    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.preset.settings.container_settings.cmfc_settings.signing_kms_key #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
@@ -1858,7 +1877,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
-    #   resp.preset.settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -1883,7 +1902,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS", "MILLISECONDS"
     #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_pid #=> Integer
-    #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.preset.settings.container_settings.m3u_8_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.timed_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.transport_stream_id #=> Integer
@@ -1911,7 +1930,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.preset.settings.container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
-    #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.preset.settings.container_settings.mpd_settings.signing_kms_key #=> String
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
@@ -2188,6 +2207,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_4k_profile_settings.hrd_buffer_size #=> Integer
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_4k_profile_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_4k_profile_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_hd_intra_cbg_profile_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_hd_intra_cbg_profile_settings.xavc_class #=> String, one of "CLASS_50", "CLASS_100", "CLASS_200"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_hd_profile_settings.bitrate_class #=> String, one of "BITRATE_CLASS_25", "BITRATE_CLASS_35", "BITRATE_CLASS_50"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_hd_profile_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -2716,6 +2736,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2", "XHE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.loudness_measurement_mode #=> String, one of "PROGRAM", "ANCHOR"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.passthrough_control #=> String, one of "WHEN_POSSIBLE", "NO_PASSTHROUGH"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rap_interval #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rate_control_mode #=> String, one of "CBR", "VBR"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.raw_format #=> String, one of "LATM_LOAS", "NONE"
@@ -2892,7 +2913,15 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.background_opacity #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_opacity #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_size #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_weight #=> String, one of "NORMAL", "BOLD"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.text_decoration #=> String, one of "NONE", "UNDERLINE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT", "MERGE"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
@@ -2908,7 +2937,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
-    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.preset.settings.container_settings.cmfc_settings.signing_kms_key #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
@@ -2959,7 +2988,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
-    #   resp.preset.settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -2984,7 +3013,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS", "MILLISECONDS"
     #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_pid #=> Integer
-    #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.preset.settings.container_settings.m3u_8_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.timed_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.transport_stream_id #=> Integer
@@ -3012,7 +3041,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.preset.settings.container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
-    #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.preset.settings.container_settings.mpd_settings.signing_kms_key #=> String
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
@@ -3289,6 +3318,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_4k_profile_settings.hrd_buffer_size #=> Integer
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_4k_profile_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_4k_profile_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_hd_intra_cbg_profile_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_hd_intra_cbg_profile_settings.xavc_class #=> String, one of "CLASS_50", "CLASS_100", "CLASS_200"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_hd_profile_settings.bitrate_class #=> String, one of "BITRATE_CLASS_25", "BITRATE_CLASS_35", "BITRATE_CLASS_50"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_hd_profile_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -3626,6 +3656,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2", "XHE"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.loudness_measurement_mode #=> String, one of "PROGRAM", "ANCHOR"
+    #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.passthrough_control #=> String, one of "WHEN_POSSIBLE", "NO_PASSTHROUGH"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.rap_interval #=> Integer
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.rate_control_mode #=> String, one of "CBR", "VBR"
     #   resp.presets[0].settings.audio_descriptions[0].codec_settings.aac_settings.raw_format #=> String, one of "LATM_LOAS", "NONE"
@@ -3802,7 +3833,15 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.background_opacity #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_opacity #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_size #=> Integer
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_weight #=> String, one of "NORMAL", "BOLD"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.text_decoration #=> String, one of "NONE", "UNDERLINE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT", "MERGE"
     #   resp.presets[0].settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
@@ -3818,7 +3857,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
-    #   resp.presets[0].settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.presets[0].settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.presets[0].settings.container_settings.cmfc_settings.signing_kms_key #=> String
     #   resp.presets[0].settings.container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
@@ -3869,7 +3908,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
     #   resp.presets[0].settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
-    #   resp.presets[0].settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.presets[0].settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.presets[0].settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.presets[0].settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.presets[0].settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -3894,7 +3933,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m3u_8_settings.pts_offset #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS", "MILLISECONDS"
     #   resp.presets[0].settings.container_settings.m3u_8_settings.scte_35_pid #=> Integer
-    #   resp.presets[0].settings.container_settings.m3u_8_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.presets[0].settings.container_settings.m3u_8_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.presets[0].settings.container_settings.m3u_8_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.m3u_8_settings.timed_metadata_pid #=> Integer
     #   resp.presets[0].settings.container_settings.m3u_8_settings.transport_stream_id #=> Integer
@@ -3922,7 +3961,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.presets[0].settings.container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
-    #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.presets[0].settings.container_settings.mpd_settings.signing_kms_key #=> String
     #   resp.presets[0].settings.container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
@@ -4199,6 +4238,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.xavc_4k_profile_settings.hrd_buffer_size #=> Integer
     #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.xavc_4k_profile_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.xavc_4k_profile_settings.slices #=> Integer
+    #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.xavc_hd_intra_cbg_profile_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
     #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.xavc_hd_intra_cbg_profile_settings.xavc_class #=> String, one of "CLASS_50", "CLASS_100", "CLASS_200"
     #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.xavc_hd_profile_settings.bitrate_class #=> String, one of "BITRATE_CLASS_25", "BITRATE_CLASS_35", "BITRATE_CLASS_50"
     #   resp.presets[0].settings.video_description.codec_settings.xavc_settings.xavc_hd_profile_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -4486,18 +4526,19 @@ module Aws::MediaConvert
     #   resp.probe_results #=> Array
     #   resp.probe_results[0].container.bit_rate #=> Integer
     #   resp.probe_results[0].container.duration #=> Float
-    #   resp.probe_results[0].container.format #=> String, one of "mp4", "quicktime", "matroska", "webm", "mxf", "wave", "avi", "mpegts", "mpegps", "mp3"
+    #   resp.probe_results[0].container.format #=> String, one of "mp4", "quicktime", "matroska", "webm", "mxf", "wave", "avi", "mpegts", "mpegps", "mp3", "flac", "asf", "ogg"
     #   resp.probe_results[0].container.start_timecode #=> String
     #   resp.probe_results[0].container.tracks #=> Array
     #   resp.probe_results[0].container.tracks[0].audio_properties.bit_depth #=> Integer
     #   resp.probe_results[0].container.tracks[0].audio_properties.bit_rate #=> Integer
+    #   resp.probe_results[0].container.tracks[0].audio_properties.channel_layout #=> String
     #   resp.probe_results[0].container.tracks[0].audio_properties.channels #=> Integer
     #   resp.probe_results[0].container.tracks[0].audio_properties.frame_rate.denominator #=> Integer
     #   resp.probe_results[0].container.tracks[0].audio_properties.frame_rate.numerator #=> Integer
     #   resp.probe_results[0].container.tracks[0].audio_properties.language_code #=> String
     #   resp.probe_results[0].container.tracks[0].audio_properties.object_count #=> Integer
     #   resp.probe_results[0].container.tracks[0].audio_properties.sample_rate #=> Integer
-    #   resp.probe_results[0].container.tracks[0].codec #=> String, one of "UNKNOWN", "AAC", "AC3", "EAC3", "FLAC", "MP2", "MP3", "OPUS", "PCM", "VORBIS", "AV1", "AVC", "HEVC", "JPEG2000", "MJPEG", "MPEG1", "MP4V", "MPEG2", "PRORES", "QTRLE", "THEORA", "UNCOMPRESSED", "VFW", "VP8", "VP9", "C608", "C708", "WEBVTT"
+    #   resp.probe_results[0].container.tracks[0].codec #=> String, one of "UNKNOWN", "AAC", "AC3", "AMR", "EAC3", "FLAC", "MP2", "MP3", "OPUS", "PCM", "VORBIS", "WMA", "WMA2", "WMAPRO", "AV1", "AVC", "DV", "H263", "HEVC", "JPEG2000", "MJPEG", "MPEG1", "MP4V", "MPEG2", "PRORES", "QTRLE", "THEORA", "UNCOMPRESSED", "VC1", "VC3", "VFW", "VP8", "VP9", "C608", "C708", "WEBVTT"
     #   resp.probe_results[0].container.tracks[0].data_properties.language_code #=> String
     #   resp.probe_results[0].container.tracks[0].duration #=> Float
     #   resp.probe_results[0].container.tracks[0].index #=> Integer
@@ -4512,6 +4553,7 @@ module Aws::MediaConvert
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.content_light_level.max_content_light_level #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.content_light_level.max_frame_average_light_level #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.field_order #=> String
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.hdr_10_plus_presence #=> String, one of "PRESENT"
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.height #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.level #=> String
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.matrix_coefficients #=> String, one of "RGB", "ITU_709", "UNSPECIFIED", "RESERVED", "FCC", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "YCgCo", "ITU_2020_NCL", "ITU_2020_CL", "SMPTE_2085", "CD_NCL", "CD_CL", "ITU_2100ICtCp", "IPT", "EBU3213", "LAST"
@@ -4521,6 +4563,8 @@ module Aws::MediaConvert
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.transfer_characteristics #=> String, one of "ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "LINEAR", "LOG10_2", "LOC10_2_5", "IEC_61966_2_4", "ITU_1361", "IEC_61966_2_1", "ITU_2020_10bit", "ITU_2020_12bit", "SMPTE_2084", "SMPTE_428_1", "ARIB_B67", "LAST"
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.width #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.color_primaries #=> String, one of "ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "GENERIC_FILM", "ITU_2020", "SMPTE_428_1", "SMPTE_431_2", "SMPTE_EG_432_1", "IPT", "SMPTE_2067XYZ", "EBU_3213_E", "LAST"
+    #   resp.probe_results[0].container.tracks[0].video_properties.display_aspect_ratio.denominator #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.display_aspect_ratio.numerator #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.frame_rate.denominator #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.frame_rate.numerator #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.hdr_metadata.content_light_level.max_content_light_level #=> Integer
@@ -4538,6 +4582,8 @@ module Aws::MediaConvert
     #   resp.probe_results[0].container.tracks[0].video_properties.height #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.matrix_coefficients #=> String, one of "RGB", "ITU_709", "UNSPECIFIED", "RESERVED", "FCC", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "YCgCo", "ITU_2020_NCL", "ITU_2020_CL", "SMPTE_2085", "CD_NCL", "CD_CL", "ITU_2100ICtCp", "IPT", "EBU3213", "LAST"
     #   resp.probe_results[0].container.tracks[0].video_properties.rotation #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.sample_aspect_ratio.denominator #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.sample_aspect_ratio.numerator #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.transfer_characteristics #=> String, one of "ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "LINEAR", "LOG10_2", "LOC10_2_5", "IEC_61966_2_4", "ITU_1361", "IEC_61966_2_1", "ITU_2020_10bit", "ITU_2020_12bit", "SMPTE_2084", "SMPTE_428_1", "ARIB_B67", "LAST"
     #   resp.probe_results[0].container.tracks[0].video_properties.width #=> Integer
     #   resp.probe_results[0].metadata.etag #=> String
@@ -4687,7 +4733,7 @@ module Aws::MediaConvert
     #   resp = client.start_jobs_query({
     #     filter_list: [
     #       {
-    #         key: "queue", # accepts queue, status, fileInput, jobEngineVersionRequested, jobEngineVersionUsed, audioCodec, videoCodec
+    #         key: "queue", # accepts queue, status, fileInput, jobEngineVersionRequested, jobEngineVersionUsed, audioCodec, videoCodec, errorCode
     #         values: ["__stringMax100"],
     #       },
     #     ],
@@ -4877,6 +4923,7 @@ module Aws::MediaConvert
     #               codec_profile: "LC", # accepts LC, HEV1, HEV2, XHE
     #               coding_mode: "AD_RECEIVER_MIX", # accepts AD_RECEIVER_MIX, CODING_MODE_1_0, CODING_MODE_1_1, CODING_MODE_2_0, CODING_MODE_5_1, CODING_MODE_AUTO
     #               loudness_measurement_mode: "PROGRAM", # accepts PROGRAM, ANCHOR
+    #               passthrough_control: "WHEN_POSSIBLE", # accepts WHEN_POSSIBLE, NO_PASSTHROUGH
     #               rap_interval: 1,
     #               rate_control_mode: "CBR", # accepts CBR, VBR
     #               raw_format: "LATM_LOAS", # accepts LATM_LOAS, NONE
@@ -5100,7 +5147,15 @@ module Aws::MediaConvert
     #               page_types: ["PAGE_TYPE_INITIAL"], # accepts PAGE_TYPE_INITIAL, PAGE_TYPE_SUBTITLE, PAGE_TYPE_ADDL_INFO, PAGE_TYPE_PROGRAM_SCHEDULE, PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE
     #             },
     #             ttml_destination_settings: {
+    #               background_color: "NONE", # accepts NONE, BLACK, WHITE, AUTO
+    #               background_opacity: 1,
+    #               font_color: "WHITE", # accepts WHITE, BLACK, YELLOW, RED, GREEN, BLUE, AUTO
+    #               font_opacity: 1,
+    #               font_size: 1,
+    #               font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #               font_weight: "NORMAL", # accepts NORMAL, BOLD
     #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #               text_decoration: "NONE", # accepts NONE, UNDERLINE
     #             },
     #             webvtt_destination_settings: {
     #               accessibility: "DISABLED", # accepts DISABLED, ENABLED
@@ -5124,7 +5179,7 @@ module Aws::MediaConvert
     #           klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           manifest_metadata_signaling: "ENABLED", # accepts ENABLED, DISABLED
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
-    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE, MANIFEST_CUES
     #           signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata_box_version: "VERSION_0", # accepts VERSION_0, VERSION_1
@@ -5185,7 +5240,7 @@ module Aws::MediaConvert
     #             scte_35_esam_pid: 1,
     #           },
     #           scte_35_pid: 1,
-    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE, MANIFEST_CUES
     #           segmentation_markers: "NONE", # accepts NONE, RAI_SEGSTART, RAI_ADAPT, PSI_SEGSTART, EBP, EBP_LEGACY
     #           segmentation_style: "MAINTAIN_CADENCE", # accepts MAINTAIN_CADENCE, RESET_CADENCE
     #           segmentation_time: 1.0,
@@ -5211,7 +5266,7 @@ module Aws::MediaConvert
     #           pts_offset: 1,
     #           pts_offset_mode: "AUTO", # accepts AUTO, SECONDS, MILLISECONDS
     #           scte_35_pid: 1,
-    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE, MANIFEST_CUES
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata_pid: 1,
     #           transport_stream_id: 1,
@@ -5245,7 +5300,7 @@ module Aws::MediaConvert
     #           klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #           manifest_metadata_signaling: "ENABLED", # accepts ENABLED, DISABLED
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
-    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
+    #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE, MANIFEST_CUES
     #           signing_kms_key: "__stringMin1PatternArnAwsUsGovCnKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912MrkAFAF0932",
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata_box_version: "VERSION_0", # accepts VERSION_0, VERSION_1
@@ -5569,6 +5624,7 @@ module Aws::MediaConvert
     #               slices: 1,
     #             },
     #             xavc_hd_intra_cbg_profile_settings: {
+    #               interlace_mode: "PROGRESSIVE", # accepts PROGRESSIVE, TOP_FIELD, BOTTOM_FIELD, FOLLOW_TOP_FIELD, FOLLOW_BOTTOM_FIELD
     #               xavc_class: "CLASS_50", # accepts CLASS_50, CLASS_100, CLASS_200
     #             },
     #             xavc_hd_profile_settings: {
@@ -5744,6 +5800,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.codec_profile #=> String, one of "LC", "HEV1", "HEV2", "XHE"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.coding_mode #=> String, one of "AD_RECEIVER_MIX", "CODING_MODE_1_0", "CODING_MODE_1_1", "CODING_MODE_2_0", "CODING_MODE_5_1", "CODING_MODE_AUTO"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.loudness_measurement_mode #=> String, one of "PROGRAM", "ANCHOR"
+    #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.passthrough_control #=> String, one of "WHEN_POSSIBLE", "NO_PASSTHROUGH"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rap_interval #=> Integer
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.rate_control_mode #=> String, one of "CBR", "VBR"
     #   resp.preset.settings.audio_descriptions[0].codec_settings.aac_settings.raw_format #=> String, one of "LATM_LOAS", "NONE"
@@ -5920,7 +5977,15 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_number #=> String
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types #=> Array
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.background_color #=> String, one of "NONE", "BLACK", "WHITE", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.background_opacity #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_color #=> String, one of "WHITE", "BLACK", "YELLOW", "RED", "GREEN", "BLUE", "AUTO"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_opacity #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_size #=> Integer
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.font_weight #=> String, one of "NORMAL", "BOLD"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.text_decoration #=> String, one of "NONE", "UNDERLINE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT", "MERGE"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
@@ -5936,7 +6001,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
-    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.preset.settings.container_settings.cmfc_settings.signing_kms_key #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
@@ -5987,7 +6052,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.rate_mode #=> String, one of "VBR", "CBR"
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_esam.scte_35_esam_pid #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.scte_35_pid #=> Integer
-    #   resp.preset.settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.m2ts_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_markers #=> String, one of "NONE", "RAI_SEGSTART", "RAI_ADAPT", "PSI_SEGSTART", "EBP", "EBP_LEGACY"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_style #=> String, one of "MAINTAIN_CADENCE", "RESET_CADENCE"
     #   resp.preset.settings.container_settings.m2ts_settings.segmentation_time #=> Float
@@ -6012,7 +6077,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.pts_offset_mode #=> String, one of "AUTO", "SECONDS", "MILLISECONDS"
     #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_pid #=> Integer
-    #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.m3u_8_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.preset.settings.container_settings.m3u_8_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m3u_8_settings.timed_metadata_pid #=> Integer
     #   resp.preset.settings.container_settings.m3u_8_settings.transport_stream_id #=> Integer
@@ -6040,7 +6105,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.preset.settings.container_settings.mpd_settings.manifest_metadata_signaling #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
-    #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
+    #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE", "MANIFEST_CUES"
     #   resp.preset.settings.container_settings.mpd_settings.signing_kms_key #=> String
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata_box_version #=> String, one of "VERSION_0", "VERSION_1"
@@ -6317,6 +6382,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_4k_profile_settings.hrd_buffer_size #=> Integer
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_4k_profile_settings.quality_tuning_level #=> String, one of "SINGLE_PASS", "SINGLE_PASS_HQ", "MULTI_PASS_HQ"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_4k_profile_settings.slices #=> Integer
+    #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_hd_intra_cbg_profile_settings.interlace_mode #=> String, one of "PROGRESSIVE", "TOP_FIELD", "BOTTOM_FIELD", "FOLLOW_TOP_FIELD", "FOLLOW_BOTTOM_FIELD"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_hd_intra_cbg_profile_settings.xavc_class #=> String, one of "CLASS_50", "CLASS_100", "CLASS_200"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_hd_profile_settings.bitrate_class #=> String, one of "BITRATE_CLASS_25", "BITRATE_CLASS_35", "BITRATE_CLASS_50"
     #   resp.preset.settings.video_description.codec_settings.xavc_settings.xavc_hd_profile_settings.flicker_adaptive_quantization #=> String, one of "DISABLED", "ENABLED"
@@ -6531,7 +6597,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.191.0'
+      context[:gem_version] = '1.192.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

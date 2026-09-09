@@ -28,6 +28,7 @@ module Aws::SageMakerFeatureStoreRuntime
   #
   # ## Error Classes
   # * {AccessForbidden}
+  # * {ConflictException}
   # * {InternalFailure}
   # * {ResourceNotFound}
   # * {ServiceUnavailable}
@@ -44,6 +45,21 @@ module Aws::SageMakerFeatureStoreRuntime
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SageMakerFeatureStoreRuntime::Types::AccessForbidden] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ConflictException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SageMakerFeatureStoreRuntime::Types::ConflictException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

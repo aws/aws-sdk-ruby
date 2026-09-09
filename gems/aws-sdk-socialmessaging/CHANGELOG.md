@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2026-09-03)
+------------------
+
+* Feature - Adding support for WhatsApp Flows with endpoints.
+
 1.29.0 (2026-08-06)
 ------------------
 

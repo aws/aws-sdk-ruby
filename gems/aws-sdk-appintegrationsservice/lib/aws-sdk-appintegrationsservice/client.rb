@@ -891,11 +891,23 @@ module Aws::AppIntegrationsService
       req.send_request(options)
     end
 
-    # Deletes the Application. Only Applications that don't have any
-    # Application Associations can be deleted.
+    # Deletes an application. If the application has associations, you must
+    # delete them first. Alternatively, use the `force` option to delete the
+    # application and remove its associations.
     #
     # @option params [required, String] :arn
     #   The Amazon Resource Name (ARN) of the Application.
+    #
+    # @option params [Boolean] :force
+    #   Specifies whether to delete the application even if it still has
+    #   application associations. If `true`, the operation removes the
+    #   application and its associations. If `false` or absent, the delete
+    #   fails when associations exist.
+    #
+    #   Setting this parameter to `true` permanently removes all of the
+    #   application's associations. Doing so might impact other resources
+    #   that rely on and reference the application. This action can't be
+    #   undone.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -916,6 +928,7 @@ module Aws::AppIntegrationsService
     #
     #   resp = client.delete_application({
     #     arn: "ArnOrUUID", # required
+    #     force: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/DeleteApplication AWS API Documentation
@@ -1858,7 +1871,7 @@ module Aws::AppIntegrationsService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

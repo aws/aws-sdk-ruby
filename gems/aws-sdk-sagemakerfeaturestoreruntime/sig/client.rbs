@@ -183,6 +183,25 @@ module Aws
                         }
                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerFeatureStoreRuntime/Client.html#update_record-instance_method
+      def update_record: (
+                           feature_group_name: ::String,
+                           record_identifier_value_as_string: ::String,
+                           features: Array[
+                             {
+                               feature_name: ::String,
+                               value_as_string: ::String?,
+                               value_as_string_list: Array[::String]?
+                             }
+                           ],
+                           ?target_stores: Array[("OnlineStore" | "OfflineStore")],
+                           ?ttl_duration: {
+                             unit: ("Seconds" | "Minutes" | "Hours" | "Days" | "Weeks"),
+                             value: ::Integer
+                           }
+                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
     end
   end
 end

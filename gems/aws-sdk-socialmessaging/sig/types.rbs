@@ -48,6 +48,7 @@ module Aws::SocialMessaging
       attr_accessor flow_json: ::String
       attr_accessor publish: bool
       attr_accessor clone_flow_id: ::String
+      attr_accessor endpoint_uri: ::String
       SENSITIVE: []
     end
 
@@ -165,6 +166,17 @@ module Aws::SocialMessaging
     class GetLinkedWhatsAppBusinessAccountPhoneNumberOutput
       attr_accessor phone_number: Types::WhatsAppPhoneNumberDetail
       attr_accessor linked_whats_app_business_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWhatsAppBusinessPublicKeyInput
+      attr_accessor origination_phone_number_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetWhatsAppBusinessPublicKeyOutput
+      attr_accessor business_public_key: ::String
+      attr_accessor business_public_key_signature_status: ::String
       SENSITIVE: []
     end
 
@@ -494,6 +506,16 @@ module Aws::SocialMessaging
     class PutWhatsAppBusinessAccountEventDestinationsOutput < Aws::EmptyStructure
     end
 
+    class PutWhatsAppBusinessPublicKeyInput
+      attr_accessor origination_phone_number_id: ::String
+      attr_accessor business_public_key: ::String
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PutWhatsAppBusinessPublicKeyOutput < Aws::EmptyStructure
+    end
+
     class ResourceNotFoundException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -595,6 +617,8 @@ module Aws::SocialMessaging
       attr_accessor flow_id: ::String
       attr_accessor flow_name: ::String
       attr_accessor categories: ::Array[("SIGN_UP" | "SIGN_IN" | "APPOINTMENT_BOOKING" | "LEAD_GENERATION" | "SHOPPING" | "CONTACT_US" | "CUSTOMER_SUPPORT" | "SURVEY" | "OTHER")]
+      attr_accessor endpoint_uri: ::String
+      attr_accessor meta_app_id: ::String
       SENSITIVE: []
     end
 

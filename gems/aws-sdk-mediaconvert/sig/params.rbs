@@ -364,7 +364,7 @@ module Aws
     }
 
       type dash_iso_encryption_settings = {
-      playback_device_compatibility: ("CENC_V1" | "UNENCRYPTED_SEI")?,
+      playback_device_compatibility: ("CENC_V1" | "UNENCRYPTED_SEI" | "CENC_V1_UNENCRYPTED_HEADERS")?,
       speke_key_provider: Params::speke_key_provider?
     }
 
@@ -593,7 +593,7 @@ module Aws
       klv_metadata: ("PASSTHROUGH" | "NONE")?,
       manifest_metadata_signaling: ("ENABLED" | "DISABLED")?,
       scte_35_esam: ("INSERT" | "NONE")?,
-      scte_35_source: ("PASSTHROUGH" | "NONE")?,
+      scte_35_source: ("PASSTHROUGH" | "NONE" | "MANIFEST_CUES")?,
       signing_kms_key: ::String?,
       timed_metadata: ("PASSTHROUGH" | "NONE")?,
       timed_metadata_box_version: ("VERSION_0" | "VERSION_1")?,
@@ -651,7 +651,7 @@ module Aws
         scte_35_esam_pid: ::Integer?
       }?,
       scte_35_pid: ::Integer?,
-      scte_35_source: ("PASSTHROUGH" | "NONE")?,
+      scte_35_source: ("PASSTHROUGH" | "NONE" | "MANIFEST_CUES")?,
       segmentation_markers: ("NONE" | "RAI_SEGSTART" | "RAI_ADAPT" | "PSI_SEGSTART" | "EBP" | "EBP_LEGACY")?,
       segmentation_style: ("MAINTAIN_CADENCE" | "RESET_CADENCE")?,
       segmentation_time: ::Float?,
@@ -678,7 +678,7 @@ module Aws
       pts_offset: ::Integer?,
       pts_offset_mode: ("AUTO" | "SECONDS" | "MILLISECONDS")?,
       scte_35_pid: ::Integer?,
-      scte_35_source: ("PASSTHROUGH" | "NONE")?,
+      scte_35_source: ("PASSTHROUGH" | "NONE" | "MANIFEST_CUES")?,
       timed_metadata: ("PASSTHROUGH" | "NONE")?,
       timed_metadata_pid: ::Integer?,
       transport_stream_id: ::Integer?,
@@ -715,7 +715,7 @@ module Aws
       klv_metadata: ("NONE" | "PASSTHROUGH")?,
       manifest_metadata_signaling: ("ENABLED" | "DISABLED")?,
       scte_35_esam: ("INSERT" | "NONE")?,
-      scte_35_source: ("PASSTHROUGH" | "NONE")?,
+      scte_35_source: ("PASSTHROUGH" | "NONE" | "MANIFEST_CUES")?,
       signing_kms_key: ::String?,
       timed_metadata: ("PASSTHROUGH" | "NONE")?,
       timed_metadata_box_version: ("VERSION_0" | "VERSION_1")?,
@@ -1070,6 +1070,7 @@ module Aws
       }?,
       xavc_4k_profile_settings: Params::xavc_4k_profile_settings?,
       xavc_hd_intra_cbg_profile_settings: {
+        interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")?,
         xavc_class: ("CLASS_50" | "CLASS_100" | "CLASS_200")?
       }?,
       xavc_hd_profile_settings: Params::xavc_hd_profile_settings?
@@ -1252,6 +1253,7 @@ module Aws
       codec_profile: ("LC" | "HEV1" | "HEV2" | "XHE")?,
       coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1" | "CODING_MODE_AUTO")?,
       loudness_measurement_mode: ("PROGRAM" | "ANCHOR")?,
+      passthrough_control: ("WHEN_POSSIBLE" | "NO_PASSTHROUGH")?,
       rap_interval: ::Integer?,
       rate_control_mode: ("CBR" | "VBR")?,
       raw_format: ("LATM_LOAS" | "NONE")?,
@@ -1465,6 +1467,18 @@ module Aws
       y_position: ::Integer?
     }
 
+      type ttml_destination_settings = {
+      background_color: ("NONE" | "BLACK" | "WHITE" | "AUTO")?,
+      background_opacity: ::Integer?,
+      font_color: ("WHITE" | "BLACK" | "YELLOW" | "RED" | "GREEN" | "BLUE" | "AUTO")?,
+      font_opacity: ::Integer?,
+      font_size: ::Integer?,
+      font_style: ("NORMAL" | "ITALIC")?,
+      font_weight: ("NORMAL" | "BOLD")?,
+      style_passthrough: ("ENABLED" | "DISABLED")?,
+      text_decoration: ("NONE" | "UNDERLINE")?
+    }
+
       type caption_destination_settings = {
       burnin_destination_settings: Params::burnin_destination_settings?,
       destination_type: ("BURN_IN" | "DVB_SUB" | "EMBEDDED" | "EMBEDDED_PLUS_SCTE20" | "IMSC" | "SCTE20_PLUS_EMBEDDED" | "SCC" | "SRT" | "SMI" | "TELETEXT" | "TTML" | "WEBVTT")?,
@@ -1487,9 +1501,7 @@ module Aws
         page_number: ::String?,
         page_types: Array[("PAGE_TYPE_INITIAL" | "PAGE_TYPE_SUBTITLE" | "PAGE_TYPE_ADDL_INFO" | "PAGE_TYPE_PROGRAM_SCHEDULE" | "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE")]?
       }?,
-      ttml_destination_settings: {
-        style_passthrough: ("ENABLED" | "DISABLED")?
-      }?,
+      ttml_destination_settings: Params::ttml_destination_settings?,
       webvtt_destination_settings: {
         accessibility: ("DISABLED" | "ENABLED")?,
         style_passthrough: ("ENABLED" | "DISABLED" | "STRICT" | "MERGE")?

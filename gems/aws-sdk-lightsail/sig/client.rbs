@@ -1534,6 +1534,16 @@ module Aws
                                        ) -> _GetOperationsForResourceResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOperationsForResourceResponseSuccess
 
+      interface _GetProfileResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetProfileResult]
+        def profile_type: () -> ("Lightsailor" | "LightsailPartner")
+        def partner: () -> Types::PartnerInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_profile-instance_method
+      def get_profile: (
+                       ) -> _GetProfileResponseSuccess
+                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetProfileResponseSuccess
+
       interface _GetRegionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRegionsResult]
         def regions: () -> ::Array[Types::Region]
@@ -1632,13 +1642,13 @@ module Aws
 
       interface _GetRelationalDatabaseMetricDataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRelationalDatabaseMetricDataResult]
-        def metric_name: () -> ("CPUUtilization" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput")
+        def metric_name: () -> ("CPUUtilization" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "FreeableMemory" | "SwapUsage")
         def metric_data: () -> ::Array[Types::MetricDatapoint]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_relational_database_metric_data-instance_method
       def get_relational_database_metric_data: (
                                                  relational_database_name: ::String,
-                                                 metric_name: ("CPUUtilization" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput"),
+                                                 metric_name: ("CPUUtilization" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "FreeableMemory" | "SwapUsage"),
                                                  period: ::Integer,
                                                  start_time: ::Time,
                                                  end_time: ::Time,
@@ -1771,7 +1781,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#put_alarm-instance_method
       def put_alarm: (
                        alarm_name: ::String,
-                       metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "BurstCapacityTime" | "BurstCapacityPercentage"),
+                       metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "FreeableMemory" | "SwapUsage" | "BurstCapacityTime" | "BurstCapacityPercentage"),
                        monitored_resource_name: ::String,
                        comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold"),
                        threshold: ::Float,

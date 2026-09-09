@@ -3184,6 +3184,14 @@ module Aws::IoTSiteWise
     #   execution.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] execution_mounts
+    #   The fully resolved mounts used for this compute node execution,
+    #   after merging task-defined mounts with any execution-level mount
+    #   overrides. Each mount attaches an external data source to the
+    #   container filesystem at a relative path under the service-owned
+    #   mount root.
+    #   @return [Array<Types::Mount>]
+    #
     class ComputeNodeExecutionDetails < Struct.new(
       :compute_node_name,
       :task_name,
@@ -3193,7 +3201,8 @@ module Aws::IoTSiteWise
       :status,
       :start_time,
       :end_time,
-      :execution_environment_variables)
+      :execution_environment_variables,
+      :execution_mounts)
       SENSITIVE = [:execution_environment_variables]
       include Aws::Structure
     end
@@ -3318,6 +3327,10 @@ module Aws::IoTSiteWise
     #   GPU resources.
     #   @return [String]
     #
+    # @!attribute [rw] ephemeral_storage_configuration
+    #   Ephemeral storage configuration for the container task.
+    #   @return [Types::EphemeralStorageConfiguration]
+    #
     # @!attribute [rw] command
     #   The command to execute in the container.
     #   @return [Array<String>]
@@ -3330,14 +3343,24 @@ module Aws::IoTSiteWise
     #   Environment variables passed to the container at runtime.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] mounts
+    #   Mounts attached to the container filesystem. Each mount exposes an
+    #   external data source as a local directory inside the container. The
+    #   service assigns each mount a container path based on the mount name.
+    #   The container reads files through that path as if the data were on
+    #   the local filesystem.
+    #   @return [Array<Types::Mount>]
+    #
     class ContainerTaskConfiguration < Struct.new(
       :ecr_uri,
       :task_execution_role,
       :processing_type,
       :processing_unit,
+      :ephemeral_storage_configuration,
       :command,
       :timeout_seconds,
-      :environment_variables)
+      :environment_variables,
+      :mounts)
       SENSITIVE = [:ecr_uri, :task_execution_role, :command, :environment_variables]
       include Aws::Structure
     end
@@ -7588,6 +7611,11 @@ module Aws::IoTSiteWise
     #   execution.
     #   @return [Types::ExecutionEnvironmentVariables]
     #
+    # @!attribute [rw] request_mount_overrides
+    #   The mount overrides provided as input for the pipeline execution.
+    #   Present when mount overrides were supplied at execution time.
+    #   @return [Types::MountOverrides]
+    #
     # @!attribute [rw] execution_priority
     #   Scheduling priority for the execution. When not specified, defaults
     #   to lowest priority.
@@ -7611,6 +7639,7 @@ module Aws::IoTSiteWise
       :start_time,
       :end_time,
       :request_environment_variables,
+      :request_mount_overrides,
       :execution_priority,
       :compute_node_execution_details,
       :next_token)
@@ -8636,6 +8665,23 @@ module Aws::IoTSiteWise
     class EnrichmentTrimSettings < Struct.new(
       :start_time,
       :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for ephemeral storage attached to the container task.
+    #
+    # @!attribute [rw] storage_class
+    #   Storage type that determines I/O performance family and level.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_size_in_gi_b
+    #   Storage volume size in GiB.
+    #   @return [Integer]
+    #
+    class EphemeralStorageConfiguration < Struct.new(
+      :storage_class,
+      :storage_size_in_gi_b)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12303,6 +12349,72 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Attaches a data source to the container filesystem for a task at a
+    # customer-supplied relative path under the service-owned mount root.
+    #
+    # @!attribute [rw] name
+    #   A unique name for the mount within the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] relative_path
+    #   The relative path under the service-owned mount root where this
+    #   mount is attached inside the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The data source for the mount.
+    #   @return [Types::MountSource]
+    #
+    # @!attribute [rw] storage_type
+    #   The type of storage used for the mount.
+    #   @return [String]
+    #
+    class Mount < Struct.new(
+      :name,
+      :relative_path,
+      :source,
+      :storage_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Runtime mount overrides applied to a single pipeline execution.
+    # Overrides are transient — they do not modify the stored task
+    # configuration.
+    #
+    # @!attribute [rw] compute_nodes
+    #   The mount overrides for each compute node, keyed by compute node
+    #   name.
+    #   @return [Hash<String,Array<Types::Mount>>]
+    #
+    class MountOverrides < Struct.new(
+      :compute_nodes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The data source configuration for a mount. Specify exactly one of the
+    # following.
+    #
+    # @note MountSource is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note MountSource is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MountSource corresponding to the set member.
+    #
+    # @!attribute [rw] s3_access_point
+    #   Configuration for a mount that reads from an Amazon S3 access point.
+    #   @return [Types::S3AccessPointSource]
+    #
+    class MountSource < Struct.new(
+      :s3_access_point,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3AccessPoint < MountSource; end
+      class Unknown < MountSource; end
+    end
+
     # The MP4 video format configuration for bulk import files.
     #
     # @api private
@@ -13387,6 +13499,24 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Configures a mount that reads from an Amazon S3 access point.
+    #
+    # @!attribute [rw] access_point_arn
+    #   The Amazon Resource Name (ARN) of the S3 access point.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   An optional key prefix to scope the mount to a subset of objects at
+    #   the access point.
+    #   @return [String]
+    #
+    class S3AccessPointSource < Struct.new(
+      :access_point_arn,
+      :prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Optional filters that restrict a search to a subset of the
     # workspace's data.
     #
@@ -13601,6 +13731,14 @@ module Aws::IoTSiteWise
     #   environment variable hierarchy.
     #   @return [Types::ExecutionEnvironmentVariables]
     #
+    # @!attribute [rw] execution_mount_overrides
+    #   Runtime mount overrides for the execution. Overrides are merged by
+    #   mount name into each listed compute node's task-defined mounts: a
+    #   matching name replaces the task-defined mount, a new name adds a
+    #   mount, and task-defined mounts not referenced remain unchanged.
+    #   Compute nodes not listed use their task-defined mounts as-is.
+    #   @return [Types::MountOverrides]
+    #
     # @!attribute [rw] execution_priority
     #   Scheduling priority for the execution. Lower values indicate higher
     #   priority. Defaults to 2 when not specified.
@@ -13621,6 +13759,7 @@ module Aws::IoTSiteWise
       :workspace_name,
       :pipeline_name,
       :execution_environment_variable_overrides,
+      :execution_mount_overrides,
       :execution_priority,
       :client_token)
       SENSITIVE = [:execution_environment_variable_overrides]

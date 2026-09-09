@@ -1483,12 +1483,12 @@ module Aws::Odb
     #   The Oracle license model to apply to the Exascale VM cluster.
     #
     # @option params [Integer] :scan_listener_port_tcp
-    #   The port number for TCP connections to the single client access name
+    #   The port number for TCP connections to the Single Client Access Name
     #   (SCAN) listener.
     #
     # @option params [Integer] :scan_listener_port_tcp_ssl
-    #   The port number for TCP connections with SSL to the single client
-    #   access name (SCAN) listener.
+    #   The port number for TCP connections with SSL to the Single Client
+    #   Access Name (SCAN) listener.
     #
     # @option params [String] :shape_attribute
     #   The shape attribute for the Exascale VM cluster.
@@ -1504,11 +1504,12 @@ module Aws::Odb
     #   The time zone for the Exascale VM cluster.
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If you don't specify a client token, the
-    #   Amazon Web Services SDK automatically generates one and uses it for
-    #   the request to ensure idempotency. The client token is valid for up to
-    #   24 hours after it's first used.
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you submit the same
+    #   request twice with the same client token, the service ignores the
+    #   second request and returns the result of the first. If you don't
+    #   specify a client token, the AWS SDK automatically generates one. The
+    #   client token is valid for up to 24 hours after it's first used.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1603,11 +1604,12 @@ module Aws::Odb
     #   The time zone for the Exascale storage vault.
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If you don't specify a client token, the
-    #   Amazon Web Services SDK automatically generates one and uses it for
-    #   the request to ensure idempotency. The client token is valid for up to
-    #   24 hours after it's first used.
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you submit the same
+    #   request twice with the same client token, the service ignores the
+    #   second request and returns the result of the first. If you don't
+    #   specify a client token, the AWS SDK automatically generates one. The
+    #   client token is valid for up to 24 hours after it's first used.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -4687,6 +4689,62 @@ module Aws::Odb
       req.send_request(options)
     end
 
+    # Returns information about the flex components that are available for
+    # an Exadata infrastructure.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output.
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [String] :shape
+    #   The shape to return flex components for. For a list of valid shapes,
+    #   use the `ListDbSystemShapes` operation.
+    #
+    # @return [Types::ListFlexComponentsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFlexComponentsOutput#next_token #next_token} => String
+    #   * {Types::ListFlexComponentsOutput#flex_components #flex_components} => Array&lt;Types::FlexComponentSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_flex_components({
+    #     max_results: 1,
+    #     next_token: "ListFlexComponentsInputNextTokenString",
+    #     shape: "ListFlexComponentsInputShapeString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.flex_components #=> Array
+    #   resp.flex_components[0].available_core_count #=> Integer
+    #   resp.flex_components[0].available_db_storage_in_g_bs #=> Integer
+    #   resp.flex_components[0].available_local_storage_in_g_bs #=> Integer
+    #   resp.flex_components[0].available_memory_in_g_bs #=> Integer
+    #   resp.flex_components[0].compute_model #=> String, one of "ECPU", "OCPU"
+    #   resp.flex_components[0].description_summary #=> String
+    #   resp.flex_components[0].hardware_type #=> String, one of "COMPUTE", "CELL"
+    #   resp.flex_components[0].minimum_core_count #=> Integer
+    #   resp.flex_components[0].name #=> String
+    #   resp.flex_components[0].runtime_minimum_core_count #=> Integer
+    #   resp.flex_components[0].shape #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListFlexComponents AWS API Documentation
+    #
+    # @overload list_flex_components(params = {})
+    # @param [Hash] params ({})
+    def list_flex_components(params = {}, options = {})
+      req = build_request(:list_flex_components, params)
+      req.send_request(options)
+    end
+
     # Returns a list of the Oracle Grid Infrastructure (GI) minor versions
     # for the specified major version.
     #
@@ -6125,7 +6183,7 @@ module Aws::Odb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-odb'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

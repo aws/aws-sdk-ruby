@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2026-09-01)
+------------------
+
+* Feature - GetOfferTerms now returns renewalTerm for offers with pre-authorized renewals, exposing maxRenewals, lockoutPeriod, adjustmentDeadline, priceIncrease (fixed percentage or percentage range), and termTemplates (renewal payment schedules). Enables buyers to view renewal pricing and terms.
+
 1.6.0 (2026-08-06)
 ------------------
 

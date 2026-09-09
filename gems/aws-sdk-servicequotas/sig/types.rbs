@@ -293,6 +293,7 @@ module Aws::ServiceQuotas
       attr_accessor context_scope: ("RESOURCE" | "ACCOUNT")
       attr_accessor context_scope_type: ::String
       attr_accessor context_id: ::String
+      attr_accessor adjustable_at_level: ("ACCOUNT" | "PER_RESOURCE" | "ALL")
       SENSITIVE: []
     end
 

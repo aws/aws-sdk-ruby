@@ -87,6 +87,43 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # A request to associate an S/MIME certificate with an email identity.
+    #
+    # @!attribute [rw] email_identity
+    #   The email identity, either an email address or a domain, to
+    #   associate the certificate with.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_address
+    #   The email address that the certificate applies to. This value is
+    #   required when the email identity is a domain, and the address must
+    #   belong to that domain or one of its subdomains. When the email
+    #   identity is an email address, this value is optional. If you specify
+    #   it, it must exactly match the email identity.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the Certificate Manager (ACM)
+    #   certificate to associate with the email identity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/AssociateEmailIdentityCertificateRequest AWS API Documentation
+    #
+    class AssociateEmailIdentityCertificateRequest < Struct.new(
+      :email_identity,
+      :from_address,
+      :certificate_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/AssociateEmailIdentityCertificateResponse AWS API Documentation
+    #
+    class AssociateEmailIdentityCertificateResponse < Aws::EmptyStructure; end
+
     # Contains metadata and attachment raw content.
     #
     # @!attribute [rw] raw_content
@@ -840,6 +877,12 @@ module Aws::SESV2
     #   that you send using the configuration set.
     #   @return [Types::ArchivingOptions]
     #
+    # @!attribute [rw] message_security_options
+    #   The message security options to apply to the configuration set, such
+    #   as the signing scheme used for messages that you send with the
+    #   configuration set.
+    #   @return [Types::MessageSecurityOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/CreateConfigurationSetRequest AWS API Documentation
     #
     class CreateConfigurationSetRequest < Struct.new(
@@ -851,7 +894,8 @@ module Aws::SESV2
       :tags,
       :suppression_options,
       :vdm_options,
-      :archiving_options)
+      :archiving_options,
+      :message_security_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1690,6 +1734,16 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # Specifies the default signing scheme, in which Amazon SES API v2
+    # doesn't apply S/MIME signing to messages sent with the configuration
+    # set.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DefaultSigningScheme AWS API Documentation
+    #
+    class DefaultSigningScheme < Aws::EmptyStructure; end
+
     # A request to delete an event destination from a configuration set.
     #
     # @!attribute [rw] configuration_set_name
@@ -2163,6 +2217,35 @@ module Aws::SESV2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # A request to remove the association between an S/MIME certificate and
+    # an email identity.
+    #
+    # @!attribute [rw] email_identity
+    #   The email identity whose certificate association you want to remove.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_address
+    #   The email address whose certificate association you want to remove.
+    #   This value is required when the email identity is a domain. When the
+    #   email identity is an email address, this value is optional.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DisassociateEmailIdentityCertificateRequest AWS API Documentation
+    #
+    class DisassociateEmailIdentityCertificateRequest < Struct.new(
+      :email_identity,
+      :from_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/DisassociateEmailIdentityCertificateResponse AWS API Documentation
+    #
+    class DisassociateEmailIdentityCertificateResponse < Aws::EmptyStructure; end
 
     # An object that contains information about the DKIM authentication
     # status for an email identity.
@@ -3615,6 +3698,12 @@ module Aws::SESV2
     #   archived that you send using the configuration set.
     #   @return [Types::ArchivingOptions]
     #
+    # @!attribute [rw] message_security_options
+    #   The message security options that are applied to the configuration
+    #   set, such as the signing scheme used for messages that you send with
+    #   the configuration set.
+    #   @return [Types::MessageSecurityOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/GetConfigurationSetResponse AWS API Documentation
     #
     class GetConfigurationSetResponse < Struct.new(
@@ -3626,7 +3715,8 @@ module Aws::SESV2
       :tags,
       :suppression_options,
       :vdm_options,
-      :archiving_options)
+      :archiving_options,
+      :message_security_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4750,6 +4840,38 @@ module Aws::SESV2
       include Aws::Structure
     end
 
+    # An object that contains information about an S/MIME certificate
+    # that's associated with an email identity.
+    #
+    # @!attribute [rw] from_address
+    #   The email address that the certificate applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the certificate association. A status of `ACTIVE`
+    #   indicates that the certificate is ready to use for signing.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_arn
+    #   The Amazon Resource Name (ARN) of the Certificate Manager (ACM)
+    #   certificate that's associated with the email identity.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_expiry_time
+    #   The timestamp after which the certificate is no longer valid.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/IdentityCertificate AWS API Documentation
+    #
+    class IdentityCertificate < Struct.new(
+      :from_address,
+      :status,
+      :certificate_arn,
+      :certificate_expiry_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an email identity.
     #
     # @!attribute [rw] identity_type
@@ -5469,6 +5591,62 @@ module Aws::SESV2
     #
     class ListEmailIdentitiesResponse < Struct.new(
       :email_identities,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A request to list the S/MIME certificates that are associated with an
+    # email identity.
+    #
+    # @!attribute [rw] email_identity
+    #   The email identity whose certificate associations you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token returned from a previous call to
+    #   `ListEmailIdentityCertificates` to indicate the position in the list
+    #   of certificates.
+    #   @return [String]
+    #
+    # @!attribute [rw] page_size
+    #   The number of results to show in a single call to
+    #   `ListEmailIdentityCertificates`. If the number of results is larger
+    #   than the number you specified in this parameter, then the response
+    #   includes a `NextToken` element, which you can use to obtain
+    #   additional results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListEmailIdentityCertificatesRequest AWS API Documentation
+    #
+    class ListEmailIdentityCertificatesRequest < Struct.new(
+      :email_identity,
+      :next_token,
+      :page_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the S/MIME certificates that are associated with an
+    # email identity.
+    #
+    # @!attribute [rw] certificates
+    #   An array that contains the certificate associations for the email
+    #   identity. Each entry includes the from address, the certificate's
+    #   status, its Amazon Resource Name (ARN), and its expiry time.
+    #   @return [Array<Types::IdentityCertificate>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates that there are additional certificates to
+    #   list. To view additional certificates, issue another request to
+    #   `ListEmailIdentityCertificates`, and pass this token in the
+    #   `NextToken` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListEmailIdentityCertificatesResponse AWS API Documentation
+    #
+    class ListEmailIdentityCertificatesResponse < Struct.new(
+      :certificates,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6255,6 +6433,11 @@ module Aws::SESV2
     #
     # @!attribute [rw] max_results
     #   The maximum number of results.
+    #
+    #   <note markdown="1"> If you don't specify `MaxResults`, the export returns a maximum of
+    #   1,000 results.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MessageInsightsDataSource AWS API Documentation
@@ -6335,6 +6518,24 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MessageRejected AWS API Documentation
     #
     class MessageRejected < Aws::EmptyStructure; end
+
+    # An object that defines the message-level security options that apply
+    # to messages that you send using the configuration set. Currently,
+    # these options determine whether Amazon SES API v2 adds an S/MIME
+    # signature to your messages and, if so, the format of that signature.
+    #
+    # @!attribute [rw] signing_scheme
+    #   The signing scheme that Amazon SES API v2 applies to messages sent
+    #   with the configuration set.
+    #   @return [Types::SigningScheme]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/MessageSecurityOptions AWS API Documentation
+    #
+    class MessageSecurityOptions < Struct.new(
+      :signing_scheme)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains the name and value of a tag that you apply to an email. You
     # can use message tags when you publish email sending events.
@@ -8304,6 +8505,57 @@ module Aws::SESV2
     #
     class SendingPausedException < Aws::EmptyStructure; end
 
+    # Specifies the signing scheme to apply to messages sent with a
+    # configuration set. This is a union type, so you specify exactly one of
+    # its members.
+    #
+    # @note SigningScheme is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SigningScheme is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SigningScheme corresponding to the set member.
+    #
+    # @!attribute [rw] default_scheme
+    #   Use the default signing behavior. When you select this option,
+    #   Amazon SES API v2 doesn't add an S/MIME signature to messages sent
+    #   with the configuration set.
+    #   @return [Types::DefaultSigningScheme]
+    #
+    # @!attribute [rw] smime_scheme
+    #   Sign messages sent with the configuration set using S/MIME. For
+    #   signing to apply, the email identity used to send a message must
+    #   have an active S/MIME certificate association.
+    #   @return [Types::SmimeSigningScheme]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SigningScheme AWS API Documentation
+    #
+    class SigningScheme < Struct.new(
+      :default_scheme,
+      :smime_scheme,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DefaultScheme < SigningScheme; end
+      class SmimeScheme < SigningScheme; end
+      class Unknown < SigningScheme; end
+    end
+
+    # Specifies that Amazon SES API v2 signs messages sent with the
+    # configuration set using S/MIME.
+    #
+    # @!attribute [rw] signature_format
+    #   The format of the S/MIME signature that Amazon SES API v2 applies to
+    #   messages.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/SmimeSigningScheme AWS API Documentation
+    #
+    class SmimeSigningScheme < Struct.new(
+      :signature_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that defines an Amazon SNS destination for email events. You
     # can use Amazon SNS to send notifications when certain email events
     # occur.
@@ -9168,6 +9420,34 @@ module Aws::SESV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateConfigurationSetEventDestinationResponse AWS API Documentation
     #
     class UpdateConfigurationSetEventDestinationResponse < Aws::EmptyStructure; end
+
+    # A request to update the configuration of an existing configuration
+    # set.
+    #
+    # @!attribute [rw] configuration_set_name
+    #   The name of the configuration set to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_security_options
+    #   The security options that apply to the MIME message itself for
+    #   messages sent with the configuration set.
+    #   @return [Types::MessageSecurityOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateConfigurationSetRequest AWS API Documentation
+    #
+    class UpdateConfigurationSetRequest < Struct.new(
+      :configuration_set_name,
+      :message_security_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An HTTP 200 response if the request succeeds, or an error message if
+    # the request fails.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/UpdateConfigurationSetResponse AWS API Documentation
+    #
+    class UpdateConfigurationSetResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] contact_list_name
     #   The name of the contact list.

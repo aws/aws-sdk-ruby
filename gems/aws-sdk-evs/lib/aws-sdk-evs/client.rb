@@ -1538,6 +1538,29 @@ module Aws::Evs
       req.send_request(options)
     end
 
+    # Returns the configured EVS settings for your Amazon Web Services
+    # account in the specified Amazon Web Services Region. If no settings
+    # have been set, an empty list is returned.
+    #
+    # @return [Types::GetAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAccountSettingsResponse#settings #settings} => Array&lt;Types::AccountSetting&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.settings #=> Array
+    #   resp.settings[0].name #=> String
+    #   resp.settings[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/GetAccountSettings AWS API Documentation
+    #
+    # @overload get_account_settings(params = {})
+    # @param [Hash] params ({})
+    def get_account_settings(params = {}, options = {})
+      req = build_request(:get_account_settings, params)
+      req.send_request(options)
+    end
+
     # Returns a URL and authentication token for accessing the Amazon EVS
     # Custom Addon depot. Configure the depot URL as a download source in
     # vSphere Lifecycle Manager (vLCM) to sync and install the Amazon EVS
@@ -2011,6 +2034,46 @@ module Aws::Evs
       req.send_request(options)
     end
 
+    # Creates or updates account-level EVS settings for your Amazon Web
+    # Services account in the specified Amazon Web Services Region.
+    #
+    # EVS settings included in the request are created or overwritten.
+    # Settings omitted from the request retain their current values.
+    #
+    # @option params [required, Array<Types::AccountSetting>] :settings
+    #   A list of regional account-level EVS settings to create or update.
+    #   Only the settings included in this list are modified.
+    #
+    # @return [Types::PutAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutAccountSettingsResponse#settings #settings} => Array&lt;Types::AccountSetting&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_account_settings({
+    #     settings: [ # required
+    #       {
+    #         name: "SettingName", # required
+    #         value: "SettingValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.settings #=> Array
+    #   resp.settings[0].name #=> String
+    #   resp.settings[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/evs-2023-07-27/PutAccountSettings AWS API Documentation
+    #
+    # @overload put_account_settings(params = {})
+    # @param [Hash] params ({})
+    def put_account_settings(params = {}, options = {})
+      req = build_request(:put_account_settings, params)
+      req.send_request(options)
+    end
+
     # Associates the specified tags to an Amazon EVS resource with the
     # specified `resourceArn`. If existing tags on a resource are not
     # specified in the request parameters, they aren't changed. When a
@@ -2171,7 +2234,7 @@ module Aws::Evs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-evs'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

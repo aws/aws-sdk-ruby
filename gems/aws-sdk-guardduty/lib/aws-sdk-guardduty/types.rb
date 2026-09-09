@@ -361,6 +361,27 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about an activity, such as an API call, that was
+    # observed for a signal.
+    #
+    # @!attribute [rw] type
+    #   The type of the observed activity.
+    #   @return [String]
+    #
+    # @!attribute [rw] api
+    #   Contains information about the API call that was observed, when the
+    #   activity type is `API_CALL`.
+    #   @return [Types::ApiCall]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Activity AWS API Documentation
+    #
+    class Activity < Struct.new(
+      :type,
+      :api)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the actors involved in an attack sequence.
     #
     # @!attribute [rw] id
@@ -585,6 +606,36 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains information about an API call that was observed as part of an
+    # activity.
+    #
+    # @!attribute [rw] operation
+    #   The name of the API operation that was invoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The service that the API operation was invoked against.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   The error code that was returned, if the API call failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_agent
+    #   User agent in the request to the API operation
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ApiCall AWS API Documentation
+    #
+    class ApiCall < Struct.new(
+      :operation,
+      :service,
+      :error,
+      :user_agent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] detector_id
     #   The ID of the detector that specifies the GuardDuty service whose
     #   findings you want to archive.
@@ -613,6 +664,101 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ArchiveFindingsResponse AWS API Documentation
     #
     class ArchiveFindingsResponse < Aws::EmptyStructure; end
+
+    # Contains the full details of a custom detection rule association.
+    #
+    # @!attribute [rw] association_id
+    #   The unique identifier for the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID associated with this rule
+    #   association.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The rule execution mode. Valid values: `LIVE` \| `DRY_RUN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the association was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the association was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_at
+    #   The timestamp when the association expires.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AssociationDetail AWS API Documentation
+    #
+    class AssociationDetail < Struct.new(
+      :association_id,
+      :arn,
+      :rule_id,
+      :account_id,
+      :mode,
+      :created_at,
+      :updated_at,
+      :expires_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a custom detection rule
+    # association.
+    #
+    # @!attribute [rw] association_id
+    #   The unique identifier for the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the association.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The rule execution mode. Valid values: `LIVE` \| `DRY_RUN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the association was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the association was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_at
+    #   The timestamp when the association expires.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AssociationSummary AWS API Documentation
+    #
+    class AssociationSummary < Struct.new(
+      :association_id,
+      :arn,
+      :rule_id,
+      :mode,
+      :created_at,
+      :updated_at,
+      :expires_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains information about the Autonomous System (AS) associated with
     # the network endpoints involved in an attack sequence.
@@ -1542,6 +1688,93 @@ module Aws::GuardDuty
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The rule execution mode. Valid values: `LIVE` \| `DRY_RUN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. Maximum 64 characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to be added to the new custom detection rule association
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateCustomDetectionRuleAssociationRequest AWS API Documentation
+    #
+    class CreateCustomDetectionRuleAssociationRequest < Struct.new(
+      :rule_id,
+      :mode,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_association
+    #   The details of the newly created custom detection rule association.
+    #   @return [Types::AssociationDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateCustomDetectionRuleAssociationResponse AWS API Documentation
+    #
+    class CreateCustomDetectionRuleAssociationResponse < Struct.new(
+      :rule_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The execution mode of the organization configuration. Valid values:
+    #   `LIVE` \| `DRY_RUN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_account_ids
+    #   The account IDs to include in the organization configuration.
+    #   Mutually exclusive with `ExcludeAccountIds`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude_account_ids
+    #   The account IDs to exclude from the organization configuration.
+    #   Mutually exclusive with `IncludeAccountIds`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateCustomDetectionRuleOrgConfigurationRequest AWS API Documentation
+    #
+    class CreateCustomDetectionRuleOrgConfigurationRequest < Struct.new(
+      :rule_id,
+      :mode,
+      :include_account_ids,
+      :exclude_account_ids,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateCustomDetectionRuleOrgConfigurationResponse AWS API Documentation
+    #
+    class CreateCustomDetectionRuleOrgConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] enable
     #   A Boolean value that specifies whether the detector is to be
@@ -3850,6 +4083,49 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   The unique identifier for the association to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteCustomDetectionRuleAssociationRequest AWS API Documentation
+    #
+    class DeleteCustomDetectionRuleAssociationRequest < Struct.new(
+      :rule_id,
+      :association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteCustomDetectionRuleAssociationResponse AWS API Documentation
+    #
+    class DeleteCustomDetectionRuleAssociationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The execution mode of the organization configuration to delete.
+    #   Valid values: `LIVE` \| `DRY_RUN`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteCustomDetectionRuleOrgConfigurationRequest AWS API Documentation
+    #
+    class DeleteCustomDetectionRuleOrgConfigurationRequest < Struct.new(
+      :rule_id,
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteCustomDetectionRuleOrgConfigurationResponse AWS API Documentation
+    #
+    class DeleteCustomDetectionRuleOrgConfigurationResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] detector_id
     #   The unique ID of the detector that you want to delete.
     #
@@ -4430,6 +4706,136 @@ module Aws::GuardDuty
     class Detection < Struct.new(
       :anomaly,
       :sequence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains filter criteria for listing custom detection rules or
+    # associations.
+    #
+    # @!attribute [rw] name
+    #   The name of the field to filter by.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to match against the specified filter name.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] condition
+    #   The condition to apply to the filter. For example, `EQUALS` or
+    #   `CONTAINS`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DetectionRuleFilter AWS API Documentation
+    #
+    class DetectionRuleFilter < Struct.new(
+      :name,
+      :values,
+      :condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the organization-level configuration for a custom detection
+    # rule.
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The execution mode of the organization configuration. Valid values:
+    #   `LIVE` \| `DRY_RUN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The configuration status. Valid values: `ACTIVE` \| `PROCESSING` \|
+    #   `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current configuration status.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_account_ids
+    #   A list of member account IDs included in the organization
+    #   configuration. Mutually exclusive with `ExcludeAccountIds`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude_account_ids
+    #   A list of member account IDs excluded from the organization
+    #   configuration. Mutually exclusive with `IncludeAccountIds`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the organization configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the organization configuration was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_at
+    #   The timestamp when the organization configuration expires.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DetectionRuleOrgConfiguration AWS API Documentation
+    #
+    class DetectionRuleOrgConfiguration < Struct.new(
+      :rule_id,
+      :mode,
+      :status,
+      :status_reason,
+      :include_account_ids,
+      :exclude_account_ids,
+      :created_at,
+      :updated_at,
+      :expires_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about an organization-level configuration
+    # for a custom detection rule.
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The rule execution mode.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The configuration status.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the current configuration status.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the organization configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the organization configuration was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expires_at
+    #   The timestamp when the organization configuration expires.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DetectionRuleOrgConfigurationSummary AWS API Documentation
+    #
+    class DetectionRuleOrgConfigurationSummary < Struct.new(
+      :rule_id,
+      :mode,
+      :status,
+      :status_reason,
+      :created_at,
+      :updated_at,
+      :expires_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5674,6 +6080,95 @@ module Aws::GuardDuty
     #
     class GetCoverageStatisticsResponse < Struct.new(
       :coverage_statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   The unique identifier for the association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetCustomDetectionRuleAssociationRequest AWS API Documentation
+    #
+    class GetCustomDetectionRuleAssociationRequest < Struct.new(
+      :rule_id,
+      :association_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_association
+    #   The details of the custom detection rule association.
+    #   @return [Types::AssociationDetail]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the custom detection rule association
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetCustomDetectionRuleAssociationResponse AWS API Documentation
+    #
+    class GetCustomDetectionRuleAssociationResponse < Struct.new(
+      :rule_association,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The execution mode of the organization configuration to retrieve.
+    #   Valid values: `LIVE` \| `DRY_RUN`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetCustomDetectionRuleOrgConfigurationRequest AWS API Documentation
+    #
+    class GetCustomDetectionRuleOrgConfigurationRequest < Struct.new(
+      :rule_id,
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configuration
+    #   The details of the organization configuration.
+    #   @return [Types::DetectionRuleOrgConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetCustomDetectionRuleOrgConfigurationResponse AWS API Documentation
+    #
+    class GetCustomDetectionRuleOrgConfigurationResponse < Struct.new(
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetCustomDetectionRuleRequest AWS API Documentation
+    #
+    class GetCustomDetectionRuleRequest < Struct.new(
+      :rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule
+    #   The details of the custom detection rule.
+    #   @return [Types::RuleDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetCustomDetectionRuleResponse AWS API Documentation
+    #
+    class GetCustomDetectionRuleResponse < Struct.new(
+      :rule)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7911,6 +8406,139 @@ module Aws::GuardDuty
     #
     class ListCoverageResponse < Struct.new(
       :resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single page. Minimum
+    #   value of 1, maximum value of 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token from a previous response. Use this token to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule to filter
+    #   associations by.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The rule execution mode to filter associations by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListCustomDetectionRuleAssociationsRequest AWS API Documentation
+    #
+    class ListCustomDetectionRuleAssociationsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :rule_id,
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_associations
+    #   A list of custom detection rule association summaries.
+    #   @return [Array<Types::AssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next page of results. If this
+    #   field is empty, there are no additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListCustomDetectionRuleAssociationsResponse AWS API Documentation
+    #
+    class ListCustomDetectionRuleAssociationsResponse < Struct.new(
+      :rule_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single page. Minimum
+    #   value of 1, maximum value of 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token from a previous response. Use this token to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The configuration status to filter by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListCustomDetectionRuleOrgConfigurationsRequest AWS API Documentation
+    #
+    class ListCustomDetectionRuleOrgConfigurationsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] configurations
+    #   A list of organization configurations for custom detection rules.
+    #   @return [Array<Types::DetectionRuleOrgConfigurationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next page of results. If this
+    #   field is empty, there are no additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListCustomDetectionRuleOrgConfigurationsResponse AWS API Documentation
+    #
+    class ListCustomDetectionRuleOrgConfigurationsResponse < Struct.new(
+      :configurations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single page. Minimum
+    #   value of 1, maximum value of 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token from a previous response. Use this token to
+    #   retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A list of filter criteria to apply when listing custom detection
+    #   rules.
+    #   @return [Array<Types::DetectionRuleFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListCustomDetectionRulesRequest AWS API Documentation
+    #
+    class ListCustomDetectionRulesRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rules
+    #   A list of custom detection rule summaries.
+    #   @return [Array<Types::RuleSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next page of results. If this
+    #   field is empty, there are no additional results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListCustomDetectionRulesResponse AWS API Documentation
+    #
+    class ListCustomDetectionRulesResponse < Struct.new(
+      :rules,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -11044,6 +11672,174 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains the detection logic for a custom detection rule.
+    #
+    # @!attribute [rw] expression
+    #   The detection logic expression for the rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RuleDefinition AWS API Documentation
+    #
+    class RuleDefinition < Struct.new(
+      :expression)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the full details of a custom detection rule, including its
+    # detection logic.
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The display name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of what the rule detects.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity level assigned to findings generated by this rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The data source that the rule analyzes.
+    #   @return [String]
+    #
+    # @!attribute [rw] tactic
+    #   The MITRE ATT&amp;CK tactic associated with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] technique
+    #   The MITRE ATT&amp;CK technique associated with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The Amazon Web Services service associated with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] definition
+    #   The detection logic definition for the rule.
+    #   @return [Types::RuleDefinition]
+    #
+    # @!attribute [rw] language
+    #   The language used for the detection logic expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The schema version used by the rule definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the rule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the rule was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RuleDetail AWS API Documentation
+    #
+    class RuleDetail < Struct.new(
+      :rule_id,
+      :arn,
+      :name,
+      :description,
+      :severity,
+      :data_source,
+      :tactic,
+      :technique,
+      :service,
+      :definition,
+      :language,
+      :schema,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a custom detection rule.
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The display name of the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of what the rule detects.
+    #   @return [String]
+    #
+    # @!attribute [rw] severity
+    #   The severity level assigned to findings generated by this rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The data source that the rule analyzes.
+    #   @return [String]
+    #
+    # @!attribute [rw] tactic
+    #   The MITRE ATT&amp;CK tactic associated with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] technique
+    #   The MITRE ATT&amp;CK technique associated with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   The Amazon Web Services service associated with the rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] language
+    #   The language used for the detection logic expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema
+    #   The schema version used by the rule definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the rule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the rule was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RuleSummary AWS API Documentation
+    #
+    class RuleSummary < Struct.new(
+      :rule_id,
+      :arn,
+      :name,
+      :description,
+      :severity,
+      :data_source,
+      :tactic,
+      :technique,
+      :service,
+      :language,
+      :schema,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Additional information about the suspicious activity.
     #
     # @!attribute [rw] modifying_process
@@ -12344,6 +13140,11 @@ module Aws::GuardDuty
     #   signals.
     #   @return [Array<Types::Indicator>]
     #
+    # @!attribute [rw] activities
+    #   Contains information about the activities, such as API calls, that
+    #   were observed for this signal.
+    #   @return [Array<Types::Activity>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Signal AWS API Documentation
     #
     class Signal < Struct.new(
@@ -12360,7 +13161,8 @@ module Aws::GuardDuty
       :resource_uids,
       :actor_ids,
       :endpoint_ids,
-      :signal_indicators)
+      :signal_indicators,
+      :activities)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12814,6 +13616,66 @@ module Aws::GuardDuty
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_id
+    #   The unique identifier for the association to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The rule execution mode. Valid values: `LIVE` \| `DRY_RUN`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateCustomDetectionRuleAssociationRequest AWS API Documentation
+    #
+    class UpdateCustomDetectionRuleAssociationRequest < Struct.new(
+      :rule_id,
+      :association_id,
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateCustomDetectionRuleAssociationResponse AWS API Documentation
+    #
+    class UpdateCustomDetectionRuleAssociationResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] rule_id
+    #   The unique identifier for the custom detection rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] mode
+    #   The execution mode of the organization configuration. Valid values:
+    #   `LIVE` \| `DRY_RUN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_account_ids
+    #   The account IDs to include in the organization configuration.
+    #   Mutually exclusive with `ExcludeAccountIds`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclude_account_ids
+    #   The account IDs to exclude from the organization configuration.
+    #   Mutually exclusive with `IncludeAccountIds`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateCustomDetectionRuleOrgConfigurationRequest AWS API Documentation
+    #
+    class UpdateCustomDetectionRuleOrgConfigurationRequest < Struct.new(
+      :rule_id,
+      :mode,
+      :include_account_ids,
+      :exclude_account_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateCustomDetectionRuleOrgConfigurationResponse AWS API Documentation
+    #
+    class UpdateCustomDetectionRuleOrgConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] detector_id
     #   The unique ID of the detector to update.

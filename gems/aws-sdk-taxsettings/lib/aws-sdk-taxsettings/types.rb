@@ -193,6 +193,10 @@ module Aws::TaxSettings
     #   Additional tax information to specify for a TRN in France.
     #   @return [Types::FranceAdditionalInfo]
     #
+    # @!attribute [rw] monaco_additional_info
+    #   Additional tax information to specify for a TRN in Monaco.
+    #   @return [Types::MonacoAdditionalInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/AdditionalInfoRequest AWS API Documentation
     #
     class AdditionalInfoRequest < Struct.new(
@@ -218,7 +222,8 @@ module Aws::TaxSettings
       :philippines_additional_info,
       :belgium_additional_info,
       :chile_additional_info,
-      :france_additional_info)
+      :france_additional_info,
+      :monaco_additional_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -331,6 +336,10 @@ module Aws::TaxSettings
     #   Additional tax information associated with your TRN in France.
     #   @return [Types::FranceAdditionalInfo]
     #
+    # @!attribute [rw] monaco_additional_info
+    #   Additional tax information associated with your TRN in Monaco.
+    #   @return [Types::MonacoAdditionalInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/AdditionalInfoResponse AWS API Documentation
     #
     class AdditionalInfoResponse < Struct.new(
@@ -358,7 +367,8 @@ module Aws::TaxSettings
       :philippines_additional_info,
       :belgium_additional_info,
       :chile_additional_info,
-      :france_additional_info)
+      :france_additional_info,
+      :monaco_additional_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -728,7 +738,14 @@ module Aws::TaxSettings
     #   @return [String]
     #
     # @!attribute [rw] business_activity
-    #   The business activity of the taxpayer in Chile.
+    #   The business activity code of the taxpayer in Chile. This must be
+    #   the activity code shown on your SII (Servicio de Impuestos Internos)
+    #   tax profile. For the list of valid activity codes, see [SII activity
+    #   codes][1].
+    #
+    #
+    #
+    #   [1]: https://www.sii.cl/ayudas/ayudas_por_servicios/1956-codigos-1959.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/ChileAdditionalInfo AWS API Documentation
@@ -878,10 +895,16 @@ module Aws::TaxSettings
     #   number.
     #   @return [String]
     #
+    # @!attribute [rw] e_invoice_routing_code
+    #   The routing code used for electronic invoicing (e-invoicing) for the
+    #   company in France.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/FranceAdditionalInfo AWS API Documentation
     #
     class FranceAdditionalInfo < Struct.new(
-      :siren_number)
+      :siren_number,
+      :e_invoice_routing_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1329,6 +1352,21 @@ module Aws::TaxSettings
       :service_tax_codes,
       :tax_information_number,
       :business_registration_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional tax information associated with your TRN in Monaco.
+    #
+    # @!attribute [rw] business_number
+    #   The business number for the company in Monaco. Can be up to 12
+    #   alphanumeric characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/MonacoAdditionalInfo AWS API Documentation
+    #
+    class MonacoAdditionalInfo < Struct.new(
+      :business_number)
       SENSITIVE = []
       include Aws::Structure
     end

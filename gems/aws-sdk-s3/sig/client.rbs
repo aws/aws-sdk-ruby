@@ -235,6 +235,9 @@ module Aws
                          ?object_lock_mode: ("GOVERNANCE" | "COMPLIANCE"),
                          ?object_lock_retain_until_date: ::Time,
                          ?object_lock_legal_hold_status: ("ON" | "OFF"),
+                         ?object_lock_event_hold: ("ON" | "OFF"),
+                         ?object_lock_event_hold_duration_days: ::Integer,
+                         ?object_lock_event_hold_duration_years: ::Integer,
                          ?expected_bucket_owner: ::String,
                          ?expected_source_bucket_owner: ::String
                        ) -> _CopyObjectResponseSuccess
@@ -375,6 +378,9 @@ module Aws
                                      ?object_lock_mode: ("GOVERNANCE" | "COMPLIANCE"),
                                      ?object_lock_retain_until_date: ::Time,
                                      ?object_lock_legal_hold_status: ("ON" | "OFF"),
+                                     ?object_lock_event_hold: ("ON" | "OFF"),
+                                     ?object_lock_event_hold_duration_days: ::Integer,
+                                     ?object_lock_event_hold_duration_years: ::Integer,
                                      ?expected_bucket_owner: ::String,
                                      ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128"),
                                      ?checksum_type: ("COMPOSITE" | "FULL_OBJECT")
@@ -934,6 +940,9 @@ module Aws
         def object_lock_mode: () -> ("GOVERNANCE" | "COMPLIANCE")
         def object_lock_retain_until_date: () -> ::Time
         def object_lock_legal_hold_status: () -> ("ON" | "OFF")
+        def object_lock_event_hold: () -> ("ON" | "OFF")
+        def object_lock_event_hold_duration_days: () -> ::Integer
+        def object_lock_event_hold_duration_years: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#get_object-instance_method
       def get_object: (
@@ -1179,6 +1188,9 @@ module Aws
         def object_lock_mode: () -> ("GOVERNANCE" | "COMPLIANCE")
         def object_lock_retain_until_date: () -> ::Time
         def object_lock_legal_hold_status: () -> ("ON" | "OFF")
+        def object_lock_event_hold: () -> ("ON" | "OFF")
+        def object_lock_event_hold_duration_days: () -> ::Integer
+        def object_lock_event_hold_duration_years: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#head_object-instance_method
       def head_object: (
@@ -1659,7 +1671,7 @@ module Aws
                                                   }?,
                                                   id: ::String,
                                                   included_object_versions: ("All" | "Current"),
-                                                  optional_fields: Array[("Size" | "LastModifiedDate" | "StorageClass" | "ETag" | "IsMultipartUploaded" | "ReplicationStatus" | "EncryptionStatus" | "ObjectLockRetainUntilDate" | "ObjectLockMode" | "ObjectLockLegalHoldStatus" | "IntelligentTieringAccessTier" | "BucketKeyStatus" | "ChecksumAlgorithm" | "ObjectAccessControlList" | "ObjectOwner" | "LifecycleExpirationDate")]?,
+                                                  optional_fields: Array[("Size" | "LastModifiedDate" | "StorageClass" | "ETag" | "IsMultipartUploaded" | "ReplicationStatus" | "EncryptionStatus" | "ObjectLockRetainUntilDate" | "ObjectLockMode" | "ObjectLockLegalHoldStatus" | "ObjectLockEventHoldStatus" | "ObjectLockEventHoldDuration" | "IntelligentTieringAccessTier" | "BucketKeyStatus" | "ChecksumAlgorithm" | "ObjectAccessControlList" | "ObjectOwner" | "LifecycleExpirationDate")]?,
                                                   schedule: {
                                                     frequency: ("Daily" | "Weekly")
                                                   }
@@ -1847,20 +1859,20 @@ module Aws
                                      notification_configuration: {
                                        topic_configuration: {
                                          id: ::String?,
-                                         events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete")]?,
-                                         event: ("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete")?,
+                                         events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete" | "s3:ObjectRetention:Put")]?,
+                                         event: ("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete" | "s3:ObjectRetention:Put")?,
                                          topic: ::String?
                                        }?,
                                        queue_configuration: {
                                          id: ::String?,
-                                         event: ("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete")?,
-                                         events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete")]?,
+                                         event: ("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete" | "s3:ObjectRetention:Put")?,
+                                         events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete" | "s3:ObjectRetention:Put")]?,
                                          queue: ::String?
                                        }?,
                                        cloud_function_configuration: {
                                          id: ::String?,
-                                         event: ("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete")?,
-                                         events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete")]?,
+                                         event: ("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete" | "s3:ObjectRetention:Put")?,
+                                         events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete" | "s3:ObjectRetention:Put")]?,
                                          cloud_function: ::String?,
                                          invocation_role: ::String?
                                        }?
@@ -1877,7 +1889,7 @@ module Aws
                                                        {
                                                          id: ::String?,
                                                          topic_arn: ::String,
-                                                         events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete")],
+                                                         events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete" | "s3:ObjectRetention:Put")],
                                                          filter: Params::notification_configuration_filter?
                                                        }
                                                      ]?,
@@ -1885,7 +1897,7 @@ module Aws
                                                        {
                                                          id: ::String?,
                                                          queue_arn: ::String,
-                                                         events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete")],
+                                                         events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete" | "s3:ObjectRetention:Put")],
                                                          filter: Params::notification_configuration_filter?
                                                        }
                                                      ]?,
@@ -1893,7 +1905,7 @@ module Aws
                                                        {
                                                          id: ::String?,
                                                          lambda_function_arn: ::String,
-                                                         events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete")],
+                                                         events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete" | "s3:ObjectAnnotation:*" | "s3:ObjectAnnotation:Put" | "s3:ObjectAnnotation:Delete" | "s3:ObjectRetention:Put")],
                                                          filter: Params::notification_configuration_filter?
                                                        }
                                                      ]?,
@@ -2157,6 +2169,9 @@ module Aws
                         ?object_lock_mode: ("GOVERNANCE" | "COMPLIANCE"),
                         ?object_lock_retain_until_date: ::Time,
                         ?object_lock_legal_hold_status: ("ON" | "OFF"),
+                        ?object_lock_event_hold: ("ON" | "OFF"),
+                        ?object_lock_event_hold_duration_days: ::Integer,
+                        ?object_lock_event_hold_duration_years: ::Integer,
                         ?expected_bucket_owner: ::String
                       ) -> _PutObjectResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutObjectResponseSuccess
@@ -2261,7 +2276,11 @@ module Aws
                                                default_retention: {
                                                  mode: ("GOVERNANCE" | "COMPLIANCE")?,
                                                  days: ::Integer?,
-                                                 years: ::Integer?
+                                                 years: ::Integer?,
+                                                 default_event_hold: {
+                                                   days: ::Integer?,
+                                                   years: ::Integer?
+                                                 }?
                                                }?
                                              }?
                                            },
@@ -2283,7 +2302,12 @@ module Aws
                                   key: ::String,
                                   ?retention: {
                                     mode: ("GOVERNANCE" | "COMPLIANCE")?,
-                                    retain_until_date: ::Time?
+                                    retain_until_date: ::Time?,
+                                    event_hold: ("ON" | "OFF")?,
+                                    event_hold_duration: {
+                                      days: ::Integer?,
+                                      years: ::Integer?
+                                    }?
                                   },
                                   ?request_payer: ("requester"),
                                   ?version_id: ::String,

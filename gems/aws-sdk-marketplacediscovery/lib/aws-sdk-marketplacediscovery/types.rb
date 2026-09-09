@@ -660,6 +660,21 @@ module Aws::MarketplaceDiscovery
       include Aws::Structure
     end
 
+    # A single fixed price increase percentage applied at each renewal
+    # cycle.
+    #
+    # @!attribute [rw] percentage_value
+    #   The percentage value applied at each renewal cycle.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/FixedPercentage AWS API Documentation
+    #
+    class FixedPercentage < Struct.new(
+      :percentage_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a fixed upfront pricing term with a pre-paid amount and
     # granted entitlements.
     #
@@ -1877,6 +1892,39 @@ module Aws::MarketplaceDiscovery
       class Unknown < OfferTerm; end
     end
 
+    # A single installment entry in the renewal payment schedule.
+    #
+    # @!attribute [rw] charge_date_offset
+    #   The relative offset from the renewal agreement start date when this
+    #   installment is due, in ISO 8601 duration format. The offset uses
+    #   months only or days only (for example, P1M or P30D); mixed units are
+    #   not supported, and every offset in a schedule uses the same unit.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_percentage
+    #   The percentage of the increased TCV to charge in this installment.
+    #   All entries in a schedule sum to 100.00.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_month
+    #   The optional calendar day of month on which the charge occurs. When
+    #   absent, the charge day is derived from `chargeDateOffset`, and this
+    #   field does not apply when `chargeDateOffset` is expressed in days.
+    #   For months with fewer days than the specified day, the charge occurs
+    #   on the last day of the month. For example, if `dayOfMonth` is 31,
+    #   the charge in April occurs on April 30.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/PaymentScheduleEntry AWS API Documentation
+    #
+    class PaymentScheduleEntry < Struct.new(
+      :charge_date_offset,
+      :charge_percentage,
+      :day_of_month)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a payment schedule term with installment payments at specified
     # dates.
     #
@@ -1906,6 +1954,80 @@ module Aws::MarketplaceDiscovery
       :schedule)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A template for the payment schedule term on the renewal offer.
+    #
+    # @!attribute [rw] schedule
+    #   An ordered list of installment entries for the renewal payment
+    #   schedule.
+    #   @return [Array<Types::PaymentScheduleEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/PaymentScheduleTermTemplate AWS API Documentation
+    #
+    class PaymentScheduleTermTemplate < Struct.new(
+      :schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A price increase percentage range with minimum, maximum, and default
+    # values.
+    #
+    # @!attribute [rw] minimum_value
+    #   The minimum percentage by which the price can increase at each
+    #   renewal cycle.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_value
+    #   The maximum percentage by which the price can increase at each
+    #   renewal cycle.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The percentage increase applied by default when no other value is
+    #   finalized before the adjustment deadline. Falls between
+    #   `minimumValue` and `maximumValue`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/PercentageRange AWS API Documentation
+    #
+    class PercentageRange < Struct.new(
+      :minimum_value,
+      :maximum_value,
+      :default_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The pricing adjustment that applies at each renewal cycle, expressed
+    # as either a fixed percentage or a percentage range. Exactly one
+    # variant is present.
+    #
+    # @note PriceIncrease is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PriceIncrease corresponding to the set member.
+    #
+    # @!attribute [rw] fixed_percentage
+    #   A single fixed percentage applied uniformly at every renewal cycle.
+    #   @return [Types::FixedPercentage]
+    #
+    # @!attribute [rw] percentage_range
+    #   A percentage band with minimum, maximum, and default values that
+    #   bound the price increase at each renewal cycle.
+    #   @return [Types::PercentageRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/PriceIncrease AWS API Documentation
+    #
+    class PriceIncrease < Struct.new(
+      :fixed_percentage,
+      :percentage_range,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class FixedPercentage < PriceIncrease; end
+      class PercentageRange < PriceIncrease; end
+      class Unknown < PriceIncrease; end
     end
 
     # A pricing model that determines how buyers are charged for a listing,
@@ -2298,11 +2420,43 @@ module Aws::MarketplaceDiscovery
     #   The category of the term.
     #   @return [String]
     #
+    # @!attribute [rw] max_renewals
+    #   The maximum number of renewals allowed on this offer. Absent means
+    #   unlimited renewals.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] lockout_period
+    #   The duration before the agreement end date when the lockout window
+    #   begins, in ISO 8601 format (for example, P30D). Absent means no
+    #   lockout.
+    #   @return [String]
+    #
+    # @!attribute [rw] adjustment_deadline
+    #   The duration before the agreement end date by which the renewal
+    #   price is finalized, represented in ISO 8601 format (for example,
+    #   P30D). Only applicable with `PercentageRange`.
+    #   @return [String]
+    #
+    # @!attribute [rw] price_increase
+    #   The price increase applied at each renewal cycle. Absent means
+    #   identical pricing on renewal.
+    #   @return [Types::PriceIncrease]
+    #
+    # @!attribute [rw] term_templates
+    #   Structural templates defining how specific terms are reshaped on
+    #   each renewal cycle. Absent for upfront-only offers.
+    #   @return [Array<Types::TermTemplate>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/RenewalTerm AWS API Documentation
     #
     class RenewalTerm < Struct.new(
       :id,
-      :type)
+      :type,
+      :max_renewals,
+      :lockout_period,
+      :adjustment_deadline,
+      :price_increase,
+      :term_templates)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2825,6 +2979,29 @@ module Aws::MarketplaceDiscovery
       :refund_policy)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # A structural template defining how a specific term type is reshaped on
+    # each renewal cycle. Exactly one variant is present.
+    #
+    # @note TermTemplate is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TermTemplate corresponding to the set member.
+    #
+    # @!attribute [rw] payment_schedule_term_template
+    #   The installment schedule used to structure payments on the renewal
+    #   offer.
+    #   @return [Types::PaymentScheduleTermTemplate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-discovery-2026-02-05/TermTemplate AWS API Documentation
+    #
+    class TermTemplate < Struct.new(
+      :payment_schedule_term_template,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PaymentScheduleTermTemplate < TermTemplate; end
+      class Unknown < TermTemplate; end
     end
 
     # The request was denied due to request throttling.

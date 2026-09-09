@@ -1007,6 +1007,7 @@ module Aws::ECS
     CreateDaemonRequest.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableECSManagedTags"))
     CreateDaemonRequest.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
     CreateDaemonRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    CreateDaemonRequest.add_member(:critical, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "critical"))
     CreateDaemonRequest.struct_class = Types::CreateDaemonRequest
 
     CreateDaemonResponse.add_member(:daemon_arn, Shapes::ShapeRef.new(shape: String, location_name: "daemonArn"))
@@ -1100,6 +1101,7 @@ module Aws::ECS
 
     DaemonCapacityProvider.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     DaemonCapacityProvider.add_member(:running_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runningCount"))
+    DaemonCapacityProvider.add_member(:without_daemon_count, Shapes::ShapeRef.new(shape: Integer, location_name: "withoutDaemonCount"))
     DaemonCapacityProvider.struct_class = Types::DaemonCapacityProvider
 
     DaemonCapacityProviderList.member = Shapes::ShapeRef.new(shape: DaemonCapacityProvider)
@@ -1172,6 +1174,7 @@ module Aws::ECS
 
     DaemonDeploymentCapacityProvider.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     DaemonDeploymentCapacityProvider.add_member(:running_instance_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "runningInstanceCount"))
+    DaemonDeploymentCapacityProvider.add_member(:without_daemon_instance_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "withoutDaemonInstanceCount"))
     DaemonDeploymentCapacityProvider.add_member(:draining_instance_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "drainingInstanceCount"))
     DaemonDeploymentCapacityProvider.struct_class = Types::DaemonDeploymentCapacityProvider
 
@@ -1187,6 +1190,7 @@ module Aws::ECS
     DaemonDeploymentRevisionDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     DaemonDeploymentRevisionDetail.add_member(:capacity_providers, Shapes::ShapeRef.new(shape: DaemonDeploymentCapacityProviderList, location_name: "capacityProviders"))
     DaemonDeploymentRevisionDetail.add_member(:total_running_instance_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "totalRunningInstanceCount"))
+    DaemonDeploymentRevisionDetail.add_member(:total_without_daemon_instance_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "totalWithoutDaemonInstanceCount"))
     DaemonDeploymentRevisionDetail.add_member(:total_draining_instance_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "totalDrainingInstanceCount"))
     DaemonDeploymentRevisionDetail.struct_class = Types::DaemonDeploymentRevisionDetail
 
@@ -1238,11 +1242,13 @@ module Aws::ECS
     DaemonRevision.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: DaemonPropagateTags, location_name: "propagateTags"))
     DaemonRevision.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enableECSManagedTags"))
     DaemonRevision.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enableExecuteCommand"))
+    DaemonRevision.add_member(:critical, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "critical"))
     DaemonRevision.struct_class = Types::DaemonRevision
 
     DaemonRevisionDetail.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     DaemonRevisionDetail.add_member(:capacity_providers, Shapes::ShapeRef.new(shape: DaemonCapacityProviderList, location_name: "capacityProviders"))
     DaemonRevisionDetail.add_member(:total_running_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalRunningCount"))
+    DaemonRevisionDetail.add_member(:total_without_daemon_count, Shapes::ShapeRef.new(shape: Integer, location_name: "totalWithoutDaemonCount"))
     DaemonRevisionDetail.struct_class = Types::DaemonRevisionDetail
 
     DaemonRevisionDetailList.member = Shapes::ShapeRef.new(shape: DaemonRevisionDetail)
@@ -3074,6 +3080,7 @@ module Aws::ECS
     UpdateDaemonRequest.add_member(:propagate_tags, Shapes::ShapeRef.new(shape: DaemonPropagateTags, location_name: "propagateTags"))
     UpdateDaemonRequest.add_member(:enable_ecs_managed_tags, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableECSManagedTags"))
     UpdateDaemonRequest.add_member(:enable_execute_command, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableExecuteCommand"))
+    UpdateDaemonRequest.add_member(:critical, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "critical"))
     UpdateDaemonRequest.struct_class = Types::UpdateDaemonRequest
 
     UpdateDaemonResponse.add_member(:daemon_arn, Shapes::ShapeRef.new(shape: String, location_name: "daemonArn"))

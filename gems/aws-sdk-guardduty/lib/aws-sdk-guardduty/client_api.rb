@@ -32,6 +32,9 @@ module Aws::GuardDuty
     AccountLevelPermissions = Shapes::StructureShape.new(name: 'AccountLevelPermissions')
     AccountStatistics = Shapes::StructureShape.new(name: 'AccountStatistics')
     Action = Shapes::StructureShape.new(name: 'Action')
+    Activities = Shapes::ListShape.new(name: 'Activities')
+    Activity = Shapes::StructureShape.new(name: 'Activity')
+    ActivityType = Shapes::StringShape.new(name: 'ActivityType')
     Actor = Shapes::StructureShape.new(name: 'Actor')
     ActorIds = Shapes::ListShape.new(name: 'ActorIds')
     ActorProcess = Shapes::StructureShape.new(name: 'ActorProcess')
@@ -52,8 +55,18 @@ module Aws::GuardDuty
     AnomalyProfiles = Shapes::MapShape.new(name: 'AnomalyProfiles')
     AnomalyUnusual = Shapes::StructureShape.new(name: 'AnomalyUnusual')
     AnomalyUnusualBehaviorFeature = Shapes::MapShape.new(name: 'AnomalyUnusualBehaviorFeature')
+    ApiCall = Shapes::StructureShape.new(name: 'ApiCall')
+    ApiCallErrorString = Shapes::StringShape.new(name: 'ApiCallErrorString')
+    ApiCallOperationString = Shapes::StringShape.new(name: 'ApiCallOperationString')
+    ApiCallServiceString = Shapes::StringShape.new(name: 'ApiCallServiceString')
+    ApiCallUserAgentString = Shapes::StringShape.new(name: 'ApiCallUserAgentString')
     ArchiveFindingsRequest = Shapes::StructureShape.new(name: 'ArchiveFindingsRequest')
     ArchiveFindingsResponse = Shapes::StructureShape.new(name: 'ArchiveFindingsResponse')
+    AssociationDetail = Shapes::StructureShape.new(name: 'AssociationDetail')
+    AssociationId = Shapes::StringShape.new(name: 'AssociationId')
+    AssociationMode = Shapes::StringShape.new(name: 'AssociationMode')
+    AssociationSummary = Shapes::StructureShape.new(name: 'AssociationSummary')
+    AssociationSummaryList = Shapes::ListShape.new(name: 'AssociationSummaryList')
     AutoEnableMembers = Shapes::StringShape.new(name: 'AutoEnableMembers')
     AutonomousSystem = Shapes::StructureShape.new(name: 'AutonomousSystem')
     AutoscalingAutoScalingGroup = Shapes::StructureShape.new(name: 'AutoscalingAutoScalingGroup')
@@ -115,6 +128,10 @@ module Aws::GuardDuty
     CoverageStatisticsType = Shapes::StringShape.new(name: 'CoverageStatisticsType')
     CoverageStatisticsTypeList = Shapes::ListShape.new(name: 'CoverageStatisticsTypeList')
     CoverageStatus = Shapes::StringShape.new(name: 'CoverageStatus')
+    CreateCustomDetectionRuleAssociationRequest = Shapes::StructureShape.new(name: 'CreateCustomDetectionRuleAssociationRequest')
+    CreateCustomDetectionRuleAssociationResponse = Shapes::StructureShape.new(name: 'CreateCustomDetectionRuleAssociationResponse')
+    CreateCustomDetectionRuleOrgConfigurationRequest = Shapes::StructureShape.new(name: 'CreateCustomDetectionRuleOrgConfigurationRequest')
+    CreateCustomDetectionRuleOrgConfigurationResponse = Shapes::StructureShape.new(name: 'CreateCustomDetectionRuleOrgConfigurationResponse')
     CreateDetectorRequest = Shapes::StructureShape.new(name: 'CreateDetectorRequest')
     CreateDetectorResponse = Shapes::StructureShape.new(name: 'CreateDetectorResponse')
     CreateFilterRequest = Shapes::StructureShape.new(name: 'CreateFilterRequest')
@@ -153,6 +170,10 @@ module Aws::GuardDuty
     DeclineInvitationsRequest = Shapes::StructureShape.new(name: 'DeclineInvitationsRequest')
     DeclineInvitationsResponse = Shapes::StructureShape.new(name: 'DeclineInvitationsResponse')
     DefaultServerSideEncryption = Shapes::StructureShape.new(name: 'DefaultServerSideEncryption')
+    DeleteCustomDetectionRuleAssociationRequest = Shapes::StructureShape.new(name: 'DeleteCustomDetectionRuleAssociationRequest')
+    DeleteCustomDetectionRuleAssociationResponse = Shapes::StructureShape.new(name: 'DeleteCustomDetectionRuleAssociationResponse')
+    DeleteCustomDetectionRuleOrgConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteCustomDetectionRuleOrgConfigurationRequest')
+    DeleteCustomDetectionRuleOrgConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteCustomDetectionRuleOrgConfigurationResponse')
     DeleteDetectorRequest = Shapes::StructureShape.new(name: 'DeleteDetectorRequest')
     DeleteDetectorResponse = Shapes::StructureShape.new(name: 'DeleteDetectorResponse')
     DeleteFilterRequest = Shapes::StructureShape.new(name: 'DeleteFilterRequest')
@@ -183,6 +204,22 @@ module Aws::GuardDuty
     DestinationType = Shapes::StringShape.new(name: 'DestinationType')
     Destinations = Shapes::ListShape.new(name: 'Destinations')
     Detection = Shapes::StructureShape.new(name: 'Detection')
+    DetectionRuleAccountIds = Shapes::ListShape.new(name: 'DetectionRuleAccountIds')
+    DetectionRuleArn = Shapes::StringShape.new(name: 'DetectionRuleArn')
+    DetectionRuleConfigurationStatus = Shapes::StringShape.new(name: 'DetectionRuleConfigurationStatus')
+    DetectionRuleDataSource = Shapes::StringShape.new(name: 'DetectionRuleDataSource')
+    DetectionRuleDescription = Shapes::StringShape.new(name: 'DetectionRuleDescription')
+    DetectionRuleFilter = Shapes::StructureShape.new(name: 'DetectionRuleFilter')
+    DetectionRuleFilterCondition = Shapes::StringShape.new(name: 'DetectionRuleFilterCondition')
+    DetectionRuleFilterList = Shapes::ListShape.new(name: 'DetectionRuleFilterList')
+    DetectionRuleFilterValue = Shapes::StringShape.new(name: 'DetectionRuleFilterValue')
+    DetectionRuleFilterValues = Shapes::ListShape.new(name: 'DetectionRuleFilterValues')
+    DetectionRuleMaxResults = Shapes::IntegerShape.new(name: 'DetectionRuleMaxResults')
+    DetectionRuleOrgConfiguration = Shapes::StructureShape.new(name: 'DetectionRuleOrgConfiguration')
+    DetectionRuleOrgConfigurationSummary = Shapes::StructureShape.new(name: 'DetectionRuleOrgConfigurationSummary')
+    DetectionRuleOrgConfigurationSummaryList = Shapes::ListShape.new(name: 'DetectionRuleOrgConfigurationSummaryList')
+    DetectionRuleServiceName = Shapes::StringShape.new(name: 'DetectionRuleServiceName')
+    DetectionRuleSeverity = Shapes::StringShape.new(name: 'DetectionRuleSeverity')
     DetectionSource = Shapes::StringShape.new(name: 'DetectionSource')
     DetectorAdditionalConfiguration = Shapes::StructureShape.new(name: 'DetectorAdditionalConfiguration')
     DetectorAdditionalConfigurationResult = Shapes::StructureShape.new(name: 'DetectorAdditionalConfigurationResult')
@@ -250,6 +287,7 @@ module Aws::GuardDuty
     FilterCriterion = Shapes::StructureShape.new(name: 'FilterCriterion')
     FilterCriterionList = Shapes::ListShape.new(name: 'FilterCriterionList')
     FilterDescription = Shapes::StringShape.new(name: 'FilterDescription')
+    FilterFieldName = Shapes::StringShape.new(name: 'FilterFieldName')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
     FilterNames = Shapes::ListShape.new(name: 'FilterNames')
     FilterRank = Shapes::IntegerShape.new(name: 'FilterRank')
@@ -277,6 +315,12 @@ module Aws::GuardDuty
     GetAdministratorAccountResponse = Shapes::StructureShape.new(name: 'GetAdministratorAccountResponse')
     GetCoverageStatisticsRequest = Shapes::StructureShape.new(name: 'GetCoverageStatisticsRequest')
     GetCoverageStatisticsResponse = Shapes::StructureShape.new(name: 'GetCoverageStatisticsResponse')
+    GetCustomDetectionRuleAssociationRequest = Shapes::StructureShape.new(name: 'GetCustomDetectionRuleAssociationRequest')
+    GetCustomDetectionRuleAssociationResponse = Shapes::StructureShape.new(name: 'GetCustomDetectionRuleAssociationResponse')
+    GetCustomDetectionRuleOrgConfigurationRequest = Shapes::StructureShape.new(name: 'GetCustomDetectionRuleOrgConfigurationRequest')
+    GetCustomDetectionRuleOrgConfigurationResponse = Shapes::StructureShape.new(name: 'GetCustomDetectionRuleOrgConfigurationResponse')
+    GetCustomDetectionRuleRequest = Shapes::StructureShape.new(name: 'GetCustomDetectionRuleRequest')
+    GetCustomDetectionRuleResponse = Shapes::StructureShape.new(name: 'GetCustomDetectionRuleResponse')
     GetDetectorRequest = Shapes::StructureShape.new(name: 'GetDetectorRequest')
     GetDetectorResponse = Shapes::StructureShape.new(name: 'GetDetectorResponse')
     GetFilterRequest = Shapes::StructureShape.new(name: 'GetFilterRequest')
@@ -385,6 +429,12 @@ module Aws::GuardDuty
     LineageObject = Shapes::StructureShape.new(name: 'LineageObject')
     ListCoverageRequest = Shapes::StructureShape.new(name: 'ListCoverageRequest')
     ListCoverageResponse = Shapes::StructureShape.new(name: 'ListCoverageResponse')
+    ListCustomDetectionRuleAssociationsRequest = Shapes::StructureShape.new(name: 'ListCustomDetectionRuleAssociationsRequest')
+    ListCustomDetectionRuleAssociationsResponse = Shapes::StructureShape.new(name: 'ListCustomDetectionRuleAssociationsResponse')
+    ListCustomDetectionRuleOrgConfigurationsRequest = Shapes::StructureShape.new(name: 'ListCustomDetectionRuleOrgConfigurationsRequest')
+    ListCustomDetectionRuleOrgConfigurationsResponse = Shapes::StructureShape.new(name: 'ListCustomDetectionRuleOrgConfigurationsResponse')
+    ListCustomDetectionRulesRequest = Shapes::StructureShape.new(name: 'ListCustomDetectionRulesRequest')
+    ListCustomDetectionRulesResponse = Shapes::StructureShape.new(name: 'ListCustomDetectionRulesResponse')
     ListDetectorsRequest = Shapes::StructureShape.new(name: 'ListDetectorsRequest')
     ListDetectorsResponse = Shapes::StructureShape.new(name: 'ListDetectorsResponse')
     ListFiltersRequest = Shapes::StructureShape.new(name: 'ListFiltersRequest')
@@ -466,6 +516,8 @@ module Aws::GuardDuty
     Members = Shapes::ListShape.new(name: 'Members')
     MemoryRegionsList = Shapes::ListShape.new(name: 'MemoryRegionsList')
     MfaStatus = Shapes::StringShape.new(name: 'MfaStatus')
+    MitreTactic = Shapes::StringShape.new(name: 'MitreTactic')
+    MitreTechnique = Shapes::StringShape.new(name: 'MitreTechnique')
     ModelDetail = Shapes::StructureShape.new(name: 'ModelDetail')
     ModelDetailModelIdString = Shapes::StringShape.new(name: 'ModelDetailModelIdString')
     ModelDetails = Shapes::ListShape.new(name: 'ModelDetails')
@@ -567,6 +619,15 @@ module Aws::GuardDuty
     Resources = Shapes::ListShape.new(name: 'Resources')
     RiskDetails = Shapes::StringShape.new(name: 'RiskDetails')
     RiskLevel = Shapes::StringShape.new(name: 'RiskLevel')
+    RuleDefinition = Shapes::StructureShape.new(name: 'RuleDefinition')
+    RuleDetail = Shapes::StructureShape.new(name: 'RuleDetail')
+    RuleExpression = Shapes::StringShape.new(name: 'RuleExpression')
+    RuleId = Shapes::StringShape.new(name: 'RuleId')
+    RuleLanguage = Shapes::StringShape.new(name: 'RuleLanguage')
+    RuleName = Shapes::StringShape.new(name: 'RuleName')
+    RuleSchema = Shapes::StringShape.new(name: 'RuleSchema')
+    RuleSummary = Shapes::StructureShape.new(name: 'RuleSummary')
+    RuleSummaryList = Shapes::ListShape.new(name: 'RuleSummaryList')
     RuntimeContext = Shapes::StructureShape.new(name: 'RuntimeContext')
     RuntimeDetails = Shapes::StructureShape.new(name: 'RuntimeDetails')
     S3Bucket = Shapes::StructureShape.new(name: 'S3Bucket')
@@ -674,6 +735,10 @@ module Aws::GuardDuty
     UnprocessedDataSourcesResult = Shapes::StructureShape.new(name: 'UnprocessedDataSourcesResult')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateCustomDetectionRuleAssociationRequest = Shapes::StructureShape.new(name: 'UpdateCustomDetectionRuleAssociationRequest')
+    UpdateCustomDetectionRuleAssociationResponse = Shapes::StructureShape.new(name: 'UpdateCustomDetectionRuleAssociationResponse')
+    UpdateCustomDetectionRuleOrgConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateCustomDetectionRuleOrgConfigurationRequest')
+    UpdateCustomDetectionRuleOrgConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateCustomDetectionRuleOrgConfigurationResponse')
     UpdateDetectorRequest = Shapes::StructureShape.new(name: 'UpdateDetectorRequest')
     UpdateDetectorResponse = Shapes::StructureShape.new(name: 'UpdateDetectorResponse')
     UpdateFilterRequest = Shapes::StructureShape.new(name: 'UpdateFilterRequest')
@@ -797,6 +862,12 @@ module Aws::GuardDuty
     Action.add_member(:rds_login_attempt_action, Shapes::ShapeRef.new(shape: RdsLoginAttemptAction, location_name: "rdsLoginAttemptAction"))
     Action.struct_class = Types::Action
 
+    Activities.member = Shapes::ShapeRef.new(shape: Activity)
+
+    Activity.add_member(:type, Shapes::ShapeRef.new(shape: ActivityType, required: true, location_name: "type"))
+    Activity.add_member(:api, Shapes::ShapeRef.new(shape: ApiCall, location_name: "api"))
+    Activity.struct_class = Types::Activity
+
     Actor.add_member(:id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "id"))
     Actor.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "user"))
     Actor.add_member(:session, Shapes::ShapeRef.new(shape: Session, location_name: "session"))
@@ -863,11 +934,38 @@ module Aws::GuardDuty
     AnomalyUnusualBehaviorFeature.key = Shapes::ShapeRef.new(shape: String)
     AnomalyUnusualBehaviorFeature.value = Shapes::ShapeRef.new(shape: AnomalyObject)
 
+    ApiCall.add_member(:operation, Shapes::ShapeRef.new(shape: ApiCallOperationString, location_name: "operation"))
+    ApiCall.add_member(:service, Shapes::ShapeRef.new(shape: ApiCallServiceString, location_name: "service"))
+    ApiCall.add_member(:error, Shapes::ShapeRef.new(shape: ApiCallErrorString, location_name: "error"))
+    ApiCall.add_member(:user_agent, Shapes::ShapeRef.new(shape: ApiCallUserAgentString, location_name: "userAgent"))
+    ApiCall.struct_class = Types::ApiCall
+
     ArchiveFindingsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "DetectorId"))
     ArchiveFindingsRequest.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIds, required: true, location_name: "findingIds"))
     ArchiveFindingsRequest.struct_class = Types::ArchiveFindingsRequest
 
     ArchiveFindingsResponse.struct_class = Types::ArchiveFindingsResponse
+
+    AssociationDetail.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, required: true, location_name: "associationId"))
+    AssociationDetail.add_member(:arn, Shapes::ShapeRef.new(shape: DetectionRuleArn, required: true, location_name: "arn"))
+    AssociationDetail.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    AssociationDetail.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    AssociationDetail.add_member(:mode, Shapes::ShapeRef.new(shape: AssociationMode, required: true, location_name: "mode"))
+    AssociationDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    AssociationDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    AssociationDetail.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
+    AssociationDetail.struct_class = Types::AssociationDetail
+
+    AssociationSummary.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, required: true, location_name: "associationId"))
+    AssociationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: DetectionRuleArn, required: true, location_name: "arn"))
+    AssociationSummary.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    AssociationSummary.add_member(:mode, Shapes::ShapeRef.new(shape: AssociationMode, required: true, location_name: "mode"))
+    AssociationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    AssociationSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    AssociationSummary.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
+    AssociationSummary.struct_class = Types::AssociationSummary
+
+    AssociationSummaryList.member = Shapes::ShapeRef.new(shape: AssociationSummary)
 
     AutonomousSystem.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     AutonomousSystem.add_member(:number, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "number"))
@@ -1061,6 +1159,24 @@ module Aws::GuardDuty
 
     CoverageStatisticsTypeList.member = Shapes::ShapeRef.new(shape: CoverageStatisticsType)
 
+    CreateCustomDetectionRuleAssociationRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    CreateCustomDetectionRuleAssociationRequest.add_member(:mode, Shapes::ShapeRef.new(shape: AssociationMode, required: true, location_name: "mode"))
+    CreateCustomDetectionRuleAssociationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateCustomDetectionRuleAssociationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateCustomDetectionRuleAssociationRequest.struct_class = Types::CreateCustomDetectionRuleAssociationRequest
+
+    CreateCustomDetectionRuleAssociationResponse.add_member(:rule_association, Shapes::ShapeRef.new(shape: AssociationDetail, required: true, location_name: "ruleAssociation"))
+    CreateCustomDetectionRuleAssociationResponse.struct_class = Types::CreateCustomDetectionRuleAssociationResponse
+
+    CreateCustomDetectionRuleOrgConfigurationRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    CreateCustomDetectionRuleOrgConfigurationRequest.add_member(:mode, Shapes::ShapeRef.new(shape: AssociationMode, required: true, location_name: "mode"))
+    CreateCustomDetectionRuleOrgConfigurationRequest.add_member(:include_account_ids, Shapes::ShapeRef.new(shape: DetectionRuleAccountIds, location_name: "includeAccountIds"))
+    CreateCustomDetectionRuleOrgConfigurationRequest.add_member(:exclude_account_ids, Shapes::ShapeRef.new(shape: DetectionRuleAccountIds, location_name: "excludeAccountIds"))
+    CreateCustomDetectionRuleOrgConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateCustomDetectionRuleOrgConfigurationRequest.struct_class = Types::CreateCustomDetectionRuleOrgConfigurationRequest
+
+    CreateCustomDetectionRuleOrgConfigurationResponse.struct_class = Types::CreateCustomDetectionRuleOrgConfigurationResponse
+
     CreateDetectorRequest.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enable"))
     CreateDetectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateDetectorRequest.add_member(:finding_publishing_frequency, Shapes::ShapeRef.new(shape: FindingPublishingFrequency, location_name: "findingPublishingFrequency"))
@@ -1234,6 +1350,18 @@ module Aws::GuardDuty
     DefaultServerSideEncryption.add_member(:kms_master_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "kmsMasterKeyArn"))
     DefaultServerSideEncryption.struct_class = Types::DefaultServerSideEncryption
 
+    DeleteCustomDetectionRuleAssociationRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location: "uri", location_name: "RuleId"))
+    DeleteCustomDetectionRuleAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, required: true, location: "uri", location_name: "AssociationId"))
+    DeleteCustomDetectionRuleAssociationRequest.struct_class = Types::DeleteCustomDetectionRuleAssociationRequest
+
+    DeleteCustomDetectionRuleAssociationResponse.struct_class = Types::DeleteCustomDetectionRuleAssociationResponse
+
+    DeleteCustomDetectionRuleOrgConfigurationRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location: "uri", location_name: "RuleId"))
+    DeleteCustomDetectionRuleOrgConfigurationRequest.add_member(:mode, Shapes::ShapeRef.new(shape: AssociationMode, required: true, location: "querystring", location_name: "mode"))
+    DeleteCustomDetectionRuleOrgConfigurationRequest.struct_class = Types::DeleteCustomDetectionRuleOrgConfigurationRequest
+
+    DeleteCustomDetectionRuleOrgConfigurationResponse.struct_class = Types::DeleteCustomDetectionRuleOrgConfigurationResponse
+
     DeleteDetectorRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "DetectorId"))
     DeleteDetectorRequest.struct_class = Types::DeleteDetectorRequest
 
@@ -1341,6 +1469,39 @@ module Aws::GuardDuty
     Detection.add_member(:anomaly, Shapes::ShapeRef.new(shape: Anomaly, location_name: "anomaly"))
     Detection.add_member(:sequence, Shapes::ShapeRef.new(shape: Sequence, location_name: "sequence"))
     Detection.struct_class = Types::Detection
+
+    DetectionRuleAccountIds.member = Shapes::ShapeRef.new(shape: AccountId)
+
+    DetectionRuleFilter.add_member(:name, Shapes::ShapeRef.new(shape: FilterFieldName, required: true, location_name: "name"))
+    DetectionRuleFilter.add_member(:values, Shapes::ShapeRef.new(shape: DetectionRuleFilterValues, required: true, location_name: "values"))
+    DetectionRuleFilter.add_member(:condition, Shapes::ShapeRef.new(shape: DetectionRuleFilterCondition, location_name: "condition"))
+    DetectionRuleFilter.struct_class = Types::DetectionRuleFilter
+
+    DetectionRuleFilterList.member = Shapes::ShapeRef.new(shape: DetectionRuleFilter)
+
+    DetectionRuleFilterValues.member = Shapes::ShapeRef.new(shape: DetectionRuleFilterValue)
+
+    DetectionRuleOrgConfiguration.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    DetectionRuleOrgConfiguration.add_member(:mode, Shapes::ShapeRef.new(shape: AssociationMode, required: true, location_name: "mode"))
+    DetectionRuleOrgConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: DetectionRuleConfigurationStatus, required: true, location_name: "status"))
+    DetectionRuleOrgConfiguration.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    DetectionRuleOrgConfiguration.add_member(:include_account_ids, Shapes::ShapeRef.new(shape: DetectionRuleAccountIds, required: true, location_name: "includeAccountIds"))
+    DetectionRuleOrgConfiguration.add_member(:exclude_account_ids, Shapes::ShapeRef.new(shape: DetectionRuleAccountIds, required: true, location_name: "excludeAccountIds"))
+    DetectionRuleOrgConfiguration.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    DetectionRuleOrgConfiguration.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    DetectionRuleOrgConfiguration.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
+    DetectionRuleOrgConfiguration.struct_class = Types::DetectionRuleOrgConfiguration
+
+    DetectionRuleOrgConfigurationSummary.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    DetectionRuleOrgConfigurationSummary.add_member(:mode, Shapes::ShapeRef.new(shape: AssociationMode, required: true, location_name: "mode"))
+    DetectionRuleOrgConfigurationSummary.add_member(:status, Shapes::ShapeRef.new(shape: DetectionRuleConfigurationStatus, required: true, location_name: "status"))
+    DetectionRuleOrgConfigurationSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    DetectionRuleOrgConfigurationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    DetectionRuleOrgConfigurationSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    DetectionRuleOrgConfigurationSummary.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
+    DetectionRuleOrgConfigurationSummary.struct_class = Types::DetectionRuleOrgConfigurationSummary
+
+    DetectionRuleOrgConfigurationSummaryList.member = Shapes::ShapeRef.new(shape: DetectionRuleOrgConfigurationSummary)
 
     DetectorAdditionalConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: FeatureAdditionalConfiguration, location_name: "name"))
     DetectorAdditionalConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "status"))
@@ -1617,6 +1778,27 @@ module Aws::GuardDuty
 
     GetCoverageStatisticsResponse.add_member(:coverage_statistics, Shapes::ShapeRef.new(shape: CoverageStatistics, location_name: "coverageStatistics"))
     GetCoverageStatisticsResponse.struct_class = Types::GetCoverageStatisticsResponse
+
+    GetCustomDetectionRuleAssociationRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location: "uri", location_name: "RuleId"))
+    GetCustomDetectionRuleAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, required: true, location: "uri", location_name: "AssociationId"))
+    GetCustomDetectionRuleAssociationRequest.struct_class = Types::GetCustomDetectionRuleAssociationRequest
+
+    GetCustomDetectionRuleAssociationResponse.add_member(:rule_association, Shapes::ShapeRef.new(shape: AssociationDetail, required: true, location_name: "ruleAssociation"))
+    GetCustomDetectionRuleAssociationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetCustomDetectionRuleAssociationResponse.struct_class = Types::GetCustomDetectionRuleAssociationResponse
+
+    GetCustomDetectionRuleOrgConfigurationRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location: "uri", location_name: "RuleId"))
+    GetCustomDetectionRuleOrgConfigurationRequest.add_member(:mode, Shapes::ShapeRef.new(shape: AssociationMode, required: true, location: "querystring", location_name: "mode"))
+    GetCustomDetectionRuleOrgConfigurationRequest.struct_class = Types::GetCustomDetectionRuleOrgConfigurationRequest
+
+    GetCustomDetectionRuleOrgConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: DetectionRuleOrgConfiguration, required: true, location_name: "configuration"))
+    GetCustomDetectionRuleOrgConfigurationResponse.struct_class = Types::GetCustomDetectionRuleOrgConfigurationResponse
+
+    GetCustomDetectionRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location: "uri", location_name: "RuleId"))
+    GetCustomDetectionRuleRequest.struct_class = Types::GetCustomDetectionRuleRequest
+
+    GetCustomDetectionRuleResponse.add_member(:rule, Shapes::ShapeRef.new(shape: RuleDetail, required: true, location_name: "rule"))
+    GetCustomDetectionRuleResponse.struct_class = Types::GetCustomDetectionRuleResponse
 
     GetDetectorRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "DetectorId"))
     GetDetectorRequest.struct_class = Types::GetDetectorRequest
@@ -2072,6 +2254,34 @@ module Aws::GuardDuty
     ListCoverageResponse.add_member(:resources, Shapes::ShapeRef.new(shape: CoverageResources, required: true, location_name: "resources"))
     ListCoverageResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListCoverageResponse.struct_class = Types::ListCoverageResponse
+
+    ListCustomDetectionRuleAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DetectionRuleMaxResults, location: "querystring", location_name: "maxResults"))
+    ListCustomDetectionRuleAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListCustomDetectionRuleAssociationsRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, location: "querystring", location_name: "ruleId"))
+    ListCustomDetectionRuleAssociationsRequest.add_member(:mode, Shapes::ShapeRef.new(shape: AssociationMode, location: "querystring", location_name: "mode"))
+    ListCustomDetectionRuleAssociationsRequest.struct_class = Types::ListCustomDetectionRuleAssociationsRequest
+
+    ListCustomDetectionRuleAssociationsResponse.add_member(:rule_associations, Shapes::ShapeRef.new(shape: AssociationSummaryList, required: true, location_name: "ruleAssociations"))
+    ListCustomDetectionRuleAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListCustomDetectionRuleAssociationsResponse.struct_class = Types::ListCustomDetectionRuleAssociationsResponse
+
+    ListCustomDetectionRuleOrgConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DetectionRuleMaxResults, location: "querystring", location_name: "maxResults"))
+    ListCustomDetectionRuleOrgConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListCustomDetectionRuleOrgConfigurationsRequest.add_member(:status, Shapes::ShapeRef.new(shape: DetectionRuleConfigurationStatus, location: "querystring", location_name: "status"))
+    ListCustomDetectionRuleOrgConfigurationsRequest.struct_class = Types::ListCustomDetectionRuleOrgConfigurationsRequest
+
+    ListCustomDetectionRuleOrgConfigurationsResponse.add_member(:configurations, Shapes::ShapeRef.new(shape: DetectionRuleOrgConfigurationSummaryList, required: true, location_name: "configurations"))
+    ListCustomDetectionRuleOrgConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListCustomDetectionRuleOrgConfigurationsResponse.struct_class = Types::ListCustomDetectionRuleOrgConfigurationsResponse
+
+    ListCustomDetectionRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DetectionRuleMaxResults, location_name: "maxResults"))
+    ListCustomDetectionRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListCustomDetectionRulesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DetectionRuleFilterList, location_name: "filters"))
+    ListCustomDetectionRulesRequest.struct_class = Types::ListCustomDetectionRulesRequest
+
+    ListCustomDetectionRulesResponse.add_member(:rules, Shapes::ShapeRef.new(shape: RuleSummaryList, required: true, location_name: "rules"))
+    ListCustomDetectionRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListCustomDetectionRulesResponse.struct_class = Types::ListCustomDetectionRulesResponse
 
     ListDetectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListDetectorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -2691,6 +2901,42 @@ module Aws::GuardDuty
 
     Resources.member = Shapes::ShapeRef.new(shape: ResourceV2)
 
+    RuleDefinition.add_member(:expression, Shapes::ShapeRef.new(shape: RuleExpression, required: true, location_name: "expression"))
+    RuleDefinition.struct_class = Types::RuleDefinition
+
+    RuleDetail.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    RuleDetail.add_member(:arn, Shapes::ShapeRef.new(shape: DetectionRuleArn, required: true, location_name: "arn"))
+    RuleDetail.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "name"))
+    RuleDetail.add_member(:description, Shapes::ShapeRef.new(shape: DetectionRuleDescription, required: true, location_name: "description"))
+    RuleDetail.add_member(:severity, Shapes::ShapeRef.new(shape: DetectionRuleSeverity, required: true, location_name: "severity"))
+    RuleDetail.add_member(:data_source, Shapes::ShapeRef.new(shape: DetectionRuleDataSource, required: true, location_name: "dataSource"))
+    RuleDetail.add_member(:tactic, Shapes::ShapeRef.new(shape: MitreTactic, required: true, location_name: "tactic"))
+    RuleDetail.add_member(:technique, Shapes::ShapeRef.new(shape: MitreTechnique, required: true, location_name: "technique"))
+    RuleDetail.add_member(:service, Shapes::ShapeRef.new(shape: DetectionRuleServiceName, required: true, location_name: "service"))
+    RuleDetail.add_member(:definition, Shapes::ShapeRef.new(shape: RuleDefinition, required: true, location_name: "definition"))
+    RuleDetail.add_member(:language, Shapes::ShapeRef.new(shape: RuleLanguage, location_name: "language"))
+    RuleDetail.add_member(:schema, Shapes::ShapeRef.new(shape: RuleSchema, location_name: "schema"))
+    RuleDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    RuleDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    RuleDetail.struct_class = Types::RuleDetail
+
+    RuleSummary.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    RuleSummary.add_member(:arn, Shapes::ShapeRef.new(shape: DetectionRuleArn, required: true, location_name: "arn"))
+    RuleSummary.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, required: true, location_name: "name"))
+    RuleSummary.add_member(:description, Shapes::ShapeRef.new(shape: DetectionRuleDescription, required: true, location_name: "description"))
+    RuleSummary.add_member(:severity, Shapes::ShapeRef.new(shape: DetectionRuleSeverity, required: true, location_name: "severity"))
+    RuleSummary.add_member(:data_source, Shapes::ShapeRef.new(shape: DetectionRuleDataSource, required: true, location_name: "dataSource"))
+    RuleSummary.add_member(:tactic, Shapes::ShapeRef.new(shape: MitreTactic, required: true, location_name: "tactic"))
+    RuleSummary.add_member(:technique, Shapes::ShapeRef.new(shape: MitreTechnique, required: true, location_name: "technique"))
+    RuleSummary.add_member(:service, Shapes::ShapeRef.new(shape: DetectionRuleServiceName, required: true, location_name: "service"))
+    RuleSummary.add_member(:language, Shapes::ShapeRef.new(shape: RuleLanguage, location_name: "language"))
+    RuleSummary.add_member(:schema, Shapes::ShapeRef.new(shape: RuleSchema, location_name: "schema"))
+    RuleSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    RuleSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    RuleSummary.struct_class = Types::RuleSummary
+
+    RuleSummaryList.member = Shapes::ShapeRef.new(shape: RuleSummary)
+
     RuntimeContext.add_member(:modifying_process, Shapes::ShapeRef.new(shape: ProcessDetails, location_name: "modifyingProcess"))
     RuntimeContext.add_member(:modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedAt"))
     RuntimeContext.add_member(:script_path, Shapes::ShapeRef.new(shape: String, location_name: "scriptPath"))
@@ -2954,6 +3200,7 @@ module Aws::GuardDuty
     Signal.add_member(:actor_ids, Shapes::ShapeRef.new(shape: ActorIds, location_name: "actorIds"))
     Signal.add_member(:endpoint_ids, Shapes::ShapeRef.new(shape: EndpointIds, location_name: "endpointIds"))
     Signal.add_member(:signal_indicators, Shapes::ShapeRef.new(shape: Indicators, location_name: "signalIndicators"))
+    Signal.add_member(:activities, Shapes::ShapeRef.new(shape: Activities, location_name: "activities"))
     Signal.struct_class = Types::Signal
 
     Signals.member = Shapes::ShapeRef.new(shape: Signal)
@@ -3075,6 +3322,21 @@ module Aws::GuardDuty
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateCustomDetectionRuleAssociationRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location: "uri", location_name: "RuleId"))
+    UpdateCustomDetectionRuleAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, required: true, location: "uri", location_name: "AssociationId"))
+    UpdateCustomDetectionRuleAssociationRequest.add_member(:mode, Shapes::ShapeRef.new(shape: AssociationMode, required: true, location_name: "mode"))
+    UpdateCustomDetectionRuleAssociationRequest.struct_class = Types::UpdateCustomDetectionRuleAssociationRequest
+
+    UpdateCustomDetectionRuleAssociationResponse.struct_class = Types::UpdateCustomDetectionRuleAssociationResponse
+
+    UpdateCustomDetectionRuleOrgConfigurationRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location: "uri", location_name: "RuleId"))
+    UpdateCustomDetectionRuleOrgConfigurationRequest.add_member(:mode, Shapes::ShapeRef.new(shape: AssociationMode, required: true, location_name: "mode"))
+    UpdateCustomDetectionRuleOrgConfigurationRequest.add_member(:include_account_ids, Shapes::ShapeRef.new(shape: DetectionRuleAccountIds, location_name: "includeAccountIds"))
+    UpdateCustomDetectionRuleOrgConfigurationRequest.add_member(:exclude_account_ids, Shapes::ShapeRef.new(shape: DetectionRuleAccountIds, location_name: "excludeAccountIds"))
+    UpdateCustomDetectionRuleOrgConfigurationRequest.struct_class = Types::UpdateCustomDetectionRuleOrgConfigurationRequest
+
+    UpdateCustomDetectionRuleOrgConfigurationResponse.struct_class = Types::UpdateCustomDetectionRuleOrgConfigurationResponse
 
     UpdateDetectorRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "DetectorId"))
     UpdateDetectorRequest.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, location_name: "enable"))
@@ -3325,6 +3587,32 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
       end)
 
+      api.add_operation(:create_custom_detection_rule_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCustomDetectionRuleAssociation"
+        o.http_method = "POST"
+        o.http_request_uri = "/custom-detection-rule/association"
+        o.input = Shapes::ShapeRef.new(shape: CreateCustomDetectionRuleAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCustomDetectionRuleAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_custom_detection_rule_org_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCustomDetectionRuleOrgConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/custom-detection-rule/org-configuration"
+        o.input = Shapes::ShapeRef.new(shape: CreateCustomDetectionRuleOrgConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCustomDetectionRuleOrgConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:create_detector, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateDetector"
         o.http_method = "POST"
@@ -3448,6 +3736,31 @@ module Aws::GuardDuty
         o.output = Shapes::ShapeRef.new(shape: DeclineInvitationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:delete_custom_detection_rule_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCustomDetectionRuleAssociation"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCustomDetectionRuleAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCustomDetectionRuleAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_custom_detection_rule_org_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCustomDetectionRuleOrgConfiguration"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/custom-detection-rule/org-configuration/{RuleId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCustomDetectionRuleOrgConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCustomDetectionRuleOrgConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:delete_detector, Seahorse::Model::Operation.new.tap do |o|
@@ -3663,6 +3976,42 @@ module Aws::GuardDuty
         o.output = Shapes::ShapeRef.new(shape: GetCoverageStatisticsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+      end)
+
+      api.add_operation(:get_custom_detection_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCustomDetectionRule"
+        o.http_method = "GET"
+        o.http_request_uri = "/custom-detection-rule/rule/{RuleId}"
+        o.input = Shapes::ShapeRef.new(shape: GetCustomDetectionRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCustomDetectionRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_custom_detection_rule_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCustomDetectionRuleAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}"
+        o.input = Shapes::ShapeRef.new(shape: GetCustomDetectionRuleAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCustomDetectionRuleAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_custom_detection_rule_org_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCustomDetectionRuleOrgConfiguration"
+        o.http_method = "GET"
+        o.http_request_uri = "/custom-detection-rule/org-configuration/{RuleId}"
+        o.input = Shapes::ShapeRef.new(shape: GetCustomDetectionRuleOrgConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCustomDetectionRuleOrgConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_detector, Seahorse::Model::Operation.new.tap do |o|
@@ -3885,6 +4234,57 @@ module Aws::GuardDuty
         o.output = Shapes::ShapeRef.new(shape: ListCoverageResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_custom_detection_rule_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCustomDetectionRuleAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/custom-detection-rule/association"
+        o.input = Shapes::ShapeRef.new(shape: ListCustomDetectionRuleAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCustomDetectionRuleAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_custom_detection_rule_org_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCustomDetectionRuleOrgConfigurations"
+        o.http_method = "GET"
+        o.http_request_uri = "/custom-detection-rule/org-configuration"
+        o.input = Shapes::ShapeRef.new(shape: ListCustomDetectionRuleOrgConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCustomDetectionRuleOrgConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_custom_detection_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCustomDetectionRules"
+        o.http_method = "POST"
+        o.http_request_uri = "/custom-detection-rule/rule"
+        o.input = Shapes::ShapeRef.new(shape: ListCustomDetectionRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCustomDetectionRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -4196,6 +4596,32 @@ module Aws::GuardDuty
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:update_custom_detection_rule_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCustomDetectionRuleAssociation"
+        o.http_method = "PUT"
+        o.http_request_uri = "/custom-detection-rule/rule/{RuleId}/association/{AssociationId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCustomDetectionRuleAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCustomDetectionRuleAssociationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_custom_detection_rule_org_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCustomDetectionRuleOrgConfiguration"
+        o.http_method = "PUT"
+        o.http_request_uri = "/custom-detection-rule/org-configuration/{RuleId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCustomDetectionRuleOrgConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCustomDetectionRuleOrgConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_detector, Seahorse::Model::Operation.new.tap do |o|

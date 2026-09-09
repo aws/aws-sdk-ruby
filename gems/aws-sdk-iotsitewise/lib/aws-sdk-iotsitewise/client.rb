@@ -3304,11 +3304,28 @@ module Aws::IoTSiteWise
     #         task_execution_role: "IamRoleArn", # required
     #         processing_type: "GENERIC_COMPUTE_PROCESSING", # required, accepts GENERIC_COMPUTE_PROCESSING, HARDWARE_ACCELERATED_PROCESSING
     #         processing_unit: "UNITS_2", # required, accepts UNITS_2, UNITS_4, UNITS_8, UNITS_12, UNITS_16, UNITS_24, UNITS_32, UNITS_36, UNITS_48, UNITS_60, UNITS_64, UNITS_72, UNITS_84, UNITS_96
+    #         ephemeral_storage_configuration: {
+    #           storage_class: "STANDARD_1", # required, accepts STANDARD_1, STANDARD_2, THROUGHPUT_1, THROUGHPUT_2
+    #           storage_size_in_gi_b: 1, # required
+    #         },
     #         command: ["String"],
     #         timeout_seconds: 1,
     #         environment_variables: {
     #           "EnvironmentVariableName" => "EnvironmentVariableValue",
     #         },
+    #         mounts: [
+    #           {
+    #             name: "ResourceName", # required
+    #             relative_path: "MountRelativePath", # required
+    #             source: { # required
+    #               s3_access_point: {
+    #                 access_point_arn: "MountS3AccessPointArn", # required
+    #                 prefix: "MountS3KeyPrefix",
+    #               },
+    #             },
+    #             storage_type: "SHARED_STORAGE", # required, accepts SHARED_STORAGE
+    #           },
+    #         ],
     #       },
     #     },
     #     tags: {
@@ -5682,6 +5699,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribePipelineExecutionResponse#start_time #start_time} => Time
     #   * {Types::DescribePipelineExecutionResponse#end_time #end_time} => Time
     #   * {Types::DescribePipelineExecutionResponse#request_environment_variables #request_environment_variables} => Types::ExecutionEnvironmentVariables
+    #   * {Types::DescribePipelineExecutionResponse#request_mount_overrides #request_mount_overrides} => Types::MountOverrides
     #   * {Types::DescribePipelineExecutionResponse#execution_priority #execution_priority} => Integer
     #   * {Types::DescribePipelineExecutionResponse#compute_node_execution_details #compute_node_execution_details} => Array&lt;Types::ComputeNodeExecutionDetails&gt;
     #   * {Types::DescribePipelineExecutionResponse#next_token #next_token} => String
@@ -5717,6 +5735,13 @@ module Aws::IoTSiteWise
     #   resp.request_environment_variables.compute_nodes #=> Hash
     #   resp.request_environment_variables.compute_nodes["ResourceName"] #=> Hash
     #   resp.request_environment_variables.compute_nodes["ResourceName"]["EnvironmentVariableName"] #=> String
+    #   resp.request_mount_overrides.compute_nodes #=> Hash
+    #   resp.request_mount_overrides.compute_nodes["ResourceName"] #=> Array
+    #   resp.request_mount_overrides.compute_nodes["ResourceName"][0].name #=> String
+    #   resp.request_mount_overrides.compute_nodes["ResourceName"][0].relative_path #=> String
+    #   resp.request_mount_overrides.compute_nodes["ResourceName"][0].source.s3_access_point.access_point_arn #=> String
+    #   resp.request_mount_overrides.compute_nodes["ResourceName"][0].source.s3_access_point.prefix #=> String
+    #   resp.request_mount_overrides.compute_nodes["ResourceName"][0].storage_type #=> String, one of "SHARED_STORAGE"
     #   resp.execution_priority #=> Integer
     #   resp.compute_node_execution_details #=> Array
     #   resp.compute_node_execution_details[0].compute_node_name #=> String
@@ -5735,6 +5760,12 @@ module Aws::IoTSiteWise
     #   resp.compute_node_execution_details[0].end_time #=> Time
     #   resp.compute_node_execution_details[0].execution_environment_variables #=> Hash
     #   resp.compute_node_execution_details[0].execution_environment_variables["ExecutionEnvironmentVariablesMapKeyString"] #=> String
+    #   resp.compute_node_execution_details[0].execution_mounts #=> Array
+    #   resp.compute_node_execution_details[0].execution_mounts[0].name #=> String
+    #   resp.compute_node_execution_details[0].execution_mounts[0].relative_path #=> String
+    #   resp.compute_node_execution_details[0].execution_mounts[0].source.s3_access_point.access_point_arn #=> String
+    #   resp.compute_node_execution_details[0].execution_mounts[0].source.s3_access_point.prefix #=> String
+    #   resp.compute_node_execution_details[0].execution_mounts[0].storage_type #=> String, one of "SHARED_STORAGE"
     #   resp.next_token #=> String
     #
     # @overload describe_pipeline_execution(params = {})
@@ -6024,11 +6055,19 @@ module Aws::IoTSiteWise
     #   resp.task_configuration.container_task_configuration.task_execution_role #=> String
     #   resp.task_configuration.container_task_configuration.processing_type #=> String, one of "GENERIC_COMPUTE_PROCESSING", "HARDWARE_ACCELERATED_PROCESSING"
     #   resp.task_configuration.container_task_configuration.processing_unit #=> String, one of "UNITS_2", "UNITS_4", "UNITS_8", "UNITS_12", "UNITS_16", "UNITS_24", "UNITS_32", "UNITS_36", "UNITS_48", "UNITS_60", "UNITS_64", "UNITS_72", "UNITS_84", "UNITS_96"
+    #   resp.task_configuration.container_task_configuration.ephemeral_storage_configuration.storage_class #=> String, one of "STANDARD_1", "STANDARD_2", "THROUGHPUT_1", "THROUGHPUT_2"
+    #   resp.task_configuration.container_task_configuration.ephemeral_storage_configuration.storage_size_in_gi_b #=> Integer
     #   resp.task_configuration.container_task_configuration.command #=> Array
     #   resp.task_configuration.container_task_configuration.command[0] #=> String
     #   resp.task_configuration.container_task_configuration.timeout_seconds #=> Integer
     #   resp.task_configuration.container_task_configuration.environment_variables #=> Hash
     #   resp.task_configuration.container_task_configuration.environment_variables["EnvironmentVariableName"] #=> String
+    #   resp.task_configuration.container_task_configuration.mounts #=> Array
+    #   resp.task_configuration.container_task_configuration.mounts[0].name #=> String
+    #   resp.task_configuration.container_task_configuration.mounts[0].relative_path #=> String
+    #   resp.task_configuration.container_task_configuration.mounts[0].source.s3_access_point.access_point_arn #=> String
+    #   resp.task_configuration.container_task_configuration.mounts[0].source.s3_access_point.prefix #=> String
+    #   resp.task_configuration.container_task_configuration.mounts[0].storage_type #=> String, one of "SHARED_STORAGE"
     #   resp.status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.status.error.message #=> String
     #   resp.status.state #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"
@@ -9724,6 +9763,13 @@ module Aws::IoTSiteWise
     #   per-node overrides. These take the highest priority in the environment
     #   variable hierarchy.
     #
+    # @option params [Types::MountOverrides] :execution_mount_overrides
+    #   Runtime mount overrides for the execution. Overrides are merged by
+    #   mount name into each listed compute node's task-defined mounts: a
+    #   matching name replaces the task-defined mount, a new name adds a
+    #   mount, and task-defined mounts not referenced remain unchanged.
+    #   Compute nodes not listed use their task-defined mounts as-is.
+    #
     # @option params [Integer] :execution_priority
     #   Scheduling priority for the execution. Lower values indicate higher
     #   priority. Defaults to 2 when not specified.
@@ -9755,6 +9801,23 @@ module Aws::IoTSiteWise
     #         "ResourceName" => {
     #           "EnvironmentVariableName" => "EnvironmentVariableValue",
     #         },
+    #       },
+    #     },
+    #     execution_mount_overrides: {
+    #       compute_nodes: { # required
+    #         "ResourceName" => [
+    #           {
+    #             name: "ResourceName", # required
+    #             relative_path: "MountRelativePath", # required
+    #             source: { # required
+    #               s3_access_point: {
+    #                 access_point_arn: "MountS3AccessPointArn", # required
+    #                 prefix: "MountS3KeyPrefix",
+    #               },
+    #             },
+    #             storage_type: "SHARED_STORAGE", # required, accepts SHARED_STORAGE
+    #           },
+    #         ],
     #       },
     #     },
     #     execution_priority: 1,
@@ -11331,11 +11394,28 @@ module Aws::IoTSiteWise
     #         task_execution_role: "IamRoleArn", # required
     #         processing_type: "GENERIC_COMPUTE_PROCESSING", # required, accepts GENERIC_COMPUTE_PROCESSING, HARDWARE_ACCELERATED_PROCESSING
     #         processing_unit: "UNITS_2", # required, accepts UNITS_2, UNITS_4, UNITS_8, UNITS_12, UNITS_16, UNITS_24, UNITS_32, UNITS_36, UNITS_48, UNITS_60, UNITS_64, UNITS_72, UNITS_84, UNITS_96
+    #         ephemeral_storage_configuration: {
+    #           storage_class: "STANDARD_1", # required, accepts STANDARD_1, STANDARD_2, THROUGHPUT_1, THROUGHPUT_2
+    #           storage_size_in_gi_b: 1, # required
+    #         },
     #         command: ["String"],
     #         timeout_seconds: 1,
     #         environment_variables: {
     #           "EnvironmentVariableName" => "EnvironmentVariableValue",
     #         },
+    #         mounts: [
+    #           {
+    #             name: "ResourceName", # required
+    #             relative_path: "MountRelativePath", # required
+    #             source: { # required
+    #               s3_access_point: {
+    #                 access_point_arn: "MountS3AccessPointArn", # required
+    #                 prefix: "MountS3KeyPrefix",
+    #               },
+    #             },
+    #             storage_type: "SHARED_STORAGE", # required, accepts SHARED_STORAGE
+    #           },
+    #         ],
     #       },
     #     },
     #   })
@@ -11427,7 +11507,7 @@ module Aws::IoTSiteWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

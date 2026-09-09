@@ -4593,6 +4593,78 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] iso_country_code
+    #   The two-character code, in ISO 3166-1 alpha-2 format, for the
+    #   country or region in which to search for available phone numbers.
+    #   This operation currently supports only `US`.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_capabilities
+    #   The capabilities to filter by, such as SMS. Only phone numbers that
+    #   support all of the specified capabilities are returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] number_type
+    #   The type of phone number to search for.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_id
+    #   The registration associated with the request. A registration is
+    #   required for regulated number types. You can specify either:
+    #
+    #   * The unique identifier of the registration.
+    #
+    #   * The Amazon Resource Name (ARN) of the registration.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_preference
+    #   Optional. If omitted, returns unfiltered available numbers. Max 1
+    #   element for List API.
+    #   @return [Array<Types::NumberPreferenceItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous request to retrieve the next page
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page. If you don't
+    #   specify a value, the default is 10.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ListAvailablePhoneNumbersRequest AWS API Documentation
+    #
+    class ListAvailablePhoneNumbersRequest < Struct.new(
+      :iso_country_code,
+      :number_capabilities,
+      :number_type,
+      :registration_id,
+      :number_preference,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] available_phone_numbers
+    #   An array of phone numbers, in E.164 format, that are available to
+    #   request based on the specified filters.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in the next request to retrieve the next page
+    #   of results. This value is null when there are no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/ListAvailablePhoneNumbersResult AWS API Documentation
+    #
+    class ListAvailablePhoneNumbersResult < Struct.new(
+      :available_phone_numbers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channels
     #   An array of channels to filter the results by.
     #   @return [Array<String>]
@@ -4856,6 +4928,32 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # The messaging limits that apply to an origination identity, such as a
+    # phone number, sender ID, or RCS agent. Includes the per-capability
+    # send rates and, for supported origination identities, advisory
+    # per-provider daily message caps.
+    #
+    # @!attribute [rw] rate_limits
+    #   The maximum send rate for each supported capability, in messages per
+    #   second. The map is keyed by capability, such as `SMS`, `MMS`,
+    #   `VOICE`, or `RCS`.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] daily_message_caps
+    #   The advisory maximum number of messages that can be sent per day,
+    #   keyed by provider (for example, `T-MOBILE`). Applies to 10DLC phone
+    #   numbers and is omitted when no daily cap applies.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/MessagingLimits AWS API Documentation
+    #
+    class MessagingLimits < Struct.new(
+      :rate_limits,
+      :daily_message_caps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The information for notify configurations that meet a specified
     # criteria.
     #
@@ -5102,6 +5200,36 @@ module Aws::PinpointSMSVoiceV2
       include Aws::Structure
     end
 
+    # A single number preference — specifies a pattern type and filter
+    # value.
+    #
+    # @!attribute [rw] preference_type
+    #   The type of match to apply to the filter values.
+    #
+    #   * `StartsWith`: Returns numbers that begin with the filter value.
+    #
+    #   * `EndsWith`: Returns numbers that end with the filter value.
+    #
+    #   * `Contains`: Returns numbers that contain the filter value.
+    #
+    #   * `ExactMatch`: Returns the number that exactly matches the filter
+    #     value.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filter
+    #   The digit pattern values to match against available phone numbers,
+    #   using the specified preference type.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/NumberPreferenceItem AWS API Documentation
+    #
+    class NumberPreferenceItem < Struct.new(
+      :preference_type,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The information for all OptOutList in an Amazon Web Services account.
     #
     # @!attribute [rw] opt_out_list_arn
@@ -5330,6 +5458,12 @@ module Aws::PinpointSMSVoiceV2
     #   The unique identifier for the registration.
     #   @return [String]
     #
+    # @!attribute [rw] messaging_limits
+    #   The messaging limits that apply to the phone number, including the
+    #   per-capability send rates and any advisory per-provider daily
+    #   message caps.
+    #   @return [Types::MessagingLimits]
+    #
     # @!attribute [rw] created_timestamp
     #   The time when the phone number was created, in [UNIX epoch time][1]
     #   format.
@@ -5360,6 +5494,7 @@ module Aws::PinpointSMSVoiceV2
       :deletion_protection_enabled,
       :pool_id,
       :registration_id,
+      :messaging_limits,
       :created_timestamp)
       SENSITIVE = []
       include Aws::Structure
@@ -6104,6 +6239,11 @@ module Aws::PinpointSMSVoiceV2
     #   The testing agent information associated with the RCS agent.
     #   @return [Types::TestingAgentInformation]
     #
+    # @!attribute [rw] messaging_limits
+    #   The messaging limits that apply to the RCS agent, including the
+    #   per-capability send rates.
+    #   @return [Types::MessagingLimits]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/RcsAgentInformation AWS API Documentation
     #
     class RcsAgentInformation < Struct.new(
@@ -6122,7 +6262,8 @@ module Aws::PinpointSMSVoiceV2
       :two_way_media_s3_key_prefix,
       :two_way_media_s3_role,
       :two_way_rcs_events_enabled,
-      :testing_agent)
+      :testing_agent,
+      :messaging_limits)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7644,6 +7785,13 @@ module Aws::PinpointSMSVoiceV2
     #   registration process.
     #   @return [String]
     #
+    # @!attribute [rw] number_preference
+    #   An optional selection preference used to request a specific phone
+    #   number, such as a number that starts with, ends with, or contains a
+    #   particular digit pattern. You can specify at most one preference.
+    #   Number preferences apply only to `TEN_DLC` requests in the `US`.
+    #   @return [Array<Types::NumberPreferenceItem>]
+    #
     # @!attribute [rw] international_sending_enabled
     #   By default this is set to false. When set to true the international
     #   sending of phone number is Enabled.
@@ -7679,6 +7827,7 @@ module Aws::PinpointSMSVoiceV2
       :opt_out_list_name,
       :pool_id,
       :registration_id,
+      :number_preference,
       :international_sending_enabled,
       :deletion_protection_enabled,
       :tags,
@@ -8753,6 +8902,11 @@ module Aws::PinpointSMSVoiceV2
     #   The unique identifier for the registration.
     #   @return [String]
     #
+    # @!attribute [rw] messaging_limits
+    #   The messaging limits that apply to the sender ID, including the
+    #   per-capability send rates.
+    #   @return [Types::MessagingLimits]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-sms-voice-v2-2022-03-31/SenderIdInformation AWS API Documentation
     #
     class SenderIdInformation < Struct.new(
@@ -8763,7 +8917,8 @@ module Aws::PinpointSMSVoiceV2
       :monthly_leasing_price,
       :deletion_protection_enabled,
       :registered,
-      :registration_id)
+      :registration_id,
+      :messaging_limits)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -393,6 +393,8 @@ module Aws::Lightsail
     GetOperationsForResourceResult = Shapes::StructureShape.new(name: 'GetOperationsForResourceResult')
     GetOperationsRequest = Shapes::StructureShape.new(name: 'GetOperationsRequest')
     GetOperationsResult = Shapes::StructureShape.new(name: 'GetOperationsResult')
+    GetProfileRequest = Shapes::StructureShape.new(name: 'GetProfileRequest')
+    GetProfileResult = Shapes::StructureShape.new(name: 'GetProfileResult')
     GetRegionsRequest = Shapes::StructureShape.new(name: 'GetRegionsRequest')
     GetRegionsResult = Shapes::StructureShape.new(name: 'GetRegionsResult')
     GetRelationalDatabaseBlueprintsRequest = Shapes::StructureShape.new(name: 'GetRelationalDatabaseBlueprintsRequest')
@@ -531,6 +533,8 @@ module Aws::Lightsail
     OriginIpAddressTypeEnum = Shapes::StringShape.new(name: 'OriginIpAddressTypeEnum')
     OriginProtocolPolicyEnum = Shapes::StringShape.new(name: 'OriginProtocolPolicyEnum')
     PartnerIdList = Shapes::ListShape.new(name: 'PartnerIdList')
+    PartnerInfo = Shapes::StructureShape.new(name: 'PartnerInfo')
+    PartnerStatus = Shapes::StringShape.new(name: 'PartnerStatus')
     PasswordData = Shapes::StructureShape.new(name: 'PasswordData')
     PeerVpcRequest = Shapes::StructureShape.new(name: 'PeerVpcRequest')
     PeerVpcResult = Shapes::StructureShape.new(name: 'PeerVpcResult')
@@ -548,6 +552,7 @@ module Aws::Lightsail
     PricingUnit = Shapes::StringShape.new(name: 'PricingUnit')
     PrivateRegistryAccess = Shapes::StructureShape.new(name: 'PrivateRegistryAccess')
     PrivateRegistryAccessRequest = Shapes::StructureShape.new(name: 'PrivateRegistryAccessRequest')
+    ProfileType = Shapes::StringShape.new(name: 'ProfileType')
     PutAlarmRequest = Shapes::StructureShape.new(name: 'PutAlarmRequest')
     PutAlarmResult = Shapes::StructureShape.new(name: 'PutAlarmResult')
     PutInstancePublicPortsRequest = Shapes::StructureShape.new(name: 'PutInstancePublicPortsRequest')
@@ -655,6 +660,7 @@ module Aws::Lightsail
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TestAlarmRequest = Shapes::StructureShape.new(name: 'TestAlarmRequest')
     TestAlarmResult = Shapes::StructureShape.new(name: 'TestAlarmResult')
+    TierName = Shapes::StringShape.new(name: 'TierName')
     TimeOfDay = Shapes::StringShape.new(name: 'TimeOfDay')
     TimePeriod = Shapes::StructureShape.new(name: 'TimePeriod')
     TreatMissingData = Shapes::StringShape.new(name: 'TreatMissingData')
@@ -2128,6 +2134,12 @@ module Aws::Lightsail
     GetOperationsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
     GetOperationsResult.struct_class = Types::GetOperationsResult
 
+    GetProfileRequest.struct_class = Types::GetProfileRequest
+
+    GetProfileResult.add_member(:profile_type, Shapes::ShapeRef.new(shape: ProfileType, required: true, location_name: "profileType"))
+    GetProfileResult.add_member(:partner, Shapes::ShapeRef.new(shape: PartnerInfo, location_name: "partner"))
+    GetProfileResult.struct_class = Types::GetProfileResult
+
     GetRegionsRequest.add_member(:include_availability_zones, Shapes::ShapeRef.new(shape: boolean, location_name: "includeAvailabilityZones"))
     GetRegionsRequest.add_member(:include_relational_database_availability_zones, Shapes::ShapeRef.new(shape: boolean, location_name: "includeRelationalDatabaseAvailabilityZones"))
     GetRegionsRequest.struct_class = Types::GetRegionsRequest
@@ -2631,6 +2643,11 @@ module Aws::Lightsail
     Origin.struct_class = Types::Origin
 
     PartnerIdList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    PartnerInfo.add_member(:enrolled_at, Shapes::ShapeRef.new(shape: IsoDate, required: true, location_name: "enrolledAt"))
+    PartnerInfo.add_member(:tier_name, Shapes::ShapeRef.new(shape: TierName, location_name: "tierName"))
+    PartnerInfo.add_member(:status, Shapes::ShapeRef.new(shape: PartnerStatus, required: true, location_name: "status"))
+    PartnerInfo.struct_class = Types::PartnerInfo
 
     PasswordData.add_member(:ciphertext, Shapes::ShapeRef.new(shape: string, location_name: "ciphertext"))
     PasswordData.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "keyPairName"))
@@ -4870,6 +4887,19 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: RegionSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_profile, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetProfile"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetProfileRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetProfileResult)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
       end)
 

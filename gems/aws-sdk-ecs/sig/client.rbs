@@ -209,7 +209,8 @@ module Aws
                            ?propagate_tags: ("DAEMON" | "NONE"),
                            ?enable_ecs_managed_tags: bool,
                            ?enable_execute_command: bool,
-                           ?client_token: ::String
+                           ?client_token: ::String,
+                           ?critical: bool
                          ) -> _CreateDaemonResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDaemonResponseSuccess
 
@@ -1787,7 +1788,8 @@ module Aws
                            ?deployment_configuration: Params::daemon_deployment_configuration,
                            ?propagate_tags: ("DAEMON" | "NONE"),
                            ?enable_ecs_managed_tags: bool,
-                           ?enable_execute_command: bool
+                           ?enable_execute_command: bool,
+                           ?critical: bool
                          ) -> _UpdateDaemonResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDaemonResponseSuccess
 

@@ -1574,6 +1574,98 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Creates a new consent portal.
+    #
+    # @option params [required, String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the consent portal
+    #   assumes to access the resources defined in its sources.
+    #
+    # @option params [required, Types::ConsentPortalIdpConfig] :idp_config
+    #   The identity provider configuration that the consent portal uses to
+    #   authenticate end users.
+    #
+    # @option params [required, String] :name
+    #   The name of the consent portal. The name must be unique within your
+    #   account.
+    #
+    # @option params [required, Array<Types::ConsentPortalSource>] :sources
+    #   The resources served by the consent portal. Currently, we only support
+    #   type `agentcore-gateway`.
+    #
+    # @option params [String] :description
+    #   The description of the consent portal.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to the consent portal. Tags
+    #   enable you to categorize your resources in different ways, for
+    #   example, by purpose, owner, or environment.
+    #
+    # @return [Types::CreateConsentPortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConsentPortalResponse#sources #sources} => Array&lt;Types::ConsentPortalSource&gt;
+    #   * {Types::CreateConsentPortalResponse#consent_portal_arn #consent_portal_arn} => String
+    #   * {Types::CreateConsentPortalResponse#consent_portal_id #consent_portal_id} => String
+    #   * {Types::CreateConsentPortalResponse#created_at #created_at} => Time
+    #   * {Types::CreateConsentPortalResponse#description #description} => String
+    #   * {Types::CreateConsentPortalResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::CreateConsentPortalResponse#idp_config #idp_config} => Types::ConsentPortalIdpConfig
+    #   * {Types::CreateConsentPortalResponse#name #name} => String
+    #   * {Types::CreateConsentPortalResponse#portal_url #portal_url} => String
+    #   * {Types::CreateConsentPortalResponse#status #status} => String
+    #   * {Types::CreateConsentPortalResponse#status_reason #status_reason} => String
+    #   * {Types::CreateConsentPortalResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_consent_portal({
+    #     execution_role_arn: "ExecutionRoleArnType", # required
+    #     idp_config: { # required
+    #       credential_provider_arn: "OAuth2CredentialProviderArn", # required
+    #       scopes: ["AllowedScopeType"], # required
+    #       audience: "AllowedAudienceType",
+    #     },
+    #     name: "ConsentPortalNameType", # required
+    #     sources: [ # required
+    #       {
+    #         identifier: "ConsentPortalSourceIdentifierType", # required
+    #         type: "agentcore-gateway", # required, accepts agentcore-gateway
+    #       },
+    #     ],
+    #     description: "ConsentPortalDescriptionType",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sources #=> Array
+    #   resp.sources[0].identifier #=> String
+    #   resp.sources[0].type #=> String, one of "agentcore-gateway"
+    #   resp.consent_portal_arn #=> String
+    #   resp.consent_portal_id #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.idp_config.credential_provider_arn #=> String
+    #   resp.idp_config.scopes #=> Array
+    #   resp.idp_config.scopes[0] #=> String
+    #   resp.idp_config.audience #=> String
+    #   resp.name #=> String
+    #   resp.portal_url #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "FAILED"
+    #   resp.status_reason #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateConsentPortal AWS API Documentation
+    #
+    # @overload create_consent_portal(params = {})
+    # @param [Hash] params ({})
+    def create_consent_portal(params = {}, options = {})
+      req = build_request(:create_consent_portal, params)
+      req.send_request(options)
+    end
+
     # Creates a new dataset resource asynchronously. Returns immediately
     # with status CREATING. Poll `GetDataset` until status transitions to
     # ACTIVE or CREATE\_FAILED.
@@ -4378,6 +4470,10 @@ module Aws::BedrockAgentCoreControl
     #   Configuration for periodic batch evaluation clustering of insight
     #   results.
     #
+    # @option params [Types::OutputConfig] :output_config
+    #   The configuration that specifies where evaluation results should be
+    #   written for monitoring and analysis.
+    #
     # @option params [required, String] :evaluation_execution_role_arn
     #   The Amazon Resource Name (ARN) of the IAM role that grants permissions
     #   to read from CloudWatch logs, write evaluation results, and invoke
@@ -4437,7 +4533,8 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     data_source_config: { # required
     #       cloud_watch_logs: {
-    #         log_group_names: ["LogGroupName"], # required
+    #         log_group_names: ["LogGroupName"],
+    #         log_group_name_prefixes: ["LogGroupNamePrefix"],
     #         service_names: ["ServiceName"], # required
     #       },
     #     },
@@ -4454,6 +4551,13 @@ module Aws::BedrockAgentCoreControl
     #     clustering_config: {
     #       frequencies: ["DAILY"], # required, accepts DAILY, WEEKLY, MONTHLY
     #     },
+    #     output_config: {
+    #       cloud_watch_config: { # required
+    #         log_group_name: "OptionalLogGroupName",
+    #         metrics_namespace: "MetricsNamespace",
+    #         result_destination: "DEDICATED_LOG_GROUP", # accepts DEDICATED_LOG_GROUP, SOURCE_LOG_GROUP
+    #       },
+    #     },
     #     evaluation_execution_role_arn: "RoleArn", # required
     #     enable_on_create: false, # required
     #     tags: {
@@ -4467,6 +4571,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.online_evaluation_config_id #=> String
     #   resp.created_at #=> Time
     #   resp.output_config.cloud_watch_config.log_group_name #=> String
+    #   resp.output_config.cloud_watch_config.metrics_namespace #=> String
+    #   resp.output_config.cloud_watch_config.result_destination #=> String, one of "DEDICATED_LOG_GROUP", "SOURCE_LOG_GROUP"
     #   resp.status #=> String, one of "ACTIVE", "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "DELETING", "ERROR"
     #   resp.execution_status #=> String, one of "ENABLED", "DISABLED"
     #   resp.failure_reason #=> String
@@ -4891,15 +4997,15 @@ module Aws::BedrockAgentCoreControl
 
     # Creates a policy within the AgentCore Policy system. Policies provide
     # real-time, deterministic control over agentic interactions with
-    # AgentCore Gateway. Using the Cedar policy language, you can define
-    # fine-grained policies that specify which interactions with Gateway
-    # tools are permitted based on input parameters and OAuth claims,
-    # ensuring agents operate within defined boundaries and business rules.
-    # The policy is validated during creation against the Cedar schema
-    # generated from the Gateway's tools' input schemas, which defines the
-    # available tools, their parameters, and expected data types. This is an
-    # asynchronous operation. Use the [GetPolicy][1] operation to poll the
-    # `status` field to track completion.
+    # AgentCore Gateway. Using Cedar or Dogwood, you can define fine-grained
+    # policies that specify which interactions with Gateway tools are
+    # permitted based on input parameters and OAuth claims, ensuring agents
+    # operate within defined boundaries and business rules. The policy is
+    # validated during creation against the Cedar schema generated from the
+    # Gateway's tools' input schemas, which defines the available tools,
+    # their parameters, and expected data types. This is an asynchronous
+    # operation. Use the [GetPolicy][1] operation to poll the `status` field
+    # to track completion.
     #
     # If the new policy is a temporal policy, creating it invalidates the
     # policy engine's active temporal sessions. For more information about
@@ -4919,10 +5025,10 @@ module Aws::BedrockAgentCoreControl
     #   cannot be changed after creation.
     #
     # @option params [required, Types::PolicyDefinition] :definition
-    #   The Cedar policy statement that defines the access control rules. This
-    #   contains the actual policy logic written in Cedar policy language,
-    #   specifying effect (permit or forbid), principals, actions, resources,
-    #   and conditions for agent behavior control.
+    #   The Cedar or Dogwood policy statement that defines the access control
+    #   rules. This contains the actual policy logic written in Cedar or
+    #   Dogwood, specifying effect (permit or forbid), principals, actions,
+    #   resources, and conditions for agent behavior control.
     #
     # @option params [String] :description
     #   A human-readable description of the policy's purpose and
@@ -5777,6 +5883,29 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def delete_configuration_bundle(params = {}, options = {})
       req = build_request(:delete_configuration_bundle, params)
+      req.send_request(options)
+    end
+
+    # Deletes a consent portal.
+    #
+    # @option params [required, String] :consent_portal_identifier
+    #   The identifier of the consent portal. You can specify either the
+    #   consent portal ID or its Amazon Resource Name (ARN).
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_consent_portal({
+    #     consent_portal_identifier: "ConsentPortalIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeleteConsentPortal AWS API Documentation
+    #
+    # @overload delete_consent_portal(params = {})
+    # @param [Hash] params ({})
+    def delete_consent_portal(params = {}, options = {})
+      req = build_request(:delete_consent_portal, params)
       req.send_request(options)
     end
 
@@ -7355,6 +7484,62 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Retrieves information about a consent portal.
+    #
+    # @option params [required, String] :consent_portal_identifier
+    #   The identifier of the consent portal. You can specify either the
+    #   consent portal ID or its Amazon Resource Name (ARN).
+    #
+    # @return [Types::GetConsentPortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConsentPortalResponse#sources #sources} => Array&lt;Types::ConsentPortalSource&gt;
+    #   * {Types::GetConsentPortalResponse#consent_portal_arn #consent_portal_arn} => String
+    #   * {Types::GetConsentPortalResponse#consent_portal_id #consent_portal_id} => String
+    #   * {Types::GetConsentPortalResponse#created_at #created_at} => Time
+    #   * {Types::GetConsentPortalResponse#description #description} => String
+    #   * {Types::GetConsentPortalResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::GetConsentPortalResponse#idp_config #idp_config} => Types::ConsentPortalIdpConfig
+    #   * {Types::GetConsentPortalResponse#name #name} => String
+    #   * {Types::GetConsentPortalResponse#portal_url #portal_url} => String
+    #   * {Types::GetConsentPortalResponse#status #status} => String
+    #   * {Types::GetConsentPortalResponse#status_reason #status_reason} => String
+    #   * {Types::GetConsentPortalResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_consent_portal({
+    #     consent_portal_identifier: "ConsentPortalIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sources #=> Array
+    #   resp.sources[0].identifier #=> String
+    #   resp.sources[0].type #=> String, one of "agentcore-gateway"
+    #   resp.consent_portal_arn #=> String
+    #   resp.consent_portal_id #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.idp_config.credential_provider_arn #=> String
+    #   resp.idp_config.scopes #=> Array
+    #   resp.idp_config.scopes[0] #=> String
+    #   resp.idp_config.audience #=> String
+    #   resp.name #=> String
+    #   resp.portal_url #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "FAILED"
+    #   resp.status_reason #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetConsentPortal AWS API Documentation
+    #
+    # @overload get_consent_portal(params = {})
+    # @param [Hash] params ({})
+    def get_consent_portal(params = {}, options = {})
+      req = build_request(:get_consent_portal, params)
+      req.send_request(options)
+    end
+
     # Retrieves dataset metadata. Use the `datasetVersion` query parameter
     # to retrieve a specific version's metadata. If absent, defaults to
     # DRAFT. For paginated example content, use `ListDatasetExamples`.
@@ -8525,6 +8710,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.rule.session_config.session_timeout_minutes #=> Integer
     #   resp.data_source_config.cloud_watch_logs.log_group_names #=> Array
     #   resp.data_source_config.cloud_watch_logs.log_group_names[0] #=> String
+    #   resp.data_source_config.cloud_watch_logs.log_group_name_prefixes #=> Array
+    #   resp.data_source_config.cloud_watch_logs.log_group_name_prefixes[0] #=> String
     #   resp.data_source_config.cloud_watch_logs.service_names #=> Array
     #   resp.data_source_config.cloud_watch_logs.service_names[0] #=> String
     #   resp.evaluators #=> Array
@@ -8534,6 +8721,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.clustering_config.frequencies #=> Array
     #   resp.clustering_config.frequencies[0] #=> String, one of "DAILY", "WEEKLY", "MONTHLY"
     #   resp.output_config.cloud_watch_config.log_group_name #=> String
+    #   resp.output_config.cloud_watch_config.metrics_namespace #=> String
+    #   resp.output_config.cloud_watch_config.result_destination #=> String, one of "DEDICATED_LOG_GROUP", "SOURCE_LOG_GROUP"
     #   resp.evaluation_execution_role_arn #=> String
     #   resp.status #=> String, one of "ACTIVE", "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "DELETING", "ERROR"
     #   resp.execution_status #=> String, one of "ENABLED", "DISABLED"
@@ -8921,7 +9110,7 @@ module Aws::BedrockAgentCoreControl
 
     # Retrieves information about a policy generation request within the
     # AgentCore Policy system. Policy generation converts natural language
-    # descriptions into Cedar policy statements using AI-powered
+    # descriptions into Dogwood policy statements using AI-powered
     # translation, enabling non-technical users to create policies.
     #
     # @option params [required, String] :policy_generation_id
@@ -9915,6 +10104,54 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def list_configuration_bundles(params = {}, options = {})
       req = build_request(:list_configuration_bundles, params)
+      req.send_request(options)
+    end
+
+    # Lists all of the consent portals in your account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of consent portals to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   A token to retrieve the next page of results. Use the value returned
+    #   in a previous response to request the next page.
+    #
+    # @return [Types::ListConsentPortalsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConsentPortalsResponse#consent_portals #consent_portals} => Array&lt;Types::ConsentPortalSummary&gt;
+    #   * {Types::ListConsentPortalsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_consent_portals({
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.consent_portals #=> Array
+    #   resp.consent_portals[0].sources #=> Array
+    #   resp.consent_portals[0].sources[0].identifier #=> String
+    #   resp.consent_portals[0].sources[0].type #=> String, one of "agentcore-gateway"
+    #   resp.consent_portals[0].consent_portal_arn #=> String
+    #   resp.consent_portals[0].consent_portal_id #=> String
+    #   resp.consent_portals[0].created_at #=> Time
+    #   resp.consent_portals[0].description #=> String
+    #   resp.consent_portals[0].name #=> String
+    #   resp.consent_portals[0].portal_url #=> String
+    #   resp.consent_portals[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "FAILED"
+    #   resp.consent_portals[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListConsentPortals AWS API Documentation
+    #
+    # @overload list_consent_portals(params = {})
+    # @param [Hash] params ({})
+    def list_consent_portals(params = {}, options = {})
+      req = build_request(:list_consent_portals, params)
       req.send_request(options)
     end
 
@@ -10975,9 +11212,9 @@ module Aws::BedrockAgentCoreControl
 
     # Retrieves a list of generated policy assets from a policy generation
     # request within the AgentCore Policy system. This operation returns the
-    # actual Cedar policies and related artifacts produced by the AI-powered
-    # policy generation process, allowing users to review and select from
-    # multiple generated policy options.
+    # actual Dogwood policies and related artifacts produced by the
+    # AI-powered policy generation process, allowing users to review and
+    # select from multiple generated policy options.
     #
     # @option params [required, String] :policy_generation_id
     #   The unique identifier of the policy generation request whose assets
@@ -11532,20 +11769,20 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
-    # Initiates the AI-powered generation of Cedar policies from natural
+    # Initiates the AI-powered generation of Dogwood policies from natural
     # language descriptions within the AgentCore Policy system. This feature
     # enables both technical and non-technical users to create policies by
     # describing their authorization requirements in plain English, which is
-    # then automatically translated into formal Cedar policy statements. The
-    # generation process analyzes the natural language input along with the
-    # Gateway's tool context to produce validated policy options. Generated
-    # policy assets are automatically deleted after 7 days, so you should
-    # review and create policies from the generated assets within this
-    # timeframe. Once created, policies are permanent and not subject to
-    # this expiration. Generated policies should be reviewed and tested in
-    # log-only mode before deploying to production. Use this when you want
-    # to describe policy intent naturally rather than learning Cedar syntax,
-    # though generated policies may require refinement for complex
+    # then automatically translated into formal Dogwood policy statements.
+    # The generation process analyzes the natural language input along with
+    # the Gateway's tool context to produce validated policy options.
+    # Generated policy assets are automatically deleted after 7 days, so you
+    # should review and create policies from the generated assets within
+    # this timeframe. Once created, policies are permanent and not subject
+    # to this expiration. Generated policies should be reviewed and tested
+    # in log-only mode before deploying to production. Use this when you
+    # want to describe policy intent naturally rather than learning Dogwood
+    # syntax, though generated policies may require refinement for complex
     # scenarios.
     #
     # @option params [required, String] :policy_engine_id
@@ -11560,7 +11797,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @option params [required, Types::Content] :content
     #   The natural language description of the desired policy behavior. This
-    #   content is processed by AI to generate corresponding Cedar policy
+    #   content is processed by AI to generate corresponding Dogwood policy
     #   statements that match the described intent.
     #
     # @option params [required, String] :name
@@ -12347,7 +12584,7 @@ module Aws::BedrockAgentCoreControl
     #   The updated component configurations. Creates a new version of the
     #   bundle.
     #
-    # @option params [Array<String>] :parent_version_ids
+    # @option params [required, Array<String>] :parent_version_ids
     #   A list of parent version identifiers for lineage tracking. Regular
     #   commits have a single parent. Merge commits have two parents: the
     #   target branch parent and the source branch parent. If the branch
@@ -12390,7 +12627,7 @@ module Aws::BedrockAgentCoreControl
     #         },
     #       },
     #     },
-    #     parent_version_ids: ["ConfigurationBundleVersion"],
+    #     parent_version_ids: ["ConfigurationBundleVersion"], # required
     #     branch_name: "BranchName",
     #     commit_message: "UpdateConfigurationBundleRequestCommitMessageString",
     #     created_by: {
@@ -12413,6 +12650,80 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def update_configuration_bundle(params = {}, options = {})
       req = build_request(:update_configuration_bundle, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing consent portal.
+    #
+    # @option params [required, String] :consent_portal_identifier
+    #   The identifier of the consent portal. You can specify either the
+    #   consent portal ID or its Amazon Resource Name (ARN).
+    #
+    # @option params [String] :execution_role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the consent portal
+    #   assumes to access the resources defined in its sources.
+    #
+    # @option params [Types::ConsentPortalIdpConfig] :idp_config
+    #   The identity provider configuration that the consent portal uses to
+    #   authenticate end users.
+    #
+    # @option params [String] :description
+    #   The description of the consent portal.
+    #
+    # @return [Types::UpdateConsentPortalResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConsentPortalResponse#sources #sources} => Array&lt;Types::ConsentPortalSource&gt;
+    #   * {Types::UpdateConsentPortalResponse#consent_portal_arn #consent_portal_arn} => String
+    #   * {Types::UpdateConsentPortalResponse#consent_portal_id #consent_portal_id} => String
+    #   * {Types::UpdateConsentPortalResponse#created_at #created_at} => Time
+    #   * {Types::UpdateConsentPortalResponse#description #description} => String
+    #   * {Types::UpdateConsentPortalResponse#execution_role_arn #execution_role_arn} => String
+    #   * {Types::UpdateConsentPortalResponse#idp_config #idp_config} => Types::ConsentPortalIdpConfig
+    #   * {Types::UpdateConsentPortalResponse#name #name} => String
+    #   * {Types::UpdateConsentPortalResponse#portal_url #portal_url} => String
+    #   * {Types::UpdateConsentPortalResponse#status #status} => String
+    #   * {Types::UpdateConsentPortalResponse#status_reason #status_reason} => String
+    #   * {Types::UpdateConsentPortalResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_consent_portal({
+    #     consent_portal_identifier: "ConsentPortalIdentifier", # required
+    #     execution_role_arn: "ExecutionRoleArnType",
+    #     idp_config: {
+    #       credential_provider_arn: "OAuth2CredentialProviderArn", # required
+    #       scopes: ["AllowedScopeType"], # required
+    #       audience: "AllowedAudienceType",
+    #     },
+    #     description: "ConsentPortalDescriptionType",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sources #=> Array
+    #   resp.sources[0].identifier #=> String
+    #   resp.sources[0].type #=> String, one of "agentcore-gateway"
+    #   resp.consent_portal_arn #=> String
+    #   resp.consent_portal_id #=> String
+    #   resp.created_at #=> Time
+    #   resp.description #=> String
+    #   resp.execution_role_arn #=> String
+    #   resp.idp_config.credential_provider_arn #=> String
+    #   resp.idp_config.scopes #=> Array
+    #   resp.idp_config.scopes[0] #=> String
+    #   resp.idp_config.audience #=> String
+    #   resp.name #=> String
+    #   resp.portal_url #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "FAILED"
+    #   resp.status_reason #=> String
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateConsentPortal AWS API Documentation
+    #
+    # @overload update_consent_portal(params = {})
+    # @param [Hash] params ({})
+    def update_consent_portal(params = {}, options = {})
+      req = build_request(:update_consent_portal, params)
       req.send_request(options)
     end
 
@@ -15271,6 +15582,10 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::ClusteringConfig] :clustering_config
     #   The updated clustering configuration for periodic batch evaluation.
     #
+    # @option params [Types::OutputConfig] :output_config
+    #   The configuration that specifies where evaluation results should be
+    #   written for monitoring and analysis.
+    #
     # @option params [String] :evaluation_execution_role_arn
     #   The updated Amazon Resource Name (ARN) of the IAM role used for
     #   evaluation execution.
@@ -15315,7 +15630,8 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     data_source_config: {
     #       cloud_watch_logs: {
-    #         log_group_names: ["LogGroupName"], # required
+    #         log_group_names: ["LogGroupName"],
+    #         log_group_name_prefixes: ["LogGroupNamePrefix"],
     #         service_names: ["ServiceName"], # required
     #       },
     #     },
@@ -15331,6 +15647,13 @@ module Aws::BedrockAgentCoreControl
     #     ],
     #     clustering_config: {
     #       frequencies: ["DAILY"], # required, accepts DAILY, WEEKLY, MONTHLY
+    #     },
+    #     output_config: {
+    #       cloud_watch_config: { # required
+    #         log_group_name: "OptionalLogGroupName",
+    #         metrics_namespace: "MetricsNamespace",
+    #         result_destination: "DEDICATED_LOG_GROUP", # accepts DEDICATED_LOG_GROUP, SOURCE_LOG_GROUP
+    #       },
     #     },
     #     evaluation_execution_role_arn: "RoleArn",
     #     execution_status: "ENABLED", # accepts ENABLED, DISABLED
@@ -15716,9 +16039,9 @@ module Aws::BedrockAgentCoreControl
     #   policy logic.
     #
     # @option params [Types::PolicyDefinition] :definition
-    #   The new Cedar policy statement that defines the access control rules.
-    #   This replaces the existing policy definition with new logic while
-    #   maintaining the policy's identity.
+    #   The new Cedar or Dogwood policy statement that defines the access
+    #   control rules. This replaces the existing policy definition with new
+    #   logic while maintaining the policy's identity.
     #
     # @option params [String] :validation_mode
     #   The validation mode for the policy update. Determines how Cedar
@@ -16361,7 +16684,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

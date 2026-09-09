@@ -4546,13 +4546,13 @@ module Aws::Odb
     #   @return [String]
     #
     # @!attribute [rw] scan_listener_port_tcp
-    #   The port number for TCP connections to the single client access name
+    #   The port number for TCP connections to the Single Client Access Name
     #   (SCAN) listener.
     #   @return [Integer]
     #
     # @!attribute [rw] scan_listener_port_tcp_ssl
-    #   The port number for TCP connections with SSL to the single client
-    #   access name (SCAN) listener.
+    #   The port number for TCP connections with SSL to the Single Client
+    #   Access Name (SCAN) listener.
     #   @return [Integer]
     #
     # @!attribute [rw] shape_attribute
@@ -4573,11 +4573,13 @@ module Aws::Odb
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If you don't specify a client token,
-    #   the Amazon Web Services SDK automatically generates one and uses it
-    #   for the request to ensure idempotency. The client token is valid for
-    #   up to 24 hours after it's first used.
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you submit the
+    #   same request twice with the same client token, the service ignores
+    #   the second request and returns the result of the first. If you
+    #   don't specify a client token, the AWS SDK automatically generates
+    #   one. The client token is valid for up to 24 hours after it's first
+    #   used.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -4683,11 +4685,13 @@ module Aws::Odb
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request. If you don't specify a client token,
-    #   the Amazon Web Services SDK automatically generates one and uses it
-    #   for the request to ensure idempotency. The client token is valid for
-    #   up to 24 hours after it's first used.
+    #   A unique, case-sensitive identifier that you provide to ensure that
+    #   the operation completes no more than one time. If you submit the
+    #   same request twice with the same client token, the service ignores
+    #   the second request and returns the result of the first. If you
+    #   don't specify a client token, the AWS SDK automatically generates
+    #   one. The client token is valid for up to 24 hours after it's first
+    #   used.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -6630,13 +6634,13 @@ module Aws::Odb
     #   @return [Array<String>]
     #
     # @!attribute [rw] scan_listener_port_tcp
-    #   The port number for TCP connections to the single client access name
+    #   The port number for TCP connections to the Single Client Access Name
     #   (SCAN) listener for the Exascale VM cluster.
     #   @return [Integer]
     #
     # @!attribute [rw] scan_listener_port_tcp_ssl
-    #   The port number for TCP connections with SSL to the single client
-    #   access name (SCAN) listener for the Exascale VM cluster.
+    #   The port number for TCP connections with SSL to the Single Client
+    #   Access Name (SCAN) listener for the Exascale VM cluster.
     #   @return [Integer]
     #
     # @!attribute [rw] shape
@@ -6901,13 +6905,13 @@ module Aws::Odb
     #   @return [Array<String>]
     #
     # @!attribute [rw] scan_listener_port_tcp
-    #   The port number for TCP connections to the single client access name
+    #   The port number for TCP connections to the Single Client Access Name
     #   (SCAN) listener for the Exascale VM cluster.
     #   @return [Integer]
     #
     # @!attribute [rw] scan_listener_port_tcp_ssl
-    #   The port number for TCP connections with SSL to the single client
-    #   access name (SCAN) listener for the Exascale VM cluster.
+    #   The port number for TCP connections with SSL to the Single Client
+    #   Access Name (SCAN) listener for the Exascale VM cluster.
     #   @return [Integer]
     #
     # @!attribute [rw] shape
@@ -7337,6 +7341,84 @@ module Aws::Odb
       :display_name,
       :status,
       :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a flex component that's available for an Exadata
+    # infrastructure. A flex component defines the hardware resources, such
+    # as CPU cores, memory, and storage, that can be allocated to a shape.
+    #
+    # @!attribute [rw] available_core_count
+    #   The maximum number of CPU cores that can be enabled for the flex
+    #   component.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_db_storage_in_g_bs
+    #   The maximum amount of database storage, in gigabytes (GB), that can
+    #   be enabled for the flex component.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_local_storage_in_g_bs
+    #   The maximum amount of local storage, in gigabytes (GB), that can be
+    #   enabled for the flex component.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_memory_in_g_bs
+    #   The maximum amount of memory, in gigabytes (GB), that can be enabled
+    #   for the flex component.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compute_model
+    #   The OCI model compute model used when you create or clone an
+    #   instance: ECPU or OCPU. An ECPU is an abstracted measure of compute
+    #   resources. ECPUs are based on the number of cores elastically
+    #   allocated from a pool of compute and storage servers. An OCPU is a
+    #   legacy physical measure of compute resources. OCPUs are based on the
+    #   physical core of a processor with hyper-threading enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] description_summary
+    #   A summary description of the flex component.
+    #   @return [String]
+    #
+    # @!attribute [rw] hardware_type
+    #   The type of hardware for the flex component. Valid values are
+    #   `COMPUTE` for compute servers and `CELL` for storage servers.
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_core_count
+    #   The minimum number of CPU cores that can be enabled for the flex
+    #   component.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] name
+    #   The name of the flex component.
+    #   @return [String]
+    #
+    # @!attribute [rw] runtime_minimum_core_count
+    #   The runtime minimum number of CPU cores that can be enabled for the
+    #   flex component.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] shape
+    #   The shape that uses the flex component.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/FlexComponentSummary AWS API Documentation
+    #
+    class FlexComponentSummary < Struct.new(
+      :available_core_count,
+      :available_db_storage_in_g_bs,
+      :available_local_storage_in_g_bs,
+      :available_memory_in_g_bs,
+      :compute_model,
+      :description_summary,
+      :hardware_type,
+      :minimum_core_count,
+      :name,
+      :runtime_minimum_core_count,
+      :shape)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8575,6 +8657,51 @@ module Aws::Odb
     class ListExascaleDbStorageVaultsOutput < Struct.new(
       :next_token,
       :exascale_db_storage_vaults)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] shape
+    #   The shape to return flex components for. For a list of valid shapes,
+    #   use the `ListDbSystemShapes` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListFlexComponentsInput AWS API Documentation
+    #
+    class ListFlexComponentsInput < Struct.new(
+      :max_results,
+      :next_token,
+      :shape)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] flex_components
+    #   The list of flex components along with their properties.
+    #   @return [Array<Types::FlexComponentSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListFlexComponentsOutput AWS API Documentation
+    #
+    class ListFlexComponentsOutput < Struct.new(
+      :next_token,
+      :flex_components)
       SENSITIVE = []
       include Aws::Structure
     end

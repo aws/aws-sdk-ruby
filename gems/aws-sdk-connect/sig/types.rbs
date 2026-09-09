@@ -1784,7 +1784,9 @@ module Aws::Connect
       attr_accessor function: ::String
       attr_accessor actions: ::Array[Types::RuleAction]
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor pre_evaluation_filters: Types::PreEvaluationFilters
       attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -2024,6 +2026,11 @@ module Aws::Connect
 
     class CrossChannelBehavior
       attr_accessor behavior_type: ("ROUTE_CURRENT_CHANNEL_ONLY" | "ROUTE_ANY_CHANNEL")
+      SENSITIVE: []
+    end
+
+    class CrossChannelWorkloadBehavior
+      attr_accessor channel_workload_behavior_type: ("ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY" | "ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY" | "ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE")
       SENSITIVE: []
     end
 
@@ -5837,6 +5844,7 @@ module Aws::Connect
       attr_accessor channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
       attr_accessor concurrency: ::Integer
       attr_accessor cross_channel_behavior: Types::CrossChannelBehavior
+      attr_accessor workload_type_concurrencies: ::Array[Types::WorkloadTypeConcurrency]
       SENSITIVE: []
     end
 
@@ -6340,6 +6348,20 @@ module Aws::Connect
 
     class PostAcceptTimeoutConfig
       attr_accessor duration_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class PreEvaluationFilter
+      attr_accessor resource_type: ("CONTACT")
+      attr_accessor filter_type: ("TAG")
+      attr_accessor filter_key: ::String
+      attr_accessor filter_value: ::String
+      attr_accessor operator: ("EQUALS")
+      SENSITIVE: []
+    end
+
+    class PreEvaluationFilters
+      attr_accessor and_conditions: ::Array[Types::PreEvaluationFilter]
       SENSITIVE: []
     end
 
@@ -7079,6 +7101,7 @@ module Aws::Connect
       attr_accessor function: ::String
       attr_accessor actions: ::Array[Types::RuleAction]
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor pre_evaluation_filters: Types::PreEvaluationFilters
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
       attr_accessor last_updated_by: ::String
@@ -7121,6 +7144,7 @@ module Aws::Connect
       attr_accessor action_summaries: ::Array[Types::ActionSummary]
       attr_accessor rule_capability_tiers: ::Array[("GenerativeAI")]
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor pre_evaluation_filters: Types::PreEvaluationFilters
       attr_accessor created_time: ::Time
       attr_accessor last_updated_time: ::Time
       attr_accessor last_updated_by: ::String
@@ -9129,6 +9153,7 @@ module Aws::Connect
       attr_accessor function: ::String
       attr_accessor actions: ::Array[Types::RuleAction]
       attr_accessor publish_status: ("DRAFT" | "PUBLISHED")
+      attr_accessor pre_evaluation_filters: Types::PreEvaluationFilters
       SENSITIVE: []
     end
 
@@ -9695,6 +9720,13 @@ module Aws::Connect
     class WisdomInfo
       attr_accessor session_arn: ::String
       attr_accessor ai_agents: ::Array[Types::AiAgentInfo]
+      SENSITIVE: []
+    end
+
+    class WorkloadTypeConcurrency
+      attr_accessor workload_type: ::String
+      attr_accessor concurrency: ::Integer
+      attr_accessor cross_channel_workload_behavior: Types::CrossChannelWorkloadBehavior
       SENSITIVE: []
     end
 

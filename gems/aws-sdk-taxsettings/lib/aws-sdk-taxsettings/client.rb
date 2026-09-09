@@ -789,6 +789,15 @@ module Aws::TaxSettings
     # * You must specify the `sirenNumber` in the `franceAdditionalInfo`
     #   field of the `additionalTaxInformation` object.
     #
+    # * You can optionally specify the `eInvoiceRoutingCode` in the
+    #   `franceAdditionalInfo` field of the `additionalTaxInformation`
+    #   object.
+    #
+    # **Monaco**
+    #
+    # * You must specify the `businessNumber` in the `monacoAdditionalInfo`
+    #   field of the `additionalTaxInformation` object.
+    #
     # ^
     #
     # **Poland**
@@ -931,6 +940,10 @@ module Aws::TaxSettings
     #         },
     #         france_additional_info: {
     #           siren_number: "SirenNumber", # required
+    #           e_invoice_routing_code: "String",
+    #         },
+    #         monaco_additional_info: {
+    #           business_number: "BusinessNumber", # required
     #         },
     #       },
     #       verification_details: {
@@ -1149,6 +1162,8 @@ module Aws::TaxSettings
     #   resp.tax_registration.additional_tax_information.chile_additional_info.document_type #=> String, one of "Invoice", "Receipt"
     #   resp.tax_registration.additional_tax_information.chile_additional_info.business_activity #=> String
     #   resp.tax_registration.additional_tax_information.france_additional_info.siren_number #=> String
+    #   resp.tax_registration.additional_tax_information.france_additional_info.e_invoice_routing_code #=> String
+    #   resp.tax_registration.additional_tax_information.monaco_additional_info.business_number #=> String
     #   resp.tax_registration.legal_address.address_line_1 #=> String
     #   resp.tax_registration.legal_address.address_line_2 #=> String
     #   resp.tax_registration.legal_address.address_line_3 #=> String
@@ -1400,6 +1415,8 @@ module Aws::TaxSettings
     #   resp.account_details[0].tax_registration.additional_tax_information.chile_additional_info.document_type #=> String, one of "Invoice", "Receipt"
     #   resp.account_details[0].tax_registration.additional_tax_information.chile_additional_info.business_activity #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.france_additional_info.siren_number #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.france_additional_info.e_invoice_routing_code #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.monaco_additional_info.business_number #=> String
     #   resp.account_details[0].tax_registration.jurisdiction.state_or_region #=> String
     #   resp.account_details[0].tax_registration.jurisdiction.country_code #=> String
     #   resp.account_details[0].tax_inheritance_details.parent_entity_id #=> String
@@ -1769,6 +1786,15 @@ module Aws::TaxSettings
     # * You must specify the `sirenNumber` in the `franceAdditionalInfo`
     #   field of the `additionalTaxInformation` object.
     #
+    # * You can optionally specify the `eInvoiceRoutingCode` in the
+    #   `franceAdditionalInfo` field of the `additionalTaxInformation`
+    #   object.
+    #
+    # **Monaco**
+    #
+    # * You must specify the `businessNumber` in the `monacoAdditionalInfo`
+    #   field of the `additionalTaxInformation` object.
+    #
     # ^
     #
     # **Poland**
@@ -1910,6 +1936,10 @@ module Aws::TaxSettings
     #         },
     #         france_additional_info: {
     #           siren_number: "SirenNumber", # required
+    #           e_invoice_routing_code: "String",
+    #         },
+    #         monaco_additional_info: {
+    #           business_number: "BusinessNumber", # required
     #         },
     #       },
     #       verification_details: {
@@ -1962,7 +1992,7 @@ module Aws::TaxSettings
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-taxsettings'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

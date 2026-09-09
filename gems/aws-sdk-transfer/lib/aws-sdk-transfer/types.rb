@@ -6188,12 +6188,23 @@ module Aws::Transfer
     #   transferring large file batches by enabling parallel operations.
     #   @return [Integer]
     #
+    # @!attribute [rw] ordered_user_secret_version_stages
+    #   An ordered list of Amazon Web Services Secrets Manager version
+    #   stages (staging labels, such as `AWSCURRENT` and `AWSPREVIOUS`) for
+    #   the secret identified by `UserSecretId`. When establishing a
+    #   connection, the connector attempts to retrieve the SFTP user's
+    #   credentials from each version stage in the order listed, and uses
+    #   the first version it can successfully retrieve. This lets you rotate
+    #   the user secret without interrupting connector operations.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/SftpConnectorConfig AWS API Documentation
     #
     class SftpConnectorConfig < Struct.new(
       :user_secret_id,
       :trusted_host_keys,
-      :max_concurrent_connections)
+      :max_concurrent_connections,
+      :ordered_user_secret_version_stages)
       SENSITIVE = []
       include Aws::Structure
     end

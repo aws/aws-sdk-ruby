@@ -4233,6 +4233,10 @@ module Aws::Drs
     #   Server.
     #   @return [Boolean]
     #
+    # @!attribute [rw] architecture
+    #   The architecture of the Source Server.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/SourceProperties AWS API Documentation
     #
     class SourceProperties < Struct.new(
@@ -4244,7 +4248,8 @@ module Aws::Drs
       :cpus,
       :ram_bytes,
       :os,
-      :supports_nitro_instances)
+      :supports_nitro_instances,
+      :architecture)
       SENSITIVE = []
       include Aws::Structure
     end

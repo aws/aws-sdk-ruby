@@ -926,7 +926,7 @@ module Aws
 
       interface _GetAccountDataRetentionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAccountDataRetentionResponse]
-        def mode: () -> ("default" | "none" | "provider_data_share" | "inherit")
+        def mode: () -> ("default" | "none" | "aws_review" | "provider_data_share" | "inherit")
         def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_account_data_retention-instance_method
@@ -1734,12 +1734,12 @@ module Aws
 
       interface _PutAccountDataRetentionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountDataRetentionResponse]
-        def mode: () -> ("default" | "none" | "provider_data_share" | "inherit")
+        def mode: () -> ("default" | "none" | "aws_review" | "provider_data_share" | "inherit")
         def updated_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#put_account_data_retention-instance_method
       def put_account_data_retention: (
-                                        mode: ("default" | "none" | "provider_data_share" | "inherit")
+                                        mode: ("default" | "none" | "aws_review" | "provider_data_share" | "inherit")
                                       ) -> _PutAccountDataRetentionResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountDataRetentionResponseSuccess
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2026-09-03)
+------------------
+
+* Feature - Updates Step Functions API documentation around CloudTrail, Execution name reuse and sort order of ListExecutions API
+
 1.110.0 (2026-07-09)
 ------------------
 

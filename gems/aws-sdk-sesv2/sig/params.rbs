@@ -26,6 +26,16 @@ module Aws
       }?
     }
 
+      type message_security_options = {
+      signing_scheme: {
+        default_scheme: {
+        }?,
+        smime_scheme: {
+          signature_format: ("DETACHED")?
+        }?
+      }?
+    }
+
       type event_destination_definition = {
       enabled: bool?,
       matching_event_types: Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE" | "DELIVERY_DELAY" | "SUBSCRIPTION")]?,

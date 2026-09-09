@@ -14,6 +14,9 @@ module Aws
       class AccessDeniedException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class DryRunOperationException < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+      end
       class ExpiredIteratorException < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

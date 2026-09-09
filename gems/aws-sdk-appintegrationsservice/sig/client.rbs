@@ -199,7 +199,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppIntegrationsService/Client.html#delete_application-instance_method
       def delete_application: (
-                                arn: ::String
+                                arn: ::String,
+                                ?force: bool
                               ) -> _DeleteApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteApplicationResponseSuccess
 

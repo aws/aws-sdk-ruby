@@ -2161,6 +2161,9 @@ module Aws::Lambda
     #       {
     #         arn: "FileSystemArn", # required
     #         local_mount_path: "LocalMountPath", # required
+    #         s3_files_config: {
+    #           direct_s3_read: "ENABLED", # accepts ENABLED, DISABLED, AUTO
+    #         },
     #       },
     #     ],
     #     code_signing_config_arn: "CodeSigningConfigArn",
@@ -2242,6 +2245,7 @@ module Aws::Lambda
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.file_system_configs[0].s3_files_config.direct_s3_read #=> String, one of "ENABLED", "DISABLED", "AUTO"
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
     #   resp.package_type #=> String, one of "Zip", "Image"
@@ -3891,6 +3895,7 @@ module Aws::Lambda
     #   resp.configuration.file_system_configs #=> Array
     #   resp.configuration.file_system_configs[0].arn #=> String
     #   resp.configuration.file_system_configs[0].local_mount_path #=> String
+    #   resp.configuration.file_system_configs[0].s3_files_config.direct_s3_read #=> String, one of "ENABLED", "DISABLED", "AUTO"
     #   resp.configuration.signing_profile_version_arn #=> String
     #   resp.configuration.signing_job_arn #=> String
     #   resp.configuration.package_type #=> String, one of "Zip", "Image"
@@ -4215,6 +4220,7 @@ module Aws::Lambda
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.file_system_configs[0].s3_files_config.direct_s3_read #=> String, one of "ENABLED", "DISABLED", "AUTO"
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
     #   resp.package_type #=> String, one of "Zip", "Image"
@@ -6298,6 +6304,7 @@ module Aws::Lambda
     #   resp.functions[0].file_system_configs #=> Array
     #   resp.functions[0].file_system_configs[0].arn #=> String
     #   resp.functions[0].file_system_configs[0].local_mount_path #=> String
+    #   resp.functions[0].file_system_configs[0].s3_files_config.direct_s3_read #=> String, one of "ENABLED", "DISABLED", "AUTO"
     #   resp.functions[0].signing_profile_version_arn #=> String
     #   resp.functions[0].signing_job_arn #=> String
     #   resp.functions[0].package_type #=> String, one of "Zip", "Image"
@@ -6914,6 +6921,7 @@ module Aws::Lambda
     #   resp.versions[0].file_system_configs #=> Array
     #   resp.versions[0].file_system_configs[0].arn #=> String
     #   resp.versions[0].file_system_configs[0].local_mount_path #=> String
+    #   resp.versions[0].file_system_configs[0].s3_files_config.direct_s3_read #=> String, one of "ENABLED", "DISABLED", "AUTO"
     #   resp.versions[0].signing_profile_version_arn #=> String
     #   resp.versions[0].signing_job_arn #=> String
     #   resp.versions[0].package_type #=> String, one of "Zip", "Image"
@@ -7291,6 +7299,7 @@ module Aws::Lambda
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.file_system_configs[0].s3_files_config.direct_s3_read #=> String, one of "ENABLED", "DISABLED", "AUTO"
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
     #   resp.package_type #=> String, one of "Zip", "Image"
@@ -9276,6 +9285,7 @@ module Aws::Lambda
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.file_system_configs[0].s3_files_config.direct_s3_read #=> String, one of "ENABLED", "DISABLED", "AUTO"
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
     #   resp.package_type #=> String, one of "Zip", "Image"
@@ -9647,6 +9657,9 @@ module Aws::Lambda
     #       {
     #         arn: "FileSystemArn", # required
     #         local_mount_path: "LocalMountPath", # required
+    #         s3_files_config: {
+    #           direct_s3_read: "ENABLED", # accepts ENABLED, DISABLED, AUTO
+    #         },
     #       },
     #     ],
     #     image_config: {
@@ -9723,6 +9736,7 @@ module Aws::Lambda
     #   resp.file_system_configs #=> Array
     #   resp.file_system_configs[0].arn #=> String
     #   resp.file_system_configs[0].local_mount_path #=> String
+    #   resp.file_system_configs[0].s3_files_config.direct_s3_read #=> String, one of "ENABLED", "DISABLED", "AUTO"
     #   resp.signing_profile_version_arn #=> String
     #   resp.signing_job_arn #=> String
     #   resp.package_type #=> String, one of "Zip", "Image"
@@ -10016,7 +10030,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.193.0'
+      context[:gem_version] = '1.194.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

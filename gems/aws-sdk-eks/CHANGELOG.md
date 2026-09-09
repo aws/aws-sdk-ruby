@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.176.0 (2026-09-03)
+------------------
+
+* Feature - Deprecate EncryptionConfig resources field. Amazon EKS encrypts all Kubernetes API data with envelope encryption by default for clusters running Kubernetes version 1.28 or higher, so this field no longer affects which resources are encrypted.
+
 1.175.0 (2026-08-25)
 ------------------
 

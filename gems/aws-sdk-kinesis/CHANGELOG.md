@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2026-09-01)
+------------------
+
+* Feature - Amazon Kinesis Data Streams now supports a dry run feature for data-plane APIs to validate the permissions and request parameters. If all checks complete successfully, the API returns a 'DryRunOperationException', confirming the request would have succeeded without the 'DryRun' parameter.
+
 1.105.0 (2026-08-31)
 ------------------
 

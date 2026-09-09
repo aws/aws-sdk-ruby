@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.390.0 (2026-09-08)
+------------------
+
+* Feature - Add support for InstancePreferences list for multiple instance type input support on SageMaker Training and Processing
+
+1.389.0 (2026-09-02)
+------------------
+
+* Feature - Amazon SageMaker Feature Store now supports the Standard V2 online store type, which enables feature-level writes to feature groups. You can select Standard V2 when creating a feature group, and update the storage type of an existing feature group via UpdateFeatureGroup.
+
 1.388.0 (2026-08-31)
 ------------------
 

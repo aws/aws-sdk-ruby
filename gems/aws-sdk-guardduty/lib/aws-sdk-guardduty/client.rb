@@ -587,6 +587,108 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Enables a custom detection rule for your account by creating an
+    # association. You specify the rule and the mode in which it operates.
+    #
+    # @option params [required, String] :rule_id
+    #   The unique identifier for the custom detection rule.
+    #
+    # @option params [required, String] :mode
+    #   The rule execution mode. Valid values: `LIVE` \| `DRY_RUN`.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time. Maximum 64 characters.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to be added to the new custom detection rule association
+    #   resource.
+    #
+    # @return [Types::CreateCustomDetectionRuleAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomDetectionRuleAssociationResponse#rule_association #rule_association} => Types::AssociationDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_detection_rule_association({
+    #     rule_id: "RuleId", # required
+    #     mode: "LIVE", # required, accepts LIVE, DRY_RUN
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_association.association_id #=> String
+    #   resp.rule_association.arn #=> String
+    #   resp.rule_association.rule_id #=> String
+    #   resp.rule_association.account_id #=> String
+    #   resp.rule_association.mode #=> String, one of "LIVE", "DRY_RUN"
+    #   resp.rule_association.created_at #=> Time
+    #   resp.rule_association.updated_at #=> Time
+    #   resp.rule_association.expires_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateCustomDetectionRuleAssociation AWS API Documentation
+    #
+    # @overload create_custom_detection_rule_association(params = {})
+    # @param [Hash] params ({})
+    def create_custom_detection_rule_association(params = {}, options = {})
+      req = build_request(:create_custom_detection_rule_association, params)
+      req.send_request(options)
+    end
+
+    # Creates an organization-level configuration that enables a custom
+    # detection rule across your organization. This operation is available
+    # only to the delegated administrator account.
+    #
+    # @option params [required, String] :rule_id
+    #   The unique identifier for the custom detection rule.
+    #
+    # @option params [required, String] :mode
+    #   The execution mode of the organization configuration. Valid values:
+    #   `LIVE` \| `DRY_RUN`.
+    #
+    # @option params [Array<String>] :include_account_ids
+    #   The account IDs to include in the organization configuration. Mutually
+    #   exclusive with `ExcludeAccountIds`.
+    #
+    # @option params [Array<String>] :exclude_account_ids
+    #   The account IDs to exclude from the organization configuration.
+    #   Mutually exclusive with `IncludeAccountIds`.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the operation
+    #   completes no more than one time.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_detection_rule_org_configuration({
+    #     rule_id: "RuleId", # required
+    #     mode: "LIVE", # required, accepts LIVE, DRY_RUN
+    #     include_account_ids: ["AccountId"],
+    #     exclude_account_ids: ["AccountId"],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/CreateCustomDetectionRuleOrgConfiguration AWS API Documentation
+    #
+    # @overload create_custom_detection_rule_org_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_custom_detection_rule_org_configuration(params = {}, options = {})
+      req = build_request(:create_custom_detection_rule_org_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a single GuardDuty detector. A detector is a resource that
     # represents the GuardDuty service. To start using GuardDuty, you must
     # create a detector in each Region where you enable the service. You can
@@ -2835,6 +2937,62 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Disables a custom detection rule by deleting its association. This
+    # operation is idempotent.
+    #
+    # @option params [required, String] :rule_id
+    #   The unique identifier for the custom detection rule.
+    #
+    # @option params [required, String] :association_id
+    #   The unique identifier for the association to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_detection_rule_association({
+    #     rule_id: "RuleId", # required
+    #     association_id: "AssociationId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteCustomDetectionRuleAssociation AWS API Documentation
+    #
+    # @overload delete_custom_detection_rule_association(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_detection_rule_association(params = {}, options = {})
+      req = build_request(:delete_custom_detection_rule_association, params)
+      req.send_request(options)
+    end
+
+    # Deletes the organization-level configuration for a custom detection
+    # rule. This operation is available only to the delegated administrator
+    # account.
+    #
+    # @option params [required, String] :rule_id
+    #   The unique identifier for the custom detection rule.
+    #
+    # @option params [required, String] :mode
+    #   The execution mode of the organization configuration to delete. Valid
+    #   values: `LIVE` \| `DRY_RUN`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_detection_rule_org_configuration({
+    #     rule_id: "RuleId", # required
+    #     mode: "LIVE", # required, accepts LIVE, DRY_RUN
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteCustomDetectionRuleOrgConfiguration AWS API Documentation
+    #
+    # @overload delete_custom_detection_rule_org_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_detection_rule_org_configuration(params = {}, options = {})
+      req = build_request(:delete_custom_detection_rule_org_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes an Amazon GuardDuty detector that is specified by the detector
     # ID.
     #
@@ -3729,6 +3887,134 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
+    # Returns details for a custom detection rule in GuardDuty, including
+    # its detection logic.
+    #
+    # @option params [required, String] :rule_id
+    #   The unique identifier for the custom detection rule.
+    #
+    # @return [Types::GetCustomDetectionRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCustomDetectionRuleResponse#rule #rule} => Types::RuleDetail
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_custom_detection_rule({
+    #     rule_id: "RuleId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule.rule_id #=> String
+    #   resp.rule.arn #=> String
+    #   resp.rule.name #=> String
+    #   resp.rule.description #=> String
+    #   resp.rule.severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW"
+    #   resp.rule.data_source #=> String, one of "CloudTrailManagementEvent"
+    #   resp.rule.tactic #=> String
+    #   resp.rule.technique #=> String
+    #   resp.rule.service #=> String
+    #   resp.rule.definition.expression #=> String
+    #   resp.rule.language #=> String, one of "SQL"
+    #   resp.rule.schema #=> String, one of "CloudTrail"
+    #   resp.rule.created_at #=> Time
+    #   resp.rule.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetCustomDetectionRule AWS API Documentation
+    #
+    # @overload get_custom_detection_rule(params = {})
+    # @param [Hash] params ({})
+    def get_custom_detection_rule(params = {}, options = {})
+      req = build_request(:get_custom_detection_rule, params)
+      req.send_request(options)
+    end
+
+    # Returns details for a custom detection rule association.
+    #
+    # @option params [required, String] :rule_id
+    #   The unique identifier for the custom detection rule.
+    #
+    # @option params [required, String] :association_id
+    #   The unique identifier for the association.
+    #
+    # @return [Types::GetCustomDetectionRuleAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCustomDetectionRuleAssociationResponse#rule_association #rule_association} => Types::AssociationDetail
+    #   * {Types::GetCustomDetectionRuleAssociationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_custom_detection_rule_association({
+    #     rule_id: "RuleId", # required
+    #     association_id: "AssociationId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_association.association_id #=> String
+    #   resp.rule_association.arn #=> String
+    #   resp.rule_association.rule_id #=> String
+    #   resp.rule_association.account_id #=> String
+    #   resp.rule_association.mode #=> String, one of "LIVE", "DRY_RUN"
+    #   resp.rule_association.created_at #=> Time
+    #   resp.rule_association.updated_at #=> Time
+    #   resp.rule_association.expires_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetCustomDetectionRuleAssociation AWS API Documentation
+    #
+    # @overload get_custom_detection_rule_association(params = {})
+    # @param [Hash] params ({})
+    def get_custom_detection_rule_association(params = {}, options = {})
+      req = build_request(:get_custom_detection_rule_association, params)
+      req.send_request(options)
+    end
+
+    # Returns the organization-level configuration for a custom detection
+    # rule.
+    #
+    # @option params [required, String] :rule_id
+    #   The unique identifier for the custom detection rule.
+    #
+    # @option params [required, String] :mode
+    #   The execution mode of the organization configuration to retrieve.
+    #   Valid values: `LIVE` \| `DRY_RUN`.
+    #
+    # @return [Types::GetCustomDetectionRuleOrgConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCustomDetectionRuleOrgConfigurationResponse#configuration #configuration} => Types::DetectionRuleOrgConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_custom_detection_rule_org_configuration({
+    #     rule_id: "RuleId", # required
+    #     mode: "LIVE", # required, accepts LIVE, DRY_RUN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configuration.rule_id #=> String
+    #   resp.configuration.mode #=> String, one of "LIVE", "DRY_RUN"
+    #   resp.configuration.status #=> String, one of "ACTIVE", "PROCESSING", "FAILED"
+    #   resp.configuration.status_reason #=> String
+    #   resp.configuration.include_account_ids #=> Array
+    #   resp.configuration.include_account_ids[0] #=> String
+    #   resp.configuration.exclude_account_ids #=> Array
+    #   resp.configuration.exclude_account_ids[0] #=> String
+    #   resp.configuration.created_at #=> Time
+    #   resp.configuration.updated_at #=> Time
+    #   resp.configuration.expires_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/GetCustomDetectionRuleOrgConfiguration AWS API Documentation
+    #
+    # @overload get_custom_detection_rule_org_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_custom_detection_rule_org_configuration(params = {}, options = {})
+      req = build_request(:get_custom_detection_rule_org_configuration, params)
+      req.send_request(options)
+    end
+
     # Retrieves a GuardDuty detector specified by the detectorId.
     #
     # There might be regional differences because some data sources might
@@ -4560,6 +4846,12 @@ module Aws::GuardDuty
     #   resp.findings[0].service.detection.sequence.signals[0].signal_indicators[0].values #=> Array
     #   resp.findings[0].service.detection.sequence.signals[0].signal_indicators[0].values[0] #=> String
     #   resp.findings[0].service.detection.sequence.signals[0].signal_indicators[0].title #=> String
+    #   resp.findings[0].service.detection.sequence.signals[0].activities #=> Array
+    #   resp.findings[0].service.detection.sequence.signals[0].activities[0].type #=> String, one of "API_CALL"
+    #   resp.findings[0].service.detection.sequence.signals[0].activities[0].api.operation #=> String
+    #   resp.findings[0].service.detection.sequence.signals[0].activities[0].api.service #=> String
+    #   resp.findings[0].service.detection.sequence.signals[0].activities[0].api.error #=> String
+    #   resp.findings[0].service.detection.sequence.signals[0].activities[0].api.user_agent #=> String
     #   resp.findings[0].service.detection.sequence.sequence_indicators #=> Array
     #   resp.findings[0].service.detection.sequence.sequence_indicators[0].key #=> String, one of "SUSPICIOUS_USER_AGENT", "SUSPICIOUS_NETWORK", "MALICIOUS_IP", "TOR_IP", "ATTACK_TACTIC", "HIGH_RISK_API", "ATTACK_TECHNIQUE", "UNUSUAL_API_FOR_ACCOUNT", "UNUSUAL_ASN_FOR_ACCOUNT", "UNUSUAL_ASN_FOR_USER", "SUSPICIOUS_PROCESS", "MALICIOUS_DOMAIN", "MALICIOUS_PROCESS", "CRYPTOMINING_IP", "CRYPTOMINING_DOMAIN", "CRYPTOMINING_PROCESS", "MALICIOUS_FILE", "VULNERABILITY", "MALICIOUS_PACKAGE", "MISCONFIGURATION", "REACHABILITY", "SENSITIVE_DATA"
     #   resp.findings[0].service.detection.sequence.sequence_indicators[0].values #=> Array
@@ -5783,6 +6075,175 @@ module Aws::GuardDuty
     # @param [Hash] params ({})
     def list_coverage(params = {}, options = {})
       req = build_request(:list_coverage, params)
+      req.send_request(options)
+    end
+
+    # Returns all custom detection rule associations for your account. You
+    # can filter by rule ID and mode.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single page. Minimum
+    #   value of 1, maximum value of 100.
+    #
+    # @option params [String] :next_token
+    #   A pagination token from a previous response. Use this token to
+    #   retrieve the next page of results.
+    #
+    # @option params [String] :rule_id
+    #   The unique identifier for the custom detection rule to filter
+    #   associations by.
+    #
+    # @option params [String] :mode
+    #   The rule execution mode to filter associations by.
+    #
+    # @return [Types::ListCustomDetectionRuleAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomDetectionRuleAssociationsResponse#rule_associations #rule_associations} => Array&lt;Types::AssociationSummary&gt;
+    #   * {Types::ListCustomDetectionRuleAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_detection_rule_associations({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     rule_id: "RuleId",
+    #     mode: "LIVE", # accepts LIVE, DRY_RUN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_associations #=> Array
+    #   resp.rule_associations[0].association_id #=> String
+    #   resp.rule_associations[0].arn #=> String
+    #   resp.rule_associations[0].rule_id #=> String
+    #   resp.rule_associations[0].mode #=> String, one of "LIVE", "DRY_RUN"
+    #   resp.rule_associations[0].created_at #=> Time
+    #   resp.rule_associations[0].updated_at #=> Time
+    #   resp.rule_associations[0].expires_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListCustomDetectionRuleAssociations AWS API Documentation
+    #
+    # @overload list_custom_detection_rule_associations(params = {})
+    # @param [Hash] params ({})
+    def list_custom_detection_rule_associations(params = {}, options = {})
+      req = build_request(:list_custom_detection_rule_associations, params)
+      req.send_request(options)
+    end
+
+    # Returns all organization-level configurations for custom detection
+    # rules. You can filter the results by status.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single page. Minimum
+    #   value of 1, maximum value of 100.
+    #
+    # @option params [String] :next_token
+    #   A pagination token from a previous response. Use this token to
+    #   retrieve the next page of results.
+    #
+    # @option params [String] :status
+    #   The configuration status to filter by.
+    #
+    # @return [Types::ListCustomDetectionRuleOrgConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomDetectionRuleOrgConfigurationsResponse#configurations #configurations} => Array&lt;Types::DetectionRuleOrgConfigurationSummary&gt;
+    #   * {Types::ListCustomDetectionRuleOrgConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_detection_rule_org_configurations({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     status: "ACTIVE", # accepts ACTIVE, PROCESSING, FAILED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.configurations #=> Array
+    #   resp.configurations[0].rule_id #=> String
+    #   resp.configurations[0].mode #=> String, one of "LIVE", "DRY_RUN"
+    #   resp.configurations[0].status #=> String, one of "ACTIVE", "PROCESSING", "FAILED"
+    #   resp.configurations[0].status_reason #=> String
+    #   resp.configurations[0].created_at #=> Time
+    #   resp.configurations[0].updated_at #=> Time
+    #   resp.configurations[0].expires_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListCustomDetectionRuleOrgConfigurations AWS API Documentation
+    #
+    # @overload list_custom_detection_rule_org_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_custom_detection_rule_org_configurations(params = {}, options = {})
+      req = build_request(:list_custom_detection_rule_org_configurations, params)
+      req.send_request(options)
+    end
+
+    # Returns all available custom detection rules in GuardDuty. You can
+    # filter the results by data source, severity, tactic, technique, and
+    # service.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single page. Minimum
+    #   value of 1, maximum value of 100.
+    #
+    # @option params [String] :next_token
+    #   A pagination token from a previous response. Use this token to
+    #   retrieve the next page of results.
+    #
+    # @option params [Array<Types::DetectionRuleFilter>] :filters
+    #   A list of filter criteria to apply when listing custom detection
+    #   rules.
+    #
+    # @return [Types::ListCustomDetectionRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomDetectionRulesResponse#rules #rules} => Array&lt;Types::RuleSummary&gt;
+    #   * {Types::ListCustomDetectionRulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_detection_rules({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     filters: [
+    #       {
+    #         name: "name", # required, accepts name, description, dataSource, severity, tactic, technique, service
+    #         values: ["DetectionRuleFilterValue"], # required
+    #         condition: "EQUALS", # accepts EQUALS, CONTAINS
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rules #=> Array
+    #   resp.rules[0].rule_id #=> String
+    #   resp.rules[0].arn #=> String
+    #   resp.rules[0].name #=> String
+    #   resp.rules[0].description #=> String
+    #   resp.rules[0].severity #=> String, one of "CRITICAL", "HIGH", "MEDIUM", "LOW"
+    #   resp.rules[0].data_source #=> String, one of "CloudTrailManagementEvent"
+    #   resp.rules[0].tactic #=> String
+    #   resp.rules[0].technique #=> String
+    #   resp.rules[0].service #=> String
+    #   resp.rules[0].language #=> String, one of "SQL"
+    #   resp.rules[0].schema #=> String, one of "CloudTrail"
+    #   resp.rules[0].created_at #=> Time
+    #   resp.rules[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/ListCustomDetectionRules AWS API Documentation
+    #
+    # @overload list_custom_detection_rules(params = {})
+    # @param [Hash] params ({})
+    def list_custom_detection_rules(params = {}, options = {})
+      req = build_request(:list_custom_detection_rules, params)
       req.send_request(options)
     end
 
@@ -7045,6 +7506,74 @@ module Aws::GuardDuty
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates the mode of an existing custom detection rule association.
+    #
+    # @option params [required, String] :rule_id
+    #   The unique identifier for the custom detection rule.
+    #
+    # @option params [required, String] :association_id
+    #   The unique identifier for the association to update.
+    #
+    # @option params [required, String] :mode
+    #   The rule execution mode. Valid values: `LIVE` \| `DRY_RUN`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_custom_detection_rule_association({
+    #     rule_id: "RuleId", # required
+    #     association_id: "AssociationId", # required
+    #     mode: "LIVE", # required, accepts LIVE, DRY_RUN
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateCustomDetectionRuleAssociation AWS API Documentation
+    #
+    # @overload update_custom_detection_rule_association(params = {})
+    # @param [Hash] params ({})
+    def update_custom_detection_rule_association(params = {}, options = {})
+      req = build_request(:update_custom_detection_rule_association, params)
+      req.send_request(options)
+    end
+
+    # Updates the organization-level configuration for a custom detection
+    # rule, including the mode and include/exclude account lists.
+    #
+    # @option params [required, String] :rule_id
+    #   The unique identifier for the custom detection rule.
+    #
+    # @option params [required, String] :mode
+    #   The execution mode of the organization configuration. Valid values:
+    #   `LIVE` \| `DRY_RUN`.
+    #
+    # @option params [Array<String>] :include_account_ids
+    #   The account IDs to include in the organization configuration. Mutually
+    #   exclusive with `ExcludeAccountIds`.
+    #
+    # @option params [Array<String>] :exclude_account_ids
+    #   The account IDs to exclude from the organization configuration.
+    #   Mutually exclusive with `IncludeAccountIds`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_custom_detection_rule_org_configuration({
+    #     rule_id: "RuleId", # required
+    #     mode: "LIVE", # required, accepts LIVE, DRY_RUN
+    #     include_account_ids: ["AccountId"],
+    #     exclude_account_ids: ["AccountId"],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/UpdateCustomDetectionRuleOrgConfiguration AWS API Documentation
+    #
+    # @overload update_custom_detection_rule_org_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_custom_detection_rule_org_configuration(params = {}, options = {})
+      req = build_request(:update_custom_detection_rule_org_configuration, params)
       req.send_request(options)
     end
 
@@ -9203,7 +9732,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.158.0'
+      context[:gem_version] = '1.160.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -29,6 +29,16 @@ module Aws::SESV2
       SENSITIVE: []
     end
 
+    class AssociateEmailIdentityCertificateRequest
+      attr_accessor email_identity: ::String
+      attr_accessor from_address: ::String
+      attr_accessor certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateEmailIdentityCertificateResponse < Aws::EmptyStructure
+    end
+
     class Attachment
       attr_accessor raw_content: ::String
       attr_accessor content_disposition: ("ATTACHMENT" | "INLINE")
@@ -188,6 +198,7 @@ module Aws::SESV2
       attr_accessor suppression_options: Types::SuppressionOptions
       attr_accessor vdm_options: Types::VdmOptions
       attr_accessor archiving_options: Types::ArchivingOptions
+      attr_accessor message_security_options: Types::MessageSecurityOptions
       SENSITIVE: []
     end
 
@@ -392,6 +403,9 @@ module Aws::SESV2
       SENSITIVE: []
     end
 
+    class DefaultSigningScheme < Aws::EmptyStructure
+    end
+
     class DeleteConfigurationSetEventDestinationRequest
       attr_accessor configuration_set_name: ::String
       attr_accessor event_destination_name: ::String
@@ -530,6 +544,15 @@ module Aws::SESV2
     class Details
       attr_accessor routes_details: ::Array[Types::RouteDetails]
       SENSITIVE: []
+    end
+
+    class DisassociateEmailIdentityCertificateRequest
+      attr_accessor email_identity: ::String
+      attr_accessor from_address: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateEmailIdentityCertificateResponse < Aws::EmptyStructure
     end
 
     class DkimAttributes
@@ -752,6 +775,7 @@ module Aws::SESV2
       attr_accessor suppression_options: Types::SuppressionOptions
       attr_accessor vdm_options: Types::VdmOptions
       attr_accessor archiving_options: Types::ArchivingOptions
+      attr_accessor message_security_options: Types::MessageSecurityOptions
       SENSITIVE: []
     end
 
@@ -1044,6 +1068,14 @@ module Aws::SESV2
       SENSITIVE: []
     end
 
+    class IdentityCertificate
+      attr_accessor from_address: ::String
+      attr_accessor status: ("PROVISIONING" | "INACTIVE" | "DEPROVISIONING" | "ACTIVE" | "FAILED")
+      attr_accessor certificate_arn: ::String
+      attr_accessor certificate_expiry_time: ::Time
+      SENSITIVE: []
+    end
+
     class IdentityInfo
       attr_accessor identity_type: ("EMAIL_ADDRESS" | "DOMAIN" | "MANAGED_DOMAIN")
       attr_accessor identity_name: ::String
@@ -1211,6 +1243,19 @@ module Aws::SESV2
 
     class ListEmailIdentitiesResponse
       attr_accessor email_identities: ::Array[Types::IdentityInfo]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEmailIdentityCertificatesRequest
+      attr_accessor email_identity: ::String
+      attr_accessor next_token: ::String
+      attr_accessor page_size: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListEmailIdentityCertificatesResponse
+      attr_accessor certificates: ::Array[Types::IdentityCertificate]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1413,6 +1458,11 @@ module Aws::SESV2
     end
 
     class MessageRejected < Aws::EmptyStructure
+    end
+
+    class MessageSecurityOptions
+      attr_accessor signing_scheme: Types::SigningScheme
+      SENSITIVE: []
     end
 
     class MessageTag
@@ -1857,6 +1907,25 @@ module Aws::SESV2
     class SendingPausedException < Aws::EmptyStructure
     end
 
+    class SigningScheme
+      attr_accessor default_scheme: Types::DefaultSigningScheme
+      attr_accessor smime_scheme: Types::SmimeSigningScheme
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DefaultScheme < SigningScheme
+      end
+      class SmimeScheme < SigningScheme
+      end
+      class Unknown < SigningScheme
+      end
+    end
+
+    class SmimeSigningScheme
+      attr_accessor signature_format: ("DETACHED")
+      SENSITIVE: []
+    end
+
     class SnsDestination
       attr_accessor topic_arn: ::String
       SENSITIVE: []
@@ -2049,6 +2118,15 @@ module Aws::SESV2
     end
 
     class UpdateConfigurationSetEventDestinationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateConfigurationSetRequest
+      attr_accessor configuration_set_name: ::String
+      attr_accessor message_security_options: Types::MessageSecurityOptions
+      SENSITIVE: []
+    end
+
+    class UpdateConfigurationSetResponse < Aws::EmptyStructure
     end
 
     class UpdateContactListRequest

@@ -249,6 +249,7 @@ module Aws::Connect
     Channel = Shapes::StringShape.new(name: 'Channel')
     ChannelList = Shapes::ListShape.new(name: 'ChannelList')
     ChannelToCountMap = Shapes::MapShape.new(name: 'ChannelToCountMap')
+    ChannelWorkloadBehaviorType = Shapes::StringShape.new(name: 'ChannelWorkloadBehaviorType')
     Channels = Shapes::ListShape.new(name: 'Channels')
     ChatContactMetrics = Shapes::StructureShape.new(name: 'ChatContactMetrics')
     ChatContent = Shapes::StringShape.new(name: 'ChatContent')
@@ -468,6 +469,7 @@ module Aws::Connect
     CreatedByInfo = Shapes::UnionShape.new(name: 'CreatedByInfo')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
     CrossChannelBehavior = Shapes::StructureShape.new(name: 'CrossChannelBehavior')
+    CrossChannelWorkloadBehavior = Shapes::StructureShape.new(name: 'CrossChannelWorkloadBehavior')
     CurrentMetric = Shapes::StructureShape.new(name: 'CurrentMetric')
     CurrentMetricData = Shapes::StructureShape.new(name: 'CurrentMetricData')
     CurrentMetricDataCollections = Shapes::ListShape.new(name: 'CurrentMetricDataCollections')
@@ -1513,6 +1515,12 @@ module Aws::Connect
     PotentialAudioQualityIssue = Shapes::StringShape.new(name: 'PotentialAudioQualityIssue')
     PotentialAudioQualityIssues = Shapes::ListShape.new(name: 'PotentialAudioQualityIssues')
     PotentialDisconnectIssue = Shapes::StringShape.new(name: 'PotentialDisconnectIssue')
+    PreEvaluationFilter = Shapes::StructureShape.new(name: 'PreEvaluationFilter')
+    PreEvaluationFilterList = Shapes::ListShape.new(name: 'PreEvaluationFilterList')
+    PreEvaluationFilterOperator = Shapes::StringShape.new(name: 'PreEvaluationFilterOperator')
+    PreEvaluationFilterResourceType = Shapes::StringShape.new(name: 'PreEvaluationFilterResourceType')
+    PreEvaluationFilterType = Shapes::StringShape.new(name: 'PreEvaluationFilterType')
+    PreEvaluationFilters = Shapes::StructureShape.new(name: 'PreEvaluationFilters')
     PreSignedAttachmentUrl = Shapes::StringShape.new(name: 'PreSignedAttachmentUrl')
     PredefinedAttribute = Shapes::StructureShape.new(name: 'PredefinedAttribute')
     PredefinedAttributeConfiguration = Shapes::StructureShape.new(name: 'PredefinedAttributeConfiguration')
@@ -2316,6 +2324,10 @@ module Aws::Connect
     WidgetDestination = Shapes::StructureShape.new(name: 'WidgetDestination')
     WidgetId = Shapes::StringShape.new(name: 'WidgetId')
     WisdomInfo = Shapes::StructureShape.new(name: 'WisdomInfo')
+    WorkloadType = Shapes::StringShape.new(name: 'WorkloadType')
+    WorkloadTypeConcurrencies = Shapes::ListShape.new(name: 'WorkloadTypeConcurrencies')
+    WorkloadTypeConcurrency = Shapes::StructureShape.new(name: 'WorkloadTypeConcurrency')
+    WorkloadTypeConcurrencyType = Shapes::IntegerShape.new(name: 'WorkloadTypeConcurrencyType')
     Workspace = Shapes::StructureShape.new(name: 'Workspace')
     WorkspaceAssociatedResourceId = Shapes::StringShape.new(name: 'WorkspaceAssociatedResourceId')
     WorkspaceAssociatedResourceName = Shapes::StringShape.new(name: 'WorkspaceAssociatedResourceName')
@@ -3838,7 +3850,9 @@ module Aws::Connect
     CreateRuleRequest.add_member(:function, Shapes::ShapeRef.new(shape: RuleFunction, required: true, location_name: "Function"))
     CreateRuleRequest.add_member(:actions, Shapes::ShapeRef.new(shape: RuleActions, required: true, location_name: "Actions"))
     CreateRuleRequest.add_member(:publish_status, Shapes::ShapeRef.new(shape: RulePublishStatus, required: true, location_name: "PublishStatus"))
+    CreateRuleRequest.add_member(:pre_evaluation_filters, Shapes::ShapeRef.new(shape: PreEvaluationFilters, location_name: "PreEvaluationFilters"))
     CreateRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateRuleRequest.struct_class = Types::CreateRuleRequest
 
     CreateRuleResponse.add_member(:rule_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "RuleArn"))
@@ -4020,6 +4034,9 @@ module Aws::Connect
 
     CrossChannelBehavior.add_member(:behavior_type, Shapes::ShapeRef.new(shape: BehaviorType, required: true, location_name: "BehaviorType"))
     CrossChannelBehavior.struct_class = Types::CrossChannelBehavior
+
+    CrossChannelWorkloadBehavior.add_member(:channel_workload_behavior_type, Shapes::ShapeRef.new(shape: ChannelWorkloadBehaviorType, location_name: "ChannelWorkloadBehaviorType"))
+    CrossChannelWorkloadBehavior.struct_class = Types::CrossChannelWorkloadBehavior
 
     CurrentMetric.add_member(:name, Shapes::ShapeRef.new(shape: CurrentMetricName, location_name: "Name"))
     CurrentMetric.add_member(:metric_id, Shapes::ShapeRef.new(shape: CurrentMetricId, location_name: "MetricId"))
@@ -6928,8 +6945,9 @@ module Aws::Connect
     MediaConcurrencies.member = Shapes::ShapeRef.new(shape: MediaConcurrency)
 
     MediaConcurrency.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, required: true, location_name: "Channel"))
-    MediaConcurrency.add_member(:concurrency, Shapes::ShapeRef.new(shape: Concurrency, required: true, location_name: "Concurrency"))
+    MediaConcurrency.add_member(:concurrency, Shapes::ShapeRef.new(shape: Concurrency, location_name: "Concurrency"))
     MediaConcurrency.add_member(:cross_channel_behavior, Shapes::ShapeRef.new(shape: CrossChannelBehavior, location_name: "CrossChannelBehavior"))
+    MediaConcurrency.add_member(:workload_type_concurrencies, Shapes::ShapeRef.new(shape: WorkloadTypeConcurrencies, location_name: "WorkloadTypeConcurrencies"))
     MediaConcurrency.struct_class = Types::MediaConcurrency
 
     MediaItem.add_member(:type, Shapes::ShapeRef.new(shape: MediaType, location_name: "Type"))
@@ -7359,6 +7377,18 @@ module Aws::Connect
     PostAcceptTimeoutConfig.struct_class = Types::PostAcceptTimeoutConfig
 
     PotentialAudioQualityIssues.member = Shapes::ShapeRef.new(shape: PotentialAudioQualityIssue)
+
+    PreEvaluationFilter.add_member(:resource_type, Shapes::ShapeRef.new(shape: PreEvaluationFilterResourceType, required: true, location_name: "ResourceType"))
+    PreEvaluationFilter.add_member(:filter_type, Shapes::ShapeRef.new(shape: PreEvaluationFilterType, required: true, location_name: "FilterType"))
+    PreEvaluationFilter.add_member(:filter_key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FilterKey"))
+    PreEvaluationFilter.add_member(:filter_value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FilterValue"))
+    PreEvaluationFilter.add_member(:operator, Shapes::ShapeRef.new(shape: PreEvaluationFilterOperator, required: true, location_name: "Operator"))
+    PreEvaluationFilter.struct_class = Types::PreEvaluationFilter
+
+    PreEvaluationFilterList.member = Shapes::ShapeRef.new(shape: PreEvaluationFilter)
+
+    PreEvaluationFilters.add_member(:and_conditions, Shapes::ShapeRef.new(shape: PreEvaluationFilterList, location_name: "AndConditions"))
+    PreEvaluationFilters.struct_class = Types::PreEvaluationFilters
 
     PredefinedAttribute.add_member(:name, Shapes::ShapeRef.new(shape: PredefinedAttributeName, location_name: "Name"))
     PredefinedAttribute.add_member(:values, Shapes::ShapeRef.new(shape: PredefinedAttributeValues, location_name: "Values"))
@@ -8003,6 +8033,7 @@ module Aws::Connect
     Rule.add_member(:function, Shapes::ShapeRef.new(shape: RuleFunction, required: true, location_name: "Function"))
     Rule.add_member(:actions, Shapes::ShapeRef.new(shape: RuleActions, required: true, location_name: "Actions"))
     Rule.add_member(:publish_status, Shapes::ShapeRef.new(shape: RulePublishStatus, required: true, location_name: "PublishStatus"))
+    Rule.add_member(:pre_evaluation_filters, Shapes::ShapeRef.new(shape: PreEvaluationFilters, location_name: "PreEvaluationFilters"))
     Rule.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTime"))
     Rule.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdatedTime"))
     Rule.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "LastUpdatedBy"))
@@ -8043,6 +8074,7 @@ module Aws::Connect
     RuleSearchSummary.add_member(:action_summaries, Shapes::ShapeRef.new(shape: ActionSummaries, required: true, location_name: "ActionSummaries"))
     RuleSearchSummary.add_member(:rule_capability_tiers, Shapes::ShapeRef.new(shape: RuleCapabilityTiers, location_name: "RuleCapabilityTiers"))
     RuleSearchSummary.add_member(:publish_status, Shapes::ShapeRef.new(shape: RulePublishStatus, required: true, location_name: "PublishStatus"))
+    RuleSearchSummary.add_member(:pre_evaluation_filters, Shapes::ShapeRef.new(shape: PreEvaluationFilters, location_name: "PreEvaluationFilters"))
     RuleSearchSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreatedTime"))
     RuleSearchSummary.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "LastUpdatedTime"))
     RuleSearchSummary.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "LastUpdatedBy"))
@@ -9641,6 +9673,7 @@ module Aws::Connect
     UpdateRuleRequest.add_member(:function, Shapes::ShapeRef.new(shape: RuleFunction, required: true, location_name: "Function"))
     UpdateRuleRequest.add_member(:actions, Shapes::ShapeRef.new(shape: RuleActions, required: true, location_name: "Actions"))
     UpdateRuleRequest.add_member(:publish_status, Shapes::ShapeRef.new(shape: RulePublishStatus, required: true, location_name: "PublishStatus"))
+    UpdateRuleRequest.add_member(:pre_evaluation_filters, Shapes::ShapeRef.new(shape: PreEvaluationFilters, location_name: "PreEvaluationFilters"))
     UpdateRuleRequest.struct_class = Types::UpdateRuleRequest
 
     UpdateSecurityProfileRequest.add_member(:description, Shapes::ShapeRef.new(shape: SecurityProfileDescription, location_name: "Description"))
@@ -10128,6 +10161,13 @@ module Aws::Connect
     WisdomInfo.add_member(:session_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "SessionArn"))
     WisdomInfo.add_member(:ai_agents, Shapes::ShapeRef.new(shape: AiAgents, location_name: "AiAgents"))
     WisdomInfo.struct_class = Types::WisdomInfo
+
+    WorkloadTypeConcurrencies.member = Shapes::ShapeRef.new(shape: WorkloadTypeConcurrency)
+
+    WorkloadTypeConcurrency.add_member(:workload_type, Shapes::ShapeRef.new(shape: WorkloadType, required: true, location_name: "WorkloadType"))
+    WorkloadTypeConcurrency.add_member(:concurrency, Shapes::ShapeRef.new(shape: WorkloadTypeConcurrencyType, required: true, location_name: "Concurrency"))
+    WorkloadTypeConcurrency.add_member(:cross_channel_workload_behavior, Shapes::ShapeRef.new(shape: CrossChannelWorkloadBehavior, location_name: "CrossChannelWorkloadBehavior"))
+    WorkloadTypeConcurrency.struct_class = Types::WorkloadTypeConcurrency
 
     Workspace.add_member(:visibility, Shapes::ShapeRef.new(shape: Visibility, location_name: "Visibility"))
     Workspace.add_member(:id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "Id"))

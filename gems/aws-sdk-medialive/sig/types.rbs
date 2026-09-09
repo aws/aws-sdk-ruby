@@ -3684,6 +3684,7 @@ module Aws::MediaLive
       attr_accessor timed_metadata_id_3_period: ::Integer
       attr_accessor timed_metadata_passthrough: ("DISABLED" | "ENABLED")
       attr_accessor additional_destinations: ::Array[Types::AdditionalDestinations]
+      attr_accessor watermarking_settings: Types::CmafIngestWatermarkingSettings
       SENSITIVE: []
     end
 
@@ -5768,6 +5769,7 @@ module Aws::MediaLive
       attr_accessor timed_metadata_id_3_period: ::Integer
       attr_accessor timed_metadata_passthrough: ("DISABLED" | "ENABLED")
       attr_accessor additional_destinations: ::Array[Types::MediaPackageAdditionalDestinations]
+      attr_accessor watermarking_settings: Types::MediaPackageV2WatermarkingSettings
       SENSITIVE: []
     end
 
@@ -6054,6 +6056,47 @@ module Aws::MediaLive
       attr_accessor width: ::Integer
       attr_accessor x: ::Integer
       attr_accessor y: ::Integer
+      SENSITIVE: []
+    end
+
+    class AbWatermarkingCustomProfile
+      attr_accessor embedding_frequency: ::Float
+      attr_accessor scene_cut: ::Float
+      attr_accessor target_psnr: ::Float
+      SENSITIVE: []
+    end
+
+    class CmafIngestAbWatermarkerIrdetoSettings
+      attr_accessor additional_destinations_alternate_destinations: ::Array[Types::OutputLocationRef]
+      attr_accessor alternate_destination: Types::OutputLocationRef
+      attr_accessor custom_profile: Types::AbWatermarkingCustomProfile
+      attr_accessor license: ::String
+      attr_accessor operator_id: ::Integer
+      attr_accessor poly_period: ::Integer
+      attr_accessor profile: ("CAMCORDING" | "CUSTOM" | "DEFAULT" | "HQ" | "MEZZANINE" | "ROBUST")
+      attr_accessor watermark_id_length: ("ID_2048" | "ID_512")
+      SENSITIVE: []
+    end
+
+    class CmafIngestWatermarkingSettings
+      attr_accessor cmaf_ingest_ab_watermarker_irdeto_settings: Types::CmafIngestAbWatermarkerIrdetoSettings
+      SENSITIVE: []
+    end
+
+    class MediaPackageV2AbWatermarkerIrdetoSettings
+      attr_accessor additional_destinations_alternate_destinations: ::Array[Types::OutputLocationRef]
+      attr_accessor alternate_destination: Types::OutputLocationRef
+      attr_accessor custom_profile: Types::AbWatermarkingCustomProfile
+      attr_accessor license: ::String
+      attr_accessor operator_id: ::Integer
+      attr_accessor poly_period: ::Integer
+      attr_accessor profile: ("CAMCORDING" | "CUSTOM" | "DEFAULT" | "HQ" | "MEZZANINE" | "ROBUST")
+      attr_accessor watermark_id_length: ("ID_2048" | "ID_512")
+      SENSITIVE: []
+    end
+
+    class MediaPackageV2WatermarkingSettings
+      attr_accessor media_package_v2_ab_watermarker_irdeto_settings: Types::MediaPackageV2AbWatermarkerIrdetoSettings
       SENSITIVE: []
     end
   end

@@ -7161,6 +7161,15 @@
       "input":{"shape":"UpdateSecurityGroupRuleDescriptionsIngressRequest"},
       "output":{"shape":"UpdateSecurityGroupRuleDescriptionsIngressResult"}
     },
+    "ValidateSecurityGroupQuotasForInterface":{
+      "name":"ValidateSecurityGroupQuotasForInterface",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ValidateSecurityGroupQuotasForInterfaceRequest"},
+      "output":{"shape":"ValidateSecurityGroupQuotasForInterfaceResult"}
+    },
     "WithdrawByoipCidr":{
       "name":"WithdrawByoipCidr",
       "http":{
@@ -11937,6 +11946,10 @@
         "InterruptionInfo":{
           "shape":"InterruptionInfo",
           "locationName":"interruptionInfo"
+        },
+        "ZeroSizePreference":{
+          "shape":"ZeroSizePreference",
+          "locationName":"zeroSizePreference"
         }
       }
     },
@@ -14754,7 +14767,8 @@
         "TagSpecifications":{
           "shape":"TagSpecificationList",
           "locationName":"TagSpecification"
-        }
+        },
+        "ZeroSizePreference":{"shape":"ZeroSizePreference"}
       }
     },
     "CreateInterruptibleCapacityReservationAllocationResult":{
@@ -38918,6 +38932,10 @@
         "InterruptionType":{
           "shape":"InterruptionType",
           "locationName":"interruptionType"
+        },
+        "ZeroSizePreference":{
+          "shape":"ZeroSizePreference",
+          "locationName":"zeroSizePreference"
         }
       }
     },
@@ -39639,6 +39657,10 @@
         "State":{
           "shape":"IpamInternetRegistryAssociationState",
           "locationName":"state"
+        },
+        "StateMessage":{
+          "shape":"String",
+          "locationName":"stateMessage"
         },
         "ChildRequestXml":{
           "shape":"String",
@@ -47048,6 +47070,10 @@
         "MaximumEnaQueueCountPerInterface":{
           "shape":"MaximumEnaQueueCountPerInterface",
           "locationName":"maximumEnaQueueCountPerInterface"
+        },
+        "InterfaceTypes":{
+          "shape":"NetworkCardInterfaceTypeList",
+          "locationName":"interfaceTypeSet"
         }
       }
     },
@@ -47055,6 +47081,22 @@
       "type":"list",
       "member":{
         "shape":"NetworkCardInfo",
+        "locationName":"item"
+      }
+    },
+    "NetworkCardInterfaceType":{
+      "type":"string",
+      "enum":[
+        "interface",
+        "efa",
+        "efa-only",
+        "secondary"
+      ]
+    },
+    "NetworkCardInterfaceTypeList":{
+      "type":"list",
+      "member":{
+        "shape":"NetworkCardInterfaceType",
         "locationName":"item"
       }
     },
@@ -60044,14 +60086,12 @@
     },
     "UpdateInterruptibleCapacityReservationAllocationRequest":{
       "type":"structure",
-      "required":[
-        "CapacityReservationId",
-        "TargetInstanceCount"
-      ],
+      "required":["CapacityReservationId"],
       "members":{
         "CapacityReservationId":{"shape":"CapacityReservationId"},
         "TargetInstanceCount":{"shape":"Integer"},
-        "DryRun":{"shape":"Boolean"}
+        "DryRun":{"shape":"Boolean"},
+        "ZeroSizePreference":{"shape":"ZeroSizePreference"}
       }
     },
     "UpdateInterruptibleCapacityReservationAllocationResult":{
@@ -60291,6 +60331,26 @@
         "ValidThreadsPerCore":{
           "shape":"ThreadsPerCoreList",
           "locationName":"validThreadsPerCore"
+        }
+      }
+    },
+    "ValidateSecurityGroupQuotasForInterfaceRequest":{
+      "type":"structure",
+      "required":["SecurityGroupIds"],
+      "members":{
+        "SecurityGroupIds":{
+          "shape":"SecurityGroupIdList",
+          "locationName":"SecurityGroupId"
+        },
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "ValidateSecurityGroupQuotasForInterfaceResult":{
+      "type":"structure",
+      "members":{
+        "Valid":{
+          "shape":"Boolean",
+          "locationName":"valid"
         }
       }
     },
@@ -63133,6 +63193,13 @@
         "shape":"Workload",
         "locationName":"item"
       }
+    },
+    "ZeroSizePreference":{
+      "type":"string",
+      "enum":[
+        "retain",
+        "default"
+      ]
     },
     "ZoneIdStringList":{
       "type":"list",

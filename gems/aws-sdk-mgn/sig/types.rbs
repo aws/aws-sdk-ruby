@@ -92,6 +92,12 @@ module Aws::Mgn
       SENSITIVE: []
     end
 
+    class CidrMapping
+      attr_accessor original_cidr: ::String
+      attr_accessor updated_cidr: ::String
+      SENSITIVE: []
+    end
+
     class CodeGenerationOutputFormatStatusDetails
       attr_accessor status: ("SUCCEEDED" | "FAILED")
       attr_accessor status_detail_list: ::String
@@ -168,6 +174,8 @@ module Aws::Mgn
       attr_accessor target_s3_configuration: Types::TargetS3Configuration
       attr_accessor target_network: Types::TargetNetwork
       attr_accessor target_deployment: ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
+      attr_accessor vpc_provisioning_strategy: ("CREATE_NEW" | "USE_EXISTING")
+      attr_accessor cidr_mappings: ::Array[Types::CidrMapping]
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor scope_tags: ::Hash[::String, ::String]
       SENSITIVE: [:tags, :scope_tags]
@@ -719,6 +727,8 @@ module Aws::Mgn
       attr_accessor volume_type: ("io1" | "io2" | "gp3" | "gp2" | "st1" | "sc1" | "standard")
       attr_accessor iops: ::Integer
       attr_accessor throughput: ::Integer
+      attr_accessor volume_initialization_rate: ::Integer
+      attr_accessor delete_on_termination: bool
       SENSITIVE: []
     end
 
@@ -1327,6 +1337,8 @@ module Aws::Mgn
       attr_accessor target_s3_configuration: Types::TargetS3Configuration
       attr_accessor target_network: Types::TargetNetwork
       attr_accessor target_deployment: ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
+      attr_accessor vpc_provisioning_strategy: ("CREATE_NEW" | "USE_EXISTING")
+      attr_accessor cidr_mappings: ::Array[Types::CidrMapping]
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor tags: ::Hash[::String, ::String]
@@ -2067,6 +2079,8 @@ module Aws::Mgn
       attr_accessor target_s3_configuration: Types::TargetS3ConfigurationUpdate
       attr_accessor target_network: Types::TargetNetworkUpdate
       attr_accessor target_deployment: ("SINGLE_ACCOUNT" | "MULTI_ACCOUNT")
+      attr_accessor vpc_provisioning_strategy: ("CREATE_NEW" | "USE_EXISTING")
+      attr_accessor cidr_mappings: ::Array[Types::CidrMapping]
       attr_accessor scope_tags: ::Hash[::String, ::String]
       SENSITIVE: [:scope_tags]
     end

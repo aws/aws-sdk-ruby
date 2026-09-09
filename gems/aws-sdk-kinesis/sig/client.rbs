@@ -332,7 +332,8 @@ module Aws
                          shard_iterator: ::String,
                          ?limit: ::Integer,
                          ?stream_arn: ::String,
-                         ?stream_id: ::String
+                         ?stream_id: ::String,
+                         ?dry_run: bool
                        ) -> _GetRecordsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRecordsResponseSuccess
 
@@ -359,7 +360,8 @@ module Aws
                                 ?starting_sequence_number: ::String,
                                 ?timestamp: ::Time,
                                 ?stream_arn: ::String,
-                                ?stream_id: ::String
+                                ?stream_id: ::String,
+                                ?dry_run: bool
                               ) -> _GetShardIteratorResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetShardIteratorResponseSuccess
 
@@ -492,7 +494,8 @@ module Aws
                         ?explicit_hash_key: ::String,
                         ?sequence_number_for_ordering: ::String,
                         ?stream_arn: ::String,
-                        ?stream_id: ::String
+                        ?stream_id: ::String,
+                        ?dry_run: bool
                       ) -> _PutRecordResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRecordResponseSuccess
 
@@ -513,7 +516,8 @@ module Aws
                          ],
                          ?stream_name: ::String,
                          ?stream_arn: ::String,
-                         ?stream_id: ::String
+                         ?stream_id: ::String,
+                         ?dry_run: bool
                        ) -> _PutRecordsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRecordsResponseSuccess
 

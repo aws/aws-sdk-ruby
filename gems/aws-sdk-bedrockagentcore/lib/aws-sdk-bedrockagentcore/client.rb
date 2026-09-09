@@ -1747,6 +1747,8 @@ module Aws::BedrockAgentCore
     #   resp.data_source_config.cloud_watch_logs.service_names[0] #=> String
     #   resp.data_source_config.cloud_watch_logs.log_group_names #=> Array
     #   resp.data_source_config.cloud_watch_logs.log_group_names[0] #=> String
+    #   resp.data_source_config.cloud_watch_logs.log_group_name_prefixes #=> Array
+    #   resp.data_source_config.cloud_watch_logs.log_group_name_prefixes[0] #=> String
     #   resp.data_source_config.cloud_watch_logs.filter_config.session_ids #=> Array
     #   resp.data_source_config.cloud_watch_logs.filter_config.session_ids[0] #=> String
     #   resp.data_source_config.cloud_watch_logs.filter_config.time_range.start_time #=> Time
@@ -1756,6 +1758,8 @@ module Aws::BedrockAgentCore
     #   resp.data_source_config.online_evaluation_config_source.time_range.end_time #=> Time
     #   resp.output_config.cloud_watch_config.log_group_name #=> String
     #   resp.output_config.cloud_watch_config.log_stream_name #=> String
+    #   resp.output_config.cloud_watch_config.metrics_namespace #=> String
+    #   resp.output_config.cloud_watch_config.result_destination #=> String, one of "DEDICATED_LOG_GROUP", "SOURCE_LOG_GROUP"
     #   resp.evaluation_results.number_of_sessions_completed #=> Integer
     #   resp.evaluation_results.number_of_sessions_in_progress #=> Integer
     #   resp.evaluation_results.number_of_sessions_failed #=> Integer
@@ -5406,6 +5410,9 @@ module Aws::BedrockAgentCore
     # @option params [String] :description
     #   The description of the batch evaluation.
     #
+    # @option params [Types::OutputConfig] :output_config
+    #   Output destination configuration.
+    #
     # @return [Types::StartBatchEvaluationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartBatchEvaluationResponse#batch_evaluation_id #batch_evaluation_id} => String
@@ -5437,7 +5444,8 @@ module Aws::BedrockAgentCore
     #     data_source_config: { # required
     #       cloud_watch_logs: {
     #         service_names: ["String"], # required
-    #         log_group_names: ["String"], # required
+    #         log_group_names: ["LogGroupName"],
+    #         log_group_name_prefixes: ["LogGroupNamePrefix"],
     #         filter_config: {
     #           session_ids: ["String"],
     #           time_range: {
@@ -5493,6 +5501,14 @@ module Aws::BedrockAgentCore
     #     },
     #     kms_key_arn: "KmsKeyArn",
     #     description: "BatchEvaluationDescription",
+    #     output_config: {
+    #       cloud_watch_config: {
+    #         log_group_name: "OptionalLogGroupName",
+    #         log_stream_name: "LogStreamName",
+    #         metrics_namespace: "MetricsNamespace",
+    #         result_destination: "DEDICATED_LOG_GROUP", # accepts DEDICATED_LOG_GROUP, SOURCE_LOG_GROUP
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -5508,6 +5524,8 @@ module Aws::BedrockAgentCore
     #   resp.created_at #=> Time
     #   resp.output_config.cloud_watch_config.log_group_name #=> String
     #   resp.output_config.cloud_watch_config.log_stream_name #=> String
+    #   resp.output_config.cloud_watch_config.metrics_namespace #=> String
+    #   resp.output_config.cloud_watch_config.result_destination #=> String, one of "DEDICATED_LOG_GROUP", "SOURCE_LOG_GROUP"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.kms_key_arn #=> String
@@ -6538,7 +6556,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

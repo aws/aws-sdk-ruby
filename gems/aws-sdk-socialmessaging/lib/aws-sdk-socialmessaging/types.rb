@@ -131,6 +131,15 @@ module Aws::SocialMessaging
     #   to clone.
     #   @return [String]
     #
+    # @!attribute [rw] endpoint_uri
+    #   Optional HTTPS endpoint for a dynamic Flow, registered with Meta as
+    #   the Flow's endpoint\_uri and called by Meta directly. When omitted,
+    #   the Flow has no endpoint (static Flow). Meta only calls the endpoint
+    #   when the Flow JSON also declares data\_api\_version. To verify that
+    #   requests originate from Meta, attach your own Meta app via
+    #   UpdateWhatsAppFlow.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/CreateWhatsAppFlowInput AWS API Documentation
     #
     class CreateWhatsAppFlowInput < Struct.new(
@@ -139,7 +148,8 @@ module Aws::SocialMessaging
       :categories,
       :flow_json,
       :publish,
-      :clone_flow_id)
+      :clone_flow_id,
+      :endpoint_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -492,6 +502,36 @@ module Aws::SocialMessaging
     class GetLinkedWhatsAppBusinessAccountPhoneNumberOutput < Struct.new(
       :phone_number,
       :linked_whats_app_business_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origination_phone_number_id
+    #   The unique identifier of the phone number whose business public key
+    #   to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetWhatsAppBusinessPublicKeyInput AWS API Documentation
+    #
+    class GetWhatsAppBusinessPublicKeyInput < Struct.new(
+      :origination_phone_number_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] business_public_key
+    #   The stored RSA business public key (PEM), if present.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_public_key_signature_status
+    #   Meta's signing status: "VALID" \| "MISMATCH".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetWhatsAppBusinessPublicKeyOutput AWS API Documentation
+    #
+    class GetWhatsAppBusinessPublicKeyOutput < Struct.new(
+      :business_public_key,
+      :business_public_key_signature_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1663,6 +1703,34 @@ module Aws::SocialMessaging
     #
     class PutWhatsAppBusinessAccountEventDestinationsOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] origination_phone_number_id
+    #   The unique identifier of the phone number to associate with the
+    #   business public key.
+    #   @return [String]
+    #
+    # @!attribute [rw] business_public_key
+    #   PEM-encoded RSA public key. Mutually exclusive with kmsKeyArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   Customer-managed KMS asymmetric RSA key ARN. Mutually exclusive with
+    #   businessPublicKey.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/PutWhatsAppBusinessPublicKeyInput AWS API Documentation
+    #
+    class PutWhatsAppBusinessPublicKeyInput < Struct.new(
+      :origination_phone_number_id,
+      :business_public_key,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/PutWhatsAppBusinessPublicKeyOutput AWS API Documentation
+    #
+    class PutWhatsAppBusinessPublicKeyOutput < Aws::EmptyStructure; end
+
     # The resource was not found.
     #
     # @!attribute [rw] message
@@ -2013,13 +2081,32 @@ module Aws::SocialMessaging
     #   The updated categories for the Flow.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] endpoint_uri
+    #   Optional HTTPS endpoint for a dynamic Flow, registered with Meta as
+    #   the Flow's endpoint\_uri and called by Meta directly. When omitted,
+    #   the Flow's endpoint is unchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] meta_app_id
+    #   Optional Meta app ID to attach to the Flow. Meta signs data-exchange
+    #   requests with the attached app's secret, so attaching your own app
+    #   is what enables X-Hub-Signature-256 and flow\_token\_signature
+    #   verification at your endpoint. Meta requires the app to be owned by
+    #   the same business that owns the WABA. Attaching your own app is
+    #   one-way: the service's app cannot be re-attached afterwards. When
+    #   omitted, the attached app is unchanged. (Set via update because Meta
+    #   ignores application\_id at creation time.)
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/UpdateWhatsAppFlowInput AWS API Documentation
     #
     class UpdateWhatsAppFlowInput < Struct.new(
       :id,
       :flow_id,
       :flow_name,
-      :categories)
+      :categories,
+      :endpoint_uri,
+      :meta_app_id)
       SENSITIVE = []
       include Aws::Structure
     end

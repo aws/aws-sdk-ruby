@@ -804,6 +804,7 @@ module Aws::Lambda
     class FileSystemConfig
       attr_accessor arn: ::String
       attr_accessor local_mount_path: ::String
+      attr_accessor s3_files_config: Types::S3FilesConfig
       SENSITIVE: []
     end
 
@@ -1957,6 +1958,11 @@ module Aws::Lambda
       attr_accessor error_code: ::String
       attr_accessor message: ::String
       SENSITIVE: [:message]
+    end
+
+    class S3FilesConfig
+      attr_accessor direct_s3_read: ("ENABLED" | "DISABLED" | "AUTO")
+      SENSITIVE: []
     end
 
     class S3FilesMountConnectivityException

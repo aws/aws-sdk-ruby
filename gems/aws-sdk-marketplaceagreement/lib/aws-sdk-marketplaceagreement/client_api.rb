@@ -78,6 +78,7 @@ module Aws::MarketplaceAgreement
     Catalog = Shapes::StringShape.new(name: 'Catalog')
     Charge = Shapes::StructureShape.new(name: 'Charge')
     ChargeId = Shapes::StringShape.new(name: 'ChargeId')
+    ChargePercentage = Shapes::StringShape.new(name: 'ChargePercentage')
     ChargeRevision = Shapes::IntegerShape.new(name: 'ChargeRevision')
     ChargeSummary = Shapes::StructureShape.new(name: 'ChargeSummary')
     Charges = Shapes::ListShape.new(name: 'Charges')
@@ -91,12 +92,16 @@ module Aws::MarketplaceAgreement
     CreateAgreementRequestInput = Shapes::StructureShape.new(name: 'CreateAgreementRequestInput')
     CreateAgreementRequestOutput = Shapes::StructureShape.new(name: 'CreateAgreementRequestOutput')
     CurrencyCode = Shapes::StringShape.new(name: 'CurrencyCode')
+    DayDuration = Shapes::StringShape.new(name: 'DayDuration')
     DescribeAgreementInput = Shapes::StructureShape.new(name: 'DescribeAgreementInput')
     DescribeAgreementOutput = Shapes::StructureShape.new(name: 'DescribeAgreementOutput')
     Dimension = Shapes::StructureShape.new(name: 'Dimension')
     DimensionList = Shapes::ListShape.new(name: 'DimensionList')
     DocumentItem = Shapes::StructureShape.new(name: 'DocumentItem')
     DocumentList = Shapes::ListShape.new(name: 'DocumentList')
+    EndTimeBehavior = Shapes::StructureShape.new(name: 'EndTimeBehavior')
+    EndTimeBehaviorReasonCode = Shapes::StringShape.new(name: 'EndTimeBehaviorReasonCode')
+    EndTimeBehaviorType = Shapes::StringShape.new(name: 'EndTimeBehaviorType')
     Entitlement = Shapes::StructureShape.new(name: 'Entitlement')
     EntitlementList = Shapes::ListShape.new(name: 'EntitlementList')
     EntitlementType = Shapes::StringShape.new(name: 'EntitlementType')
@@ -110,6 +115,7 @@ module Aws::MarketplaceAgreement
     FilterName = Shapes::StringShape.new(name: 'FilterName')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
+    FixedPercentage = Shapes::StructureShape.new(name: 'FixedPercentage')
     FixedUpfrontPricingTerm = Shapes::StructureShape.new(name: 'FixedUpfrontPricingTerm')
     FreeTrialPricingTerm = Shapes::StructureShape.new(name: 'FreeTrialPricingTerm')
     GetAgreementCancellationRequestInput = Shapes::StructureShape.new(name: 'GetAgreementCancellationRequestInput')
@@ -153,6 +159,7 @@ module Aws::MarketplaceAgreement
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OfferId = Shapes::StringShape.new(name: 'OfferId')
     OfferSetId = Shapes::StringShape.new(name: 'OfferSetId')
+    OffsetDuration = Shapes::StringShape.new(name: 'OffsetDuration')
     PartyType = Shapes::StringShape.new(name: 'PartyType')
     PaymentRequestApprovalStrategy = Shapes::StringShape.new(name: 'PaymentRequestApprovalStrategy')
     PaymentRequestDescription = Shapes::StringShape.new(name: 'PaymentRequestDescription')
@@ -163,9 +170,16 @@ module Aws::MarketplaceAgreement
     PaymentRequestStatusMessage = Shapes::StringShape.new(name: 'PaymentRequestStatusMessage')
     PaymentRequestSummary = Shapes::StructureShape.new(name: 'PaymentRequestSummary')
     PaymentRequestSummaryList = Shapes::ListShape.new(name: 'PaymentRequestSummaryList')
+    PaymentScheduleEntry = Shapes::StructureShape.new(name: 'PaymentScheduleEntry')
+    PaymentScheduleEntryDayOfMonthInteger = Shapes::IntegerShape.new(name: 'PaymentScheduleEntryDayOfMonthInteger')
     PaymentScheduleTerm = Shapes::StructureShape.new(name: 'PaymentScheduleTerm')
+    PaymentScheduleTermTemplate = Shapes::StructureShape.new(name: 'PaymentScheduleTermTemplate')
+    PaymentScheduleTermTemplateScheduleList = Shapes::ListShape.new(name: 'PaymentScheduleTermTemplateScheduleList')
+    PercentageRange = Shapes::StructureShape.new(name: 'PercentageRange')
     PositiveAmountUpto8Decimals = Shapes::StringShape.new(name: 'PositiveAmountUpto8Decimals')
     PositiveIntegerWithDefaultValueOne = Shapes::IntegerShape.new(name: 'PositiveIntegerWithDefaultValueOne')
+    PriceIncrease = Shapes::UnionShape.new(name: 'PriceIncrease')
+    PriceIncreasePercentage = Shapes::StringShape.new(name: 'PriceIncreasePercentage')
     PricingCurrencyAmount = Shapes::StructureShape.new(name: 'PricingCurrencyAmount')
     ProposalSummary = Shapes::StructureShape.new(name: 'ProposalSummary')
     Proposer = Shapes::StructureShape.new(name: 'Proposer')
@@ -180,8 +194,11 @@ module Aws::MarketplaceAgreement
     RejectAgreementCancellationRequestOutput = Shapes::StructureShape.new(name: 'RejectAgreementCancellationRequestOutput')
     RejectAgreementPaymentRequestInput = Shapes::StructureShape.new(name: 'RejectAgreementPaymentRequestInput')
     RejectAgreementPaymentRequestOutput = Shapes::StructureShape.new(name: 'RejectAgreementPaymentRequestOutput')
+    RenewalSummary = Shapes::StructureShape.new(name: 'RenewalSummary')
     RenewalTerm = Shapes::StructureShape.new(name: 'RenewalTerm')
     RenewalTermConfiguration = Shapes::StructureShape.new(name: 'RenewalTermConfiguration')
+    RenewalTermMaxRenewalsInteger = Shapes::IntegerShape.new(name: 'RenewalTermMaxRenewalsInteger')
+    RenewalTermTermTemplatesList = Shapes::ListShape.new(name: 'RenewalTermTermTemplatesList')
     RequestId = Shapes::StringShape.new(name: 'RequestId')
     RequestedTerm = Shapes::StructureShape.new(name: 'RequestedTerm')
     RequestedTermConfiguration = Shapes::UnionShape.new(name: 'RequestedTermConfiguration')
@@ -211,6 +228,7 @@ module Aws::MarketplaceAgreement
     TaxConfiguration = Shapes::StructureShape.new(name: 'TaxConfiguration')
     TaxEstimation = Shapes::StringShape.new(name: 'TaxEstimation')
     TermId = Shapes::StringShape.new(name: 'TermId')
+    TermTemplate = Shapes::UnionShape.new(name: 'TermTemplate')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Timing = Shapes::StringShape.new(name: 'Timing')
@@ -342,12 +360,16 @@ module Aws::MarketplaceAgreement
     AgreementViewSummary.add_member(:acceptance_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "acceptanceTime"))
     AgreementViewSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startTime"))
     AgreementViewSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endTime"))
+    AgreementViewSummary.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdateTime"))
     AgreementViewSummary.add_member(:agreement_type, Shapes::ShapeRef.new(shape: AgreementType, location_name: "agreementType"))
     AgreementViewSummary.add_member(:acceptor, Shapes::ShapeRef.new(shape: Acceptor, location_name: "acceptor"))
     AgreementViewSummary.add_member(:proposer, Shapes::ShapeRef.new(shape: Proposer, location_name: "proposer"))
     AgreementViewSummary.add_member(:proposal_summary, Shapes::ShapeRef.new(shape: ProposalSummary, location_name: "proposalSummary"))
     AgreementViewSummary.add_member(:status, Shapes::ShapeRef.new(shape: AgreementStatus, location_name: "status"))
     AgreementViewSummary.add_member(:entitlements, Shapes::ShapeRef.new(shape: EntitlementList, location_name: "entitlements"))
+    AgreementViewSummary.add_member(:initial_agreement_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "initialAgreementId"))
+    AgreementViewSummary.add_member(:end_time_behavior_type, Shapes::ShapeRef.new(shape: EndTimeBehaviorType, location_name: "endTimeBehaviorType"))
+    AgreementViewSummary.add_member(:end_time_behavior_reason_code, Shapes::ShapeRef.new(shape: EndTimeBehaviorReasonCode, location_name: "endTimeBehaviorReasonCode"))
     AgreementViewSummary.struct_class = Types::AgreementViewSummary
 
     AgreementViewSummaryList.member = Shapes::ShapeRef.new(shape: AgreementViewSummary)
@@ -510,6 +532,8 @@ module Aws::MarketplaceAgreement
     DescribeAgreementOutput.add_member(:estimated_charges, Shapes::ShapeRef.new(shape: EstimatedCharges, location_name: "estimatedCharges"))
     DescribeAgreementOutput.add_member(:proposal_summary, Shapes::ShapeRef.new(shape: ProposalSummary, location_name: "proposalSummary"))
     DescribeAgreementOutput.add_member(:status, Shapes::ShapeRef.new(shape: AgreementStatus, location_name: "status"))
+    DescribeAgreementOutput.add_member(:initial_agreement_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "initialAgreementId"))
+    DescribeAgreementOutput.add_member(:end_time_behavior, Shapes::ShapeRef.new(shape: EndTimeBehavior, location_name: "endTimeBehavior"))
     DescribeAgreementOutput.struct_class = Types::DescribeAgreementOutput
 
     Dimension.add_member(:dimension_key, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "dimensionKey"))
@@ -524,6 +548,11 @@ module Aws::MarketplaceAgreement
     DocumentItem.struct_class = Types::DocumentItem
 
     DocumentList.member = Shapes::ShapeRef.new(shape: DocumentItem)
+
+    EndTimeBehavior.add_member(:type, Shapes::ShapeRef.new(shape: EndTimeBehaviorType, required: true, location_name: "type"))
+    EndTimeBehavior.add_member(:reason_code, Shapes::ShapeRef.new(shape: EndTimeBehaviorReasonCode, location_name: "reasonCode"))
+    EndTimeBehavior.add_member(:renewal_summary, Shapes::ShapeRef.new(shape: RenewalSummary, location_name: "renewalSummary"))
+    EndTimeBehavior.struct_class = Types::EndTimeBehavior
 
     Entitlement.add_member(:license_arn, Shapes::ShapeRef.new(shape: String, location_name: "licenseArn"))
     Entitlement.struct_class = Types::Entitlement
@@ -555,6 +584,9 @@ module Aws::MarketplaceAgreement
     FilterList.member = Shapes::ShapeRef.new(shape: Filter)
 
     FilterValueList.member = Shapes::ShapeRef.new(shape: FilterValue)
+
+    FixedPercentage.add_member(:value, Shapes::ShapeRef.new(shape: PriceIncreasePercentage, location_name: "value"))
+    FixedPercentage.struct_class = Types::FixedPercentage
 
     FixedUpfrontPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     FixedUpfrontPricingTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, location_name: "id"))
@@ -752,11 +784,34 @@ module Aws::MarketplaceAgreement
 
     PaymentRequestSummaryList.member = Shapes::ShapeRef.new(shape: PaymentRequestSummary)
 
+    PaymentScheduleEntry.add_member(:charge_date_offset, Shapes::ShapeRef.new(shape: OffsetDuration, location_name: "chargeDateOffset"))
+    PaymentScheduleEntry.add_member(:charge_percentage, Shapes::ShapeRef.new(shape: ChargePercentage, location_name: "chargePercentage"))
+    PaymentScheduleEntry.add_member(:day_of_month, Shapes::ShapeRef.new(shape: PaymentScheduleEntryDayOfMonthInteger, location_name: "dayOfMonth"))
+    PaymentScheduleEntry.struct_class = Types::PaymentScheduleEntry
+
     PaymentScheduleTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     PaymentScheduleTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, location_name: "id"))
     PaymentScheduleTerm.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, location_name: "currencyCode"))
     PaymentScheduleTerm.add_member(:schedule, Shapes::ShapeRef.new(shape: ScheduleList, location_name: "schedule"))
     PaymentScheduleTerm.struct_class = Types::PaymentScheduleTerm
+
+    PaymentScheduleTermTemplate.add_member(:schedule, Shapes::ShapeRef.new(shape: PaymentScheduleTermTemplateScheduleList, location_name: "schedule"))
+    PaymentScheduleTermTemplate.struct_class = Types::PaymentScheduleTermTemplate
+
+    PaymentScheduleTermTemplateScheduleList.member = Shapes::ShapeRef.new(shape: PaymentScheduleEntry)
+
+    PercentageRange.add_member(:min_value, Shapes::ShapeRef.new(shape: PriceIncreasePercentage, location_name: "minValue"))
+    PercentageRange.add_member(:max_value, Shapes::ShapeRef.new(shape: PriceIncreasePercentage, location_name: "maxValue"))
+    PercentageRange.add_member(:default_value, Shapes::ShapeRef.new(shape: PriceIncreasePercentage, location_name: "defaultValue"))
+    PercentageRange.struct_class = Types::PercentageRange
+
+    PriceIncrease.add_member(:fixed_percentage, Shapes::ShapeRef.new(shape: FixedPercentage, location_name: "fixedPercentage"))
+    PriceIncrease.add_member(:percentage_range, Shapes::ShapeRef.new(shape: PercentageRange, location_name: "percentageRange"))
+    PriceIncrease.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PriceIncrease.add_member_subclass(:fixed_percentage, Types::PriceIncrease::FixedPercentage)
+    PriceIncrease.add_member_subclass(:percentage_range, Types::PriceIncrease::PercentageRange)
+    PriceIncrease.add_member_subclass(:unknown, Types::PriceIncrease::Unknown)
+    PriceIncrease.struct_class = Types::PriceIncrease
 
     PricingCurrencyAmount.add_member(:amount, Shapes::ShapeRef.new(shape: BoundedString, location_name: "amount"))
     PricingCurrencyAmount.add_member(:max_adjustment_amount, Shapes::ShapeRef.new(shape: BoundedString, location_name: "maxAdjustmentAmount"))
@@ -824,13 +879,23 @@ module Aws::MarketplaceAgreement
     RejectAgreementPaymentRequestOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     RejectAgreementPaymentRequestOutput.struct_class = Types::RejectAgreementPaymentRequestOutput
 
+    RenewalSummary.add_member(:offer_id, Shapes::ShapeRef.new(shape: OfferId, location_name: "offerId"))
+    RenewalSummary.struct_class = Types::RenewalSummary
+
     RenewalTerm.add_member(:type, Shapes::ShapeRef.new(shape: UnversionedTermType, location_name: "type"))
     RenewalTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, location_name: "id"))
     RenewalTerm.add_member(:configuration, Shapes::ShapeRef.new(shape: RenewalTermConfiguration, location_name: "configuration"))
+    RenewalTerm.add_member(:lockout_period, Shapes::ShapeRef.new(shape: DayDuration, location_name: "lockoutPeriod"))
+    RenewalTerm.add_member(:max_renewals, Shapes::ShapeRef.new(shape: RenewalTermMaxRenewalsInteger, location_name: "maxRenewals"))
+    RenewalTerm.add_member(:adjustment_deadline, Shapes::ShapeRef.new(shape: DayDuration, location_name: "adjustmentDeadline"))
+    RenewalTerm.add_member(:price_increase, Shapes::ShapeRef.new(shape: PriceIncrease, location_name: "priceIncrease"))
+    RenewalTerm.add_member(:term_templates, Shapes::ShapeRef.new(shape: RenewalTermTermTemplatesList, location_name: "termTemplates"))
     RenewalTerm.struct_class = Types::RenewalTerm
 
     RenewalTermConfiguration.add_member(:enable_auto_renew, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enableAutoRenew"))
     RenewalTermConfiguration.struct_class = Types::RenewalTermConfiguration
+
+    RenewalTermTermTemplatesList.member = Shapes::ShapeRef.new(shape: TermTemplate)
 
     RequestedTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, required: true, location_name: "id"))
     RequestedTerm.add_member(:configuration, Shapes::ShapeRef.new(shape: RequestedTermConfiguration, location_name: "configuration"))
@@ -940,6 +1005,12 @@ module Aws::MarketplaceAgreement
 
     TaxConfiguration.add_member(:tax_estimation, Shapes::ShapeRef.new(shape: TaxEstimation, location_name: "taxEstimation"))
     TaxConfiguration.struct_class = Types::TaxConfiguration
+
+    TermTemplate.add_member(:payment_schedule_term_template, Shapes::ShapeRef.new(shape: PaymentScheduleTermTemplate, location_name: "paymentScheduleTermTemplate"))
+    TermTemplate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TermTemplate.add_member_subclass(:payment_schedule_term_template, Types::TermTemplate::PaymentScheduleTermTemplate)
+    TermTemplate.add_member_subclass(:unknown, Types::TermTemplate::Unknown)
+    TermTemplate.struct_class = Types::TermTemplate
 
     ThrottlingException.add_member(:request_id, Shapes::ShapeRef.new(shape: RequestId, location_name: "requestId"))
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))

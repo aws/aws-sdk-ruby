@@ -9018,6 +9018,42 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetProfileRequest AWS API Documentation
+    #
+    class GetProfileRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] profile_type
+    #   The type of the profile.
+    #
+    #   The following profile types are possible:
+    #
+    #   * `Lightsailor` – The account is not enrolled in the Lightsail
+    #     partner program.
+    #
+    #   * `LightsailPartner` – The account is enrolled in the Lightsail
+    #     partner program.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner
+    #   An object that describes the partner membership of the account, such
+    #   as the tier of the membership, its status, and when the account was
+    #   enrolled.
+    #
+    #   This parameter is returned only for accounts that have a
+    #   `profileType` of `LightsailPartner`.
+    #   @return [Types::PartnerInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetProfileResult AWS API Documentation
+    #
+    class GetProfileResult < Struct.new(
+      :profile_type,
+      :partner)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] include_availability_zones
     #   A Boolean value indicating whether to also include Availability
     #   Zones in your get regions request. Availability Zones are indicated
@@ -12206,6 +12242,40 @@ module Aws::Lightsail
       :protocol_policy,
       :response_timeout,
       :ip_address_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains information about the Lightsail partner
+    # program membership of an Amazon Lightsail account.
+    #
+    # @!attribute [rw] enrolled_at
+    #   The timestamp when the account was enrolled in the Lightsail partner
+    #   program.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tier_name
+    #   The tier of the partner membership.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the partner membership.
+    #
+    #   The following statuses are possible:
+    #
+    #   * `Active` – The membership is active, and the benefits of the
+    #     current tier are available to the account.
+    #
+    #   * `Suspended` – The membership is suspended, and the benefits of the
+    #     tier are not available to the account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PartnerInfo AWS API Documentation
+    #
+    class PartnerInfo < Struct.new(
+      :enrolled_at,
+      :tier_name,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

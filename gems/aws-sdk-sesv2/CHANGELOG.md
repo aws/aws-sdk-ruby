@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.107.0 (2026-09-01)
+------------------
+
+* Feature - Added support for managing SMIME signing certificates for email identities, including associating, listing, and disassociating certificates. Added the UpdateConfigurationSet operation to configure message security options such as signing scheme.
+
 1.106.0 (2026-08-20)
 ------------------
 

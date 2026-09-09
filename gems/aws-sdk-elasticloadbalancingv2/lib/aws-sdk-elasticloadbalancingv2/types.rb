@@ -2361,6 +2361,17 @@ module Aws::ElasticLoadBalancingV2
     #
     #   ^
     #
+    #   The following attribute is only supported by Gateway Load Balancers:
+    #
+    #   * `send_tcp_reset.on_idle_timeout.enabled` – Specifies whether the
+    #     Gateway Load Balancer sends a TCP Reset to the sender of traffic
+    #     when a TCP flow's idle timeout expires. This attribute also
+    #     applies to non-SYN TCP packets received for flows that are not in
+    #     the flow table. The value is `true` or `false`. The default is
+    #     `false`.
+    #
+    #   ^
+    #
     #   The following attributes are only supported by Application Load
     #   Balancers.
     #
@@ -4646,6 +4657,25 @@ module Aws::ElasticLoadBalancingV2
     #     (`target_failover.on_deregistration` and
     #     `target_failover.on_unhealthy`) can't be set independently. The
     #     value you set for both attributes must be the same.
+    #
+    #   * `send_tcp_reset.on_unhealthy.enabled` – Specifies whether the
+    #     Gateway Load Balancer sends a TCP Reset to the sender of traffic
+    #     when a target becomes unhealthy. After sending the reset, the
+    #     Gateway Load Balancer removes the flow entry from its flow table.
+    #     The value is `true` or `false`. The default is `false`. This
+    #     attribute does not apply when `target_failover.on_unhealthy` is
+    #     set to `rebalance`. This feature requires 5-tuple flow stickiness,
+    #     which the target group uses by default when `stickiness.enabled`
+    #     is set to `false`.
+    #
+    #   * `send_tcp_reset.on_deregistration.enabled` – Specifies whether the
+    #     Gateway Load Balancer sends a TCP Reset to the sender of traffic
+    #     when a target is deregistered. The reset occurs after the
+    #     connection drain time has elapsed. The value is `true` or `false`.
+    #     The default is `false`. This attribute does not apply when
+    #     `target_failover.on_deregistration` is set to `rebalance`. This
+    #     feature requires 5-tuple flow stickiness, which the target group
+    #     uses by default when `stickiness.enabled` is set to `false`.
     #   @return [String]
     #
     # @!attribute [rw] value

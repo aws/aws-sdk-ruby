@@ -475,6 +475,10 @@ module Aws::Kinesis
     #   The starting position in the data stream from which to start
     #   streaming.
     #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
     # @return [Types::SubscribeToShardOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::SubscribeToShardOutput#event_stream #event_stream} => Types::SubscribeToShardEventStream
@@ -660,6 +664,7 @@ module Aws::Kinesis
     #       sequence_number: "SequenceNumber",
     #       timestamp: Time.now,
     #     },
+    #     dry_run: false,
     #   })
     #   # => Seahorse::Client::AsyncResponse
     #   async_resp.wait
@@ -756,7 +761,7 @@ module Aws::Kinesis
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.106.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

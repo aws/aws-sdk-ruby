@@ -215,6 +215,7 @@ module Aws::S3
     Errors = Shapes::ListShape.new(name: 'Errors', flattened: true)
     Event = Shapes::StringShape.new(name: 'Event')
     EventBridgeConfiguration = Shapes::StructureShape.new(name: 'EventBridgeConfiguration')
+    EventHoldDuration = Shapes::StructureShape.new(name: 'EventHoldDuration')
     EventList = Shapes::ListShape.new(name: 'EventList', flattened: true)
     ExistingObjectReplication = Shapes::StructureShape.new(name: 'ExistingObjectReplication')
     ExistingObjectReplicationStatus = Shapes::StringShape.new(name: 'ExistingObjectReplicationStatus')
@@ -490,6 +491,9 @@ module Aws::S3
     ObjectLockConfiguration = Shapes::StructureShape.new(name: 'ObjectLockConfiguration')
     ObjectLockEnabled = Shapes::StringShape.new(name: 'ObjectLockEnabled')
     ObjectLockEnabledForBucket = Shapes::BooleanShape.new(name: 'ObjectLockEnabledForBucket')
+    ObjectLockEventHold = Shapes::StringShape.new(name: 'ObjectLockEventHold')
+    ObjectLockEventHoldDurationDays = Shapes::IntegerShape.new(name: 'ObjectLockEventHoldDurationDays')
+    ObjectLockEventHoldDurationYears = Shapes::IntegerShape.new(name: 'ObjectLockEventHoldDurationYears')
     ObjectLockLegalHold = Shapes::StructureShape.new(name: 'ObjectLockLegalHold')
     ObjectLockLegalHoldStatus = Shapes::StringShape.new(name: 'ObjectLockLegalHoldStatus')
     ObjectLockMode = Shapes::StringShape.new(name: 'ObjectLockMode')
@@ -1039,6 +1043,9 @@ module Aws::S3
     CopyObjectRequest.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
     CopyObjectRequest.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location: "header", location_name: "x-amz-object-lock-retain-until-date"))
     CopyObjectRequest.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-object-lock-legal-hold"))
+    CopyObjectRequest.add_member(:object_lock_event_hold, Shapes::ShapeRef.new(shape: ObjectLockEventHold, location: "header", location_name: "x-amz-object-lock-event-hold"))
+    CopyObjectRequest.add_member(:object_lock_event_hold_duration_days, Shapes::ShapeRef.new(shape: ObjectLockEventHoldDurationDays, location: "header", location_name: "x-amz-object-lock-event-hold-duration-days"))
+    CopyObjectRequest.add_member(:object_lock_event_hold_duration_years, Shapes::ShapeRef.new(shape: ObjectLockEventHoldDurationYears, location: "header", location_name: "x-amz-object-lock-event-hold-duration-years"))
     CopyObjectRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     CopyObjectRequest.add_member(:expected_source_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-source-expected-bucket-owner"))
     CopyObjectRequest.struct_class = Types::CopyObjectRequest
@@ -1159,6 +1166,9 @@ module Aws::S3
     CreateMultipartUploadRequest.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
     CreateMultipartUploadRequest.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location: "header", location_name: "x-amz-object-lock-retain-until-date"))
     CreateMultipartUploadRequest.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-object-lock-legal-hold"))
+    CreateMultipartUploadRequest.add_member(:object_lock_event_hold, Shapes::ShapeRef.new(shape: ObjectLockEventHold, location: "header", location_name: "x-amz-object-lock-event-hold"))
+    CreateMultipartUploadRequest.add_member(:object_lock_event_hold_duration_days, Shapes::ShapeRef.new(shape: ObjectLockEventHoldDurationDays, location: "header", location_name: "x-amz-object-lock-event-hold-duration-days"))
+    CreateMultipartUploadRequest.add_member(:object_lock_event_hold_duration_years, Shapes::ShapeRef.new(shape: ObjectLockEventHoldDurationYears, location: "header", location_name: "x-amz-object-lock-event-hold-duration-years"))
     CreateMultipartUploadRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     CreateMultipartUploadRequest.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: ChecksumAlgorithm, location: "header", location_name: "x-amz-checksum-algorithm"))
     CreateMultipartUploadRequest.add_member(:checksum_type, Shapes::ShapeRef.new(shape: ChecksumType, location: "header", location_name: "x-amz-checksum-type"))
@@ -1182,6 +1192,7 @@ module Aws::S3
     DefaultRetention.add_member(:mode, Shapes::ShapeRef.new(shape: ObjectLockRetentionMode, location_name: "Mode"))
     DefaultRetention.add_member(:days, Shapes::ShapeRef.new(shape: Days, location_name: "Days"))
     DefaultRetention.add_member(:years, Shapes::ShapeRef.new(shape: Years, location_name: "Years"))
+    DefaultRetention.add_member(:default_event_hold, Shapes::ShapeRef.new(shape: EventHoldDuration, location_name: "DefaultEventHold"))
     DefaultRetention.struct_class = Types::DefaultRetention
 
     Delete.add_member(:objects, Shapes::ShapeRef.new(shape: ObjectIdentifierList, required: true, location_name: "Object"))
@@ -1375,6 +1386,10 @@ module Aws::S3
     Errors.member = Shapes::ShapeRef.new(shape: Error)
 
     EventBridgeConfiguration.struct_class = Types::EventBridgeConfiguration
+
+    EventHoldDuration.add_member(:days, Shapes::ShapeRef.new(shape: Days, location_name: "Days"))
+    EventHoldDuration.add_member(:years, Shapes::ShapeRef.new(shape: Years, location_name: "Years"))
+    EventHoldDuration.struct_class = Types::EventHoldDuration
 
     EventList.member = Shapes::ShapeRef.new(shape: Event)
 
@@ -1739,6 +1754,9 @@ module Aws::S3
     GetObjectOutput.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
     GetObjectOutput.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location: "header", location_name: "x-amz-object-lock-retain-until-date"))
     GetObjectOutput.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-object-lock-legal-hold"))
+    GetObjectOutput.add_member(:object_lock_event_hold, Shapes::ShapeRef.new(shape: ObjectLockEventHold, location: "header", location_name: "x-amz-object-lock-event-hold"))
+    GetObjectOutput.add_member(:object_lock_event_hold_duration_days, Shapes::ShapeRef.new(shape: ObjectLockEventHoldDurationDays, location: "header", location_name: "x-amz-object-lock-event-hold-duration-days"))
+    GetObjectOutput.add_member(:object_lock_event_hold_duration_years, Shapes::ShapeRef.new(shape: ObjectLockEventHoldDurationYears, location: "header", location_name: "x-amz-object-lock-event-hold-duration-years"))
     GetObjectOutput.struct_class = Types::GetObjectOutput
     GetObjectOutput[:payload] = :body
     GetObjectOutput[:payload_member] = GetObjectOutput.member(:body)
@@ -1881,6 +1899,9 @@ module Aws::S3
     HeadObjectOutput.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
     HeadObjectOutput.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location: "header", location_name: "x-amz-object-lock-retain-until-date"))
     HeadObjectOutput.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-object-lock-legal-hold"))
+    HeadObjectOutput.add_member(:object_lock_event_hold, Shapes::ShapeRef.new(shape: ObjectLockEventHold, location: "header", location_name: "x-amz-object-lock-event-hold"))
+    HeadObjectOutput.add_member(:object_lock_event_hold_duration_days, Shapes::ShapeRef.new(shape: ObjectLockEventHoldDurationDays, location: "header", location_name: "x-amz-object-lock-event-hold-duration-days"))
+    HeadObjectOutput.add_member(:object_lock_event_hold_duration_years, Shapes::ShapeRef.new(shape: ObjectLockEventHoldDurationYears, location: "header", location_name: "x-amz-object-lock-event-hold-duration-years"))
     HeadObjectOutput.struct_class = Types::HeadObjectOutput
 
     HeadObjectRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket", metadata: {"contextParam" => {"name" => "Bucket"}}))
@@ -2427,6 +2448,8 @@ module Aws::S3
 
     ObjectLockRetention.add_member(:mode, Shapes::ShapeRef.new(shape: ObjectLockRetentionMode, location_name: "Mode"))
     ObjectLockRetention.add_member(:retain_until_date, Shapes::ShapeRef.new(shape: Date, location_name: "RetainUntilDate"))
+    ObjectLockRetention.add_member(:event_hold, Shapes::ShapeRef.new(shape: ObjectLockEventHold, location_name: "EventHold"))
+    ObjectLockRetention.add_member(:event_hold_duration, Shapes::ShapeRef.new(shape: EventHoldDuration, location_name: "EventHoldDuration"))
     ObjectLockRetention.struct_class = Types::ObjectLockRetention
 
     ObjectLockRule.add_member(:default_retention, Shapes::ShapeRef.new(shape: DefaultRetention, location_name: "DefaultRetention"))
@@ -2883,6 +2906,9 @@ module Aws::S3
     PutObjectRequest.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: ObjectLockMode, location: "header", location_name: "x-amz-object-lock-mode"))
     PutObjectRequest.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: ObjectLockRetainUntilDate, location: "header", location_name: "x-amz-object-lock-retain-until-date"))
     PutObjectRequest.add_member(:object_lock_legal_hold_status, Shapes::ShapeRef.new(shape: ObjectLockLegalHoldStatus, location: "header", location_name: "x-amz-object-lock-legal-hold"))
+    PutObjectRequest.add_member(:object_lock_event_hold, Shapes::ShapeRef.new(shape: ObjectLockEventHold, location: "header", location_name: "x-amz-object-lock-event-hold"))
+    PutObjectRequest.add_member(:object_lock_event_hold_duration_days, Shapes::ShapeRef.new(shape: ObjectLockEventHoldDurationDays, location: "header", location_name: "x-amz-object-lock-event-hold-duration-days"))
+    PutObjectRequest.add_member(:object_lock_event_hold_duration_years, Shapes::ShapeRef.new(shape: ObjectLockEventHoldDurationYears, location: "header", location_name: "x-amz-object-lock-event-hold-duration-years"))
     PutObjectRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
     PutObjectRequest.struct_class = Types::PutObjectRequest
     PutObjectRequest[:payload] = :body

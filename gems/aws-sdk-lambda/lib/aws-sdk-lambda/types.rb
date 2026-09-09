@@ -3632,7 +3632,7 @@ module Aws::Lambda
     end
 
     # Details about the connection between a Lambda function and an [Amazon
-    # EFS file system][1] or an [Amazon S3 Files file system][1].
+    # EFS file system][1] or an [Amazon S3 file system][1].
     #
     #
     #
@@ -3648,11 +3648,20 @@ module Aws::Lambda
     #   with `/mnt/`.
     #   @return [String]
     #
+    # @!attribute [rw] s3_files_config
+    #   The configuration for how your function accesses data on an Amazon
+    #   S3 file system. Valid only when the file system access point ARN is
+    #   an Amazon S3 Files access point. If you specify a different access
+    #   point type (for example, Amazon Elastic File System), the operation
+    #   returns an `InvalidParameterException`.
+    #   @return [Types::S3FilesConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FileSystemConfig AWS API Documentation
     #
     class FileSystemConfig < Struct.new(
       :arn,
-      :local_mount_path)
+      :local_mount_path,
+      :s3_files_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4026,7 +4035,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] file_system_configs
     #   Connection settings for an [Amazon EFS file system][1] or an [Amazon
-    #   S3 Files file system][1].
+    #   S3 file system][1].
     #
     #
     #
@@ -8768,6 +8777,37 @@ module Aws::Lambda
       :error_code,
       :message)
       SENSITIVE = [:message]
+      include Aws::Structure
+    end
+
+    # Setting controls how your function accesses data from an Amazon S3
+    # file system.
+    #
+    # @!attribute [rw] direct_s3_read
+    #   Specifies if a function reads from the file system for the lowest
+    #   latency, or through Amazon S3 Files feature "direct Amazon S3
+    #   bucket reads" for the highest throughput. Valid values:
+    #
+    #   * `AUTO` (default) – Direct reads are active for functions you
+    #     configure with 512 MB or more of memory.
+    #
+    #   * `ENABLED` – Enforces all reads are directly from the Amazon S3
+    #     bucket, regardless of available memory (less than 512 MB).
+    #
+    #   * `DISABLED` – Routes all reads through the file system, regardless
+    #     of memory configuration.
+    #
+    #   To use direct reads, you must grant the execution role the
+    #   `s3:GetObject` and `s3:GetObjectVersion` permissions. If a direct
+    #   read fails, Lambda automatically falls back to reading through the
+    #   file system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/S3FilesConfig AWS API Documentation
+    #
+    class S3FilesConfig < Struct.new(
+      :direct_s3_read)
+      SENSITIVE = []
       include Aws::Structure
     end
 

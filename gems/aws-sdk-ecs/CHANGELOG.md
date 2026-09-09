@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.245.0 (2026-09-03)
+------------------
+
+* Feature - Adds a critical parameter to the Amazon ECS managed daemon APIs that controls whether a daemon task failure drains the container instance. Non-critical daemon failures no longer drain the instance or block instance registration.
+
 1.244.0 (2026-08-28)
 ------------------
 

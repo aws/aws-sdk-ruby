@@ -619,6 +619,14 @@ module Aws::SocialMessaging
     #   The ID of an existing Flow within the same WhatsApp Business Account
     #   to clone.
     #
+    # @option params [String] :endpoint_uri
+    #   Optional HTTPS endpoint for a dynamic Flow, registered with Meta as
+    #   the Flow's endpoint\_uri and called by Meta directly. When omitted,
+    #   the Flow has no endpoint (static Flow). Meta only calls the endpoint
+    #   when the Flow JSON also declares data\_api\_version. To verify that
+    #   requests originate from Meta, attach your own Meta app via
+    #   UpdateWhatsAppFlow.
+    #
     # @return [Types::CreateWhatsAppFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWhatsAppFlowOutput#flow_id #flow_id} => String
@@ -633,6 +641,7 @@ module Aws::SocialMessaging
     #     flow_json: "data",
     #     publish: false,
     #     clone_flow_id: "MetaFlowId",
+    #     endpoint_uri: "MetaFlowEndpointUri",
     #   })
     #
     # @example Response structure
@@ -1056,6 +1065,38 @@ module Aws::SocialMessaging
     # @param [Hash] params ({})
     def get_linked_whats_app_business_account_phone_number(params = {}, options = {})
       req = build_request(:get_linked_whats_app_business_account_phone_number, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the business public key for a phone number and its signature
+    # status.
+    #
+    # @option params [required, String] :origination_phone_number_id
+    #   The unique identifier of the phone number whose business public key to
+    #   retrieve.
+    #
+    # @return [Types::GetWhatsAppBusinessPublicKeyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWhatsAppBusinessPublicKeyOutput#business_public_key #business_public_key} => String
+    #   * {Types::GetWhatsAppBusinessPublicKeyOutput#business_public_key_signature_status #business_public_key_signature_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_whats_app_business_public_key({
+    #     origination_phone_number_id: "WhatsAppPhoneNumberId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.business_public_key #=> String
+    #   resp.business_public_key_signature_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetWhatsAppBusinessPublicKey AWS API Documentation
+    #
+    # @overload get_whats_app_business_public_key(params = {})
+    # @param [Hash] params ({})
+    def get_whats_app_business_public_key(params = {}, options = {})
+      req = build_request(:get_whats_app_business_public_key, params)
       req.send_request(options)
     end
 
@@ -1704,6 +1745,39 @@ module Aws::SocialMessaging
       req.send_request(options)
     end
 
+    # Sets the business public key used to encrypt the data exchanged with
+    # the endpoint of a data exchange Flow.
+    #
+    # @option params [required, String] :origination_phone_number_id
+    #   The unique identifier of the phone number to associate with the
+    #   business public key.
+    #
+    # @option params [String] :business_public_key
+    #   PEM-encoded RSA public key. Mutually exclusive with kmsKeyArn.
+    #
+    # @option params [String] :kms_key_arn
+    #   Customer-managed KMS asymmetric RSA key ARN. Mutually exclusive with
+    #   businessPublicKey.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_whats_app_business_public_key({
+    #     origination_phone_number_id: "WhatsAppPhoneNumberId", # required
+    #     business_public_key: "BusinessPublicKeyPem",
+    #     kms_key_arn: "KmsKeyArn",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/PutWhatsAppBusinessPublicKey AWS API Documentation
+    #
+    # @overload put_whats_app_business_public_key(params = {})
+    # @param [Hash] params ({})
+    def put_whats_app_business_public_key(params = {}, options = {})
+      req = build_request(:put_whats_app_business_public_key, params)
+      req.send_request(options)
+    end
+
     # Sends a conversion event to Meta's Conversions API for the specified
     # WhatsApp Business Account dataset.
     #
@@ -1901,6 +1975,21 @@ module Aws::SocialMessaging
     # @option params [Array<String>] :categories
     #   The updated categories for the Flow.
     #
+    # @option params [String] :endpoint_uri
+    #   Optional HTTPS endpoint for a dynamic Flow, registered with Meta as
+    #   the Flow's endpoint\_uri and called by Meta directly. When omitted,
+    #   the Flow's endpoint is unchanged.
+    #
+    # @option params [String] :meta_app_id
+    #   Optional Meta app ID to attach to the Flow. Meta signs data-exchange
+    #   requests with the attached app's secret, so attaching your own app is
+    #   what enables X-Hub-Signature-256 and flow\_token\_signature
+    #   verification at your endpoint. Meta requires the app to be owned by
+    #   the same business that owns the WABA. Attaching your own app is
+    #   one-way: the service's app cannot be re-attached afterwards. When
+    #   omitted, the attached app is unchanged. (Set via update because Meta
+    #   ignores application\_id at creation time.)
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -1910,6 +1999,8 @@ module Aws::SocialMessaging
     #     flow_id: "MetaFlowId", # required
     #     flow_name: "MetaFlowName",
     #     categories: ["SIGN_UP"], # accepts SIGN_UP, SIGN_IN, APPOINTMENT_BOOKING, LEAD_GENERATION, SHOPPING, CONTACT_US, CUSTOMER_SUPPORT, SURVEY, OTHER
+    #     endpoint_uri: "MetaFlowEndpointUri",
+    #     meta_app_id: "MetaFlowApplicationId",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/UpdateWhatsAppFlow AWS API Documentation
@@ -2035,7 +2126,7 @@ module Aws::SocialMessaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-socialmessaging'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

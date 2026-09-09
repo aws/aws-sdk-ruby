@@ -6718,6 +6718,14 @@ module Aws::EC2
     #   with the source reservation for interruptible Capacity Reservations.
     #   @return [Types::InterruptionInfo]
     #
+    # @!attribute [rw] zero_size_preference
+    #   The zero-size preference configured for the interruptible Capacity
+    #   Reservation. A value of `retain` keeps the interruptible Capacity
+    #   Reservation active at zero capacity when you reduce its allocation
+    #   to zero. A value of `default` cancels the interruptible Capacity
+    #   Reservation when you reduce its allocation to zero.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservation AWS API Documentation
     #
     class CapacityReservation < Struct.new(
@@ -6751,7 +6759,8 @@ module Aws::EC2
       :capacity_block_id,
       :interruptible,
       :interruptible_capacity_allocation,
-      :interruption_info)
+      :interruption_info,
+      :zero_size_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12140,6 +12149,16 @@ module Aws::EC2
     #   creation.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] zero_size_preference
+    #   Specifies the behavior for the interruptible Capacity Reservation
+    #   when you reduce its allocation to zero instances. Specify `retain`
+    #   to keep the interruptible Capacity Reservation active at zero
+    #   capacity so that you can allocate instances to it again later.
+    #   Specify `default` to cancel the interruptible Capacity Reservation
+    #   and return the capacity to your source Capacity Reservation. The
+    #   default value is `default`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateInterruptibleCapacityReservationAllocationRequest AWS API Documentation
     #
     class CreateInterruptibleCapacityReservationAllocationRequest < Struct.new(
@@ -12147,7 +12166,8 @@ module Aws::EC2
       :instance_count,
       :client_token,
       :dry_run,
-      :tag_specifications)
+      :tag_specifications,
+      :zero_size_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25854,7 +25874,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     #   @return [String]
     #
     # @!attribute [rw] error_message
@@ -25864,7 +25884,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFleetError AWS API Documentation
@@ -56575,8 +56595,7 @@ module Aws::EC2
     #   @return [Types::EbsStatusSummary]
     #
     # @!attribute [rw] application_status
-    #   Reports impaired functionality that stems from issues with
-    #   applications running on the instance.
+    #   Reports the application-level health status for the instance.
     #   @return [Types::ApplicationStatusSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatus AWS API Documentation
@@ -57221,6 +57240,16 @@ module Aws::EC2
     #   reservation.
     #   @return [String]
     #
+    # @!attribute [rw] zero_size_preference
+    #   Specifies how Amazon EC2 handles the interruptible Capacity
+    #   Reservation when you reduce its allocation to zero instances. A
+    #   value of `retain` keeps the interruptible Capacity Reservation
+    #   active at zero capacity so that you can allocate instances to it
+    #   again later. A value of `default` cancels the interruptible Capacity
+    #   Reservation and returns the capacity to your source Capacity
+    #   Reservation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InterruptibleCapacityAllocation AWS API Documentation
     #
     class InterruptibleCapacityAllocation < Struct.new(
@@ -57228,7 +57257,8 @@ module Aws::EC2
       :target_instance_count,
       :status,
       :interruptible_capacity_reservation_id,
-      :interruption_type)
+      :interruption_type,
+      :zero_size_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -58130,6 +58160,12 @@ module Aws::EC2
     #   `delete-failed`.
     #   @return [String]
     #
+    # @!attribute [rw] state_message
+    #   A message describing the current state of the internet registry
+    #   association, including additional details such as the reason for a
+    #   failure.
+    #   @return [String]
+    #
     # @!attribute [rw] child_request_xml
     #   The XML content for the child request to be submitted to the
     #   internet registry to complete the BPKI setup.
@@ -58151,6 +58187,7 @@ module Aws::EC2
       :organization_handle,
       :description,
       :state,
+      :state_message,
       :child_request_xml,
       :tags)
       SENSITIVE = []
@@ -71168,6 +71205,10 @@ module Aws::EC2
     #   The maximum number of the ENA queues for each interface.
     #   @return [Integer]
     #
+    # @!attribute [rw] interface_types
+    #   The supported interface types for the network card.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/NetworkCardInfo AWS API Documentation
     #
     class NetworkCardInfo < Struct.new(
@@ -71179,7 +71220,8 @@ module Aws::EC2
       :peak_bandwidth_in_gbps,
       :default_ena_queue_count_per_interface,
       :maximum_ena_queue_count,
-      :maximum_ena_queue_count_per_interface)
+      :maximum_ena_queue_count_per_interface,
+      :interface_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -81683,7 +81725,11 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes a value for a resource attribute that is a Base64-encoded
+    # binary data object.
+    #
     # @!attribute [rw] value
+    #   The attribute value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/SecureBlobAttributeValue AWS API Documentation
@@ -88822,12 +88868,23 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   @return [Boolean]
     #
+    # @!attribute [rw] zero_size_preference
+    #   Specifies the updated behavior for the interruptible Capacity
+    #   Reservation when you reduce its allocation to zero instances.
+    #   Specify `retain` to keep the interruptible Capacity Reservation
+    #   active at zero capacity so that you can allocate instances to it
+    #   again later. Specify `default` to cancel the interruptible Capacity
+    #   Reservation and return the capacity to your source Capacity
+    #   Reservation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/UpdateInterruptibleCapacityReservationAllocationRequest AWS API Documentation
     #
     class UpdateInterruptibleCapacityReservationAllocationRequest < Struct.new(
       :capacity_reservation_id,
       :target_instance_count,
-      :dry_run)
+      :dry_run,
+      :zero_size_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -89164,6 +89221,44 @@ module Aws::EC2
       :default_threads_per_core,
       :valid_cores,
       :valid_threads_per_core)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the security groups to validate for association with a
+    #   single network interface. You must specify at least one ID, and each
+    #   ID must be unique. The number of IDs cannot exceed the maximum
+    #   number of security groups allowed per network interface.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ValidateSecurityGroupQuotasForInterfaceRequest AWS API Documentation
+    #
+    class ValidateSecurityGroupQuotasForInterfaceRequest < Struct.new(
+      :security_group_ids,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] valid
+    #   The operation returns `true` if the specified security groups can be
+    #   associated with a single network interface without exceeding the
+    #   quotas. It returns an error if associating the security groups would
+    #   exceed a quota.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ValidateSecurityGroupQuotasForInterfaceResult AWS API Documentation
+    #
+    class ValidateSecurityGroupQuotasForInterfaceResult < Struct.new(
+      :valid)
       SENSITIVE = []
       include Aws::Structure
     end

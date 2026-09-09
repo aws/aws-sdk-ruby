@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.195.0 (2026-09-02)
+------------------
+
+* Feature - AWS Elemental MediaLive now supports AB forensic video watermarking
+
 1.194.0 (2026-08-19)
 ------------------
 

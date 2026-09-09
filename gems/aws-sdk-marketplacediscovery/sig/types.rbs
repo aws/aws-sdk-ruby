@@ -179,6 +179,11 @@ module Aws::MarketplaceDiscovery
       SENSITIVE: []
     end
 
+    class FixedPercentage
+      attr_accessor percentage_value: ::String
+      SENSITIVE: []
+    end
+
     class FixedUpfrontPricingTerm
       attr_accessor id: ::String
       attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
@@ -538,12 +543,45 @@ module Aws::MarketplaceDiscovery
       end
     end
 
+    class PaymentScheduleEntry
+      attr_accessor charge_date_offset: ::String
+      attr_accessor charge_percentage: ::String
+      attr_accessor day_of_month: ::Integer
+      SENSITIVE: []
+    end
+
     class PaymentScheduleTerm
       attr_accessor id: ::String
       attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor currency_code: ::String
       attr_accessor schedule: ::Array[Types::ScheduleItem]
       SENSITIVE: []
+    end
+
+    class PaymentScheduleTermTemplate
+      attr_accessor schedule: ::Array[Types::PaymentScheduleEntry]
+      SENSITIVE: []
+    end
+
+    class PercentageRange
+      attr_accessor minimum_value: ::String
+      attr_accessor maximum_value: ::String
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class PriceIncrease
+      attr_accessor fixed_percentage: Types::FixedPercentage
+      attr_accessor percentage_range: Types::PercentageRange
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FixedPercentage < PriceIncrease
+      end
+      class PercentageRange < PriceIncrease
+      end
+      class Unknown < PriceIncrease
+      end
     end
 
     class PricingModel
@@ -611,7 +649,7 @@ module Aws::MarketplaceDiscovery
 
     class PurchaseOptionBadge
       attr_accessor display_name: ::String
-      attr_accessor badge_type: ("PRIVATE_PRICING" | "FUTURE_DATED" | "REPLACEMENT_OFFER")
+      attr_accessor badge_type: ("PRIVATE_PRICING" | "FUTURE_DATED" | "REPLACEMENT_OFFER" | "AUTO_RENEW")
       SENSITIVE: []
     end
 
@@ -656,6 +694,11 @@ module Aws::MarketplaceDiscovery
     class RenewalTerm
       attr_accessor id: ::String
       attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
+      attr_accessor max_renewals: ::Integer
+      attr_accessor lockout_period: ::String
+      attr_accessor adjustment_deadline: ::String
+      attr_accessor price_increase: Types::PriceIncrease
+      attr_accessor term_templates: ::Array[Types::TermTemplate]
       SENSITIVE: []
     end
 
@@ -798,6 +841,17 @@ module Aws::MarketplaceDiscovery
       attr_accessor type: ("ByolPricingTerm" | "ConfigurableUpfrontPricingTerm" | "FixedUpfrontPricingTerm" | "UsageBasedPricingTerm" | "FreeTrialPricingTerm" | "LegalTerm" | "PaymentScheduleTerm" | "RecurringPaymentTerm" | "RenewalTerm" | "SupportTerm" | "ValidityTerm" | "VariablePaymentTerm" | "NetPaymentTerm")
       attr_accessor refund_policy: ::String
       SENSITIVE: []
+    end
+
+    class TermTemplate
+      attr_accessor payment_schedule_term_template: Types::PaymentScheduleTermTemplate
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PaymentScheduleTermTemplate < TermTemplate
+      end
+      class Unknown < TermTemplate
+      end
     end
 
     class ThrottlingException

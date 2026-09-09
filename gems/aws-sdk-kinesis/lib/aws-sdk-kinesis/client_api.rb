@@ -76,6 +76,7 @@ module Aws::Kinesis
     DescribeStreamSummaryInput = Shapes::StructureShape.new(name: 'DescribeStreamSummaryInput')
     DescribeStreamSummaryOutput = Shapes::StructureShape.new(name: 'DescribeStreamSummaryOutput')
     DisableEnhancedMonitoringInput = Shapes::StructureShape.new(name: 'DisableEnhancedMonitoringInput')
+    DryRunOperationException = Shapes::StructureShape.new(name: 'DryRunOperationException')
     EnableEnhancedMonitoringInput = Shapes::StructureShape.new(name: 'EnableEnhancedMonitoringInput')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EnhancedMetrics = Shapes::StructureShape.new(name: 'EnhancedMetrics')
@@ -440,6 +441,9 @@ module Aws::Kinesis
     DisableEnhancedMonitoringInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
     DisableEnhancedMonitoringInput.struct_class = Types::DisableEnhancedMonitoringInput
 
+    DryRunOperationException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    DryRunOperationException.struct_class = Types::DryRunOperationException
+
     EnableEnhancedMonitoringInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     EnableEnhancedMonitoringInput.add_member(:shard_level_metrics, Shapes::ShapeRef.new(shape: MetricsNameList, required: true, location_name: "ShardLevelMetrics"))
     EnableEnhancedMonitoringInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
@@ -467,6 +471,7 @@ module Aws::Kinesis
     GetRecordsInput.add_member(:limit, Shapes::ShapeRef.new(shape: GetRecordsInputLimit, location_name: "Limit"))
     GetRecordsInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     GetRecordsInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
+    GetRecordsInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DryRun"))
     GetRecordsInput.struct_class = Types::GetRecordsInput
 
     GetRecordsOutput.add_member(:records, Shapes::ShapeRef.new(shape: RecordList, required: true, location_name: "Records"))
@@ -489,6 +494,7 @@ module Aws::Kinesis
     GetShardIteratorInput.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
     GetShardIteratorInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     GetShardIteratorInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
+    GetShardIteratorInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DryRun"))
     GetShardIteratorInput.struct_class = Types::GetShardIteratorInput
 
     GetShardIteratorOutput.add_member(:shard_iterator, Shapes::ShapeRef.new(shape: ShardIterator, location_name: "ShardIterator"))
@@ -631,6 +637,7 @@ module Aws::Kinesis
     PutRecordInput.add_member(:sequence_number_for_ordering, Shapes::ShapeRef.new(shape: SequenceNumber, location_name: "SequenceNumberForOrdering"))
     PutRecordInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     PutRecordInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
+    PutRecordInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DryRun"))
     PutRecordInput.struct_class = Types::PutRecordInput
 
     PutRecordOutput.add_member(:shard_id, Shapes::ShapeRef.new(shape: ShardId, required: true, location_name: "ShardId"))
@@ -642,6 +649,7 @@ module Aws::Kinesis
     PutRecordsInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
     PutRecordsInput.add_member(:stream_arn, Shapes::ShapeRef.new(shape: StreamARN, location_name: "StreamARN", metadata: {"contextParam" => {"name" => "StreamARN"}}))
     PutRecordsInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
+    PutRecordsInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DryRun"))
     PutRecordsInput.struct_class = Types::PutRecordsInput
 
     PutRecordsOutput.add_member(:failed_record_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "FailedRecordCount"))
@@ -863,6 +871,7 @@ module Aws::Kinesis
     SubscribeToShardInput.add_member(:stream_id, Shapes::ShapeRef.new(shape: StreamId, location_name: "StreamId", metadata: {"contextParam" => {"name" => "StreamId"}}))
     SubscribeToShardInput.add_member(:shard_id, Shapes::ShapeRef.new(shape: ShardId, required: true, location_name: "ShardId"))
     SubscribeToShardInput.add_member(:starting_position, Shapes::ShapeRef.new(shape: StartingPosition, required: true, location_name: "StartingPosition"))
+    SubscribeToShardInput.add_member(:dry_run, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "DryRun"))
     SubscribeToShardInput.struct_class = Types::SubscribeToShardInput
 
     SubscribeToShardOutput.add_member(:event_stream, Shapes::ShapeRef.new(shape: SubscribeToShardEventStream, required: true, eventstream: true, location_name: "EventStream"))
@@ -1193,6 +1202,7 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:get_resource_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1219,6 +1229,7 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:increase_stream_retention_period, Seahorse::Model::Operation.new.tap do |o|
@@ -1360,6 +1371,7 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:put_records, Seahorse::Model::Operation.new.tap do |o|
@@ -1379,6 +1391,7 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: KMSThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1476,6 +1489,7 @@ module Aws::Kinesis
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
         o.async = true
       end)
 

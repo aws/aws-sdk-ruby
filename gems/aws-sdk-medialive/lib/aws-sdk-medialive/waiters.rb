@@ -400,7 +400,7 @@ module Aws::MediaLive
 
     end
 
-    # Wait until a channel has is stopped
+    # Wait until a channel is not running
     class ChannelStopped
 
       # @param [Hash] options
@@ -433,6 +433,23 @@ module Aws::MediaLive
                 "state" => "retry",
                 "matcher" => "status",
                 "expected" => 500
+              },
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "DELETING"
+              },
+              {
+                "state" => "success",
+                "matcher" => "path",
+                "argument" => "state",
+                "expected" => "DELETED"
+              },
+              {
+                "state" => "failure",
+                "matcher" => "error",
+                "expected" => "NotFoundException"
               }
             ]
           )

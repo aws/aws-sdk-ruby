@@ -997,7 +997,14 @@ module Aws::BedrockAgentCore
     #
     # @!attribute [rw] log_group_names
     #   The list of CloudWatch log group names to read agent traces from.
-    #   Maximum of 5 log groups.
+    #   Maximum of 10 log groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] log_group_name_prefixes
+    #   The list of CloudWatch log group name prefixes to read agent traces
+    #   from. Specify this instead of `logGroupNames` to match log groups by
+    #   prefix. Maximum of 5 prefixes. Specify either `logGroupNames` or
+    #   `logGroupNamePrefixes`, not both. One of the two is required.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filter_config
@@ -1010,6 +1017,7 @@ module Aws::BedrockAgentCore
     class CloudWatchLogsSource < Struct.new(
       :service_names,
       :log_group_names,
+      :log_group_name_prefixes,
       :filter_config)
       SENSITIVE = []
       include Aws::Structure
@@ -1055,7 +1063,11 @@ module Aws::BedrockAgentCore
     #
     # @!attribute [rw] log_group_name
     #   The name of the CloudWatch log group where evaluation results will
-    #   be written.
+    #   be written. This value doesn't apply when `resultDestination` is
+    #   `SOURCE_LOG_GROUP`, because results are written back to the trace
+    #   source log group. The name can't be under the service-reserved
+    #   `/aws/bedrock-agentcore/evaluations/` namespace, apart from the
+    #   service-managed default group.
     #   @return [String]
     #
     # @!attribute [rw] log_stream_name
@@ -1063,11 +1075,31 @@ module Aws::BedrockAgentCore
     #   be written.
     #   @return [String]
     #
+    # @!attribute [rw] metrics_namespace
+    #   The CloudWatch metrics namespace where evaluation result metrics are
+    #   published. If you omit this value, the service publishes metrics to
+    #   `Bedrock-AgentCore/Evaluations`. This value can't begin with
+    #   `AWS/`.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_destination
+    #   The destination where evaluation results are written. Valid values:
+    #
+    #   * `DEDICATED_LOG_GROUP` (default) – Writes results to a dedicated
+    #     result log group.
+    #
+    #   * `SOURCE_LOG_GROUP` – Writes results back to the log group that the
+    #     agent traces were read from. If you use this value, don't specify
+    #     `logGroupName`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CloudWatchOutputConfig AWS API Documentation
     #
     class CloudWatchOutputConfig < Struct.new(
       :log_group_name,
-      :log_stream_name)
+      :log_stream_name,
+      :metrics_namespace,
+      :result_destination)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8066,6 +8098,8 @@ module Aws::BedrockAgentCore
 
     # Output destination configuration.
     #
+    # @note OutputConfig is a union - when making an API calls you must set exactly one of the members.
+    #
     # @note OutputConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OutputConfig corresponding to the set member.
     #
     # @!attribute [rw] cloud_watch_config
@@ -9698,6 +9732,10 @@ module Aws::BedrockAgentCore
     #   The description of the batch evaluation.
     #   @return [String]
     #
+    # @!attribute [rw] output_config
+    #   Output destination configuration.
+    #   @return [Types::OutputConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StartBatchEvaluationRequest AWS API Documentation
     #
     class StartBatchEvaluationRequest < Struct.new(
@@ -9709,7 +9747,8 @@ module Aws::BedrockAgentCore
       :evaluation_metadata,
       :tags,
       :kms_key_arn,
-      :description)
+      :description,
+      :output_config)
       SENSITIVE = []
       include Aws::Structure
     end

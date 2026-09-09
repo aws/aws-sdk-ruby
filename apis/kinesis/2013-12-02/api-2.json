@@ -326,7 +326,8 @@
         {"shape":"KMSOptInRequired"},
         {"shape":"KMSThrottlingException"},
         {"shape":"AccessDeniedException"},
-        {"shape":"InternalFailureException"}
+        {"shape":"InternalFailureException"},
+        {"shape":"DryRunOperationException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"data"}
@@ -364,7 +365,8 @@
         {"shape":"InvalidArgumentException"},
         {"shape":"ProvisionedThroughputExceededException"},
         {"shape":"AccessDeniedException"},
-        {"shape":"InternalFailureException"}
+        {"shape":"InternalFailureException"},
+        {"shape":"DryRunOperationException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"data"}
@@ -539,7 +541,8 @@
         {"shape":"KMSOptInRequired"},
         {"shape":"KMSThrottlingException"},
         {"shape":"AccessDeniedException"},
-        {"shape":"InternalFailureException"}
+        {"shape":"InternalFailureException"},
+        {"shape":"DryRunOperationException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"data"}
@@ -564,7 +567,8 @@
         {"shape":"KMSOptInRequired"},
         {"shape":"KMSThrottlingException"},
         {"shape":"AccessDeniedException"},
-        {"shape":"InternalFailureException"}
+        {"shape":"InternalFailureException"},
+        {"shape":"DryRunOperationException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"data"}
@@ -698,7 +702,8 @@
         {"shape":"InvalidArgumentException"},
         {"shape":"ResourceInUseException"},
         {"shape":"LimitExceededException"},
-        {"shape":"AccessDeniedException"}
+        {"shape":"AccessDeniedException"},
+        {"shape":"DryRunOperationException"}
       ],
       "staticContextParams":{
         "OperationType":{"value":"data"}
@@ -1439,6 +1444,13 @@
         }
       }
     },
+    "DryRunOperationException":{
+      "type":"structure",
+      "members":{
+        "message":{"shape":"ErrorMessage"}
+      },
+      "exception":true
+    },
     "EnableEnhancedMonitoringInput":{
       "type":"structure",
       "required":["ShardLevelMetrics"],
@@ -1522,7 +1534,8 @@
         "StreamId":{
           "shape":"StreamId",
           "contextParam":{"name":"StreamId"}
-        }
+        },
+        "DryRun":{"shape":"BooleanObject"}
       }
     },
     "GetRecordsInputLimit":{
@@ -1580,7 +1593,8 @@
         "StreamId":{
           "shape":"StreamId",
           "contextParam":{"name":"StreamId"}
-        }
+        },
+        "DryRun":{"shape":"BooleanObject"}
       }
     },
     "GetShardIteratorOutput":{
@@ -2017,7 +2031,8 @@
         "StreamId":{
           "shape":"StreamId",
           "contextParam":{"name":"StreamId"}
-        }
+        },
+        "DryRun":{"shape":"BooleanObject"}
       }
     },
     "PutRecordOutput":{
@@ -2045,7 +2060,8 @@
         "StreamId":{
           "shape":"StreamId",
           "contextParam":{"name":"StreamId"}
-        }
+        },
+        "DryRun":{"shape":"BooleanObject"}
       }
     },
     "PutRecordsOutput":{
@@ -2695,7 +2711,8 @@
           "contextParam":{"name":"StreamId"}
         },
         "ShardId":{"shape":"ShardId"},
-        "StartingPosition":{"shape":"StartingPosition"}
+        "StartingPosition":{"shape":"StartingPosition"},
+        "DryRun":{"shape":"BooleanObject"}
       }
     },
     "SubscribeToShardOutput":{

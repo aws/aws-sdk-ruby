@@ -8,6 +8,12 @@
 module Aws::Evs
   module Types
 
+    class AccountSetting
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class AssociateEipToVlanRequest
       attr_accessor client_token: ::String
       attr_accessor environment_id: ::String
@@ -236,6 +242,14 @@ module Aws::Evs
       SENSITIVE: []
     end
 
+    class GetAccountSettingsRequest < Aws::EmptyStructure
+    end
+
+    class GetAccountSettingsResponse
+      attr_accessor settings: ::Array[Types::AccountSetting]
+      SENSITIVE: []
+    end
+
     class GetDepotUrlRequest
       attr_accessor environment_id: ::String
       attr_accessor rotate: bool
@@ -409,6 +423,16 @@ module Aws::Evs
 
     class NetworkInterface
       attr_accessor network_interface_id: ::String
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingsRequest
+      attr_accessor settings: ::Array[Types::AccountSetting]
+      SENSITIVE: []
+    end
+
+    class PutAccountSettingsResponse
+      attr_accessor settings: ::Array[Types::AccountSetting]
       SENSITIVE: []
     end
 

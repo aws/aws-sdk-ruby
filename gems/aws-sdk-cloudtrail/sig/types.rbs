@@ -198,6 +198,7 @@ module Aws::CloudTrail
       attr_accessor kms_key_id: ::String
       attr_accessor is_organization_trail: bool
       attr_accessor tags_list: ::Array[Types::Tag]
+      attr_accessor recursive_logging: bool
       SENSITIVE: []
     end
 
@@ -215,6 +216,7 @@ module Aws::CloudTrail
       attr_accessor cloud_watch_logs_role_arn: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor is_organization_trail: bool
+      attr_accessor recursive_logging: bool
       SENSITIVE: []
     end
 
@@ -1319,6 +1321,7 @@ module Aws::CloudTrail
       attr_accessor has_custom_event_selectors: bool
       attr_accessor has_insight_selectors: bool
       attr_accessor is_organization_trail: bool
+      attr_accessor recursive_logging: bool
       SENSITIVE: []
     end
 
@@ -1419,6 +1422,7 @@ module Aws::CloudTrail
       attr_accessor cloud_watch_logs_role_arn: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor is_organization_trail: bool
+      attr_accessor recursive_logging: bool
       SENSITIVE: []
     end
 
@@ -1436,6 +1440,7 @@ module Aws::CloudTrail
       attr_accessor cloud_watch_logs_role_arn: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor is_organization_trail: bool
+      attr_accessor recursive_logging: bool
       SENSITIVE: []
     end
 

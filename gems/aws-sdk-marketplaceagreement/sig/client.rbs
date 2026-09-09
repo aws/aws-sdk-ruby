@@ -254,6 +254,8 @@ module Aws
         def estimated_charges: () -> Types::EstimatedCharges
         def proposal_summary: () -> Types::ProposalSummary
         def status: () -> ("ACTIVE" | "ARCHIVED" | "CANCELLED" | "EXPIRED" | "RENEWED" | "REPLACED" | "ROLLED_BACK" | "SUPERSEDED" | "TERMINATED")
+        def initial_agreement_id: () -> ::String
+        def end_time_behavior: () -> Types::EndTimeBehavior
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MarketplaceAgreement/Client.html#describe_agreement-instance_method
       def describe_agreement: (

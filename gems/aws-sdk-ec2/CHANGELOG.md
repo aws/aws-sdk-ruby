@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.645.0 (2026-09-08)
+------------------
+
+* Feature - Adds the InterfaceTypes field to NetworkCardInfo in the DescribeInstanceTypes response. This field identifies the network interface types supported by each network card.
+
+1.644.0 (2026-09-04)
+------------------
+
+* Feature - Adds support for ValidateSecurityGroupQuotasForInterface, an API that specifically authorized AWS services use to validate security group rule quotas before creating an elastic network interface.
+
+1.643.0 (2026-09-02)
+------------------
+
+* Feature - This release adds support to retain interruptible Capacity Reservations in an active state when all capacity is reclaimed.
+
+1.642.0 (2026-09-01)
+------------------
+
+* Feature - Update UserData and UploadPolicy shapes to use SecureBlob
+
 1.641.0 (2026-08-27)
 ------------------
 

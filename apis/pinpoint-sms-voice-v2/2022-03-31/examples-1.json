@@ -218,6 +218,39 @@
         "title": "DescribeNotifyTemplates"
       }
     ],
+    "ListAvailablePhoneNumbers": [
+      {
+        "input": {
+          "IsoCountryCode": "US",
+          "MaxResults": 10,
+          "NumberCapabilities": [
+            "SMS"
+          ],
+          "NumberPreference": [
+            {
+              "Filter": [
+                "+1206"
+              ],
+              "PreferenceType": [
+                "StartsWith"
+              ]
+            }
+          ],
+          "NumberType": "TEN_DLC",
+          "RegistrationId": "reg-1234567890abcdef0"
+        },
+        "output": {
+          "AvailablePhoneNumbers": [
+            "+12065550100",
+            "+12065550142",
+            "+12065550187"
+          ]
+        },
+        "description": "Search for available TEN_DLC phone numbers in the US that start with a specific area code.",
+        "id": "example-1",
+        "title": "ListAvailablePhoneNumbers"
+      }
+    ],
     "ListNotifyCountries": [
       {
         "input": {

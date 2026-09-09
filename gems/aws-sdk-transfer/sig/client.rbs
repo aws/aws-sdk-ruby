@@ -157,7 +157,8 @@ module Aws
                               ?sftp_config: {
                                 user_secret_id: ::String?,
                                 trusted_host_keys: Array[::String]?,
-                                max_concurrent_connections: ::Integer?
+                                max_concurrent_connections: ::Integer?,
+                                ordered_user_secret_version_stages: Array[::String]?
                               },
                               ?security_policy_name: ::String,
                               ?egress_config: {
@@ -994,7 +995,8 @@ module Aws
                               ?sftp_config: {
                                 user_secret_id: ::String?,
                                 trusted_host_keys: Array[::String]?,
-                                max_concurrent_connections: ::Integer?
+                                max_concurrent_connections: ::Integer?,
+                                ordered_user_secret_version_stages: Array[::String]?
                               },
                               ?security_policy_name: ::String,
                               ?egress_config: {

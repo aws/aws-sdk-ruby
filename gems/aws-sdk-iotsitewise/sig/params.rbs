@@ -180,13 +180,32 @@ module Aws
       task_execution_role: ::String,
       processing_type: ("GENERIC_COMPUTE_PROCESSING" | "HARDWARE_ACCELERATED_PROCESSING"),
       processing_unit: ("UNITS_2" | "UNITS_4" | "UNITS_8" | "UNITS_12" | "UNITS_16" | "UNITS_24" | "UNITS_32" | "UNITS_36" | "UNITS_48" | "UNITS_60" | "UNITS_64" | "UNITS_72" | "UNITS_84" | "UNITS_96"),
+      ephemeral_storage_configuration: {
+        storage_class: ("STANDARD_1" | "STANDARD_2" | "THROUGHPUT_1" | "THROUGHPUT_2"),
+        storage_size_in_gi_b: ::Integer
+      }?,
       command: Array[::String]?,
       timeout_seconds: ::Integer?,
-      environment_variables: Hash[::String, ::String]?
+      environment_variables: Hash[::String, ::String]?,
+      mounts: Array[
+        Params::mount
+      ]?
     }
 
       type task_configuration = {
       container_task_configuration: Params::container_task_configuration?
+    }
+
+      type mount = {
+      name: ::String,
+      relative_path: ::String,
+      source: {
+        s3_access_point: {
+          access_point_arn: ::String,
+          prefix: ::String?
+        }?
+      },
+      storage_type: ("SHARED_STORAGE")
     }
 
       type asset_model_property = {

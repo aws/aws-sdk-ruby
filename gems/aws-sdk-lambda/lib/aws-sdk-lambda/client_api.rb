@@ -136,6 +136,7 @@ module Aws::Lambda
     Description = Shapes::StringShape.new(name: 'Description')
     DestinationArn = Shapes::StringShape.new(name: 'DestinationArn')
     DestinationConfig = Shapes::StructureShape.new(name: 'DestinationConfig')
+    DirectS3Read = Shapes::StringShape.new(name: 'DirectS3Read')
     DocumentDBEventSourceConfig = Shapes::StructureShape.new(name: 'DocumentDBEventSourceConfig')
     DurableConfig = Shapes::StructureShape.new(name: 'DurableConfig')
     DurableExecutionAlreadyStartedException = Shapes::StructureShape.new(name: 'DurableExecutionAlreadyStartedException')
@@ -487,6 +488,7 @@ module Aws::Lambda
     RuntimeVersionConfig = Shapes::StructureShape.new(name: 'RuntimeVersionConfig')
     RuntimeVersionError = Shapes::StructureShape.new(name: 'RuntimeVersionError')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
+    S3FilesConfig = Shapes::StructureShape.new(name: 'S3FilesConfig')
     S3FilesMountConnectivityException = Shapes::StructureShape.new(name: 'S3FilesMountConnectivityException')
     S3FilesMountFailureException = Shapes::StructureShape.new(name: 'S3FilesMountFailureException')
     S3FilesMountTimeoutException = Shapes::StructureShape.new(name: 'S3FilesMountTimeoutException')
@@ -1226,6 +1228,7 @@ module Aws::Lambda
 
     FileSystemConfig.add_member(:arn, Shapes::ShapeRef.new(shape: FileSystemArn, required: true, location_name: "Arn"))
     FileSystemConfig.add_member(:local_mount_path, Shapes::ShapeRef.new(shape: LocalMountPath, required: true, location_name: "LocalMountPath"))
+    FileSystemConfig.add_member(:s3_files_config, Shapes::ShapeRef.new(shape: S3FilesConfig, location_name: "S3FilesConfig"))
     FileSystemConfig.struct_class = Types::FileSystemConfig
 
     FileSystemConfigList.member = Shapes::ShapeRef.new(shape: FileSystemConfig)
@@ -2117,6 +2120,9 @@ module Aws::Lambda
     RuntimeVersionError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
     RuntimeVersionError.add_member(:message, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Message"))
     RuntimeVersionError.struct_class = Types::RuntimeVersionError
+
+    S3FilesConfig.add_member(:direct_s3_read, Shapes::ShapeRef.new(shape: DirectS3Read, location_name: "DirectS3Read"))
+    S3FilesConfig.struct_class = Types::S3FilesConfig
 
     S3FilesMountConnectivityException.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "Type"))
     S3FilesMountConnectivityException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))

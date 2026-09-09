@@ -152,6 +152,15 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#object_lock_legal_hold_status-instance_method
       def object_lock_legal_hold_status: () -> ("ON" | "OFF")
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#object_lock_event_hold-instance_method
+      def object_lock_event_hold: () -> ("ON" | "OFF")
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#object_lock_event_hold_duration_days-instance_method
+      def object_lock_event_hold_duration_days: () -> ::Integer
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#object_lock_event_hold_duration_years-instance_method
+      def object_lock_event_hold_duration_years: () -> ::Integer
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Object.html#load-instance_method
@@ -218,6 +227,9 @@ module Aws
                        ?object_lock_mode: ("GOVERNANCE" | "COMPLIANCE"),
                        ?object_lock_retain_until_date: ::Time,
                        ?object_lock_legal_hold_status: ("ON" | "OFF"),
+                       ?object_lock_event_hold: ("ON" | "OFF"),
+                       ?object_lock_event_hold_duration_days: ::Integer,
+                       ?object_lock_event_hold_duration_years: ::Integer,
                        ?expected_bucket_owner: ::String,
                        ?expected_source_bucket_owner: ::String
                      ) -> Types::CopyObjectOutput
@@ -288,6 +300,9 @@ module Aws
                                        ?object_lock_mode: ("GOVERNANCE" | "COMPLIANCE"),
                                        ?object_lock_retain_until_date: ::Time,
                                        ?object_lock_legal_hold_status: ("ON" | "OFF"),
+                                       ?object_lock_event_hold: ("ON" | "OFF"),
+                                       ?object_lock_event_hold_duration_days: ::Integer,
+                                       ?object_lock_event_hold_duration_years: ::Integer,
                                        ?expected_bucket_owner: ::String,
                                        ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128"),
                                        ?checksum_type: ("COMPOSITE" | "FULL_OBJECT")
@@ -339,6 +354,9 @@ module Aws
                  ?object_lock_mode: ("GOVERNANCE" | "COMPLIANCE"),
                  ?object_lock_retain_until_date: ::Time,
                  ?object_lock_legal_hold_status: ("ON" | "OFF"),
+                 ?object_lock_event_hold: ("ON" | "OFF"),
+                 ?object_lock_event_hold_duration_days: ::Integer,
+                 ?object_lock_event_hold_duration_years: ::Integer,
                  ?expected_bucket_owner: ::String
                ) -> Types::PutObjectOutput
              | (?Hash[Symbol, untyped]) -> Types::PutObjectOutput

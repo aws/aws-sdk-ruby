@@ -533,11 +533,21 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Cancels a query if the query is not in a terminated state, such as
     # `CANCELLED`, `FAILED`, `TIMED_OUT`, or `FINISHED`. You must specify an
     # ARN value for `EventDataStore`. The ID of the query that you want to
     # cancel is also required. When you run `CancelQuery`, the query status
     # might show as `CANCELLED` even if the operation is not yet finished.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on which
@@ -579,9 +589,19 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Creates a channel for CloudTrail to ingest events from a partner or
     # external source. After you create a channel, a CloudTrail Lake event
     # data store can log events from the partner or source that you specify.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :name
     #   The name of the channel.
@@ -655,6 +675,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Creates a custom dashboard or the Highlights dashboard.
     #
     # * **Custom dashboards** - Custom dashboards allow you to query events
@@ -673,24 +699,25 @@ module Aws::CloudTrail
     # run the `StartQuery` operation on your behalf. To provide permissions,
     # run the `PutResourcePolicy` operation to attach a resource-based
     # policy to each event data store. For more information, see [Example:
-    # Allow CloudTrail to run queries to populate a dashboard][1] in the
+    # Allow CloudTrail to run queries to populate a dashboard][2] in the
     # *CloudTrail User Guide*.
     #
     # To set a refresh schedule, CloudTrail must be granted permissions to
     # run the `StartDashboardRefresh` operation to refresh the dashboard on
     # your behalf. To provide permissions, run the `PutResourcePolicy`
     # operation to attach a resource-based policy to the dashboard. For more
-    # information, see [ Resource-based policy example for a dashboard][2]
+    # information, see [ Resource-based policy example for a dashboard][3]
     # in the *CloudTrail User Guide*.
     #
     # For more information about dashboards, see [CloudTrail Lake
-    # dashboards][3] in the *CloudTrail User Guide*.
+    # dashboards][4] in the *CloudTrail User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard
-    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-dashboards
-    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-dashboard.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard
+    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-dashboards
+    # [4]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-dashboard.html
     #
     # @option params [required, String] :name
     #   The name of the dashboard. The name must be unique to your account.
@@ -789,7 +816,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Creates a new event data store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :name
     #   The name of the event data store.
@@ -1058,7 +1095,10 @@ module Aws::CloudTrail
     #
     # @option params [Boolean] :include_global_service_events
     #   Specifies whether the trail is publishing events from global services
-    #   such as IAM to the log files.
+    #   such as IAM to the log files. Setting this value to `true` only
+    #   delivers global service events to the trail if the trail is
+    #   multi-Region or if the trail's home Region is the partition leader
+    #   Region (for example, us-east-1).
     #
     # @option params [Boolean] :is_multi_region_trail
     #   Specifies whether the trail is created in the current Region or in all
@@ -1130,6 +1170,13 @@ module Aws::CloudTrail
     # @option params [Array<Types::Tag>] :tags_list
     #   A list of tags.
     #
+    # @option params [Boolean] :recursive_logging
+    #   Specifies whether recursive logging is enabled for the trail. If you
+    #   set `RecursiveLogging` to `false`, CloudTrail suppresses events
+    #   generated by CloudTrail when it delivers log files to your trail's
+    #   destinations, including Amazon S3 and CloudWatch Logs. The default
+    #   value is `true`.
+    #
     # @return [Types::CreateTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTrailResponse#name #name} => String
@@ -1145,6 +1192,7 @@ module Aws::CloudTrail
     #   * {Types::CreateTrailResponse#cloud_watch_logs_role_arn #cloud_watch_logs_role_arn} => String
     #   * {Types::CreateTrailResponse#kms_key_id #kms_key_id} => String
     #   * {Types::CreateTrailResponse#is_organization_trail #is_organization_trail} => Boolean
+    #   * {Types::CreateTrailResponse#recursive_logging #recursive_logging} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -1166,6 +1214,7 @@ module Aws::CloudTrail
     #         value: "TagValue",
     #       },
     #     ],
+    #     recursive_logging: false,
     #   })
     #
     # @example Response structure
@@ -1183,6 +1232,7 @@ module Aws::CloudTrail
     #   resp.cloud_watch_logs_role_arn #=> String
     #   resp.kms_key_id #=> String
     #   resp.is_organization_trail #=> Boolean
+    #   resp.recursive_logging #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateTrail AWS API Documentation
     #
@@ -1193,7 +1243,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Deletes a channel.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :channel
     #   The ARN or the `UUID` value of the channel that you want to delete.
@@ -1215,8 +1275,18 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Deletes the specified dashboard. You cannot delete a dashboard that
     # has termination protection enabled.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :dashboard_id
     #   The name or ARN for the dashboard.
@@ -1238,6 +1308,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Disables the event data store specified by `EventDataStore`, which
     # accepts an event data store ARN. After you run `DeleteEventDataStore`,
     # the event data store enters a `PENDING_DELETION` state, and is
@@ -1252,6 +1328,10 @@ module Aws::CloudTrail
     # queries that are using an event data store in a `PENDING_DELETION`
     # state. An event data store in the `PENDING_DELETION` state does not
     # incur costs.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of the event data store to
@@ -1377,6 +1457,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Returns metadata about a query, including query run time in
     # milliseconds, number of events scanned and matched, and query status.
     # If the query results were delivered to an S3 bucket, the response also
@@ -1387,6 +1473,10 @@ module Aws::CloudTrail
     # for the alias. You can provide `RefreshId` along with `QueryAlias` to
     # view the query results of a dashboard query for the specified
     # `RefreshId`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on which
@@ -1515,6 +1605,7 @@ module Aws::CloudTrail
     #   resp.trail_list[0].has_custom_event_selectors #=> Boolean
     #   resp.trail_list[0].has_insight_selectors #=> Boolean
     #   resp.trail_list[0].is_organization_trail #=> Boolean
+    #   resp.trail_list[0].recursive_logging #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeTrails AWS API Documentation
     #
@@ -1525,6 +1616,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Disables Lake query federation on the specified event data store. When
     # you disable federation, CloudTrail disables the integration with Glue,
     # Lake Formation, and Amazon Athena. After disabling Lake query
@@ -1532,6 +1629,10 @@ module Aws::CloudTrail
     #
     # No CloudTrail Lake data is deleted when you disable federation and you
     # can continue to run queries in CloudTrail Lake.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store for which
@@ -1562,9 +1663,15 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Enables Lake query federation on the specified event data store.
     # Federating an event data store lets you view the metadata associated
-    # with the event data store in the Glue [Data Catalog][1] and run SQL
+    # with the event data store in the Glue [Data Catalog][2] and run SQL
     # queries against your event data using Amazon Athena. The table
     # metadata stored in the Glue Data Catalog lets the Athena query engine
     # know how to find, read, and process the data that you want to query.
@@ -1573,18 +1680,19 @@ module Aws::CloudTrail
     # database named `aws:cloudtrail` (if the database doesn't already
     # exist) and a managed federated table in the Glue Data Catalog. The
     # event data store ID is used for the table name. CloudTrail registers
-    # the role ARN and event data store in [Lake Formation][2], the service
+    # the role ARN and event data store in [Lake Formation][3], the service
     # responsible for allowing fine-grained access control of the federated
     # resources in the Glue Data Catalog.
     #
     # For more information about Lake query federation, see [Federate an
-    # event data store][3].
+    # event data store][4].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/glue/latest/dg/components-overview.html#data-catalog-intro
-    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation-lake-formation.html
-    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
+    # [2]: https://docs.aws.amazon.com/glue/latest/dg/components-overview.html#data-catalog-intro
+    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation-lake-formation.html
+    # [4]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store for which
@@ -1629,6 +1737,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Generates a query from a natural language prompt. This operation uses
     # generative artificial intelligence (generative AI) to produce a
     # ready-to-use SQL query from the prompt.
@@ -1640,7 +1754,7 @@ module Aws::CloudTrail
     #
     # The prompt must be in English. For information about limitations,
     # permissions, and supported Regions, see [Create CloudTrail Lake
-    # queries from natural language prompts][1] in the <i>CloudTrail </i>
+    # queries from natural language prompts][2] in the <i>CloudTrail </i>
     # user guide.
     #
     # <note markdown="1"> Do not include any personally identifying, confidential, or sensitive
@@ -1653,7 +1767,8 @@ module Aws::CloudTrail
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/lake-query-generator.html
     #
     # @option params [required, Array<String>] :event_data_stores
     #   The ARN (or ID suffix of the ARN) of the event data store that you
@@ -1696,7 +1811,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Returns information about a specific channel.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :channel
     #   The ARN or `UUID` of a channel.
@@ -1756,7 +1881,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Returns the specified dashboard.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :dashboard_id
     #   The name or ARN for the dashboard.
@@ -1863,8 +1998,18 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Returns information about an event data store specified as either an
     # ARN or the ID portion of the ARN.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store about which
@@ -2040,7 +2185,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Returns information about a specific import.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :import_id
     #   The ID for the import.
@@ -2172,8 +2327,18 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Gets event data results of a query. You must specify the `QueryID`
     # value returned by the `StartQuery` operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [String] :event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store against
@@ -2310,6 +2475,7 @@ module Aws::CloudTrail
     #   resp.trail.has_custom_event_selectors #=> Boolean
     #   resp.trail.has_insight_selectors #=> Boolean
     #   resp.trail.is_organization_trail #=> Boolean
+    #   resp.trail.recursive_logging #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetTrail AWS API Documentation
     #
@@ -2396,7 +2562,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Lists the channels in the current account, and their source names.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of CloudTrail channels to display on a single page.
@@ -2438,8 +2614,18 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Returns information about all dashboards in the account, in the
     # current Region.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [String] :name_prefix
     #   Specify a name prefix to filter on.
@@ -2483,8 +2669,18 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Returns information about all event data stores in the account, in the
     # current Region.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [String] :next_token
     #   A token you can use to get the next page of event data store results.
@@ -2545,7 +2741,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Returns a list of failures for the specified import.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :import_id
     #   The ID of the import.
@@ -2590,8 +2796,18 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Returns information on all imports, or a select set of imports by
     # `ImportStatus` or `Destination`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [Integer] :max_results
     #   The maximum number of imports to display on a single page.
@@ -2661,6 +2877,14 @@ module Aws::CloudTrail
     # The rate of ListInsightsData requests is limited to two per second,
     # per account, per Region. If this limit is exceeded, a throttling error
     # occurs.
+    #
+    # <note markdown="1"> For data event Insights on organization trails, only the management
+    # account and delegated administrator accounts can call
+    # `ListInsightsData`. For these callers, the API returns Insights events
+    # only for the caller's own account. Member accounts cannot call this
+    # API on organization trails.
+    #
+    #  </note>
     #
     # @option params [required, String] :insight_source
     #   The Amazon Resource Name(ARN) of the trail for which you want to
@@ -2775,6 +2999,14 @@ module Aws::CloudTrail
     #   linked to the `cloudtrail:LookupEvents` action only. To use this
     #   operation, you must have permissions to perform the
     #   `cloudtrail:LookupEvents` action.
+    #
+    # <note markdown="1"> For data event Insights on organization trails, only the management
+    # account and delegated administrator accounts can call
+    # `ListInsightsMetricData`. For these callers, the API returns Insights
+    # metrics only for the caller's own account. Member accounts cannot
+    # call this API on organization trails.
+    #
+    #  </note>
     #
     # @option params [String] :trail_name
     #   The Amazon Resource Name(ARN) or name of the trail for which you want
@@ -2949,12 +3181,22 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Returns a list of queries and query statuses for the past seven days.
     # You must specify an ARN value for `EventDataStore`. Optionally, to
     # shorten the list of results, you can specify a time range, formatted
     # as timestamps, by adding `StartTime` and `EndTime` parameters, and a
     # `QueryStatus` value. Valid values for `QueryStatus` include `QUEUED`,
     # `RUNNING`, `FINISHED`, `FAILED`, `TIMED_OUT`, or `CANCELLED`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on which
@@ -3785,11 +4027,21 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Restores a deleted event data store specified by `EventDataStore`,
     # which accepts an event data store ARN. You can only restore a deleted
     # event data store within the seven-day wait period after deletion.
     # Restoring an event data store can take several minutes, depending on
     # the size of the event data store.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of the event data store that you
@@ -3855,9 +4107,19 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Searches sample queries and returns a list of sample queries that are
     # sorted by relevance. To search for sample queries, provide a natural
     # language `SearchPhrase` in English.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :search_phrase
     #   The natural language phrase to use for the semantic search. The phrase
@@ -3902,6 +4164,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Starts a refresh of the specified dashboard.
     #
     # Each time a dashboard is refreshed, CloudTrail runs queries to
@@ -3910,11 +4178,12 @@ module Aws::CloudTrail
     # provide permissions, run the `PutResourcePolicy` operation to attach a
     # resource-based policy to each event data store. For more information,
     # see [Example: Allow CloudTrail to run queries to populate a
-    # dashboard][1] in the *CloudTrail User Guide*.
+    # dashboard][2] in the *CloudTrail User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard
     #
     # @option params [required, String] :dashboard_id
     #   The name or ARN of the dashboard.
@@ -3955,11 +4224,21 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Starts the ingestion of live events on an event data store specified
     # as either an ARN or the ID portion of the ARN. To start ingestion, the
     # event data store `Status` must be `STOPPED_INGESTION` and the
     # `eventCategory` must be `Management`, `Data`, `NetworkActivity`, or
     # `ConfigurationItem`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store for which
@@ -3982,6 +4261,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Starts an import of logged trail events from a source S3 bucket to a
     # destination event data store. By default, CloudTrail only imports
     # events contained in the S3 bucket's `CloudTrail` prefix and the
@@ -3989,14 +4274,14 @@ module Aws::CloudTrail
     # for other Amazon Web Services services. If you want to import
     # CloudTrail events contained in another prefix, you must include the
     # prefix in the `S3LocationUri`. For more considerations about importing
-    # trail events, see [Considerations for copying trail events][1] in the
+    # trail events, see [Considerations for copying trail events][2] in the
     # *CloudTrail User Guide*.
     #
     # When you start a new import, the `Destinations` and `ImportSource`
     # parameters are required. Before starting a new import, disable any
     # access control lists (ACLs) attached to the source S3 bucket. For more
     # information about disabling ACLs, see [Controlling ownership of
-    # objects and disabling ACLs for your bucket][2].
+    # objects and disabling ACLs for your bucket][3].
     #
     # When you retry an import, the `ImportID` parameter is required.
     #
@@ -4008,8 +4293,9 @@ module Aws::CloudTrail
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-copy-trail-to-lake.html#cloudtrail-trail-copy-considerations
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-copy-trail-to-lake.html#cloudtrail-trail-copy-considerations
+    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html
     #
     # @option params [Array<String>] :destinations
     #   The ARN of the destination event data store. Use this parameter for a
@@ -4120,6 +4406,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Starts a CloudTrail Lake query. Use the `QueryStatement` parameter to
     # provide your SQL query, enclosed in single quotation marks. Use the
     # optional `DeliveryS3Uri` parameter to deliver the query results to an
@@ -4129,6 +4421,10 @@ module Aws::CloudTrail
     # parameter, or a `QueryAlias` and any `QueryParameters`. In the current
     # release, the `QueryAlias` and `QueryParameters` parameters are used
     # only for the queries that populate the CloudTrail Lake dashboards.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [String] :query_statement
     #   The SQL code of your query.
@@ -4174,11 +4470,21 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Stops the ingestion of live events on an event data store specified as
     # either an ARN or the ID portion of the ARN. To stop ingestion, the
     # event data store `Status` must be `ENABLED` and the `eventCategory`
     # must be `Management`, `Data`, `NetworkActivity`, or
     # `ConfigurationItem`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or ID suffix of the ARN) of the event data store for which
@@ -4201,7 +4507,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Stops a specified import.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :import_id
     #   The ID of the import.
@@ -4286,7 +4602,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Updates a channel specified by a required channel ARN or UUID.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
     #
     # @option params [required, String] :channel
     #   The ARN or ID (the ARN suffix) of the channel that you want to update.
@@ -4336,13 +4662,19 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Updates the specified dashboard.
     #
     # To set a refresh schedule, CloudTrail must be granted permissions to
     # run the `StartDashboardRefresh` operation to refresh the dashboard on
     # your behalf. To provide permissions, run the `PutResourcePolicy`
     # operation to attach a resource-based policy to the dashboard. For more
-    # information, see [ Resource-based policy example for a dashboard][1]
+    # information, see [ Resource-based policy example for a dashboard][2]
     # in the *CloudTrail User Guide*.
     #
     # CloudTrail runs queries to populate the dashboard's widgets during a
@@ -4350,13 +4682,14 @@ module Aws::CloudTrail
     # run the `StartQuery` operation on your behalf. To provide permissions,
     # run the `PutResourcePolicy` operation to attach a resource-based
     # policy to each event data store. For more information, see [Example:
-    # Allow CloudTrail to run queries to populate a dashboard][2] in the
+    # Allow CloudTrail to run queries to populate a dashboard][3] in the
     # *CloudTrail User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-dashboards
-    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-dashboards
+    # [3]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html#security_iam_resource-based-policy-examples-eds-dashboard
     #
     # @option params [required, String] :dashboard_id
     #   The name or ARN of the dashboard.
@@ -4444,6 +4777,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # CloudTrail Lake will no longer be open to new customers starting May
+    # 31, 2026. If you would like to use CloudTrail Lake, sign up prior to
+    # that date. Existing customers can continue to use the service as
+    # normal. For more information, see [CloudTrail Lake availability
+    # change][1].
+    #
     # Updates an event data store. The required `EventDataStore` value is an
     # ARN or the ID portion of the ARN. Other parameters are optional, but
     # at least one optional parameter must be specified, or CloudTrail
@@ -4456,7 +4795,7 @@ module Aws::CloudTrail
     # For event data stores for CloudTrail events, `AdvancedEventSelectors`
     # includes or excludes management, data, or network activity events in
     # your event data store. For more information about
-    # `AdvancedEventSelectors`, see [AdvancedEventSelectors][1].
+    # `AdvancedEventSelectors`, see [AdvancedEventSelectors][2].
     #
     # For event data stores for CloudTrail Insights events, Config
     # configuration items, Audit Manager evidence, or non-Amazon Web
@@ -4465,7 +4804,8 @@ module Aws::CloudTrail
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
+    # [2]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of the event data store that you
@@ -4724,7 +5064,10 @@ module Aws::CloudTrail
     #
     # @option params [Boolean] :include_global_service_events
     #   Specifies whether the trail is publishing events from global services
-    #   such as IAM to the log files.
+    #   such as IAM to the log files. Setting this value to `true` only
+    #   delivers global service events to the trail if the trail is
+    #   multi-Region or if the trail's home Region is the partition leader
+    #   Region (for example, us-east-1).
     #
     # @option params [Boolean] :is_multi_region_trail
     #   Specifies whether the trail applies only to the current Region or to
@@ -4807,6 +5150,13 @@ module Aws::CloudTrail
     #
     #    </note>
     #
+    # @option params [Boolean] :recursive_logging
+    #   Specifies whether recursive logging is enabled for the trail. If you
+    #   set `RecursiveLogging` to `false`, CloudTrail suppresses events
+    #   generated by CloudTrail when it delivers log files to your trail's
+    #   destinations, including Amazon S3 and CloudWatch Logs. The default
+    #   value is `true`.
+    #
     # @return [Types::UpdateTrailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTrailResponse#name #name} => String
@@ -4822,6 +5172,7 @@ module Aws::CloudTrail
     #   * {Types::UpdateTrailResponse#cloud_watch_logs_role_arn #cloud_watch_logs_role_arn} => String
     #   * {Types::UpdateTrailResponse#kms_key_id #kms_key_id} => String
     #   * {Types::UpdateTrailResponse#is_organization_trail #is_organization_trail} => Boolean
+    #   * {Types::UpdateTrailResponse#recursive_logging #recursive_logging} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -4837,6 +5188,7 @@ module Aws::CloudTrail
     #     cloud_watch_logs_role_arn: "String",
     #     kms_key_id: "String",
     #     is_organization_trail: false,
+    #     recursive_logging: false,
     #   })
     #
     # @example Response structure
@@ -4854,6 +5206,7 @@ module Aws::CloudTrail
     #   resp.cloud_watch_logs_role_arn #=> String
     #   resp.kms_key_id #=> String
     #   resp.is_organization_trail #=> Boolean
+    #   resp.recursive_logging #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateTrail AWS API Documentation
     #
@@ -4882,7 +5235,7 @@ module Aws::CloudTrail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.126.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

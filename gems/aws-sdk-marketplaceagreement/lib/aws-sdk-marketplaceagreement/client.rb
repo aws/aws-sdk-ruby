@@ -1033,6 +1033,8 @@ module Aws::MarketplaceAgreement
     #   * {Types::DescribeAgreementOutput#estimated_charges #estimated_charges} => Types::EstimatedCharges
     #   * {Types::DescribeAgreementOutput#proposal_summary #proposal_summary} => Types::ProposalSummary
     #   * {Types::DescribeAgreementOutput#status #status} => String
+    #   * {Types::DescribeAgreementOutput#initial_agreement_id #initial_agreement_id} => String
+    #   * {Types::DescribeAgreementOutput#end_time_behavior #end_time_behavior} => Types::EndTimeBehavior
     #
     # @example Request syntax with placeholder values
     #
@@ -1057,6 +1059,10 @@ module Aws::MarketplaceAgreement
     #   resp.proposal_summary.offer_id #=> String
     #   resp.proposal_summary.offer_set_id #=> String
     #   resp.status #=> String, one of "ACTIVE", "ARCHIVED", "CANCELLED", "EXPIRED", "RENEWED", "REPLACED", "ROLLED_BACK", "SUPERSEDED", "TERMINATED"
+    #   resp.initial_agreement_id #=> String
+    #   resp.end_time_behavior.type #=> String, one of "RENEW", "REPLACE", "EXPIRE"
+    #   resp.end_time_behavior.reason_code #=> String, one of "PROPOSER_RENEW_OPTED_OUT", "ACCEPTOR_RENEW_OPTED_OUT", "NO_RENEWAL_TERM", "RENEWAL_LIMIT_EXHAUSTED"
+    #   resp.end_time_behavior.renewal_summary.offer_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/DescribeAgreement AWS API Documentation
     #
@@ -1310,6 +1316,18 @@ module Aws::MarketplaceAgreement
     #   resp.accepted_terms[0].renewal_term.type #=> String
     #   resp.accepted_terms[0].renewal_term.id #=> String
     #   resp.accepted_terms[0].renewal_term.configuration.enable_auto_renew #=> Boolean
+    #   resp.accepted_terms[0].renewal_term.lockout_period #=> String
+    #   resp.accepted_terms[0].renewal_term.max_renewals #=> Integer
+    #   resp.accepted_terms[0].renewal_term.adjustment_deadline #=> String
+    #   resp.accepted_terms[0].renewal_term.price_increase.fixed_percentage.value #=> String
+    #   resp.accepted_terms[0].renewal_term.price_increase.percentage_range.min_value #=> String
+    #   resp.accepted_terms[0].renewal_term.price_increase.percentage_range.max_value #=> String
+    #   resp.accepted_terms[0].renewal_term.price_increase.percentage_range.default_value #=> String
+    #   resp.accepted_terms[0].renewal_term.term_templates #=> Array
+    #   resp.accepted_terms[0].renewal_term.term_templates[0].payment_schedule_term_template.schedule #=> Array
+    #   resp.accepted_terms[0].renewal_term.term_templates[0].payment_schedule_term_template.schedule[0].charge_date_offset #=> String
+    #   resp.accepted_terms[0].renewal_term.term_templates[0].payment_schedule_term_template.schedule[0].charge_percentage #=> String
+    #   resp.accepted_terms[0].renewal_term.term_templates[0].payment_schedule_term_template.schedule[0].day_of_month #=> Integer
     #   resp.accepted_terms[0].usage_based_pricing_term.type #=> String
     #   resp.accepted_terms[0].usage_based_pricing_term.id #=> String
     #   resp.accepted_terms[0].usage_based_pricing_term.currency_code #=> String
@@ -2059,130 +2077,6 @@ module Aws::MarketplaceAgreement
     # AWS Marketplace. The search returns a list of agreements with basic
     # agreement information.
     #
-    # The following filter combinations are supported when the `PartyType`
-    # is `Proposer`:
-    #
-    # * `AgreementType`
-    #
-    # * `AgreementType` + `EndTime`
-    #
-    # * `AgreementType` + `ResourceType`
-    #
-    # * `AgreementType` + `ResourceType` + `EndTime`
-    #
-    # * `AgreementType` + `ResourceType` + `Status`
-    #
-    # * `AgreementType` + `ResourceType` + `Status` + `EndTime`
-    #
-    # * `AgreementType` + `ResourceIdentifier`
-    #
-    # * `AgreementType` + `ResourceIdentifier` + `EndTime`
-    #
-    # * `AgreementType` + `ResourceIdentifier` + `Status`
-    #
-    # * `AgreementType` + `ResourceIdentifier` + `Status` + `EndTime`
-    #
-    # * `AgreementType` + `AcceptorAccountId`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `EndTime`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `Status`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `Status` + `EndTime`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `OfferId`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `OfferId` + `Status`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `OfferId` + `EndTime`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `OfferId` + `Status` +
-    #   `EndTime`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `ResourceIdentifier`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `ResourceIdentifier` +
-    #   `Status`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `ResourceIdentifier` +
-    #   `EndTime`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `ResourceIdentifier` +
-    #   `Status` + `EndTime`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `ResourceType`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `ResourceType` + `EndTime`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `ResourceType` + `Status`
-    #
-    # * `AgreementType` + `AcceptorAccountId` + `ResourceType` + `Status` +
-    #   `EndTime`
-    #
-    # * `AgreementType` + `Status`
-    #
-    # * `AgreementType` + `Status` + `EndTime`
-    #
-    # * `AgreementType` + `OfferId`
-    #
-    # * `AgreementType` + `OfferId` + `EndTime`
-    #
-    # * `AgreementType` + `OfferId` + `Status`
-    #
-    # * `AgreementType` + `OfferId` + `Status` + `EndTime`
-    #
-    # * `AgreementType` + `OfferSetId`
-    #
-    # * `AgreementType` + `OfferSetId` + `EndTime`
-    #
-    # * `AgreementType` + `OfferSetId` + `Status`
-    #
-    # * `AgreementType` + `OfferSetId` + `Status` + `EndTime`
-    #
-    # <note markdown="1"> To filter by `EndTime`, you can use `BeforeEndTime` and/or
-    # `AfterEndTime`. Only `EndTime` is supported for sorting.
-    #
-    #  </note>
-    #
-    # The following filter combinations are supported when the `PartyType`
-    # is `Acceptor`:
-    #
-    # * `AgreementType`
-    #
-    # * `AgreementType` + `Status`
-    #
-    # * `AgreementType` + `EndTime`
-    #
-    # * `AgreementType` + `Status` + `EndTime`
-    #
-    # * `AgreementType` + `ResourceIdentifier`
-    #
-    # * `AgreementType` + `ResourceIdentifier` + `EndTime`
-    #
-    # * `AgreementType` + `ResourceIdentifier` + `Status`
-    #
-    # * `AgreementType` + `ResourceIdentifier` + `Status` + `EndTime`
-    #
-    # * `AgreementType` + `ResourceType`
-    #
-    # * `AgreementType` + `ResourceType` + `EndTime`
-    #
-    # * `AgreementType` + `OfferId`
-    #
-    # * `AgreementType` + `OfferId` + `EndTime`
-    #
-    # * `AgreementType` + `OfferId` + `Status`
-    #
-    # * `AgreementType` + `OfferId` + `Status` + `EndTime`
-    #
-    # * `AgreementType` + `OfferSetId`
-    #
-    # * `AgreementType` + `OfferSetId` + `EndTime`
-    #
-    # * `AgreementType` + `OfferSetId` + `Status`
-    #
-    # * `AgreementType` + `OfferSetId` + `Status` + `EndTime`
-    #
     # @option params [String] :catalog
     #   The catalog in which the agreement was created.
     #
@@ -2208,14 +2102,26 @@ module Aws::MarketplaceAgreement
     #     are registered in the agreement token.
     #
     #   * `Status` – The current status of the agreement. Values include
-    #     `ACTIVE`, `ARCHIVED`, `CANCELLED`, `EXPIRED`, `RENEWED`, `REPLACED`,
-    #     and `TERMINATED`.
+    #     `ACTIVE`, `CANCELLED`, `EXPIRED`, `RENEWED`, `REPLACED`, and
+    #     `TERMINATED`.
     #
     #   * `BeforeEndTime` – A date used to filter agreements with a date
     #     before the `endTime` of an agreement.
     #
     #   * `AfterEndTime` – A date used to filter agreements with a date after
     #     the `endTime` of an agreement.
+    #
+    #   * `BeforeStartTime` – A date used to filter agreements with a date
+    #     before the `startTime` of an agreement.
+    #
+    #   * `AfterStartTime` – A date used to filter agreements with a date
+    #     after the `startTime` of an agreement.
+    #
+    #   * `BeforeLastUpdateTime` – A date used to filter agreements with a
+    #     date before the `lastUpdateTime` of an agreement.
+    #
+    #   * `AfterLastUpdateTime` – A date used to filter agreements with a date
+    #     after the `lastUpdateTime` of an agreement.
     #
     #   * `AgreementType` – The type of agreement. Supported value includes
     #     `PurchaseAgreement`.
@@ -2224,10 +2130,75 @@ module Aws::MarketplaceAgreement
     #     offer. All agreements created from offers in this set include this
     #     identifier as context.
     #
+    #   * `EndTimeBehaviorType` – What happens to the agreement when it
+    #     reaches its end date. Values include `RENEW`, `REPLACE`, and
+    #     `EXPIRE`.
+    #
+    #   * `EndTimeBehaviorReasonCode` – The reason why the agreement doesn't
+    #     renew at its end date. Values include `PROPOSER_RENEW_OPTED_OUT`,
+    #     `ACCEPTOR_RENEW_OPTED_OUT`, `NO_RENEWAL_TERM`, and
+    #     `RENEWAL_LIMIT_EXHAUSTED`.
+    #
+    #   * `InitialAgreementId` – The unique identifier of the very first
+    #     agreement in a chain of related agreements. Use this filter to
+    #     return every agreement in the same chain.
+    #
+    #   * `LicenseArn` – The Amazon Resource Name (ARN) of the AWS License
+    #     Manager license associated with an entitlement granted by the
+    #     agreement.
+    #
+    #   A proposer can use any combination of the preceding filters along with
+    #   `AgreementType`, which is required.
+    #
+    #   The following filter combinations are supported when the `PartyType`
+    #   is `Acceptor`:
+    #
+    #   * `AgreementType`
+    #
+    #   * `AgreementType` + `Status`
+    #
+    #   * `AgreementType` + `EndTime`
+    #
+    #   * `AgreementType` + `Status` + `EndTime`
+    #
+    #   * `AgreementType` + `ResourceIdentifier`
+    #
+    #   * `AgreementType` + `ResourceIdentifier` + `EndTime`
+    #
+    #   * `AgreementType` + `ResourceIdentifier` + `Status`
+    #
+    #   * `AgreementType` + `ResourceIdentifier` + `Status` + `EndTime`
+    #
+    #   * `AgreementType` + `ResourceType`
+    #
+    #   * `AgreementType` + `ResourceType` + `EndTime`
+    #
+    #   * `AgreementType` + `OfferId`
+    #
+    #   * `AgreementType` + `OfferId` + `EndTime`
+    #
+    #   * `AgreementType` + `OfferId` + `Status`
+    #
+    #   * `AgreementType` + `OfferId` + `Status` + `EndTime`
+    #
+    #   * `AgreementType` + `OfferSetId`
+    #
+    #   * `AgreementType` + `OfferSetId` + `EndTime`
+    #
+    #   * `AgreementType` + `OfferSetId` + `Status`
+    #
+    #   * `AgreementType` + `OfferSetId` + `Status` + `EndTime`
+    #
+    #   <note markdown="1"> To filter by `EndTime`, you can use `BeforeEndTime`, `AfterEndTime`,
+    #   or both.
+    #
+    #    </note>
+    #
     # @option params [Types::Sort] :sort
-    #   An object that contains the `SortBy` and `SortOrder` attributes. Only
-    #   `EndTime` is supported for `SearchAgreements`. The default sort is
-    #   `EndTime` descending.
+    #   An object that contains the `SortBy` and `SortOrder` attributes. For
+    #   `SearchAgreements`, `SortBy` supports `EndTime` for both party types,
+    #   and `StartTime` and `LastUpdateTime` only when `PartyType` is
+    #   `Proposer`. The default `SortBy` value is `EndTime`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of agreements to return in the response.
@@ -2267,6 +2238,7 @@ module Aws::MarketplaceAgreement
     #   resp.agreement_view_summaries[0].acceptance_time #=> Time
     #   resp.agreement_view_summaries[0].start_time #=> Time
     #   resp.agreement_view_summaries[0].end_time #=> Time
+    #   resp.agreement_view_summaries[0].last_update_time #=> Time
     #   resp.agreement_view_summaries[0].agreement_type #=> String
     #   resp.agreement_view_summaries[0].acceptor.account_id #=> String
     #   resp.agreement_view_summaries[0].proposer.account_id #=> String
@@ -2278,6 +2250,9 @@ module Aws::MarketplaceAgreement
     #   resp.agreement_view_summaries[0].status #=> String, one of "ACTIVE", "ARCHIVED", "CANCELLED", "EXPIRED", "RENEWED", "REPLACED", "ROLLED_BACK", "SUPERSEDED", "TERMINATED"
     #   resp.agreement_view_summaries[0].entitlements #=> Array
     #   resp.agreement_view_summaries[0].entitlements[0].license_arn #=> String
+    #   resp.agreement_view_summaries[0].initial_agreement_id #=> String
+    #   resp.agreement_view_summaries[0].end_time_behavior_type #=> String, one of "RENEW", "REPLACE", "EXPIRE"
+    #   resp.agreement_view_summaries[0].end_time_behavior_reason_code #=> String, one of "PROPOSER_RENEW_OPTED_OUT", "ACCEPTOR_RENEW_OPTED_OUT", "NO_RENEWAL_TERM", "RENEWAL_LIMIT_EXHAUSTED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/SearchAgreements AWS API Documentation
@@ -2506,7 +2481,7 @@ module Aws::MarketplaceAgreement
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplaceagreement'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

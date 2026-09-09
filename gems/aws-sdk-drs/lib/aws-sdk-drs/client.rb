@@ -657,6 +657,7 @@ module Aws::Drs
     #   resp.source_server.source_properties.ram_bytes #=> Integer
     #   resp.source_server.source_properties.os.full_string #=> String
     #   resp.source_server.source_properties.supports_nitro_instances #=> Boolean
+    #   resp.source_server.source_properties.architecture #=> String, one of "x86_64", "arm64"
     #   resp.source_server.staging_area.status #=> String, one of "EXTENDED", "EXTENSION_ERROR", "NOT_EXTENDED"
     #   resp.source_server.staging_area.staging_account_id #=> String
     #   resp.source_server.staging_area.staging_source_server_arn #=> String
@@ -1900,6 +1901,7 @@ module Aws::Drs
     #   resp.items[0].source_properties.ram_bytes #=> Integer
     #   resp.items[0].source_properties.os.full_string #=> String
     #   resp.items[0].source_properties.supports_nitro_instances #=> Boolean
+    #   resp.items[0].source_properties.architecture #=> String, one of "x86_64", "arm64"
     #   resp.items[0].staging_area.status #=> String, one of "EXTENDED", "EXTENSION_ERROR", "NOT_EXTENDED"
     #   resp.items[0].staging_area.staging_account_id #=> String
     #   resp.items[0].staging_area.staging_source_server_arn #=> String
@@ -2053,6 +2055,7 @@ module Aws::Drs
     #   resp.source_properties.ram_bytes #=> Integer
     #   resp.source_properties.os.full_string #=> String
     #   resp.source_properties.supports_nitro_instances #=> Boolean
+    #   resp.source_properties.architecture #=> String, one of "x86_64", "arm64"
     #   resp.staging_area.status #=> String, one of "EXTENDED", "EXTENSION_ERROR", "NOT_EXTENDED"
     #   resp.staging_area.staging_account_id #=> String
     #   resp.staging_area.staging_source_server_arn #=> String
@@ -3028,6 +3031,7 @@ module Aws::Drs
     #   resp.source_properties.ram_bytes #=> Integer
     #   resp.source_properties.os.full_string #=> String
     #   resp.source_properties.supports_nitro_instances #=> Boolean
+    #   resp.source_properties.architecture #=> String, one of "x86_64", "arm64"
     #   resp.staging_area.status #=> String, one of "EXTENDED", "EXTENSION_ERROR", "NOT_EXTENDED"
     #   resp.staging_area.staging_account_id #=> String
     #   resp.staging_area.staging_source_server_arn #=> String
@@ -3410,6 +3414,7 @@ module Aws::Drs
     #   resp.source_server.source_properties.ram_bytes #=> Integer
     #   resp.source_server.source_properties.os.full_string #=> String
     #   resp.source_server.source_properties.supports_nitro_instances #=> Boolean
+    #   resp.source_server.source_properties.architecture #=> String, one of "x86_64", "arm64"
     #   resp.source_server.staging_area.status #=> String, one of "EXTENDED", "EXTENSION_ERROR", "NOT_EXTENDED"
     #   resp.source_server.staging_area.staging_account_id #=> String
     #   resp.source_server.staging_area.staging_source_server_arn #=> String
@@ -3649,6 +3654,7 @@ module Aws::Drs
     #   resp.source_server.source_properties.ram_bytes #=> Integer
     #   resp.source_server.source_properties.os.full_string #=> String
     #   resp.source_server.source_properties.supports_nitro_instances #=> Boolean
+    #   resp.source_server.source_properties.architecture #=> String, one of "x86_64", "arm64"
     #   resp.source_server.staging_area.status #=> String, one of "EXTENDED", "EXTENSION_ERROR", "NOT_EXTENDED"
     #   resp.source_server.staging_area.staging_account_id #=> String
     #   resp.source_server.staging_area.staging_source_server_arn #=> String
@@ -4555,7 +4561,7 @@ module Aws::Drs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

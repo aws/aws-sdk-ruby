@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2026-09-01)
+------------------
+
+* Feature - This release adds support for the Amazon Lightsail GetProfile API, which returns the profile for the specified account.
+
 1.134.0 (2026-07-09)
 ------------------
 

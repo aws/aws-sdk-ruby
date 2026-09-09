@@ -2974,6 +2974,31 @@ module Aws::S3
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] object_lock_event_hold
+    #   The event hold status to apply to the object copy. Set to `ON` to
+    #   enable or `OFF` to disable.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] object_lock_event_hold_duration_days
+    #   The event hold duration in days to apply to the object copy.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] object_lock_event_hold_duration_years
+    #   The event hold duration in years to apply to the object copy.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @!attribute [rw] expected_bucket_owner
     #   The account ID of the expected destination bucket owner. If the
     #   account ID that you provide does not match the actual owner of the
@@ -3033,6 +3058,9 @@ module Aws::S3
       :object_lock_mode,
       :object_lock_retain_until_date,
       :object_lock_legal_hold_status,
+      :object_lock_event_hold,
+      :object_lock_event_hold_duration_days,
+      :object_lock_event_hold_duration_years,
       :expected_bucket_owner,
       :expected_source_bucket_owner)
       SENSITIVE = [:sse_customer_key, :ssekms_key_id, :ssekms_encryption_context, :copy_source_sse_customer_key]
@@ -3062,9 +3090,9 @@ module Aws::S3
     #
     # @!attribute [rw] checksum_crc32
     #   The Base64 encoded, 32-bit `CRC32` checksum of the object. This
-    #   checksum is only present if the object was uploaded with the object.
-    #   For more information, see [ Checking object integrity][1] in the
-    #   *Amazon S3 User Guide*.
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. For more information, see [ Checking object integrity][1] in
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -4463,6 +4491,33 @@ module Aws::S3
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] object_lock_event_hold
+    #   Specifies the event hold status to apply to the uploaded object. Set
+    #   to `ON` to enable or `OFF` to disable.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] object_lock_event_hold_duration_days
+    #   Specifies the event hold duration in days to apply to the uploaded
+    #   object.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] object_lock_event_hold_duration_years
+    #   Specifies the event hold duration in years to apply to the uploaded
+    #   object.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @!attribute [rw] expected_bucket_owner
     #   The account ID of the expected bucket owner. If the account ID that
     #   you provide does not match the actual owner of the bucket, the
@@ -4521,6 +4576,9 @@ module Aws::S3
       :object_lock_mode,
       :object_lock_retain_until_date,
       :object_lock_legal_hold_status,
+      :object_lock_event_hold,
+      :object_lock_event_hold_duration_days,
+      :object_lock_event_hold_duration_years,
       :expected_bucket_owner,
       :checksum_algorithm,
       :checksum_type)
@@ -4726,12 +4784,19 @@ module Aws::S3
     #   retention period. Must be used with `Mode`.
     #   @return [Integer]
     #
+    # @!attribute [rw] default_event_hold
+    #   The default event hold duration to be applied to new objects placed
+    #   in the specified bucket. When configured, new objects will
+    #   automatically have an event hold enabled with this duration.
+    #   @return [Types::EventHoldDuration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/DefaultRetention AWS API Documentation
     #
     class DefaultRetention < Struct.new(
       :mode,
       :days,
-      :years)
+      :years,
+      :default_event_hold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7144,6 +7209,28 @@ module Aws::S3
     #
     class EventBridgeConfiguration < Aws::EmptyStructure; end
 
+    # Contains the event hold duration configuration, specified in either
+    # days or years.
+    #
+    # @!attribute [rw] days
+    #   The number of days for the event hold duration. The minimum value is
+    #   1 and the maximum value is 36,500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] years
+    #   The number of years for the event hold duration. The minimum value
+    #   is 1 and the maximum value is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/EventHoldDuration AWS API Documentation
+    #
+    class EventHoldDuration < Struct.new(
+      :days,
+      :years)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Optional configuration to replicate existing source bucket objects.
     #
     # <note markdown="1"> This parameter is no longer supported. To replicate existing objects,
@@ -9120,9 +9207,9 @@ module Aws::S3
     #
     # @!attribute [rw] checksum_crc32
     #   The Base64 encoded, 32-bit `CRC32` checksum of the object. This
-    #   checksum is only present if the object was uploaded with the object.
-    #   For more information, see [ Checking object integrity][1] in the
-    #   *Amazon S3 User Guide*.
+    #   checksum is only present if the checksum was uploaded with the
+    #   object. For more information, see [ Checking object integrity][1] in
+    #   the *Amazon S3 User Guide*.
     #
     #
     #
@@ -9430,6 +9517,33 @@ module Aws::S3
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] object_lock_event_hold
+    #   The event hold status for this object. This header is only returned
+    #   if the requester has the `s3:GetObjectRetention` permission.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] object_lock_event_hold_duration_days
+    #   The event hold duration in days for this object. Only returned when
+    #   the event hold is enabled.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] object_lock_event_hold_duration_years
+    #   The event hold duration in years for this object. Only returned when
+    #   the event hold is enabled.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/GetObjectOutput AWS API Documentation
     #
     class GetObjectOutput < Struct.new(
@@ -9476,7 +9590,10 @@ module Aws::S3
       :tag_count,
       :object_lock_mode,
       :object_lock_retain_until_date,
-      :object_lock_legal_hold_status)
+      :object_lock_legal_hold_status,
+      :object_lock_event_hold,
+      :object_lock_event_hold_duration_days,
+      :object_lock_event_hold_duration_years)
       SENSITIVE = [:ssekms_key_id]
       include Aws::Structure
     end
@@ -10786,6 +10903,33 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
     #   @return [String]
     #
+    # @!attribute [rw] object_lock_event_hold
+    #   The event hold status for this object. This header is only returned
+    #   if the requester has the `s3:GetObjectRetention` permission.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] object_lock_event_hold_duration_days
+    #   The event hold duration in days for this object. Only returned when
+    #   the event hold is enabled.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] object_lock_event_hold_duration_years
+    #   The event hold duration in years for this object. Only returned when
+    #   the event hold is enabled.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/HeadObjectOutput AWS API Documentation
     #
     class HeadObjectOutput < Struct.new(
@@ -10832,7 +10976,10 @@ module Aws::S3
       :tag_count,
       :object_lock_mode,
       :object_lock_retain_until_date,
-      :object_lock_legal_hold_status)
+      :object_lock_legal_hold_status,
+      :object_lock_event_hold,
+      :object_lock_event_hold_duration_days,
+      :object_lock_event_hold_duration_years)
       SENSITIVE = [:ssekms_key_id]
       include Aws::Structure
     end
@@ -15038,11 +15185,23 @@ module Aws::S3
     #   The date on which this Object Lock Retention will expire.
     #   @return [Time]
     #
+    # @!attribute [rw] event_hold
+    #   The event hold status for the object. Set to `ON` to enable an event
+    #   hold or `OFF` to disable it.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_hold_duration
+    #   The event hold duration for the object. Specifies how long the
+    #   object remains protected after the event hold is released.
+    #   @return [Types::EventHoldDuration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3-2006-03-01/ObjectLockRetention AWS API Documentation
     #
     class ObjectLockRetention < Struct.new(
       :mode,
-      :retain_until_date)
+      :retain_until_date,
+      :event_hold,
+      :event_hold_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18733,6 +18892,31 @@ module Aws::S3
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html
     #   @return [String]
     #
+    # @!attribute [rw] object_lock_event_hold
+    #   Specifies the event hold status to apply to this object. Set to `ON`
+    #   to enable or `OFF` to disable.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] object_lock_event_hold_duration_days
+    #   Specifies the event hold duration in days to apply to this object.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] object_lock_event_hold_duration_years
+    #   Specifies the event hold duration in years to apply to this object.
+    #
+    #   <note markdown="1"> This functionality is not supported for directory buckets.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
     # @!attribute [rw] expected_bucket_owner
     #   The account ID of the expected bucket owner. If the account ID that
     #   you provide does not match the actual owner of the bucket, the
@@ -18788,6 +18972,9 @@ module Aws::S3
       :object_lock_mode,
       :object_lock_retain_until_date,
       :object_lock_legal_hold_status,
+      :object_lock_event_hold,
+      :object_lock_event_hold_duration_days,
+      :object_lock_event_hold_duration_years,
       :expected_bucket_owner)
       SENSITIVE = [:sse_customer_key, :ssekms_key_id, :ssekms_encryption_context]
       include Aws::Structure

@@ -3025,6 +3025,8 @@ module Aws::EC2
     NetworkCardIndex = Shapes::IntegerShape.new(name: 'NetworkCardIndex')
     NetworkCardInfo = Shapes::StructureShape.new(name: 'NetworkCardInfo')
     NetworkCardInfoList = Shapes::ListShape.new(name: 'NetworkCardInfoList')
+    NetworkCardInterfaceType = Shapes::StringShape.new(name: 'NetworkCardInterfaceType')
+    NetworkCardInterfaceTypeList = Shapes::ListShape.new(name: 'NetworkCardInterfaceTypeList')
     NetworkInfo = Shapes::StructureShape.new(name: 'NetworkInfo')
     NetworkInsightsAccessScope = Shapes::StructureShape.new(name: 'NetworkInsightsAccessScope')
     NetworkInsightsAccessScopeAnalysis = Shapes::StructureShape.new(name: 'NetworkInsightsAccessScopeAnalysis')
@@ -4037,6 +4039,8 @@ module Aws::EC2
     VCpuCountRange = Shapes::StructureShape.new(name: 'VCpuCountRange')
     VCpuCountRangeRequest = Shapes::StructureShape.new(name: 'VCpuCountRangeRequest')
     VCpuInfo = Shapes::StructureShape.new(name: 'VCpuInfo')
+    ValidateSecurityGroupQuotasForInterfaceRequest = Shapes::StructureShape.new(name: 'ValidateSecurityGroupQuotasForInterfaceRequest')
+    ValidateSecurityGroupQuotasForInterfaceResult = Shapes::StructureShape.new(name: 'ValidateSecurityGroupQuotasForInterfaceResult')
     ValidationError = Shapes::StructureShape.new(name: 'ValidationError')
     ValidationWarning = Shapes::StructureShape.new(name: 'ValidationWarning')
     ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
@@ -4231,6 +4235,7 @@ module Aws::EC2
     WithdrawByoipCidrResult = Shapes::StructureShape.new(name: 'WithdrawByoipCidrResult')
     Workload = Shapes::StringShape.new(name: 'Workload')
     WorkloadsList = Shapes::ListShape.new(name: 'WorkloadsList')
+    ZeroSizePreference = Shapes::StringShape.new(name: 'ZeroSizePreference')
     ZoneIdStringList = Shapes::ListShape.new(name: 'ZoneIdStringList')
     ZoneNameStringList = Shapes::ListShape.new(name: 'ZoneNameStringList')
     customerGatewayConfiguration = Shapes::StringShape.new(name: 'customerGatewayConfiguration')
@@ -5562,6 +5567,7 @@ module Aws::EC2
     CapacityReservation.add_member(:interruptible, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "interruptible"))
     CapacityReservation.add_member(:interruptible_capacity_allocation, Shapes::ShapeRef.new(shape: InterruptibleCapacityAllocation, location_name: "interruptibleCapacityAllocation"))
     CapacityReservation.add_member(:interruption_info, Shapes::ShapeRef.new(shape: InterruptionInfo, location_name: "interruptionInfo"))
+    CapacityReservation.add_member(:zero_size_preference, Shapes::ShapeRef.new(shape: ZeroSizePreference, location_name: "zeroSizePreference"))
     CapacityReservation.struct_class = Types::CapacityReservation
 
     CapacityReservationBillingRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationId"))
@@ -6430,6 +6436,7 @@ module Aws::EC2
     CreateInterruptibleCapacityReservationAllocationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateInterruptibleCapacityReservationAllocationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateInterruptibleCapacityReservationAllocationRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
+    CreateInterruptibleCapacityReservationAllocationRequest.add_member(:zero_size_preference, Shapes::ShapeRef.new(shape: ZeroSizePreference, location_name: "ZeroSizePreference"))
     CreateInterruptibleCapacityReservationAllocationRequest.struct_class = Types::CreateInterruptibleCapacityReservationAllocationRequest
 
     CreateInterruptibleCapacityReservationAllocationResult.add_member(:source_capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, location_name: "sourceCapacityReservationId"))
@@ -13977,6 +13984,7 @@ module Aws::EC2
     InterruptibleCapacityAllocation.add_member(:status, Shapes::ShapeRef.new(shape: InterruptibleCapacityReservationAllocationStatus, location_name: "status"))
     InterruptibleCapacityAllocation.add_member(:interruptible_capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "interruptibleCapacityReservationId"))
     InterruptibleCapacityAllocation.add_member(:interruption_type, Shapes::ShapeRef.new(shape: InterruptionType, location_name: "interruptionType"))
+    InterruptibleCapacityAllocation.add_member(:zero_size_preference, Shapes::ShapeRef.new(shape: ZeroSizePreference, location_name: "zeroSizePreference"))
     InterruptibleCapacityAllocation.struct_class = Types::InterruptibleCapacityAllocation
 
     InterruptionInfo.add_member(:source_capacity_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceCapacityReservationId"))
@@ -14141,6 +14149,7 @@ module Aws::EC2
     IpamInternetRegistryAssociation.add_member(:organization_handle, Shapes::ShapeRef.new(shape: String, location_name: "organizationHandle"))
     IpamInternetRegistryAssociation.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     IpamInternetRegistryAssociation.add_member(:state, Shapes::ShapeRef.new(shape: IpamInternetRegistryAssociationState, location_name: "state"))
+    IpamInternetRegistryAssociation.add_member(:state_message, Shapes::ShapeRef.new(shape: String, location_name: "stateMessage"))
     IpamInternetRegistryAssociation.add_member(:child_request_xml, Shapes::ShapeRef.new(shape: String, location_name: "childRequestXml"))
     IpamInternetRegistryAssociation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     IpamInternetRegistryAssociation.struct_class = Types::IpamInternetRegistryAssociation
@@ -16458,9 +16467,12 @@ module Aws::EC2
     NetworkCardInfo.add_member(:default_ena_queue_count_per_interface, Shapes::ShapeRef.new(shape: DefaultEnaQueueCountPerInterface, location_name: "defaultEnaQueueCountPerInterface"))
     NetworkCardInfo.add_member(:maximum_ena_queue_count, Shapes::ShapeRef.new(shape: MaximumEnaQueueCount, location_name: "maximumEnaQueueCount"))
     NetworkCardInfo.add_member(:maximum_ena_queue_count_per_interface, Shapes::ShapeRef.new(shape: MaximumEnaQueueCountPerInterface, location_name: "maximumEnaQueueCountPerInterface"))
+    NetworkCardInfo.add_member(:interface_types, Shapes::ShapeRef.new(shape: NetworkCardInterfaceTypeList, location_name: "interfaceTypeSet"))
     NetworkCardInfo.struct_class = Types::NetworkCardInfo
 
     NetworkCardInfoList.member = Shapes::ShapeRef.new(shape: NetworkCardInfo, location_name: "item")
+
+    NetworkCardInterfaceTypeList.member = Shapes::ShapeRef.new(shape: NetworkCardInterfaceType, location_name: "item")
 
     NetworkInfo.add_member(:network_performance, Shapes::ShapeRef.new(shape: NetworkPerformance, location_name: "networkPerformance"))
     NetworkInfo.add_member(:maximum_network_interfaces, Shapes::ShapeRef.new(shape: MaxNetworkInterfaces, location_name: "maximumNetworkInterfaces"))
@@ -19977,8 +19989,9 @@ module Aws::EC2
     UpdateCapacityManagerOrganizationsAccessResult.struct_class = Types::UpdateCapacityManagerOrganizationsAccessResult
 
     UpdateInterruptibleCapacityReservationAllocationRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
-    UpdateInterruptibleCapacityReservationAllocationRequest.add_member(:target_instance_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TargetInstanceCount"))
+    UpdateInterruptibleCapacityReservationAllocationRequest.add_member(:target_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TargetInstanceCount"))
     UpdateInterruptibleCapacityReservationAllocationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    UpdateInterruptibleCapacityReservationAllocationRequest.add_member(:zero_size_preference, Shapes::ShapeRef.new(shape: ZeroSizePreference, location_name: "ZeroSizePreference"))
     UpdateInterruptibleCapacityReservationAllocationRequest.struct_class = Types::UpdateInterruptibleCapacityReservationAllocationRequest
 
     UpdateInterruptibleCapacityReservationAllocationResult.add_member(:interruptible_capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, location_name: "interruptibleCapacityReservationId"))
@@ -20055,6 +20068,13 @@ module Aws::EC2
     VCpuInfo.add_member(:valid_cores, Shapes::ShapeRef.new(shape: CoreCountList, location_name: "validCores"))
     VCpuInfo.add_member(:valid_threads_per_core, Shapes::ShapeRef.new(shape: ThreadsPerCoreList, location_name: "validThreadsPerCore"))
     VCpuInfo.struct_class = Types::VCpuInfo
+
+    ValidateSecurityGroupQuotasForInterfaceRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupIdList, required: true, location_name: "SecurityGroupId"))
+    ValidateSecurityGroupQuotasForInterfaceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ValidateSecurityGroupQuotasForInterfaceRequest.struct_class = Types::ValidateSecurityGroupQuotasForInterfaceRequest
+
+    ValidateSecurityGroupQuotasForInterfaceResult.add_member(:valid, Shapes::ShapeRef.new(shape: Boolean, location_name: "valid"))
+    ValidateSecurityGroupQuotasForInterfaceResult.struct_class = Types::ValidateSecurityGroupQuotasForInterfaceResult
 
     ValidationError.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
     ValidationError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -28235,6 +28255,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateSecurityGroupRuleDescriptionsIngressRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateSecurityGroupRuleDescriptionsIngressResult)
+      end)
+
+      api.add_operation(:validate_security_group_quotas_for_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ValidateSecurityGroupQuotasForInterface"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ValidateSecurityGroupQuotasForInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ValidateSecurityGroupQuotasForInterfaceResult)
       end)
 
       api.add_operation(:withdraw_byoip_cidr, Seahorse::Model::Operation.new.tap do |o|

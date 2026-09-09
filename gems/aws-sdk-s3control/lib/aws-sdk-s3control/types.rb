@@ -7416,6 +7416,18 @@ module Aws::S3Control
     # @!attribute [rw] metadata_directive
     #   @return [String]
     #
+    # @!attribute [rw] annotation_directive
+    #   Specifies whether the Batch Operations copy job copies object
+    #   annotations from the source object or skips them. If this property
+    #   isn't specified, `COPY` is the default behavior.
+    #
+    #   Valid Values: `COPY | EXCLUDE`
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @!attribute [rw] modified_since_constraint
     #   @return [Time]
     #
@@ -7569,6 +7581,26 @@ module Aws::S3Control
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
     #   @return [String]
     #
+    # @!attribute [rw] object_lock_event_hold
+    #   The event hold status to be applied to all objects in the Batch
+    #   Operations copy job. Set to `ON` to enable an event hold or `OFF` to
+    #   disable it.
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] object_lock_event_hold_duration
+    #   The event hold duration to be applied to all objects in the Batch
+    #   Operations copy job. The duration specifies how long the object
+    #   remains protected after the event hold is released.
+    #
+    #   <note markdown="1"> This functionality is not supported by directory buckets.
+    #
+    #    </note>
+    #   @return [Types::S3ObjectLockEventHoldDuration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3CopyObjectOperation AWS API Documentation
     #
     class S3CopyObjectOperation < Struct.new(
@@ -7576,6 +7608,7 @@ module Aws::S3Control
       :canned_access_control_list,
       :access_control_grants,
       :metadata_directive,
+      :annotation_directive,
       :modified_since_constraint,
       :new_object_metadata,
       :new_object_tagging,
@@ -7589,7 +7622,9 @@ module Aws::S3Control
       :object_lock_mode,
       :object_lock_retain_until_date,
       :bucket_key_enabled,
-      :checksum_algorithm)
+      :checksum_algorithm,
+      :object_lock_event_hold,
+      :object_lock_event_hold_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7712,10 +7747,10 @@ module Aws::S3Control
     # The container for the service that will create the S3 manifest.
     #
     # @!attribute [rw] expected_bucket_owner
-    #   The Amazon Web Services account ID that owns the bucket the
-    #   generated manifest is written to. If provided the generated manifest
-    #   bucket's owner Amazon Web Services account ID must match this
-    #   value, else the job fails.
+    #   The Amazon Web Services account ID that owns the source bucket
+    #   specified in `SourceBucket`. If provided, the manifest source bucket
+    #   owner's Amazon Web Services account ID must match this value, else
+    #   the job fails.
     #   @return [String]
     #
     # @!attribute [rw] source_bucket
@@ -7803,6 +7838,28 @@ module Aws::S3Control
       include Aws::Structure
     end
 
+    # Contains the duration configuration for an event hold, specified in
+    # either days or years.
+    #
+    # @!attribute [rw] days
+    #   The number of days for the event hold duration. The minimum value is
+    #   1 and the maximum value is 36,500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] years
+    #   The number of years for the event hold duration. The minimum value
+    #   is 1 and the maximum value is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3ObjectLockEventHoldDuration AWS API Documentation
+    #
+    class S3ObjectLockEventHoldDuration < Struct.new(
+      :days,
+      :years)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Whether S3 Object Lock legal hold will be applied to objects in an S3
     # Batch Operations job.
     #
@@ -7815,6 +7872,28 @@ module Aws::S3Control
     #
     class S3ObjectLockLegalHold < Struct.new(
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the duration configuration for an event hold, specified in
+    # either days or years.
+    #
+    # @!attribute [rw] days
+    #   The number of days for the event hold duration. The minimum value is
+    #   1 and the maximum value is 36,500.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] years
+    #   The number of years for the event hold duration. The minimum value
+    #   is 1 and the maximum value is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3ObjectLockRetentionEventHoldDuration AWS API Documentation
+    #
+    class S3ObjectLockRetentionEventHoldDuration < Struct.new(
+      :days,
+      :years)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7934,11 +8013,25 @@ module Aws::S3Control
     #   Batch Operations job.
     #   @return [String]
     #
+    # @!attribute [rw] event_hold
+    #   The event hold status to be applied to all objects in the Batch
+    #   Operations job. Set to `ON` to enable an event hold or `OFF` to
+    #   disable it.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_hold_duration
+    #   The event hold duration to be applied to all objects in the Batch
+    #   Operations job. The duration specifies how long the object remains
+    #   protected after the event hold is released.
+    #   @return [Types::S3ObjectLockRetentionEventHoldDuration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3Retention AWS API Documentation
     #
     class S3Retention < Struct.new(
       :retain_until_date,
-      :mode)
+      :mode,
+      :event_hold,
+      :event_hold_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8244,12 +8337,8 @@ module Aws::S3Control
     #   @return [Integer]
     #
     # @!attribute [rw] min_storage_bytes_percentage
-    #   The minimum number of storage bytes percentage whose metrics will be
-    #   selected.
-    #
-    #   <note markdown="1"> You must choose a value greater than or equal to `1.0`.
-    #
-    #    </note>
+    #   The minimum percentage of total bucket storage that a prefix must
+    #   hold for its metrics to be included.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/SelectionCriteria AWS API Documentation

@@ -1064,13 +1064,7 @@ module Aws
                                       }
                                     ],
                                     media_concurrencies: Array[
-                                      {
-                                        channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
-                                        concurrency: ::Integer,
-                                        cross_channel_behavior: {
-                                          behavior_type: ("ROUTE_CURRENT_CHANNEL_ONLY" | "ROUTE_ANY_CHANNEL")
-                                        }?
-                                      }
+                                      Params::media_concurrency
                                     ],
                                     ?tags: Hash[::String, ::String],
                                     ?agent_availability_timer: ("TIME_SINCE_LAST_ACTIVITY" | "TIME_SINCE_LAST_INBOUND")
@@ -1095,7 +1089,9 @@ module Aws
                            Params::rule_action
                          ],
                          publish_status: ("DRAFT" | "PUBLISHED"),
-                         ?client_token: ::String
+                         ?pre_evaluation_filters: Params::pre_evaluation_filters,
+                         ?client_token: ::String,
+                         ?tags: Hash[::String, ::String]
                        ) -> _CreateRuleResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleResponseSuccess
 
@@ -5788,13 +5784,7 @@ module Aws
                                                 instance_id: ::String,
                                                 routing_profile_id: ::String,
                                                 media_concurrencies: Array[
-                                                  {
-                                                    channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
-                                                    concurrency: ::Integer,
-                                                    cross_channel_behavior: {
-                                                      behavior_type: ("ROUTE_CURRENT_CHANNEL_ONLY" | "ROUTE_ANY_CHANNEL")
-                                                    }?
-                                                  }
+                                                  Params::media_concurrency
                                                 ]
                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -5835,7 +5825,8 @@ module Aws
                          actions: Array[
                            Params::rule_action
                          ],
-                         publish_status: ("DRAFT" | "PUBLISHED")
+                         publish_status: ("DRAFT" | "PUBLISHED"),
+                         ?pre_evaluation_filters: Params::pre_evaluation_filters
                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

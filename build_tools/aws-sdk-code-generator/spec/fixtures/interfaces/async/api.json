@@ -60,13 +60,6 @@
       },
       "eventstream": true
     },
-    "BazStream": {
-      "type": "structure",
-      "members": {
-        "Bar": { "shape": "BarEvent"}
-      },
-      "eventstream": true
-    },
     "BarEvent": {
       "type": "structure",
       "members": {

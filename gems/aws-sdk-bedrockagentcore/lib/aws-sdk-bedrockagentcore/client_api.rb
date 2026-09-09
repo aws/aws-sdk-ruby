@@ -100,6 +100,7 @@ module Aws::BedrockAgentCore
     CloudWatchLogsFilterOperator = Shapes::StringShape.new(name: 'CloudWatchLogsFilterOperator')
     CloudWatchLogsRule = Shapes::StructureShape.new(name: 'CloudWatchLogsRule')
     CloudWatchLogsSource = Shapes::StructureShape.new(name: 'CloudWatchLogsSource')
+    CloudWatchLogsSourceLogGroupNamePrefixesList = Shapes::ListShape.new(name: 'CloudWatchLogsSourceLogGroupNamePrefixesList')
     CloudWatchLogsSourceLogGroupNamesList = Shapes::ListShape.new(name: 'CloudWatchLogsSourceLogGroupNamesList')
     CloudWatchLogsSourceServiceNamesList = Shapes::ListShape.new(name: 'CloudWatchLogsSourceServiceNamesList')
     CloudWatchLogsTraceConfig = Shapes::StructureShape.new(name: 'CloudWatchLogsTraceConfig')
@@ -475,6 +476,9 @@ module Aws::BedrockAgentCore
     ListSessionsInput = Shapes::StructureShape.new(name: 'ListSessionsInput')
     ListSessionsOutput = Shapes::StructureShape.new(name: 'ListSessionsOutput')
     LiveViewStream = Shapes::StructureShape.new(name: 'LiveViewStream')
+    LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
+    LogGroupNamePrefix = Shapes::StringShape.new(name: 'LogGroupNamePrefix')
+    LogStreamName = Shapes::StringShape.new(name: 'LogStreamName')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxLenString = Shapes::StringShape.new(name: 'MaxLenString')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -514,6 +518,7 @@ module Aws::BedrockAgentCore
     MetadataMap = Shapes::MapShape.new(name: 'MetadataMap')
     MetadataValue = Shapes::UnionShape.new(name: 'MetadataValue')
     MetadataValueStringValueString = Shapes::StringShape.new(name: 'MetadataValueStringValueString')
+    MetricsNamespace = Shapes::StringShape.new(name: 'MetricsNamespace')
     MimeType = Shapes::StringShape.new(name: 'MimeType')
     ModelId = Shapes::StringShape.new(name: 'ModelId')
     MountPath = Shapes::StringShape.new(name: 'MountPath')
@@ -559,6 +564,7 @@ module Aws::BedrockAgentCore
     OnlineEvaluationConfigSource = Shapes::StructureShape.new(name: 'OnlineEvaluationConfigSource')
     OnlineEvaluationTraceConfig = Shapes::StructureShape.new(name: 'OnlineEvaluationTraceConfig')
     OperatorType = Shapes::StringShape.new(name: 'OperatorType')
+    OptionalLogGroupName = Shapes::StringShape.new(name: 'OptionalLogGroupName')
     OutputConfig = Shapes::UnionShape.new(name: 'OutputConfig')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PathPattern = Shapes::StringShape.new(name: 'PathPattern')
@@ -640,6 +646,7 @@ module Aws::BedrockAgentCore
     ResourcesListType = Shapes::ListShape.new(name: 'ResourcesListType')
     ResponseChunk = Shapes::StructureShape.new(name: 'ResponseChunk')
     ResponseStream = Shapes::BlobShape.new(name: 'ResponseStream', streaming: true)
+    ResultDestination = Shapes::StringShape.new(name: 'ResultDestination')
     RetrieveMemoryRecordsInput = Shapes::StructureShape.new(name: 'RetrieveMemoryRecordsInput')
     RetrieveMemoryRecordsOutput = Shapes::StructureShape.new(name: 'RetrieveMemoryRecordsOutput')
     RetryableConflictException = Shapes::StructureShape.new(name: 'RetryableConflictException')
@@ -1057,11 +1064,14 @@ module Aws::BedrockAgentCore
     CloudWatchLogsRule.struct_class = Types::CloudWatchLogsRule
 
     CloudWatchLogsSource.add_member(:service_names, Shapes::ShapeRef.new(shape: CloudWatchLogsSourceServiceNamesList, required: true, location_name: "serviceNames"))
-    CloudWatchLogsSource.add_member(:log_group_names, Shapes::ShapeRef.new(shape: CloudWatchLogsSourceLogGroupNamesList, required: true, location_name: "logGroupNames"))
+    CloudWatchLogsSource.add_member(:log_group_names, Shapes::ShapeRef.new(shape: CloudWatchLogsSourceLogGroupNamesList, location_name: "logGroupNames"))
+    CloudWatchLogsSource.add_member(:log_group_name_prefixes, Shapes::ShapeRef.new(shape: CloudWatchLogsSourceLogGroupNamePrefixesList, location_name: "logGroupNamePrefixes"))
     CloudWatchLogsSource.add_member(:filter_config, Shapes::ShapeRef.new(shape: CloudWatchFilterConfig, location_name: "filterConfig"))
     CloudWatchLogsSource.struct_class = Types::CloudWatchLogsSource
 
-    CloudWatchLogsSourceLogGroupNamesList.member = Shapes::ShapeRef.new(shape: String)
+    CloudWatchLogsSourceLogGroupNamePrefixesList.member = Shapes::ShapeRef.new(shape: LogGroupNamePrefix)
+
+    CloudWatchLogsSourceLogGroupNamesList.member = Shapes::ShapeRef.new(shape: LogGroupName)
 
     CloudWatchLogsSourceServiceNamesList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -1074,8 +1084,10 @@ module Aws::BedrockAgentCore
 
     CloudWatchLogsTraceConfigLogGroupArnsList.member = Shapes::ShapeRef.new(shape: String)
 
-    CloudWatchOutputConfig.add_member(:log_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "logGroupName"))
-    CloudWatchOutputConfig.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "logStreamName"))
+    CloudWatchOutputConfig.add_member(:log_group_name, Shapes::ShapeRef.new(shape: OptionalLogGroupName, location_name: "logGroupName"))
+    CloudWatchOutputConfig.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, location_name: "logStreamName"))
+    CloudWatchOutputConfig.add_member(:metrics_namespace, Shapes::ShapeRef.new(shape: MetricsNamespace, location_name: "metricsNamespace"))
+    CloudWatchOutputConfig.add_member(:result_destination, Shapes::ShapeRef.new(shape: ResultDestination, location_name: "resultDestination"))
     CloudWatchOutputConfig.struct_class = Types::CloudWatchOutputConfig
 
     CodeInterpreterResult.add_member(:content, Shapes::ShapeRef.new(shape: ContentBlockList, required: true, location_name: "content"))
@@ -3047,6 +3059,7 @@ module Aws::BedrockAgentCore
     StartBatchEvaluationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     StartBatchEvaluationRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     StartBatchEvaluationRequest.add_member(:description, Shapes::ShapeRef.new(shape: BatchEvaluationDescription, location_name: "description"))
+    StartBatchEvaluationRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "outputConfig"))
     StartBatchEvaluationRequest.struct_class = Types::StartBatchEvaluationRequest
 
     StartBatchEvaluationRequestEvaluatorsList.member = Shapes::ShapeRef.new(shape: Evaluator)

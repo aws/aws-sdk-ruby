@@ -1286,7 +1286,7 @@ module Aws::EKS
     ElasticLoadBalancing.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "enabled"))
     ElasticLoadBalancing.struct_class = Types::ElasticLoadBalancing
 
-    EncryptionConfig.add_member(:resources, Shapes::ShapeRef.new(shape: StringList, location_name: "resources"))
+    EncryptionConfig.add_member(:resources, Shapes::ShapeRef.new(shape: StringList, deprecated: true, location_name: "resources", metadata: {"deprecatedMessage" => "Deprecated. Amazon EKS encrypts all Kubernetes API data by default, so this value no longer determines which resources are encrypted.", "deprecatedSince" => "2025-03-05"}))
     EncryptionConfig.add_member(:provider, Shapes::ShapeRef.new(shape: Provider, location_name: "provider"))
     EncryptionConfig.struct_class = Types::EncryptionConfig
 

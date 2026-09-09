@@ -366,12 +366,15 @@ module Aws::BedrockAgentCoreControl
 
     class CloudWatchLogsInputConfig
       attr_accessor log_group_names: ::Array[::String]
+      attr_accessor log_group_name_prefixes: ::Array[::String]
       attr_accessor service_names: ::Array[::String]
       SENSITIVE: []
     end
 
     class CloudWatchOutputConfig
       attr_accessor log_group_name: ::String
+      attr_accessor metrics_namespace: ::String
+      attr_accessor result_destination: ("DEDICATED_LOG_GROUP" | "SOURCE_LOG_GROUP")
       SENSITIVE: []
     end
 
@@ -551,6 +554,32 @@ module Aws::BedrockAgentCoreControl
       attr_accessor source: Types::ConnectorSource
       attr_accessor enabled: ::Array[::String]
       attr_accessor configurations: ::Array[Types::ConnectorConfiguration]
+      SENSITIVE: []
+    end
+
+    class ConsentPortalIdpConfig
+      attr_accessor credential_provider_arn: ::String
+      attr_accessor scopes: ::Array[::String]
+      attr_accessor audience: ::String
+      SENSITIVE: []
+    end
+
+    class ConsentPortalSource
+      attr_accessor identifier: ::String
+      attr_accessor type: ("agentcore-gateway")
+      SENSITIVE: []
+    end
+
+    class ConsentPortalSummary
+      attr_accessor sources: ::Array[Types::ConsentPortalSource]
+      attr_accessor consent_portal_arn: ::String
+      attr_accessor consent_portal_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor name: ::String
+      attr_accessor portal_url: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "FAILED")
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -749,6 +778,32 @@ module Aws::BedrockAgentCoreControl
       attr_accessor bundle_id: ::String
       attr_accessor version_id: ::String
       attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CreateConsentPortalRequest
+      attr_accessor execution_role_arn: ::String
+      attr_accessor idp_config: Types::ConsentPortalIdpConfig
+      attr_accessor name: ::String
+      attr_accessor sources: ::Array[Types::ConsentPortalSource]
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateConsentPortalResponse
+      attr_accessor sources: ::Array[Types::ConsentPortalSource]
+      attr_accessor consent_portal_arn: ::String
+      attr_accessor consent_portal_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor idp_config: Types::ConsentPortalIdpConfig
+      attr_accessor name: ::String
+      attr_accessor portal_url: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -1016,6 +1071,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor evaluators: ::Array[Types::EvaluatorReference]
       attr_accessor insights: ::Array[Types::Insight]
       attr_accessor clustering_config: Types::ClusteringConfig
+      attr_accessor output_config: Types::OutputConfig
       attr_accessor evaluation_execution_role_arn: ::String
       attr_accessor enable_on_create: bool
       attr_accessor tags: ::Hash[::String, ::String]
@@ -1565,6 +1621,14 @@ module Aws::BedrockAgentCoreControl
       attr_accessor bundle_id: ::String
       attr_accessor status: ("ACTIVE" | "CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: []
+    end
+
+    class DeleteConsentPortalRequest
+      attr_accessor consent_portal_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteConsentPortalResponse < Aws::EmptyStructure
     end
 
     class DeleteDatasetExamplesRequest
@@ -2382,6 +2446,27 @@ module Aws::BedrockAgentCoreControl
       attr_accessor version_created_at: ::Time
       attr_accessor kms_key_arn: ::String
       SENSITIVE: [:description]
+    end
+
+    class GetConsentPortalRequest
+      attr_accessor consent_portal_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetConsentPortalResponse
+      attr_accessor sources: ::Array[Types::ConsentPortalSource]
+      attr_accessor consent_portal_arn: ::String
+      attr_accessor consent_portal_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor idp_config: Types::ConsentPortalIdpConfig
+      attr_accessor name: ::String
+      attr_accessor portal_url: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
     end
 
     class GetDatasetRequest
@@ -3682,6 +3767,18 @@ module Aws::BedrockAgentCoreControl
 
     class ListConfigurationBundlesResponse
       attr_accessor bundles: ::Array[Types::ConfigurationBundleSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConsentPortalsRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListConsentPortalsResponse
+      attr_accessor consent_portals: ::Array[Types::ConsentPortalSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -5678,6 +5775,30 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class UpdateConsentPortalRequest
+      attr_accessor consent_portal_identifier: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor idp_config: Types::ConsentPortalIdpConfig
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateConsentPortalResponse
+      attr_accessor sources: ::Array[Types::ConsentPortalSource]
+      attr_accessor consent_portal_arn: ::String
+      attr_accessor consent_portal_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor execution_role_arn: ::String
+      attr_accessor idp_config: Types::ConsentPortalIdpConfig
+      attr_accessor name: ::String
+      attr_accessor portal_url: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "FAILED")
+      attr_accessor status_reason: ::String
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class UpdateDatasetExamplesRequest
       attr_accessor dataset_id: ::String
       attr_accessor client_token: ::String
@@ -5935,6 +6056,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor evaluators: ::Array[Types::EvaluatorReference]
       attr_accessor insights: ::Array[Types::Insight]
       attr_accessor clustering_config: Types::ClusteringConfig
+      attr_accessor output_config: Types::OutputConfig
       attr_accessor evaluation_execution_role_arn: ::String
       attr_accessor execution_status: ("ENABLED" | "DISABLED")
       SENSITIVE: [:description]

@@ -1259,6 +1259,7 @@ module Aws::Drs
       attr_accessor ram_bytes: ::Integer
       attr_accessor os: Types::OS
       attr_accessor supports_nitro_instances: bool
+      attr_accessor architecture: ("x86_64" | "arm64")
       SENSITIVE: []
     end
 

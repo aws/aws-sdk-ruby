@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2026-09-01)
+------------------
+
+* Feature - France and Monaco Additional Info changes
+
 1.43.0 (2026-07-09)
 ------------------
 

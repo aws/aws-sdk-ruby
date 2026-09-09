@@ -937,6 +937,7 @@ module Aws::Transfer
     #       user_secret_id: "SecretId",
     #       trusted_host_keys: ["SftpConnectorTrustedHostKey"],
     #       max_concurrent_connections: 1,
+    #       ordered_user_secret_version_stages: ["SecretVersionStage"],
     #     },
     #     security_policy_name: "ConnectorSecurityPolicyName",
     #     egress_config: {
@@ -2442,6 +2443,8 @@ module Aws::Transfer
     #   resp.connector.sftp_config.trusted_host_keys #=> Array
     #   resp.connector.sftp_config.trusted_host_keys[0] #=> String
     #   resp.connector.sftp_config.max_concurrent_connections #=> Integer
+    #   resp.connector.sftp_config.ordered_user_secret_version_stages #=> Array
+    #   resp.connector.sftp_config.ordered_user_secret_version_stages[0] #=> String
     #   resp.connector.service_managed_egress_ip_addresses #=> Array
     #   resp.connector.service_managed_egress_ip_addresses[0] #=> String
     #   resp.connector.security_policy_name #=> String
@@ -4976,6 +4979,7 @@ module Aws::Transfer
     #       user_secret_id: "SecretId",
     #       trusted_host_keys: ["SftpConnectorTrustedHostKey"],
     #       max_concurrent_connections: 1,
+    #       ordered_user_secret_version_stages: ["SecretVersionStage"],
     #     },
     #     security_policy_name: "ConnectorSecurityPolicyName",
     #     egress_config: {
@@ -5769,7 +5773,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.143.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

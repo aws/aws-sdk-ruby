@@ -31,6 +31,7 @@ module Aws::AppIntegrationsService
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientAssociationMetadata = Shapes::MapShape.new(name: 'ClientAssociationMetadata')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContactHandling = Shapes::StructureShape.new(name: 'ContactHandling')
     ContactHandlingScope = Shapes::StringShape.new(name: 'ContactHandlingScope')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
@@ -176,6 +177,9 @@ module Aws::AppIntegrationsService
     ClientAssociationMetadata.key = Shapes::ShapeRef.new(shape: NonBlankString)
     ClientAssociationMetadata.value = Shapes::ShapeRef.new(shape: NonBlankString)
 
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
+
     ContactHandling.add_member(:scope, Shapes::ShapeRef.new(shape: ContactHandlingScope, location_name: "Scope"))
     ContactHandling.struct_class = Types::ContactHandling
 
@@ -265,6 +269,7 @@ module Aws::AppIntegrationsService
     DataIntegrationsList.member = Shapes::ShapeRef.new(shape: DataIntegrationSummary)
 
     DeleteApplicationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ArnOrUUID, required: true, location: "uri", location_name: "ApplicationIdentifier"))
+    DeleteApplicationRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "force"))
     DeleteApplicationRequest.struct_class = Types::DeleteApplicationRequest
 
     DeleteApplicationResponse.struct_class = Types::DeleteApplicationResponse
@@ -853,6 +858,7 @@ module Aws::AppIntegrationsService
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:update_data_integration, Seahorse::Model::Operation.new.tap do |o|

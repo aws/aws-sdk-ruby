@@ -42,6 +42,11 @@ module Aws::AppIntegrationsService
       SENSITIVE: []
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ContactHandling
       attr_accessor scope: ("CROSS_CONTACTS" | "PER_CONTACT")
       SENSITIVE: []
@@ -150,6 +155,7 @@ module Aws::AppIntegrationsService
 
     class DeleteApplicationRequest
       attr_accessor arn: ::String
+      attr_accessor force: bool
       SENSITIVE: []
     end
 

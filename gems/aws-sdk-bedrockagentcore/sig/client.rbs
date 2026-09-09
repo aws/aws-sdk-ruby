@@ -1436,7 +1436,8 @@ module Aws
                                     data_source_config: {
                                       cloud_watch_logs: {
                                         service_names: Array[::String],
-                                        log_group_names: Array[::String],
+                                        log_group_names: Array[::String]?,
+                                        log_group_name_prefixes: Array[::String]?,
                                         filter_config: {
                                           session_ids: Array[::String]?,
                                           time_range: {
@@ -1487,7 +1488,15 @@ module Aws
                                     },
                                     ?tags: Hash[::String, ::String],
                                     ?kms_key_arn: ::String,
-                                    ?description: ::String
+                                    ?description: ::String,
+                                    ?output_config: {
+                                      cloud_watch_config: {
+                                        log_group_name: ::String?,
+                                        log_stream_name: ::String?,
+                                        metrics_namespace: ::String?,
+                                        result_destination: ("DEDICATED_LOG_GROUP" | "SOURCE_LOG_GROUP")?
+                                      }?
+                                    }
                                   ) -> _StartBatchEvaluationResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBatchEvaluationResponseSuccess
 

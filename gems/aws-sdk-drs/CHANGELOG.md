@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2026-09-03)
+------------------
+
+* Feature - AWS Elastic Disaster Recovery now includes source server architecture in SourceProperties to identify x86 and ARM64 systems.
+
 1.69.0 (2026-08-17)
 ------------------
 

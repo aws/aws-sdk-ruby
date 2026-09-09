@@ -435,6 +435,7 @@ module Aws::S3Control
     S3AccessControlList = Shapes::StructureShape.new(name: 'S3AccessControlList')
     S3AccessControlPolicy = Shapes::StructureShape.new(name: 'S3AccessControlPolicy')
     S3AccessPointArn = Shapes::StringShape.new(name: 'S3AccessPointArn')
+    S3AnnotationDirective = Shapes::StringShape.new(name: 'S3AnnotationDirective')
     S3BucketArnString = Shapes::StringShape.new(name: 'S3BucketArnString')
     S3BucketDestination = Shapes::StructureShape.new(name: 'S3BucketDestination')
     S3CannedAccessControlList = Shapes::StringShape.new(name: 'S3CannedAccessControlList')
@@ -455,9 +456,17 @@ module Aws::S3Control
     S3KeyArnString = Shapes::StringShape.new(name: 'S3KeyArnString')
     S3ManifestOutputLocation = Shapes::StructureShape.new(name: 'S3ManifestOutputLocation')
     S3MetadataDirective = Shapes::StringShape.new(name: 'S3MetadataDirective')
+    S3ObjectLockEventHold = Shapes::StringShape.new(name: 'S3ObjectLockEventHold')
+    S3ObjectLockEventHoldDuration = Shapes::StructureShape.new(name: 'S3ObjectLockEventHoldDuration')
+    S3ObjectLockEventHoldDurationDays = Shapes::IntegerShape.new(name: 'S3ObjectLockEventHoldDurationDays')
+    S3ObjectLockEventHoldDurationYears = Shapes::IntegerShape.new(name: 'S3ObjectLockEventHoldDurationYears')
     S3ObjectLockLegalHold = Shapes::StructureShape.new(name: 'S3ObjectLockLegalHold')
     S3ObjectLockLegalHoldStatus = Shapes::StringShape.new(name: 'S3ObjectLockLegalHoldStatus')
     S3ObjectLockMode = Shapes::StringShape.new(name: 'S3ObjectLockMode')
+    S3ObjectLockRetentionEventHold = Shapes::StringShape.new(name: 'S3ObjectLockRetentionEventHold')
+    S3ObjectLockRetentionEventHoldDuration = Shapes::StructureShape.new(name: 'S3ObjectLockRetentionEventHoldDuration')
+    S3ObjectLockRetentionEventHoldDurationDays = Shapes::IntegerShape.new(name: 'S3ObjectLockRetentionEventHoldDurationDays')
+    S3ObjectLockRetentionEventHoldDurationYears = Shapes::IntegerShape.new(name: 'S3ObjectLockRetentionEventHoldDurationYears')
     S3ObjectLockRetentionMode = Shapes::StringShape.new(name: 'S3ObjectLockRetentionMode')
     S3ObjectMetadata = Shapes::StructureShape.new(name: 'S3ObjectMetadata')
     S3ObjectOwner = Shapes::StructureShape.new(name: 'S3ObjectOwner')
@@ -1854,6 +1863,7 @@ module Aws::S3Control
     S3CopyObjectOperation.add_member(:canned_access_control_list, Shapes::ShapeRef.new(shape: S3CannedAccessControlList, location_name: "CannedAccessControlList", metadata: {"box" => true}))
     S3CopyObjectOperation.add_member(:access_control_grants, Shapes::ShapeRef.new(shape: S3GrantList, location_name: "AccessControlGrants", metadata: {"box" => true}))
     S3CopyObjectOperation.add_member(:metadata_directive, Shapes::ShapeRef.new(shape: S3MetadataDirective, location_name: "MetadataDirective"))
+    S3CopyObjectOperation.add_member(:annotation_directive, Shapes::ShapeRef.new(shape: S3AnnotationDirective, location_name: "AnnotationDirective"))
     S3CopyObjectOperation.add_member(:modified_since_constraint, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "ModifiedSinceConstraint"))
     S3CopyObjectOperation.add_member(:new_object_metadata, Shapes::ShapeRef.new(shape: S3ObjectMetadata, location_name: "NewObjectMetadata"))
     S3CopyObjectOperation.add_member(:new_object_tagging, Shapes::ShapeRef.new(shape: S3TagSet, location_name: "NewObjectTagging"))
@@ -1868,6 +1878,8 @@ module Aws::S3Control
     S3CopyObjectOperation.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "ObjectLockRetainUntilDate"))
     S3CopyObjectOperation.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "BucketKeyEnabled"))
     S3CopyObjectOperation.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: S3ChecksumAlgorithm, location_name: "ChecksumAlgorithm"))
+    S3CopyObjectOperation.add_member(:object_lock_event_hold, Shapes::ShapeRef.new(shape: S3ObjectLockEventHold, location_name: "ObjectLockEventHold"))
+    S3CopyObjectOperation.add_member(:object_lock_event_hold_duration, Shapes::ShapeRef.new(shape: S3ObjectLockEventHoldDuration, location_name: "ObjectLockEventHoldDuration"))
     S3CopyObjectOperation.struct_class = Types::S3CopyObjectOperation
 
     S3DeleteObjectTaggingOperation.struct_class = Types::S3DeleteObjectTaggingOperation
@@ -1905,8 +1917,16 @@ module Aws::S3Control
     S3ManifestOutputLocation.add_member(:manifest_format, Shapes::ShapeRef.new(shape: GeneratedManifestFormat, required: true, location_name: "ManifestFormat"))
     S3ManifestOutputLocation.struct_class = Types::S3ManifestOutputLocation
 
+    S3ObjectLockEventHoldDuration.add_member(:days, Shapes::ShapeRef.new(shape: S3ObjectLockEventHoldDurationDays, location_name: "Days", metadata: {"box" => true}))
+    S3ObjectLockEventHoldDuration.add_member(:years, Shapes::ShapeRef.new(shape: S3ObjectLockEventHoldDurationYears, location_name: "Years", metadata: {"box" => true}))
+    S3ObjectLockEventHoldDuration.struct_class = Types::S3ObjectLockEventHoldDuration
+
     S3ObjectLockLegalHold.add_member(:status, Shapes::ShapeRef.new(shape: S3ObjectLockLegalHoldStatus, required: true, location_name: "Status"))
     S3ObjectLockLegalHold.struct_class = Types::S3ObjectLockLegalHold
+
+    S3ObjectLockRetentionEventHoldDuration.add_member(:days, Shapes::ShapeRef.new(shape: S3ObjectLockRetentionEventHoldDurationDays, location_name: "Days", metadata: {"box" => true}))
+    S3ObjectLockRetentionEventHoldDuration.add_member(:years, Shapes::ShapeRef.new(shape: S3ObjectLockRetentionEventHoldDurationYears, location_name: "Years", metadata: {"box" => true}))
+    S3ObjectLockRetentionEventHoldDuration.struct_class = Types::S3ObjectLockRetentionEventHoldDuration
 
     S3ObjectMetadata.add_member(:cache_control, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "CacheControl"))
     S3ObjectMetadata.add_member(:content_disposition, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "ContentDisposition"))
@@ -1929,6 +1949,8 @@ module Aws::S3Control
 
     S3Retention.add_member(:retain_until_date, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "RetainUntilDate"))
     S3Retention.add_member(:mode, Shapes::ShapeRef.new(shape: S3ObjectLockRetentionMode, location_name: "Mode"))
+    S3Retention.add_member(:event_hold, Shapes::ShapeRef.new(shape: S3ObjectLockRetentionEventHold, location_name: "EventHold"))
+    S3Retention.add_member(:event_hold_duration, Shapes::ShapeRef.new(shape: S3ObjectLockRetentionEventHoldDuration, location_name: "EventHoldDuration"))
     S3Retention.struct_class = Types::S3Retention
 
     S3SetObjectAclOperation.add_member(:access_control_policy, Shapes::ShapeRef.new(shape: S3AccessControlPolicy, location_name: "AccessControlPolicy"))

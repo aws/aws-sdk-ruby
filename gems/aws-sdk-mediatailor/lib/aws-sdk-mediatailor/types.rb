@@ -244,8 +244,15 @@ module Aws::MediaTailor
     # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/ads-log-format.html
     #
     # @!attribute [rw] publish_opt_in_event_types
-    #   Indicates that MediaTailor emits `RAW_ADS_RESPONSE` logs for
-    #   playback sessions that are initialized with this configuration.
+    #   Indicates that MediaTailor will emit the selected events in the logs
+    #   for playback sessions that are initialized with this configuration.
+    #   These events are not emitted by default and must be explicitly opted
+    #   in. For descriptions of each event type, see [MediaTailor ADS logs
+    #   description and event types][1] in Elemental MediaTailor User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/ads-log-format.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclude_event_types
@@ -2394,6 +2401,10 @@ module Aws::MediaTailor
     #   The configuration for a `SEQUENTIAL_EXECUTOR` function.
     #   @return [Types::SequentialExecutorConfiguration]
     #
+    # @!attribute [rw] vast_request_configuration
+    #   The configuration for a `VAST_REQUEST` function.
+    #   @return [Types::VastRequestConfiguration]
+    #
     # @!attribute [rw] tags
     #   The tags assigned to the function. Tags are key-value pairs that you
     #   can associate with Amazon resources to help with organization,
@@ -2419,6 +2430,7 @@ module Aws::MediaTailor
       :custom_output_configuration,
       :concurrent_executor_configuration,
       :sequential_executor_configuration,
+      :vast_request_configuration,
       :tags,
       :arn)
       SENSITIVE = []
@@ -2589,6 +2601,10 @@ module Aws::MediaTailor
     #   The configuration for a `SEQUENTIAL_EXECUTOR` function.
     #   @return [Types::SequentialExecutorConfiguration]
     #
+    # @!attribute [rw] vast_request_configuration
+    #   The configuration for a `VAST_REQUEST` function.
+    #   @return [Types::VastRequestConfiguration]
+    #
     # @!attribute [rw] tags
     #   The tags assigned to the function. Tags are key-value pairs that you
     #   can associate with Amazon resources to help with organization,
@@ -2614,6 +2630,7 @@ module Aws::MediaTailor
       :custom_output_configuration,
       :concurrent_executor_configuration,
       :sequential_executor_configuration,
+      :vast_request_configuration,
       :tags,
       :arn)
       SENSITIVE = []
@@ -2798,11 +2815,18 @@ module Aws::MediaTailor
     #   body content, and compression options.
     #   @return [Types::AdDecisionServerConfiguration]
     #
+    # @!attribute [rw] yield_optimization_configuration
+    #   Configuration for Yield Optimization, which fills unsold ad
+    #   inventory in ad breaks with programmatic ads from Amazon Publisher
+    #   Services (APS).
+    #   @return [Types::YieldOptimizationConfiguration]
+    #
     # @!attribute [rw] function_mapping
     #   A map of lifecycle hook event names to function identifiers. The
     #   function mapping specifies which function MediaTailor executes at
     #   each lifecycle hook during ad insertion. Valid keys are
-    #   `PRE_SESSION_INITIALIZATION` and `PRE_ADS_REQUEST`. For more
+    #   `PRE_SESSION_INITIALIZATION`, `PRE_ADS_REQUEST`,
+    #   `POST_ADS_RESPONSE`, and `PRE_MANIFEST_INSERTION`. For more
     #   information, see [Functions lifecycle hooks][1] in the *MediaTailor
     #   User Guide*.
     #
@@ -2851,6 +2875,7 @@ module Aws::MediaTailor
       :video_content_source_url,
       :ad_conditioning_configuration,
       :ad_decision_server_configuration,
+      :yield_optimization_configuration,
       :function_mapping,
       :ads_personalization_timeouts,
       :ads_personalization_concurrency)
@@ -4074,11 +4099,18 @@ module Aws::MediaTailor
     #   requests.
     #   @return [Types::AdDecisionServerConfiguration]
     #
+    # @!attribute [rw] yield_optimization_configuration
+    #   Configuration for Yield Optimization, which fills unsold ad
+    #   inventory in ad breaks with programmatic ads from Amazon Publisher
+    #   Services (APS).
+    #   @return [Types::YieldOptimizationConfiguration]
+    #
     # @!attribute [rw] function_mapping
     #   A map of lifecycle hook event names to function identifiers. The
     #   function mapping specifies which function MediaTailor executes at
     #   each lifecycle hook during ad insertion. Valid keys are
-    #   `PRE_SESSION_INITIALIZATION` and `PRE_ADS_REQUEST`. For more
+    #   `PRE_SESSION_INITIALIZATION`, `PRE_ADS_REQUEST`,
+    #   `POST_ADS_RESPONSE`, and `PRE_MANIFEST_INSERTION`. For more
     #   information, see [Functions lifecycle hooks][1] in the *MediaTailor
     #   User Guide*.
     #
@@ -4127,6 +4159,7 @@ module Aws::MediaTailor
       :video_content_source_url,
       :ad_conditioning_configuration,
       :ad_decision_server_configuration,
+      :yield_optimization_configuration,
       :function_mapping,
       :ads_personalization_timeouts,
       :ads_personalization_concurrency)
@@ -4391,10 +4424,14 @@ module Aws::MediaTailor
     #   expressions and produces output bindings with no external calls.
     #   `HTTP_REQUEST` makes an HTTP call to an external service and
     #   evaluates output expressions that can reference the response.
+    #   `VAST_REQUEST` calls a VAST endpoint, parses the response as VAST,
+    #   and makes the parsed ads available to output expressions.
     #   `SEQUENTIAL_EXECUTOR` runs a sequence of child functions in order,
-    #   passing data between steps through temporary data. For more
-    #   information, see [Function types and composition][1] in the
-    #   *MediaTailor User Guide*.
+    #   passing data between steps through temporary data.
+    #   `CONCURRENT_EXECUTOR` runs a set of child functions in parallel, up
+    #   to a maximum concurrency, and combines their output when all
+    #   functions complete. For more information, see [Function types and
+    #   composition][1] in the *MediaTailor User Guide*.
     #
     #
     #
@@ -4431,6 +4468,12 @@ module Aws::MediaTailor
     #   `SEQUENTIAL_EXECUTOR`.
     #   @return [Types::SequentialExecutorConfiguration]
     #
+    # @!attribute [rw] vast_request_configuration
+    #   The configuration for a `VAST_REQUEST` function. Specifies the HTTP
+    #   method, URL, headers, body, timeout, and output expressions.
+    #   Required when `FunctionType` is `VAST_REQUEST`.
+    #   @return [Types::VastRequestConfiguration]
+    #
     # @!attribute [rw] tags
     #   The tags to assign to the function. Tags are key-value pairs that
     #   you can associate with Amazon resources to help with organization,
@@ -4452,6 +4495,7 @@ module Aws::MediaTailor
       :custom_output_configuration,
       :concurrent_executor_configuration,
       :sequential_executor_configuration,
+      :vast_request_configuration,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -4487,6 +4531,10 @@ module Aws::MediaTailor
     #   The configuration for a `SEQUENTIAL_EXECUTOR` function.
     #   @return [Types::SequentialExecutorConfiguration]
     #
+    # @!attribute [rw] vast_request_configuration
+    #   The configuration for a `VAST_REQUEST` function.
+    #   @return [Types::VastRequestConfiguration]
+    #
     # @!attribute [rw] tags
     #   The tags assigned to the function. Tags are key-value pairs that you
     #   can associate with Amazon resources to help with organization,
@@ -4512,6 +4560,7 @@ module Aws::MediaTailor
       :custom_output_configuration,
       :concurrent_executor_configuration,
       :sequential_executor_configuration,
+      :vast_request_configuration,
       :tags,
       :arn)
       SENSITIVE = []
@@ -4650,11 +4699,18 @@ module Aws::MediaTailor
     #   body content, and compression options.
     #   @return [Types::AdDecisionServerConfiguration]
     #
+    # @!attribute [rw] yield_optimization_configuration
+    #   Configuration for Yield Optimization, which fills unsold ad
+    #   inventory in ad breaks with programmatic ads from Amazon Publisher
+    #   Services (APS).
+    #   @return [Types::YieldOptimizationConfiguration]
+    #
     # @!attribute [rw] function_mapping
     #   A map of lifecycle hook event names to function identifiers. The
     #   function mapping specifies which function MediaTailor executes at
     #   each lifecycle hook during ad insertion. Valid keys are
-    #   `PRE_SESSION_INITIALIZATION` and `PRE_ADS_REQUEST`. For more
+    #   `PRE_SESSION_INITIALIZATION`, `PRE_ADS_REQUEST`,
+    #   `POST_ADS_RESPONSE`, and `PRE_MANIFEST_INSERTION`. For more
     #   information, see [Functions lifecycle hooks][1] in the *MediaTailor
     #   User Guide*.
     #
@@ -4696,6 +4752,7 @@ module Aws::MediaTailor
       :video_content_source_url,
       :ad_conditioning_configuration,
       :ad_decision_server_configuration,
+      :yield_optimization_configuration,
       :function_mapping,
       :ads_personalization_timeouts,
       :ads_personalization_concurrency)
@@ -4869,11 +4926,18 @@ module Aws::MediaTailor
     #   body content, and compression options.
     #   @return [Types::AdDecisionServerConfiguration]
     #
+    # @!attribute [rw] yield_optimization_configuration
+    #   Configuration for Yield Optimization, which fills unsold ad
+    #   inventory in ad breaks with programmatic ads from Amazon Publisher
+    #   Services (APS).
+    #   @return [Types::YieldOptimizationConfiguration]
+    #
     # @!attribute [rw] function_mapping
     #   A map of lifecycle hook event names to function identifiers. The
     #   function mapping specifies which function MediaTailor executes at
     #   each lifecycle hook during ad insertion. Valid keys are
-    #   `PRE_SESSION_INITIALIZATION` and `PRE_ADS_REQUEST`. For more
+    #   `PRE_SESSION_INITIALIZATION`, `PRE_ADS_REQUEST`,
+    #   `POST_ADS_RESPONSE`, and `PRE_MANIFEST_INSERTION`. For more
     #   information, see [Functions lifecycle hooks][1] in the *MediaTailor
     #   User Guide*.
     #
@@ -4922,6 +4986,7 @@ module Aws::MediaTailor
       :video_content_source_url,
       :ad_conditioning_configuration,
       :ad_decision_server_configuration,
+      :yield_optimization_configuration,
       :function_mapping,
       :ads_personalization_timeouts,
       :ads_personalization_concurrency)
@@ -6270,6 +6335,87 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The configuration for a `VAST_REQUEST` function. Specifies the HTTP
+    # method, URL, headers, body, timeout, and output expressions for a
+    # request to a VAST endpoint. MediaTailor parses the response as VAST
+    # and resolves wrapper redirects, then makes the parsed ads available to
+    # the function's output expressions. For more information, see
+    # [Function types and composition][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types.html
+    #
+    # @!attribute [rw] runtime
+    #   The expression language used to evaluate expressions in the function
+    #   configuration. Set this to `JSONata`.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   A map of output bindings. Each key is a namespaced output path (such
+    #   as `temp.wrappedAds`), and each value is an expression that
+    #   MediaTailor evaluates at runtime. Output expressions in a
+    #   `VAST_REQUEST` function can reference the `response` object, which
+    #   exposes `response.parsedAds` — the ads parsed from the VAST response
+    #   after schema validation and wrapper resolution — and
+    #   `response.statusCode`. For more information about expression syntax,
+    #   see [JSONata expression reference][1] in the *MediaTailor User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] method_type
+    #   The HTTP method for the request to the VAST endpoint. Valid values:
+    #   `GET` and `POST`. Use `POST` to send a bid request body, such as an
+    #   OpenRTB payload.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_timeout_milliseconds
+    #   The maximum time, in milliseconds, that MediaTailor waits for a
+    #   response from the VAST endpoint. The timeout covers the entire
+    #   response, including any wrapper redirects that MediaTailor follows.
+    #   If the call exceeds this timeout, MediaTailor proceeds with an empty
+    #   ad list and continues output expression evaluation. Valid values:
+    #   `100` to `2000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] url
+    #   An expression that evaluates to the VAST endpoint URL. Use `{%...%}`
+    #   delimiters for dynamic expressions. A literal value must be an
+    #   `https://` URL. The maximum length is 25,000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   An expression that evaluates to the request body. Used with `POST`
+    #   requests, for example to send an OpenRTB bid request. The maximum
+    #   length is 100,000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers
+    #   A map of HTTP header names to expression values. MediaTailor
+    #   evaluates each header value expression at runtime and includes the
+    #   result in the outbound request. Headers beginning with `X-Amz-` are
+    #   reserved by the service, and method override headers are not
+    #   allowed.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/VastRequestConfiguration AWS API Documentation
+    #
+    class VastRequestConfiguration < Struct.new(
+      :runtime,
+      :output,
+      :method_type,
+      :request_timeout_milliseconds,
+      :url,
+      :body,
+      :headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The settings that control how MediaTailor processes VAST responses
     # from the ad decision server.
     #
@@ -6342,6 +6488,57 @@ module Aws::MediaTailor
       :source_location_name,
       :tags,
       :vod_source_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for Yield Optimization, which fills unsold ad inventory
+    # in ad breaks with programmatic ads from Amazon Publisher Services
+    # (APS).
+    #
+    # @!attribute [rw] minimum_unfilled_duration
+    #   The minimum unfilled duration, in seconds, that must remain in an ad
+    #   break before MediaTailor requests additional ads from Amazon
+    #   Publisher Services (APS). For example, if set to 6 seconds, yield
+    #   optimization triggers only when at least 6 seconds of unfilled time
+    #   remains after the primary ad server response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] publisher_id
+    #   Publisher ID for an existing Amazon Publisher Services
+    #   configuration. This ID must be obtained by registering with APS
+    #   prior to using the Yield Optimization feature. The Publisher ID
+    #   identifies your account in the APS system and is required for all
+    #   bid requests.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Publisher Services (APS) region that MediaTailor sends
+    #   bid requests to. Choose the region closest to your primary audience,
+    #   because the selection affects both latency and the ad inventory
+    #   available to you. This setting applies to the entire playback
+    #   configuration, not to individual viewers. If you serve traffic
+    #   across multiple regions, create a separate playback configuration
+    #   for each APS region.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_rtb_template
+    #   The OpenRTB bid request template, in JSON, that MediaTailor sends to
+    #   Amazon Publisher Services (APS). The template must include an `imp`
+    #   array with one impression specifying `bidfloor`, an `app` object
+    #   specifying `bundle` and `storeurl`, and a `device` object specifying
+    #   `ua` and `ip`. Use double curly braces (for example,
+    #   `{{player_params.user_agent}}`) to insert session variables and
+    #   player parameters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/YieldOptimizationConfiguration AWS API Documentation
+    #
+    class YieldOptimizationConfiguration < Struct.new(
+      :minimum_unfilled_duration,
+      :publisher_id,
+      :region,
+      :open_rtb_template)
       SENSITIVE = []
       include Aws::Structure
     end

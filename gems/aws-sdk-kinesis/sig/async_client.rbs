@@ -82,7 +82,8 @@ module Aws
                                   type: ("AT_SEQUENCE_NUMBER" | "AFTER_SEQUENCE_NUMBER" | "TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP"),
                                   sequence_number: ::String?,
                                   timestamp: ::Time?
-                                }
+                                },
+                                ?dry_run: bool
                               ) -> _SubscribeToShardResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SubscribeToShardResponseSuccess
     end

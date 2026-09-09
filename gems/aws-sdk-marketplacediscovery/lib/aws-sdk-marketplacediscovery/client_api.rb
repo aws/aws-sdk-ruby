@@ -53,6 +53,7 @@ module Aws::MarketplaceDiscovery
     EksAddOnOperatingSystemList = Shapes::ListShape.new(name: 'EksAddOnOperatingSystemList')
     ExceptionMessage = Shapes::StringShape.new(name: 'ExceptionMessage')
     FacetTypeList = Shapes::ListShape.new(name: 'FacetTypeList')
+    FixedPercentage = Shapes::StructureShape.new(name: 'FixedPercentage')
     FixedUpfrontPricingTerm = Shapes::StructureShape.new(name: 'FixedUpfrontPricingTerm')
     FreeTrialPricingTerm = Shapes::StructureShape.new(name: 'FreeTrialPricingTerm')
     FulfillmentOption = Shapes::UnionShape.new(name: 'FulfillmentOption')
@@ -117,7 +118,13 @@ module Aws::MarketplaceDiscovery
     OfferSetInformation = Shapes::StructureShape.new(name: 'OfferSetInformation')
     OfferTerm = Shapes::UnionShape.new(name: 'OfferTerm')
     OfferTermsList = Shapes::ListShape.new(name: 'OfferTermsList')
+    PaymentScheduleEntry = Shapes::StructureShape.new(name: 'PaymentScheduleEntry')
+    PaymentScheduleEntryDayOfMonthInteger = Shapes::IntegerShape.new(name: 'PaymentScheduleEntryDayOfMonthInteger')
+    PaymentScheduleEntryList = Shapes::ListShape.new(name: 'PaymentScheduleEntryList')
     PaymentScheduleTerm = Shapes::StructureShape.new(name: 'PaymentScheduleTerm')
+    PaymentScheduleTermTemplate = Shapes::StructureShape.new(name: 'PaymentScheduleTermTemplate')
+    PercentageRange = Shapes::StructureShape.new(name: 'PercentageRange')
+    PriceIncrease = Shapes::UnionShape.new(name: 'PriceIncrease')
     PricingModel = Shapes::StructureShape.new(name: 'PricingModel')
     PricingModelList = Shapes::ListShape.new(name: 'PricingModelList')
     PricingModelType = Shapes::StringShape.new(name: 'PricingModelType')
@@ -149,6 +156,7 @@ module Aws::MarketplaceDiscovery
     RateCardList = Shapes::ListShape.new(name: 'RateCardList')
     RecurringPaymentTerm = Shapes::StructureShape.new(name: 'RecurringPaymentTerm')
     RenewalTerm = Shapes::StructureShape.new(name: 'RenewalTerm')
+    RenewalTermMaxRenewalsInteger = Shapes::IntegerShape.new(name: 'RenewalTermMaxRenewalsInteger')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceContentType = Shapes::StringShape.new(name: 'ResourceContentType')
     ResourceList = Shapes::ListShape.new(name: 'ResourceList')
@@ -189,6 +197,8 @@ module Aws::MarketplaceDiscovery
     String = Shapes::StringShape.new(name: 'String')
     SupportTerm = Shapes::StructureShape.new(name: 'SupportTerm')
     TermId = Shapes::StringShape.new(name: 'TermId')
+    TermTemplate = Shapes::UnionShape.new(name: 'TermTemplate')
+    TermTemplateList = Shapes::ListShape.new(name: 'TermTemplateList')
     TermType = Shapes::StringShape.new(name: 'TermType')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -353,6 +363,9 @@ module Aws::MarketplaceDiscovery
     EksAddOnOperatingSystemList.member = Shapes::ShapeRef.new(shape: EksAddOnOperatingSystem)
 
     FacetTypeList.member = Shapes::ShapeRef.new(shape: SearchFacetType)
+
+    FixedPercentage.add_member(:percentage_value, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "percentageValue"))
+    FixedPercentage.struct_class = Types::FixedPercentage
 
     FixedUpfrontPricingTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, required: true, location_name: "id"))
     FixedUpfrontPricingTerm.add_member(:type, Shapes::ShapeRef.new(shape: TermType, required: true, location_name: "type"))
@@ -642,11 +655,34 @@ module Aws::MarketplaceDiscovery
 
     OfferTermsList.member = Shapes::ShapeRef.new(shape: OfferTerm)
 
+    PaymentScheduleEntry.add_member(:charge_date_offset, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "chargeDateOffset"))
+    PaymentScheduleEntry.add_member(:charge_percentage, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "chargePercentage"))
+    PaymentScheduleEntry.add_member(:day_of_month, Shapes::ShapeRef.new(shape: PaymentScheduleEntryDayOfMonthInteger, location_name: "dayOfMonth"))
+    PaymentScheduleEntry.struct_class = Types::PaymentScheduleEntry
+
+    PaymentScheduleEntryList.member = Shapes::ShapeRef.new(shape: PaymentScheduleEntry)
+
     PaymentScheduleTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, required: true, location_name: "id"))
     PaymentScheduleTerm.add_member(:type, Shapes::ShapeRef.new(shape: TermType, required: true, location_name: "type"))
     PaymentScheduleTerm.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, required: true, location_name: "currencyCode"))
     PaymentScheduleTerm.add_member(:schedule, Shapes::ShapeRef.new(shape: ScheduleList, required: true, location_name: "schedule"))
     PaymentScheduleTerm.struct_class = Types::PaymentScheduleTerm
+
+    PaymentScheduleTermTemplate.add_member(:schedule, Shapes::ShapeRef.new(shape: PaymentScheduleEntryList, required: true, location_name: "schedule"))
+    PaymentScheduleTermTemplate.struct_class = Types::PaymentScheduleTermTemplate
+
+    PercentageRange.add_member(:minimum_value, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "minimumValue"))
+    PercentageRange.add_member(:maximum_value, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "maximumValue"))
+    PercentageRange.add_member(:default_value, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "defaultValue"))
+    PercentageRange.struct_class = Types::PercentageRange
+
+    PriceIncrease.add_member(:fixed_percentage, Shapes::ShapeRef.new(shape: FixedPercentage, location_name: "fixedPercentage"))
+    PriceIncrease.add_member(:percentage_range, Shapes::ShapeRef.new(shape: PercentageRange, location_name: "percentageRange"))
+    PriceIncrease.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PriceIncrease.add_member_subclass(:fixed_percentage, Types::PriceIncrease::FixedPercentage)
+    PriceIncrease.add_member_subclass(:percentage_range, Types::PriceIncrease::PercentageRange)
+    PriceIncrease.add_member_subclass(:unknown, Types::PriceIncrease::Unknown)
+    PriceIncrease.struct_class = Types::PriceIncrease
 
     PricingModel.add_member(:pricing_model_type, Shapes::ShapeRef.new(shape: PricingModelType, required: true, location_name: "pricingModelType"))
     PricingModel.add_member(:display_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "displayName"))
@@ -745,6 +781,11 @@ module Aws::MarketplaceDiscovery
 
     RenewalTerm.add_member(:id, Shapes::ShapeRef.new(shape: TermId, required: true, location_name: "id"))
     RenewalTerm.add_member(:type, Shapes::ShapeRef.new(shape: TermType, required: true, location_name: "type"))
+    RenewalTerm.add_member(:max_renewals, Shapes::ShapeRef.new(shape: RenewalTermMaxRenewalsInteger, location_name: "maxRenewals"))
+    RenewalTerm.add_member(:lockout_period, Shapes::ShapeRef.new(shape: BoundedString, location_name: "lockoutPeriod"))
+    RenewalTerm.add_member(:adjustment_deadline, Shapes::ShapeRef.new(shape: BoundedString, location_name: "adjustmentDeadline"))
+    RenewalTerm.add_member(:price_increase, Shapes::ShapeRef.new(shape: PriceIncrease, location_name: "priceIncrease"))
+    RenewalTerm.add_member(:term_templates, Shapes::ShapeRef.new(shape: TermTemplateList, location_name: "termTemplates"))
     RenewalTerm.struct_class = Types::RenewalTerm
 
     Resource.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
@@ -861,6 +902,14 @@ module Aws::MarketplaceDiscovery
     SupportTerm.add_member(:type, Shapes::ShapeRef.new(shape: TermType, required: true, location_name: "type"))
     SupportTerm.add_member(:refund_policy, Shapes::ShapeRef.new(shape: BoundedString, required: true, location_name: "refundPolicy"))
     SupportTerm.struct_class = Types::SupportTerm
+
+    TermTemplate.add_member(:payment_schedule_term_template, Shapes::ShapeRef.new(shape: PaymentScheduleTermTemplate, location_name: "paymentScheduleTermTemplate"))
+    TermTemplate.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TermTemplate.add_member_subclass(:payment_schedule_term_template, Types::TermTemplate::PaymentScheduleTermTemplate)
+    TermTemplate.add_member_subclass(:unknown, Types::TermTemplate::Unknown)
+    TermTemplate.struct_class = Types::TermTemplate
+
+    TermTemplateList.member = Shapes::ShapeRef.new(shape: TermTemplate)
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException

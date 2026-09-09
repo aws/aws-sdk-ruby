@@ -3116,6 +3116,26 @@ module Aws::ECS
     #   characters in the range of 33-126 (inclusive) are allowed.
     #   @return [String]
     #
+    # @!attribute [rw] critical
+    #   If the `critical` parameter of a daemon is `true`, and the daemon
+    #   task fails, stops, or becomes unhealthy, Amazon ECS drains the
+    #   container instance and stops the other tasks running on it. If the
+    #   `critical` parameter is `false`, the daemon task failure doesn't
+    #   affect the other tasks on the instance. The default value is `true`.
+    #
+    #   A non-critical daemon doesn't block instance registration. The
+    #   container instance becomes active and continues to run your other
+    #   tasks, whether the daemon task fails during scale-out or during a
+    #   deployment.
+    #
+    #   Amazon ECS emits an EventBridge event when a daemon task fails to
+    #   start, for both critical and non-critical daemons.
+    #
+    #   Daemon task launch failures during a deployment are still counted by
+    #   the deployment circuit breaker. The circuit breaker can roll back an
+    #   unstable target revision.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateDaemonRequest AWS API Documentation
     #
     class CreateDaemonRequest < Struct.new(
@@ -3128,7 +3148,8 @@ module Aws::ECS
       :propagate_tags,
       :enable_ecs_managed_tags,
       :enable_execute_command,
-      :client_token)
+      :client_token,
+      :critical)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4138,11 +4159,20 @@ module Aws::ECS
     #   The number of daemon tasks running on this capacity provider.
     #   @return [Integer]
     #
+    # @!attribute [rw] without_daemon_count
+    #   The number of instances on this capacity provider that are running
+    #   without the daemon task. This applies to daemons that aren't
+    #   critical, where the instance remains available for your other tasks
+    #   even if the daemon task can't start or stops. These instances
+    #   aren't included in `runningCount`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DaemonCapacityProvider AWS API Documentation
     #
     class DaemonCapacityProvider < Struct.new(
       :arn,
-      :running_count)
+      :running_count,
+      :without_daemon_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4502,6 +4532,14 @@ module Aws::ECS
     #   provider.
     #   @return [Integer]
     #
+    # @!attribute [rw] without_daemon_instance_count
+    #   The number of instances on this capacity provider that are running
+    #   without the daemon task. This applies to daemons that aren't
+    #   critical, where the instance remains available for your other tasks
+    #   even if the daemon task can't start or stops. These instances
+    #   aren't included in `runningInstanceCount`.
+    #   @return [Integer]
+    #
     # @!attribute [rw] draining_instance_count
     #   The number of instances being drained on this capacity provider
     #   during the deployment.
@@ -4512,6 +4550,7 @@ module Aws::ECS
     class DaemonDeploymentCapacityProvider < Struct.new(
       :arn,
       :running_instance_count,
+      :without_daemon_instance_count,
       :draining_instance_count)
       SENSITIVE = []
       include Aws::Structure
@@ -4564,6 +4603,12 @@ module Aws::ECS
     #   revision.
     #   @return [Integer]
     #
+    # @!attribute [rw] total_without_daemon_instance_count
+    #   The total number of instances running without the daemon task for
+    #   this revision, across all capacity providers. These instances
+    #   aren't included in `totalRunningInstanceCount`.
+    #   @return [Integer]
+    #
     # @!attribute [rw] total_draining_instance_count
     #   The total number of instances being drained for this revision during
     #   the deployment.
@@ -4575,6 +4620,7 @@ module Aws::ECS
       :arn,
       :capacity_providers,
       :total_running_instance_count,
+      :total_without_daemon_instance_count,
       :total_draining_instance_count)
       SENSITIVE = []
       include Aws::Structure
@@ -4803,6 +4849,15 @@ module Aws::ECS
     #   the daemon tasks.
     #   @return [Boolean]
     #
+    # @!attribute [rw] critical
+    #   If the `critical` parameter of this daemon revision is `true`, and
+    #   the daemon task fails, stops, or becomes unhealthy, Amazon ECS
+    #   drains the container instance and stops the other tasks running on
+    #   it. If the parameter is `false`, the daemon task failure doesn't
+    #   affect the other tasks on the instance, and doesn't block instance
+    #   registration. The default value is `true`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DaemonRevision AWS API Documentation
     #
     class DaemonRevision < Struct.new(
@@ -4814,7 +4869,8 @@ module Aws::ECS
       :container_images,
       :propagate_tags,
       :enable_ecs_managed_tags,
-      :enable_execute_command)
+      :enable_execute_command,
+      :critical)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4834,12 +4890,19 @@ module Aws::ECS
     #   The total number of daemon tasks running for this revision.
     #   @return [Integer]
     #
+    # @!attribute [rw] total_without_daemon_count
+    #   The total number of instances running without the daemon task for
+    #   this revision, across all capacity providers. These instances
+    #   aren't included in `totalRunningCount`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DaemonRevisionDetail AWS API Documentation
     #
     class DaemonRevisionDetail < Struct.new(
       :arn,
       :capacity_providers,
-      :total_running_count)
+      :total_running_count,
+      :total_without_daemon_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18796,6 +18859,26 @@ module Aws::ECS
     #   is turned off.
     #   @return [Boolean]
     #
+    # @!attribute [rw] critical
+    #   If the `critical` parameter of a daemon is `true`, and the daemon
+    #   task fails, stops, or becomes unhealthy, Amazon ECS drains the
+    #   container instance and stops the other tasks running on it. If the
+    #   `critical` parameter is `false`, the daemon task failure doesn't
+    #   affect the other tasks on the instance. The default value is `true`.
+    #
+    #   A non-critical daemon doesn't block instance registration. The
+    #   container instance becomes active and continues to run your other
+    #   tasks, whether the daemon task fails during scale-out or during a
+    #   deployment.
+    #
+    #   Amazon ECS emits an EventBridge event when a daemon task fails to
+    #   start, for both critical and non-critical daemons.
+    #
+    #   Daemon task launch failures during a deployment are still counted by
+    #   the deployment circuit breaker. The circuit breaker can roll back an
+    #   unstable target revision.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateDaemonRequest AWS API Documentation
     #
     class UpdateDaemonRequest < Struct.new(
@@ -18805,7 +18888,8 @@ module Aws::ECS
       :deployment_configuration,
       :propagate_tags,
       :enable_ecs_managed_tags,
-      :enable_execute_command)
+      :enable_execute_command,
+      :critical)
       SENSITIVE = []
       include Aws::Structure
     end

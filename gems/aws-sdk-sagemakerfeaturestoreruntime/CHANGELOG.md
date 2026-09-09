@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2026-09-02)
+------------------
+
+* Feature - Amazon SageMaker Feature Store now supports the UpdateRecord API, enabling partial updates to individual feature values in an existing Online Store record without rewriting the entire record. This reduces write payloads and latency for high-frequency feature-level writes .
+
 1.67.0 (2026-07-09)
 ------------------
 

@@ -329,6 +329,7 @@ module Aws::BedrockAgentCore
     class CloudWatchLogsSource
       attr_accessor service_names: ::Array[::String]
       attr_accessor log_group_names: ::Array[::String]
+      attr_accessor log_group_name_prefixes: ::Array[::String]
       attr_accessor filter_config: Types::CloudWatchFilterConfig
       SENSITIVE: []
     end
@@ -345,6 +346,8 @@ module Aws::BedrockAgentCore
     class CloudWatchOutputConfig
       attr_accessor log_group_name: ::String
       attr_accessor log_stream_name: ::String
+      attr_accessor metrics_namespace: ::String
+      attr_accessor result_destination: ("DEDICATED_LOG_GROUP" | "SOURCE_LOG_GROUP")
       SENSITIVE: []
     end
 
@@ -2936,6 +2939,7 @@ module Aws::BedrockAgentCore
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor kms_key_arn: ::String
       attr_accessor description: ::String
+      attr_accessor output_config: Types::OutputConfig
       SENSITIVE: []
     end
 

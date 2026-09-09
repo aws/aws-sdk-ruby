@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:sesv2)
 # structure.
 #
 #     sesv2 = Aws::SESV2::Client.new
-#     resp = sesv2.batch_get_metric_data(params)
+#     resp = sesv2.associate_email_identity_certificate(params)
 #
 # See {Client} for more information.
 #
@@ -54,7 +54,7 @@ module Aws::SESV2
   autoload :EndpointProvider, 'aws-sdk-sesv2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sesv2/endpoints'
 
-  GEM_VERSION = '1.106.0'
+  GEM_VERSION = '1.107.0'
 
 end
 

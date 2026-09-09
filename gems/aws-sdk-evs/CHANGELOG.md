@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2026-09-03)
+------------------
+
+* Feature - Amazon EVS now allows users to set, update, and retrieve values for parameters that apply across all EVS Environments in their account at a regional level, such as the VCF License portability core count.
+
 1.24.0 (2026-08-25)
 ------------------
 

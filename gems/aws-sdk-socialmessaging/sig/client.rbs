@@ -147,7 +147,8 @@ module Aws
                                    categories: Array[("SIGN_UP" | "SIGN_IN" | "APPOINTMENT_BOOKING" | "LEAD_GENERATION" | "SHOPPING" | "CONTACT_US" | "CUSTOMER_SUPPORT" | "SURVEY" | "OTHER")],
                                    ?flow_json: ::String,
                                    ?publish: bool,
-                                   ?clone_flow_id: ::String
+                                   ?clone_flow_id: ::String,
+                                   ?endpoint_uri: ::String
                                  ) -> _CreateWhatsAppFlowResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWhatsAppFlowResponseSuccess
 
@@ -287,6 +288,17 @@ module Aws
                                                                 id: ::String
                                                               ) -> _GetLinkedWhatsAppBusinessAccountPhoneNumberResponseSuccess
                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLinkedWhatsAppBusinessAccountPhoneNumberResponseSuccess
+
+      interface _GetWhatsAppBusinessPublicKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetWhatsAppBusinessPublicKeyOutput]
+        def business_public_key: () -> ::String
+        def business_public_key_signature_status: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#get_whats_app_business_public_key-instance_method
+      def get_whats_app_business_public_key: (
+                                               origination_phone_number_id: ::String
+                                             ) -> _GetWhatsAppBusinessPublicKeyResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWhatsAppBusinessPublicKeyResponseSuccess
 
       interface _GetWhatsAppFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetWhatsAppFlowOutput]
@@ -477,6 +489,17 @@ module Aws
                                                              ) -> _PutWhatsAppBusinessAccountEventDestinationsResponseSuccess
                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutWhatsAppBusinessAccountEventDestinationsResponseSuccess
 
+      interface _PutWhatsAppBusinessPublicKeyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutWhatsAppBusinessPublicKeyOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#put_whats_app_business_public_key-instance_method
+      def put_whats_app_business_public_key: (
+                                               origination_phone_number_id: ::String,
+                                               ?business_public_key: ::String,
+                                               ?kms_key_arn: ::String
+                                             ) -> _PutWhatsAppBusinessPublicKeyResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutWhatsAppBusinessPublicKeyResponseSuccess
+
       interface _SendWhatsAppConversionEventResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::SendWhatsAppConversionEventOutput]
         def request_id: () -> ::String
@@ -536,7 +559,9 @@ module Aws
                                    id: ::String,
                                    flow_id: ::String,
                                    ?flow_name: ::String,
-                                   ?categories: Array[("SIGN_UP" | "SIGN_IN" | "APPOINTMENT_BOOKING" | "LEAD_GENERATION" | "SHOPPING" | "CONTACT_US" | "CUSTOMER_SUPPORT" | "SURVEY" | "OTHER")]
+                                   ?categories: Array[("SIGN_UP" | "SIGN_IN" | "APPOINTMENT_BOOKING" | "LEAD_GENERATION" | "SHOPPING" | "CONTACT_US" | "CUSTOMER_SUPPORT" | "SURVEY" | "OTHER")],
+                                   ?endpoint_uri: ::String,
+                                   ?meta_app_id: ::String
                                  ) -> _UpdateWhatsAppFlowResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWhatsAppFlowResponseSuccess
 

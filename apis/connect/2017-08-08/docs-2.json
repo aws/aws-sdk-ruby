@@ -2157,6 +2157,12 @@
         "UserData$ActiveSlotsByChannel": "<p> A map of active slots by channel. The key is a channel name. The value is an integer: the number of active slots. </p>"
       }
     },
+    "ChannelWorkloadBehaviorType": {
+      "base": null,
+      "refs": {
+        "CrossChannelWorkloadBehavior$ChannelWorkloadBehaviorType": "<p>Specifies the routing behavior for an agent handling their current channel and workload type.</p>"
+      }
+    },
     "Channels": {
       "base": null,
       "refs": {
@@ -3612,6 +3618,12 @@
       "base": "<p>Defines the cross-channel routing behavior that allows an agent working on a contact in one channel to be offered a contact from a different channel.</p>",
       "refs": {
         "MediaConcurrency$CrossChannelBehavior": "<p>Defines the cross-channel routing behavior for each channel that is enabled for this Routing Profile. For example, this allows you to offer an agent a different contact from another channel when they are currently working with a contact from a Voice channel.</p>"
+      }
+    },
+    "CrossChannelWorkloadBehavior": {
+      "base": "<p>Defines the cross-channel and workload type routing behavior that allows an agent working on a contact to be offered a contact from a different channel or workload type.</p>",
+      "refs": {
+        "WorkloadTypeConcurrency$CrossChannelWorkloadBehavior": "<p>Defines the cross-channel and workload type routing behavior for each channel and workload type combination that is enabled for this Routing Profile.</p>"
       }
     },
     "CurrentMetric": {
@@ -10526,6 +10538,45 @@
         "DisconnectDetails$PotentialDisconnectIssue": "<p>Indicates the potential disconnection issues for a call. This field is not populated if the service does not detect potential issues.</p>"
       }
     },
+    "PreEvaluationFilter": {
+      "base": "<p>A single pre-evaluation filter condition. Specifies a resource type, filter type, key, value, and operator to match against a resource attribute.</p>",
+      "refs": {
+        "PreEvaluationFilterList$member": null
+      }
+    },
+    "PreEvaluationFilterList": {
+      "base": null,
+      "refs": {
+        "PreEvaluationFilters$AndConditions": "<p>A list of conditions that the rule evaluates together using AND logic. All conditions must be met for the event to be evaluated by the rule.</p>"
+      }
+    },
+    "PreEvaluationFilterOperator": {
+      "base": null,
+      "refs": {
+        "PreEvaluationFilter$Operator": "<p>The comparison operator for the filter condition. Valid values: <code>EQUALS</code>.</p>"
+      }
+    },
+    "PreEvaluationFilterResourceType": {
+      "base": null,
+      "refs": {
+        "PreEvaluationFilter$ResourceType": "<p>The type of resource to filter on. Valid values: <code>CONTACT</code>.</p>"
+      }
+    },
+    "PreEvaluationFilterType": {
+      "base": null,
+      "refs": {
+        "PreEvaluationFilter$FilterType": "<p>The type of filter to apply. Valid values: <code>TAG</code>.</p>"
+      }
+    },
+    "PreEvaluationFilters": {
+      "base": "<p>The pre-evaluation filters for a rule, that restrict a rule to be applied to only certain resources based on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>",
+      "refs": {
+        "CreateRuleRequest$PreEvaluationFilters": "<p>The pre-evaluation filters for the rule, that restrict the rule to be applied to only certain resources based on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>",
+        "Rule$PreEvaluationFilters": "<p>The pre-evaluation filters for the rule, that restrict the rule to be applied to only certain resources based on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>",
+        "RuleSearchSummary$PreEvaluationFilters": "<p>The pre-evaluation filters for the rule, that restrict the rule to be applied to only certain resources based on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>",
+        "UpdateRuleRequest$PreEvaluationFilters": "<p>The pre-evaluation filters for the rule, that restrict the rule to be applied to only certain resources based on the resource's attributes, such as tags assigned to a contact. The pre-evaluation filters are applied even before rule conditions are evaluated and are used to enforce tag-based-access-control while applying rules.</p>"
+      }
+    },
     "PreSignedAttachmentUrl": {
       "base": null,
       "refs": {
@@ -13480,6 +13531,8 @@
         "MetricFilterValueList$member": null,
         "MetricGroupingList$member": null,
         "NumberCondition$FieldName": "<p>The name of the field in the number condition.</p>",
+        "PreEvaluationFilter$FilterKey": "<p>The key of the attribute to filter on. For tag filters, this is the tag key.</p>",
+        "PreEvaluationFilter$FilterValue": "<p>The value to match against. For tag filters, this is the tag value.</p>",
         "PrimaryValue$Value": "<p>The actual value for the primary attribute. Must be provided as a string regardless of the attribute's value type. Primary values cannot be expressions and must be explicitly specified.</p>",
         "PrimaryValueResponse$Value": "<p>The value's value.</p>",
         "PropertyValidationExceptionProperty$PropertyPath": "<p>The full property path.</p>",
@@ -13741,6 +13794,7 @@
         "CreateQueueRequest$Tags": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
         "CreateQuickConnectRequest$Tags": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
         "CreateRoutingProfileRequest$Tags": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
+        "CreateRuleRequest$Tags": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
         "CreateSecurityProfileRequest$Tags": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
         "CreateTestCaseRequest$Tags": "<p>The tags used to organize, track, or control access for this resource.</p>",
         "CreateTrafficDistributionGroupRequest$Tags": "<p>The tags used to organize, track, or control access for this resource. For example, { \"Tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
@@ -15838,6 +15892,30 @@
       "base": "<p>Information about Connect Customer Wisdom.</p>",
       "refs": {
         "Contact$WisdomInfo": "<p>Information about Connect Customer Wisdom.</p>"
+      }
+    },
+    "WorkloadType": {
+      "base": null,
+      "refs": {
+        "WorkloadTypeConcurrency$WorkloadType": "<p>The value of the workload type.</p>"
+      }
+    },
+    "WorkloadTypeConcurrencies": {
+      "base": null,
+      "refs": {
+        "MediaConcurrency$WorkloadTypeConcurrencies": "<p>Defines the list of workload type concurrency configurations for a channel. When provided, enables granular concurrency control based on workload type values.</p>"
+      }
+    },
+    "WorkloadTypeConcurrency": {
+      "base": "<p>Defines the maximum number of contacts an agent can handle simultaneously for a specific channel and workload type combination.</p>",
+      "refs": {
+        "WorkloadTypeConcurrencies$member": null
+      }
+    },
+    "WorkloadTypeConcurrencyType": {
+      "base": null,
+      "refs": {
+        "WorkloadTypeConcurrency$Concurrency": "<p>The maximum number of contacts an agent can handle simultaneously for a specific channel and workload type combination.</p> <p>Valid Range for <code>VOICE</code>: Minimum value of 1. Maximum value of 1.</p> <p>Valid Range for <code>CHAT</code>: Minimum value of 1. Maximum value of 10.</p> <p>Valid Range for <code>TASK</code>: Minimum value of 1. Maximum value of 10.</p>"
       }
     },
     "Workspace": {

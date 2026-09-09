@@ -254,6 +254,7 @@ module Aws
                               Params::s3_grant
                             ]?,
                             metadata_directive: ("COPY" | "REPLACE")?,
+                            annotation_directive: ("COPY" | "EXCLUDE")?,
                             modified_since_constraint: ::Time?,
                             new_object_metadata: {
                               cache_control: ::String?,
@@ -284,7 +285,12 @@ module Aws
                             object_lock_mode: ("COMPLIANCE" | "GOVERNANCE")?,
                             object_lock_retain_until_date: ::Time?,
                             bucket_key_enabled: bool?,
-                            checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128")?
+                            checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128")?,
+                            object_lock_event_hold: ("ON" | "OFF")?,
+                            object_lock_event_hold_duration: {
+                              days: ::Integer?,
+                              years: ::Integer?
+                            }?
                           }?,
                           s3_put_object_acl: {
                             access_control_policy: {
@@ -323,7 +329,12 @@ module Aws
                             bypass_governance_retention: bool?,
                             retention: {
                               retain_until_date: ::Time?,
-                              mode: ("COMPLIANCE" | "GOVERNANCE")?
+                              mode: ("COMPLIANCE" | "GOVERNANCE")?,
+                              event_hold: ("ON" | "OFF")?,
+                              event_hold_duration: {
+                                days: ::Integer?,
+                                years: ::Integer?
+                              }?
                             }
                           }?,
                           s3_replicate_object: {

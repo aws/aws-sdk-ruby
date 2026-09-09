@@ -269,6 +269,11 @@ module Aws::Kinesis
       SENSITIVE: []
     end
 
+    class DryRunOperationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class EnableEnhancedMonitoringInput
       attr_accessor stream_name: ::String
       attr_accessor shard_level_metrics: ::Array[("IncomingBytes" | "IncomingRecords" | "OutgoingBytes" | "OutgoingRecords" | "WriteProvisionedThroughputExceeded" | "ReadProvisionedThroughputExceeded" | "IteratorAgeMilliseconds" | "ALL")]
@@ -305,6 +310,7 @@ module Aws::Kinesis
       attr_accessor limit: ::Integer
       attr_accessor stream_arn: ::String
       attr_accessor stream_id: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -335,6 +341,7 @@ module Aws::Kinesis
       attr_accessor timestamp: ::Time
       attr_accessor stream_arn: ::String
       attr_accessor stream_id: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -542,6 +549,7 @@ module Aws::Kinesis
       attr_accessor sequence_number_for_ordering: ::String
       attr_accessor stream_arn: ::String
       attr_accessor stream_id: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -557,6 +565,7 @@ module Aws::Kinesis
       attr_accessor stream_name: ::String
       attr_accessor stream_arn: ::String
       attr_accessor stream_id: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
@@ -817,6 +826,7 @@ module Aws::Kinesis
       attr_accessor stream_id: ::String
       attr_accessor shard_id: ::String
       attr_accessor starting_position: Types::StartingPosition
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 

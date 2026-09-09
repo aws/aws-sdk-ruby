@@ -1947,7 +1947,8 @@ module Aws
                                                                         }
                                                                       ]?
                                                                     }
-                                                                  ]
+                                                                  ],
+                                                                  ?zero_size_preference: ("retain" | "default")
                                                                 ) -> _CreateInterruptibleCapacityReservationAllocationResponseSuccess
                                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInterruptibleCapacityReservationAllocationResponseSuccess
 
@@ -14843,8 +14844,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#update_interruptible_capacity_reservation_allocation-instance_method
       def update_interruptible_capacity_reservation_allocation: (
                                                                   capacity_reservation_id: ::String,
-                                                                  target_instance_count: ::Integer,
-                                                                  ?dry_run: bool
+                                                                  ?target_instance_count: ::Integer,
+                                                                  ?dry_run: bool,
+                                                                  ?zero_size_preference: ("retain" | "default")
                                                                 ) -> _UpdateInterruptibleCapacityReservationAllocationResponseSuccess
                                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInterruptibleCapacityReservationAllocationResponseSuccess
 
@@ -14889,6 +14891,17 @@ module Aws
                                                              ]
                                                            ) -> _UpdateSecurityGroupRuleDescriptionsIngressResponseSuccess
                                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSecurityGroupRuleDescriptionsIngressResponseSuccess
+
+      interface _ValidateSecurityGroupQuotasForInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ValidateSecurityGroupQuotasForInterfaceResult]
+        def valid: () -> bool
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#validate_security_group_quotas_for_interface-instance_method
+      def validate_security_group_quotas_for_interface: (
+                                                          security_group_ids: Array[::String],
+                                                          ?dry_run: bool
+                                                        ) -> _ValidateSecurityGroupQuotasForInterfaceResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateSecurityGroupQuotasForInterfaceResponseSuccess
 
       interface _WithdrawByoipCidrResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::WithdrawByoipCidrResult]

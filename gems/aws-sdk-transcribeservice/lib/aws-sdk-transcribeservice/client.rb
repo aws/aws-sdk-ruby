@@ -1631,7 +1631,7 @@ module Aws::TranscribeService
     #   resp.call_analytics_job.settings.content_redaction.redaction_type #=> String, one of "PII"
     #   resp.call_analytics_job.settings.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
     #   resp.call_analytics_job.settings.content_redaction.pii_entity_types #=> Array
-    #   resp.call_analytics_job.settings.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"
+    #   resp.call_analytics_job.settings.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"
     #   resp.call_analytics_job.settings.language_options #=> Array
     #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"
     #   resp.call_analytics_job.settings.language_id_settings #=> Hash
@@ -1899,7 +1899,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.content_redaction.redaction_type #=> String, one of "PII"
     #   resp.transcription_job.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
     #   resp.transcription_job.content_redaction.pii_entity_types #=> Array
-    #   resp.transcription_job.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"
+    #   resp.transcription_job.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"
     #   resp.transcription_job.identify_language #=> Boolean
     #   resp.transcription_job.identify_multiple_languages #=> Boolean
     #   resp.transcription_job.language_options #=> Array
@@ -2587,7 +2587,7 @@ module Aws::TranscribeService
     #   resp.transcription_job_summaries[0].content_redaction.redaction_type #=> String, one of "PII"
     #   resp.transcription_job_summaries[0].content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
     #   resp.transcription_job_summaries[0].content_redaction.pii_entity_types #=> Array
-    #   resp.transcription_job_summaries[0].content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"
+    #   resp.transcription_job_summaries[0].content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"
     #   resp.transcription_job_summaries[0].model_settings.language_model_name #=> String
     #   resp.transcription_job_summaries[0].identify_language #=> Boolean
     #   resp.transcription_job_summaries[0].identify_multiple_languages #=> Boolean
@@ -2905,7 +2905,7 @@ module Aws::TranscribeService
     #       content_redaction: {
     #         redaction_type: "PII", # required, accepts PII
     #         redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
-    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, ALL
+    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, ALL
     #       },
     #       language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, am-ET, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-MX, es-US, fa-AF, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, ht-HT, id-ID, it-IT, ja-JP, jv-ID, km-KH, ko-KR, my-MM, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ, vi-VN, sv-SE, ab-GE, ast-ES, az-AZ, ba-RU, be-BY, bg-BG, bn-IN, bs-BA, ca-ES, ckb-IQ, ckb-IR, cs-CZ, cy-WL, el-GR, et-EE, et-ET, eu-ES, fi-FI, gl-ES, gu-IN, ha-NG, hr-HR, hu-HU, hy-AM, is-IS, ka-GE, kab-DZ, kk-KZ, kn-IN, ky-KG, lg-IN, lt-LT, lv-LV, mhr-RU, mi-NZ, mk-MK, ml-IN, mn-MN, mr-IN, mt-MT, no-NO, ne-NP, or-IN, pa-IN, pl-PL, ps-AF, ro-RO, rw-RW, si-LK, sk-SK, sl-SI, so-SO, sq-AL, sr-RS, su-ID, sw-BI, sw-KE, sw-RW, sw-TZ, sw-UG, tl-PH, tt-RU, ug-CN, uk-UA, uz-UZ, wo-SN, zh-HK, zu-ZA
     #       language_id_settings: {
@@ -2961,7 +2961,7 @@ module Aws::TranscribeService
     #   resp.call_analytics_job.settings.content_redaction.redaction_type #=> String, one of "PII"
     #   resp.call_analytics_job.settings.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
     #   resp.call_analytics_job.settings.content_redaction.pii_entity_types #=> Array
-    #   resp.call_analytics_job.settings.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"
+    #   resp.call_analytics_job.settings.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"
     #   resp.call_analytics_job.settings.language_options #=> Array
     #   resp.call_analytics_job.settings.language_options[0] #=> String, one of "af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"
     #   resp.call_analytics_job.settings.language_id_settings #=> Hash
@@ -3925,7 +3925,7 @@ module Aws::TranscribeService
     #     content_redaction: {
     #       redaction_type: "PII", # required, accepts PII
     #       redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
-    #       pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, ALL
+    #       pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, CA_HEALTH_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, ALL
     #     },
     #     identify_language: false,
     #     identify_multiple_languages: false,
@@ -3983,7 +3983,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.content_redaction.redaction_type #=> String, one of "PII"
     #   resp.transcription_job.content_redaction.redaction_output #=> String, one of "redacted", "redacted_and_unredacted"
     #   resp.transcription_job.content_redaction.pii_entity_types #=> Array
-    #   resp.transcription_job.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "ALL"
+    #   resp.transcription_job.content_redaction.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "CA_HEALTH_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "ALL"
     #   resp.transcription_job.identify_language #=> Boolean
     #   resp.transcription_job.identify_multiple_languages #=> Boolean
     #   resp.transcription_job.language_options #=> Array
@@ -4547,7 +4547,7 @@ module Aws::TranscribeService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.143.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

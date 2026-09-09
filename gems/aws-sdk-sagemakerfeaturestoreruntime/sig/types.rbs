@@ -76,6 +76,11 @@ module Aws::SageMakerFeatureStoreRuntime
       SENSITIVE: []
     end
 
+    class ConflictException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class DeleteRecordRequest
       attr_accessor feature_group_name: ::String
       attr_accessor record_identifier_value_as_string: ::String
@@ -146,6 +151,15 @@ module Aws::SageMakerFeatureStoreRuntime
     class TtlDuration
       attr_accessor unit: ("Seconds" | "Minutes" | "Hours" | "Days" | "Weeks")
       attr_accessor value: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateRecordRequest
+      attr_accessor feature_group_name: ::String
+      attr_accessor record_identifier_value_as_string: ::String
+      attr_accessor features: ::Array[Types::FeatureValue]
+      attr_accessor target_stores: ::Array[("OnlineStore" | "OfflineStore")]
+      attr_accessor ttl_duration: Types::TtlDuration
       SENSITIVE: []
     end
 

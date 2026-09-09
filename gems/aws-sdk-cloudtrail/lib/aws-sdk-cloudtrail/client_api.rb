@@ -549,6 +549,7 @@ module Aws::CloudTrail
     CreateTrailRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     CreateTrailRequest.add_member(:is_organization_trail, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsOrganizationTrail"))
     CreateTrailRequest.add_member(:tags_list, Shapes::ShapeRef.new(shape: TagsList, location_name: "TagsList"))
+    CreateTrailRequest.add_member(:recursive_logging, Shapes::ShapeRef.new(shape: Boolean, location_name: "RecursiveLogging"))
     CreateTrailRequest.struct_class = Types::CreateTrailRequest
 
     CreateTrailResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -564,6 +565,7 @@ module Aws::CloudTrail
     CreateTrailResponse.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudWatchLogsRoleArn"))
     CreateTrailResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     CreateTrailResponse.add_member(:is_organization_trail, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsOrganizationTrail"))
+    CreateTrailResponse.add_member(:recursive_logging, Shapes::ShapeRef.new(shape: Boolean, location_name: "RecursiveLogging"))
     CreateTrailResponse.struct_class = Types::CreateTrailResponse
 
     DashboardDetail.add_member(:dashboard_arn, Shapes::ShapeRef.new(shape: DashboardArn, location_name: "DashboardArn"))
@@ -1432,6 +1434,7 @@ module Aws::CloudTrail
     Trail.add_member(:has_custom_event_selectors, Shapes::ShapeRef.new(shape: Boolean, location_name: "HasCustomEventSelectors"))
     Trail.add_member(:has_insight_selectors, Shapes::ShapeRef.new(shape: Boolean, location_name: "HasInsightSelectors"))
     Trail.add_member(:is_organization_trail, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsOrganizationTrail"))
+    Trail.add_member(:recursive_logging, Shapes::ShapeRef.new(shape: Boolean, location_name: "RecursiveLogging"))
     Trail.struct_class = Types::Trail
 
     TrailAlreadyExistsException.struct_class = Types::TrailAlreadyExistsException
@@ -1518,6 +1521,7 @@ module Aws::CloudTrail
     UpdateTrailRequest.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudWatchLogsRoleArn"))
     UpdateTrailRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     UpdateTrailRequest.add_member(:is_organization_trail, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsOrganizationTrail"))
+    UpdateTrailRequest.add_member(:recursive_logging, Shapes::ShapeRef.new(shape: Boolean, location_name: "RecursiveLogging"))
     UpdateTrailRequest.struct_class = Types::UpdateTrailRequest
 
     UpdateTrailResponse.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -1533,6 +1537,7 @@ module Aws::CloudTrail
     UpdateTrailResponse.add_member(:cloud_watch_logs_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "CloudWatchLogsRoleArn"))
     UpdateTrailResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     UpdateTrailResponse.add_member(:is_organization_trail, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsOrganizationTrail"))
+    UpdateTrailResponse.add_member(:recursive_logging, Shapes::ShapeRef.new(shape: Boolean, location_name: "RecursiveLogging"))
     UpdateTrailResponse.struct_class = Types::UpdateTrailResponse
 
     ViewPropertiesMap.key = Shapes::ShapeRef.new(shape: ViewPropertiesKey)
@@ -2353,6 +2358,7 @@ module Aws::CloudTrail
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: NotOrganizationMasterAccountException)
         o.errors << Shapes::ShapeRef.new(shape: NoManagementAccountSLRExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

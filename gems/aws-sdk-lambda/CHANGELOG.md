@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.194.0 (2026-09-01)
+------------------
+
+* Feature - AWS Lambda now provides configurable control over S3 direct access, allowing you to explicitly enable or disable how functions stream file reads directly from S3 buckets. This gives you flexibility to tune data access behavior based on your workload requirements, independent of memory size.
+
 1.193.0 (2026-08-20)
 ------------------
 

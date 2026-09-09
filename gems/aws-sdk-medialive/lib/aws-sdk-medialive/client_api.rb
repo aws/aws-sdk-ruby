@@ -22,6 +22,9 @@ module Aws::MediaLive
     AacSettings = Shapes::StructureShape.new(name: 'AacSettings')
     AacSpec = Shapes::StringShape.new(name: 'AacSpec')
     AacVbrQuality = Shapes::StringShape.new(name: 'AacVbrQuality')
+    AbWatermarkerIdLength = Shapes::StringShape.new(name: 'AbWatermarkerIdLength')
+    AbWatermarkingCustomProfile = Shapes::StructureShape.new(name: 'AbWatermarkingCustomProfile')
+    AbWatermarkingProfile = Shapes::StringShape.new(name: 'AbWatermarkingProfile')
     Ac3AttenuationControl = Shapes::StringShape.new(name: 'Ac3AttenuationControl')
     Ac3BitstreamMode = Shapes::StringShape.new(name: 'Ac3BitstreamMode')
     Ac3CodingMode = Shapes::StringShape.new(name: 'Ac3CodingMode')
@@ -169,10 +172,12 @@ module Aws::MediaLive
     ClusterState = Shapes::StringShape.new(name: 'ClusterState')
     ClusterType = Shapes::StringShape.new(name: 'ClusterType')
     CmafId3Behavior = Shapes::StringShape.new(name: 'CmafId3Behavior')
+    CmafIngestAbWatermarkerIrdetoSettings = Shapes::StructureShape.new(name: 'CmafIngestAbWatermarkerIrdetoSettings')
     CmafIngestCaptionLanguageMapping = Shapes::StructureShape.new(name: 'CmafIngestCaptionLanguageMapping')
     CmafIngestGroupSettings = Shapes::StructureShape.new(name: 'CmafIngestGroupSettings')
     CmafIngestOutputSettings = Shapes::StructureShape.new(name: 'CmafIngestOutputSettings')
     CmafIngestSegmentLengthUnits = Shapes::StringShape.new(name: 'CmafIngestSegmentLengthUnits')
+    CmafIngestWatermarkingSettings = Shapes::StructureShape.new(name: 'CmafIngestWatermarkingSettings')
     CmafKLVBehavior = Shapes::StringShape.new(name: 'CmafKLVBehavior')
     CmafNielsenId3Behavior = Shapes::StringShape.new(name: 'CmafNielsenId3Behavior')
     CmafTimedMetadataId3Frame = Shapes::StringShape.new(name: 'CmafTimedMetadataId3Frame')
@@ -723,8 +728,10 @@ module Aws::MediaLive
     MediaPackageGroupSettings = Shapes::StructureShape.new(name: 'MediaPackageGroupSettings')
     MediaPackageOutputDestinationSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputDestinationSettings')
     MediaPackageOutputSettings = Shapes::StructureShape.new(name: 'MediaPackageOutputSettings')
+    MediaPackageV2AbWatermarkerIrdetoSettings = Shapes::StructureShape.new(name: 'MediaPackageV2AbWatermarkerIrdetoSettings')
     MediaPackageV2DestinationSettings = Shapes::StructureShape.new(name: 'MediaPackageV2DestinationSettings')
     MediaPackageV2GroupSettings = Shapes::StructureShape.new(name: 'MediaPackageV2GroupSettings')
+    MediaPackageV2WatermarkingSettings = Shapes::StructureShape.new(name: 'MediaPackageV2WatermarkingSettings')
     MediaResource = Shapes::StructureShape.new(name: 'MediaResource')
     MediaResourceMap = Shapes::MapShape.new(name: 'MediaResourceMap')
     MediaResourceNeighbor = Shapes::StructureShape.new(name: 'MediaResourceNeighbor')
@@ -1144,6 +1151,7 @@ module Aws::MediaLive
     __integerMin1000Max30000 = Shapes::IntegerShape.new(name: '__integerMin1000Max30000')
     __integerMin10Max86400 = Shapes::IntegerShape.new(name: '__integerMin10Max86400')
     __integerMin1Max10 = Shapes::IntegerShape.new(name: '__integerMin1Max10')
+    __integerMin1Max1000 = Shapes::IntegerShape.new(name: '__integerMin1Max1000')
     __integerMin1Max1000000 = Shapes::IntegerShape.new(name: '__integerMin1Max1000000')
     __integerMin1Max16 = Shapes::IntegerShape.new(name: '__integerMin1Max16')
     __integerMin1Max20 = Shapes::IntegerShape.new(name: '__integerMin1Max20')
@@ -1154,6 +1162,7 @@ module Aws::MediaLive
     __integerMin1Max4 = Shapes::IntegerShape.new(name: '__integerMin1Max4')
     __integerMin1Max5 = Shapes::IntegerShape.new(name: '__integerMin1Max5')
     __integerMin1Max51 = Shapes::IntegerShape.new(name: '__integerMin1Max51')
+    __integerMin1Max511 = Shapes::IntegerShape.new(name: '__integerMin1Max511')
     __integerMin1Max6 = Shapes::IntegerShape.new(name: '__integerMin1Max6')
     __integerMin1Max65535 = Shapes::IntegerShape.new(name: '__integerMin1Max65535')
     __integerMin1Max8 = Shapes::IntegerShape.new(name: '__integerMin1Max8')
@@ -1332,6 +1341,11 @@ module Aws::MediaLive
     AacSettings.add_member(:spec, Shapes::ShapeRef.new(shape: AacSpec, location_name: "spec"))
     AacSettings.add_member(:vbr_quality, Shapes::ShapeRef.new(shape: AacVbrQuality, location_name: "vbrQuality"))
     AacSettings.struct_class = Types::AacSettings
+
+    AbWatermarkingCustomProfile.add_member(:embedding_frequency, Shapes::ShapeRef.new(shape: __doubleMin250Max5000, required: true, location_name: "embeddingFrequency"))
+    AbWatermarkingCustomProfile.add_member(:scene_cut, Shapes::ShapeRef.new(shape: __doubleMinNegative1Max5, required: true, location_name: "sceneCut"))
+    AbWatermarkingCustomProfile.add_member(:target_psnr, Shapes::ShapeRef.new(shape: __doubleMin32Max46, required: true, location_name: "targetPsnr"))
+    AbWatermarkingCustomProfile.struct_class = Types::AbWatermarkingCustomProfile
 
     Ac3Settings.add_member(:bitrate, Shapes::ShapeRef.new(shape: __double, location_name: "bitrate"))
     Ac3Settings.add_member(:bitstream_mode, Shapes::ShapeRef.new(shape: Ac3BitstreamMode, location_name: "bitstreamMode"))
@@ -1851,6 +1865,16 @@ module Aws::MediaLive
     ClusterNetworkSettingsUpdateRequest.add_member(:interface_mappings, Shapes::ShapeRef.new(shape: __listOfInterfaceMappingUpdateRequest, location_name: "interfaceMappings"))
     ClusterNetworkSettingsUpdateRequest.struct_class = Types::ClusterNetworkSettingsUpdateRequest
 
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:additional_destinations_alternate_destinations, Shapes::ShapeRef.new(shape: __listOfOutputLocationRef, location_name: "additionalDestinationsAlternateDestinations"))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:alternate_destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "alternateDestination"))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:custom_profile, Shapes::ShapeRef.new(shape: AbWatermarkingCustomProfile, location_name: "customProfile"))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:license, Shapes::ShapeRef.new(shape: __string, location_name: "license"))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:operator_id, Shapes::ShapeRef.new(shape: __integerMin1Max511, required: true, location_name: "operatorId"))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:poly_period, Shapes::ShapeRef.new(shape: __integerMin1Max1000, location_name: "polyPeriod"))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:profile, Shapes::ShapeRef.new(shape: AbWatermarkingProfile, required: true, location_name: "profile"))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:watermark_id_length, Shapes::ShapeRef.new(shape: AbWatermarkerIdLength, location_name: "watermarkIdLength"))
+    CmafIngestAbWatermarkerIrdetoSettings.struct_class = Types::CmafIngestAbWatermarkerIrdetoSettings
+
     CmafIngestCaptionLanguageMapping.add_member(:caption_channel, Shapes::ShapeRef.new(shape: __integerMin1Max4, required: true, location_name: "captionChannel"))
     CmafIngestCaptionLanguageMapping.add_member(:language_code, Shapes::ShapeRef.new(shape: __stringMin3Max3, required: true, location_name: "languageCode"))
     CmafIngestCaptionLanguageMapping.struct_class = Types::CmafIngestCaptionLanguageMapping
@@ -1872,10 +1896,14 @@ module Aws::MediaLive
     CmafIngestGroupSettings.add_member(:timed_metadata_id_3_period, Shapes::ShapeRef.new(shape: __integerMin0Max10000, location_name: "timedMetadataId3Period"))
     CmafIngestGroupSettings.add_member(:timed_metadata_passthrough, Shapes::ShapeRef.new(shape: CmafTimedMetadataPassthrough, location_name: "timedMetadataPassthrough"))
     CmafIngestGroupSettings.add_member(:additional_destinations, Shapes::ShapeRef.new(shape: __listOfAdditionalDestinations, location_name: "additionalDestinations"))
+    CmafIngestGroupSettings.add_member(:watermarking_settings, Shapes::ShapeRef.new(shape: CmafIngestWatermarkingSettings, location_name: "watermarkingSettings"))
     CmafIngestGroupSettings.struct_class = Types::CmafIngestGroupSettings
 
     CmafIngestOutputSettings.add_member(:name_modifier, Shapes::ShapeRef.new(shape: __string, location_name: "nameModifier"))
     CmafIngestOutputSettings.struct_class = Types::CmafIngestOutputSettings
+
+    CmafIngestWatermarkingSettings.add_member(:cmaf_ingest_ab_watermarker_irdeto_settings, Shapes::ShapeRef.new(shape: CmafIngestAbWatermarkerIrdetoSettings, location_name: "cmafIngestAbWatermarkerIrdetoSettings"))
+    CmafIngestWatermarkingSettings.struct_class = Types::CmafIngestWatermarkingSettings
 
     ColorCorrection.add_member(:input_color_space, Shapes::ShapeRef.new(shape: ColorSpace, required: true, location_name: "inputColorSpace"))
     ColorCorrection.add_member(:output_color_space, Shapes::ShapeRef.new(shape: ColorSpace, required: true, location_name: "outputColorSpace"))
@@ -4265,6 +4293,16 @@ module Aws::MediaLive
     MediaPackageOutputSettings.add_member(:media_package_v2_destination_settings, Shapes::ShapeRef.new(shape: MediaPackageV2DestinationSettings, location_name: "mediaPackageV2DestinationSettings"))
     MediaPackageOutputSettings.struct_class = Types::MediaPackageOutputSettings
 
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:additional_destinations_alternate_destinations, Shapes::ShapeRef.new(shape: __listOfOutputLocationRef, location_name: "additionalDestinationsAlternateDestinations"))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:alternate_destination, Shapes::ShapeRef.new(shape: OutputLocationRef, required: true, location_name: "alternateDestination"))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:custom_profile, Shapes::ShapeRef.new(shape: AbWatermarkingCustomProfile, location_name: "customProfile"))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:license, Shapes::ShapeRef.new(shape: __string, location_name: "license"))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:operator_id, Shapes::ShapeRef.new(shape: __integerMin1Max511, required: true, location_name: "operatorId"))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:poly_period, Shapes::ShapeRef.new(shape: __integerMin1Max1000, location_name: "polyPeriod"))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:profile, Shapes::ShapeRef.new(shape: AbWatermarkingProfile, required: true, location_name: "profile"))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:watermark_id_length, Shapes::ShapeRef.new(shape: AbWatermarkerIdLength, location_name: "watermarkIdLength"))
+    MediaPackageV2AbWatermarkerIrdetoSettings.struct_class = Types::MediaPackageV2AbWatermarkerIrdetoSettings
+
     MediaPackageV2DestinationSettings.add_member(:audio_group_id, Shapes::ShapeRef.new(shape: __string, location_name: "audioGroupId"))
     MediaPackageV2DestinationSettings.add_member(:audio_rendition_sets, Shapes::ShapeRef.new(shape: __string, location_name: "audioRenditionSets"))
     MediaPackageV2DestinationSettings.add_member(:hls_auto_select, Shapes::ShapeRef.new(shape: HlsAutoSelect, location_name: "hlsAutoSelect"))
@@ -4282,7 +4320,11 @@ module Aws::MediaLive
     MediaPackageV2GroupSettings.add_member(:timed_metadata_id_3_period, Shapes::ShapeRef.new(shape: __integerMin0Max10000, location_name: "timedMetadataId3Period"))
     MediaPackageV2GroupSettings.add_member(:timed_metadata_passthrough, Shapes::ShapeRef.new(shape: CmafTimedMetadataPassthrough, location_name: "timedMetadataPassthrough"))
     MediaPackageV2GroupSettings.add_member(:additional_destinations, Shapes::ShapeRef.new(shape: __listOfMediaPackageAdditionalDestinations, location_name: "additionalDestinations"))
+    MediaPackageV2GroupSettings.add_member(:watermarking_settings, Shapes::ShapeRef.new(shape: MediaPackageV2WatermarkingSettings, location_name: "watermarkingSettings"))
     MediaPackageV2GroupSettings.struct_class = Types::MediaPackageV2GroupSettings
+
+    MediaPackageV2WatermarkingSettings.add_member(:media_package_v2_ab_watermarker_irdeto_settings, Shapes::ShapeRef.new(shape: MediaPackageV2AbWatermarkerIrdetoSettings, location_name: "mediaPackageV2AbWatermarkerIrdetoSettings"))
+    MediaPackageV2WatermarkingSettings.struct_class = Types::MediaPackageV2WatermarkingSettings
 
     MediaResource.add_member(:destinations, Shapes::ShapeRef.new(shape: __listOfMediaResourceNeighbor, location_name: "destinations"))
     MediaResource.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max256, location_name: "name"))

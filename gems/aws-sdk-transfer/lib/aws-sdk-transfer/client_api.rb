@@ -293,6 +293,8 @@ module Aws::Transfer
     S3VersionId = Shapes::StringShape.new(name: 'S3VersionId')
     SecondaryGids = Shapes::ListShape.new(name: 'SecondaryGids')
     SecretId = Shapes::StringShape.new(name: 'SecretId')
+    SecretVersionStage = Shapes::StringShape.new(name: 'SecretVersionStage')
+    SecretVersionStageList = Shapes::ListShape.new(name: 'SecretVersionStageList')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
     SecurityPolicyName = Shapes::StringShape.new(name: 'SecurityPolicyName')
@@ -1309,6 +1311,8 @@ module Aws::Transfer
 
     SecondaryGids.member = Shapes::ShapeRef.new(shape: PosixId)
 
+    SecretVersionStageList.member = Shapes::ShapeRef.new(shape: SecretVersionStage)
+
     SecurityGroupIds.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
     SecurityPolicyNames.member = Shapes::ShapeRef.new(shape: SecurityPolicyName)
@@ -1336,6 +1340,7 @@ module Aws::Transfer
     SftpConnectorConfig.add_member(:user_secret_id, Shapes::ShapeRef.new(shape: SecretId, location_name: "UserSecretId"))
     SftpConnectorConfig.add_member(:trusted_host_keys, Shapes::ShapeRef.new(shape: SftpConnectorTrustedHostKeyList, location_name: "TrustedHostKeys"))
     SftpConnectorConfig.add_member(:max_concurrent_connections, Shapes::ShapeRef.new(shape: MaxConcurrentConnections, location_name: "MaxConcurrentConnections"))
+    SftpConnectorConfig.add_member(:ordered_user_secret_version_stages, Shapes::ShapeRef.new(shape: SecretVersionStageList, location_name: "OrderedUserSecretVersionStages"))
     SftpConnectorConfig.struct_class = Types::SftpConnectorConfig
 
     SftpConnectorConnectionDetails.add_member(:host_key, Shapes::ShapeRef.new(shape: SftpConnectorHostKey, location_name: "HostKey"))

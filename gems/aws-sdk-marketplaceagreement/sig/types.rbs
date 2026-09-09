@@ -153,12 +153,16 @@ module Aws::MarketplaceAgreement
       attr_accessor acceptance_time: ::Time
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
+      attr_accessor last_update_time: ::Time
       attr_accessor agreement_type: ::String
       attr_accessor acceptor: Types::Acceptor
       attr_accessor proposer: Types::Proposer
       attr_accessor proposal_summary: Types::ProposalSummary
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "CANCELLED" | "EXPIRED" | "RENEWED" | "REPLACED" | "ROLLED_BACK" | "SUPERSEDED" | "TERMINATED")
       attr_accessor entitlements: ::Array[Types::Entitlement]
+      attr_accessor initial_agreement_id: ::String
+      attr_accessor end_time_behavior_type: ("RENEW" | "REPLACE" | "EXPIRE")
+      attr_accessor end_time_behavior_reason_code: ("PROPOSER_RENEW_OPTED_OUT" | "ACCEPTOR_RENEW_OPTED_OUT" | "NO_RENEWAL_TERM" | "RENEWAL_LIMIT_EXHAUSTED")
       SENSITIVE: []
     end
 
@@ -354,6 +358,8 @@ module Aws::MarketplaceAgreement
       attr_accessor estimated_charges: Types::EstimatedCharges
       attr_accessor proposal_summary: Types::ProposalSummary
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "CANCELLED" | "EXPIRED" | "RENEWED" | "REPLACED" | "ROLLED_BACK" | "SUPERSEDED" | "TERMINATED")
+      attr_accessor initial_agreement_id: ::String
+      attr_accessor end_time_behavior: Types::EndTimeBehavior
       SENSITIVE: []
     end
 
@@ -367,6 +373,13 @@ module Aws::MarketplaceAgreement
       attr_accessor type: ::String
       attr_accessor url: ::String
       attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class EndTimeBehavior
+      attr_accessor type: ("RENEW" | "REPLACE" | "EXPIRE")
+      attr_accessor reason_code: ("PROPOSER_RENEW_OPTED_OUT" | "ACCEPTOR_RENEW_OPTED_OUT" | "NO_RENEWAL_TERM" | "RENEWAL_LIMIT_EXHAUSTED")
+      attr_accessor renewal_summary: Types::RenewalSummary
       SENSITIVE: []
     end
 
@@ -400,6 +413,11 @@ module Aws::MarketplaceAgreement
     class Filter
       attr_accessor name: ::String
       attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class FixedPercentage
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 
@@ -653,12 +671,45 @@ module Aws::MarketplaceAgreement
       SENSITIVE: []
     end
 
+    class PaymentScheduleEntry
+      attr_accessor charge_date_offset: ::String
+      attr_accessor charge_percentage: ::String
+      attr_accessor day_of_month: ::Integer
+      SENSITIVE: []
+    end
+
     class PaymentScheduleTerm
       attr_accessor type: ::String
       attr_accessor id: ::String
       attr_accessor currency_code: ::String
       attr_accessor schedule: ::Array[Types::ScheduleItem]
       SENSITIVE: []
+    end
+
+    class PaymentScheduleTermTemplate
+      attr_accessor schedule: ::Array[Types::PaymentScheduleEntry]
+      SENSITIVE: []
+    end
+
+    class PercentageRange
+      attr_accessor min_value: ::String
+      attr_accessor max_value: ::String
+      attr_accessor default_value: ::String
+      SENSITIVE: []
+    end
+
+    class PriceIncrease
+      attr_accessor fixed_percentage: Types::FixedPercentage
+      attr_accessor percentage_range: Types::PercentageRange
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FixedPercentage < PriceIncrease
+      end
+      class PercentageRange < PriceIncrease
+      end
+      class Unknown < PriceIncrease
+      end
     end
 
     class PricingCurrencyAmount
@@ -743,10 +794,20 @@ module Aws::MarketplaceAgreement
       SENSITIVE: [:description]
     end
 
+    class RenewalSummary
+      attr_accessor offer_id: ::String
+      SENSITIVE: []
+    end
+
     class RenewalTerm
       attr_accessor type: ::String
       attr_accessor id: ::String
       attr_accessor configuration: Types::RenewalTermConfiguration
+      attr_accessor lockout_period: ::String
+      attr_accessor max_renewals: ::Integer
+      attr_accessor adjustment_deadline: ::String
+      attr_accessor price_increase: Types::PriceIncrease
+      attr_accessor term_templates: ::Array[Types::TermTemplate]
       SENSITIVE: []
     end
 
@@ -893,6 +954,17 @@ module Aws::MarketplaceAgreement
     class TaxConfiguration
       attr_accessor tax_estimation: ("DISABLED" | "ENABLED")
       SENSITIVE: []
+    end
+
+    class TermTemplate
+      attr_accessor payment_schedule_term_template: Types::PaymentScheduleTermTemplate
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PaymentScheduleTermTemplate < TermTemplate
+      end
+      class Unknown < TermTemplate
+      end
     end
 
     class ThrottlingException

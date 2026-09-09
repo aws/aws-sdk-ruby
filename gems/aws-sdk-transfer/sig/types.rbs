@@ -1193,6 +1193,7 @@ module Aws::Transfer
       attr_accessor user_secret_id: ::String
       attr_accessor trusted_host_keys: ::Array[::String]
       attr_accessor max_concurrent_connections: ::Integer
+      attr_accessor ordered_user_secret_version_stages: ::Array[::String]
       SENSITIVE: []
     end
 

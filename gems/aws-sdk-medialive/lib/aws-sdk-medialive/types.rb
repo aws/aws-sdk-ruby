@@ -14534,6 +14534,10 @@ module Aws::MediaLive
     #   the OutputGroup outputs
     #   @return [Array<Types::AdditionalDestinations>]
     #
+    # @!attribute [rw] watermarking_settings
+    #   Specifies the type of watermarking technology to use.
+    #   @return [Types::CmafIngestWatermarkingSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CmafIngestGroupSettings AWS API Documentation
     #
     class CmafIngestGroupSettings < Struct.new(
@@ -14553,7 +14557,8 @@ module Aws::MediaLive
       :timed_metadata_id_3_frame,
       :timed_metadata_id_3_period,
       :timed_metadata_passthrough,
-      :additional_destinations)
+      :additional_destinations,
+      :watermarking_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22422,6 +22427,10 @@ module Aws::MediaLive
     #   the OutputGroup outputs
     #   @return [Array<Types::MediaPackageAdditionalDestinations>]
     #
+    # @!attribute [rw] watermarking_settings
+    #   Specifies the type of watermarking technology to use.
+    #   @return [Types::MediaPackageV2WatermarkingSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageV2GroupSettings AWS API Documentation
     #
     class MediaPackageV2GroupSettings < Struct.new(
@@ -22435,7 +22444,8 @@ module Aws::MediaLive
       :timed_metadata_id_3_frame,
       :timed_metadata_id_3_period,
       :timed_metadata_passthrough,
-      :additional_destinations)
+      :additional_destinations,
+      :watermarking_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23410,6 +23420,149 @@ module Aws::MediaLive
       :width,
       :x,
       :y)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The vendor-specified custom profile options
+    #
+    # @!attribute [rw] embedding_frequency
+    #   The frequency with which watermarks will be embedded, in
+    #   milliseconds.
+    #   @return [Float]
+    #
+    # @!attribute [rw] scene_cut
+    #   The number of frames after scene-cut to embed the watermark
+    #   @return [Float]
+    #
+    # @!attribute [rw] target_psnr
+    #   The target PSNR of the watermarked frame
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AbWatermarkingCustomProfile AWS API Documentation
+    #
+    class AbWatermarkingCustomProfile < Struct.new(
+      :embedding_frequency,
+      :scene_cut,
+      :target_psnr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A/B Watermarker settings for CMAF Ingest output groups.
+    #
+    # @!attribute [rw] additional_destinations_alternate_destinations
+    #   @return [Array<Types::OutputLocationRef>]
+    #
+    # @!attribute [rw] alternate_destination
+    #   Reference to an OutputDestination ID defined in the channel
+    #   @return [Types::OutputLocationRef]
+    #
+    # @!attribute [rw] custom_profile
+    #   The vendor-specified custom profile options
+    #   @return [Types::AbWatermarkingCustomProfile]
+    #
+    # @!attribute [rw] license
+    #   @return [String]
+    #
+    # @!attribute [rw] operator_id
+    #   @return [Integer]
+    #
+    # @!attribute [rw] poly_period
+    #   @return [Integer]
+    #
+    # @!attribute [rw] profile
+    #   Ab Watermarking Profile
+    #   @return [String]
+    #
+    # @!attribute [rw] watermark_id_length
+    #   Ab Watermarker Id Length
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CmafIngestAbWatermarkerIrdetoSettings AWS API Documentation
+    #
+    class CmafIngestAbWatermarkerIrdetoSettings < Struct.new(
+      :additional_destinations_alternate_destinations,
+      :alternate_destination,
+      :custom_profile,
+      :license,
+      :operator_id,
+      :poly_period,
+      :profile,
+      :watermark_id_length)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A/B Watermarker settings for CMAF Ingest output groups.
+    #
+    # @!attribute [rw] cmaf_ingest_ab_watermarker_irdeto_settings
+    #   A/B Watermarker settings for CMAF Ingest output groups.
+    #   @return [Types::CmafIngestAbWatermarkerIrdetoSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/CmafIngestWatermarkingSettings AWS API Documentation
+    #
+    class CmafIngestWatermarkingSettings < Struct.new(
+      :cmaf_ingest_ab_watermarker_irdeto_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A/B Watermarker settings for MediaPackage V2 output groups.
+    #
+    # @!attribute [rw] additional_destinations_alternate_destinations
+    #   @return [Array<Types::OutputLocationRef>]
+    #
+    # @!attribute [rw] alternate_destination
+    #   Reference to an OutputDestination ID defined in the channel
+    #   @return [Types::OutputLocationRef]
+    #
+    # @!attribute [rw] custom_profile
+    #   The vendor-specified custom profile options
+    #   @return [Types::AbWatermarkingCustomProfile]
+    #
+    # @!attribute [rw] license
+    #   @return [String]
+    #
+    # @!attribute [rw] operator_id
+    #   @return [Integer]
+    #
+    # @!attribute [rw] poly_period
+    #   @return [Integer]
+    #
+    # @!attribute [rw] profile
+    #   Ab Watermarking Profile
+    #   @return [String]
+    #
+    # @!attribute [rw] watermark_id_length
+    #   Ab Watermarker Id Length
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageV2AbWatermarkerIrdetoSettings AWS API Documentation
+    #
+    class MediaPackageV2AbWatermarkerIrdetoSettings < Struct.new(
+      :additional_destinations_alternate_destinations,
+      :alternate_destination,
+      :custom_profile,
+      :license,
+      :operator_id,
+      :poly_period,
+      :profile,
+      :watermark_id_length)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A/B Watermarker settings for MediaPackage V2 output groups.
+    #
+    # @!attribute [rw] media_package_v2_ab_watermarker_irdeto_settings
+    #   A/B Watermarker settings for MediaPackage V2 output groups.
+    #   @return [Types::MediaPackageV2AbWatermarkerIrdetoSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageV2WatermarkingSettings AWS API Documentation
+    #
+    class MediaPackageV2WatermarkingSettings < Struct.new(
+      :media_package_v2_ab_watermarker_irdeto_settings)
       SENSITIVE = []
       include Aws::Structure
     end

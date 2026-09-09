@@ -419,7 +419,10 @@ module Aws
                              ?file_system_configs: Array[
                                {
                                  arn: ::String,
-                                 local_mount_path: ::String
+                                 local_mount_path: ::String,
+                                 s3_files_config: {
+                                   direct_s3_read: ("ENABLED" | "DISABLED" | "AUTO")?
+                                 }?
                                }
                              ],
                              ?code_signing_config_arn: ::String,
@@ -1798,7 +1801,10 @@ module Aws
                                            ?file_system_configs: Array[
                                              {
                                                arn: ::String,
-                                               local_mount_path: ::String
+                                               local_mount_path: ::String,
+                                               s3_files_config: {
+                                                 direct_s3_read: ("ENABLED" | "DISABLED" | "AUTO")?
+                                               }?
                                              }
                                            ],
                                            ?image_config: {

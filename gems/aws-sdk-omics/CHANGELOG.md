@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2026-09-08)
+------------------
+
+* Feature - Added support for session policies in AWS HealthOmics Workflows, allowing customers to scope down IAM permissions for individual workflow runs without modifying the service role.
+
 1.76.0 (2026-07-16)
 ------------------
 

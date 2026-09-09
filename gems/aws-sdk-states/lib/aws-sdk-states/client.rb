@@ -506,9 +506,7 @@ module Aws::States
     #
     # @option params [required, String] :name
     #   The name of the activity to create. This name must be unique for your
-    #   Amazon Web Services account and region for 90 days. For more
-    #   information, see [ Limits Related to State Machine Executions][1] in
-    #   the *Step Functions Developer Guide*.
+    #   Amazon Web Services account and region.
     #
     #   A name must *not* contain:
     #
@@ -528,10 +526,6 @@ module Aws::States
     #
     #   To enable logging with CloudWatch Logs, the name should only contain
     #   0-9, A-Z, a-z, - and \_.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions
     #
     # @option params [Array<Types::Tag>] :tags
     #   The list of tags to add to a resource.
@@ -1504,10 +1498,6 @@ module Aws::States
     # task is available within 60 seconds, the poll returns a `taskToken`
     # with a null string.
     #
-    # <note markdown="1"> This API action isn't logged in CloudTrail.
-    #
-    #  </note>
-    #
     # Workers should set their client side socket timeout to at least 65
     # seconds (5 seconds higher than the maximum time the service may hold
     # the poll request).
@@ -1805,6 +1795,8 @@ module Aws::States
     # version.
     #
     # Results are sorted by time, with the most recent execution first.
+    # Running executions are sorted by their `startDate` or `redriveDate`,
+    # and other executions are sorted by their `stopDate`.
     #
     # If `nextToken` is returned, there are more results available. The
     # value of `nextToken` is a unique pagination token for each page. Make
@@ -1818,7 +1810,9 @@ module Aws::States
     #
     #  </note>
     #
-    # This API action is not supported by `EXPRESS` state machines.
+    # This API action is not supported by `EXPRESS` state machines. However,
+    # you may list `EXPRESS` children started by a map run using the
+    # `mapRunArn` parameter.
     #
     #
     #
@@ -2617,7 +2611,7 @@ module Aws::States
     # and input as a running execution, the call succeeds and return the
     # same response as the original request. If the execution is closed or
     # if the input is different, it returns a `400 ExecutionAlreadyExists`
-    # error. You can reuse names after 90 days.
+    # error. You can reuse the name 90 days after it closes.
     #
     #  `StartExecution` isn't idempotent for `EXPRESS` workflows.
     #
@@ -2665,10 +2659,13 @@ module Aws::States
     #     execution.
     #
     # @option params [String] :name
-    #   Optional name of the execution. This name must be unique for your
-    #   Amazon Web Services account, Region, and state machine for 90 days.
-    #   For more information, see [ Limits Related to State Machine
-    #   Executions][1] in the *Step Functions Developer Guide*.
+    #   Optional name of the execution. For STANDARD workflows, this name must
+    #   be unique for your Amazon Web Services account, region, and state
+    #   machine. If a previous execution with the same name exists, you can
+    #   reuse the name 90 days after it closes. For EXPRESS workflows,
+    #   execution names can be reused immediately. For more information, see [
+    #   Limits Related to State Machine Executions][1] in the *Step Functions
+    #   Developer Guide*.
     #
     #   If you don't provide a name for the execution, Step Functions
     #   automatically generates a universally unique identifier (UUID) as the
@@ -2761,10 +2758,6 @@ module Aws::States
     # reflect function errors. Error codes are reserved for errors that
     # prevent your execution from running, such as permissions errors, limit
     # errors, or issues with your state machine code and configuration.
-    #
-    #  </note>
-    #
-    # <note markdown="1"> This API action isn't logged in CloudTrail.
     #
     #  </note>
     #
@@ -3576,7 +3569,7 @@ module Aws::States
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-states'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

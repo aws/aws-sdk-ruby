@@ -5053,10 +5053,19 @@ module Aws::Connect
     #     media_concurrencies: [ # required
     #       {
     #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
-    #         concurrency: 1, # required
+    #         concurrency: 1,
     #         cross_channel_behavior: {
     #           behavior_type: "ROUTE_CURRENT_CHANNEL_ONLY", # required, accepts ROUTE_CURRENT_CHANNEL_ONLY, ROUTE_ANY_CHANNEL
     #         },
+    #         workload_type_concurrencies: [
+    #           {
+    #             workload_type: "WorkloadType", # required
+    #             concurrency: 1, # required
+    #             cross_channel_workload_behavior: {
+    #               channel_workload_behavior_type: "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY", # accepts ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY, ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY, ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #     tags: {
@@ -5110,6 +5119,13 @@ module Aws::Connect
     # @option params [required, String] :publish_status
     #   The publish status of the rule.
     #
+    # @option params [Types::PreEvaluationFilters] :pre_evaluation_filters
+    #   The pre-evaluation filters for the rule, that restrict the rule to be
+    #   applied to only certain resources based on the resource's attributes,
+    #   such as tags assigned to a contact. The pre-evaluation filters are
+    #   applied even before rule conditions are evaluated and are used to
+    #   enforce tag-based-access-control while applying rules.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If not provided, the Amazon Web Services
@@ -5122,6 +5138,11 @@ module Aws::Connect
     #
     #
     #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #   For example, \{ "Tags": \{"key1":"value1", "key2":"value2"}
+    #   }.
     #
     # @return [Types::CreateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5240,7 +5261,21 @@ module Aws::Connect
     #       },
     #     ],
     #     publish_status: "DRAFT", # required, accepts DRAFT, PUBLISHED
+    #     pre_evaluation_filters: {
+    #       and_conditions: [
+    #         {
+    #           resource_type: "CONTACT", # required, accepts CONTACT
+    #           filter_type: "TAG", # required, accepts TAG
+    #           filter_key: "String", # required
+    #           filter_value: "String", # required
+    #           operator: "EQUALS", # required, accepts EQUALS
+    #         },
+    #       ],
+    #     },
     #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -9790,6 +9825,10 @@ module Aws::Connect
     #   resp.routing_profile.media_concurrencies[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
     #   resp.routing_profile.media_concurrencies[0].concurrency #=> Integer
     #   resp.routing_profile.media_concurrencies[0].cross_channel_behavior.behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_ONLY", "ROUTE_ANY_CHANNEL"
+    #   resp.routing_profile.media_concurrencies[0].workload_type_concurrencies #=> Array
+    #   resp.routing_profile.media_concurrencies[0].workload_type_concurrencies[0].workload_type #=> String
+    #   resp.routing_profile.media_concurrencies[0].workload_type_concurrencies[0].concurrency #=> Integer
+    #   resp.routing_profile.media_concurrencies[0].workload_type_concurrencies[0].cross_channel_workload_behavior.channel_workload_behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY", "ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY", "ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE"
     #   resp.routing_profile.default_outbound_queue_id #=> String
     #   resp.routing_profile.tags #=> Hash
     #   resp.routing_profile.tags["TagKey"] #=> String
@@ -9896,6 +9935,12 @@ module Aws::Connect
     #   resp.rule.actions[0].extract_information_action.rules_extraction_definitions #=> Array
     #   resp.rule.actions[0].extract_information_action.rules_extraction_definitions[0].identifier #=> String
     #   resp.rule.publish_status #=> String, one of "DRAFT", "PUBLISHED"
+    #   resp.rule.pre_evaluation_filters.and_conditions #=> Array
+    #   resp.rule.pre_evaluation_filters.and_conditions[0].resource_type #=> String, one of "CONTACT"
+    #   resp.rule.pre_evaluation_filters.and_conditions[0].filter_type #=> String, one of "TAG"
+    #   resp.rule.pre_evaluation_filters.and_conditions[0].filter_key #=> String
+    #   resp.rule.pre_evaluation_filters.and_conditions[0].filter_value #=> String
+    #   resp.rule.pre_evaluation_filters.and_conditions[0].operator #=> String, one of "EQUALS"
     #   resp.rule.created_time #=> Time
     #   resp.rule.last_updated_time #=> Time
     #   resp.rule.last_updated_by #=> String
@@ -22692,6 +22737,10 @@ module Aws::Connect
     #   resp.routing_profiles[0].media_concurrencies[0].channel #=> String, one of "VOICE", "CHAT", "TASK", "EMAIL"
     #   resp.routing_profiles[0].media_concurrencies[0].concurrency #=> Integer
     #   resp.routing_profiles[0].media_concurrencies[0].cross_channel_behavior.behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_ONLY", "ROUTE_ANY_CHANNEL"
+    #   resp.routing_profiles[0].media_concurrencies[0].workload_type_concurrencies #=> Array
+    #   resp.routing_profiles[0].media_concurrencies[0].workload_type_concurrencies[0].workload_type #=> String
+    #   resp.routing_profiles[0].media_concurrencies[0].workload_type_concurrencies[0].concurrency #=> Integer
+    #   resp.routing_profiles[0].media_concurrencies[0].workload_type_concurrencies[0].cross_channel_workload_behavior.channel_workload_behavior_type #=> String, one of "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY", "ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY", "ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE"
     #   resp.routing_profiles[0].default_outbound_queue_id #=> String
     #   resp.routing_profiles[0].tags #=> Hash
     #   resp.routing_profiles[0].tags["TagKey"] #=> String
@@ -22858,6 +22907,12 @@ module Aws::Connect
     #   resp.rules[0].rule_capability_tiers #=> Array
     #   resp.rules[0].rule_capability_tiers[0] #=> String, one of "GenerativeAI"
     #   resp.rules[0].publish_status #=> String, one of "DRAFT", "PUBLISHED"
+    #   resp.rules[0].pre_evaluation_filters.and_conditions #=> Array
+    #   resp.rules[0].pre_evaluation_filters.and_conditions[0].resource_type #=> String, one of "CONTACT"
+    #   resp.rules[0].pre_evaluation_filters.and_conditions[0].filter_type #=> String, one of "TAG"
+    #   resp.rules[0].pre_evaluation_filters.and_conditions[0].filter_key #=> String
+    #   resp.rules[0].pre_evaluation_filters.and_conditions[0].filter_value #=> String
+    #   resp.rules[0].pre_evaluation_filters.and_conditions[0].operator #=> String, one of "EQUALS"
     #   resp.rules[0].created_time #=> Time
     #   resp.rules[0].last_updated_time #=> Time
     #   resp.rules[0].last_updated_by #=> String
@@ -29775,10 +29830,19 @@ module Aws::Connect
     #     media_concurrencies: [ # required
     #       {
     #         channel: "VOICE", # required, accepts VOICE, CHAT, TASK, EMAIL
-    #         concurrency: 1, # required
+    #         concurrency: 1,
     #         cross_channel_behavior: {
     #           behavior_type: "ROUTE_CURRENT_CHANNEL_ONLY", # required, accepts ROUTE_CURRENT_CHANNEL_ONLY, ROUTE_ANY_CHANNEL
     #         },
+    #         workload_type_concurrencies: [
+    #           {
+    #             workload_type: "WorkloadType", # required
+    #             concurrency: 1, # required
+    #             cross_channel_workload_behavior: {
+    #               channel_workload_behavior_type: "ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY", # accepts ROUTE_CURRENT_CHANNEL_CURRENT_WORKLOADTYPE_ONLY, ROUTE_CURRENT_CHANNEL_ANY_WORKLOADTYPE_ONLY, ROUTE_ANY_CHANNEL_ANY_WORKLOAD_TYPE
+    #             },
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -29950,6 +30014,13 @@ module Aws::Connect
     # @option params [required, String] :publish_status
     #   The publish status of the rule.
     #
+    # @option params [Types::PreEvaluationFilters] :pre_evaluation_filters
+    #   The pre-evaluation filters for the rule, that restrict the rule to be
+    #   applied to only certain resources based on the resource's attributes,
+    #   such as tags assigned to a contact. The pre-evaluation filters are
+    #   applied even before rule conditions are evaluated and are used to
+    #   enforce tag-based-access-control while applying rules.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -30061,6 +30132,17 @@ module Aws::Connect
     #       },
     #     ],
     #     publish_status: "DRAFT", # required, accepts DRAFT, PUBLISHED
+    #     pre_evaluation_filters: {
+    #       and_conditions: [
+    #         {
+    #           resource_type: "CONTACT", # required, accepts CONTACT
+    #           filter_type: "TAG", # required, accepts TAG
+    #           filter_key: "String", # required
+    #           filter_value: "String", # required
+    #           operator: "EQUALS", # required, accepts EQUALS
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRule AWS API Documentation
@@ -31380,7 +31462,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.274.0'
+      context[:gem_version] = '1.276.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

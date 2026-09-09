@@ -561,6 +561,31 @@ module Aws
       ts_file_mode: ("SEGMENTED_FILES" | "SINGLE_FILE")?
     }
 
+      type media_package_v2_ab_watermarker_irdeto_settings = {
+      additional_destinations_alternate_destinations: Array[
+        {
+          destination_ref_id: ::String?
+        }
+      ]?,
+      alternate_destination: {
+        destination_ref_id: ::String?
+      },
+      custom_profile: {
+        embedding_frequency: ::Float,
+        scene_cut: ::Float,
+        target_psnr: ::Float
+      }?,
+      license: ::String?,
+      operator_id: ::Integer,
+      poly_period: ::Integer?,
+      profile: ("CAMCORDING" | "CUSTOM" | "DEFAULT" | "HQ" | "MEZZANINE" | "ROBUST"),
+      watermark_id_length: ("ID_2048" | "ID_512")?
+    }
+
+      type media_package_v2_watermarking_settings = {
+      media_package_v2_ab_watermarker_irdeto_settings: Params::media_package_v2_ab_watermarker_irdeto_settings?
+    }
+
       type media_package_v2_group_settings = {
       caption_language_mappings: Array[
         {
@@ -584,7 +609,8 @@ module Aws
             destination_ref_id: ::String?
           }
         }
-      ]?
+      ]?,
+      watermarking_settings: Params::media_package_v2_watermarking_settings?
     }
 
       type media_package_group_settings = {
@@ -629,6 +655,31 @@ module Aws
       include_filler_nal_units: ("AUTO" | "DROP" | "INCLUDE")?
     }
 
+      type cmaf_ingest_ab_watermarker_irdeto_settings = {
+      additional_destinations_alternate_destinations: Array[
+        {
+          destination_ref_id: ::String?
+        }
+      ]?,
+      alternate_destination: {
+        destination_ref_id: ::String?
+      },
+      custom_profile: {
+        embedding_frequency: ::Float,
+        scene_cut: ::Float,
+        target_psnr: ::Float
+      }?,
+      license: ::String?,
+      operator_id: ::Integer,
+      poly_period: ::Integer?,
+      profile: ("CAMCORDING" | "CUSTOM" | "DEFAULT" | "HQ" | "MEZZANINE" | "ROBUST"),
+      watermark_id_length: ("ID_2048" | "ID_512")?
+    }
+
+      type cmaf_ingest_watermarking_settings = {
+      cmaf_ingest_ab_watermarker_irdeto_settings: Params::cmaf_ingest_ab_watermarker_irdeto_settings?
+    }
+
       type cmaf_ingest_group_settings = {
       destination: {
         destination_ref_id: ::String?
@@ -659,7 +710,8 @@ module Aws
             destination_ref_id: ::String?
           }
         }
-      ]?
+      ]?,
+      watermarking_settings: Params::cmaf_ingest_watermarking_settings?
     }
 
       type output_group_settings = {

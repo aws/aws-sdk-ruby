@@ -1,8 +1,11 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add `rexml` as a dependency.
+
 3.254.1 (2026-08-06)
 ------------------
+
 * Issue - Fix a double space appearing in the frameworks section of the User-Agent header.
 
 3.254.0 (2026-07-09)

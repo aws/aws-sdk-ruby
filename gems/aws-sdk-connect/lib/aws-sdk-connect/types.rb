@@ -7582,6 +7582,14 @@ module Aws::Connect
     #   The publish status of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] pre_evaluation_filters
+    #   The pre-evaluation filters for the rule, that restrict the rule to
+    #   be applied to only certain resources based on the resource's
+    #   attributes, such as tags assigned to a contact. The pre-evaluation
+    #   filters are applied even before rule conditions are evaluated and
+    #   are used to enforce tag-based-access-control while applying rules.
+    #   @return [Types::PreEvaluationFilters]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. If not provided, the Amazon Web Services
@@ -7596,6 +7604,12 @@ module Aws::Connect
     #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource. For example, \{ "Tags": \{"key1":"value1",
+    #   "key2":"value2"} }.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateRuleRequest AWS API Documentation
     #
     class CreateRuleRequest < Struct.new(
@@ -7605,7 +7619,9 @@ module Aws::Connect
       :function,
       :actions,
       :publish_status,
-      :client_token)
+      :pre_evaluation_filters,
+      :client_token,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8625,6 +8641,23 @@ module Aws::Connect
     #
     class CrossChannelBehavior < Struct.new(
       :behavior_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the cross-channel and workload type routing behavior that
+    # allows an agent working on a contact to be offered a contact from a
+    # different channel or workload type.
+    #
+    # @!attribute [rw] channel_workload_behavior_type
+    #   Specifies the routing behavior for an agent handling their current
+    #   channel and workload type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CrossChannelWorkloadBehavior AWS API Documentation
+    #
+    class CrossChannelWorkloadBehavior < Struct.new(
+      :channel_workload_behavior_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25531,12 +25564,19 @@ module Aws::Connect
     #   are currently working with a contact from a Voice channel.
     #   @return [Types::CrossChannelBehavior]
     #
+    # @!attribute [rw] workload_type_concurrencies
+    #   Defines the list of workload type concurrency configurations for a
+    #   channel. When provided, enables granular concurrency control based
+    #   on workload type values.
+    #   @return [Array<Types::WorkloadTypeConcurrency>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/MediaConcurrency AWS API Documentation
     #
     class MediaConcurrency < Struct.new(
       :channel,
       :concurrency,
-      :cross_channel_behavior)
+      :cross_channel_behavior,
+      :workload_type_concurrencies)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27530,6 +27570,64 @@ module Aws::Connect
     #
     class PostAcceptTimeoutConfig < Struct.new(
       :duration_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single pre-evaluation filter condition. Specifies a resource type,
+    # filter type, key, value, and operator to match against a resource
+    # attribute.
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource to filter on. Valid values: `CONTACT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_type
+    #   The type of filter to apply. Valid values: `TAG`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_key
+    #   The key of the attribute to filter on. For tag filters, this is the
+    #   tag key.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter_value
+    #   The value to match against. For tag filters, this is the tag value.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator for the filter condition. Valid values:
+    #   `EQUALS`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PreEvaluationFilter AWS API Documentation
+    #
+    class PreEvaluationFilter < Struct.new(
+      :resource_type,
+      :filter_type,
+      :filter_key,
+      :filter_value,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The pre-evaluation filters for a rule, that restrict a rule to be
+    # applied to only certain resources based on the resource's attributes,
+    # such as tags assigned to a contact. The pre-evaluation filters are
+    # applied even before rule conditions are evaluated and are used to
+    # enforce tag-based-access-control while applying rules.
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions that the rule evaluates together using AND
+    #   logic. All conditions must be met for the event to be evaluated by
+    #   the rule.
+    #   @return [Array<Types::PreEvaluationFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PreEvaluationFilters AWS API Documentation
+    #
+    class PreEvaluationFilters < Struct.new(
+      :and_conditions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30367,6 +30465,14 @@ module Aws::Connect
     #   The publish status of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] pre_evaluation_filters
+    #   The pre-evaluation filters for the rule, that restrict the rule to
+    #   be applied to only certain resources based on the resource's
+    #   attributes, such as tags assigned to a contact. The pre-evaluation
+    #   filters are applied even before rule conditions are evaluated and
+    #   are used to enforce tag-based-access-control while applying rules.
+    #   @return [Types::PreEvaluationFilters]
+    #
     # @!attribute [rw] created_time
     #   The timestamp for when the rule was created.
     #   @return [Time]
@@ -30397,6 +30503,7 @@ module Aws::Connect
       :function,
       :actions,
       :publish_status,
+      :pre_evaluation_filters,
       :created_time,
       :last_updated_time,
       :last_updated_by,
@@ -30581,6 +30688,14 @@ module Aws::Connect
     #   The publish status of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] pre_evaluation_filters
+    #   The pre-evaluation filters for the rule, that restrict the rule to
+    #   be applied to only certain resources based on the resource's
+    #   attributes, such as tags assigned to a contact. The pre-evaluation
+    #   filters are applied even before rule conditions are evaluated and
+    #   are used to enforce tag-based-access-control while applying rules.
+    #   @return [Types::PreEvaluationFilters]
+    #
     # @!attribute [rw] created_time
     #   The timestamp for when the rule was created.
     #   @return [Time]
@@ -30610,6 +30725,7 @@ module Aws::Connect
       :action_summaries,
       :rule_capability_tiers,
       :publish_status,
+      :pre_evaluation_filters,
       :created_time,
       :last_updated_time,
       :last_updated_by,
@@ -39019,6 +39135,14 @@ module Aws::Connect
     #   The publish status of the rule.
     #   @return [String]
     #
+    # @!attribute [rw] pre_evaluation_filters
+    #   The pre-evaluation filters for the rule, that restrict the rule to
+    #   be applied to only certain resources based on the resource's
+    #   attributes, such as tags assigned to a contact. The pre-evaluation
+    #   filters are applied even before rule conditions are evaluated and
+    #   are used to enforce tag-based-access-control while applying rules.
+    #   @return [Types::PreEvaluationFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateRuleRequest AWS API Documentation
     #
     class UpdateRuleRequest < Struct.new(
@@ -39027,7 +39151,8 @@ module Aws::Connect
       :name,
       :function,
       :actions,
-      :publish_status)
+      :publish_status,
+      :pre_evaluation_filters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41433,6 +41558,40 @@ module Aws::Connect
     class WisdomInfo < Struct.new(
       :session_arn,
       :ai_agents)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the maximum number of contacts an agent can handle
+    # simultaneously for a specific channel and workload type combination.
+    #
+    # @!attribute [rw] workload_type
+    #   The value of the workload type.
+    #   @return [String]
+    #
+    # @!attribute [rw] concurrency
+    #   The maximum number of contacts an agent can handle simultaneously
+    #   for a specific channel and workload type combination.
+    #
+    #   Valid Range for `VOICE`: Minimum value of 1. Maximum value of 1.
+    #
+    #   Valid Range for `CHAT`: Minimum value of 1. Maximum value of 10.
+    #
+    #   Valid Range for `TASK`: Minimum value of 1. Maximum value of 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cross_channel_workload_behavior
+    #   Defines the cross-channel and workload type routing behavior for
+    #   each channel and workload type combination that is enabled for this
+    #   Routing Profile.
+    #   @return [Types::CrossChannelWorkloadBehavior]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/WorkloadTypeConcurrency AWS API Documentation
+    #
+    class WorkloadTypeConcurrency < Struct.new(
+      :workload_type,
+      :concurrency,
+      :cross_channel_workload_behavior)
       SENSITIVE = []
       include Aws::Structure
     end
