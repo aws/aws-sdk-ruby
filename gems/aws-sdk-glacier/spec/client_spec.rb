@@ -21,7 +21,7 @@ module Aws
         body = Json.load(resp.context.http_request.body_contents)
         time = body['InventoryRetrievalParameters']['StartDate']
         expect(time).to be_a(String)
-        expect(time).to eq(now.utc.iso8601)
+        expect(time).to eq(Aws::Util.serialize_date_time(now))
       end
 
       it 'handles seeked io objects in :upload_archive' do

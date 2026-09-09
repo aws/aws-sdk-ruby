@@ -42,8 +42,8 @@ module Aws
 
         def timestamp(ref, value)
           case ref['timestampFormat'] || ref.shape['timestampFormat']
-          when 'unixTimestamp' then Util.serialize_epoch_time(value)
-          when 'iso8601' then Util.serialize_iso8601_time(value)
+          when 'unixTimestamp' then Util.serialize_epoch_seconds(value)
+          when 'iso8601' then Util.serialize_date_time(value)
           else
             # header default to rfc822
             value.utc.httpdate
