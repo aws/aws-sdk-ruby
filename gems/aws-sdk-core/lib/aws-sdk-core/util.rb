@@ -91,6 +91,25 @@ module Aws
         end
       end
 
+      # Serializes a {Time} to epoch seconds, preserving millisecond
+      # precision. Whole-second values are returned as an Integer so the
+      # wire format is unchanged for the common case.
+      # @param [Time] value
+      # @return [Integer, Float]
+      def serialize_epoch_time(value)
+        return value.to_i if value.nsec.zero?
+
+        value.to_i + value.nsec / 1_000_000 / 1000.0
+      end
+
+      # Serializes a {Time} to an ISO 8601 string, including millisecond
+      # precision only when the value has a sub-second component.
+      # @param [Time] value
+      # @return [String]
+      def serialize_iso8601_time(value)
+        value.nsec.zero? ? value.utc.iso8601 : value.utc.iso8601(3)
+      end
+
       # @param [String] value
       # @return [Time]
       def deserialize_time(value)

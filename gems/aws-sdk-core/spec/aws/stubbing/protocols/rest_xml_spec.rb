@@ -56,7 +56,7 @@ module Aws
                 <Buckets>
                   <Bucket>
                     <Name>aws-sdk</Name>
-                    <CreationDate>#{now.utc.iso8601}</CreationDate>
+                    <CreationDate>#{Aws::Util.serialize_iso8601_time(now)}</CreationDate>
                   </Bucket>
                 </Buckets>
                 <Owner>

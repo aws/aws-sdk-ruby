@@ -74,6 +74,12 @@ module Aws
         expect(json(string: 'abc', integer: nil)).to eq('{"String":"abc"}')
       end
 
+      it 'preserves millisecond precision on epoch timestamps' do
+        params = Structure.new(*rules.shape.member_names).new
+        params.timestamp = Time.at(123_456_789, 123_000)
+        expect(json(params)).to eq('{"Timestamp":123456789.123}')
+      end
+
       describe 'document types' do
         it 'serializes BigDecimal values as JSON numbers' do
           expect(json(document_type: {

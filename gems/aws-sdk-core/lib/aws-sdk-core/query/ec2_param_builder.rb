@@ -70,11 +70,11 @@ module Aws
 
       def timestamp(ref, value)
         case ref['timestampFormat'] || ref.shape['timestampFormat']
-        when 'unixTimestamp' then value.to_i
+        when 'unixTimestamp' then Util.serialize_epoch_time(value)
         when 'rfc822' then value.utc.httpdate
         else
           # ec2 defaults to iso8601
-          value.utc.iso8601
+          Util.serialize_iso8601_time(value)
         end
       end
 

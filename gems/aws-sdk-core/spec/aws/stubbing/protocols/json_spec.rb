@@ -72,7 +72,7 @@ module Aws
                       "AttributeType": "S"
                     }
                   ],
-                  "CreationDateTime": #{now.to_i},
+                  "CreationDateTime": #{Aws::Util.serialize_epoch_time(now)},
                   "ItemCount": 0,
                   "KeySchema": [
                     {
@@ -81,8 +81,8 @@ module Aws
                     }
                   ],
                   "ProvisionedThroughput": {
-                    "LastIncreaseDateTime": #{now.to_i},
-                    "LastDecreaseDateTime": #{now.to_i},
+                    "LastIncreaseDateTime": #{Aws::Util.serialize_epoch_time(now)},
+                    "LastDecreaseDateTime": #{Aws::Util.serialize_epoch_time(now)},
                     "NumberOfDecreasesToday": 0,
                     "ReadCapacityUnits": 50,
                     "WriteCapacityUnits": 50
