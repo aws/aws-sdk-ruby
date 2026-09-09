@@ -34710,7 +34710,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.390.0'
+      context[:gem_version] = '1.391.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

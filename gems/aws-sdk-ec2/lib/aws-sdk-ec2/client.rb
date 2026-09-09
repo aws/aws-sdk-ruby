@@ -5926,6 +5926,23 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #
+    # @option params [Boolean] :encrypted
+    #   Indicates whether to encrypt the volume copy. If the source volume is
+    #   encrypted, the service always encrypts the copy regardless of this
+    #   value. Set to `true` to encrypt a copy of an unencrypted source volume
+    #   during the copy operation. If you set `Encrypted` to `true` but do not
+    #   specify `KmsKeyId`, the service uses the default KMS key for EBS
+    #   encryption in your account.
+    #
+    # @option params [String] :kms_key_id
+    #   The identifier of the KMS key to use for encryption of the volume
+    #   copy. Specify a symmetric encryption KMS key. You can specify a KMS
+    #   key using the key ID, key ARN, alias name, or alias ARN. If you set
+    #   `Encrypted` to `true` but do not specify this parameter, the service
+    #   uses the default KMS key for EBS encryption in your account. For
+    #   cross-account volume copies, this must be a KMS key in the calling
+    #   account.
+    #
     # @return [Types::CopyVolumesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CopyVolumesResult#volumes #volumes} => Array&lt;Types::Volume&gt;
@@ -5952,6 +5969,8 @@ module Aws::EC2
     #     multi_attach_enabled: false,
     #     throughput: 1,
     #     client_token: "String",
+    #     encrypted: false,
+    #     kms_key_id: "KmsKeyId",
     #   })
     #
     # @example Response structure
@@ -5973,6 +5992,8 @@ module Aws::EC2
     #   resp.volumes[0].operator.principal #=> String
     #   resp.volumes[0].operator.hidden_by_default #=> Boolean
     #   resp.volumes[0].volume_initialization_rate #=> Integer
+    #   resp.volumes[0].volume_arn #=> String
+    #   resp.volumes[0].owner_id #=> String
     #   resp.volumes[0].volume_id #=> String
     #   resp.volumes[0].size #=> Integer
     #   resp.volumes[0].snapshot_id #=> String
@@ -18896,6 +18917,8 @@ module Aws::EC2
     #   * {Types::Volume#sse_type #sse_type} => String
     #   * {Types::Volume#operator #operator} => Types::OperatorResponse
     #   * {Types::Volume#volume_initialization_rate #volume_initialization_rate} => Integer
+    #   * {Types::Volume#volume_arn #volume_arn} => String
+    #   * {Types::Volume#owner_id #owner_id} => String
     #   * {Types::Volume#volume_id #volume_id} => String
     #   * {Types::Volume#size #size} => Integer
     #   * {Types::Volume#snapshot_id #snapshot_id} => String
@@ -19009,6 +19032,8 @@ module Aws::EC2
     #   resp.operator.principal #=> String
     #   resp.operator.hidden_by_default #=> Boolean
     #   resp.volume_initialization_rate #=> Integer
+    #   resp.volume_arn #=> String
+    #   resp.owner_id #=> String
     #   resp.volume_id #=> String
     #   resp.size #=> Integer
     #   resp.snapshot_id #=> String
@@ -47392,6 +47417,8 @@ module Aws::EC2
     #   resp.volumes[0].operator.principal #=> String
     #   resp.volumes[0].operator.hidden_by_default #=> Boolean
     #   resp.volumes[0].volume_initialization_rate #=> Integer
+    #   resp.volumes[0].volume_arn #=> String
+    #   resp.volumes[0].owner_id #=> String
     #   resp.volumes[0].volume_id #=> String
     #   resp.volumes[0].size #=> Integer
     #   resp.volumes[0].snapshot_id #=> String
@@ -77380,7 +77407,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.645.0'
+      context[:gem_version] = '1.646.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

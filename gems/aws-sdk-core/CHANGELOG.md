@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.255.0 (2026-09-09)
+------------------
+
 * Feature - Add `rexml` as a dependency.
 
 3.254.1 (2026-08-06)

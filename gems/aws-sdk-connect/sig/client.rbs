@@ -771,7 +771,8 @@ module Aws
                                     },
                                     ?language_configuration: {
                                       form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "ms-MY")?
-                                    }
+                                    },
+                                    ?ai_version: ::String
                                   ) -> _CreateEvaluationFormResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEvaluationFormResponseSuccess
 
@@ -3034,6 +3035,20 @@ module Aws
                                            ?max_results: ::Integer
                                          ) -> _ListEntitySecurityProfilesResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEntitySecurityProfilesResponseSuccess
+
+      interface _ListEvaluationFormAIVersionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEvaluationFormAIVersionsResponse]
+        def ai_version_summaries: () -> ::Array[Types::EvaluationFormAIVersionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_evaluation_form_ai_versions-instance_method
+      def list_evaluation_form_ai_versions: (
+                                              instance_id: ::String,
+                                              contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER"),
+                                              ?max_results: ::Integer,
+                                              ?next_token: ::String
+                                            ) -> _ListEvaluationFormAIVersionsResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEvaluationFormAIVersionsResponseSuccess
 
       interface _ListEvaluationFormVersionsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEvaluationFormVersionsResponse]
@@ -5500,7 +5515,8 @@ module Aws
                                     },
                                     ?language_configuration: {
                                       form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "ms-MY")?
-                                    }
+                                    },
+                                    ?ai_version: ::String
                                   ) -> _UpdateEvaluationFormResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEvaluationFormResponseSuccess
 

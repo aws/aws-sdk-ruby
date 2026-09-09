@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2026-09-09)
+------------------
+
+* Feature - This release adds support for custom Gres.conf configuration and Slurm version 26.05 in AWS PCS. Customers can now specify generic resource (GRES) settings to control how GPUs and other resources are configured and shared on their compute node groups.
+
 1.52.0 (2026-07-22)
 ------------------
 

@@ -581,6 +581,10 @@
         "SCTE35_ENHANCED"
       ]
     },
+    "AttachedMultiviewChannelList":{
+      "type":"list",
+      "member":{"shape":"ResourceName"}
+    },
     "Boolean":{
       "type":"boolean",
       "box":true
@@ -692,7 +696,9 @@
         "ModifiedAt":{"shape":"Timestamp"},
         "Description":{"shape":"ResourceDescription"},
         "InputType":{"shape":"InputType"},
-        "OutputLockingMode":{"shape":"OutputLockingMode"}
+        "OutputLockingMode":{"shape":"OutputLockingMode"},
+        "MultiviewConfiguration":{"shape":"MultiviewConfiguration"},
+        "AttachedMultiviewChannels":{"shape":"AttachedMultiviewChannelList"}
       }
     },
     "CmafEncryptionMethod":{
@@ -792,6 +798,7 @@
         "Description":{"shape":"ResourceDescription"},
         "InputSwitchConfiguration":{"shape":"InputSwitchConfiguration"},
         "OutputHeaderConfiguration":{"shape":"OutputHeaderConfiguration"},
+        "MultiviewConfiguration":{"shape":"MultiviewConfiguration"},
         "OutputLockingMode":{"shape":"OutputLockingMode"},
         "Tags":{
           "shape":"TagMap",
@@ -809,6 +816,8 @@
         "ModifiedAt"
       ],
       "members":{
+        "MultiviewConfiguration":{"shape":"MultiviewConfiguration"},
+        "AttachedMultiviewChannels":{"shape":"AttachedMultiviewChannelList"},
         "Arn":{"shape":"String"},
         "ChannelName":{"shape":"String"},
         "ChannelGroupName":{"shape":"String"},
@@ -1686,6 +1695,8 @@
         "ModifiedAt"
       ],
       "members":{
+        "MultiviewConfiguration":{"shape":"MultiviewConfiguration"},
+        "AttachedMultiviewChannels":{"shape":"AttachedMultiviewChannelList"},
         "Arn":{"shape":"String"},
         "ChannelName":{"shape":"String"},
         "ChannelGroupName":{"shape":"String"},
@@ -2097,7 +2108,8 @@
       "type":"string",
       "enum":[
         "HLS",
-        "CMAF"
+        "CMAF",
+        "MULTIVIEW"
       ]
     },
     "Integer":{
@@ -2352,6 +2364,40 @@
         "FULL",
         "COMPACT"
       ]
+    },
+    "MultiviewConfiguration":{
+      "type":"structure",
+      "required":[
+        "AvailableSources",
+        "AvailableLayouts"
+      ],
+      "members":{
+        "AvailableSources":{"shape":"MultiviewSourceList"},
+        "AvailableLayouts":{"shape":"MultiviewLayoutList"}
+      }
+    },
+    "MultiviewLayoutList":{
+      "type":"list",
+      "member":{"shape":"MultiviewLayoutType"},
+      "max":6,
+      "min":1
+    },
+    "MultiviewLayoutType":{
+      "type":"string",
+      "enum":[
+        "LAYOUT_2EH",
+        "LAYOUT_2PL",
+        "LAYOUT_3EL",
+        "LAYOUT_3PL",
+        "LAYOUT_4E",
+        "LAYOUT_4PL"
+      ]
+    },
+    "MultiviewSourceList":{
+      "type":"list",
+      "member":{"shape":"ResourceName"},
+      "max":10,
+      "min":1
     },
     "OriginEndpointListConfiguration":{
       "type":"structure",
@@ -2922,7 +2968,8 @@
         },
         "Description":{"shape":"ResourceDescription"},
         "InputSwitchConfiguration":{"shape":"InputSwitchConfiguration"},
-        "OutputHeaderConfiguration":{"shape":"OutputHeaderConfiguration"}
+        "OutputHeaderConfiguration":{"shape":"OutputHeaderConfiguration"},
+        "MultiviewConfiguration":{"shape":"MultiviewConfiguration"}
       }
     },
     "UpdateChannelResponse":{
@@ -2935,6 +2982,8 @@
         "ModifiedAt"
       ],
       "members":{
+        "MultiviewConfiguration":{"shape":"MultiviewConfiguration"},
+        "AttachedMultiviewChannels":{"shape":"AttachedMultiviewChannelList"},
         "Arn":{"shape":"String"},
         "ChannelName":{"shape":"String"},
         "ChannelGroupName":{"shape":"String"},
@@ -3168,7 +3217,31 @@
         "OUTPUT_TIMESTAMP_MODE_IMMUTABLE",
         "NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION",
         "ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE",
-        "STREAM_NAME_OUTPUT_MODE_IMMUTABLE"
+        "STREAM_NAME_OUTPUT_MODE_IMMUTABLE",
+        "MULTIVIEW_CONFIGURATION_REQUIRED",
+        "MULTIVIEW_CONFIGURATION_NOT_ALLOWED",
+        "MULTIVIEW_SOURCE_NOT_FOUND",
+        "MULTIVIEW_SOURCE_INVALID_INPUT_TYPE",
+        "MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED",
+        "MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST",
+        "MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST",
+        "MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER",
+        "MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION",
+        "MULTIVIEW_INPUT_TYPE_WITH_START_TAG",
+        "MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB",
+        "MULTIVIEW_RESET_NOT_ALLOWED",
+        "MULTIVIEW_DUPLICATE_SOURCE",
+        "MULTIVIEW_DUPLICATE_LAYOUT",
+        "MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED",
+        "MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED",
+        "MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED",
+        "MULTIVIEW_INVALID_TIME_DELAY_SECONDS",
+        "MULTIVIEW_MANIFEST_WINDOW_TOO_LONG",
+        "MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS",
+        "MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED",
+        "MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION",
+        "MULTIVIEW_SOURCE_NON_EPOCH_LOCKED",
+        "MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER"
       ]
     }
   }

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.646.0 (2026-09-09)
+------------------
+
+* Feature - This release adds support for sharing Amazon EBS volumes across AWS accounts using AWS Resource Access Manager (RAM). Consuming accounts can view shared volume metadata and create copies of shared volumes within the same Availability Zone, with optional re-encryption using their own KMS key.
+
 1.645.0 (2026-09-08)
 ------------------
 

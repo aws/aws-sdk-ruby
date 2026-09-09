@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.195.0 (2026-09-09)
+------------------
+
+* Feature - Updates documentation for lambda function timeout.
+
 1.194.0 (2026-09-01)
 ------------------
 

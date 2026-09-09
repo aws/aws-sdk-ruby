@@ -109,12 +109,14 @@ module Aws::PCS
     class ComputeNodeGroupSlurmConfiguration
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      attr_accessor gres_custom_settings: ::Array[::Hash[::String, ::String]]
       SENSITIVE: []
     end
 
     class ComputeNodeGroupSlurmConfigurationRequest
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      attr_accessor gres_custom_settings: ::Array[::Hash[::String, ::String]]
       SENSITIVE: []
     end
 
@@ -591,6 +593,7 @@ module Aws::PCS
     class UpdateComputeNodeGroupSlurmConfigurationRequest
       attr_accessor scale_down_idle_time_in_seconds: ::Integer
       attr_accessor slurm_custom_settings: ::Array[Types::SlurmCustomSetting]
+      attr_accessor gres_custom_settings: ::Array[::Hash[::String, ::String]]
       SENSITIVE: []
     end
 

@@ -33,7 +33,10 @@ module Aws
           fixture_id: ::String
         }?
       }?,
-      subtitling: Params::subtitling_config?
+      subtitling: Params::subtitling_config?,
+      contextual_metadata: {
+        summary_generation: ("ENABLED" | "DISABLED")?
+      }?
     }
 
       type create_output = {

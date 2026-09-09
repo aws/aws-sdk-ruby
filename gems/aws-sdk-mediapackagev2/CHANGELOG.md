@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2026-09-09)
+------------------
+
+* Feature - Dynamic Multiview enables viewers to watch multiple live video streams in a single combined output. Viewers can select from 6 preset tiled layouts. Create MediaPackage channels with Input Type MULTIVIEW and configure Available Layouts and Available Sources. See the API Documentation for details.
+
 1.70.0 (2026-08-07)
 ------------------
 

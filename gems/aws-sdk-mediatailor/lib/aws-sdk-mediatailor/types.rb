@@ -540,6 +540,99 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The configuration for an `AWS_SERVICE_REQUEST` function. Contains the
+    # target service, target Region, and request parameters that the
+    # function uses to call an AWS service API. For more information, see
+    # [AWS\_SERVICE\_REQUEST][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types-aws-service-request.html
+    #
+    # @!attribute [rw] runtime
+    #   The expression language used to evaluate expressions in the function
+    #   configuration. The only supported value is `JSONata`.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   A map of output bindings. Each key is a namespaced output path, such
+    #   as `player_params.device_type`. Each value is an expression that
+    #   MediaTailor evaluates at runtime and can reference the `response`
+    #   object from the target service. For more information, see [JSONata
+    #   expression reference][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] method_type
+    #   Specifies how the function sends the request to the target service.
+    #   The value must match what the target service operation requires.
+    #   Valid values:
+    #
+    #   * `GET` – Retrieves data from the target service.
+    #
+    #   * `POST` – Submits a request body to the target service.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_timeout_milliseconds
+    #   The maximum time, in milliseconds, that MediaTailor waits for a
+    #   response from the AWS service. If the call exceeds this timeout,
+    #   MediaTailor sets the response status code to `null` and proceeds
+    #   with output expression evaluation. Valid values: `100` to `2000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] url
+    #   An expression that evaluates to the endpoint URL for the target AWS
+    #   service API operation. Use `{%...%}` delimiters for dynamic
+    #   expressions. The URL must correspond to a valid endpoint for the
+    #   service specified in `TargetService`. The maximum length after
+    #   evaluation is 2,048 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   An expression that evaluates to the request body for the AWS service
+    #   API call. The body must conform to the input format that the target
+    #   service operation expects. Applies only when the target operation
+    #   accepts a request body. The maximum size after evaluation is 64 KB.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers
+    #   A map of HTTP header names to expression values. MediaTailor
+    #   evaluates each header value expression at runtime and includes the
+    #   result in the outbound request to the AWS service. Use this to pass
+    #   any headers required by the target service operation. You can
+    #   include a maximum of 50 headers.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] target_service
+    #   The AWS service to call. Valid value: `elemental-inference` (AWS
+    #   Elemental Inference).
+    #   @return [String]
+    #
+    # @!attribute [rw] target_region
+    #   The AWS Region for the target service. Specify a static Region code
+    #   (for example, `us-east-1`) or a JSONata expression that resolves to
+    #   a Region code at runtime (for example, `{%inference.region%}`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/AwsServiceRequestConfiguration AWS API Documentation
+    #
+    class AwsServiceRequestConfiguration < Struct.new(
+      :runtime,
+      :output,
+      :method_type,
+      :request_timeout_milliseconds,
+      :url,
+      :body,
+      :headers,
+      :target_service,
+      :target_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A request contains unexpected data.
     #
     # @!attribute [rw] message
@@ -2389,6 +2482,11 @@ module Aws::MediaTailor
     #   The configuration for an `HTTP_REQUEST` function.
     #   @return [Types::HttpRequestConfiguration]
     #
+    # @!attribute [rw] aws_service_request_configuration
+    #   The configuration for an `AWS_SERVICE_REQUEST` function. Specifies
+    #   the target service, target Region, and request parameters.
+    #   @return [Types::AwsServiceRequestConfiguration]
+    #
     # @!attribute [rw] custom_output_configuration
     #   The configuration for a `CUSTOM_OUTPUT` function.
     #   @return [Types::CustomOutputConfiguration]
@@ -2427,6 +2525,7 @@ module Aws::MediaTailor
       :function_type,
       :description,
       :http_request_configuration,
+      :aws_service_request_configuration,
       :custom_output_configuration,
       :concurrent_executor_configuration,
       :sequential_executor_configuration,
@@ -2589,6 +2688,11 @@ module Aws::MediaTailor
     #   The configuration for an `HTTP_REQUEST` function.
     #   @return [Types::HttpRequestConfiguration]
     #
+    # @!attribute [rw] aws_service_request_configuration
+    #   The configuration for an `AWS_SERVICE_REQUEST` function. Specifies
+    #   the target service, target Region, and request parameters.
+    #   @return [Types::AwsServiceRequestConfiguration]
+    #
     # @!attribute [rw] custom_output_configuration
     #   The configuration for a `CUSTOM_OUTPUT` function.
     #   @return [Types::CustomOutputConfiguration]
@@ -2627,6 +2731,7 @@ module Aws::MediaTailor
       :function_type,
       :description,
       :http_request_configuration,
+      :aws_service_request_configuration,
       :custom_output_configuration,
       :concurrent_executor_configuration,
       :sequential_executor_configuration,
@@ -4419,19 +4524,31 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] function_type
-    #   The type of the function. The function type determines what the
-    #   function can do at runtime. Valid values: `CUSTOM_OUTPUT` evaluates
-    #   expressions and produces output bindings with no external calls.
-    #   `HTTP_REQUEST` makes an HTTP call to an external service and
-    #   evaluates output expressions that can reference the response.
-    #   `VAST_REQUEST` calls a VAST endpoint, parses the response as VAST,
-    #   and makes the parsed ads available to output expressions.
-    #   `SEQUENTIAL_EXECUTOR` runs a sequence of child functions in order,
-    #   passing data between steps through temporary data.
-    #   `CONCURRENT_EXECUTOR` runs a set of child functions in parallel, up
-    #   to a maximum concurrency, and combines their output when all
-    #   functions complete. For more information, see [Function types and
-    #   composition][1] in the *MediaTailor User Guide*.
+    #   The type of the function, which determines what the function can do
+    #   at runtime. Valid values:
+    #
+    #   * `CUSTOM_OUTPUT` – Evaluates expressions and produces output
+    #     bindings with no external calls.
+    #
+    #   * `HTTP_REQUEST` – Makes an HTTP call to an external service and
+    #     evaluates output expressions that can reference the response.
+    #
+    #   * `AWS_SERVICE_REQUEST` – Makes an authenticated request to a
+    #     supported AWS service API and evaluates output expressions that
+    #     can reference the response.
+    #
+    #   * `VAST_REQUEST` – Calls a VAST endpoint, parses the response as
+    #     VAST, and makes the parsed ads available to output expressions.
+    #
+    #   * `SEQUENTIAL_EXECUTOR` – Runs a sequence of child functions in
+    #     order, passing data between steps through temporary data.
+    #
+    #   * `CONCURRENT_EXECUTOR` – Runs a set of child functions in parallel,
+    #     up to a maximum concurrency, and combines their output when all
+    #     functions complete.
+    #
+    #   For more information, see [Function types and composition][1] in the
+    #   *MediaTailor User Guide*.
     #
     #
     #
@@ -4447,6 +4564,11 @@ module Aws::MediaTailor
     #   method, URL, headers, body, timeout, and output expressions.
     #   Required when `FunctionType` is `HTTP_REQUEST`.
     #   @return [Types::HttpRequestConfiguration]
+    #
+    # @!attribute [rw] aws_service_request_configuration
+    #   The configuration for an `AWS_SERVICE_REQUEST` function. You must
+    #   specify this parameter when `FunctionType` is `AWS_SERVICE_REQUEST`.
+    #   @return [Types::AwsServiceRequestConfiguration]
     #
     # @!attribute [rw] custom_output_configuration
     #   The configuration for a `CUSTOM_OUTPUT` function. Specifies the
@@ -4492,6 +4614,7 @@ module Aws::MediaTailor
       :function_type,
       :description,
       :http_request_configuration,
+      :aws_service_request_configuration,
       :custom_output_configuration,
       :concurrent_executor_configuration,
       :sequential_executor_configuration,
@@ -4518,6 +4641,11 @@ module Aws::MediaTailor
     # @!attribute [rw] http_request_configuration
     #   The configuration for an `HTTP_REQUEST` function.
     #   @return [Types::HttpRequestConfiguration]
+    #
+    # @!attribute [rw] aws_service_request_configuration
+    #   The configuration for an `AWS_SERVICE_REQUEST` function. Specifies
+    #   the target service, target Region, and request parameters.
+    #   @return [Types::AwsServiceRequestConfiguration]
     #
     # @!attribute [rw] custom_output_configuration
     #   The configuration for a `CUSTOM_OUTPUT` function.
@@ -4557,6 +4685,7 @@ module Aws::MediaTailor
       :function_type,
       :description,
       :http_request_configuration,
+      :aws_service_request_configuration,
       :custom_output_configuration,
       :concurrent_executor_configuration,
       :sequential_executor_configuration,
@@ -6385,13 +6514,14 @@ module Aws::MediaTailor
     # @!attribute [rw] url
     #   An expression that evaluates to the VAST endpoint URL. Use `{%...%}`
     #   delimiters for dynamic expressions. A literal value must be an
-    #   `https://` URL. The maximum length is 25,000 characters.
+    #   `https://` URL. The expression can be up to 25,000 characters, and
+    #   the URL after evaluation can be up to 2,048 characters.
     #   @return [String]
     #
     # @!attribute [rw] body
-    #   An expression that evaluates to the request body. Used with `POST`
-    #   requests, for example to send an OpenRTB bid request. The maximum
-    #   length is 100,000 characters.
+    #   An expression that evaluates to the request body, for example to
+    #   send an OpenRTB bid request. The expression can be up to 100,000
+    #   characters, and the body after evaluation can be up to 64 KB.
     #   @return [String]
     #
     # @!attribute [rw] headers

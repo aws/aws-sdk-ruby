@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.277.0 (2026-09-09)
+------------------
+
+* Feature - Add metric configuration field to evaluation forms and ListEvaluationFormAIVersions API for retrieving AI-generated evaluation form versions
+
 1.276.0 (2026-09-08)
 ------------------
 

@@ -563,6 +563,9 @@ module Aws::ElementalInference
     #             dictionary: "DictionaryId",
     #             profanity_filter: "DISABLED", # accepts DISABLED, CENSOR, DROP
     #           },
+    #           contextual_metadata: {
+    #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         description: "ResourceDescription",
@@ -720,6 +723,9 @@ module Aws::ElementalInference
     #             dictionary: "DictionaryId",
     #             profanity_filter: "DISABLED", # accepts DISABLED, CENSOR, DROP
     #           },
+    #           contextual_metadata: {
+    #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         description: "ResourceDescription",
@@ -750,6 +756,7 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.aspect_ratio.height #=> Integer
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
+    #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
@@ -835,6 +842,30 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def delete_feed(params = {}, options = {})
       req = build_request(:delete_feed, params)
+      req.send_request(options)
+    end
+
+    # Deletes the resource-based policy attached to the specified feed.
+    # After you delete the policy, the operation revokes the cross-account
+    # access that the policy granted.
+    #
+    # @option params [required, String] :id
+    #   The ID of the feed whose policy you want to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_feed_policy({
+    #     id: "FeedId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteFeedPolicy AWS API Documentation
+    #
+    # @overload delete_feed_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_feed_policy(params = {}, options = {})
+      req = build_request(:delete_feed_policy, params)
       req.send_request(options)
     end
 
@@ -998,6 +1029,7 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.aspect_ratio.height #=> Integer
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
+    #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
@@ -1018,6 +1050,34 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def get_feed(params = {}, options = {})
       req = build_request(:get_feed, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the resource-based policy attached to the specified feed.
+    #
+    # @option params [required, String] :id
+    #   The ID of the feed whose policy you want to retrieve.
+    #
+    # @return [Types::GetFeedPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFeedPolicyResponse#policy #policy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_feed_policy({
+    #     id: "FeedId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetFeedPolicy AWS API Documentation
+    #
+    # @overload get_feed_policy(params = {})
+    # @param [Hash] params ({})
+    def get_feed_policy(params = {}, options = {})
+      req = build_request(:get_feed_policy, params)
       req.send_request(options)
     end
 
@@ -1189,6 +1249,33 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Attaches or replaces a resource-based policy on the specified feed. A
+    # resource-based policy grants cross-account access to the feed.
+    #
+    # @option params [required, String] :id
+    #   The ID of the feed to attach the policy to.
+    #
+    # @option params [required, String] :policy
+    #   The resource-based policy document to attach to the feed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_feed_policy({
+    #     id: "FeedId", # required
+    #     policy: "PolicyDocument", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/PutFeedPolicy AWS API Documentation
+    #
+    # @overload put_feed_policy(params = {})
+    # @param [Hash] params ({})
+    def put_feed_policy(params = {}, options = {})
+      req = build_request(:put_feed_policy, params)
       req.send_request(options)
     end
 
@@ -1480,6 +1567,9 @@ module Aws::ElementalInference
     #             dictionary: "DictionaryId",
     #             profanity_filter: "DISABLED", # accepts DISABLED, CENSOR, DROP
     #           },
+    #           contextual_metadata: {
+    #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
     #         description: "ResourceDescription",
@@ -1508,6 +1598,7 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.aspect_ratio.height #=> Integer
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
+    #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
@@ -1544,7 +1635,7 @@ module Aws::ElementalInference
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elementalinference'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

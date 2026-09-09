@@ -55,7 +55,7 @@ module Aws::Uxc
   autoload :EndpointProvider, 'aws-sdk-uxc/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-uxc/endpoints'
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end
 

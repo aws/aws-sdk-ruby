@@ -161,9 +161,10 @@ module Aws::MediaPackageV2
     #   @return [String]
     #
     # @!attribute [rw] input_type
-    #   The input type will be an immutable field which will be used to
-    #   define whether the channel will allow CMAF ingest or HLS ingest. If
-    #   unprovided, it will default to HLS to preserve current behavior.
+    #   The input type is an immutable field. It defines whether the channel
+    #   allows CMAF ingest, HLS ingest, or server-side multiview output.
+    #   Multiview channels receive no ingest of their own. If unprovided,
+    #   the value defaults to HLS.
     #
     #   The allowed values are:
     #
@@ -172,6 +173,11 @@ module Aws::MediaPackageV2
     #
     #   * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
     #     segments with optional DASH manifests).
+    #
+    #   * `MULTIVIEW` – Server-side multiview. The channel receives no
+    #     ingest of its own. Instead, it composites video from the source
+    #     channels in its `MultiviewConfiguration` into a single tiled
+    #     output stream.
     #   @return [String]
     #
     # @!attribute [rw] output_locking_mode
@@ -188,6 +194,16 @@ module Aws::MediaPackageV2
     #     sequence numbers starting from 0.
     #   @return [String]
     #
+    # @!attribute [rw] multiview_configuration
+    #   The multiview configuration for the channel. This is present only
+    #   when `InputType` is `MULTIVIEW`.
+    #   @return [Types::MultiviewConfiguration]
+    #
+    # @!attribute [rw] attached_multiview_channels
+    #   The multiview channels, in the same channel group, that list this
+    #   channel as an available source. This is a read-only field.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ChannelListConfiguration AWS API Documentation
     #
     class ChannelListConfiguration < Struct.new(
@@ -198,7 +214,9 @@ module Aws::MediaPackageV2
       :modified_at,
       :description,
       :input_type,
-      :output_locking_mode)
+      :output_locking_mode,
+      :multiview_configuration,
+      :attached_multiview_channels)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -337,9 +355,10 @@ module Aws::MediaPackageV2
     #   @return [String]
     #
     # @!attribute [rw] input_type
-    #   The input type will be an immutable field which will be used to
-    #   define whether the channel will allow CMAF ingest or HLS ingest. If
-    #   unprovided, it will default to HLS to preserve current behavior.
+    #   The input type is an immutable field. It defines whether the channel
+    #   allows CMAF ingest, HLS ingest, or server-side multiview output.
+    #   Multiview channels receive no ingest of their own. If unprovided,
+    #   the value defaults to HLS.
     #
     #   The allowed values are:
     #
@@ -348,6 +367,11 @@ module Aws::MediaPackageV2
     #
     #   * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
     #     segments with optional DASH manifests).
+    #
+    #   * `MULTIVIEW` – Server-side multiview. The channel receives no
+    #     ingest of its own. Instead, it composites video from the source
+    #     channels in its `MultiviewConfiguration` into a single tiled
+    #     output stream.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -365,6 +389,12 @@ module Aws::MediaPackageV2
     #   Elemental MediaPackage includes in responses to the CDN. This
     #   setting is valid only when `InputType` is `CMAF`.
     #   @return [Types::OutputHeaderConfiguration]
+    #
+    # @!attribute [rw] multiview_configuration
+    #   The multiview configuration for the channel. This setting is
+    #   required when `InputType` is `MULTIVIEW`, and can't be set for any
+    #   other input type.
+    #   @return [Types::MultiviewConfiguration]
     #
     # @!attribute [rw] output_locking_mode
     #   The output locking mode for the channel. This setting is only valid
@@ -404,12 +434,26 @@ module Aws::MediaPackageV2
       :description,
       :input_switch_configuration,
       :output_header_configuration,
+      :multiview_configuration,
       :output_locking_mode,
       :tags)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] multiview_configuration
+    #   The multiview configuration for the channel. This is present only
+    #   when `InputType` is `MULTIVIEW`.
+    #   @return [Types::MultiviewConfiguration]
+    #
+    # @!attribute [rw] attached_multiview_channels
+    #   The multiview channels, in the same channel group, that list this
+    #   channel as an available source. This is a read-only field. You
+    #   can't delete a channel while any multiview channel still lists it
+    #   as a source. Use this field to find the multiview channels that you
+    #   need to update first.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) associated with the resource.
     #   @return [String]
@@ -443,9 +487,10 @@ module Aws::MediaPackageV2
     #   @return [Array<Types::IngestEndpoint>]
     #
     # @!attribute [rw] input_type
-    #   The input type will be an immutable field which will be used to
-    #   define whether the channel will allow CMAF ingest or HLS ingest. If
-    #   unprovided, it will default to HLS to preserve current behavior.
+    #   The input type is an immutable field. It defines whether the channel
+    #   allows CMAF ingest, HLS ingest, or server-side multiview output.
+    #   Multiview channels receive no ingest of their own. If unprovided,
+    #   the value defaults to HLS.
     #
     #   The allowed values are:
     #
@@ -454,6 +499,11 @@ module Aws::MediaPackageV2
     #
     #   * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
     #     segments with optional DASH manifests).
+    #
+    #   * `MULTIVIEW` – Server-side multiview. The channel receives no
+    #     ingest of its own. Instead, it composites video from the source
+    #     channels in its `MultiviewConfiguration` into a single tiled
+    #     output stream.
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -496,6 +546,8 @@ module Aws::MediaPackageV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CreateChannelResponse AWS API Documentation
     #
     class CreateChannelResponse < Struct.new(
+      :multiview_configuration,
+      :attached_multiview_channels,
       :arn,
       :channel_name,
       :channel_group_name,
@@ -2089,6 +2141,19 @@ module Aws::MediaPackageV2
       include Aws::Structure
     end
 
+    # @!attribute [rw] multiview_configuration
+    #   The multiview configuration for the channel. This is present only
+    #   when `InputType` is `MULTIVIEW`.
+    #   @return [Types::MultiviewConfiguration]
+    #
+    # @!attribute [rw] attached_multiview_channels
+    #   The multiview channels, in the same channel group, that list this
+    #   channel as an available source. This is a read-only field. You
+    #   can't delete a channel while any multiview channel still lists it
+    #   as a source. Use this field to find the multiview channels that you
+    #   need to update first.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) associated with the resource.
     #   @return [String]
@@ -2126,9 +2191,10 @@ module Aws::MediaPackageV2
     #   @return [Array<Types::IngestEndpoint>]
     #
     # @!attribute [rw] input_type
-    #   The input type will be an immutable field which will be used to
-    #   define whether the channel will allow CMAF ingest or HLS ingest. If
-    #   unprovided, it will default to HLS to preserve current behavior.
+    #   The input type is an immutable field. It defines whether the channel
+    #   allows CMAF ingest, HLS ingest, or server-side multiview output.
+    #   Multiview channels receive no ingest of their own. If unprovided,
+    #   the value defaults to HLS.
     #
     #   The allowed values are:
     #
@@ -2137,6 +2203,11 @@ module Aws::MediaPackageV2
     #
     #   * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
     #     segments with optional DASH manifests).
+    #
+    #   * `MULTIVIEW` – Server-side multiview. The channel receives no
+    #     ingest of its own. Instead, it composites video from the source
+    #     channels in its `MultiviewConfiguration` into a single tiled
+    #     output stream.
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -2179,6 +2250,8 @@ module Aws::MediaPackageV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetChannelResponse AWS API Documentation
     #
     class GetChannelResponse < Struct.new(
+      :multiview_configuration,
+      :attached_multiview_channels,
       :arn,
       :channel_name,
       :channel_group_name,
@@ -3486,6 +3559,34 @@ module Aws::MediaPackageV2
       include Aws::Structure
     end
 
+    # The multiview configuration for a channel. A multiview channel
+    # composites video from several source channels into a single tiled
+    # output stream. Players receive one standard HLS or DASH stream instead
+    # of several separate streams. This setting is required when `InputType`
+    # is `MULTIVIEW`, and can't be set for any other input type.
+    #
+    # @!attribute [rw] available_sources
+    #   The channels that players can use as tiles in this multiview
+    #   channel's output. Each source channel must be in the same channel
+    #   group as the multiview channel, and must have an `InputType` of
+    #   `CMAF`. Only the channels that you list here are available as tiles.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] available_layouts
+    #   The tile layouts that players can request from this multiview
+    #   channel's origin endpoints. Only the layouts that you list here are
+    #   available. Each layout must appear at most once.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/MultiviewConfiguration AWS API Documentation
+    #
+    class MultiviewConfiguration < Struct.new(
+      :available_sources,
+      :available_layouts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration of the origin endpoint.
     #
     # @!attribute [rw] arn
@@ -4300,6 +4401,14 @@ module Aws::MediaPackageV2
     #   setting is valid only when `InputType` is `CMAF`.
     #   @return [Types::OutputHeaderConfiguration]
     #
+    # @!attribute [rw] multiview_configuration
+    #   The multiview configuration for the channel. This setting is
+    #   required when the channel's `InputType` is `MULTIVIEW`, and can't
+    #   be set for any other input type. Because `InputType` is immutable,
+    #   you can change a multiview channel's sources and layouts. You
+    #   can't add or remove the multiview configuration itself.
+    #   @return [Types::MultiviewConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/UpdateChannelRequest AWS API Documentation
     #
     class UpdateChannelRequest < Struct.new(
@@ -4308,11 +4417,25 @@ module Aws::MediaPackageV2
       :etag,
       :description,
       :input_switch_configuration,
-      :output_header_configuration)
+      :output_header_configuration,
+      :multiview_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
 
+    # @!attribute [rw] multiview_configuration
+    #   The multiview configuration for the channel. This is present only
+    #   when `InputType` is `MULTIVIEW`.
+    #   @return [Types::MultiviewConfiguration]
+    #
+    # @!attribute [rw] attached_multiview_channels
+    #   The multiview channels, in the same channel group, that list this
+    #   channel as an available source. This is a read-only field. You
+    #   can't delete a channel while any multiview channel still lists it
+    #   as a source. Use this field to find the multiview channels that you
+    #   need to update first.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) associated with the resource.
     #   @return [String]
@@ -4346,9 +4469,10 @@ module Aws::MediaPackageV2
     #   @return [Array<Types::IngestEndpoint>]
     #
     # @!attribute [rw] input_type
-    #   The input type will be an immutable field which will be used to
-    #   define whether the channel will allow CMAF ingest or HLS ingest. If
-    #   unprovided, it will default to HLS to preserve current behavior.
+    #   The input type is an immutable field. It defines whether the channel
+    #   allows CMAF ingest, HLS ingest, or server-side multiview output.
+    #   Multiview channels receive no ingest of their own. If unprovided,
+    #   the value defaults to HLS.
     #
     #   The allowed values are:
     #
@@ -4357,6 +4481,11 @@ module Aws::MediaPackageV2
     #
     #   * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
     #     segments with optional DASH manifests).
+    #
+    #   * `MULTIVIEW` – Server-side multiview. The channel receives no
+    #     ingest of its own. Instead, it composites video from the source
+    #     channels in its `MultiviewConfiguration` into a single tiled
+    #     output stream.
     #   @return [String]
     #
     # @!attribute [rw] etag
@@ -4400,6 +4529,8 @@ module Aws::MediaPackageV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/UpdateChannelResponse AWS API Documentation
     #
     class UpdateChannelResponse < Struct.new(
+      :multiview_configuration,
+      :attached_multiview_channels,
       :arn,
       :channel_name,
       :channel_group_name,

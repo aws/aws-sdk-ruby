@@ -9434,6 +9434,25 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] encrypted
+    #   Indicates whether to encrypt the volume copy. If the source volume
+    #   is encrypted, the service always encrypts the copy regardless of
+    #   this value. Set to `true` to encrypt a copy of an unencrypted source
+    #   volume during the copy operation. If you set `Encrypted` to `true`
+    #   but do not specify `KmsKeyId`, the service uses the default KMS key
+    #   for EBS encryption in your account.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier of the KMS key to use for encryption of the volume
+    #   copy. Specify a symmetric encryption KMS key. You can specify a KMS
+    #   key using the key ID, key ARN, alias name, or alias ARN. If you set
+    #   `Encrypted` to `true` but do not specify this parameter, the service
+    #   uses the default KMS key for EBS encryption in your account. For
+    #   cross-account volume copies, this must be a KMS key in the calling
+    #   account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CopyVolumesRequest AWS API Documentation
     #
     class CopyVolumesRequest < Struct.new(
@@ -9445,7 +9464,9 @@ module Aws::EC2
       :tag_specifications,
       :multi_attach_enabled,
       :throughput,
-      :client_token)
+      :client_token,
+      :encrypted,
+      :kms_key_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -90382,6 +90403,14 @@ module Aws::EC2
     #   `null`.
     #   @return [Integer]
     #
+    # @!attribute [rw] volume_arn
+    #   The Amazon Resource Name (ARN) of the volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_id
+    #   The ID of the Amazon Web Services account that owns the volume.
+    #   @return [String]
+    #
     # @!attribute [rw] volume_id
     #   The ID of the volume.
     #   @return [String]
@@ -90438,6 +90467,8 @@ module Aws::EC2
       :sse_type,
       :operator,
       :volume_initialization_rate,
+      :volume_arn,
+      :owner_id,
       :volume_id,
       :size,
       :snapshot_id,
