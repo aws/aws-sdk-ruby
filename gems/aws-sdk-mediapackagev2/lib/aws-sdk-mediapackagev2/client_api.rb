@@ -17,6 +17,7 @@ module Aws::MediaPackageV2
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AdMarkerDash = Shapes::StringShape.new(name: 'AdMarkerDash')
     AdMarkerHls = Shapes::StringShape.new(name: 'AdMarkerHls')
+    AttachedMultiviewChannelList = Shapes::ListShape.new(name: 'AttachedMultiviewChannelList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelHarvestJobRequest = Shapes::StructureShape.new(name: 'CancelHarvestJobRequest')
     CancelHarvestJobResponse = Shapes::StructureShape.new(name: 'CancelHarvestJobResponse')
@@ -186,6 +187,10 @@ module Aws::MediaPackageV2
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ManifestName = Shapes::StringShape.new(name: 'ManifestName')
     MssManifestLayout = Shapes::StringShape.new(name: 'MssManifestLayout')
+    MultiviewConfiguration = Shapes::StructureShape.new(name: 'MultiviewConfiguration')
+    MultiviewLayoutList = Shapes::ListShape.new(name: 'MultiviewLayoutList')
+    MultiviewLayoutType = Shapes::StringShape.new(name: 'MultiviewLayoutType')
+    MultiviewSourceList = Shapes::ListShape.new(name: 'MultiviewSourceList')
     OriginEndpointListConfiguration = Shapes::StructureShape.new(name: 'OriginEndpointListConfiguration')
     OriginEndpointsList = Shapes::ListShape.new(name: 'OriginEndpointsList')
     OutputHeaderConfiguration = Shapes::StructureShape.new(name: 'OutputHeaderConfiguration')
@@ -255,6 +260,8 @@ module Aws::MediaPackageV2
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AttachedMultiviewChannelList.member = Shapes::ShapeRef.new(shape: ResourceName)
+
     CancelHarvestJobRequest.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelGroupName"))
     CancelHarvestJobRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelName"))
     CancelHarvestJobRequest.add_member(:origin_endpoint_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "OriginEndpointName"))
@@ -289,6 +296,8 @@ module Aws::MediaPackageV2
     ChannelListConfiguration.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     ChannelListConfiguration.add_member(:input_type, Shapes::ShapeRef.new(shape: InputType, location_name: "InputType"))
     ChannelListConfiguration.add_member(:output_locking_mode, Shapes::ShapeRef.new(shape: OutputLockingMode, location_name: "OutputLockingMode"))
+    ChannelListConfiguration.add_member(:multiview_configuration, Shapes::ShapeRef.new(shape: MultiviewConfiguration, location_name: "MultiviewConfiguration"))
+    ChannelListConfiguration.add_member(:attached_multiview_channels, Shapes::ShapeRef.new(shape: AttachedMultiviewChannelList, location_name: "AttachedMultiviewChannels"))
     ChannelListConfiguration.struct_class = Types::ChannelListConfiguration
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
@@ -318,10 +327,13 @@ module Aws::MediaPackageV2
     CreateChannelRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     CreateChannelRequest.add_member(:input_switch_configuration, Shapes::ShapeRef.new(shape: InputSwitchConfiguration, location_name: "InputSwitchConfiguration"))
     CreateChannelRequest.add_member(:output_header_configuration, Shapes::ShapeRef.new(shape: OutputHeaderConfiguration, location_name: "OutputHeaderConfiguration"))
+    CreateChannelRequest.add_member(:multiview_configuration, Shapes::ShapeRef.new(shape: MultiviewConfiguration, location_name: "MultiviewConfiguration"))
     CreateChannelRequest.add_member(:output_locking_mode, Shapes::ShapeRef.new(shape: OutputLockingMode, location_name: "OutputLockingMode"))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
+    CreateChannelResponse.add_member(:multiview_configuration, Shapes::ShapeRef.new(shape: MultiviewConfiguration, location_name: "MultiviewConfiguration"))
+    CreateChannelResponse.add_member(:attached_multiview_channels, Shapes::ShapeRef.new(shape: AttachedMultiviewChannelList, location_name: "AttachedMultiviewChannels"))
     CreateChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
     CreateChannelResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelName"))
     CreateChannelResponse.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelGroupName"))
@@ -604,6 +616,8 @@ module Aws::MediaPackageV2
     GetChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "ChannelName"))
     GetChannelRequest.struct_class = Types::GetChannelRequest
 
+    GetChannelResponse.add_member(:multiview_configuration, Shapes::ShapeRef.new(shape: MultiviewConfiguration, location_name: "MultiviewConfiguration"))
+    GetChannelResponse.add_member(:attached_multiview_channels, Shapes::ShapeRef.new(shape: AttachedMultiviewChannelList, location_name: "AttachedMultiviewChannels"))
     GetChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
     GetChannelResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelName"))
     GetChannelResponse.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelGroupName"))
@@ -870,6 +884,14 @@ module Aws::MediaPackageV2
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    MultiviewConfiguration.add_member(:available_sources, Shapes::ShapeRef.new(shape: MultiviewSourceList, required: true, location_name: "AvailableSources"))
+    MultiviewConfiguration.add_member(:available_layouts, Shapes::ShapeRef.new(shape: MultiviewLayoutList, required: true, location_name: "AvailableLayouts"))
+    MultiviewConfiguration.struct_class = Types::MultiviewConfiguration
+
+    MultiviewLayoutList.member = Shapes::ShapeRef.new(shape: MultiviewLayoutType)
+
+    MultiviewSourceList.member = Shapes::ShapeRef.new(shape: ResourceName)
+
     OriginEndpointListConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
     OriginEndpointListConfiguration.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelGroupName"))
     OriginEndpointListConfiguration.add_member(:channel_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "ChannelName"))
@@ -1017,8 +1039,11 @@ module Aws::MediaPackageV2
     UpdateChannelRequest.add_member(:description, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Description"))
     UpdateChannelRequest.add_member(:input_switch_configuration, Shapes::ShapeRef.new(shape: InputSwitchConfiguration, location_name: "InputSwitchConfiguration"))
     UpdateChannelRequest.add_member(:output_header_configuration, Shapes::ShapeRef.new(shape: OutputHeaderConfiguration, location_name: "OutputHeaderConfiguration"))
+    UpdateChannelRequest.add_member(:multiview_configuration, Shapes::ShapeRef.new(shape: MultiviewConfiguration, location_name: "MultiviewConfiguration"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
 
+    UpdateChannelResponse.add_member(:multiview_configuration, Shapes::ShapeRef.new(shape: MultiviewConfiguration, location_name: "MultiviewConfiguration"))
+    UpdateChannelResponse.add_member(:attached_multiview_channels, Shapes::ShapeRef.new(shape: AttachedMultiviewChannelList, location_name: "AttachedMultiviewChannels"))
     UpdateChannelResponse.add_member(:arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Arn"))
     UpdateChannelResponse.add_member(:channel_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelName"))
     UpdateChannelResponse.add_member(:channel_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ChannelGroupName"))

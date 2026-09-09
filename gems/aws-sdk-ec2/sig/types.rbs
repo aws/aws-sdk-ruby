@@ -2109,6 +2109,8 @@ module Aws::EC2
       attr_accessor multi_attach_enabled: bool
       attr_accessor throughput: ::Integer
       attr_accessor client_token: ::String
+      attr_accessor encrypted: bool
+      attr_accessor kms_key_id: ::String
       SENSITIVE: []
     end
 
@@ -19561,6 +19563,8 @@ module Aws::EC2
       attr_accessor sse_type: ("sse-ebs" | "sse-kms" | "none")
       attr_accessor operator: Types::OperatorResponse
       attr_accessor volume_initialization_rate: ::Integer
+      attr_accessor volume_arn: ::String
+      attr_accessor owner_id: ::String
       attr_accessor volume_id: ::String
       attr_accessor size: ::Integer
       attr_accessor snapshot_id: ::String

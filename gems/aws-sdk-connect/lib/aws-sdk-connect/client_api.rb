@@ -794,6 +794,11 @@ module Aws::Connect
     EvaluationContactLensAnswerAnalysisDetails = Shapes::StructureShape.new(name: 'EvaluationContactLensAnswerAnalysisDetails')
     EvaluationContactParticipant = Shapes::StructureShape.new(name: 'EvaluationContactParticipant')
     EvaluationForm = Shapes::StructureShape.new(name: 'EvaluationForm')
+    EvaluationFormAIVersion = Shapes::StringShape.new(name: 'EvaluationFormAIVersion')
+    EvaluationFormAIVersionLifecycle = Shapes::StructureShape.new(name: 'EvaluationFormAIVersionLifecycle')
+    EvaluationFormAIVersionStatus = Shapes::StringShape.new(name: 'EvaluationFormAIVersionStatus')
+    EvaluationFormAIVersionSummary = Shapes::StructureShape.new(name: 'EvaluationFormAIVersionSummary')
+    EvaluationFormAIVersionSummaryList = Shapes::ListShape.new(name: 'EvaluationFormAIVersionSummaryList')
     EvaluationFormAutoEvaluationConfiguration = Shapes::StructureShape.new(name: 'EvaluationFormAutoEvaluationConfiguration')
     EvaluationFormContent = Shapes::StructureShape.new(name: 'EvaluationFormContent')
     EvaluationFormDescription = Shapes::StringShape.new(name: 'EvaluationFormDescription')
@@ -816,6 +821,9 @@ module Aws::Connect
     EvaluationFormItemsList = Shapes::ListShape.new(name: 'EvaluationFormItemsList')
     EvaluationFormLanguageCode = Shapes::StringShape.new(name: 'EvaluationFormLanguageCode')
     EvaluationFormLanguageConfiguration = Shapes::StructureShape.new(name: 'EvaluationFormLanguageConfiguration')
+    EvaluationFormMetricConfiguration = Shapes::StructureShape.new(name: 'EvaluationFormMetricConfiguration')
+    EvaluationFormMetricName = Shapes::StringShape.new(name: 'EvaluationFormMetricName')
+    EvaluationFormMetricType = Shapes::StringShape.new(name: 'EvaluationFormMetricType')
     EvaluationFormMultiSelectQuestionAutomation = Shapes::StructureShape.new(name: 'EvaluationFormMultiSelectQuestionAutomation')
     EvaluationFormMultiSelectQuestionAutomationOption = Shapes::UnionShape.new(name: 'EvaluationFormMultiSelectQuestionAutomationOption')
     EvaluationFormMultiSelectQuestionAutomationOptionList = Shapes::ListShape.new(name: 'EvaluationFormMultiSelectQuestionAutomationOptionList')
@@ -1197,6 +1205,8 @@ module Aws::Connect
     ListDefaultVocabulariesResponse = Shapes::StructureShape.new(name: 'ListDefaultVocabulariesResponse')
     ListEntitySecurityProfilesRequest = Shapes::StructureShape.new(name: 'ListEntitySecurityProfilesRequest')
     ListEntitySecurityProfilesResponse = Shapes::StructureShape.new(name: 'ListEntitySecurityProfilesResponse')
+    ListEvaluationFormAIVersionsRequest = Shapes::StructureShape.new(name: 'ListEvaluationFormAIVersionsRequest')
+    ListEvaluationFormAIVersionsResponse = Shapes::StructureShape.new(name: 'ListEvaluationFormAIVersionsResponse')
     ListEvaluationFormVersionsRequest = Shapes::StructureShape.new(name: 'ListEvaluationFormVersionsRequest')
     ListEvaluationFormVersionsResponse = Shapes::StructureShape.new(name: 'ListEvaluationFormVersionsResponse')
     ListEvaluationFormsRequest = Shapes::StructureShape.new(name: 'ListEvaluationFormsRequest')
@@ -3653,6 +3663,7 @@ module Aws::Connect
     CreateEvaluationFormRequest.add_member(:review_configuration, Shapes::ShapeRef.new(shape: EvaluationReviewConfiguration, location_name: "ReviewConfiguration"))
     CreateEvaluationFormRequest.add_member(:target_configuration, Shapes::ShapeRef.new(shape: EvaluationFormTargetConfiguration, location_name: "TargetConfiguration"))
     CreateEvaluationFormRequest.add_member(:language_configuration, Shapes::ShapeRef.new(shape: EvaluationFormLanguageConfiguration, location_name: "LanguageConfiguration"))
+    CreateEvaluationFormRequest.add_member(:ai_version, Shapes::ShapeRef.new(shape: EvaluationFormAIVersion, location_name: "AIVersion"))
     CreateEvaluationFormRequest.struct_class = Types::CreateEvaluationFormRequest
 
     CreateEvaluationFormResponse.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "EvaluationFormId"))
@@ -5069,7 +5080,19 @@ module Aws::Connect
     EvaluationForm.add_member(:language_configuration, Shapes::ShapeRef.new(shape: EvaluationFormLanguageConfiguration, location_name: "LanguageConfiguration"))
     EvaluationForm.add_member(:latest_validation_status, Shapes::ShapeRef.new(shape: EvaluationFormValidationStatus, location_name: "LatestValidationStatus"))
     EvaluationForm.add_member(:last_validation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastValidationTime"))
+    EvaluationForm.add_member(:ai_version, Shapes::ShapeRef.new(shape: EvaluationFormAIVersion, location_name: "AIVersion"))
     EvaluationForm.struct_class = Types::EvaluationForm
+
+    EvaluationFormAIVersionLifecycle.add_member(:status, Shapes::ShapeRef.new(shape: EvaluationFormAIVersionStatus, required: true, location_name: "Status"))
+    EvaluationFormAIVersionLifecycle.add_member(:start_of_life_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartOfLifeTime"))
+    EvaluationFormAIVersionLifecycle.add_member(:end_of_life_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndOfLifeTime"))
+    EvaluationFormAIVersionLifecycle.struct_class = Types::EvaluationFormAIVersionLifecycle
+
+    EvaluationFormAIVersionSummary.add_member(:ai_version_name, Shapes::ShapeRef.new(shape: EvaluationFormAIVersion, required: true, location_name: "AIVersionName"))
+    EvaluationFormAIVersionSummary.add_member(:ai_version_lifecycle, Shapes::ShapeRef.new(shape: EvaluationFormAIVersionLifecycle, required: true, location_name: "AIVersionLifecycle"))
+    EvaluationFormAIVersionSummary.struct_class = Types::EvaluationFormAIVersionSummary
+
+    EvaluationFormAIVersionSummaryList.member = Shapes::ShapeRef.new(shape: EvaluationFormAIVersionSummary)
 
     EvaluationFormAutoEvaluationConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     EvaluationFormAutoEvaluationConfiguration.struct_class = Types::EvaluationFormAutoEvaluationConfiguration
@@ -5085,6 +5108,7 @@ module Aws::Connect
     EvaluationFormContent.add_member(:target_configuration, Shapes::ShapeRef.new(shape: EvaluationFormTargetConfiguration, location_name: "TargetConfiguration"))
     EvaluationFormContent.add_member(:language_configuration, Shapes::ShapeRef.new(shape: EvaluationFormLanguageConfiguration, location_name: "LanguageConfiguration"))
     EvaluationFormContent.add_member(:review_configuration, Shapes::ShapeRef.new(shape: EvaluationReviewConfiguration, location_name: "ReviewConfiguration"))
+    EvaluationFormContent.add_member(:ai_version, Shapes::ShapeRef.new(shape: EvaluationFormAIVersion, location_name: "AIVersion"))
     EvaluationFormContent.struct_class = Types::EvaluationFormContent
 
     EvaluationFormItem.add_member(:section, Shapes::ShapeRef.new(shape: EvaluationFormSection, location_name: "Section"))
@@ -5133,6 +5157,10 @@ module Aws::Connect
 
     EvaluationFormLanguageConfiguration.add_member(:form_language, Shapes::ShapeRef.new(shape: EvaluationFormLanguageCode, location_name: "FormLanguage"))
     EvaluationFormLanguageConfiguration.struct_class = Types::EvaluationFormLanguageConfiguration
+
+    EvaluationFormMetricConfiguration.add_member(:metric_type, Shapes::ShapeRef.new(shape: EvaluationFormMetricType, required: true, location_name: "MetricType"))
+    EvaluationFormMetricConfiguration.add_member(:metric_name, Shapes::ShapeRef.new(shape: EvaluationFormMetricName, required: true, location_name: "MetricName"))
+    EvaluationFormMetricConfiguration.struct_class = Types::EvaluationFormMetricConfiguration
 
     EvaluationFormMultiSelectQuestionAutomation.add_member(:options, Shapes::ShapeRef.new(shape: EvaluationFormMultiSelectQuestionAutomationOptionList, location_name: "Options"))
     EvaluationFormMultiSelectQuestionAutomation.add_member(:default_option_ref_ids, Shapes::ShapeRef.new(shape: ReferenceIdList, location_name: "DefaultOptionRefIds"))
@@ -5195,6 +5223,7 @@ module Aws::Connect
     EvaluationFormQuestion.add_member(:enablement, Shapes::ShapeRef.new(shape: EvaluationFormItemEnablementConfiguration, location_name: "Enablement"))
     EvaluationFormQuestion.add_member(:weight, Shapes::ShapeRef.new(shape: EvaluationFormItemWeight, location_name: "Weight"))
     EvaluationFormQuestion.add_member(:scoring_configuration, Shapes::ShapeRef.new(shape: EvaluationFormQuestionScoringConfiguration, location_name: "ScoringConfiguration"))
+    EvaluationFormQuestion.add_member(:metric_configuration, Shapes::ShapeRef.new(shape: EvaluationFormMetricConfiguration, location_name: "MetricConfiguration"))
     EvaluationFormQuestion.struct_class = Types::EvaluationFormQuestion
 
     EvaluationFormQuestionAutomationAnswerSource.add_member(:source_type, Shapes::ShapeRef.new(shape: EvaluationFormQuestionAutomationAnswerSourceType, required: true, location_name: "SourceType"))
@@ -5259,6 +5288,7 @@ module Aws::Connect
     EvaluationFormSearchSummary.add_member(:evaluation_form_language, Shapes::ShapeRef.new(shape: EvaluationFormLanguageCode, location_name: "EvaluationFormLanguage"))
     EvaluationFormSearchSummary.add_member(:contact_interaction_type, Shapes::ShapeRef.new(shape: ContactInteractionType, location_name: "ContactInteractionType"))
     EvaluationFormSearchSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    EvaluationFormSearchSummary.add_member(:ai_version, Shapes::ShapeRef.new(shape: EvaluationFormAIVersion, location_name: "AIVersion"))
     EvaluationFormSearchSummary.struct_class = Types::EvaluationFormSearchSummary
 
     EvaluationFormSearchSummaryList.member = Shapes::ShapeRef.new(shape: EvaluationFormSearchSummary)
@@ -6424,6 +6454,16 @@ module Aws::Connect
     ListEntitySecurityProfilesResponse.add_member(:security_profiles, Shapes::ShapeRef.new(shape: SecurityProfiles100, location_name: "SecurityProfiles"))
     ListEntitySecurityProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken2500, location_name: "NextToken"))
     ListEntitySecurityProfilesResponse.struct_class = Types::ListEntitySecurityProfilesResponse
+
+    ListEvaluationFormAIVersionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListEvaluationFormAIVersionsRequest.add_member(:contact_interaction_type, Shapes::ShapeRef.new(shape: ContactInteractionType, required: true, location: "querystring", location_name: "contactInteractionType"))
+    ListEvaluationFormAIVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListEvaluationFormAIVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListEvaluationFormAIVersionsRequest.struct_class = Types::ListEvaluationFormAIVersionsRequest
+
+    ListEvaluationFormAIVersionsResponse.add_member(:ai_version_summaries, Shapes::ShapeRef.new(shape: EvaluationFormAIVersionSummaryList, required: true, location_name: "AIVersionSummaries"))
+    ListEvaluationFormAIVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEvaluationFormAIVersionsResponse.struct_class = Types::ListEvaluationFormAIVersionsResponse
 
     ListEvaluationFormVersionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListEvaluationFormVersionsRequest.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "EvaluationFormId"))
@@ -9470,6 +9510,7 @@ module Aws::Connect
     UpdateEvaluationFormRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     UpdateEvaluationFormRequest.add_member(:target_configuration, Shapes::ShapeRef.new(shape: EvaluationFormTargetConfiguration, location_name: "TargetConfiguration"))
     UpdateEvaluationFormRequest.add_member(:language_configuration, Shapes::ShapeRef.new(shape: EvaluationFormLanguageConfiguration, location_name: "LanguageConfiguration"))
+    UpdateEvaluationFormRequest.add_member(:ai_version, Shapes::ShapeRef.new(shape: EvaluationFormAIVersion, location_name: "AIVersion"))
     UpdateEvaluationFormRequest.struct_class = Types::UpdateEvaluationFormRequest
 
     UpdateEvaluationFormResponse.add_member(:evaluation_form_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "EvaluationFormId"))
@@ -13343,6 +13384,18 @@ module Aws::Connect
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_evaluation_form_ai_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEvaluationFormAIVersions"
+        o.http_method = "GET"
+        o.http_request_uri = "/instances/{InstanceId}/evaluation-form-ai-versions"
+        o.input = Shapes::ShapeRef.new(shape: ListEvaluationFormAIVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEvaluationFormAIVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:list_evaluation_form_versions, Seahorse::Model::Operation.new.tap do |o|

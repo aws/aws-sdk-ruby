@@ -13707,7 +13707,9 @@
         "ClientToken":{
           "shape":"String",
           "idempotencyToken":true
-        }
+        },
+        "Encrypted":{"shape":"Boolean"},
+        "KmsKeyId":{"shape":"KmsKeyId"}
       }
     },
     "CopyVolumesResult":{
@@ -61305,6 +61307,14 @@
         "VolumeInitializationRate":{
           "shape":"Integer",
           "locationName":"volumeInitializationRate"
+        },
+        "VolumeArn":{
+          "shape":"String",
+          "locationName":"volumeArn"
+        },
+        "OwnerId":{
+          "shape":"String",
+          "locationName":"ownerId"
         },
         "VolumeId":{
           "shape":"String",

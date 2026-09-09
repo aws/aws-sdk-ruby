@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2026-09-09)
+------------------
+
+* Feature - This release adds contextual metadata, a feed output type that generates a descriptive summary of your media content along with IAB taxonomy and GARM suitability classifications. It also adds feed resource policies for granting cross-account access to a feed.
+
 1.10.0 (2026-08-24)
 ------------------
 

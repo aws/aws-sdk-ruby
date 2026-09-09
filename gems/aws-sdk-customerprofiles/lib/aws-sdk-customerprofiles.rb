@@ -54,7 +54,7 @@ module Aws::CustomerProfiles
   autoload :EndpointProvider, 'aws-sdk-customerprofiles/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-customerprofiles/endpoints'
 
-  GEM_VERSION = '1.93.0'
+  GEM_VERSION = '1.94.0'
 
 end
 

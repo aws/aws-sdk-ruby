@@ -2137,6 +2137,7 @@ module Aws::MediaTailor
     #   * {Types::GetFunctionResponse#function_type #function_type} => String
     #   * {Types::GetFunctionResponse#description #description} => String
     #   * {Types::GetFunctionResponse#http_request_configuration #http_request_configuration} => Types::HttpRequestConfiguration
+    #   * {Types::GetFunctionResponse#aws_service_request_configuration #aws_service_request_configuration} => Types::AwsServiceRequestConfiguration
     #   * {Types::GetFunctionResponse#custom_output_configuration #custom_output_configuration} => Types::CustomOutputConfiguration
     #   * {Types::GetFunctionResponse#concurrent_executor_configuration #concurrent_executor_configuration} => Types::ConcurrentExecutorConfiguration
     #   * {Types::GetFunctionResponse#sequential_executor_configuration #sequential_executor_configuration} => Types::SequentialExecutorConfiguration
@@ -2153,7 +2154,7 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.function_id #=> String
-    #   resp.function_type #=> String, one of "HTTP_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR", "VAST_REQUEST"
+    #   resp.function_type #=> String, one of "HTTP_REQUEST", "AWS_SERVICE_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR", "VAST_REQUEST"
     #   resp.description #=> String
     #   resp.http_request_configuration.runtime #=> String, one of "JSONATA"
     #   resp.http_request_configuration.output #=> Hash
@@ -2164,6 +2165,17 @@ module Aws::MediaTailor
     #   resp.http_request_configuration.body #=> String
     #   resp.http_request_configuration.headers #=> Hash
     #   resp.http_request_configuration.headers["__string"] #=> String
+    #   resp.aws_service_request_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.aws_service_request_configuration.output #=> Hash
+    #   resp.aws_service_request_configuration.output["__string"] #=> String
+    #   resp.aws_service_request_configuration.method_type #=> String, one of "GET", "POST"
+    #   resp.aws_service_request_configuration.request_timeout_milliseconds #=> Integer
+    #   resp.aws_service_request_configuration.url #=> String
+    #   resp.aws_service_request_configuration.body #=> String
+    #   resp.aws_service_request_configuration.headers #=> Hash
+    #   resp.aws_service_request_configuration.headers["__string"] #=> String
+    #   resp.aws_service_request_configuration.target_service #=> String
+    #   resp.aws_service_request_configuration.target_region #=> String
     #   resp.custom_output_configuration.runtime #=> String, one of "JSONATA"
     #   resp.custom_output_configuration.output #=> Hash
     #   resp.custom_output_configuration.output["__string"] #=> String
@@ -2611,7 +2623,7 @@ module Aws::MediaTailor
     #
     #   resp.items #=> Array
     #   resp.items[0].function_id #=> String
-    #   resp.items[0].function_type #=> String, one of "HTTP_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR", "VAST_REQUEST"
+    #   resp.items[0].function_type #=> String, one of "HTTP_REQUEST", "AWS_SERVICE_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR", "VAST_REQUEST"
     #   resp.items[0].description #=> String
     #   resp.items[0].http_request_configuration.runtime #=> String, one of "JSONATA"
     #   resp.items[0].http_request_configuration.output #=> Hash
@@ -2622,6 +2634,17 @@ module Aws::MediaTailor
     #   resp.items[0].http_request_configuration.body #=> String
     #   resp.items[0].http_request_configuration.headers #=> Hash
     #   resp.items[0].http_request_configuration.headers["__string"] #=> String
+    #   resp.items[0].aws_service_request_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.items[0].aws_service_request_configuration.output #=> Hash
+    #   resp.items[0].aws_service_request_configuration.output["__string"] #=> String
+    #   resp.items[0].aws_service_request_configuration.method_type #=> String, one of "GET", "POST"
+    #   resp.items[0].aws_service_request_configuration.request_timeout_milliseconds #=> Integer
+    #   resp.items[0].aws_service_request_configuration.url #=> String
+    #   resp.items[0].aws_service_request_configuration.body #=> String
+    #   resp.items[0].aws_service_request_configuration.headers #=> Hash
+    #   resp.items[0].aws_service_request_configuration.headers["__string"] #=> String
+    #   resp.items[0].aws_service_request_configuration.target_service #=> String
+    #   resp.items[0].aws_service_request_configuration.target_region #=> String
     #   resp.items[0].custom_output_configuration.runtime #=> String, one of "JSONATA"
     #   resp.items[0].custom_output_configuration.output #=> Hash
     #   resp.items[0].custom_output_configuration.output["__string"] #=> String
@@ -3183,18 +3206,31 @@ module Aws::MediaTailor
     #   your account.
     #
     # @option params [required, String] :function_type
-    #   The type of the function. The function type determines what the
-    #   function can do at runtime. Valid values: `CUSTOM_OUTPUT` evaluates
-    #   expressions and produces output bindings with no external calls.
-    #   `HTTP_REQUEST` makes an HTTP call to an external service and evaluates
-    #   output expressions that can reference the response. `VAST_REQUEST`
-    #   calls a VAST endpoint, parses the response as VAST, and makes the
-    #   parsed ads available to output expressions. `SEQUENTIAL_EXECUTOR` runs
-    #   a sequence of child functions in order, passing data between steps
-    #   through temporary data. `CONCURRENT_EXECUTOR` runs a set of child
-    #   functions in parallel, up to a maximum concurrency, and combines their
-    #   output when all functions complete. For more information, see
-    #   [Function types and composition][1] in the *MediaTailor User Guide*.
+    #   The type of the function, which determines what the function can do at
+    #   runtime. Valid values:
+    #
+    #   * `CUSTOM_OUTPUT` – Evaluates expressions and produces output bindings
+    #     with no external calls.
+    #
+    #   * `HTTP_REQUEST` – Makes an HTTP call to an external service and
+    #     evaluates output expressions that can reference the response.
+    #
+    #   * `AWS_SERVICE_REQUEST` – Makes an authenticated request to a
+    #     supported AWS service API and evaluates output expressions that can
+    #     reference the response.
+    #
+    #   * `VAST_REQUEST` – Calls a VAST endpoint, parses the response as VAST,
+    #     and makes the parsed ads available to output expressions.
+    #
+    #   * `SEQUENTIAL_EXECUTOR` – Runs a sequence of child functions in order,
+    #     passing data between steps through temporary data.
+    #
+    #   * `CONCURRENT_EXECUTOR` – Runs a set of child functions in parallel,
+    #     up to a maximum concurrency, and combines their output when all
+    #     functions complete.
+    #
+    #   For more information, see [Function types and composition][1] in the
+    #   *MediaTailor User Guide*.
     #
     #
     #
@@ -3207,6 +3243,10 @@ module Aws::MediaTailor
     #   The configuration for an `HTTP_REQUEST` function. Specifies the HTTP
     #   method, URL, headers, body, timeout, and output expressions. Required
     #   when `FunctionType` is `HTTP_REQUEST`.
+    #
+    # @option params [Types::AwsServiceRequestConfiguration] :aws_service_request_configuration
+    #   The configuration for an `AWS_SERVICE_REQUEST` function. You must
+    #   specify this parameter when `FunctionType` is `AWS_SERVICE_REQUEST`.
     #
     # @option params [Types::CustomOutputConfiguration] :custom_output_configuration
     #   The configuration for a `CUSTOM_OUTPUT` function. Specifies the
@@ -3245,6 +3285,7 @@ module Aws::MediaTailor
     #   * {Types::PutFunctionResponse#function_type #function_type} => String
     #   * {Types::PutFunctionResponse#description #description} => String
     #   * {Types::PutFunctionResponse#http_request_configuration #http_request_configuration} => Types::HttpRequestConfiguration
+    #   * {Types::PutFunctionResponse#aws_service_request_configuration #aws_service_request_configuration} => Types::AwsServiceRequestConfiguration
     #   * {Types::PutFunctionResponse#custom_output_configuration #custom_output_configuration} => Types::CustomOutputConfiguration
     #   * {Types::PutFunctionResponse#concurrent_executor_configuration #concurrent_executor_configuration} => Types::ConcurrentExecutorConfiguration
     #   * {Types::PutFunctionResponse#sequential_executor_configuration #sequential_executor_configuration} => Types::SequentialExecutorConfiguration
@@ -3256,7 +3297,7 @@ module Aws::MediaTailor
     #
     #   resp = client.put_function({
     #     function_id: "__string", # required
-    #     function_type: "HTTP_REQUEST", # required, accepts HTTP_REQUEST, CUSTOM_OUTPUT, CONCURRENT_EXECUTOR, SEQUENTIAL_EXECUTOR, VAST_REQUEST
+    #     function_type: "HTTP_REQUEST", # required, accepts HTTP_REQUEST, AWS_SERVICE_REQUEST, CUSTOM_OUTPUT, CONCURRENT_EXECUTOR, SEQUENTIAL_EXECUTOR, VAST_REQUEST
     #     description: "__string",
     #     http_request_configuration: {
     #       runtime: "JSONATA", # required, accepts JSONATA
@@ -3270,6 +3311,21 @@ module Aws::MediaTailor
     #       headers: {
     #         "__string" => "__string",
     #       },
+    #     },
+    #     aws_service_request_configuration: {
+    #       runtime: "JSONATA", # required, accepts JSONATA
+    #       output: {
+    #         "__string" => "__string",
+    #       },
+    #       method_type: "GET", # required, accepts GET, POST
+    #       request_timeout_milliseconds: 1, # required
+    #       url: "__string", # required
+    #       body: "__string",
+    #       headers: {
+    #         "__string" => "__string",
+    #       },
+    #       target_service: "AwsTargetService", # required
+    #       target_region: "AwsServiceRequestConfigurationTargetRegionString", # required
     #     },
     #     custom_output_configuration: {
     #       runtime: "JSONATA", # required, accepts JSONATA
@@ -3327,7 +3383,7 @@ module Aws::MediaTailor
     # @example Response structure
     #
     #   resp.function_id #=> String
-    #   resp.function_type #=> String, one of "HTTP_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR", "VAST_REQUEST"
+    #   resp.function_type #=> String, one of "HTTP_REQUEST", "AWS_SERVICE_REQUEST", "CUSTOM_OUTPUT", "CONCURRENT_EXECUTOR", "SEQUENTIAL_EXECUTOR", "VAST_REQUEST"
     #   resp.description #=> String
     #   resp.http_request_configuration.runtime #=> String, one of "JSONATA"
     #   resp.http_request_configuration.output #=> Hash
@@ -3338,6 +3394,17 @@ module Aws::MediaTailor
     #   resp.http_request_configuration.body #=> String
     #   resp.http_request_configuration.headers #=> Hash
     #   resp.http_request_configuration.headers["__string"] #=> String
+    #   resp.aws_service_request_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.aws_service_request_configuration.output #=> Hash
+    #   resp.aws_service_request_configuration.output["__string"] #=> String
+    #   resp.aws_service_request_configuration.method_type #=> String, one of "GET", "POST"
+    #   resp.aws_service_request_configuration.request_timeout_milliseconds #=> Integer
+    #   resp.aws_service_request_configuration.url #=> String
+    #   resp.aws_service_request_configuration.body #=> String
+    #   resp.aws_service_request_configuration.headers #=> Hash
+    #   resp.aws_service_request_configuration.headers["__string"] #=> String
+    #   resp.aws_service_request_configuration.target_service #=> String
+    #   resp.aws_service_request_configuration.target_region #=> String
     #   resp.custom_output_configuration.runtime #=> String, one of "JSONATA"
     #   resp.custom_output_configuration.output #=> Hash
     #   resp.custom_output_configuration.output["__string"] #=> String
@@ -4398,7 +4465,7 @@ module Aws::MediaTailor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.127.0'
+      context[:gem_version] = '1.128.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

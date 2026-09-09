@@ -54,6 +54,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#volume_initialization_rate-instance_method
       def volume_initialization_rate: () -> ::Integer
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#volume_arn-instance_method
+      def volume_arn: () -> ::String
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#owner_id-instance_method
+      def owner_id: () -> ::String
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Volume.html#size-instance_method
       def size: () -> ::Integer
 

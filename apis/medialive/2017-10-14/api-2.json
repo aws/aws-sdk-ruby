@@ -8629,7 +8629,16 @@
     },
     "EmbeddedDestinationSettings": {
       "type": "structure",
-      "members": {}
+      "members": {
+        "Position": {
+          "shape": "EmbeddedCaptionPositionSettings",
+          "locationName": "position"
+        },
+        "StyleControl": {
+          "shape": "EmbeddedDestinationStyleControl",
+          "locationName": "styleControl"
+        }
+      }
     },
     "EmbeddedPlusScte20DestinationSettings": {
       "type": "structure",
@@ -15856,6 +15865,10 @@
         "StyleControl": {
           "shape": "TtmlDestinationStyleControl",
           "locationName": "styleControl"
+        },
+        "Position": {
+          "shape": "TextCaptionPositionSettings",
+          "locationName": "position"
         }
       }
     },
@@ -15863,7 +15876,8 @@
       "type": "string",
       "enum": [
         "PASSTHROUGH",
-        "USE_CONFIGURED"
+        "USE_CONFIGURED",
+        "MANUAL"
       ]
     },
     "UdpContainerSettings": {
@@ -16733,6 +16747,10 @@
         "OutputPositionRectangle": {
           "shape": "VideoPositionRectangle",
           "locationName": "outputPositionRectangle"
+        },
+        "Border": {
+          "shape": "__integerMin0Max100",
+          "locationName": "border"
         }
       },
       "required": [
@@ -16906,6 +16924,10 @@
         "StyleControl": {
           "shape": "WebvttDestinationStyleControl",
           "locationName": "styleControl"
+        },
+        "Position": {
+          "shape": "TextCaptionPositionSettings",
+          "locationName": "position"
         }
       }
     },
@@ -16913,7 +16935,8 @@
       "type": "string",
       "enum": [
         "NO_STYLE_DATA",
-        "PASSTHROUGH"
+        "PASSTHROUGH",
+        "MANUAL"
       ]
     },
     "__boolean": {
@@ -24938,6 +24961,10 @@
         "HlsDefault": {
           "shape": "HlsDefault",
           "locationName": "hlsDefault"
+        },
+        "OutputUsage": {
+          "shape": "__listOfOutputUsage",
+          "locationName": "outputUsage"
         }
       }
     },
@@ -25647,6 +25674,10 @@
         "AudioFeedInputs": {
           "shape": "__listOfAudioFeedInput",
           "locationName": "audioFeedInputs"
+        },
+        "EnrichmentMethods": {
+          "shape": "__listOfEnrichmentMethod",
+          "locationName": "enrichmentMethods"
         }
       }
     },
@@ -25660,6 +25691,10 @@
         "AudioFeedInputs": {
           "shape": "__listOfAudioFeedInput",
           "locationName": "audioFeedInputs"
+        },
+        "EnrichmentMethods": {
+          "shape": "__listOfEnrichmentMethod",
+          "locationName": "enrichmentMethods"
         }
       }
     },
@@ -26068,6 +26103,60 @@
     },
     "__integerMin1Max511": {
       "type": "integer"
+    },
+    "EmbeddedCaptionPositionSettings": {
+      "type": "structure",
+      "members": {
+        "YPositionLine": {
+          "shape": "__integerMin1Max15",
+          "locationName": "yPositionLine"
+        }
+      }
+    },
+    "EmbeddedDestinationStyleControl": {
+      "type": "string",
+      "enum": [
+        "MANUAL",
+        "PASSTHROUGH"
+      ]
+    },
+    "TextCaptionPositionSettings": {
+      "type": "structure",
+      "members": {
+        "YPositionPercentage": {
+          "shape": "__integerMin0Max100",
+          "locationName": "yPositionPercentage"
+        }
+      }
+    },
+    "__integerMin1Max15": {
+      "type": "integer"
+    },
+    "EnrichmentMethod": {
+      "type": "string",
+      "enum": [
+        "SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"
+      ]
+    },
+    "__listOfEnrichmentMethod": {
+      "type": "list",
+      "member": {
+        "shape": "EnrichmentMethod"
+      }
+    },
+    "OutputUsage": {
+      "type": "string",
+      "enum": [
+        "MULTIVIEW_EQUAL_SIZE_VIEW",
+        "MULTIVIEW_PRIMARY_VIEW",
+        "MULTIVIEW_SECONDARY_VIEW"
+      ]
+    },
+    "__listOfOutputUsage": {
+      "type": "list",
+      "member": {
+        "shape": "OutputUsage"
+      }
     }
   }
 }

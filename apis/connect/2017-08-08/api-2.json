@@ -3531,6 +3531,21 @@
         {"shape":"InternalServiceException"}
       ]
     },
+    "ListEvaluationFormAIVersions":{
+      "name":"ListEvaluationFormAIVersions",
+      "http":{
+        "method":"GET",
+        "requestUri":"/instances/{InstanceId}/evaluation-form-ai-versions"
+      },
+      "input":{"shape":"ListEvaluationFormAIVersionsRequest"},
+      "output":{"shape":"ListEvaluationFormAIVersionsResponse"},
+      "errors":[
+        {"shape":"InvalidParameterException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServiceException"}
+      ]
+    },
     "ListEvaluationFormVersions":{
       "name":"ListEvaluationFormVersions",
       "http":{
@@ -9998,7 +10013,8 @@
         "Tags":{"shape":"TagMap"},
         "ReviewConfiguration":{"shape":"EvaluationReviewConfiguration"},
         "TargetConfiguration":{"shape":"EvaluationFormTargetConfiguration"},
-        "LanguageConfiguration":{"shape":"EvaluationFormLanguageConfiguration"}
+        "LanguageConfiguration":{"shape":"EvaluationFormLanguageConfiguration"},
+        "AIVersion":{"shape":"EvaluationFormAIVersion"}
       }
     },
     "CreateEvaluationFormResponse":{
@@ -14410,8 +14426,50 @@
         "TargetConfiguration":{"shape":"EvaluationFormTargetConfiguration"},
         "LanguageConfiguration":{"shape":"EvaluationFormLanguageConfiguration"},
         "LatestValidationStatus":{"shape":"EvaluationFormValidationStatus"},
-        "LastValidationTime":{"shape":"Timestamp"}
+        "LastValidationTime":{"shape":"Timestamp"},
+        "AIVersion":{"shape":"EvaluationFormAIVersion"}
       }
+    },
+    "EvaluationFormAIVersion":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "EvaluationFormAIVersionLifecycle":{
+      "type":"structure",
+      "required":[
+        "Status",
+        "StartOfLifeTime"
+      ],
+      "members":{
+        "Status":{"shape":"EvaluationFormAIVersionStatus"},
+        "StartOfLifeTime":{"shape":"Timestamp"},
+        "EndOfLifeTime":{"shape":"Timestamp"}
+      }
+    },
+    "EvaluationFormAIVersionStatus":{
+      "type":"string",
+      "enum":[
+        "LATEST",
+        "PREVIEW",
+        "ACTIVE",
+        "DEPRECATED"
+      ]
+    },
+    "EvaluationFormAIVersionSummary":{
+      "type":"structure",
+      "required":[
+        "AIVersionName",
+        "AIVersionLifecycle"
+      ],
+      "members":{
+        "AIVersionName":{"shape":"EvaluationFormAIVersion"},
+        "AIVersionLifecycle":{"shape":"EvaluationFormAIVersionLifecycle"}
+      }
+    },
+    "EvaluationFormAIVersionSummaryList":{
+      "type":"list",
+      "member":{"shape":"EvaluationFormAIVersionSummary"}
     },
     "EvaluationFormAutoEvaluationConfiguration":{
       "type":"structure",
@@ -14440,7 +14498,8 @@
         "AutoEvaluationConfiguration":{"shape":"EvaluationFormAutoEvaluationConfiguration"},
         "TargetConfiguration":{"shape":"EvaluationFormTargetConfiguration"},
         "LanguageConfiguration":{"shape":"EvaluationFormLanguageConfiguration"},
-        "ReviewConfiguration":{"shape":"EvaluationReviewConfiguration"}
+        "ReviewConfiguration":{"shape":"EvaluationReviewConfiguration"},
+        "AIVersion":{"shape":"EvaluationFormAIVersion"}
       }
     },
     "EvaluationFormDescription":{"type":"string"},
@@ -14579,6 +14638,27 @@
         "FormLanguage":{"shape":"EvaluationFormLanguageCode"}
       }
     },
+    "EvaluationFormMetricConfiguration":{
+      "type":"structure",
+      "required":[
+        "MetricType",
+        "MetricName"
+      ],
+      "members":{
+        "MetricType":{"shape":"EvaluationFormMetricType"},
+        "MetricName":{"shape":"EvaluationFormMetricName"}
+      }
+    },
+    "EvaluationFormMetricName":{
+      "type":"string",
+      "max":256,
+      "min":1,
+      "pattern":"^[^\\p{C}]*$"
+    },
+    "EvaluationFormMetricType":{
+      "type":"string",
+      "enum":["BUSINESS_OUTCOME"]
+    },
     "EvaluationFormMultiSelectQuestionAutomation":{
       "type":"structure",
       "members":{
@@ -14694,7 +14774,8 @@
         "QuestionTypeProperties":{"shape":"EvaluationFormQuestionTypeProperties"},
         "Enablement":{"shape":"EvaluationFormItemEnablementConfiguration"},
         "Weight":{"shape":"EvaluationFormItemWeight"},
-        "ScoringConfiguration":{"shape":"EvaluationFormQuestionScoringConfiguration"}
+        "ScoringConfiguration":{"shape":"EvaluationFormQuestionScoringConfiguration"},
+        "MetricConfiguration":{"shape":"EvaluationFormMetricConfiguration"}
       }
     },
     "EvaluationFormQuestionAnswerScore":{"type":"integer"},
@@ -14839,7 +14920,8 @@
         "AutoEvaluationEnabled":{"shape":"Boolean"},
         "EvaluationFormLanguage":{"shape":"EvaluationFormLanguageCode"},
         "ContactInteractionType":{"shape":"ContactInteractionType"},
-        "Tags":{"shape":"TagMap"}
+        "Tags":{"shape":"TagMap"},
+        "AIVersion":{"shape":"EvaluationFormAIVersion"}
       }
     },
     "EvaluationFormSearchSummaryList":{
@@ -18084,6 +18166,44 @@
       "members":{
         "SecurityProfiles":{"shape":"SecurityProfiles100"},
         "NextToken":{"shape":"NextToken2500"}
+      }
+    },
+    "ListEvaluationFormAIVersionsRequest":{
+      "type":"structure",
+      "required":[
+        "InstanceId",
+        "ContactInteractionType"
+      ],
+      "members":{
+        "InstanceId":{
+          "shape":"InstanceId",
+          "location":"uri",
+          "locationName":"InstanceId"
+        },
+        "ContactInteractionType":{
+          "shape":"ContactInteractionType",
+          "location":"querystring",
+          "locationName":"contactInteractionType"
+        },
+        "MaxResults":{
+          "shape":"MaxResult100",
+          "box":true,
+          "location":"querystring",
+          "locationName":"maxResults"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "location":"querystring",
+          "locationName":"nextToken"
+        }
+      }
+    },
+    "ListEvaluationFormAIVersionsResponse":{
+      "type":"structure",
+      "required":["AIVersionSummaries"],
+      "members":{
+        "AIVersionSummaries":{"shape":"EvaluationFormAIVersionSummaryList"},
+        "NextToken":{"shape":"NextToken"}
       }
     },
     "ListEvaluationFormVersionsRequest":{
@@ -26818,7 +26938,8 @@
           "idempotencyToken":true
         },
         "TargetConfiguration":{"shape":"EvaluationFormTargetConfiguration"},
-        "LanguageConfiguration":{"shape":"EvaluationFormLanguageConfiguration"}
+        "LanguageConfiguration":{"shape":"EvaluationFormLanguageConfiguration"},
+        "AIVersion":{"shape":"EvaluationFormAIVersion"}
       }
     },
     "UpdateEvaluationFormResponse":{

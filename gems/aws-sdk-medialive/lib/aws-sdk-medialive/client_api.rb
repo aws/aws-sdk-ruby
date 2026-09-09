@@ -370,13 +370,16 @@ module Aws::MediaLive
     EbuTtDDestinationSettings = Shapes::StructureShape.new(name: 'EbuTtDDestinationSettings')
     EbuTtDDestinationStyleControl = Shapes::StringShape.new(name: 'EbuTtDDestinationStyleControl')
     EbuTtDFillLineGapControl = Shapes::StringShape.new(name: 'EbuTtDFillLineGapControl')
+    EmbeddedCaptionPositionSettings = Shapes::StructureShape.new(name: 'EmbeddedCaptionPositionSettings')
     EmbeddedConvert608To708 = Shapes::StringShape.new(name: 'EmbeddedConvert608To708')
     EmbeddedDestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedDestinationSettings')
+    EmbeddedDestinationStyleControl = Shapes::StringShape.new(name: 'EmbeddedDestinationStyleControl')
     EmbeddedPlusScte20DestinationSettings = Shapes::StructureShape.new(name: 'EmbeddedPlusScte20DestinationSettings')
     EmbeddedScte20Detection = Shapes::StringShape.new(name: 'EmbeddedScte20Detection')
     EmbeddedSourceSettings = Shapes::StructureShape.new(name: 'EmbeddedSourceSettings')
     Empty = Shapes::StructureShape.new(name: 'Empty')
     EncoderSettings = Shapes::StructureShape.new(name: 'EncoderSettings')
+    EnrichmentMethod = Shapes::StringShape.new(name: 'EnrichmentMethod')
     EpochLockingSettings = Shapes::StructureShape.new(name: 'EpochLockingSettings')
     Esam = Shapes::StructureShape.new(name: 'Esam')
     EventBridgeRuleTemplateEventType = Shapes::StringShape.new(name: 'EventBridgeRuleTemplateEventType')
@@ -819,6 +822,7 @@ module Aws::MediaLive
     OutputLocationRef = Shapes::StructureShape.new(name: 'OutputLocationRef')
     OutputLockingSettings = Shapes::StructureShape.new(name: 'OutputLockingSettings')
     OutputSettings = Shapes::StructureShape.new(name: 'OutputSettings')
+    OutputUsage = Shapes::StringShape.new(name: 'OutputUsage')
     PassThroughSettings = Shapes::StructureShape.new(name: 'PassThroughSettings')
     PauseStateScheduleActionSettings = Shapes::StructureShape.new(name: 'PauseStateScheduleActionSettings')
     PipelineDetail = Shapes::StructureShape.new(name: 'PipelineDetail')
@@ -990,6 +994,7 @@ module Aws::MediaLive
     TemporalFilterPostFilterSharpening = Shapes::StringShape.new(name: 'TemporalFilterPostFilterSharpening')
     TemporalFilterSettings = Shapes::StructureShape.new(name: 'TemporalFilterSettings')
     TemporalFilterStrength = Shapes::StringShape.new(name: 'TemporalFilterStrength')
+    TextCaptionPositionSettings = Shapes::StructureShape.new(name: 'TextCaptionPositionSettings')
     Thumbnail = Shapes::StructureShape.new(name: 'Thumbnail')
     ThumbnailConfiguration = Shapes::StructureShape.new(name: 'ThumbnailConfiguration')
     ThumbnailData = Shapes::StructureShape.new(name: 'ThumbnailData')
@@ -1153,6 +1158,7 @@ module Aws::MediaLive
     __integerMin1Max10 = Shapes::IntegerShape.new(name: '__integerMin1Max10')
     __integerMin1Max1000 = Shapes::IntegerShape.new(name: '__integerMin1Max1000')
     __integerMin1Max1000000 = Shapes::IntegerShape.new(name: '__integerMin1Max1000000')
+    __integerMin1Max15 = Shapes::IntegerShape.new(name: '__integerMin1Max15')
     __integerMin1Max16 = Shapes::IntegerShape.new(name: '__integerMin1Max16')
     __integerMin1Max20 = Shapes::IntegerShape.new(name: '__integerMin1Max20')
     __integerMin1Max3003 = Shapes::IntegerShape.new(name: '__integerMin1Max3003')
@@ -1214,6 +1220,7 @@ module Aws::MediaLive
     __listOfDescribeClusterSummary = Shapes::ListShape.new(name: '__listOfDescribeClusterSummary')
     __listOfDescribeNetworkSummary = Shapes::ListShape.new(name: '__listOfDescribeNetworkSummary')
     __listOfDescribeNodeSummary = Shapes::ListShape.new(name: '__listOfDescribeNodeSummary')
+    __listOfEnrichmentMethod = Shapes::ListShape.new(name: '__listOfEnrichmentMethod')
     __listOfEventBridgeRuleTemplateGroupSummary = Shapes::ListShape.new(name: '__listOfEventBridgeRuleTemplateGroupSummary')
     __listOfEventBridgeRuleTemplateSummary = Shapes::ListShape.new(name: '__listOfEventBridgeRuleTemplateSummary')
     __listOfEventBridgeRuleTemplateTarget = Shapes::ListShape.new(name: '__listOfEventBridgeRuleTemplateTarget')
@@ -1265,6 +1272,7 @@ module Aws::MediaLive
     __listOfOutputDestinationSettings = Shapes::ListShape.new(name: '__listOfOutputDestinationSettings')
     __listOfOutputGroup = Shapes::ListShape.new(name: '__listOfOutputGroup')
     __listOfOutputLocationRef = Shapes::ListShape.new(name: '__listOfOutputLocationRef')
+    __listOfOutputUsage = Shapes::ListShape.new(name: '__listOfOutputUsage')
     __listOfPipelineDetail = Shapes::ListShape.new(name: '__listOfPipelineDetail')
     __listOfPipelinePauseStateSettings = Shapes::ListShape.new(name: '__listOfPipelinePauseStateSettings')
     __listOfReservation = Shapes::ListShape.new(name: '__listOfReservation')
@@ -2689,6 +2697,7 @@ module Aws::MediaLive
 
     DescribeInferenceSettings.add_member(:feed_arn, Shapes::ShapeRef.new(shape: __string, location_name: "feedArn"))
     DescribeInferenceSettings.add_member(:audio_feed_inputs, Shapes::ShapeRef.new(shape: __listOfAudioFeedInput, location_name: "audioFeedInputs"))
+    DescribeInferenceSettings.add_member(:enrichment_methods, Shapes::ShapeRef.new(shape: __listOfEnrichmentMethod, location_name: "enrichmentMethods"))
     DescribeInferenceSettings.struct_class = Types::DescribeInferenceSettings
 
     DescribeInputDeviceRequest.add_member(:input_device_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "inputDeviceId"))
@@ -3020,6 +3029,11 @@ module Aws::MediaLive
     EbuTtDDestinationSettings.add_member(:default_line_height, Shapes::ShapeRef.new(shape: __integerMin80Max800, location_name: "defaultLineHeight"))
     EbuTtDDestinationSettings.struct_class = Types::EbuTtDDestinationSettings
 
+    EmbeddedCaptionPositionSettings.add_member(:y_position_line, Shapes::ShapeRef.new(shape: __integerMin1Max15, location_name: "yPositionLine"))
+    EmbeddedCaptionPositionSettings.struct_class = Types::EmbeddedCaptionPositionSettings
+
+    EmbeddedDestinationSettings.add_member(:position, Shapes::ShapeRef.new(shape: EmbeddedCaptionPositionSettings, location_name: "position"))
+    EmbeddedDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: EmbeddedDestinationStyleControl, location_name: "styleControl"))
     EmbeddedDestinationSettings.struct_class = Types::EmbeddedDestinationSettings
 
     EmbeddedPlusScte20DestinationSettings.struct_class = Types::EmbeddedPlusScte20DestinationSettings
@@ -3549,6 +3563,7 @@ module Aws::MediaLive
 
     InferenceSettings.add_member(:feed_arn, Shapes::ShapeRef.new(shape: __string, location_name: "feedArn"))
     InferenceSettings.add_member(:audio_feed_inputs, Shapes::ShapeRef.new(shape: __listOfAudioFeedInput, location_name: "audioFeedInputs"))
+    InferenceSettings.add_member(:enrichment_methods, Shapes::ShapeRef.new(shape: __listOfEnrichmentMethod, location_name: "enrichmentMethods"))
     InferenceSettings.struct_class = Types::InferenceSettings
 
     Input.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
@@ -4307,6 +4322,7 @@ module Aws::MediaLive
     MediaPackageV2DestinationSettings.add_member(:audio_rendition_sets, Shapes::ShapeRef.new(shape: __string, location_name: "audioRenditionSets"))
     MediaPackageV2DestinationSettings.add_member(:hls_auto_select, Shapes::ShapeRef.new(shape: HlsAutoSelect, location_name: "hlsAutoSelect"))
     MediaPackageV2DestinationSettings.add_member(:hls_default, Shapes::ShapeRef.new(shape: HlsDefault, location_name: "hlsDefault"))
+    MediaPackageV2DestinationSettings.add_member(:output_usage, Shapes::ShapeRef.new(shape: __listOfOutputUsage, location_name: "outputUsage"))
     MediaPackageV2DestinationSettings.struct_class = Types::MediaPackageV2DestinationSettings
 
     MediaPackageV2GroupSettings.add_member(:caption_language_mappings, Shapes::ShapeRef.new(shape: __listOfCaptionLanguageMapping, location_name: "captionLanguageMappings"))
@@ -5430,6 +5446,9 @@ module Aws::MediaLive
     TemporalFilterSettings.add_member(:strength, Shapes::ShapeRef.new(shape: TemporalFilterStrength, location_name: "strength"))
     TemporalFilterSettings.struct_class = Types::TemporalFilterSettings
 
+    TextCaptionPositionSettings.add_member(:y_position_percentage, Shapes::ShapeRef.new(shape: __integerMin0Max100, location_name: "yPositionPercentage"))
+    TextCaptionPositionSettings.struct_class = Types::TextCaptionPositionSettings
+
     Thumbnail.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "body"))
     Thumbnail.add_member(:content_type, Shapes::ShapeRef.new(shape: __string, location_name: "contentType"))
     Thumbnail.add_member(:thumbnail_type, Shapes::ShapeRef.new(shape: ThumbnailType, location_name: "thumbnailType"))
@@ -5486,6 +5505,7 @@ module Aws::MediaLive
     TransferringInputDeviceSummary.struct_class = Types::TransferringInputDeviceSummary
 
     TtmlDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: TtmlDestinationStyleControl, location_name: "styleControl"))
+    TtmlDestinationSettings.add_member(:position, Shapes::ShapeRef.new(shape: TextCaptionPositionSettings, location_name: "position"))
     TtmlDestinationSettings.struct_class = Types::TtmlDestinationSettings
 
     UdpContainerSettings.add_member(:m2ts_settings, Shapes::ShapeRef.new(shape: M2tsSettings, location_name: "m2tsSettings"))
@@ -5985,6 +6005,7 @@ module Aws::MediaLive
     VideoDescription.add_member(:width, Shapes::ShapeRef.new(shape: __integer, location_name: "width"))
     VideoDescription.add_member(:crop_rectangle, Shapes::ShapeRef.new(shape: VideoPositionRectangle, location_name: "cropRectangle"))
     VideoDescription.add_member(:output_position_rectangle, Shapes::ShapeRef.new(shape: VideoPositionRectangle, location_name: "outputPositionRectangle"))
+    VideoDescription.add_member(:border, Shapes::ShapeRef.new(shape: __integerMin0Max100, location_name: "border"))
     VideoDescription.struct_class = Types::VideoDescription
 
     VideoPositionRectangle.add_member(:height, Shapes::ShapeRef.new(shape: __integerMin2Max8192, required: true, location_name: "height"))
@@ -6029,6 +6050,7 @@ module Aws::MediaLive
     WavSettings.struct_class = Types::WavSettings
 
     WebvttDestinationSettings.add_member(:style_control, Shapes::ShapeRef.new(shape: WebvttDestinationStyleControl, location_name: "styleControl"))
+    WebvttDestinationSettings.add_member(:position, Shapes::ShapeRef.new(shape: TextCaptionPositionSettings, location_name: "position"))
     WebvttDestinationSettings.struct_class = Types::WebvttDestinationSettings
 
     __listOfAdditionalDestinations.member = Shapes::ShapeRef.new(shape: AdditionalDestinations)
@@ -6086,6 +6108,8 @@ module Aws::MediaLive
     __listOfDescribeNetworkSummary.member = Shapes::ShapeRef.new(shape: DescribeNetworkSummary)
 
     __listOfDescribeNodeSummary.member = Shapes::ShapeRef.new(shape: DescribeNodeSummary)
+
+    __listOfEnrichmentMethod.member = Shapes::ShapeRef.new(shape: EnrichmentMethod)
 
     __listOfEventBridgeRuleTemplateGroupSummary.member = Shapes::ShapeRef.new(shape: EventBridgeRuleTemplateGroupSummary)
 
@@ -6188,6 +6212,8 @@ module Aws::MediaLive
     __listOfOutputGroup.member = Shapes::ShapeRef.new(shape: OutputGroup)
 
     __listOfOutputLocationRef.member = Shapes::ShapeRef.new(shape: OutputLocationRef)
+
+    __listOfOutputUsage.member = Shapes::ShapeRef.new(shape: OutputUsage)
 
     __listOfPipelineDetail.member = Shapes::ShapeRef.new(shape: PipelineDetail)
 

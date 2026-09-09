@@ -169,6 +169,31 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # The output configuration settings for the contextual metadata feature.
+    # Use this structure when the feed output generates metadata that
+    # describes the media content.
+    #
+    # @!attribute [rw] summary_generation
+    #   Specifies whether Elemental Inference generates a descriptive
+    #   summary of the media content for this output.
+    #
+    #   Valid values:
+    #
+    #   * ENABLED (default) – Elemental Inference generates a descriptive
+    #     summary along with IAB taxonomy and GARM suitability
+    #     classifications.
+    #
+    #   * DISABLED – No descriptive summary is generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ContextualMetadataConfig AWS API Documentation
+    #
+    class ContextualMetadataConfig < Struct.new(
+      :summary_generation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   A user-friendly name for this dictionary.
     #   @return [String]
@@ -441,6 +466,18 @@ module Aws::ElementalInference
       :arn,
       :id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the feed whose policy you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteFeedPolicyRequest AWS API Documentation
+    #
+    class DeleteFeedPolicyRequest < Struct.new(
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -754,6 +791,30 @@ module Aws::ElementalInference
       :status,
       :references,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the feed whose policy you want to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetFeedPolicyRequest AWS API Documentation
+    #
+    class GetFeedPolicyRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy
+    #   The resource-based policy document attached to the feed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/GetFeedPolicyResponse AWS API Documentation
+    #
+    class GetFeedPolicyResponse < Struct.new(
+      :policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1073,12 +1134,18 @@ module Aws::ElementalInference
     #   The output config type that applies to the smart subtitling feature.
     #   @return [Types::SubtitlingConfig]
     #
+    # @!attribute [rw] contextual_metadata
+    #   The output config type that applies to the contextual metadata
+    #   feature.
+    #   @return [Types::ContextualMetadataConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/OutputConfig AWS API Documentation
     #
     class OutputConfig < Struct.new(
       :cropping,
       :clipping,
       :subtitling,
+      :contextual_metadata,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1087,8 +1154,30 @@ module Aws::ElementalInference
       class Cropping < OutputConfig; end
       class Clipping < OutputConfig; end
       class Subtitling < OutputConfig; end
+      class ContextualMetadata < OutputConfig; end
       class Unknown < OutputConfig; end
     end
+
+    # @!attribute [rw] id
+    #   The ID of the feed to attach the policy to.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The resource-based policy document to attach to the feed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/PutFeedPolicyRequest AWS API Documentation
+    #
+    class PutFeedPolicyRequest < Struct.new(
+      :id,
+      :policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/PutFeedPolicyResponse AWS API Documentation
+    #
+    class PutFeedPolicyResponse < Aws::EmptyStructure; end
 
     # The resource specified in the action doesn't exist.
     #

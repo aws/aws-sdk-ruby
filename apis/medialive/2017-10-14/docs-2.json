@@ -3572,7 +3572,7 @@
     "TtmlDestinationStyleControl": {
       "base": "Ttml Destination Style Control",
       "refs": {
-        "TtmlDestinationSettings$StyleControl": "This field is not currently supported and will not affect the output styling. Leave the default value."
+        "TtmlDestinationSettings$StyleControl": "Controls the source of style and position information for the output captions.  PASSTHROUGH - Preserve the style and position from the source captions.  USE_CONFIGURED - Don't pass through the style. The output captions will use the default styling.  MANUAL - Applies the specified styling and positioning. All other styling and positioning is given default values."
       }
     },
     "UdpContainerSettings": {
@@ -3792,7 +3792,7 @@
     "WebvttDestinationStyleControl": {
       "base": "Webvtt Destination Style Control",
       "refs": {
-        "WebvttDestinationSettings$StyleControl": "Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED or TELETEXT.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information."
+        "WebvttDestinationSettings$StyleControl": "Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED, TELETEXT, or SMART SUBTITLES.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information. MANUAL - Applies the specified styling and positioning. All other styling and positioning is given default values."
       }
     },
     "__boolean": {
@@ -4032,7 +4032,9 @@
         "H264Settings$BufFillPct": "Percentage of the buffer that should initially be filled (HRD buffer model).",
         "StaticImageActivateScheduleActionSettings$Opacity": "Opacity of image where 0 is transparent and 100 is fully opaque. Default is 100.",
         "StaticImageOutputActivateScheduleActionSettings$Opacity": "Opacity of image where 0 is transparent and 100 is fully opaque. Default is 100.",
-        "VideoDescription$Sharpness": "Changes the strength of the anti-alias filter used for scaling. 0 is the softest setting, 100 is the sharpest. A setting of 50 is recommended for most content."
+        "VideoDescription$Sharpness": "Changes the strength of the anti-alias filter used for scaling. 0 is the softest setting, 100 is the sharpest. A setting of 50 is recommended for most content.",
+        "TextCaptionPositionSettings$YPositionPercentage": "Specifies the vertical position of the top edge of the caption relative to the top of the output as a percentage. A value of 0 places the caption at the top of the output and 100 at the bottom.",
+        "VideoDescription$Border": "Specifies the number of pixels of black border that will be inserted around the edge\nof the encoded picture. Must be an even integer from 0 (no border, the default) up\nto 100. The width and height of the VideoDescription must each be greater than twice\nthis value. Cannot be used together with {@link outputPositionRectangle} -- both\ngovern the position of the encoded content within the output frame."
       }
     },
     "__integerMin0Max1000": {
@@ -7797,6 +7799,56 @@
     "__integerMin1Max511": {
       "base": null,
       "refs": {
+      }
+    },
+    "EnrichmentMethod": {
+      "base": "A Contextual Metadata Enrichment method. Each value selects a strategy for enriching the channel's output with contextual metadata derived from the Elemental Inference feed. SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS enriches outbound SCTE-35 messages with query parameters that downstream systems can use to call the Elemental Inference GetMetadata API.",
+      "refs": {
+        "__listOfEnrichmentMethod$member": null
+      }
+    },
+    "__listOfEnrichmentMethod": {
+      "base": null,
+      "refs": {
+        "DescribeInferenceSettings$EnrichmentMethods": "The set of Contextual Metadata Enrichment methods enabled for this channel. Each method represents a specific way the channel uses the inference feed to augment its output with contextual metadata.",
+        "InferenceSettings$EnrichmentMethods": "The set of Contextual Metadata Enrichment methods enabled for this channel. Each method represents a specific way the channel will use the inference feed to augment its output with contextual metadata. An empty array (or omitting the field) disables enrichment. Order is not significant; duplicate values are not permitted."
+      }
+    },
+    "EmbeddedCaptionPositionSettings": {
+      "base": "Embedded Caption Position Settings",
+      "refs": {
+        "EmbeddedDestinationSettings$Position": "Specifies the position of the output captions. Applies only when styleControl is set to manual."
+      }
+    },
+    "EmbeddedDestinationStyleControl": {
+      "base": "Controls the source of position and style information for embedded outputs.\n- \"passthrough\": Carry the caption position and style from the source captions. When the source captions are embedded, SCTE-20, or ancillary, the position and style are preserved exactly. When the source captions are another format, the position and any supported style are carried over.\n- \"manual\": Use the position specified in the destination's position field.",
+      "refs": {
+        "EmbeddedDestinationSettings$StyleControl": "Controls the source of position and style information for the output captions.\n\n- \"passthrough\": Carry the caption position and style from the source captions. When the source captions are embedded, SCTE-20, or ancillary, the position and style are preserved exactly. When the source captions are another format, the position and any supported style are carried over.\n- \"manual\": Applies the specified styling and positioning. All other styling and positioning is given default values."
+      }
+    },
+    "TextCaptionPositionSettings": {
+      "base": "Text Caption Position Settings",
+      "refs": {
+        "TtmlDestinationSettings$Position": "Specifies the position of the output captions. Applies only when styleControl is set to manual.",
+        "WebvttDestinationSettings$Position": "Specifies the position of the output captions. Applies only when styleControl is set to manual."
+      }
+    },
+    "__integerMin1Max15": {
+      "base": null,
+      "refs": {
+        "EmbeddedCaptionPositionSettings$YPositionLine": "Specifies the vertical position of the caption as a row counted from the top of the output. Row 1 is the topmost row. Acceptable values are 1 through 15."
+      }
+    },
+    "OutputUsage": {
+      "base": "Output Usage",
+      "refs": {
+        "__listOfOutputUsage$member": null
+      }
+    },
+    "__listOfOutputUsage": {
+      "base": null,
+      "refs": {
+        "MediaPackageV2DestinationSettings$OutputUsage": "List of usage tags declaring how this MediaPackage V2 output is used. Currently these are all multiview-related (multiviewPrimaryView, multiviewSecondaryView, multiviewEqualSizeView) and enable multiview validations and augmentations to help ensure proper multiview configuration and compatibility with MediaPackage. Leave empty (the default) if this output has no multiview role. If any video-carrying MediaPackage V2 output in an output group specifies a multiview value, every video-carrying MediaPackage V2 output in the group must also specify a multiview value; place standalone video outputs in a separate output group."
       }
     }
   },

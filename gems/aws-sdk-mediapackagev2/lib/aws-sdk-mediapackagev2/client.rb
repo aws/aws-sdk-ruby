@@ -559,9 +559,10 @@ module Aws::MediaPackageV2
     #   not need to pass this option.**
     #
     # @option params [String] :input_type
-    #   The input type will be an immutable field which will be used to define
-    #   whether the channel will allow CMAF ingest or HLS ingest. If
-    #   unprovided, it will default to HLS to preserve current behavior.
+    #   The input type is an immutable field. It defines whether the channel
+    #   allows CMAF ingest, HLS ingest, or server-side multiview output.
+    #   Multiview channels receive no ingest of their own. If unprovided, the
+    #   value defaults to HLS.
     #
     #   The allowed values are:
     #
@@ -570,6 +571,10 @@ module Aws::MediaPackageV2
     #
     #   * `CMAF` - The DASH-IF CMAF Ingest specification (which defines CMAF
     #     segments with optional DASH manifests).
+    #
+    #   * `MULTIVIEW` – Server-side multiview. The channel receives no ingest
+    #     of its own. Instead, it composites video from the source channels in
+    #     its `MultiviewConfiguration` into a single tiled output stream.
     #
     # @option params [String] :description
     #   Enter any descriptive text that helps you to identify the channel.
@@ -583,6 +588,11 @@ module Aws::MediaPackageV2
     #   The settings for what common media server data (CMSD) headers AWS
     #   Elemental MediaPackage includes in responses to the CDN. This setting
     #   is valid only when `InputType` is `CMAF`.
+    #
+    # @option params [Types::MultiviewConfiguration] :multiview_configuration
+    #   The multiview configuration for the channel. This setting is required
+    #   when `InputType` is `MULTIVIEW`, and can't be set for any other input
+    #   type.
     #
     # @option params [String] :output_locking_mode
     #   The output locking mode for the channel. This setting is only valid
@@ -612,6 +622,8 @@ module Aws::MediaPackageV2
     #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::CreateChannelResponse#multiview_configuration #multiview_configuration} => Types::MultiviewConfiguration
+    #   * {Types::CreateChannelResponse#attached_multiview_channels #attached_multiview_channels} => Array&lt;String&gt;
     #   * {Types::CreateChannelResponse#arn #arn} => String
     #   * {Types::CreateChannelResponse#channel_name #channel_name} => String
     #   * {Types::CreateChannelResponse#channel_group_name #channel_group_name} => String
@@ -705,7 +717,7 @@ module Aws::MediaPackageV2
     #     channel_group_name: "ResourceName", # required
     #     channel_name: "ResourceName", # required
     #     client_token: "IdempotencyToken",
-    #     input_type: "HLS", # accepts HLS, CMAF
+    #     input_type: "HLS", # accepts HLS, CMAF, MULTIVIEW
     #     description: "ResourceDescription",
     #     input_switch_configuration: {
     #       mqcs_input_switching: false,
@@ -713,6 +725,10 @@ module Aws::MediaPackageV2
     #     },
     #     output_header_configuration: {
     #       publish_mqcs: false,
+    #     },
+    #     multiview_configuration: {
+    #       available_sources: ["ResourceName"], # required
+    #       available_layouts: ["LAYOUT_2EH"], # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
     #     },
     #     output_locking_mode: "EPOCH_LOCKED", # accepts EPOCH_LOCKED, NON_EPOCH_LOCKED
     #     tags: {
@@ -722,6 +738,12 @@ module Aws::MediaPackageV2
     #
     # @example Response structure
     #
+    #   resp.multiview_configuration.available_sources #=> Array
+    #   resp.multiview_configuration.available_sources[0] #=> String
+    #   resp.multiview_configuration.available_layouts #=> Array
+    #   resp.multiview_configuration.available_layouts[0] #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.attached_multiview_channels #=> Array
+    #   resp.attached_multiview_channels[0] #=> String
     #   resp.arn #=> String
     #   resp.channel_name #=> String
     #   resp.channel_group_name #=> String
@@ -731,7 +753,7 @@ module Aws::MediaPackageV2
     #   resp.ingest_endpoints #=> Array
     #   resp.ingest_endpoints[0].id #=> String
     #   resp.ingest_endpoints[0].url #=> String
-    #   resp.input_type #=> String, one of "HLS", "CMAF"
+    #   resp.input_type #=> String, one of "HLS", "CMAF", "MULTIVIEW"
     #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -2497,6 +2519,8 @@ module Aws::MediaPackageV2
     #
     # @return [Types::GetChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetChannelResponse#multiview_configuration #multiview_configuration} => Types::MultiviewConfiguration
+    #   * {Types::GetChannelResponse#attached_multiview_channels #attached_multiview_channels} => Array&lt;String&gt;
     #   * {Types::GetChannelResponse#arn #arn} => String
     #   * {Types::GetChannelResponse#channel_name #channel_name} => String
     #   * {Types::GetChannelResponse#channel_group_name #channel_group_name} => String
@@ -2589,6 +2613,12 @@ module Aws::MediaPackageV2
     #
     # @example Response structure
     #
+    #   resp.multiview_configuration.available_sources #=> Array
+    #   resp.multiview_configuration.available_sources[0] #=> String
+    #   resp.multiview_configuration.available_layouts #=> Array
+    #   resp.multiview_configuration.available_layouts[0] #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.attached_multiview_channels #=> Array
+    #   resp.attached_multiview_channels[0] #=> String
     #   resp.arn #=> String
     #   resp.channel_name #=> String
     #   resp.channel_group_name #=> String
@@ -2599,7 +2629,7 @@ module Aws::MediaPackageV2
     #   resp.ingest_endpoints #=> Array
     #   resp.ingest_endpoints[0].id #=> String
     #   resp.ingest_endpoints[0].url #=> String
-    #   resp.input_type #=> String, one of "HLS", "CMAF"
+    #   resp.input_type #=> String, one of "HLS", "CMAF", "MULTIVIEW"
     #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -3466,8 +3496,14 @@ module Aws::MediaPackageV2
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].modified_at #=> Time
     #   resp.items[0].description #=> String
-    #   resp.items[0].input_type #=> String, one of "HLS", "CMAF"
+    #   resp.items[0].input_type #=> String, one of "HLS", "CMAF", "MULTIVIEW"
     #   resp.items[0].output_locking_mode #=> String, one of "EPOCH_LOCKED", "NON_EPOCH_LOCKED"
+    #   resp.items[0].multiview_configuration.available_sources #=> Array
+    #   resp.items[0].multiview_configuration.available_sources[0] #=> String
+    #   resp.items[0].multiview_configuration.available_layouts #=> Array
+    #   resp.items[0].multiview_configuration.available_layouts[0] #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.items[0].attached_multiview_channels #=> Array
+    #   resp.items[0].attached_multiview_channels[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/ListChannels AWS API Documentation
@@ -4508,8 +4544,17 @@ module Aws::MediaPackageV2
     #   Elemental MediaPackage includes in responses to the CDN. This setting
     #   is valid only when `InputType` is `CMAF`.
     #
+    # @option params [Types::MultiviewConfiguration] :multiview_configuration
+    #   The multiview configuration for the channel. This setting is required
+    #   when the channel's `InputType` is `MULTIVIEW`, and can't be set for
+    #   any other input type. Because `InputType` is immutable, you can change
+    #   a multiview channel's sources and layouts. You can't add or remove
+    #   the multiview configuration itself.
+    #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::UpdateChannelResponse#multiview_configuration #multiview_configuration} => Types::MultiviewConfiguration
+    #   * {Types::UpdateChannelResponse#attached_multiview_channels #attached_multiview_channels} => Array&lt;String&gt;
     #   * {Types::UpdateChannelResponse#arn #arn} => String
     #   * {Types::UpdateChannelResponse#channel_name #channel_name} => String
     #   * {Types::UpdateChannelResponse#channel_group_name #channel_group_name} => String
@@ -4608,10 +4653,20 @@ module Aws::MediaPackageV2
     #     output_header_configuration: {
     #       publish_mqcs: false,
     #     },
+    #     multiview_configuration: {
+    #       available_sources: ["ResourceName"], # required
+    #       available_layouts: ["LAYOUT_2EH"], # required, accepts LAYOUT_2EH, LAYOUT_2PL, LAYOUT_3EL, LAYOUT_3PL, LAYOUT_4E, LAYOUT_4PL
+    #     },
     #   })
     #
     # @example Response structure
     #
+    #   resp.multiview_configuration.available_sources #=> Array
+    #   resp.multiview_configuration.available_sources[0] #=> String
+    #   resp.multiview_configuration.available_layouts #=> Array
+    #   resp.multiview_configuration.available_layouts[0] #=> String, one of "LAYOUT_2EH", "LAYOUT_2PL", "LAYOUT_3EL", "LAYOUT_3PL", "LAYOUT_4E", "LAYOUT_4PL"
+    #   resp.attached_multiview_channels #=> Array
+    #   resp.attached_multiview_channels[0] #=> String
     #   resp.arn #=> String
     #   resp.channel_name #=> String
     #   resp.channel_group_name #=> String
@@ -4621,7 +4676,7 @@ module Aws::MediaPackageV2
     #   resp.ingest_endpoints #=> Array
     #   resp.ingest_endpoints[0].id #=> String
     #   resp.ingest_endpoints[0].url #=> String
-    #   resp.input_type #=> String, one of "HLS", "CMAF"
+    #   resp.input_type #=> String, one of "HLS", "CMAF", "MULTIVIEW"
     #   resp.etag #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -5486,7 +5541,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

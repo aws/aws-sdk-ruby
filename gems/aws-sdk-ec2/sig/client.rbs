@@ -1122,7 +1122,9 @@ module Aws
                           ],
                           ?multi_attach_enabled: bool,
                           ?throughput: ::Integer,
-                          ?client_token: ::String
+                          ?client_token: ::String,
+                          ?encrypted: bool,
+                          ?kms_key_id: ::String
                         ) -> _CopyVolumesResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyVolumesResponseSuccess
 
@@ -3876,6 +3878,8 @@ module Aws
         def sse_type: () -> ("sse-ebs" | "sse-kms" | "none")
         def operator: () -> Types::OperatorResponse
         def volume_initialization_rate: () -> ::Integer
+        def volume_arn: () -> ::String
+        def owner_id: () -> ::String
         def volume_id: () -> ::String
         def size: () -> ::Integer
         def snapshot_id: () -> ::String

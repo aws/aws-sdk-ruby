@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.196.0 (2026-09-09)
+------------------
+
+* Feature - MediaLive now supports Manual Style Control for vertical caption positioning in TTML, WebVTT, and Embedded captions, Contextual Metadata Enrichment via Elemental Inference, and an Output Usage field on MediaPackage v2 for Dynamic Multiview validation.
+
 1.195.0 (2026-09-02)
 ------------------
 

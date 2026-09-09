@@ -164,6 +164,9 @@ module Aws
                                              parameter_name: ::String,
                                              parameter_value: ::String
                                            }
+                                         ]?,
+                                         gres_custom_settings: Array[
+                                           Hash[::String, ::String]
                                          ]?
                                        },
                                        ?node_lifecycle_actions: {
@@ -422,6 +425,9 @@ module Aws
                                              parameter_name: ::String,
                                              parameter_value: ::String
                                            }
+                                         ]?,
+                                         gres_custom_settings: Array[
+                                           Hash[::String, ::String]
                                          ]?
                                        },
                                        ?node_lifecycle_actions: {

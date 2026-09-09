@@ -402,6 +402,10 @@ module Aws
       dvb_sub_destination_settings: Params::dvb_sub_destination_settings?,
       ebu_tt_d_destination_settings: Params::ebu_tt_d_destination_settings?,
       embedded_destination_settings: {
+        position: {
+          y_position_line: ::Integer?
+        }?,
+        style_control: ("MANUAL" | "PASSTHROUGH")?
       }?,
       embedded_plus_scte_20_destination_settings: {
       }?,
@@ -416,10 +420,16 @@ module Aws
       teletext_destination_settings: {
       }?,
       ttml_destination_settings: {
-        style_control: ("PASSTHROUGH" | "USE_CONFIGURED")?
+        style_control: ("PASSTHROUGH" | "USE_CONFIGURED" | "MANUAL")?,
+        position: {
+          y_position_percentage: ::Integer?
+        }?
       }?,
       webvtt_destination_settings: {
-        style_control: ("NO_STYLE_DATA" | "PASSTHROUGH")?
+        style_control: ("NO_STYLE_DATA" | "PASSTHROUGH" | "MANUAL")?,
+        position: {
+          y_position_percentage: ::Integer?
+        }?
       }?
     }
 
@@ -881,7 +891,8 @@ module Aws
         audio_group_id: ::String?,
         audio_rendition_sets: ::String?,
         hls_auto_select: ("NO" | "OMIT" | "YES")?,
-        hls_default: ("NO" | "OMIT" | "YES")?
+        hls_default: ("NO" | "OMIT" | "YES")?,
+        output_usage: Array[("MULTIVIEW_EQUAL_SIZE_VIEW" | "MULTIVIEW_PRIMARY_VIEW" | "MULTIVIEW_SECONDARY_VIEW")]?
       }?
     }
 
@@ -1253,7 +1264,8 @@ module Aws
         width: ::Integer,
         x: ::Integer,
         y: ::Integer
-      }?
+      }?,
+      border: ::Integer?
     }
 
       type automatic_input_failover_settings = {
@@ -1459,6 +1471,17 @@ module Aws
       primary_channel_settings: {
         linked_channel_type: ("FOLLOWING_CHANNEL" | "PRIMARY_CHANNEL")?
       }?
+    }
+
+      type inference_settings = {
+      feed_arn: ::String?,
+      audio_feed_inputs: Array[
+        {
+          audio_selector_name: ::String?,
+          feed_input: ::String?
+        }
+      ]?,
+      enrichment_methods: Array[("SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS")]?
     }
 
       type input_destination_request = {

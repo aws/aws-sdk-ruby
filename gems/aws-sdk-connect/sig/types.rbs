@@ -1525,6 +1525,7 @@ module Aws::Connect
       attr_accessor review_configuration: Types::EvaluationReviewConfiguration
       attr_accessor target_configuration: Types::EvaluationFormTargetConfiguration
       attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
+      attr_accessor ai_version: ::String
       SENSITIVE: []
     end
 
@@ -3419,6 +3420,20 @@ module Aws::Connect
       attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
       attr_accessor latest_validation_status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
       attr_accessor last_validation_time: ::Time
+      attr_accessor ai_version: ::String
+      SENSITIVE: []
+    end
+
+    class EvaluationFormAIVersionLifecycle
+      attr_accessor status: ("LATEST" | "PREVIEW" | "ACTIVE" | "DEPRECATED")
+      attr_accessor start_of_life_time: ::Time
+      attr_accessor end_of_life_time: ::Time
+      SENSITIVE: []
+    end
+
+    class EvaluationFormAIVersionSummary
+      attr_accessor ai_version_name: ::String
+      attr_accessor ai_version_lifecycle: Types::EvaluationFormAIVersionLifecycle
       SENSITIVE: []
     end
 
@@ -3439,6 +3454,7 @@ module Aws::Connect
       attr_accessor target_configuration: Types::EvaluationFormTargetConfiguration
       attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
       attr_accessor review_configuration: Types::EvaluationReviewConfiguration
+      attr_accessor ai_version: ::String
       SENSITIVE: []
     end
 
@@ -3504,6 +3520,12 @@ module Aws::Connect
 
     class EvaluationFormLanguageConfiguration
       attr_accessor form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "ms-MY")
+      SENSITIVE: []
+    end
+
+    class EvaluationFormMetricConfiguration
+      attr_accessor metric_type: ("BUSINESS_OUTCOME")
+      attr_accessor metric_name: ::String
       SENSITIVE: []
     end
 
@@ -3584,6 +3606,7 @@ module Aws::Connect
       attr_accessor enablement: Types::EvaluationFormItemEnablementConfiguration
       attr_accessor weight: ::Float
       attr_accessor scoring_configuration: Types::EvaluationFormQuestionScoringConfiguration
+      attr_accessor metric_configuration: Types::EvaluationFormMetricConfiguration
       SENSITIVE: []
     end
 
@@ -3666,6 +3689,7 @@ module Aws::Connect
       attr_accessor evaluation_form_language: ("de-DE" | "en-US" | "es-ES" | "fr-FR" | "it-IT" | "pt-BR" | "ja-JP" | "ko-KR" | "zh-CN" | "ms-MY")
       attr_accessor contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER")
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor ai_version: ::String
       SENSITIVE: []
     end
 
@@ -5119,6 +5143,20 @@ module Aws::Connect
 
     class ListEntitySecurityProfilesResponse
       attr_accessor security_profiles: ::Array[Types::SecurityProfileItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEvaluationFormAIVersionsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListEvaluationFormAIVersionsResponse
+      attr_accessor ai_version_summaries: ::Array[Types::EvaluationFormAIVersionSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -8877,6 +8915,7 @@ module Aws::Connect
       attr_accessor client_token: ::String
       attr_accessor target_configuration: Types::EvaluationFormTargetConfiguration
       attr_accessor language_configuration: Types::EvaluationFormLanguageConfiguration
+      attr_accessor ai_version: ::String
       SENSITIVE: []
     end
 

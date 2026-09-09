@@ -4650,11 +4650,30 @@ module Aws::MediaLive
 
     # Embedded Destination Settings
     #
-    # @api private
+    # @!attribute [rw] position
+    #   Specifies the position of the output captions. Applies only when
+    #   styleControl is set to manual.
+    #   @return [Types::EmbeddedCaptionPositionSettings]
+    #
+    # @!attribute [rw] style_control
+    #   Controls the source of position and style information for the output
+    #   captions. - "passthrough": Carry the caption position and style
+    #   from the source captions. When the source captions are embedded,
+    #   SCTE-20, or ancillary, the position and style are preserved exactly.
+    #   When the source captions are another format, the position and any
+    #   supported style are carried over. - "manual": Applies the
+    #   specified styling and positioning. All other styling and positioning
+    #   is given default values.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EmbeddedDestinationSettings AWS API Documentation
     #
-    class EmbeddedDestinationSettings < Aws::EmptyStructure; end
+    class EmbeddedDestinationSettings < Struct.new(
+      :position,
+      :style_control)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Embedded Plus Scte20 Destination Settings
     #
@@ -12895,14 +12914,24 @@ module Aws::MediaLive
     # Ttml Destination Settings
     #
     # @!attribute [rw] style_control
-    #   This field is not currently supported and will not affect the output
-    #   styling. Leave the default value.
+    #   Controls the source of style and position information for the output
+    #   captions. PASSTHROUGH - Preserve the style and position from the
+    #   source captions. USE\_CONFIGURED - Don't pass through the style.
+    #   The output captions will use the default styling. MANUAL - Applies
+    #   the specified styling and positioning. All other styling and
+    #   positioning is given default values.
     #   @return [String]
+    #
+    # @!attribute [rw] position
+    #   Specifies the position of the output captions. Applies only when
+    #   styleControl is set to manual.
+    #   @return [Types::TextCaptionPositionSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TtmlDestinationSettings AWS API Documentation
     #
     class TtmlDestinationSettings < Struct.new(
-      :style_control)
+      :style_control,
+      :position)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14009,6 +14038,15 @@ module Aws::MediaLive
     #   frame.
     #   @return [Types::VideoPositionRectangle]
     #
+    # @!attribute [rw] border
+    #   Specifies the number of pixels of black border that will be inserted
+    #   around the edge of the encoded picture. Must be an even integer from
+    #   0 (no border, the default) up to 100. The width and height of the
+    #   VideoDescription must each be greater than twice this value. Cannot
+    #   be used together with \{@link outputPositionRectangle} -- both
+    #   govern the position of the encoded content within the output frame.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/VideoDescription AWS API Documentation
     #
     class VideoDescription < Struct.new(
@@ -14020,7 +14058,8 @@ module Aws::MediaLive
       :sharpness,
       :width,
       :crop_rectangle,
-      :output_position_rectangle)
+      :output_position_rectangle,
+      :border)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14229,15 +14268,23 @@ module Aws::MediaLive
     # @!attribute [rw] style_control
     #   Controls whether the color and position of the source captions is
     #   passed through to the WebVTT output captions. PASSTHROUGH - Valid
-    #   only if the source captions are EMBEDDED or TELETEXT.
-    #   NO\_STYLE\_DATA - Don't pass through the style. The output captions
-    #   will not contain any font styling information.
+    #   only if the source captions are EMBEDDED, TELETEXT, or SMART
+    #   SUBTITLES. NO\_STYLE\_DATA - Don't pass through the style. The
+    #   output captions will not contain any font styling information.
+    #   MANUAL - Applies the specified styling and positioning. All other
+    #   styling and positioning is given default values.
     #   @return [String]
+    #
+    # @!attribute [rw] position
+    #   Specifies the position of the output captions. Applies only when
+    #   styleControl is set to manual.
+    #   @return [Types::TextCaptionPositionSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/WebvttDestinationSettings AWS API Documentation
     #
     class WebvttDestinationSettings < Struct.new(
-      :style_control)
+      :style_control,
+      :position)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22347,13 +22394,28 @@ module Aws::MediaLive
     #   to OMIT.
     #   @return [String]
     #
+    # @!attribute [rw] output_usage
+    #   List of usage tags declaring how this MediaPackage V2 output is
+    #   used. Currently these are all multiview-related
+    #   (multiviewPrimaryView, multiviewSecondaryView,
+    #   multiviewEqualSizeView) and enable multiview validations and
+    #   augmentations to help ensure proper multiview configuration and
+    #   compatibility with MediaPackage. Leave empty (the default) if this
+    #   output has no multiview role. If any video-carrying MediaPackage V2
+    #   output in an output group specifies a multiview value, every
+    #   video-carrying MediaPackage V2 output in the group must also specify
+    #   a multiview value; place standalone video outputs in a separate
+    #   output group.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaPackageV2DestinationSettings AWS API Documentation
     #
     class MediaPackageV2DestinationSettings < Struct.new(
       :audio_group_id,
       :audio_rendition_sets,
       :hls_auto_select,
-      :hls_default)
+      :hls_default,
+      :output_usage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23117,11 +23179,18 @@ module Aws::MediaLive
     #   to feed inputs on the associated Elemental Inference feed.
     #   @return [Array<Types::AudioFeedInput>]
     #
+    # @!attribute [rw] enrichment_methods
+    #   The set of Contextual Metadata Enrichment methods enabled for this
+    #   channel. Each method represents a specific way the channel uses the
+    #   inference feed to augment its output with contextual metadata.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/DescribeInferenceSettings AWS API Documentation
     #
     class DescribeInferenceSettings < Struct.new(
       :feed_arn,
-      :audio_feed_inputs)
+      :audio_feed_inputs,
+      :enrichment_methods)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23138,11 +23207,20 @@ module Aws::MediaLive
     #   to feed inputs on the associated Elemental Inference feed.
     #   @return [Array<Types::AudioFeedInput>]
     #
+    # @!attribute [rw] enrichment_methods
+    #   The set of Contextual Metadata Enrichment methods enabled for this
+    #   channel. Each method represents a specific way the channel will use
+    #   the inference feed to augment its output with contextual metadata.
+    #   An empty array (or omitting the field) disables enrichment. Order is
+    #   not significant; duplicate values are not permitted.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/InferenceSettings AWS API Documentation
     #
     class InferenceSettings < Struct.new(
       :feed_arn,
-      :audio_feed_inputs)
+      :audio_feed_inputs,
+      :enrichment_methods)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23563,6 +23641,38 @@ module Aws::MediaLive
     #
     class MediaPackageV2WatermarkingSettings < Struct.new(
       :media_package_v2_ab_watermarker_irdeto_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Embedded Caption Position Settings
+    #
+    # @!attribute [rw] y_position_line
+    #   Specifies the vertical position of the caption as a row counted from
+    #   the top of the output. Row 1 is the topmost row. Acceptable values
+    #   are 1 through 15.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/EmbeddedCaptionPositionSettings AWS API Documentation
+    #
+    class EmbeddedCaptionPositionSettings < Struct.new(
+      :y_position_line)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Text Caption Position Settings
+    #
+    # @!attribute [rw] y_position_percentage
+    #   Specifies the vertical position of the top edge of the caption
+    #   relative to the top of the output as a percentage. A value of 0
+    #   places the caption at the top of the output and 100 at the bottom.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TextCaptionPositionSettings AWS API Documentation
+    #
+    class TextCaptionPositionSettings < Struct.new(
+      :y_position_percentage)
       SENSITIVE = []
       include Aws::Structure
     end

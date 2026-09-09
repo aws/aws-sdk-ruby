@@ -1241,7 +1241,10 @@ module Aws::MediaLive
       SENSITIVE: []
     end
 
-    class EmbeddedDestinationSettings < Aws::EmptyStructure
+    class EmbeddedDestinationSettings
+      attr_accessor position: Types::EmbeddedCaptionPositionSettings
+      attr_accessor style_control: ("MANUAL" | "PASSTHROUGH")
+      SENSITIVE: []
     end
 
     class EmbeddedPlusScte20DestinationSettings < Aws::EmptyStructure
@@ -3244,7 +3247,8 @@ module Aws::MediaLive
     end
 
     class TtmlDestinationSettings
-      attr_accessor style_control: ("PASSTHROUGH" | "USE_CONFIGURED")
+      attr_accessor style_control: ("PASSTHROUGH" | "USE_CONFIGURED" | "MANUAL")
+      attr_accessor position: Types::TextCaptionPositionSettings
       SENSITIVE: []
     end
 
@@ -3561,6 +3565,7 @@ module Aws::MediaLive
       attr_accessor width: ::Integer
       attr_accessor crop_rectangle: Types::VideoPositionRectangle
       attr_accessor output_position_rectangle: Types::VideoPositionRectangle
+      attr_accessor border: ::Integer
       SENSITIVE: []
     end
 
@@ -3616,7 +3621,8 @@ module Aws::MediaLive
     end
 
     class WebvttDestinationSettings
-      attr_accessor style_control: ("NO_STYLE_DATA" | "PASSTHROUGH")
+      attr_accessor style_control: ("NO_STYLE_DATA" | "PASSTHROUGH" | "MANUAL")
+      attr_accessor position: Types::TextCaptionPositionSettings
       SENSITIVE: []
     end
 
@@ -5754,6 +5760,7 @@ module Aws::MediaLive
       attr_accessor audio_rendition_sets: ::String
       attr_accessor hls_auto_select: ("NO" | "OMIT" | "YES")
       attr_accessor hls_default: ("NO" | "OMIT" | "YES")
+      attr_accessor output_usage: ::Array[("MULTIVIEW_EQUAL_SIZE_VIEW" | "MULTIVIEW_PRIMARY_VIEW" | "MULTIVIEW_SECONDARY_VIEW")]
       SENSITIVE: []
     end
 
@@ -5974,12 +5981,14 @@ module Aws::MediaLive
     class DescribeInferenceSettings
       attr_accessor feed_arn: ::String
       attr_accessor audio_feed_inputs: ::Array[Types::AudioFeedInput]
+      attr_accessor enrichment_methods: ::Array[("SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS")]
       SENSITIVE: []
     end
 
     class InferenceSettings
       attr_accessor feed_arn: ::String
       attr_accessor audio_feed_inputs: ::Array[Types::AudioFeedInput]
+      attr_accessor enrichment_methods: ::Array[("SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS")]
       SENSITIVE: []
     end
 
@@ -6097,6 +6106,16 @@ module Aws::MediaLive
 
     class MediaPackageV2WatermarkingSettings
       attr_accessor media_package_v2_ab_watermarker_irdeto_settings: Types::MediaPackageV2AbWatermarkerIrdetoSettings
+      SENSITIVE: []
+    end
+
+    class EmbeddedCaptionPositionSettings
+      attr_accessor y_position_line: ::Integer
+      SENSITIVE: []
+    end
+
+    class TextCaptionPositionSettings
+      attr_accessor y_position_percentage: ::Integer
       SENSITIVE: []
     end
   end

@@ -123,6 +123,18 @@ module Aws::EC2
       data[:volume_initialization_rate]
     end
 
+    # The Amazon Resource Name (ARN) of the volume.
+    # @return [String]
+    def volume_arn
+      data[:volume_arn]
+    end
+
+    # The ID of the Amazon Web Services account that owns the volume.
+    # @return [String]
+    def owner_id
+      data[:owner_id]
+    end
+
     # The size of the volume, in GiBs.
     # @return [Integer]
     def size

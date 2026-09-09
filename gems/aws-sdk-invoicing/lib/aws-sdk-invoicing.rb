@@ -55,7 +55,7 @@ module Aws::Invoicing
   autoload :EndpointProvider, 'aws-sdk-invoicing/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-invoicing/endpoints'
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end
 

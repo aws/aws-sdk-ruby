@@ -54,7 +54,7 @@ module Aws::FIS
   autoload :EndpointProvider, 'aws-sdk-fis/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-fis/endpoints'
 
-  GEM_VERSION = '1.68.0'
+  GEM_VERSION = '1.69.0'
 
 end
 

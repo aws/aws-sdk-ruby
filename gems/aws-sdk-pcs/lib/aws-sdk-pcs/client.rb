@@ -780,6 +780,11 @@ module Aws::PCS
     #           parameter_value: "String", # required
     #         },
     #       ],
+    #       gres_custom_settings: [
+    #         {
+    #           "String" => "String",
+    #         },
+    #       ],
     #     },
     #     node_lifecycle_actions: {
     #       stages: { # required
@@ -843,6 +848,9 @@ module Aws::PCS
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings #=> Array
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings[0].parameter_name #=> String
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
+    #   resp.compute_node_group.slurm_configuration.gres_custom_settings #=> Array
+    #   resp.compute_node_group.slurm_configuration.gres_custom_settings[0] #=> Hash
+    #   resp.compute_node_group.slurm_configuration.gres_custom_settings[0]["String"] #=> String
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped #=> Array
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].name #=> String
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.script_location #=> String
@@ -1196,6 +1204,9 @@ module Aws::PCS
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings #=> Array
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings[0].parameter_name #=> String
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
+    #   resp.compute_node_group.slurm_configuration.gres_custom_settings #=> Array
+    #   resp.compute_node_group.slurm_configuration.gres_custom_settings[0] #=> Hash
+    #   resp.compute_node_group.slurm_configuration.gres_custom_settings[0]["String"] #=> String
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped #=> Array
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].name #=> String
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.script_location #=> String
@@ -1850,6 +1861,11 @@ module Aws::PCS
     #           parameter_value: "String", # required
     #         },
     #       ],
+    #       gres_custom_settings: [
+    #         {
+    #           "String" => "String",
+    #         },
+    #       ],
     #     },
     #     node_lifecycle_actions: {
     #       stages: { # required
@@ -1910,6 +1926,9 @@ module Aws::PCS
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings #=> Array
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings[0].parameter_name #=> String
     #   resp.compute_node_group.slurm_configuration.slurm_custom_settings[0].parameter_value #=> String
+    #   resp.compute_node_group.slurm_configuration.gres_custom_settings #=> Array
+    #   resp.compute_node_group.slurm_configuration.gres_custom_settings[0] #=> Hash
+    #   resp.compute_node_group.slurm_configuration.gres_custom_settings[0]["String"] #=> String
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped #=> Array
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].name #=> String
     #   resp.compute_node_group.node_lifecycle_actions.stages.node_bootstrapped[0].script_source.script_location #=> String
@@ -2040,7 +2059,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

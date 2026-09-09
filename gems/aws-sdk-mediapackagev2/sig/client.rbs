@@ -93,6 +93,8 @@ module Aws
 
       interface _CreateChannelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateChannelResponse]
+        def multiview_configuration: () -> Types::MultiviewConfiguration
+        def attached_multiview_channels: () -> ::Array[::String]
         def arn: () -> ::String
         def channel_name: () -> ::String
         def channel_group_name: () -> ::String
@@ -100,7 +102,7 @@ module Aws
         def modified_at: () -> ::Time
         def description: () -> ::String
         def ingest_endpoints: () -> ::Array[Types::IngestEndpoint]
-        def input_type: () -> ("HLS" | "CMAF")
+        def input_type: () -> ("HLS" | "CMAF" | "MULTIVIEW")
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
         def input_switch_configuration: () -> Types::InputSwitchConfiguration
@@ -112,7 +114,7 @@ module Aws
                             channel_group_name: ::String,
                             channel_name: ::String,
                             ?client_token: ::String,
-                            ?input_type: ("HLS" | "CMAF"),
+                            ?input_type: ("HLS" | "CMAF" | "MULTIVIEW"),
                             ?description: ::String,
                             ?input_switch_configuration: {
                               mqcs_input_switching: bool?,
@@ -120,6 +122,10 @@ module Aws
                             },
                             ?output_header_configuration: {
                               publish_mqcs: bool?
+                            },
+                            ?multiview_configuration: {
+                              available_sources: Array[::String],
+                              available_layouts: Array[("LAYOUT_2EH" | "LAYOUT_2PL" | "LAYOUT_3EL" | "LAYOUT_3PL" | "LAYOUT_4E" | "LAYOUT_4PL")]
                             },
                             ?output_locking_mode: ("EPOCH_LOCKED" | "NON_EPOCH_LOCKED"),
                             ?tags: Hash[::String, ::String]
@@ -309,6 +315,8 @@ module Aws
 
       interface _GetChannelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetChannelResponse]
+        def multiview_configuration: () -> Types::MultiviewConfiguration
+        def attached_multiview_channels: () -> ::Array[::String]
         def arn: () -> ::String
         def channel_name: () -> ::String
         def channel_group_name: () -> ::String
@@ -317,7 +325,7 @@ module Aws
         def reset_at: () -> ::Time
         def description: () -> ::String
         def ingest_endpoints: () -> ::Array[Types::IngestEndpoint]
-        def input_type: () -> ("HLS" | "CMAF")
+        def input_type: () -> ("HLS" | "CMAF" | "MULTIVIEW")
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
         def input_switch_configuration: () -> Types::InputSwitchConfiguration
@@ -573,6 +581,8 @@ module Aws
 
       interface _UpdateChannelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateChannelResponse]
+        def multiview_configuration: () -> Types::MultiviewConfiguration
+        def attached_multiview_channels: () -> ::Array[::String]
         def arn: () -> ::String
         def channel_name: () -> ::String
         def channel_group_name: () -> ::String
@@ -580,7 +590,7 @@ module Aws
         def modified_at: () -> ::Time
         def description: () -> ::String
         def ingest_endpoints: () -> ::Array[Types::IngestEndpoint]
-        def input_type: () -> ("HLS" | "CMAF")
+        def input_type: () -> ("HLS" | "CMAF" | "MULTIVIEW")
         def etag: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
         def input_switch_configuration: () -> Types::InputSwitchConfiguration
@@ -599,6 +609,10 @@ module Aws
                             },
                             ?output_header_configuration: {
                               publish_mqcs: bool?
+                            },
+                            ?multiview_configuration: {
+                              available_sources: Array[::String],
+                              available_layouts: Array[("LAYOUT_2EH" | "LAYOUT_2PL" | "LAYOUT_3EL" | "LAYOUT_3PL" | "LAYOUT_4E" | "LAYOUT_4PL")]
                             }
                           ) -> _UpdateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
