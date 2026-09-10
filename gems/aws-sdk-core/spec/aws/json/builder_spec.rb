@@ -77,7 +77,8 @@ module Aws
       it 'preserves millisecond precision on epoch timestamps' do
         params = Structure.new(*rules.shape.member_names).new
         params.timestamp = Time.at(123_456_789, 123_000)
-        expect(json(params)).to eq('{"Timestamp":123456789.123}')
+        # JRuby and MRI render the same float differently but both are valid JSON for the same value
+        expect(Aws::Json.load(json(params))['Timestamp']).to eq(123_456_789.123)
       end
 
       describe 'document types' do
