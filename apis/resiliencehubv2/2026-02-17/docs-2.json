@@ -48,7 +48,9 @@
     "ListSystemEvents": "<p>Lists events for a system.</p>",
     "ListSystems": "<p>Lists systems.</p>",
     "ListTagsForResource": "<p>Lists the tags for a resource.</p>",
+    "ListTestRunDependencies": "<p>Lists the dependencies that a test run blocked. Each dependency reflects the discovered classification captured when the run started, so results do not change if a dependency is reclassified after the run.</p>",
     "ListTestRunEvents": "<p>Lists the events in a test run's timeline.</p>",
+    "ListTestRunSourceEvents": "<p>Lists the state-change events observed for a test run monitoring source. Events are returned for one source per call, in chronological order.</p>",
     "ListTestRunSources": "<p>Lists the monitoring source snapshots captured for a test run, optionally filtered by type.</p>",
     "ListTestRuns": "<p>Lists the runs of a test, or all test runs for a service.</p>",
     "ListTestSources": "<p>Lists the monitoring sources attached to a test, optionally filtered by type.</p>",
@@ -87,8 +89,8 @@
     "AccountTargeting": {
       "base": "<p>Whether a test run targets resources in a single AWS account or across multiple accounts.</p>",
       "refs": {
-        "TestRun$accountTargeting": "<p>Indicates whether this test run targets a single account or multiple accounts.</p>",
-        "TestRunSummary$accountTargeting": "<p>Indicates whether this test run targets a single account or multiple accounts.</p>"
+        "TestRun$accountTargeting": "<p>Indicates whether the test run targets resources in a single AWS account or across multiple accounts.</p>",
+        "TestRunSummary$accountTargeting": "<p>Indicates whether the test run targets resources in a single AWS account or across multiple accounts.</p>"
       }
     },
     "Achievability": {
@@ -112,6 +114,25 @@
       "base": null,
       "refs": {
         "EventActor$type": "<p>The type of actor, either USER or SYSTEM.</p>"
+      }
+    },
+    "AlarmState": {
+      "base": "<p>The state of a CloudWatch alarm.</p>",
+      "refs": {
+        "AlarmStateChangeDetail$state": "<p>The state the alarm transitioned to.</p>",
+        "AlarmStateChangeDetail$previousState": "<p>The state the alarm transitioned from. Absent on the initial event, which records the alarm's state when collection began.</p>"
+      }
+    },
+    "AlarmStateChangeDetail": {
+      "base": "<p>Details about a CloudWatch alarm state change observed during a test run.</p>",
+      "refs": {
+        "TestRunSourceEventDetail$alarmStateChange": "<p>A CloudWatch alarm state change.</p>"
+      }
+    },
+    "AlarmStateChangeDetailReasonString": {
+      "base": null,
+      "refs": {
+        "AlarmStateChangeDetail$reason": "<p>A human-readable explanation of the state change, as reported by CloudWatch.</p>"
       }
     },
     "Arn": {
@@ -178,7 +199,9 @@
         "ListServicesRequest$policyArn": null,
         "ListSystemEventsRequest$systemArn": null,
         "ListTagsForResourceRequest$resourceArn": null,
+        "ListTestRunDependenciesRequest$serviceArn": "<p>The ARN of the service the test run belongs to.</p>",
         "ListTestRunEventsRequest$serviceArn": "<p>The ARN of the service the test run belongs to.</p>",
+        "ListTestRunSourceEventsRequest$serviceArn": "<p>The ARN of the service the test run belongs to.</p>",
         "ListTestRunSourcesRequest$serviceArn": "<p>The ARN of the service the test run belongs to.</p>",
         "ListTestRunsRequest$serviceArn": "<p>The ARN of the service to list test runs for.</p>",
         "ListTestSourcesRequest$serviceArn": "<p>The ARN of the service the test belongs to.</p>",
@@ -639,9 +662,10 @@
       "refs": {}
     },
     "DependencyCriticality": {
-      "base": null,
+      "base": "<p>The criticality classification of a dependency.</p>",
       "refs": {
         "DependencySummary$criticality": "<p>The criticality level of the dependency.</p>",
+        "TestRunDependencySummary$criticality": "<p>The criticality classification of the dependency when the run started. A dependency that was not discovered has the UNKNOWN criticality.</p>",
         "UpdateDependencyRequest$criticality": "<p>The updated criticality level of the dependency.</p>",
         "UpdateDependencyResponse$criticality": "<p>The criticality level of the dependency.</p>"
       }
@@ -722,6 +746,56 @@
         "Service$effectivePolicyValues": "<p>The effective policy values for the service.</p>"
       }
     },
+    "EksLabelKey": {
+      "base": "<p>A Kubernetes label key. It can include an optional DNS subdomain prefix.</p>",
+      "refs": {
+        "EksLabelSelectorMatchLabelsMap$key": null,
+        "EksLabelSelectorRequirement$key": "<p>The label key that the requirement applies to.</p>"
+      }
+    },
+    "EksLabelSelector": {
+      "base": "<p>A label selector that filters the Kubernetes objects discovered from an Amazon EKS input source. An object must satisfy both matchLabels and matchExpressions to match the selector. A selector with neither matches every object. The selector must render to 2,048 characters or fewer in Kubernetes label selector syntax.</p>",
+      "refs": {
+        "EksSource$labelSelector": "<p>Filters discovery to the Kubernetes objects whose labels match the selector. When omitted, all supported objects in the specified namespaces are discovered.</p>"
+      }
+    },
+    "EksLabelSelectorMatchExpressionsList": {
+      "base": null,
+      "refs": {
+        "EksLabelSelector$matchExpressions": "<p>The label requirements that an object must satisfy. All requirements in the list must match for the object to be selected.</p>"
+      }
+    },
+    "EksLabelSelectorMatchLabelsMap": {
+      "base": "<p>Specifies Kubernetes labels as a map of label keys to values.</p>",
+      "refs": {
+        "EksLabelSelector$matchLabels": "<p>The label key-value pairs that an object must have. All pairs must match for the object to be selected.</p>"
+      }
+    },
+    "EksLabelSelectorOperator": {
+      "base": "<p>The operator that a label selector requirement applies to its key and values.</p> <ul> <li> <p>IN — the key's value must be one of the specified values.</p> </li> <li> <p>NOT_IN — the key's value must not be one of the specified values.</p> </li> <li> <p>EXISTS — the key must be present, regardless of its value.</p> </li> <li> <p>DOES_NOT_EXIST — the key must not be present.</p> </li> </ul>",
+      "refs": {
+        "EksLabelSelectorRequirement$operator": "<p>The operator that relates the label key to the values.</p>"
+      }
+    },
+    "EksLabelSelectorRequirement": {
+      "base": "<p>A single label requirement in a label selector, expressed as a key, an operator, and an optional list of values.</p>",
+      "refs": {
+        "EksLabelSelectorMatchExpressionsList$member": null
+      }
+    },
+    "EksLabelSelectorRequirementValuesList": {
+      "base": null,
+      "refs": {
+        "EksLabelSelectorRequirement$values": "<p>The label values to compare against. Specify values when the operator is IN or NOT_IN. Leave this empty when the operator is EXISTS or DOES_NOT_EXIST.</p>"
+      }
+    },
+    "EksLabelValue": {
+      "base": "<p>A Kubernetes label value. This value can be empty.</p>",
+      "refs": {
+        "EksLabelSelectorMatchLabelsMap$value": null,
+        "EksLabelSelectorRequirementValuesList$member": null
+      }
+    },
     "EksNamespace": {
       "base": "<p>Kubernetes namespace name (RFC 1123 Label).</p>",
       "refs": {
@@ -793,7 +867,6 @@
         "CreatePolicyRequest$name": null,
         "CreateServiceRequest$name": null,
         "CreateSystemRequest$name": null,
-        "CreateTestRequest$roleName": "<p>The name of the IAM execution role to use when running the test.</p>",
         "DisasterRecoverySource$policyName": null,
         "Policy$name": null,
         "PolicySummary$name": null,
@@ -803,10 +876,7 @@
         "System$name": null,
         "SystemSummary$name": null,
         "TargetSource$policyName": null,
-        "Test$roleName": "<p>The name of the IAM execution role used to run the test.</p>",
-        "TestRun$roleName": "<p>The IAM execution role name snapshotted from the test when the run was started.</p>",
-        "TestRunPolicySnapshot$name": "<p>The name of the policy.</p>",
-        "UpdateTestRequest$roleName": "<p>The updated IAM execution role name.</p>"
+        "TestRunPolicySnapshot$name": "<p>The name of the policy.</p>"
       }
     },
     "EventActor": {
@@ -969,7 +1039,11 @@
     "IamRoleName": {
       "base": "<p>IAM role name (supports up to 64 characters per IAM limits).</p>",
       "refs": {
-        "PermissionModel$invokerRoleName": null
+        "CreateTestRequest$roleName": "<p>The name of the IAM execution role to use when running the test.</p>",
+        "PermissionModel$invokerRoleName": null,
+        "Test$roleName": "<p>The name of the IAM execution role used to run the test.</p>",
+        "TestRun$roleName": "<p>The IAM execution role name snapshotted from the test when the run was started.</p>",
+        "UpdateTestRequest$roleName": "<p>The updated IAM execution role name.</p>"
       }
     },
     "ImportAppRequest": {
@@ -1206,11 +1280,27 @@
       "base": null,
       "refs": {}
     },
+    "ListTestRunDependenciesRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListTestRunDependenciesResponse": {
+      "base": null,
+      "refs": {}
+    },
     "ListTestRunEventsRequest": {
       "base": null,
       "refs": {}
     },
     "ListTestRunEventsResponse": {
+      "base": null,
+      "refs": {}
+    },
+    "ListTestRunSourceEventsRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListTestRunSourceEventsResponse": {
       "base": null,
       "refs": {}
     },
@@ -1306,7 +1396,9 @@
         "ListServicesRequest$maxResults": null,
         "ListSystemEventsRequest$maxResults": null,
         "ListSystemsRequest$maxResults": null,
+        "ListTestRunDependenciesRequest$maxResults": null,
         "ListTestRunEventsRequest$maxResults": null,
+        "ListTestRunSourceEventsRequest$maxResults": null,
         "ListTestRunSourcesRequest$maxResults": null,
         "ListTestRunsRequest$maxResults": null,
         "ListTestSourcesRequest$maxResults": null,
@@ -1405,8 +1497,12 @@
         "ListSystemEventsResponse$nextToken": null,
         "ListSystemsRequest$nextToken": null,
         "ListSystemsResponse$nextToken": null,
+        "ListTestRunDependenciesRequest$nextToken": null,
+        "ListTestRunDependenciesResponse$nextToken": null,
         "ListTestRunEventsRequest$nextToken": null,
         "ListTestRunEventsResponse$nextToken": null,
+        "ListTestRunSourceEventsRequest$nextToken": null,
+        "ListTestRunSourceEventsResponse$nextToken": null,
         "ListTestRunSourcesRequest$nextToken": null,
         "ListTestRunSourcesResponse$nextToken": null,
         "ListTestRunsRequest$nextToken": null,
@@ -1567,6 +1663,7 @@
         "Service$regions": "<p>The Regions where the service operates.</p>",
         "ServiceSummary$regions": "<p>The Regions where the service operates.</p>",
         "TestRun$regions": "<p>The Regions snapshotted from the service when the run was started.</p>",
+        "TestRunDependencySummary$sourceRegions": "<p>The source Regions from which the dependency was detected.</p>",
         "UpdateServiceRequest$regions": "<p>The updated AWS Regions where the service operates.</p>"
       }
     },
@@ -2466,6 +2563,48 @@
         "GetTestRunResponse$testRun": "<p>The requested test run.</p>"
       }
     },
+    "TestRunDependencySource": {
+      "base": "<p>The origin of a blocked dependency.</p>",
+      "refs": {
+        "TestRunDependencySummary$source": "<p>The origin of the dependency. A discovered dependency was found by dependency discovery; a manual dependency was entered when the run started.</p>"
+      }
+    },
+    "TestRunDependencySummary": {
+      "base": "<p>Contains summary information about a dependency that a test run blocked, as captured when the run started.</p>",
+      "refs": {
+        "TestRunDependencySummaryList$member": null
+      }
+    },
+    "TestRunDependencySummaryDependencyNameString": {
+      "base": null,
+      "refs": {
+        "TestRunDependencySummary$dependencyName": "<p>The name of the dependency.</p>"
+      }
+    },
+    "TestRunDependencySummaryDnsNameString": {
+      "base": null,
+      "refs": {
+        "TestRunDependencySummary$dnsName": "<p>The DNS name of the dependency that the test run blocked.</p>"
+      }
+    },
+    "TestRunDependencySummaryList": {
+      "base": null,
+      "refs": {
+        "ListTestRunDependenciesResponse$dependencies": "<p>The list of dependencies the test run blocked.</p>"
+      }
+    },
+    "TestRunDependencySummaryLocationString": {
+      "base": null,
+      "refs": {
+        "TestRunDependencySummary$location": "<p>The location of the dependency.</p>"
+      }
+    },
+    "TestRunDependencySummaryProviderString": {
+      "base": null,
+      "refs": {
+        "TestRunDependencySummary$provider": "<p>The provider of the dependency.</p>"
+      }
+    },
     "TestRunEvent": {
       "base": "<p>A single event in a test run's timeline.</p>",
       "refs": {
@@ -2520,7 +2659,9 @@
         "GetTestRunRequest$testRunId": "<p>The identifier of the test run to retrieve.</p>",
         "ListReportsRequest$testRunId": null,
         "ListResolvedTestRunTargetResourcesRequest$testRunId": "<p>The identifier of the test run to list resolved target resources for.</p>",
+        "ListTestRunDependenciesRequest$testRunId": "<p>The identifier of the test run to list dependencies for.</p>",
         "ListTestRunEventsRequest$testRunId": "<p>The identifier of the test run to list events for.</p>",
+        "ListTestRunSourceEventsRequest$testRunId": "<p>The identifier of the test run to list source events for.</p>",
         "ListTestRunSourcesRequest$testRunId": "<p>The identifier of the test run to list sources for.</p>",
         "ReportGenerationResult$testRunId": null,
         "StartTestRunResponse$testRunId": "<p>The identifier of the started test run.</p>",
@@ -2546,6 +2687,55 @@
       "base": "<p>A snapshot of the report configuration captured onto a test run from the service when the run was started.</p>",
       "refs": {
         "TestRun$reportConfiguration": "<p>The report configuration snapshotted from the service when the run was started.</p>"
+      }
+    },
+    "TestRunSourceArn": {
+      "base": "<p>The ARN of a test run monitoring source, such as a CloudWatch alarm.</p>",
+      "refs": {
+        "ListTestRunSourceEventsRequest$sourceArn": "<p>The ARN of the monitoring source to list events for, such as the ARN of a CloudWatch alarm. If the source was not monitored during the test run, the response is an empty list.</p>",
+        "TestRunSourceEvent$sourceArn": "<p>The ARN of the monitoring source the event belongs to.</p>"
+      }
+    },
+    "TestRunSourceEvent": {
+      "base": "<p>A state-change event observed for a test run monitoring source.</p>",
+      "refs": {
+        "TestRunSourceEventList$member": null
+      }
+    },
+    "TestRunSourceEventDetail": {
+      "base": "<p>The payload of a test run source event. Exactly one member is set.</p>",
+      "refs": {
+        "TestRunSourceEvent$detail": "<p>The event payload.</p>"
+      }
+    },
+    "TestRunSourceEventError": {
+      "base": "<p>Describes an error that prevented event collection from a test run monitoring source.</p>",
+      "refs": {
+        "TestRunSourceEventDetail$error": "<p>An error that prevented event collection from the source.</p>"
+      }
+    },
+    "TestRunSourceEventErrorCode": {
+      "base": "<p>The cause of a source event collection error.</p>",
+      "refs": {
+        "TestRunSourceEventError$errorCode": "<p>The error code.</p>"
+      }
+    },
+    "TestRunSourceEventErrorErrorMessageString": {
+      "base": null,
+      "refs": {
+        "TestRunSourceEventError$errorMessage": "<p>A human-readable description of the error.</p>"
+      }
+    },
+    "TestRunSourceEventList": {
+      "base": null,
+      "refs": {
+        "ListTestRunSourceEventsResponse$testRunSourceEvents": "<p>The list of source events, in chronological order.</p>"
+      }
+    },
+    "TestRunSourceEventType": {
+      "base": "<p>The type of a test run source event. ALARM indicates an event produced from a CloudWatch alarm source.</p>",
+      "refs": {
+        "TestRunSourceEvent$eventType": "<p>The type of the event. ALARM indicates an event from a CloudWatch alarm source; the detail member carries either the alarm state change or a collection error.</p>"
       }
     },
     "TestRunSourceSummary": {
@@ -2738,6 +2928,7 @@
         "TestRun$startedAt": "<p>The timestamp when the test run started.</p>",
         "TestRun$endedAt": "<p>The timestamp when the test run ended.</p>",
         "TestRunEvent$timestamp": "<p>The timestamp when the event occurred.</p>",
+        "TestRunSourceEvent$timestamp": "<p>The timestamp when the event occurred.</p>",
         "TestRunSummary$startedAt": "<p>The timestamp when the test run started.</p>",
         "TestRunSummary$endedAt": "<p>The timestamp when the test run ended.</p>",
         "TestSummary$creationTime": "<p>The timestamp when the test was created.</p>",
@@ -2907,6 +3098,7 @@
         "ServiceEvent$eventId": "<p>The unique identifier of the event.</p>",
         "StartFailureModeAssessmentResponse$assessmentId": "<p>The unique identifier of the started assessment.</p>",
         "SystemEvent$eventId": "<p>The unique identifier of the event.</p>",
+        "TestRunDependencySummary$dependencyId": "<p>The unique identifier of the dependency. Absent when the dependency was entered manually and was not part of dependency discovery.</p>",
         "UpdateAssertionRequest$assertionId": "<p>The unique identifier of the assertion to update.</p>",
         "UpdateDependencyRequest$dependencyId": "<p>The identifier of the dependency to update.</p>",
         "UpdateDependencyResponse$dependencyId": "<p>The identifier of the updated dependency.</p>",

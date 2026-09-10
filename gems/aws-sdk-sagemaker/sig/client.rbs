@@ -120,6 +120,21 @@ module Aws
                                      ) -> _AssociateTrialComponentResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateTrialComponentResponseSuccess
 
+      interface _AttachClusterNodeNetworkInterfaceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AttachClusterNodeNetworkInterfaceResponse]
+        def cluster_arn: () -> ::String
+        def node_id: () -> ::String
+        def network_interface_id: () -> ::String
+        def attachment_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMaker/Client.html#attach_cluster_node_network_interface-instance_method
+      def attach_cluster_node_network_interface: (
+                                                   cluster_name: ::String,
+                                                   node_id: ::String,
+                                                   network_interface_id: ::String
+                                                 ) -> _AttachClusterNodeNetworkInterfaceResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachClusterNodeNetworkInterfaceResponseSuccess
+
       interface _AttachClusterNodeVolumeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AttachClusterNodeVolumeResponse]
         def cluster_arn: () -> ::String

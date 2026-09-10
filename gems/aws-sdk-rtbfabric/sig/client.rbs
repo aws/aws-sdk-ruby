@@ -219,6 +219,7 @@ module Aws
         def status: () -> ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
         def listener_config: () -> Types::ListenerConfig
         def external_inbound_endpoint: () -> ::String
+        def client_routing_policy: () -> ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#create_responder_gateway-instance_method
       def create_responder_gateway: (
@@ -238,7 +239,8 @@ module Aws
                                       client_token: ::String,
                                       ?description: ::String,
                                       ?tags: Hash[::String, ::String],
-                                      ?gateway_type: ("EXTERNAL" | "INTERNAL")
+                                      ?gateway_type: ("EXTERNAL" | "INTERNAL"),
+                                      ?client_routing_policy: ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
                                     ) -> _CreateResponderGatewayResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResponderGatewayResponseSuccess
 
@@ -473,6 +475,7 @@ module Aws
         def links_requested_count: () -> ::Integer
         def gateway_type: () -> ("EXTERNAL" | "INTERNAL")
         def external_inbound_endpoint: () -> ::String
+        def client_routing_policy: () -> ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#get_responder_gateway-instance_method
       def get_responder_gateway: (
@@ -697,6 +700,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResponderGatewayResponse]
         def gateway_id: () -> ::String
         def status: () -> ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+        def client_routing_policy: () -> ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#update_responder_gateway-instance_method
       def update_responder_gateway: (
@@ -712,7 +716,8 @@ module Aws
                                       ?managed_endpoint_configuration: Params::managed_endpoint_configuration,
                                       client_token: ::String,
                                       gateway_id: ::String,
-                                      ?description: ::String
+                                      ?description: ::String,
+                                      ?client_routing_policy: ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
                                     ) -> _UpdateResponderGatewayResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResponderGatewayResponseSuccess
 

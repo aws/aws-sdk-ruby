@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2026-09-10)
+------------------
+
+* Feature - TwelveLabs Marengo 3.0 is now an embedding model option in Amazon Bedrock Managed Knowledge Base. Create multimodal embeddings for video, audio, and image content that capture visual scenes, speech, and video cues, not just transcribed text.
+
 1.82.0 (2026-09-09)
 ------------------
 

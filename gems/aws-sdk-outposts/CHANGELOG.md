@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2026-09-10)
+------------------
+
+* Feature - Added fields to identify Outpost generation and rack scaling configuration on Outpost and CatalogItem resources.
+
 1.110.0 (2026-09-09)
 ------------------
 

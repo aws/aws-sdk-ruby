@@ -218,7 +218,7 @@ module Aws
     }
 
       type parsing_configuration = {
-      parsing_strategy: ("BEDROCK_FOUNDATION_MODEL" | "BEDROCK_DATA_AUTOMATION" | "SMART_PARSING"),
+      parsing_strategy: ("BEDROCK_FOUNDATION_MODEL" | "BEDROCK_DATA_AUTOMATION" | "SMART_PARSING" | "MULTI_MODAL_EMBEDDINGS"),
       bedrock_foundation_model_configuration: {
         model_arn: ::String,
         parsing_prompt: {
@@ -558,7 +558,9 @@ module Aws
             fixed_length_duration: ::Integer
           }
         }
-      ]?
+      ]?,
+      model_configuration: {
+      }?
     }
 
       type embedding_model_configuration = {
@@ -588,7 +590,8 @@ module Aws
       embedding_model_configuration: Params::embedding_model_configuration?,
       server_side_encryption_configuration: {
         kms_key_arn: ::String?
-      }?
+      }?,
+      supplemental_data_storage_configuration: Params::supplemental_data_storage_configuration?
     }
 
       type redshift_provisioned_configuration = {

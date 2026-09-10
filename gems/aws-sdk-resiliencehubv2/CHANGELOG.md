@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2026-09-10)
+------------------
+
+* Feature - This release adds the ListTestRunSourceEvents and ListTestRunDependencies APIs, which return the alarm state changes during a test run and the dependencies the run blocked.
+
 1.4.0 (2026-09-09)
 ------------------
 

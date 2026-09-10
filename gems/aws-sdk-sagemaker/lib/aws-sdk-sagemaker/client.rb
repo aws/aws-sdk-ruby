@@ -665,6 +665,56 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
+    # Attaches an elastic network interface (ENI) to a node in a HyperPod
+    # cluster.
+    #
+    # To use this operation, you must have the
+    # `sagemaker:AttachClusterNodeNetworkInterface` permission.
+    #
+    # @option params [required, String] :cluster_name
+    #   The name or Amazon Resource Name (ARN) of the SageMaker HyperPod
+    #   cluster that contains the target node.
+    #
+    # @option params [required, String] :node_id
+    #   The unique identifier of the cluster node to which you want to attach
+    #   the network interface. The node must belong to your specified HyperPod
+    #   cluster and cannot be part of a Restricted Instance Group (RIG).
+    #
+    # @option params [required, String] :network_interface_id
+    #   The unique identifier of the elastic network interface (ENI) to
+    #   attach.
+    #
+    # @return [Types::AttachClusterNodeNetworkInterfaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AttachClusterNodeNetworkInterfaceResponse#cluster_arn #cluster_arn} => String
+    #   * {Types::AttachClusterNodeNetworkInterfaceResponse#node_id #node_id} => String
+    #   * {Types::AttachClusterNodeNetworkInterfaceResponse#network_interface_id #network_interface_id} => String
+    #   * {Types::AttachClusterNodeNetworkInterfaceResponse#attachment_id #attachment_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.attach_cluster_node_network_interface({
+    #     cluster_name: "ClusterNameOrArn", # required
+    #     node_id: "ClusterNodeId", # required
+    #     network_interface_id: "ClusterNetworkInterfaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_arn #=> String
+    #   resp.node_id #=> String
+    #   resp.network_interface_id #=> String
+    #   resp.attachment_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AttachClusterNodeNetworkInterface AWS API Documentation
+    #
+    # @overload attach_cluster_node_network_interface(params = {})
+    # @param [Hash] params ({})
+    def attach_cluster_node_network_interface(params = {}, options = {})
+      req = build_request(:attach_cluster_node_network_interface, params)
+      req.send_request(options)
+    end
+
     # Attaches your Amazon Elastic Block Store (Amazon EBS) volume to a node
     # in your EKS orchestrated HyperPod cluster.
     #
@@ -34710,7 +34760,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.391.0'
+      context[:gem_version] = '1.392.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

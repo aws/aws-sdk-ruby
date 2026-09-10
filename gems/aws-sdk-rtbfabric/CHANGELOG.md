@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2026-09-10)
+------------------
+
+* Feature - AWS RTB Fabric now lets you control how traffic is routed to your responder gateway across Availability Zones. Set the new clientRoutingPolicy parameter  to keep traffic within the same Availability Zone or distribute traffic across all Availability Zones.
+
 1.17.0 (2026-09-09)
 ------------------
 

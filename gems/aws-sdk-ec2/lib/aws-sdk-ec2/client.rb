@@ -9108,6 +9108,30 @@ module Aws::EC2
     #
     #   Default: `regional` (for instances in Local Zones only)
     #
+    # @option params [String] :boot_mode_override
+    #   The boot mode of the new image, which overrides the default boot mode.
+    #   By default, if you do not specify this parameter, the new image
+    #   inherits the `boot-mode` from the source instance.
+    #
+    #   A value of `uefi` indicates that the image only supports UEFI boot
+    #   mode. You can specify this parameter only if the
+    #   `current-instance-boot-mode` of the source instance is `uefi`. To find
+    #   the `boot-mode` or `current-instance-boot-mode` of an instance, see
+    #   [DescribeInstances][1].
+    #
+    #   <note markdown="1"> The operating system contained in the AMI must be configured to
+    #   support the specified boot mode.
+    #
+    #    </note>
+    #
+    #   For more information, see [Instance launch behavior with Amazon EC2
+    #   boot modes][2] in the *Amazon EC2 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
+    #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -9210,6 +9234,7 @@ module Aws::EC2
     #       },
     #     ],
     #     snapshot_location: "regional", # accepts regional, local
+    #     boot_mode_override: "uefi", # accepts uefi
     #     dry_run: false,
     #     instance_id: "InstanceId", # required
     #     name: "ImageNameRequest", # required
@@ -77407,7 +77432,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.646.0'
+      context[:gem_version] = '1.647.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -601,11 +601,20 @@ module Aws::BedrockAgent
       req.send_request(options)
     end
 
-    # Creates an agent that orchestrates interactions between foundation
+    # <note markdown="1"> Amazon Bedrock Agents (now Amazon Bedrock Agents
+    # Classic) is no longer
+    # open to new customers. For capabilities similar to Bedrock Agents
+    # Classic, explore Amazon Bedrock AgentCore. Existing customers can
+    # continue to use the service as normal. For more information, see
+    # [Amazon Bedrock Agents Classic availability change][1].
+    #
+    #  </note>
+    #
+    #  Creates an agent that orchestrates interactions between foundation
     # models, data sources, software applications, user conversations, and
     # APIs to carry out tasks to help customers.
     #
-    # * Specify the following fields for security purposes.
+    #  * Specify the following fields for security purposes.
     #
     #   * `agentResourceRoleArn` – The Amazon Resource Name (ARN) of the
     #     role with permissions to invoke API operations on an agent.
@@ -619,11 +628,11 @@ module Aws::BedrockAgent
     #     begins a new session.
     # * To enable your agent to retain conversational context across
     #   multiple sessions, include a `memoryConfiguration` object. For more
-    #   information, see [Configure memory][1].
+    #   information, see [Configure memory][2].
     #
     # * To override the default prompt behavior for agent orchestration and
     #   to use advanced prompts, include a `promptOverrideConfiguration`
-    #   object. For more information, see [Advanced prompts][2].
+    #   object. For more information, see [Advanced prompts][3].
     #
     # * If your agent fails to be created, the response returns a list of
     #   `failureReasons` alongside a list of `recommendedActions` for you to
@@ -635,8 +644,9 @@ module Aws::BedrockAgent
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-configure-memory.html
-    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
+    # [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html
+    # [2]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-configure-memory.html
+    # [3]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
     #
     # @option params [required, String] :agent_name
     #   A name for the agent that you create.
@@ -1396,7 +1406,7 @@ module Aws::BedrockAgent
     #         ],
     #       },
     #       parsing_configuration: {
-    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL", # required, accepts BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION, SMART_PARSING
+    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL", # required, accepts BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION, SMART_PARSING, MULTI_MODAL_EMBEDDINGS
     #         bedrock_foundation_model_configuration: {
     #           model_arn: "BedrockModelArn", # required
     #           parsing_prompt: {
@@ -1499,7 +1509,7 @@ module Aws::BedrockAgent
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations #=> Array
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].transformation_function.transformation_lambda_configuration.lambda_arn #=> String
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].step_to_apply #=> String, one of "POST_CHUNKING"
-    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING"
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING", "MULTI_MODAL_EMBEDDINGS"
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_modality #=> String, one of "MULTIMODAL"
@@ -2362,6 +2372,8 @@ module Aws::BedrockAgent
     #                 },
     #               },
     #             ],
+    #             model_configuration: {
+    #             },
     #           },
     #         },
     #         supplemental_data_storage_configuration: {
@@ -2396,10 +2408,22 @@ module Aws::BedrockAgent
     #                 },
     #               },
     #             ],
+    #             model_configuration: {
+    #             },
     #           },
     #         },
     #         server_side_encryption_configuration: {
     #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #         supplemental_data_storage_configuration: {
+    #           storage_locations: [ # required
+    #             {
+    #               type: "S3", # required, accepts S3
+    #               s3_location: {
+    #                 uri: "S3BucketUri", # required
+    #               },
+    #             },
+    #           ],
     #         },
     #       },
     #       kendra_knowledge_base_configuration: {
@@ -2577,6 +2601,9 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video #=> Array
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video[0].segmentation_configuration.fixed_length_duration #=> Integer
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.server_side_encryption_configuration.kms_key_arn #=> String
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations #=> Array
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].type #=> String, one of "S3"
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].s3_location.uri #=> String
     #   resp.knowledge_base.knowledge_base_configuration.kendra_knowledge_base_configuration.kendra_index_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.sql_knowledge_base_configuration.type #=> String, one of "REDSHIFT"
     #   resp.knowledge_base.knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configurations #=> Array
@@ -4002,7 +4029,7 @@ module Aws::BedrockAgent
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations #=> Array
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].transformation_function.transformation_lambda_configuration.lambda_arn #=> String
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].step_to_apply #=> String, one of "POST_CHUNKING"
-    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING"
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING", "MULTI_MODAL_EMBEDDINGS"
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_modality #=> String, one of "MULTIMODAL"
@@ -4538,6 +4565,9 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video #=> Array
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video[0].segmentation_configuration.fixed_length_duration #=> Integer
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.server_side_encryption_configuration.kms_key_arn #=> String
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations #=> Array
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].type #=> String, one of "S3"
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].s3_location.uri #=> String
     #   resp.knowledge_base.knowledge_base_configuration.kendra_knowledge_base_configuration.kendra_index_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.sql_knowledge_base_configuration.type #=> String, one of "REDSHIFT"
     #   resp.knowledge_base.knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configurations #=> Array
@@ -6907,7 +6937,7 @@ module Aws::BedrockAgent
     #         ],
     #       },
     #       parsing_configuration: {
-    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL", # required, accepts BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION, SMART_PARSING
+    #         parsing_strategy: "BEDROCK_FOUNDATION_MODEL", # required, accepts BEDROCK_FOUNDATION_MODEL, BEDROCK_DATA_AUTOMATION, SMART_PARSING, MULTI_MODAL_EMBEDDINGS
     #         bedrock_foundation_model_configuration: {
     #           model_arn: "BedrockModelArn", # required
     #           parsing_prompt: {
@@ -7010,7 +7040,7 @@ module Aws::BedrockAgent
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations #=> Array
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].transformation_function.transformation_lambda_configuration.lambda_arn #=> String
     #   resp.data_source.vector_ingestion_configuration.custom_transformation_configuration.transformations[0].step_to_apply #=> String, one of "POST_CHUNKING"
-    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING"
+    #   resp.data_source.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL", "BEDROCK_DATA_AUTOMATION", "SMART_PARSING", "MULTI_MODAL_EMBEDDINGS"
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
     #   resp.data_source.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_modality #=> String, one of "MULTIMODAL"
@@ -7623,6 +7653,8 @@ module Aws::BedrockAgent
     #                 },
     #               },
     #             ],
+    #             model_configuration: {
+    #             },
     #           },
     #         },
     #         supplemental_data_storage_configuration: {
@@ -7657,10 +7689,22 @@ module Aws::BedrockAgent
     #                 },
     #               },
     #             ],
+    #             model_configuration: {
+    #             },
     #           },
     #         },
     #         server_side_encryption_configuration: {
     #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #         supplemental_data_storage_configuration: {
+    #           storage_locations: [ # required
+    #             {
+    #               type: "S3", # required, accepts S3
+    #               s3_location: {
+    #                 uri: "S3BucketUri", # required
+    #               },
+    #             },
+    #           ],
     #         },
     #       },
     #       kendra_knowledge_base_configuration: {
@@ -7835,6 +7879,9 @@ module Aws::BedrockAgent
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video #=> Array
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.embedding_model_configuration.bedrock_embedding_model_configuration.video[0].segmentation_configuration.fixed_length_duration #=> Integer
     #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.server_side_encryption_configuration.kms_key_arn #=> String
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations #=> Array
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].type #=> String, one of "S3"
+    #   resp.knowledge_base.knowledge_base_configuration.managed_knowledge_base_configuration.supplemental_data_storage_configuration.storage_locations[0].s3_location.uri #=> String
     #   resp.knowledge_base.knowledge_base_configuration.kendra_knowledge_base_configuration.kendra_index_arn #=> String
     #   resp.knowledge_base.knowledge_base_configuration.sql_knowledge_base_configuration.type #=> String, one of "REDSHIFT"
     #   resp.knowledge_base.knowledge_base_configuration.sql_knowledge_base_configuration.redshift_configuration.storage_configurations #=> Array
@@ -8490,7 +8537,7 @@ module Aws::BedrockAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagent'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

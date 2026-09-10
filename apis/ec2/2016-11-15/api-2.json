@@ -10611,6 +10611,10 @@
       }
     },
     "Boolean":{"type":"boolean"},
+    "BootModeOverrideValues":{
+      "type":"string",
+      "enum":["uefi"]
+    },
     "BootModeType":{
       "type":"string",
       "enum":[
@@ -14555,6 +14559,7 @@
           "locationName":"TagSpecification"
         },
         "SnapshotLocation":{"shape":"SnapshotLocationEnum"},
+        "BootModeOverride":{"shape":"BootModeOverrideValues"},
         "DryRun":{
           "shape":"Boolean",
           "locationName":"dryRun"

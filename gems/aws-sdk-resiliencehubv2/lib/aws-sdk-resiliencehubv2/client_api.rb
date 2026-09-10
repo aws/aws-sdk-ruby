@@ -20,6 +20,9 @@ module Aws::Resiliencehubv2
     Achievability = Shapes::StructureShape.new(name: 'Achievability')
     AchievabilityStatus = Shapes::StringShape.new(name: 'AchievabilityStatus')
     ActorType = Shapes::StringShape.new(name: 'ActorType')
+    AlarmState = Shapes::StringShape.new(name: 'AlarmState')
+    AlarmStateChangeDetail = Shapes::StructureShape.new(name: 'AlarmStateChangeDetail')
+    AlarmStateChangeDetailReasonString = Shapes::StringShape.new(name: 'AlarmStateChangeDetailReasonString')
     Arn = Shapes::StringShape.new(name: 'Arn')
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     Assertion = Shapes::StructureShape.new(name: 'Assertion')
@@ -106,6 +109,14 @@ module Aws::Resiliencehubv2
     EdgePropertyList = Shapes::ListShape.new(name: 'EdgePropertyList')
     EdgePropertySummary = Shapes::StructureShape.new(name: 'EdgePropertySummary')
     EffectivePolicyValues = Shapes::StructureShape.new(name: 'EffectivePolicyValues')
+    EksLabelKey = Shapes::StringShape.new(name: 'EksLabelKey')
+    EksLabelSelector = Shapes::StructureShape.new(name: 'EksLabelSelector')
+    EksLabelSelectorMatchExpressionsList = Shapes::ListShape.new(name: 'EksLabelSelectorMatchExpressionsList')
+    EksLabelSelectorMatchLabelsMap = Shapes::MapShape.new(name: 'EksLabelSelectorMatchLabelsMap')
+    EksLabelSelectorOperator = Shapes::StringShape.new(name: 'EksLabelSelectorOperator')
+    EksLabelSelectorRequirement = Shapes::StructureShape.new(name: 'EksLabelSelectorRequirement')
+    EksLabelSelectorRequirementValuesList = Shapes::ListShape.new(name: 'EksLabelSelectorRequirementValuesList')
+    EksLabelValue = Shapes::StringShape.new(name: 'EksLabelValue')
     EksNamespace = Shapes::StringShape.new(name: 'EksNamespace')
     EksSource = Shapes::StructureShape.new(name: 'EksSource')
     EksSourceNamespacesList = Shapes::ListShape.new(name: 'EksSourceNamespacesList')
@@ -190,8 +201,12 @@ module Aws::Resiliencehubv2
     ListSystemsResponse = Shapes::StructureShape.new(name: 'ListSystemsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTestRunDependenciesRequest = Shapes::StructureShape.new(name: 'ListTestRunDependenciesRequest')
+    ListTestRunDependenciesResponse = Shapes::StructureShape.new(name: 'ListTestRunDependenciesResponse')
     ListTestRunEventsRequest = Shapes::StructureShape.new(name: 'ListTestRunEventsRequest')
     ListTestRunEventsResponse = Shapes::StructureShape.new(name: 'ListTestRunEventsResponse')
+    ListTestRunSourceEventsRequest = Shapes::StructureShape.new(name: 'ListTestRunSourceEventsRequest')
+    ListTestRunSourceEventsResponse = Shapes::StructureShape.new(name: 'ListTestRunSourceEventsResponse')
     ListTestRunSourcesRequest = Shapes::StructureShape.new(name: 'ListTestRunSourcesRequest')
     ListTestRunSourcesResponse = Shapes::StructureShape.new(name: 'ListTestRunSourcesResponse')
     ListTestRunsRequest = Shapes::StructureShape.new(name: 'ListTestRunsRequest')
@@ -360,6 +375,13 @@ module Aws::Resiliencehubv2
     TestId = Shapes::StringShape.new(name: 'TestId')
     TestParameters = Shapes::MapShape.new(name: 'TestParameters')
     TestRun = Shapes::StructureShape.new(name: 'TestRun')
+    TestRunDependencySource = Shapes::StringShape.new(name: 'TestRunDependencySource')
+    TestRunDependencySummary = Shapes::StructureShape.new(name: 'TestRunDependencySummary')
+    TestRunDependencySummaryDependencyNameString = Shapes::StringShape.new(name: 'TestRunDependencySummaryDependencyNameString')
+    TestRunDependencySummaryDnsNameString = Shapes::StringShape.new(name: 'TestRunDependencySummaryDnsNameString')
+    TestRunDependencySummaryList = Shapes::ListShape.new(name: 'TestRunDependencySummaryList')
+    TestRunDependencySummaryLocationString = Shapes::StringShape.new(name: 'TestRunDependencySummaryLocationString')
+    TestRunDependencySummaryProviderString = Shapes::StringShape.new(name: 'TestRunDependencySummaryProviderString')
     TestRunEvent = Shapes::StructureShape.new(name: 'TestRunEvent')
     TestRunEventAttributeKey = Shapes::StringShape.new(name: 'TestRunEventAttributeKey')
     TestRunEventAttributeValue = Shapes::StringShape.new(name: 'TestRunEventAttributeValue')
@@ -372,6 +394,14 @@ module Aws::Resiliencehubv2
     TestRunObservabilityAlarmSummary = Shapes::StructureShape.new(name: 'TestRunObservabilityAlarmSummary')
     TestRunPolicySnapshot = Shapes::StructureShape.new(name: 'TestRunPolicySnapshot')
     TestRunReportConfiguration = Shapes::StructureShape.new(name: 'TestRunReportConfiguration')
+    TestRunSourceArn = Shapes::StringShape.new(name: 'TestRunSourceArn')
+    TestRunSourceEvent = Shapes::StructureShape.new(name: 'TestRunSourceEvent')
+    TestRunSourceEventDetail = Shapes::UnionShape.new(name: 'TestRunSourceEventDetail')
+    TestRunSourceEventError = Shapes::StructureShape.new(name: 'TestRunSourceEventError')
+    TestRunSourceEventErrorCode = Shapes::StringShape.new(name: 'TestRunSourceEventErrorCode')
+    TestRunSourceEventErrorErrorMessageString = Shapes::StringShape.new(name: 'TestRunSourceEventErrorErrorMessageString')
+    TestRunSourceEventList = Shapes::ListShape.new(name: 'TestRunSourceEventList')
+    TestRunSourceEventType = Shapes::StringShape.new(name: 'TestRunSourceEventType')
     TestRunSourceSummary = Shapes::UnionShape.new(name: 'TestRunSourceSummary')
     TestRunSourceSummaryList = Shapes::ListShape.new(name: 'TestRunSourceSummaryList')
     TestRunSourceType = Shapes::StringShape.new(name: 'TestRunSourceType')
@@ -439,6 +469,11 @@ module Aws::Resiliencehubv2
     Achievability.add_member(:multi_region_rto_rpo, Shapes::ShapeRef.new(shape: AchievabilityStatus, location_name: "multiRegionRtoRpo"))
     Achievability.add_member(:data_recovery_time_between_backups, Shapes::ShapeRef.new(shape: AchievabilityStatus, location_name: "dataRecoveryTimeBetweenBackups"))
     Achievability.struct_class = Types::Achievability
+
+    AlarmStateChangeDetail.add_member(:state, Shapes::ShapeRef.new(shape: AlarmState, required: true, location_name: "state"))
+    AlarmStateChangeDetail.add_member(:previous_state, Shapes::ShapeRef.new(shape: AlarmState, location_name: "previousState"))
+    AlarmStateChangeDetail.add_member(:reason, Shapes::ShapeRef.new(shape: AlarmStateChangeDetailReasonString, location_name: "reason"))
+    AlarmStateChangeDetail.struct_class = Types::AlarmStateChangeDetail
 
     ArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
@@ -589,7 +624,7 @@ module Aws::Resiliencehubv2
     CreateTestRequest.add_member(:test_template_arn, Shapes::ShapeRef.new(shape: ServiceOwnedArn, required: true, location_name: "testTemplateArn"))
     CreateTestRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
     CreateTestRequest.add_member(:stop_conditions, Shapes::ShapeRef.new(shape: StopConditionList, location_name: "stopConditions"))
-    CreateTestRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "roleName"))
+    CreateTestRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: IamRoleName, location_name: "roleName"))
     CreateTestRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: TestParameters, location_name: "parameters"))
     CreateTestRequest.struct_class = Types::CreateTestRequest
 
@@ -728,8 +763,25 @@ module Aws::Resiliencehubv2
     EffectivePolicyValues.add_member(:data_recovery_time_between_backups, Shapes::ShapeRef.new(shape: TargetSource, location_name: "dataRecoveryTimeBetweenBackups"))
     EffectivePolicyValues.struct_class = Types::EffectivePolicyValues
 
+    EksLabelSelector.add_member(:match_labels, Shapes::ShapeRef.new(shape: EksLabelSelectorMatchLabelsMap, location_name: "matchLabels"))
+    EksLabelSelector.add_member(:match_expressions, Shapes::ShapeRef.new(shape: EksLabelSelectorMatchExpressionsList, location_name: "matchExpressions"))
+    EksLabelSelector.struct_class = Types::EksLabelSelector
+
+    EksLabelSelectorMatchExpressionsList.member = Shapes::ShapeRef.new(shape: EksLabelSelectorRequirement)
+
+    EksLabelSelectorMatchLabelsMap.key = Shapes::ShapeRef.new(shape: EksLabelKey)
+    EksLabelSelectorMatchLabelsMap.value = Shapes::ShapeRef.new(shape: EksLabelValue)
+
+    EksLabelSelectorRequirement.add_member(:key, Shapes::ShapeRef.new(shape: EksLabelKey, required: true, location_name: "key"))
+    EksLabelSelectorRequirement.add_member(:operator, Shapes::ShapeRef.new(shape: EksLabelSelectorOperator, required: true, location_name: "operator"))
+    EksLabelSelectorRequirement.add_member(:values, Shapes::ShapeRef.new(shape: EksLabelSelectorRequirementValuesList, location_name: "values"))
+    EksLabelSelectorRequirement.struct_class = Types::EksLabelSelectorRequirement
+
+    EksLabelSelectorRequirementValuesList.member = Shapes::ShapeRef.new(shape: EksLabelValue)
+
     EksSource.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "clusterArn"))
     EksSource.add_member(:namespaces, Shapes::ShapeRef.new(shape: EksSourceNamespacesList, required: true, location_name: "namespaces"))
+    EksSource.add_member(:label_selector, Shapes::ShapeRef.new(shape: EksLabelSelector, location_name: "labelSelector"))
     EksSource.struct_class = Types::EksSource
 
     EksSourceNamespacesList.member = Shapes::ShapeRef.new(shape: EksNamespace)
@@ -1055,6 +1107,16 @@ module Aws::Resiliencehubv2
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ListTestRunDependenciesRequest.add_member(:test_run_id, Shapes::ShapeRef.new(shape: TestRunId, required: true, location: "uri", location_name: "testRunId"))
+    ListTestRunDependenciesRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "serviceArn"))
+    ListTestRunDependenciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListTestRunDependenciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListTestRunDependenciesRequest.struct_class = Types::ListTestRunDependenciesRequest
+
+    ListTestRunDependenciesResponse.add_member(:dependencies, Shapes::ShapeRef.new(shape: TestRunDependencySummaryList, required: true, location_name: "dependencies"))
+    ListTestRunDependenciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTestRunDependenciesResponse.struct_class = Types::ListTestRunDependenciesResponse
+
     ListTestRunEventsRequest.add_member(:test_run_id, Shapes::ShapeRef.new(shape: TestRunId, required: true, location: "uri", location_name: "testRunId"))
     ListTestRunEventsRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "serviceArn"))
     ListTestRunEventsRequest.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "startedAt"))
@@ -1066,6 +1128,17 @@ module Aws::Resiliencehubv2
     ListTestRunEventsResponse.add_member(:events, Shapes::ShapeRef.new(shape: TestRunEventList, required: true, location_name: "events"))
     ListTestRunEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListTestRunEventsResponse.struct_class = Types::ListTestRunEventsResponse
+
+    ListTestRunSourceEventsRequest.add_member(:test_run_id, Shapes::ShapeRef.new(shape: TestRunId, required: true, location: "uri", location_name: "testRunId"))
+    ListTestRunSourceEventsRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "serviceArn"))
+    ListTestRunSourceEventsRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: TestRunSourceArn, required: true, location: "querystring", location_name: "sourceArn"))
+    ListTestRunSourceEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListTestRunSourceEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListTestRunSourceEventsRequest.struct_class = Types::ListTestRunSourceEventsRequest
+
+    ListTestRunSourceEventsResponse.add_member(:test_run_source_events, Shapes::ShapeRef.new(shape: TestRunSourceEventList, required: true, location_name: "testRunSourceEvents"))
+    ListTestRunSourceEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTestRunSourceEventsResponse.struct_class = Types::ListTestRunSourceEventsResponse
 
     ListTestRunSourcesRequest.add_member(:test_run_id, Shapes::ShapeRef.new(shape: TestRunId, required: true, location: "uri", location_name: "testRunId"))
     ListTestRunSourcesRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "serviceArn"))
@@ -1689,7 +1762,7 @@ module Aws::Resiliencehubv2
     Test.add_member(:actions, Shapes::ShapeRef.new(shape: TestActionList, location_name: "actions"))
     Test.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
     Test.add_member(:stop_conditions, Shapes::ShapeRef.new(shape: StopConditionList, location_name: "stopConditions"))
-    Test.add_member(:role_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "roleName"))
+    Test.add_member(:role_name, Shapes::ShapeRef.new(shape: IamRoleName, location_name: "roleName"))
     Test.add_member(:parameters, Shapes::ShapeRef.new(shape: TestParameters, location_name: "parameters"))
     Test.add_member(:total_test_runs, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "totalTestRuns"))
     Test.add_member(:successful_test_runs, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "successfulTestRuns"))
@@ -1718,7 +1791,7 @@ module Aws::Resiliencehubv2
     TestRun.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
     TestRun.add_member(:stop_conditions, Shapes::ShapeRef.new(shape: StopConditionList, location_name: "stopConditions"))
     TestRun.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
-    TestRun.add_member(:role_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "roleName"))
+    TestRun.add_member(:role_name, Shapes::ShapeRef.new(shape: IamRoleName, location_name: "roleName"))
     TestRun.add_member(:test_template_arn, Shapes::ShapeRef.new(shape: ServiceOwnedArn, required: true, location_name: "testTemplateArn"))
     TestRun.add_member(:report_configuration, Shapes::ShapeRef.new(shape: TestRunReportConfiguration, location_name: "reportConfiguration"))
     TestRun.add_member(:policy, Shapes::ShapeRef.new(shape: TestRunPolicySnapshot, location_name: "policy"))
@@ -1729,6 +1802,18 @@ module Aws::Resiliencehubv2
     TestRun.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "regions"))
     TestRun.add_member(:account_targeting, Shapes::ShapeRef.new(shape: AccountTargeting, location_name: "accountTargeting"))
     TestRun.struct_class = Types::TestRun
+
+    TestRunDependencySummary.add_member(:dependency_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "dependencyId"))
+    TestRunDependencySummary.add_member(:dependency_name, Shapes::ShapeRef.new(shape: TestRunDependencySummaryDependencyNameString, required: true, location_name: "dependencyName"))
+    TestRunDependencySummary.add_member(:dns_name, Shapes::ShapeRef.new(shape: TestRunDependencySummaryDnsNameString, required: true, location_name: "dnsName"))
+    TestRunDependencySummary.add_member(:criticality, Shapes::ShapeRef.new(shape: DependencyCriticality, required: true, location_name: "criticality"))
+    TestRunDependencySummary.add_member(:source, Shapes::ShapeRef.new(shape: TestRunDependencySource, required: true, location_name: "source"))
+    TestRunDependencySummary.add_member(:location, Shapes::ShapeRef.new(shape: TestRunDependencySummaryLocationString, location_name: "location"))
+    TestRunDependencySummary.add_member(:source_regions, Shapes::ShapeRef.new(shape: RegionList, location_name: "sourceRegions"))
+    TestRunDependencySummary.add_member(:provider, Shapes::ShapeRef.new(shape: TestRunDependencySummaryProviderString, location_name: "provider"))
+    TestRunDependencySummary.struct_class = Types::TestRunDependencySummary
+
+    TestRunDependencySummaryList.member = Shapes::ShapeRef.new(shape: TestRunDependencySummary)
 
     TestRunEvent.add_member(:event_id, Shapes::ShapeRef.new(shape: TestRunEventEventIdString, required: true, location_name: "eventId"))
     TestRunEvent.add_member(:event_type, Shapes::ShapeRef.new(shape: TestRunEventEventTypeString, required: true, location_name: "eventType"))
@@ -1758,6 +1843,26 @@ module Aws::Resiliencehubv2
 
     TestRunReportConfiguration.add_member(:report_output, Shapes::ShapeRef.new(shape: ReportOutputConfigurationList, required: true, location_name: "reportOutput"))
     TestRunReportConfiguration.struct_class = Types::TestRunReportConfiguration
+
+    TestRunSourceEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timestamp"))
+    TestRunSourceEvent.add_member(:source_arn, Shapes::ShapeRef.new(shape: TestRunSourceArn, required: true, location_name: "sourceArn"))
+    TestRunSourceEvent.add_member(:event_type, Shapes::ShapeRef.new(shape: TestRunSourceEventType, required: true, location_name: "eventType"))
+    TestRunSourceEvent.add_member(:detail, Shapes::ShapeRef.new(shape: TestRunSourceEventDetail, required: true, location_name: "detail"))
+    TestRunSourceEvent.struct_class = Types::TestRunSourceEvent
+
+    TestRunSourceEventDetail.add_member(:alarm_state_change, Shapes::ShapeRef.new(shape: AlarmStateChangeDetail, location_name: "alarmStateChange"))
+    TestRunSourceEventDetail.add_member(:error, Shapes::ShapeRef.new(shape: TestRunSourceEventError, location_name: "error"))
+    TestRunSourceEventDetail.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TestRunSourceEventDetail.add_member_subclass(:alarm_state_change, Types::TestRunSourceEventDetail::AlarmStateChange)
+    TestRunSourceEventDetail.add_member_subclass(:error, Types::TestRunSourceEventDetail::Error)
+    TestRunSourceEventDetail.add_member_subclass(:unknown, Types::TestRunSourceEventDetail::Unknown)
+    TestRunSourceEventDetail.struct_class = Types::TestRunSourceEventDetail
+
+    TestRunSourceEventError.add_member(:error_code, Shapes::ShapeRef.new(shape: TestRunSourceEventErrorCode, required: true, location_name: "errorCode"))
+    TestRunSourceEventError.add_member(:error_message, Shapes::ShapeRef.new(shape: TestRunSourceEventErrorErrorMessageString, required: true, location_name: "errorMessage"))
+    TestRunSourceEventError.struct_class = Types::TestRunSourceEventError
+
+    TestRunSourceEventList.member = Shapes::ShapeRef.new(shape: TestRunSourceEvent)
 
     TestRunSourceSummary.add_member(:success_criteria_alarm, Shapes::ShapeRef.new(shape: TestRunSuccessCriteriaAlarmSummary, location_name: "successCriteriaAlarm"))
     TestRunSourceSummary.add_member(:observability_alarm, Shapes::ShapeRef.new(shape: TestRunObservabilityAlarmSummary, location_name: "observabilityAlarm"))
@@ -1936,7 +2041,7 @@ module Aws::Resiliencehubv2
     UpdateTestRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "serviceArn"))
     UpdateTestRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "loggingConfiguration"))
     UpdateTestRequest.add_member(:stop_conditions, Shapes::ShapeRef.new(shape: StopConditionList, location_name: "stopConditions"))
-    UpdateTestRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "roleName"))
+    UpdateTestRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: IamRoleName, location_name: "roleName"))
     UpdateTestRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: TestParameters, location_name: "parameters"))
     UpdateTestRequest.struct_class = Types::UpdateTestRequest
 
@@ -2675,12 +2780,48 @@ module Aws::Resiliencehubv2
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:list_test_run_dependencies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTestRunDependencies"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/test-runs/{testRunId}/dependencies"
+        o.input = Shapes::ShapeRef.new(shape: ListTestRunDependenciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTestRunDependenciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_test_run_events, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTestRunEvents"
         o.http_method = "GET"
         o.http_request_uri = "/v2/test-runs/{testRunId}/events"
         o.input = Shapes::ShapeRef.new(shape: ListTestRunEventsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTestRunEventsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_test_run_source_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTestRunSourceEvents"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/test-runs/{testRunId}/source-events"
+        o.input = Shapes::ShapeRef.new(shape: ListTestRunSourceEventsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTestRunSourceEventsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

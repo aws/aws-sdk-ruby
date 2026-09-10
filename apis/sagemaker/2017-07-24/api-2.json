@@ -51,6 +51,19 @@
         {"shape":"ResourceLimitExceeded"}
       ]
     },
+    "AttachClusterNodeNetworkInterface":{
+      "name":"AttachClusterNodeNetworkInterface",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"AttachClusterNodeNetworkInterfaceRequest"},
+      "output":{"shape":"AttachClusterNodeNetworkInterfaceResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"},
+        {"shape":"ResourceLimitExceeded"}
+      ]
+    },
     "AttachClusterNodeVolume":{
       "name":"AttachClusterNodeVolume",
       "http":{
@@ -6206,6 +6219,34 @@
       "min":1,
       "pattern":"[a-zA-Z0-9._-]+"
     },
+    "AttachClusterNodeNetworkInterfaceRequest":{
+      "type":"structure",
+      "required":[
+        "ClusterName",
+        "NodeId",
+        "NetworkInterfaceId"
+      ],
+      "members":{
+        "ClusterName":{"shape":"ClusterNameOrArn"},
+        "NodeId":{"shape":"ClusterNodeId"},
+        "NetworkInterfaceId":{"shape":"ClusterNetworkInterfaceId"}
+      }
+    },
+    "AttachClusterNodeNetworkInterfaceResponse":{
+      "type":"structure",
+      "required":[
+        "ClusterArn",
+        "NodeId",
+        "NetworkInterfaceId",
+        "AttachmentId"
+      ],
+      "members":{
+        "ClusterArn":{"shape":"ClusterArn"},
+        "NodeId":{"shape":"ClusterNodeId"},
+        "NetworkInterfaceId":{"shape":"ClusterNetworkInterfaceId"},
+        "AttachmentId":{"shape":"ClusterNetworkInterfaceAttachmentId"}
+      }
+    },
     "AttachClusterNodeVolumeRequest":{
       "type":"structure",
       "required":[
@@ -8829,11 +8870,23 @@
         "InterfaceType":{"shape":"ClusterInterfaceType"}
       }
     },
+    "ClusterNetworkInterfaceAttachmentId":{
+      "type":"string",
+      "max":28,
+      "min":1,
+      "pattern":"eni-attach-[0-9a-f]{8}(?:[0-9a-f]{9})?"
+    },
     "ClusterNetworkInterfaceDetails":{
       "type":"structure",
       "members":{
         "InterfaceType":{"shape":"ClusterInterfaceType"}
       }
+    },
+    "ClusterNetworkInterfaceId":{
+      "type":"string",
+      "max":21,
+      "min":1,
+      "pattern":"eni-[0-9a-f]{8}(?:[0-9a-f]{9})?"
     },
     "ClusterNodeDetails":{
       "type":"structure",

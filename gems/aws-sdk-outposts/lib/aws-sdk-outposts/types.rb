@@ -381,6 +381,11 @@ module Aws::Outposts
     #   The supported storage options for the catalog item.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] rack_scaling_type
+    #   The rack scaling type supported by the catalog item. Valid values
+    #   are `SINGLE_RACK` and `MULTI_RACK`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CatalogItem AWS API Documentation
     #
     class CatalogItem < Struct.new(
@@ -390,7 +395,8 @@ module Aws::Outposts
       :power_kva,
       :weight_lbs,
       :supported_uplink_gbps,
-      :supported_storage)
+      :supported_storage,
+      :rack_scaling_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2449,6 +2455,18 @@ module Aws::Outposts
     #   The hardware type.
     #   @return [String]
     #
+    # @!attribute [rw] generation
+    #   The Outpost generation. Valid values are `GENERATION_1` for
+    #   first-generation rack deployments and `GENERATION_2` for
+    #   second-generation rack deployments.
+    #   @return [String]
+    #
+    # @!attribute [rw] rack_scaling_type
+    #   The rack scaling type. Valid values are `SINGLE_RACK` for
+    #   single-rack Outposts and `MULTI_RACK` for multi-rack Outposts that
+    #   can expand across multiple racks.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/Outpost AWS API Documentation
     #
     class Outpost < Struct.new(
@@ -2463,7 +2481,9 @@ module Aws::Outposts
       :availability_zone_id,
       :tags,
       :site_arn,
-      :supported_hardware_type)
+      :supported_hardware_type,
+      :generation,
+      :rack_scaling_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2660,7 +2680,8 @@ module Aws::Outposts
     #
     # @!attribute [rw] quote_constraint_type
     #   The type of constraint. Valid values are `RACK_MAXIMUM`,
-    #   `RACK_MAX_POWER_KVA`, and `RACK_MAX_WEIGHT_LBS`.
+    #   `RACK_MAX_POWER_KVA`, `RACK_MAX_WEIGHT_LBS`, and
+    #   `RACK_SPACE_CONSTRAINED`.
     #   @return [String]
     #
     # @!attribute [rw] value

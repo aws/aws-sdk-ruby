@@ -553,6 +553,18 @@ module Aws::Resiliencehubv2
     #       eks: {
     #         cluster_arn: "Arn", # required
     #         namespaces: ["EksNamespace"], # required
+    #         label_selector: {
+    #           match_labels: {
+    #             "EksLabelKey" => "EksLabelValue",
+    #           },
+    #           match_expressions: [
+    #             {
+    #               key: "EksLabelKey", # required
+    #               operator: "IN", # required, accepts IN, NOT_IN, EXISTS, DOES_NOT_EXIST
+    #               values: ["EksLabelValue"],
+    #             },
+    #           ],
+    #         },
     #       },
     #       design_file_s3_url: "S3Url",
     #     },
@@ -1084,7 +1096,7 @@ module Aws::Resiliencehubv2
     #         value: "String", # required
     #       },
     #     ],
-    #     role_name: "EntityName",
+    #     role_name: "IamRoleName",
     #     parameters: {
     #       "ParameterKey" => ["ParameterValue"],
     #     },
@@ -2470,6 +2482,13 @@ module Aws::Resiliencehubv2
     #   resp.input_source_summaries[0].eks.cluster_arn #=> String
     #   resp.input_source_summaries[0].eks.namespaces #=> Array
     #   resp.input_source_summaries[0].eks.namespaces[0] #=> String
+    #   resp.input_source_summaries[0].eks.label_selector.match_labels #=> Hash
+    #   resp.input_source_summaries[0].eks.label_selector.match_labels["EksLabelKey"] #=> String
+    #   resp.input_source_summaries[0].eks.label_selector.match_expressions #=> Array
+    #   resp.input_source_summaries[0].eks.label_selector.match_expressions[0].key #=> String
+    #   resp.input_source_summaries[0].eks.label_selector.match_expressions[0].operator #=> String, one of "IN", "NOT_IN", "EXISTS", "DOES_NOT_EXIST"
+    #   resp.input_source_summaries[0].eks.label_selector.match_expressions[0].values #=> Array
+    #   resp.input_source_summaries[0].eks.label_selector.match_expressions[0].values[0] #=> String
     #   resp.input_source_summaries[0].design_file_s3_url #=> String
     #   resp.input_source_summaries[0].created_at #=> Time
     #   resp.next_token #=> String
@@ -3172,6 +3191,62 @@ module Aws::Resiliencehubv2
       req.send_request(options)
     end
 
+    # Lists the dependencies that a test run blocked. Each dependency
+    # reflects the discovered classification captured when the run started,
+    # so results do not change if a dependency is reclassified after the
+    # run.
+    #
+    # @option params [required, String] :test_run_id
+    #   The identifier of the test run to list dependencies for.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test run belongs to.
+    #
+    # @option params [Integer] :max_results
+    #   Pagination page size.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @return [Types::ListTestRunDependenciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestRunDependenciesResponse#dependencies #dependencies} => Array&lt;Types::TestRunDependencySummary&gt;
+    #   * {Types::ListTestRunDependenciesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_run_dependencies({
+    #     test_run_id: "TestRunId", # required
+    #     service_arn: "Arn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dependencies #=> Array
+    #   resp.dependencies[0].dependency_id #=> String
+    #   resp.dependencies[0].dependency_name #=> String
+    #   resp.dependencies[0].dns_name #=> String
+    #   resp.dependencies[0].criticality #=> String, one of "HARD", "SOFT", "UNKNOWN"
+    #   resp.dependencies[0].source #=> String, one of "DISCOVERED", "MANUAL"
+    #   resp.dependencies[0].location #=> String
+    #   resp.dependencies[0].source_regions #=> Array
+    #   resp.dependencies[0].source_regions[0] #=> String
+    #   resp.dependencies[0].provider #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunDependencies AWS API Documentation
+    #
+    # @overload list_test_run_dependencies(params = {})
+    # @param [Hash] params ({})
+    def list_test_run_dependencies(params = {}, options = {})
+      req = build_request(:list_test_run_dependencies, params)
+      req.send_request(options)
+    end
+
     # Lists the events in a test run's timeline.
     #
     # @option params [required, String] :test_run_id
@@ -3227,6 +3302,66 @@ module Aws::Resiliencehubv2
     # @param [Hash] params ({})
     def list_test_run_events(params = {}, options = {})
       req = build_request(:list_test_run_events, params)
+      req.send_request(options)
+    end
+
+    # Lists the state-change events observed for a test run monitoring
+    # source. Events are returned for one source per call, in chronological
+    # order.
+    #
+    # @option params [required, String] :test_run_id
+    #   The identifier of the test run to list source events for.
+    #
+    # @option params [required, String] :service_arn
+    #   The ARN of the service the test run belongs to.
+    #
+    # @option params [required, String] :source_arn
+    #   The ARN of the monitoring source to list events for, such as the ARN
+    #   of a CloudWatch alarm. If the source was not monitored during the test
+    #   run, the response is an empty list.
+    #
+    # @option params [Integer] :max_results
+    #   Pagination page size.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @return [Types::ListTestRunSourceEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTestRunSourceEventsResponse#test_run_source_events #test_run_source_events} => Array&lt;Types::TestRunSourceEvent&gt;
+    #   * {Types::ListTestRunSourceEventsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_test_run_source_events({
+    #     test_run_id: "TestRunId", # required
+    #     service_arn: "Arn", # required
+    #     source_arn: "TestRunSourceArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.test_run_source_events #=> Array
+    #   resp.test_run_source_events[0].timestamp #=> Time
+    #   resp.test_run_source_events[0].source_arn #=> String
+    #   resp.test_run_source_events[0].event_type #=> String, one of "ALARM"
+    #   resp.test_run_source_events[0].detail.alarm_state_change.state #=> String, one of "OK", "ALARM", "INSUFFICIENT_DATA"
+    #   resp.test_run_source_events[0].detail.alarm_state_change.previous_state #=> String, one of "OK", "ALARM", "INSUFFICIENT_DATA"
+    #   resp.test_run_source_events[0].detail.alarm_state_change.reason #=> String
+    #   resp.test_run_source_events[0].detail.error.error_code #=> String, one of "ACCESS_DENIED", "INTERNAL_ERROR"
+    #   resp.test_run_source_events[0].detail.error.error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunSourceEvents AWS API Documentation
+    #
+    # @overload list_test_run_source_events(params = {})
+    # @param [Hash] params ({})
+    def list_test_run_source_events(params = {}, options = {})
+      req = build_request(:list_test_run_source_events, params)
       req.send_request(options)
     end
 
@@ -4237,7 +4372,7 @@ module Aws::Resiliencehubv2
     #         value: "String", # required
     #       },
     #     ],
-    #     role_name: "EntityName",
+    #     role_name: "IamRoleName",
     #     parameters: {
     #       "ParameterKey" => ["ParameterValue"],
     #     },
@@ -4343,7 +4478,7 @@ module Aws::Resiliencehubv2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resiliencehubv2'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

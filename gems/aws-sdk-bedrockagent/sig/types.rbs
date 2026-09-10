@@ -299,6 +299,7 @@ module Aws::BedrockAgent
       attr_accessor embedding_data_type: ("FLOAT32" | "BINARY")
       attr_accessor audio: ::Array[Types::AudioConfiguration]
       attr_accessor video: ::Array[Types::VideoConfiguration]
+      attr_accessor model_configuration: untyped
       SENSITIVE: []
     end
 
@@ -1916,6 +1917,7 @@ module Aws::BedrockAgent
       attr_accessor embedding_model_arn: ::String
       attr_accessor embedding_model_configuration: Types::EmbeddingModelConfiguration
       attr_accessor server_side_encryption_configuration: Types::ServerSideEncryptionConfiguration
+      attr_accessor supplemental_data_storage_configuration: Types::SupplementalDataStorageConfiguration
       SENSITIVE: []
     end
 
@@ -2128,7 +2130,7 @@ module Aws::BedrockAgent
     end
 
     class ParsingConfiguration
-      attr_accessor parsing_strategy: ("BEDROCK_FOUNDATION_MODEL" | "BEDROCK_DATA_AUTOMATION" | "SMART_PARSING")
+      attr_accessor parsing_strategy: ("BEDROCK_FOUNDATION_MODEL" | "BEDROCK_DATA_AUTOMATION" | "SMART_PARSING" | "MULTI_MODAL_EMBEDDINGS")
       attr_accessor bedrock_foundation_model_configuration: Types::BedrockFoundationModelConfiguration
       attr_accessor bedrock_data_automation_configuration: Types::BedrockDataAutomationConfiguration
       SENSITIVE: []

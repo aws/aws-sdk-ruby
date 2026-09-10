@@ -114,6 +114,7 @@ module Aws::Outposts
       attr_accessor weight_lbs: ::Integer
       attr_accessor supported_uplink_gbps: ::Array[::Integer]
       attr_accessor supported_storage: ::Array[("EBS" | "S3")]
+      attr_accessor rack_scaling_type: ("SINGLE_RACK" | "MULTI_RACK")
       SENSITIVE: []
     end
 
@@ -699,6 +700,8 @@ module Aws::Outposts
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor site_arn: ::String
       attr_accessor supported_hardware_type: ("RACK" | "SERVER")
+      attr_accessor generation: ("GENERATION_2" | "GENERATION_1")
+      attr_accessor rack_scaling_type: ("SINGLE_RACK" | "MULTI_RACK")
       SENSITIVE: []
     end
 
@@ -744,7 +747,7 @@ module Aws::Outposts
     end
 
     class QuoteConstraint
-      attr_accessor quote_constraint_type: ("RACK_MAXIMUM" | "RACK_MAX_POWER_KVA" | "RACK_MAX_WEIGHT_LBS")
+      attr_accessor quote_constraint_type: ("RACK_MAXIMUM" | "RACK_MAX_POWER_KVA" | "RACK_MAX_WEIGHT_LBS" | "RACK_SPACE_CONSTRAINED")
       attr_accessor value: ::String
       SENSITIVE: []
     end

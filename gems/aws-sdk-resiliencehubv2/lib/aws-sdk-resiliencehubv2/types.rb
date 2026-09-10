@@ -57,6 +57,33 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # Details about a CloudWatch alarm state change observed during a test
+    # run.
+    #
+    # @!attribute [rw] state
+    #   The state the alarm transitioned to.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_state
+    #   The state the alarm transitioned from. Absent on the initial event,
+    #   which records the alarm's state when collection began.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   A human-readable explanation of the state change, as reported by
+    #   CloudWatch.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/AlarmStateChangeDetail AWS API Documentation
+    #
+    class AlarmStateChangeDetail < Struct.new(
+      :state,
+      :previous_state,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a resilience assertion for a service.
     #
     # @!attribute [rw] service_arn
@@ -1317,6 +1344,58 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # A label selector that filters the Kubernetes objects discovered from
+    # an Amazon EKS input source. An object must satisfy both matchLabels
+    # and matchExpressions to match the selector. A selector with neither
+    # matches every object. The selector must render to 2,048 characters or
+    # fewer in Kubernetes label selector syntax.
+    #
+    # @!attribute [rw] match_labels
+    #   The label key-value pairs that an object must have. All pairs must
+    #   match for the object to be selected.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] match_expressions
+    #   The label requirements that an object must satisfy. All requirements
+    #   in the list must match for the object to be selected.
+    #   @return [Array<Types::EksLabelSelectorRequirement>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/EksLabelSelector AWS API Documentation
+    #
+    class EksLabelSelector < Struct.new(
+      :match_labels,
+      :match_expressions)
+      SENSITIVE = [:match_labels, :match_expressions]
+      include Aws::Structure
+    end
+
+    # A single label requirement in a label selector, expressed as a key, an
+    # operator, and an optional list of values.
+    #
+    # @!attribute [rw] key
+    #   The label key that the requirement applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operator that relates the label key to the values.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The label values to compare against. Specify values when the
+    #   operator is IN or NOT\_IN. Leave this empty when the operator is
+    #   EXISTS or DOES\_NOT\_EXIST.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/EksLabelSelectorRequirement AWS API Documentation
+    #
+    class EksLabelSelectorRequirement < Struct.new(
+      :key,
+      :operator,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines an Amazon EKS cluster and its namespaces as an input source
     # for resource discovery.
     #
@@ -1328,11 +1407,18 @@ module Aws::Resiliencehubv2
     #   The list of Kubernetes namespaces within the EKS cluster.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] label_selector
+    #   Filters discovery to the Kubernetes objects whose labels match the
+    #   selector. When omitted, all supported objects in the specified
+    #   namespaces are discovered.
+    #   @return [Types::EksLabelSelector]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/EksSource AWS API Documentation
     #
     class EksSource < Struct.new(
       :cluster_arn,
-      :namespaces)
+      :namespaces,
+      :label_selector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2731,6 +2817,50 @@ module Aws::Resiliencehubv2
     end
 
     # @!attribute [rw] test_run_id
+    #   The identifier of the test run to list dependencies for.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test run belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Pagination page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunDependenciesRequest AWS API Documentation
+    #
+    class ListTestRunDependenciesRequest < Struct.new(
+      :test_run_id,
+      :service_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dependencies
+    #   The list of dependencies the test run blocked.
+    #   @return [Array<Types::TestRunDependencySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunDependenciesResponse AWS API Documentation
+    #
+    class ListTestRunDependenciesResponse < Struct.new(
+      :dependencies,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run_id
     #   The identifier of the test run to list events for.
     #   @return [String]
     #
@@ -2779,6 +2909,57 @@ module Aws::Resiliencehubv2
     #
     class ListTestRunEventsResponse < Struct.new(
       :events,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run_id
+    #   The identifier of the test run to list source events for.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_arn
+    #   The ARN of the service the test run belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_arn
+    #   The ARN of the monitoring source to list events for, such as the ARN
+    #   of a CloudWatch alarm. If the source was not monitored during the
+    #   test run, the response is an empty list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Pagination page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunSourceEventsRequest AWS API Documentation
+    #
+    class ListTestRunSourceEventsRequest < Struct.new(
+      :test_run_id,
+      :service_arn,
+      :source_arn,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] test_run_source_events
+    #   The list of source events, in chronological order.
+    #   @return [Array<Types::TestRunSourceEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListTestRunSourceEventsResponse AWS API Documentation
+    #
+    class ListTestRunSourceEventsResponse < Struct.new(
+      :test_run_source_events,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -5468,8 +5649,8 @@ module Aws::Resiliencehubv2
     #   @return [Array<String>]
     #
     # @!attribute [rw] account_targeting
-    #   Indicates whether this test run targets a single account or multiple
-    #   accounts.
+    #   Indicates whether the test run targets resources in a single AWS
+    #   account or across multiple accounts.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRun AWS API Documentation
@@ -5497,6 +5678,61 @@ module Aws::Resiliencehubv2
       :permission_model,
       :regions,
       :account_targeting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a dependency that a test run
+    # blocked, as captured when the run started.
+    #
+    # @!attribute [rw] dependency_id
+    #   The unique identifier of the dependency. Absent when the dependency
+    #   was entered manually and was not part of dependency discovery.
+    #   @return [String]
+    #
+    # @!attribute [rw] dependency_name
+    #   The name of the dependency.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_name
+    #   The DNS name of the dependency that the test run blocked.
+    #   @return [String]
+    #
+    # @!attribute [rw] criticality
+    #   The criticality classification of the dependency when the run
+    #   started. A dependency that was not discovered has the UNKNOWN
+    #   criticality.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The origin of the dependency. A discovered dependency was found by
+    #   dependency discovery; a manual dependency was entered when the run
+    #   started.
+    #   @return [String]
+    #
+    # @!attribute [rw] location
+    #   The location of the dependency.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_regions
+    #   The source Regions from which the dependency was detected.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] provider
+    #   The provider of the dependency.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunDependencySummary AWS API Documentation
+    #
+    class TestRunDependencySummary < Struct.new(
+      :dependency_id,
+      :dependency_name,
+      :dns_name,
+      :criticality,
+      :source,
+      :location,
+      :source_regions,
+      :provider)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5621,6 +5857,84 @@ module Aws::Resiliencehubv2
       include Aws::Structure
     end
 
+    # A state-change event observed for a test run monitoring source.
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp when the event occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_arn
+    #   The ARN of the monitoring source the event belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   The type of the event. ALARM indicates an event from a CloudWatch
+    #   alarm source; the detail member carries either the alarm state
+    #   change or a collection error.
+    #   @return [String]
+    #
+    # @!attribute [rw] detail
+    #   The event payload.
+    #   @return [Types::TestRunSourceEventDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunSourceEvent AWS API Documentation
+    #
+    class TestRunSourceEvent < Struct.new(
+      :timestamp,
+      :source_arn,
+      :event_type,
+      :detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The payload of a test run source event. Exactly one member is set.
+    #
+    # @note TestRunSourceEventDetail is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TestRunSourceEventDetail corresponding to the set member.
+    #
+    # @!attribute [rw] alarm_state_change
+    #   A CloudWatch alarm state change.
+    #   @return [Types::AlarmStateChangeDetail]
+    #
+    # @!attribute [rw] error
+    #   An error that prevented event collection from the source.
+    #   @return [Types::TestRunSourceEventError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunSourceEventDetail AWS API Documentation
+    #
+    class TestRunSourceEventDetail < Struct.new(
+      :alarm_state_change,
+      :error,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AlarmStateChange < TestRunSourceEventDetail; end
+      class Error < TestRunSourceEventDetail; end
+      class Unknown < TestRunSourceEventDetail; end
+    end
+
+    # Describes an error that prevented event collection from a test run
+    # monitoring source.
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A human-readable description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunSourceEventError AWS API Documentation
+    #
+    class TestRunSourceEventError < Struct.new(
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A monitoring-source snapshot captured for a test run. Exactly one
     # member is set.
     #
@@ -5722,8 +6036,8 @@ module Aws::Resiliencehubv2
     #   @return [String]
     #
     # @!attribute [rw] account_targeting
-    #   Indicates whether this test run targets a single account or multiple
-    #   accounts.
+    #   Indicates whether the test run targets resources in a single AWS
+    #   account or across multiple accounts.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/TestRunSummary AWS API Documentation

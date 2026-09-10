@@ -656,6 +656,8 @@ module Aws::Outposts
     #   resp.outpost.tags["TagKey"] #=> String
     #   resp.outpost.site_arn #=> String
     #   resp.outpost.supported_hardware_type #=> String, one of "RACK", "SERVER"
+    #   resp.outpost.generation #=> String, one of "GENERATION_2", "GENERATION_1"
+    #   resp.outpost.rack_scaling_type #=> String, one of "SINGLE_RACK", "MULTI_RACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/CreateOutpost AWS API Documentation
     #
@@ -773,7 +775,7 @@ module Aws::Outposts
     #     ],
     #     requested_constraints: [
     #       {
-    #         quote_constraint_type: "RACK_MAXIMUM", # accepts RACK_MAXIMUM, RACK_MAX_POWER_KVA, RACK_MAX_WEIGHT_LBS
+    #         quote_constraint_type: "RACK_MAXIMUM", # accepts RACK_MAXIMUM, RACK_MAX_POWER_KVA, RACK_MAX_WEIGHT_LBS, RACK_SPACE_CONSTRAINED
     #         value: "ConstraintValue",
     #       },
     #     ],
@@ -795,7 +797,7 @@ module Aws::Outposts
     #   resp.quote.requested_capacities[0].unit #=> String
     #   resp.quote.requested_capacities[0].quantity #=> Float
     #   resp.quote.requested_constraints #=> Array
-    #   resp.quote.requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS"
+    #   resp.quote.requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"
     #   resp.quote.requested_constraints[0].value #=> String
     #   resp.quote.requested_payment_options #=> Array
     #   resp.quote.requested_payment_options[0] #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
@@ -1212,6 +1214,7 @@ module Aws::Outposts
     #   resp.catalog_item.supported_uplink_gbps[0] #=> Integer
     #   resp.catalog_item.supported_storage #=> Array
     #   resp.catalog_item.supported_storage[0] #=> String, one of "EBS", "S3"
+    #   resp.catalog_item.rack_scaling_type #=> String, one of "SINGLE_RACK", "MULTI_RACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetCatalogItem AWS API Documentation
     #
@@ -1354,6 +1357,8 @@ module Aws::Outposts
     #   resp.outpost.tags["TagKey"] #=> String
     #   resp.outpost.site_arn #=> String
     #   resp.outpost.supported_hardware_type #=> String, one of "RACK", "SERVER"
+    #   resp.outpost.generation #=> String, one of "GENERATION_2", "GENERATION_1"
+    #   resp.outpost.rack_scaling_type #=> String, one of "SINGLE_RACK", "MULTI_RACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpost AWS API Documentation
     #
@@ -1584,7 +1589,7 @@ module Aws::Outposts
     #   resp.quote.requested_capacities[0].unit #=> String
     #   resp.quote.requested_capacities[0].quantity #=> Float
     #   resp.quote.requested_constraints #=> Array
-    #   resp.quote.requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS"
+    #   resp.quote.requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"
     #   resp.quote.requested_constraints[0].value #=> String
     #   resp.quote.requested_payment_options #=> Array
     #   resp.quote.requested_payment_options[0] #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
@@ -2107,6 +2112,7 @@ module Aws::Outposts
     #   resp.catalog_items[0].supported_uplink_gbps[0] #=> Integer
     #   resp.catalog_items[0].supported_storage #=> Array
     #   resp.catalog_items[0].supported_storage[0] #=> String, one of "EBS", "S3"
+    #   resp.catalog_items[0].rack_scaling_type #=> String, one of "SINGLE_RACK", "MULTI_RACK"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListCatalogItems AWS API Documentation
@@ -2272,6 +2278,8 @@ module Aws::Outposts
     #   resp.outposts[0].tags["TagKey"] #=> String
     #   resp.outposts[0].site_arn #=> String
     #   resp.outposts[0].supported_hardware_type #=> String, one of "RACK", "SERVER"
+    #   resp.outposts[0].generation #=> String, one of "GENERATION_2", "GENERATION_1"
+    #   resp.outposts[0].rack_scaling_type #=> String, one of "SINGLE_RACK", "MULTI_RACK"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListOutposts AWS API Documentation
@@ -2319,7 +2327,7 @@ module Aws::Outposts
     #   resp.quotes[0].requested_capacities[0].unit #=> String
     #   resp.quotes[0].requested_capacities[0].quantity #=> Float
     #   resp.quotes[0].requested_constraints #=> Array
-    #   resp.quotes[0].requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS"
+    #   resp.quotes[0].requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"
     #   resp.quotes[0].requested_constraints[0].value #=> String
     #   resp.quotes[0].requested_payment_options #=> Array
     #   resp.quotes[0].requested_payment_options[0] #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
@@ -2802,6 +2810,8 @@ module Aws::Outposts
     #   resp.outpost.tags["TagKey"] #=> String
     #   resp.outpost.site_arn #=> String
     #   resp.outpost.supported_hardware_type #=> String, one of "RACK", "SERVER"
+    #   resp.outpost.generation #=> String, one of "GENERATION_2", "GENERATION_1"
+    #   resp.outpost.rack_scaling_type #=> String, one of "SINGLE_RACK", "MULTI_RACK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/UpdateOutpost AWS API Documentation
     #
@@ -2859,7 +2869,7 @@ module Aws::Outposts
     #     ],
     #     requested_constraints: [
     #       {
-    #         quote_constraint_type: "RACK_MAXIMUM", # accepts RACK_MAXIMUM, RACK_MAX_POWER_KVA, RACK_MAX_WEIGHT_LBS
+    #         quote_constraint_type: "RACK_MAXIMUM", # accepts RACK_MAXIMUM, RACK_MAX_POWER_KVA, RACK_MAX_WEIGHT_LBS, RACK_SPACE_CONSTRAINED
     #         value: "ConstraintValue",
     #       },
     #     ],
@@ -2881,7 +2891,7 @@ module Aws::Outposts
     #   resp.quote.requested_capacities[0].unit #=> String
     #   resp.quote.requested_capacities[0].quantity #=> Float
     #   resp.quote.requested_constraints #=> Array
-    #   resp.quote.requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS"
+    #   resp.quote.requested_constraints[0].quote_constraint_type #=> String, one of "RACK_MAXIMUM", "RACK_MAX_POWER_KVA", "RACK_MAX_WEIGHT_LBS", "RACK_SPACE_CONSTRAINED"
     #   resp.quote.requested_constraints[0].value #=> String
     #   resp.quote.requested_payment_options #=> Array
     #   resp.quote.requested_payment_options[0] #=> String, one of "ALL_UPFRONT", "NO_UPFRONT", "PARTIAL_UPFRONT"
@@ -3271,7 +3281,7 @@ module Aws::Outposts
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

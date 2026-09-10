@@ -21,6 +21,13 @@ module Aws::Resiliencehubv2
       SENSITIVE: []
     end
 
+    class AlarmStateChangeDetail
+      attr_accessor state: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
+      attr_accessor previous_state: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
     class Assertion
       attr_accessor service_arn: ::String
       attr_accessor assertion_id: ::String
@@ -404,9 +411,23 @@ module Aws::Resiliencehubv2
       SENSITIVE: []
     end
 
+    class EksLabelSelector
+      attr_accessor match_labels: ::Hash[::String, ::String]
+      attr_accessor match_expressions: ::Array[Types::EksLabelSelectorRequirement]
+      SENSITIVE: [:match_labels, :match_expressions]
+    end
+
+    class EksLabelSelectorRequirement
+      attr_accessor key: ::String
+      attr_accessor operator: ("IN" | "NOT_IN" | "EXISTS" | "DOES_NOT_EXIST")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class EksSource
       attr_accessor cluster_arn: ::String
       attr_accessor namespaces: ::Array[::String]
+      attr_accessor label_selector: Types::EksLabelSelector
       SENSITIVE: []
     end
 
@@ -841,6 +862,20 @@ module Aws::Resiliencehubv2
       SENSITIVE: [:tags]
     end
 
+    class ListTestRunDependenciesRequest
+      attr_accessor test_run_id: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestRunDependenciesResponse
+      attr_accessor dependencies: ::Array[Types::TestRunDependencySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTestRunEventsRequest
       attr_accessor test_run_id: ::String
       attr_accessor service_arn: ::String
@@ -853,6 +888,21 @@ module Aws::Resiliencehubv2
 
     class ListTestRunEventsResponse
       attr_accessor events: ::Array[Types::TestRunEvent]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestRunSourceEventsRequest
+      attr_accessor test_run_id: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor source_arn: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTestRunSourceEventsResponse
+      attr_accessor test_run_source_events: ::Array[Types::TestRunSourceEvent]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1685,6 +1735,18 @@ module Aws::Resiliencehubv2
       SENSITIVE: []
     end
 
+    class TestRunDependencySummary
+      attr_accessor dependency_id: ::String
+      attr_accessor dependency_name: ::String
+      attr_accessor dns_name: ::String
+      attr_accessor criticality: ("HARD" | "SOFT" | "UNKNOWN")
+      attr_accessor source: ("DISCOVERED" | "MANUAL")
+      attr_accessor location: ::String
+      attr_accessor source_regions: ::Array[::String]
+      attr_accessor provider: ::String
+      SENSITIVE: []
+    end
+
     class TestRunEvent
       attr_accessor event_id: ::String
       attr_accessor event_type: ::String
@@ -1714,6 +1776,34 @@ module Aws::Resiliencehubv2
 
     class TestRunReportConfiguration
       attr_accessor report_output: ::Array[Types::ReportOutputConfiguration]
+      SENSITIVE: []
+    end
+
+    class TestRunSourceEvent
+      attr_accessor timestamp: ::Time
+      attr_accessor source_arn: ::String
+      attr_accessor event_type: ("ALARM")
+      attr_accessor detail: Types::TestRunSourceEventDetail
+      SENSITIVE: []
+    end
+
+    class TestRunSourceEventDetail
+      attr_accessor alarm_state_change: Types::AlarmStateChangeDetail
+      attr_accessor error: Types::TestRunSourceEventError
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AlarmStateChange < TestRunSourceEventDetail
+      end
+      class Error < TestRunSourceEventDetail
+      end
+      class Unknown < TestRunSourceEventDetail
+      end
+    end
+
+    class TestRunSourceEventError
+      attr_accessor error_code: ("ACCESS_DENIED" | "INTERNAL_ERROR")
+      attr_accessor error_message: ::String
       SENSITIVE: []
     end
 

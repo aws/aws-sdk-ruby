@@ -551,6 +551,21 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class AttachClusterNodeNetworkInterfaceRequest
+      attr_accessor cluster_name: ::String
+      attr_accessor node_id: ::String
+      attr_accessor network_interface_id: ::String
+      SENSITIVE: []
+    end
+
+    class AttachClusterNodeNetworkInterfaceResponse
+      attr_accessor cluster_arn: ::String
+      attr_accessor node_id: ::String
+      attr_accessor network_interface_id: ::String
+      attr_accessor attachment_id: ::String
+      SENSITIVE: []
+    end
+
     class AttachClusterNodeVolumeRequest
       attr_accessor cluster_arn: ::String
       attr_accessor node_id: ::String

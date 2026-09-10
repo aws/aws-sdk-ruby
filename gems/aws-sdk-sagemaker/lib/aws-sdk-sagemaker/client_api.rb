@@ -200,6 +200,8 @@ module Aws::SageMaker
     AthenaResultCompressionType = Shapes::StringShape.new(name: 'AthenaResultCompressionType')
     AthenaResultFormat = Shapes::StringShape.new(name: 'AthenaResultFormat')
     AthenaWorkGroup = Shapes::StringShape.new(name: 'AthenaWorkGroup')
+    AttachClusterNodeNetworkInterfaceRequest = Shapes::StructureShape.new(name: 'AttachClusterNodeNetworkInterfaceRequest')
+    AttachClusterNodeNetworkInterfaceResponse = Shapes::StructureShape.new(name: 'AttachClusterNodeNetworkInterfaceResponse')
     AttachClusterNodeVolumeRequest = Shapes::StructureShape.new(name: 'AttachClusterNodeVolumeRequest')
     AttachClusterNodeVolumeResponse = Shapes::StructureShape.new(name: 'AttachClusterNodeVolumeResponse')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
@@ -492,7 +494,9 @@ module Aws::SageMaker
     ClusterName = Shapes::StringShape.new(name: 'ClusterName')
     ClusterNameOrArn = Shapes::StringShape.new(name: 'ClusterNameOrArn')
     ClusterNetworkInterface = Shapes::StructureShape.new(name: 'ClusterNetworkInterface')
+    ClusterNetworkInterfaceAttachmentId = Shapes::StringShape.new(name: 'ClusterNetworkInterfaceAttachmentId')
     ClusterNetworkInterfaceDetails = Shapes::StructureShape.new(name: 'ClusterNetworkInterfaceDetails')
+    ClusterNetworkInterfaceId = Shapes::StringShape.new(name: 'ClusterNetworkInterfaceId')
     ClusterNodeDetails = Shapes::StructureShape.new(name: 'ClusterNodeDetails')
     ClusterNodeId = Shapes::StringShape.new(name: 'ClusterNodeId')
     ClusterNodeIds = Shapes::ListShape.new(name: 'ClusterNodeIds')
@@ -3514,6 +3518,17 @@ module Aws::SageMaker
     AthenaDatasetDefinition.add_member(:output_format, Shapes::ShapeRef.new(shape: AthenaResultFormat, required: true, location_name: "OutputFormat"))
     AthenaDatasetDefinition.add_member(:output_compression, Shapes::ShapeRef.new(shape: AthenaResultCompressionType, location_name: "OutputCompression"))
     AthenaDatasetDefinition.struct_class = Types::AthenaDatasetDefinition
+
+    AttachClusterNodeNetworkInterfaceRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
+    AttachClusterNodeNetworkInterfaceRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
+    AttachClusterNodeNetworkInterfaceRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: ClusterNetworkInterfaceId, required: true, location_name: "NetworkInterfaceId"))
+    AttachClusterNodeNetworkInterfaceRequest.struct_class = Types::AttachClusterNodeNetworkInterfaceRequest
+
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: ClusterNetworkInterfaceId, required: true, location_name: "NetworkInterfaceId"))
+    AttachClusterNodeNetworkInterfaceResponse.add_member(:attachment_id, Shapes::ShapeRef.new(shape: ClusterNetworkInterfaceAttachmentId, required: true, location_name: "AttachmentId"))
+    AttachClusterNodeNetworkInterfaceResponse.struct_class = Types::AttachClusterNodeNetworkInterfaceResponse
 
     AttachClusterNodeVolumeRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
     AttachClusterNodeVolumeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, required: true, location_name: "NodeId"))
@@ -13464,6 +13479,16 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateTrialComponentRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateTrialComponentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
+      api.add_operation(:attach_cluster_node_network_interface, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AttachClusterNodeNetworkInterface"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AttachClusterNodeNetworkInterfaceRequest)
+        o.output = Shapes::ShapeRef.new(shape: AttachClusterNodeNetworkInterfaceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
       end)

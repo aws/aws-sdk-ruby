@@ -90,11 +90,23 @@
       "limit_key": "maxResults",
       "result_key": "systemSummaries"
     },
+    "ListTestRunDependencies": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults",
+      "result_key": "dependencies"
+    },
     "ListTestRunEvents": {
       "input_token": "nextToken",
       "output_token": "nextToken",
       "limit_key": "maxResults",
       "result_key": "events"
+    },
+    "ListTestRunSourceEvents": {
+      "input_token": "nextToken",
+      "output_token": "nextToken",
+      "limit_key": "maxResults",
+      "result_key": "testRunSourceEvents"
     },
     "ListTestRunSources": {
       "input_token": "nextToken",

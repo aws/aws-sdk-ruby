@@ -196,6 +196,7 @@ module Aws::RTBFabric
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor gateway_type: ("EXTERNAL" | "INTERNAL")
+      attr_accessor client_routing_policy: ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
       SENSITIVE: []
     end
 
@@ -204,6 +205,7 @@ module Aws::RTBFabric
       attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
       attr_accessor listener_config: Types::ListenerConfig
       attr_accessor external_inbound_endpoint: ::String
+      attr_accessor client_routing_policy: ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
       SENSITIVE: []
     end
 
@@ -463,6 +465,7 @@ module Aws::RTBFabric
       attr_accessor links_requested_count: ::Integer
       attr_accessor gateway_type: ("EXTERNAL" | "INTERNAL")
       attr_accessor external_inbound_endpoint: ::String
+      attr_accessor client_routing_policy: ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
       SENSITIVE: []
     end
 
@@ -834,12 +837,14 @@ module Aws::RTBFabric
       attr_accessor client_token: ::String
       attr_accessor gateway_id: ::String
       attr_accessor description: ::String
+      attr_accessor client_routing_policy: ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
       SENSITIVE: []
     end
 
     class UpdateResponderGatewayResponse
       attr_accessor gateway_id: ::String
       attr_accessor status: ("PENDING_CREATION" | "ACTIVE" | "PENDING_DELETION" | "DELETED" | "ERROR" | "PENDING_UPDATE" | "ISOLATED" | "PENDING_ISOLATION" | "PENDING_RESTORATION")
+      attr_accessor client_routing_policy: ("AVAILABILITY_ZONE_AFFINITY" | "ANY_AVAILABILITY_ZONE")
       SENSITIVE: []
     end
 

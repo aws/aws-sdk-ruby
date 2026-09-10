@@ -265,6 +265,7 @@ module Aws
                             }
                           ],
                           ?snapshot_location: ("regional" | "local"),
+                          ?boot_mode_override: ("uefi"),
                           ?dry_run: bool,
                           name: ::String,
                           ?description: ::String,

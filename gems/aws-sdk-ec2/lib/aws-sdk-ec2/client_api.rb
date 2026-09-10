@@ -291,6 +291,7 @@ module Aws::EC2
     BlockPublicAccessMode = Shapes::StringShape.new(name: 'BlockPublicAccessMode')
     BlockPublicAccessStates = Shapes::StructureShape.new(name: 'BlockPublicAccessStates')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BootModeOverrideValues = Shapes::StringShape.new(name: 'BootModeOverrideValues')
     BootModeType = Shapes::StringShape.new(name: 'BootModeType')
     BootModeTypeList = Shapes::ListShape.new(name: 'BootModeTypeList')
     BootModeValues = Shapes::StringShape.new(name: 'BootModeValues')
@@ -6371,6 +6372,7 @@ module Aws::EC2
 
     CreateImageRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateImageRequest.add_member(:snapshot_location, Shapes::ShapeRef.new(shape: SnapshotLocationEnum, location_name: "SnapshotLocation"))
+    CreateImageRequest.add_member(:boot_mode_override, Shapes::ShapeRef.new(shape: BootModeOverrideValues, location_name: "BootModeOverride"))
     CreateImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateImageRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
     CreateImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: ImageNameRequest, required: true, location_name: "name"))

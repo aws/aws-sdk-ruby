@@ -109,7 +109,17 @@ module Aws
                                    tf_state_file_url: ::String?,
                                    eks: {
                                      cluster_arn: ::String,
-                                     namespaces: Array[::String]
+                                     namespaces: Array[::String],
+                                     label_selector: {
+                                       match_labels: Hash[::String, ::String]?,
+                                       match_expressions: Array[
+                                         {
+                                           key: ::String,
+                                           operator: ("IN" | "NOT_IN" | "EXISTS" | "DOES_NOT_EXIST"),
+                                           values: Array[::String]?
+                                         }
+                                       ]?
+                                     }?
                                    }?,
                                    design_file_s3_url: ::String?
                                  },
@@ -747,6 +757,20 @@ module Aws
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
 
+      interface _ListTestRunDependenciesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestRunDependenciesResponse]
+        def dependencies: () -> ::Array[Types::TestRunDependencySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_test_run_dependencies-instance_method
+      def list_test_run_dependencies: (
+                                        test_run_id: ::String,
+                                        service_arn: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListTestRunDependenciesResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestRunDependenciesResponseSuccess
+
       interface _ListTestRunEventsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTestRunEventsResponse]
         def events: () -> ::Array[Types::TestRunEvent]
@@ -762,6 +786,21 @@ module Aws
                                   ?next_token: ::String
                                 ) -> _ListTestRunEventsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestRunEventsResponseSuccess
+
+      interface _ListTestRunSourceEventsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTestRunSourceEventsResponse]
+        def test_run_source_events: () -> ::Array[Types::TestRunSourceEvent]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Resiliencehubv2/Client.html#list_test_run_source_events-instance_method
+      def list_test_run_source_events: (
+                                         test_run_id: ::String,
+                                         service_arn: ::String,
+                                         source_arn: ::String,
+                                         ?max_results: ::Integer,
+                                         ?next_token: ::String
+                                       ) -> _ListTestRunSourceEventsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTestRunSourceEventsResponseSuccess
 
       interface _ListTestRunSourcesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTestRunSourcesResponse]

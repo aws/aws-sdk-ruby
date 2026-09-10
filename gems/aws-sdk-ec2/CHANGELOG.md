@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.647.0 (2026-09-10)
+------------------
+
+* Feature - The CreateImage API now supports a BootModeOverride parameter to explicitly set UEFI boot mode on a new AMI, overriding the source instance's inherited boot mode.
+
 1.646.0 (2026-09-09)
 ------------------
 

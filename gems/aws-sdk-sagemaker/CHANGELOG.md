@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.392.0 (2026-09-10)
+------------------
+
+* Feature - This release adds the ability for customers to attach customer owned Elastic Network Interfaces (ENIs) to HyperPod cluster nodes.
+
 1.391.0 (2026-09-09)
 ------------------
 

@@ -2768,6 +2768,64 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_name
+    #   The name or Amazon Resource Name (ARN) of the SageMaker HyperPod
+    #   cluster that contains the target node.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The unique identifier of the cluster node to which you want to
+    #   attach the network interface. The node must belong to your specified
+    #   HyperPod cluster and cannot be part of a Restricted Instance Group
+    #   (RIG).
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The unique identifier of the elastic network interface (ENI) to
+    #   attach.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AttachClusterNodeNetworkInterfaceRequest AWS API Documentation
+    #
+    class AttachClusterNodeNetworkInterfaceRequest < Struct.new(
+      :cluster_name,
+      :node_id,
+      :network_interface_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster
+    #   where the network interface attachment operation was performed.
+    #   @return [String]
+    #
+    # @!attribute [rw] node_id
+    #   The unique identifier of the cluster node where your network
+    #   interface was attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_interface_id
+    #   The unique identifier of the elastic network interface (ENI) that
+    #   was attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   The unique identifier of the network interface attachment. Use this
+    #   value to reference or detach the network interface later.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AttachClusterNodeNetworkInterfaceResponse AWS API Documentation
+    #
+    class AttachClusterNodeNetworkInterfaceResponse < Struct.new(
+      :cluster_arn,
+      :node_id,
+      :network_interface_id,
+      :attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] cluster_arn
     #   The Amazon Resource Name (ARN) of your SageMaker HyperPod cluster
     #   containing the target node. Your cluster must use EKS as the

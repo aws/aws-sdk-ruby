@@ -651,7 +651,7 @@ module Aws::RTBFabric
     #   If you don't provide this value, then Amazon Web Services generates a
     #   random one for you.
     #
-    #   If you retry the operation with the same `ClientToken`, but with
+    #   If you retry the operation with the same `clientToken`, but with
     #   different parameters, the retry fails with an
     #   `IdempotentParameterMismatch` error.
     #
@@ -712,10 +712,26 @@ module Aws::RTBFabric
     # Creates an inbound external link.
     #
     # @option params [required, String] :client_token
-    #   The unique client token.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #   If you retry the operation with the same `clientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [required, String] :gateway_id
     #   The unique identifier of the gateway.
@@ -830,7 +846,11 @@ module Aws::RTBFabric
     #   resource.
     #
     # @option params [required, Types::LinkLogSettings] :log_settings
-    #   Settings for the application logs.
+    #   Application log settings for the link. This value is required. Under
+    #   `applicationLogs.sampling`, the `errorLog` and `filterLog` fields set
+    #   the percentage of eligible events to log. Valid values range from `0`
+    #   through `100`. To turn off application logs, set both fields to `0`,
+    #   as in `{"applicationLogs":{"sampling":{"errorLog":0,"filterLog":0}}}`.
     #
     # @option params [Integer] :timeout_in_millis
     #   The timeout value in milliseconds.
@@ -995,7 +1015,7 @@ module Aws::RTBFabric
     #   If you don't provide this value, then Amazon Web Services generates a
     #   random one for you.
     #
-    #   If you retry the operation with the same `ClientToken`, but with
+    #   If you retry the operation with the same `clientToken`, but with
     #   different parameters, the retry fails with an
     #   `IdempotentParameterMismatch` error.
     #
@@ -1095,10 +1115,26 @@ module Aws::RTBFabric
     # Creates an outbound external link.
     #
     # @option params [required, String] :client_token
-    #   The unique client token.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #   If you retry the operation with the same `clientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [required, String] :gateway_id
     #   The unique identifier of the gateway.
@@ -1205,10 +1241,26 @@ module Aws::RTBFabric
     #   The unique identifiers of the security groups.
     #
     # @option params [required, String] :client_token
-    #   The unique client token.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #   If you retry the operation with the same `clientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [String] :description
     #   An optional description for the requester gateway.
@@ -1284,7 +1336,10 @@ module Aws::RTBFabric
     #   The unique identifier of the Virtual Private Cloud (VPC).
     #
     # @option params [required, Array<String>] :subnet_ids
-    #   The unique identifiers of the subnets.
+    #   Unique identifiers of the subnets. A service quota for your account
+    #   sets the number of Availability Zones that your subnets can span. By
+    #   default, this quota is one Availability Zone. To span more
+    #   Availability Zones, request a quota increase.
     #
     # @option params [required, Array<String>] :security_group_ids
     #   The unique identifiers of the security groups.
@@ -1309,10 +1364,26 @@ module Aws::RTBFabric
     #   The configuration for the managed endpoint.
     #
     # @option params [required, String] :client_token
-    #   The unique client token.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #   If you retry the operation with the same `clientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [String] :description
     #   An optional description for the responder gateway.
@@ -1324,12 +1395,42 @@ module Aws::RTBFabric
     # @option params [String] :gateway_type
     #   The type of gateway. Valid values are `EXTERNAL` or `INTERNAL`.
     #
+    # @option params [String] :client_routing_policy
+    #   The client routing policy of the gateway. This policy controls which
+    #   Availability Zones RTB Fabric uses to reach the gateway for the
+    #   requester gateways that send traffic to it. Valid values are the
+    #   following:
+    #
+    #   * `AVAILABILITY_ZONE_AFFINITY`: RTB Fabric routes each requester's
+    #     traffic to gateway capacity in the requester's own Availability
+    #     Zone when the gateway has capacity available there. Otherwise, RTB
+    #     Fabric routes the traffic to gateway capacity in the other
+    #     Availability Zones of the gateway.
+    #
+    #   * `ANY_AVAILABILITY_ZONE`: RTB Fabric routes each requester's traffic
+    #     to gateway capacity in every Availability Zone that the subnets of
+    #     the gateway span. The Availability Zone that the requester is in
+    #     does not change this.
+    #
+    #   If you don't specify a value, RTB Fabric uses
+    #   `AVAILABILITY_ZONE_AFFINITY`. To get the behavior of
+    #   `ANY_AVAILABILITY_ZONE`, create the gateway with subnets in more than
+    #   one Availability Zone. RTB Fabric does not support partial
+    #   Availability Zone affinity, so `PARTIAL_AVAILABILITY_ZONE_AFFINITY` is
+    #   not a valid value. For more information, see [Configuring Availability
+    #   Zone affinity][1] in the *Amazon Web Services RTB Fabric User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rtb-fabric/latest/userguide/working-with-responder-gateways.html#configuring-availability-zone-affinity
+    #
     # @return [Types::CreateResponderGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResponderGatewayResponse#gateway_id #gateway_id} => String
     #   * {Types::CreateResponderGatewayResponse#status #status} => String
     #   * {Types::CreateResponderGatewayResponse#listener_config #listener_config} => Types::ListenerConfig
     #   * {Types::CreateResponderGatewayResponse#external_inbound_endpoint #external_inbound_endpoint} => String
+    #   * {Types::CreateResponderGatewayResponse#client_routing_policy #client_routing_policy} => String
     #
     #
     # @example Example: Create a responder gateway
@@ -1402,6 +1503,7 @@ module Aws::RTBFabric
     #       "TagKey" => "TagValue",
     #     },
     #     gateway_type: "EXTERNAL", # accepts EXTERNAL, INTERNAL
+    #     client_routing_policy: "AVAILABILITY_ZONE_AFFINITY", # accepts AVAILABILITY_ZONE_AFFINITY, ANY_AVAILABILITY_ZONE
     #   })
     #
     # @example Response structure
@@ -1411,6 +1513,7 @@ module Aws::RTBFabric
     #   resp.listener_config.protocols #=> Array
     #   resp.listener_config.protocols[0] #=> String, one of "HTTP", "HTTPS"
     #   resp.external_inbound_endpoint #=> String
+    #   resp.client_routing_policy #=> String, one of "AVAILABILITY_ZONE_AFFINITY", "ANY_AVAILABILITY_ZONE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/CreateResponderGateway AWS API Documentation
     #
@@ -2426,6 +2529,7 @@ module Aws::RTBFabric
     #   * {Types::GetResponderGatewayResponse#links_requested_count #links_requested_count} => Integer
     #   * {Types::GetResponderGatewayResponse#gateway_type #gateway_type} => String
     #   * {Types::GetResponderGatewayResponse#external_inbound_endpoint #external_inbound_endpoint} => String
+    #   * {Types::GetResponderGatewayResponse#client_routing_policy #client_routing_policy} => String
     #
     #
     # @example Example: Get responder gateway details
@@ -2507,6 +2611,7 @@ module Aws::RTBFabric
     #   resp.links_requested_count #=> Integer
     #   resp.gateway_type #=> String, one of "EXTERNAL", "INTERNAL"
     #   resp.external_inbound_endpoint #=> String
+    #   resp.client_routing_policy #=> String, one of "AVAILABILITY_ZONE_AFFINITY", "ANY_AVAILABILITY_ZONE"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3323,10 +3428,26 @@ module Aws::RTBFabric
     # Updates a link module flow.
     #
     # @option params [required, String] :client_token
-    #   The unique client token.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #   If you retry the operation with the same `clientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [required, String] :gateway_id
     #   The unique identifier of the gateway.
@@ -3526,10 +3647,26 @@ module Aws::RTBFabric
     # Updates a requester gateway.
     #
     # @option params [required, String] :client_token
-    #   The unique client token.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #   If you retry the operation with the same `clientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [required, String] :gateway_id
     #   The unique identifier of the gateway.
@@ -3581,16 +3718,29 @@ module Aws::RTBFabric
       req.send_request(options)
     end
 
-    # Updates a responder gateway.
+    # Updates the description, Auto Scaling group managed endpoint
+    # configuration, trust store configuration, and client routing policy of
+    # a responder gateway. This operation also updates the `protocols` list
+    # in the listener configuration.
+    #
+    # You cannot change the `domainName`, `port`, and `protocol` values that
+    # you set when you create a responder gateway. To change any of them,
+    # delete the gateway and create a new one.
     #
     # @option params [String] :domain_name
-    #   The domain name for the responder gateway.
+    #   Domain name for the responder gateway. This operation does not change
+    #   the domain name of an existing gateway. To use a different domain
+    #   name, delete the gateway and create a new one.
     #
     # @option params [required, Integer] :port
-    #   The networking port to use.
+    #   Networking port to use. This operation does not change the port of an
+    #   existing gateway. To use a different port, delete the gateway and
+    #   create a new one.
     #
     # @option params [required, String] :protocol
-    #   The networking protocol to use.
+    #   Networking protocol to use. This operation does not change the
+    #   protocol of an existing gateway. To use a different protocol, delete
+    #   the gateway and create a new one.
     #
     # @option params [Types::ListenerConfig] :listener_config
     #   The listener configuration for the responder gateway.
@@ -3602,10 +3752,26 @@ module Aws::RTBFabric
     #   The configuration for the managed endpoint.
     #
     # @option params [required, String] :client_token
-    #   The unique client token.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #   If you retry the operation with the same `clientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [required, String] :gateway_id
     #   The unique identifier of the gateway.
@@ -3613,10 +3779,40 @@ module Aws::RTBFabric
     # @option params [String] :description
     #   An optional description for the responder gateway.
     #
+    # @option params [String] :client_routing_policy
+    #   The client routing policy of the gateway. This policy controls which
+    #   Availability Zones RTB Fabric uses to reach the gateway for the
+    #   requester gateways that send traffic to it. Valid values are the
+    #   following:
+    #
+    #   * `AVAILABILITY_ZONE_AFFINITY`: RTB Fabric routes each requester's
+    #     traffic to gateway capacity in the requester's own Availability
+    #     Zone when the gateway has capacity available there. Otherwise, RTB
+    #     Fabric routes the traffic to gateway capacity in the other
+    #     Availability Zones of the gateway.
+    #
+    #   * `ANY_AVAILABILITY_ZONE`: RTB Fabric routes each requester's traffic
+    #     to gateway capacity in every Availability Zone that the subnets of
+    #     the gateway span. The Availability Zone that the requester is in
+    #     does not change this.
+    #
+    #   If you don't specify a value, the gateway keeps its current client
+    #   routing policy. Changing the policy sets the gateway status to
+    #   `PENDING_UPDATE` until the change is complete. RTB Fabric does not
+    #   support partial Availability Zone affinity, so
+    #   `PARTIAL_AVAILABILITY_ZONE_AFFINITY` is not a valid value. For more
+    #   information, see [Configuring Availability Zone affinity][1] in the
+    #   *Amazon Web Services RTB Fabric User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rtb-fabric/latest/userguide/working-with-responder-gateways.html#configuring-availability-zone-affinity
+    #
     # @return [Types::UpdateResponderGatewayResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateResponderGatewayResponse#gateway_id #gateway_id} => String
     #   * {Types::UpdateResponderGatewayResponse#status #status} => String
+    #   * {Types::UpdateResponderGatewayResponse#client_routing_policy #client_routing_policy} => String
     #
     #
     # @example Example: Update responder gateway
@@ -3676,12 +3872,14 @@ module Aws::RTBFabric
     #     client_token: "String", # required
     #     gateway_id: "GatewayId", # required
     #     description: "UpdateResponderGatewayRequestDescriptionString",
+    #     client_routing_policy: "AVAILABILITY_ZONE_AFFINITY", # accepts AVAILABILITY_ZONE_AFFINITY, ANY_AVAILABILITY_ZONE
     #   })
     #
     # @example Response structure
     #
     #   resp.gateway_id #=> String
     #   resp.status #=> String, one of "PENDING_CREATION", "ACTIVE", "PENDING_DELETION", "DELETED", "ERROR", "PENDING_UPDATE", "ISOLATED", "PENDING_ISOLATION", "PENDING_RESTORATION"
+    #   resp.client_routing_policy #=> String, one of "AVAILABILITY_ZONE_AFFINITY", "ANY_AVAILABILITY_ZONE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateResponderGateway AWS API Documentation
     #
@@ -3710,7 +3908,7 @@ module Aws::RTBFabric
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rtbfabric'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
