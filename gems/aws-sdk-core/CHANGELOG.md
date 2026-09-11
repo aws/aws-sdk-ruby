@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.256.0 (2026-09-11)
+------------------
+
 * Feature - Preserve millisecond precision when serializing `Time` values on the request path, instead of truncating to whole seconds.
 
 3.255.0 (2026-09-09)

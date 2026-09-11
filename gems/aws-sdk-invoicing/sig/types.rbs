@@ -155,6 +155,11 @@ module Aws::Invoicing
       SENSITIVE: []
     end
 
+    class FeatureConfigurations
+      attr_accessor invoice_configuration: Types::InvoiceConfiguration
+      SENSITIVE: []
+    end
+
     class FeesBreakdown
       attr_accessor breakdown: ::Array[Types::FeesBreakdownAmount]
       attr_accessor total_amount: ::String
@@ -216,6 +221,12 @@ module Aws::Invoicing
     class InternalServerException
       attr_accessor retry_after_seconds: ::Integer
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class InvoiceConfiguration
+      attr_accessor document_types: ::Array[("AWS_CLOUD_INVOICE" | "AWS_CLOUD_CREDIT_MEMO" | "AWS_MARKETPLACE_INVOICE" | "AWS_MARKETPLACE_CREDIT_MEMO" | "AWS_REQUEST_FOR_PAYMENT")]
+      attr_accessor attachment_types: ::Array[("INVOICE_PDF" | "RFP_PDF")]
       SENSITIVE: []
     end
 
@@ -341,6 +352,31 @@ module Aws::Invoicing
       SENSITIVE: []
     end
 
+    class ListProcurementPortalSuppliersRequest
+      attr_accessor portal_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProcurementPortalSuppliersResponse
+      attr_accessor procurement_portal_suppliers: ::Array[Types::ProcurementPortalSupplier]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListProcurementPortalsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListProcurementPortalsResponse
+      attr_accessor procurement_portals: ::Array[Types::ProcurementPortal]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -348,6 +384,14 @@ module Aws::Invoicing
 
     class ListTagsForResourceResponse
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
+      SENSITIVE: []
+    end
+
+    class ProcurementPortal
+      attr_accessor portal_identifier: ::String
+      attr_accessor portal_name: ("SAP_BUSINESS_NETWORK" | "COUPA")
+      attr_accessor portal_display_name: ::String
+      attr_accessor default_feature_configurations: Types::FeatureConfigurations
       SENSITIVE: []
     end
 
@@ -402,6 +446,14 @@ module Aws::Invoicing
       attr_accessor version: ::Integer
       attr_accessor create_date: ::Time
       attr_accessor last_update_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ProcurementPortalSupplier
+      attr_accessor supplier_identifier: ::String
+      attr_accessor seller_of_record: ::String
+      attr_accessor country_code: ::String
+      attr_accessor environment: ("PROD" | "TEST")
       SENSITIVE: []
     end
 

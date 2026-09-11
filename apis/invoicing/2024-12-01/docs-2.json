@@ -13,6 +13,8 @@
     "ListInvoiceSummaries": "<p>Retrieves your invoice details programmatically, without line item details.</p>",
     "ListInvoiceUnits": "<p>This fetches a list of all invoice unit definitions for a given account, as of the provided <code>AsOf</code> date.</p>",
     "ListProcurementPortalPreferences": "<p> <i> <b>This feature API is subject to changing at any time. For more information, see the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a> (Betas and Previews).</b> </i> </p> <p>Retrieves a list of procurement portal preferences associated with the Amazon Web Services account.</p>",
+    "ListProcurementPortalSuppliers": "<p>Returns the suppliers configured for a specified procurement portal, including supplier identifiers and associated metadata. For faster, more reliable responses, use pagination.</p>",
+    "ListProcurementPortals": "<p>Returns the Amazon Web Services-supported procurement portals for e-invoice delivery and purchase order retrieval. Each entry includes the portal identifier, name, and default feature configurations, which define the supported document and attachment types. For faster, more reliable responses, use pagination.</p>",
     "ListTagsForResource": "<p>Lists the tags for a resource. </p>",
     "PutProcurementPortalPreference": "<p> <i> <b>This feature API is subject to changing at any time. For more information, see the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a> (Betas and Previews).</b> </i> </p> <p>Updates an existing procurement portal preference configuration. This operation can modify settings for e-invoice delivery and purchase order retrieval.</p>",
     "SendProcurementPortalValidation": "<p> <i> <b>This feature API is subject to changing at any time. For more information, see the <a href=\"https://aws.amazon.com/service-terms/\">Amazon Web Services Service Terms</a> (Betas and Previews).</b> </i> </p> <p>Sends a validation request for a procurement portal preference. This operation initiates the validation process by issuing a validation code that confirms ownership and connectivity of the configured procurement portal endpoint. Use <code>VerifyProcurementPortalValidation</code> to submit the received code and complete validation.</p>",
@@ -93,6 +95,7 @@
         "InvoiceSummary$CommercialInvoiceId": "<p> The commercial invoice ID. This is only applicable for tax invoices and identifies the associated commercial invoice. </p>",
         "InvoiceSummary$OriginalInvoiceId": "<p>The initial or original invoice ID. </p>",
         "InvoiceSummary$PurchaseOrderNumber": "<p> The purchase order number associated to the invoice.</p>",
+        "ProcurementPortal$PortalDisplayName": "<p>The display name of the procurement portal.</p>",
         "ProcurementPortalPreference$EinvoiceDeliveryPreferenceStatusReason": "<p>The reason for the current e-invoice delivery preference status.</p>",
         "ProcurementPortalPreference$PurchaseOrderRetrievalPreferenceStatusReason": "<p>The reason for the current purchase order retrieval preference status.</p>",
         "ProcurementPortalPreferenceSummary$EinvoiceDeliveryPreferenceStatusReason": "<p>The reason for the current e-invoice delivery preference status in this summary.</p>",
@@ -134,6 +137,10 @@
         "InvoiceProfile$Issuer": "<p> This specifies the issuing entity of the invoice. </p>",
         "ListProcurementPortalPreferencesRequest$NextToken": "<p>The token for the next set of results. (You received this token from a previous call.)</p>",
         "ListProcurementPortalPreferencesResponse$NextToken": "<p>The token to use to retrieve the next set of results, or null if there are no more results.</p>",
+        "ListProcurementPortalSuppliersRequest$NextToken": "<p>The token for the next set of results. You received this token from a previous call.</p>",
+        "ListProcurementPortalSuppliersResponse$NextToken": "<p>The token to use to retrieve the next set of results, or null if there are no more results.</p>",
+        "ListProcurementPortalsRequest$NextToken": "<p>The token for the next set of results. You received this token from a previous call.</p>",
+        "ListProcurementPortalsResponse$NextToken": "<p>The token to use to retrieve the next set of results, or null if there are no more results.</p>",
         "ProcurementPortalPreference$BuyerIdentifier": "<p>The unique identifier for the buyer in the procurement portal.</p>",
         "ProcurementPortalPreference$SupplierIdentifier": "<p>The unique identifier for the supplier in the procurement portal.</p>",
         "ProcurementPortalPreference$ProcurementPortalSharedSecret": "<p>The shared secret or authentication credential used for secure communication with the procurement portal.</p>",
@@ -141,6 +148,7 @@
         "ProcurementPortalPreference$PurchaseOrderRetrievalEndpoint": "<p>The endpoint URL used for retrieving purchase orders from the procurement portal.</p>",
         "ProcurementPortalPreferenceSummary$BuyerIdentifier": "<p>The unique identifier for the buyer in the procurement portal.</p>",
         "ProcurementPortalPreferenceSummary$SupplierIdentifier": "<p>The unique identifier for the supplier in the procurement portal.</p>",
+        "ProcurementPortalSupplier$SellerOfRecord": "<p>The Amazon Web Services seller of record associated with the supplier—the Amazon Web Services legal entity that issues invoices for the account (for example, <code>AWS_INC</code> or <code>AWS_EUROPE</code>).</p>",
         "PutProcurementPortalPreferenceRequest$ProcurementPortalInstanceEndpoint": "<p>The updated endpoint URL where e-invoices will be delivered to the procurement portal. Must be a valid HTTPS URL.</p>",
         "PutProcurementPortalPreferenceRequest$ClientToken": "<p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>",
         "SellerOfRecords$member": null,
@@ -240,6 +248,12 @@
         "PutProcurementPortalPreferenceRequest$Contacts": "<p>Updated list of contact information for portal administrators and technical contacts.</p>"
       }
     },
+    "CountryCode": {
+      "base": null,
+      "refs": {
+        "ProcurementPortalSupplier$CountryCode": "<p>The two-letter ISO 3166-1 alpha-2 country code associated with the supplier.</p>"
+      }
+    },
     "CreateInvoiceUnitRequest": {
       "base": null,
       "refs": {}
@@ -326,7 +340,8 @@
     "EinvoiceDeliveryAttachmentTypes": {
       "base": null,
       "refs": {
-        "EinvoiceDeliveryPreference$EinvoiceDeliveryAttachmentTypes": "<p>The types of attachments to include with the e-invoice delivery.</p>"
+        "EinvoiceDeliveryPreference$EinvoiceDeliveryAttachmentTypes": "<p>The types of attachments to include with the e-invoice delivery.</p>",
+        "InvoiceConfiguration$AttachmentTypes": "<p>The attachment types supported by the procurement portal for e-invoice delivery.</p>"
       }
     },
     "EinvoiceDeliveryDocumentType": {
@@ -339,7 +354,8 @@
     "EinvoiceDeliveryDocumentTypes": {
       "base": null,
       "refs": {
-        "EinvoiceDeliveryPreference$EinvoiceDeliveryDocumentTypes": "<p>The types of e-invoice documents to be delivered.</p>"
+        "EinvoiceDeliveryPreference$EinvoiceDeliveryDocumentTypes": "<p>The types of e-invoice documents to be delivered.</p>",
+        "InvoiceConfiguration$DocumentTypes": "<p>The e-invoice document types supported by the procurement portal.</p>"
       }
     },
     "EinvoiceDeliveryPreference": {
@@ -366,6 +382,12 @@
       "base": "<p>The organization name providing Amazon Web Services services.</p>",
       "refs": {
         "InvoiceSummary$Entity": "<p>The organization name providing Amazon Web Services services.</p>"
+      }
+    },
+    "FeatureConfigurations": {
+      "base": "<p>Contains the default feature configuration settings for a procurement portal.</p>",
+      "refs": {
+        "ProcurementPortal$DefaultFeatureConfigurations": "<p>The default feature configurations for the procurement portal.</p>"
       }
     },
     "FeesBreakdown": {
@@ -426,6 +448,12 @@
     "InternalServerException": {
       "base": "<p>The processing request failed because of an unknown error, exception, or failure. </p>",
       "refs": {}
+    },
+    "InvoiceConfiguration": {
+      "base": "<p>Specifies the supported document types and attachment types for invoice delivery to a procurement portal.</p>",
+      "refs": {
+        "FeatureConfigurations$InvoiceConfiguration": "<p>The invoice configuration settings for the procurement portal.</p>"
+      }
     },
     "InvoiceCurrencyAmount": {
       "base": "<p> The amount charged after taxes, in the preferred currency. </p>",
@@ -585,6 +613,22 @@
       "base": null,
       "refs": {}
     },
+    "ListProcurementPortalSuppliersRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListProcurementPortalSuppliersResponse": {
+      "base": null,
+      "refs": {}
+    },
+    "ListProcurementPortalsRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ListProcurementPortalsResponse": {
+      "base": null,
+      "refs": {}
+    },
     "ListTagsForResourceRequest": {
       "base": null,
       "refs": {}
@@ -603,7 +647,9 @@
     "MaxResults": {
       "base": null,
       "refs": {
-        "ListProcurementPortalPreferencesRequest$MaxResults": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.</p>"
+        "ListProcurementPortalPreferencesRequest$MaxResults": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value.</p>",
+        "ListProcurementPortalSuppliersRequest$MaxResults": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. Default is 100.</p>",
+        "ListProcurementPortalsRequest$MaxResults": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. Default is 100.</p>"
       }
     },
     "MaxResultsInteger": {
@@ -627,10 +673,30 @@
         "ListInvoiceUnitsResponse$NextToken": "<p>The next token used to indicate where the returned list should start from. </p>"
       }
     },
+    "ProcurementPortal": {
+      "base": "<p>Contains metadata for a procurement portal, including the portal identifier, name, and default feature configurations.</p>",
+      "refs": {
+        "ProcurementPortals$member": null
+      }
+    },
+    "ProcurementPortalEnv": {
+      "base": "<p>The environment of a procurement portal supplier. <code>PROD</code> indicates the production environment. <code>TEST</code> indicates the sandbox or test environment.</p>",
+      "refs": {
+        "ProcurementPortalSupplier$Environment": "<p>The environment identifier for the supplier in the procurement portal. PROD for production env, or TEST for sandbox/test env.</p>"
+      }
+    },
+    "ProcurementPortalIdString": {
+      "base": null,
+      "refs": {
+        "ListProcurementPortalSuppliersRequest$PortalIdentifier": "<p>The unique identifier of the procurement portal for which to list suppliers. Use the <code>PortalIdentifier</code> value returned by <code>ListProcurementPortals</code>.</p>",
+        "ProcurementPortal$PortalIdentifier": "<p>The unique identifier of the procurement portal.</p>"
+      }
+    },
     "ProcurementPortalName": {
       "base": null,
       "refs": {
         "CreateProcurementPortalPreferenceRequest$ProcurementPortalName": "<p>The name of the procurement portal.</p>",
+        "ProcurementPortal$PortalName": "<p>The name of the procurement portal.</p>",
         "ProcurementPortalPreference$ProcurementPortalName": "<p>The name of the procurement portal.</p>",
         "ProcurementPortalPreferenceSummary$ProcurementPortalName": "<p>The name of the procurement portal.</p>"
       }
@@ -690,6 +756,24 @@
       "base": "<p>Provides a summary of a procurement portal preference, including key identifiers and status information.</p>",
       "refs": {
         "ProcurementPortalPreferenceSummaries$member": null
+      }
+    },
+    "ProcurementPortalSupplier": {
+      "base": "<p>Contains metadata for a supplier configured within a procurement portal.</p>",
+      "refs": {
+        "ProcurementPortalSuppliers$member": null
+      }
+    },
+    "ProcurementPortalSuppliers": {
+      "base": null,
+      "refs": {
+        "ListProcurementPortalSuppliersResponse$ProcurementPortalSuppliers": "<p>The list of suppliers configured for the specified procurement portal.</p>"
+      }
+    },
+    "ProcurementPortals": {
+      "base": null,
+      "refs": {
+        "ListProcurementPortalsResponse$ProcurementPortals": "<p>The list of procurement portals available for configuration.</p>"
       }
     },
     "ProfileList": {
@@ -852,6 +936,12 @@
         "ProcurementPortalPreferenceSummary$SupplierDomain": "<p>The domain identifier for the supplier in the procurement portal.</p>",
         "TestEnvPreference$SupplierDomain": "<p>The domain identifier for the supplier in the test environment of the procurement portal.</p>",
         "TestEnvPreferenceInput$SupplierDomain": "<p>The domain identifier to use for the supplier in the test environment.</p>"
+      }
+    },
+    "SupplierIdString": {
+      "base": null,
+      "refs": {
+        "ProcurementPortalSupplier$SupplierIdentifier": "<p>The unique identifier of the supplier within the procurement portal.</p>"
       }
     },
     "TagResourceRequest": {

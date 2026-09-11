@@ -5223,7 +5223,7 @@ module Aws::SES
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ses'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

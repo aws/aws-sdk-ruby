@@ -1968,7 +1968,7 @@ module Aws::TrustedAdvisor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-trustedadvisor'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

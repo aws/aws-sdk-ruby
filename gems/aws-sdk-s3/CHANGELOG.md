@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.232.0 (2026-09-11)
+------------------
+
+* Feature - Updated S3 Object Lock Default Retention documentation.
+
 1.231.0 (2026-09-09)
 ------------------
 

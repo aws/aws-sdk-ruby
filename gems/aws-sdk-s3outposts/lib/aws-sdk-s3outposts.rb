@@ -54,7 +54,7 @@ module Aws::S3Outposts
   autoload :EndpointProvider, 'aws-sdk-s3outposts/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-s3outposts/endpoints'
 
-  GEM_VERSION = '1.65.0'
+  GEM_VERSION = '1.66.0'
 
 end
 

@@ -533,7 +533,14 @@ module Aws::MediaConvert
     # values, reduced to lowest terms. Used for the sample (pixel) aspect
     # ratio and the display aspect ratio of a video track. For example, a
     # 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a
-    # display aspect ratio of 16 / 9.
+    # display aspect ratio of 16 / 9. A video track can declare an aspect
+    # ratio in two independent places, and MediaConvert reports each one
+    # where it was found rather than choosing between them. The ratio
+    # declared by the container appears on the video track itself, and the
+    # ratio declared by the video essence appears under codecMetadata. When
+    # a file declares an aspect ratio in only one of the two places, the
+    # other is null; when it declares both and they disagree, you can
+    # compare them and decide which to use.
     #
     # @!attribute [rw] denominator
     #   The denominator, or bottom number, in the fractional aspect ratio.
@@ -3277,6 +3284,29 @@ module Aws::MediaConvert
     #   level characteristics of the content.
     #   @return [Types::ContentLightLevel]
     #
+    # @!attribute [rw] display_aspect_ratio
+    #   An aspect ratio expressed as a fraction with numerator and
+    #   denominator values, reduced to lowest terms. Used for the sample
+    #   (pixel) aspect ratio and the display aspect ratio of a video track.
+    #   For example, a 720x576 anamorphic track has a sample aspect ratio of
+    #   64 / 45 and a display aspect ratio of 16 / 9. A video track can
+    #   declare an aspect ratio in two independent places, and MediaConvert
+    #   reports each one where it was found rather than choosing between
+    #   them. The ratio declared by the container appears on the video track
+    #   itself, and the ratio declared by the video essence appears under
+    #   codecMetadata. When a file declares an aspect ratio in only one of
+    #   the two places, the other is null; when it declares both and they
+    #   disagree, you can compare them and decide which to use.
+    #   @return [Types::AspectRatio]
+    #
+    # @!attribute [rw] dolby_vision
+    #   Dolby Vision characteristics of the video track: the profile and
+    #   level, and whether the RPU (dynamic metadata), base layer, and
+    #   enhancement layer are present. Use this to distinguish Dolby Vision
+    #   content from standard HEVC and to choose your encoding or
+    #   passthrough settings. Omitted when the content is not Dolby Vision.
+    #   @return [Types::DolbyVisionMetadata]
+    #
     # @!attribute [rw] field_order
     #   The field order of interlaced video, which indicates whether the top
     #   or bottom field is displayed first. Use this to select the correct
@@ -3324,6 +3354,21 @@ module Aws::MediaConvert
     #   or when the rotation is 0 degrees.
     #   @return [Integer]
     #
+    # @!attribute [rw] sample_aspect_ratio
+    #   An aspect ratio expressed as a fraction with numerator and
+    #   denominator values, reduced to lowest terms. Used for the sample
+    #   (pixel) aspect ratio and the display aspect ratio of a video track.
+    #   For example, a 720x576 anamorphic track has a sample aspect ratio of
+    #   64 / 45 and a display aspect ratio of 16 / 9. A video track can
+    #   declare an aspect ratio in two independent places, and MediaConvert
+    #   reports each one where it was found rather than choosing between
+    #   them. The ratio declared by the container appears on the video track
+    #   itself, and the ratio declared by the video essence appears under
+    #   codecMetadata. When a file declares an aspect ratio in only one of
+    #   the two places, the other is null; when it declares both and they
+    #   disagree, you can compare them and decide which to use.
+    #   @return [Types::AspectRatio]
+    #
     # @!attribute [rw] scan_type
     #   The scanning method specified in the video essence, indicating
     #   whether the video uses progressive or interlaced scanning.
@@ -3349,6 +3394,8 @@ module Aws::MediaConvert
       :coded_frame_rate,
       :color_primaries,
       :content_light_level,
+      :display_aspect_ratio,
+      :dolby_vision,
       :field_order,
       :hdr_10_plus_presence,
       :height,
@@ -3356,6 +3403,7 @@ module Aws::MediaConvert
       :matrix_coefficients,
       :profile,
       :rotation,
+      :sample_aspect_ratio,
       :scan_type,
       :transfer_characteristics,
       :width)
@@ -3565,9 +3613,9 @@ module Aws::MediaConvert
     # @!attribute [rw] format
     #   The format of your media file. For example: MP4, QuickTime (MOV),
     #   Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, MP3, FLAC,
-    #   ASF (Windows Media / WMA), OGG. Note that this will be blank if your
-    #   media file has a format that the MediaConvert Probe operation does
-    #   not recognize.
+    #   ASF (Windows Media / WMA), or OGG. Note that this will be blank if
+    #   your media file has a format that the MediaConvert Probe operation
+    #   does not recognize.
     #   @return [String]
     #
     # @!attribute [rw] start_timecode
@@ -4818,6 +4866,47 @@ module Aws::MediaConvert
     class DolbyVisionLevel6Metadata < Struct.new(
       :max_cll,
       :max_fall)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Dolby Vision characteristics of the video track: the profile and
+    # level, and whether the RPU (dynamic metadata), base layer, and
+    # enhancement layer are present. Use this to distinguish Dolby Vision
+    # content from standard HEVC and to choose your encoding or passthrough
+    # settings. Omitted when the content is not Dolby Vision.
+    #
+    # @!attribute [rw] base_layer
+    #   Whether a Dolby Vision component is present in the track.
+    #   @return [String]
+    #
+    # @!attribute [rw] enhancement_layer
+    #   Whether a Dolby Vision component is present in the track.
+    #   @return [String]
+    #
+    # @!attribute [rw] level
+    #   The Dolby Vision level, which indicates the maximum resolution and
+    #   frame rate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] profile
+    #   The Dolby Vision profile, for example 5, 7, or 8. The profile
+    #   determines the layer structure and playback compatibility of the
+    #   content.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] rpu
+    #   Whether a Dolby Vision component is present in the track.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DolbyVisionMetadata AWS API Documentation
+    #
+    class DolbyVisionMetadata < Struct.new(
+      :base_layer,
+      :enhancement_layer,
+      :level,
+      :profile,
+      :rpu)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14912,6 +15001,17 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/UnprocessableEntityException AWS API Documentation
+    #
+    class UnprocessableEntityException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # To remove tags from a MediaConvert queue, preset, job, or job
     # template, send a request with the Amazon Resource Name (ARN) of the
     # resource and the keys of the tags that you want to remove.
@@ -16028,7 +16128,14 @@ module Aws::MediaConvert
     #   denominator values, reduced to lowest terms. Used for the sample
     #   (pixel) aspect ratio and the display aspect ratio of a video track.
     #   For example, a 720x576 anamorphic track has a sample aspect ratio of
-    #   64 / 45 and a display aspect ratio of 16 / 9.
+    #   64 / 45 and a display aspect ratio of 16 / 9. A video track can
+    #   declare an aspect ratio in two independent places, and MediaConvert
+    #   reports each one where it was found rather than choosing between
+    #   them. The ratio declared by the container appears on the video track
+    #   itself, and the ratio declared by the video essence appears under
+    #   codecMetadata. When a file declares an aspect ratio in only one of
+    #   the two places, the other is null; when it declares both and they
+    #   disagree, you can compare them and decide which to use.
     #   @return [Types::AspectRatio]
     #
     # @!attribute [rw] frame_rate
@@ -16067,7 +16174,14 @@ module Aws::MediaConvert
     #   denominator values, reduced to lowest terms. Used for the sample
     #   (pixel) aspect ratio and the display aspect ratio of a video track.
     #   For example, a 720x576 anamorphic track has a sample aspect ratio of
-    #   64 / 45 and a display aspect ratio of 16 / 9.
+    #   64 / 45 and a display aspect ratio of 16 / 9. A video track can
+    #   declare an aspect ratio in two independent places, and MediaConvert
+    #   reports each one where it was found rather than choosing between
+    #   them. The ratio declared by the container appears on the video track
+    #   itself, and the ratio declared by the video essence appears under
+    #   codecMetadata. When a file declares an aspect ratio in only one of
+    #   the two places, the other is null; when it declares both and they
+    #   disagree, you can compare them and decide which to use.
     #   @return [Types::AspectRatio]
     #
     # @!attribute [rw] transfer_characteristics

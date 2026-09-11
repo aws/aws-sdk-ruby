@@ -4552,6 +4552,13 @@ module Aws::MediaConvert
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.color_primaries #=> String, one of "ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "GENERIC_FILM", "ITU_2020", "SMPTE_428_1", "SMPTE_431_2", "SMPTE_EG_432_1", "IPT", "SMPTE_2067XYZ", "EBU_3213_E", "LAST"
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.content_light_level.max_content_light_level #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.content_light_level.max_frame_average_light_level #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.display_aspect_ratio.denominator #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.display_aspect_ratio.numerator #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.dolby_vision.base_layer #=> String, one of "PRESENT", "ABSENT"
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.dolby_vision.enhancement_layer #=> String, one of "PRESENT", "ABSENT"
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.dolby_vision.level #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.dolby_vision.profile #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.dolby_vision.rpu #=> String, one of "PRESENT", "ABSENT"
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.field_order #=> String
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.hdr_10_plus_presence #=> String, one of "PRESENT"
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.height #=> Integer
@@ -4559,6 +4566,8 @@ module Aws::MediaConvert
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.matrix_coefficients #=> String, one of "RGB", "ITU_709", "UNSPECIFIED", "RESERVED", "FCC", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "YCgCo", "ITU_2020_NCL", "ITU_2020_CL", "SMPTE_2085", "CD_NCL", "CD_CL", "ITU_2100ICtCp", "IPT", "EBU3213", "LAST"
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.profile #=> String
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.rotation #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.sample_aspect_ratio.denominator #=> Integer
+    #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.sample_aspect_ratio.numerator #=> Integer
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.scan_type #=> String
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.transfer_characteristics #=> String, one of "ITU_709", "UNSPECIFIED", "RESERVED", "ITU_470M", "ITU_470BG", "SMPTE_170M", "SMPTE_240M", "LINEAR", "LOG10_2", "LOC10_2_5", "IEC_61966_2_4", "ITU_1361", "IEC_61966_2_1", "ITU_2020_10bit", "ITU_2020_12bit", "SMPTE_2084", "SMPTE_428_1", "ARIB_B67", "LAST"
     #   resp.probe_results[0].container.tracks[0].video_properties.codec_metadata.width #=> Integer
@@ -6597,7 +6606,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.193.0'
+      context[:gem_version] = '1.194.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

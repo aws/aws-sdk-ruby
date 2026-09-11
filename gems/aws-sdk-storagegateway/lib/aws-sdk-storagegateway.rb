@@ -54,7 +54,7 @@ module Aws::StorageGateway
   autoload :EndpointProvider, 'aws-sdk-storagegateway/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-storagegateway/endpoints'
 
-  GEM_VERSION = '1.130.0'
+  GEM_VERSION = '1.131.0'
 
 end
 

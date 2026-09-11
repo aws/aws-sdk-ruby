@@ -202,6 +202,39 @@
         {"shape":"AccessDeniedException"}
       ]
     },
+    "ListProcurementPortalSuppliers":{
+      "name":"ListProcurementPortalSuppliers",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListProcurementPortalSuppliersRequest"},
+      "output":{"shape":"ListProcurementPortalSuppliersResponse"},
+      "errors":[
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"}
+      ],
+      "readonly":true
+    },
+    "ListProcurementPortals":{
+      "name":"ListProcurementPortals",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListProcurementPortalsRequest"},
+      "output":{"shape":"ListProcurementPortalsResponse"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"InternalServerException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"AccessDeniedException"}
+      ],
+      "readonly":true
+    },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
       "http":{
@@ -464,6 +497,12 @@
       "max":1,
       "min":1
     },
+    "CountryCode":{
+      "type":"string",
+      "max":2,
+      "min":2,
+      "pattern":"[A-Z]{2}"
+    },
     "CreateInvoiceUnitRequest":{
       "type":"structure",
       "required":[
@@ -679,6 +718,12 @@
         "BillingEntity":{"shape":"BillingEntity"}
       }
     },
+    "FeatureConfigurations":{
+      "type":"structure",
+      "members":{
+        "InvoiceConfiguration":{"shape":"InvoiceConfiguration"}
+      }
+    },
     "FeesBreakdown":{
       "type":"structure",
       "members":{
@@ -769,6 +814,13 @@
       },
       "exception":true,
       "fault":true
+    },
+    "InvoiceConfiguration":{
+      "type":"structure",
+      "members":{
+        "DocumentTypes":{"shape":"EinvoiceDeliveryDocumentTypes"},
+        "AttachmentTypes":{"shape":"EinvoiceDeliveryAttachmentTypes"}
+      }
     },
     "InvoiceCurrencyAmount":{
       "type":"structure",
@@ -974,6 +1026,38 @@
         "NextToken":{"shape":"BasicStringWithoutSpace"}
       }
     },
+    "ListProcurementPortalSuppliersRequest":{
+      "type":"structure",
+      "required":["PortalIdentifier"],
+      "members":{
+        "PortalIdentifier":{"shape":"ProcurementPortalIdString"},
+        "NextToken":{"shape":"BasicStringWithoutSpace"},
+        "MaxResults":{"shape":"MaxResults"}
+      }
+    },
+    "ListProcurementPortalSuppliersResponse":{
+      "type":"structure",
+      "required":["ProcurementPortalSuppliers"],
+      "members":{
+        "ProcurementPortalSuppliers":{"shape":"ProcurementPortalSuppliers"},
+        "NextToken":{"shape":"BasicStringWithoutSpace"}
+      }
+    },
+    "ListProcurementPortalsRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"BasicStringWithoutSpace"},
+        "MaxResults":{"shape":"MaxResults"}
+      }
+    },
+    "ListProcurementPortalsResponse":{
+      "type":"structure",
+      "required":["ProcurementPortals"],
+      "members":{
+        "ProcurementPortals":{"shape":"ProcurementPortals"},
+        "NextToken":{"shape":"BasicStringWithoutSpace"}
+      }
+    },
     "ListTagsForResourceRequest":{
       "type":"structure",
       "required":["ResourceArn"],
@@ -1013,6 +1097,30 @@
       "type":"string",
       "min":1,
       "pattern":"[\\S\\s]*"
+    },
+    "ProcurementPortal":{
+      "type":"structure",
+      "required":[
+        "PortalIdentifier",
+        "PortalName"
+      ],
+      "members":{
+        "PortalIdentifier":{"shape":"ProcurementPortalIdString"},
+        "PortalName":{"shape":"ProcurementPortalName"},
+        "PortalDisplayName":{"shape":"BasicString"},
+        "DefaultFeatureConfigurations":{"shape":"FeatureConfigurations"}
+      }
+    },
+    "ProcurementPortalEnv":{
+      "type":"string",
+      "enum":[
+        "PROD",
+        "TEST"
+      ]
+    },
+    "ProcurementPortalIdString":{
+      "type":"string",
+      "min":1
     },
     "ProcurementPortalName":{
       "type":"string",
@@ -1127,6 +1235,24 @@
         "CreateDate":{"shape":"Timestamp"},
         "LastUpdateDate":{"shape":"Timestamp"}
       }
+    },
+    "ProcurementPortalSupplier":{
+      "type":"structure",
+      "required":["SupplierIdentifier"],
+      "members":{
+        "SupplierIdentifier":{"shape":"SupplierIdString"},
+        "SellerOfRecord":{"shape":"BasicStringWithoutSpace"},
+        "CountryCode":{"shape":"CountryCode"},
+        "Environment":{"shape":"ProcurementPortalEnv"}
+      }
+    },
+    "ProcurementPortalSuppliers":{
+      "type":"list",
+      "member":{"shape":"ProcurementPortalSupplier"}
+    },
+    "ProcurementPortals":{
+      "type":"list",
+      "member":{"shape":"ProcurementPortal"}
     },
     "ProfileList":{
       "type":"list",
@@ -1325,6 +1451,10 @@
     "SupplierDomain":{
       "type":"string",
       "enum":["NetworkID"]
+    },
+    "SupplierIdString":{
+      "type":"string",
+      "min":1
     },
     "TagResourceRequest":{
       "type":"structure",

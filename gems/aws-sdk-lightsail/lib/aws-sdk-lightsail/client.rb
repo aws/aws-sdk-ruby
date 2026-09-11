@@ -2403,6 +2403,34 @@ module Aws::Lightsail
     # @option params [String] :viewer_minimum_tls_protocol_version
     #   The minimum TLS protocol version for the SSL/TLS certificate.
     #
+    # @option params [Boolean] :enable_private_origin_access
+    #   Specifies whether to enable private origin access for the
+    #   distribution. With private origin access, the distribution can serve
+    #   objects that aren't publicly accessible from a Lightsail bucket.
+    #
+    #   Lightsail grants the distribution permission to read the bucket's
+    #   objects. Enabling private origin access doesn't change the bucket's
+    #   access settings, and you can still retrieve publicly accessible
+    #   objects directly from the bucket's endpoint.
+    #
+    #   <note markdown="1"> You can enable private origin access only when the distribution's
+    #   origin is a Lightsail bucket. If the origin is another resource type,
+    #   the request fails.
+    #
+    #    </note>
+    #
+    # @option params [String] :default_root_object
+    #   The object (for example, `index.html`) that the distribution returns
+    #   when a viewer requests the root URL of the distribution (`/`) instead
+    #   of a specific object. The object that you specify must be available
+    #   from the origin.
+    #
+    # @option params [Array<Types::DistributionCustomErrorResponse>] :custom_error_responses
+    #   An array of objects that describe the custom error responses for the
+    #   distribution. With a custom error response, you can specify the page
+    #   to return when the origin responds with a given HTTP error code. You
+    #   can also specify the HTTP status code to send to the viewer.
+    #
     # @return [Types::CreateDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDistributionResult#distribution #distribution} => Types::LightsailDistribution
@@ -2457,6 +2485,16 @@ module Aws::Lightsail
     #     ],
     #     certificate_name: "ResourceName",
     #     viewer_minimum_tls_protocol_version: "TLSv1.1_2016", # accepts TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
+    #     enable_private_origin_access: false,
+    #     default_root_object: "string",
+    #     custom_error_responses: [
+    #       {
+    #         error_code: 1,
+    #         response_code: "string",
+    #         response_page_path: "string",
+    #         error_caching_min_ttl: 1,
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2481,6 +2519,7 @@ module Aws::Lightsail
     #   resp.distribution.origin.protocol_policy #=> String, one of "http-only", "https-only"
     #   resp.distribution.origin.response_timeout #=> Integer
     #   resp.distribution.origin.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
+    #   resp.distribution.origin.is_private_origin_access_enabled #=> Boolean
     #   resp.distribution.origin_public_dns #=> String
     #   resp.distribution.default_cache_behavior.behavior #=> String, one of "dont-cache", "cache"
     #   resp.distribution.cache_behavior_settings.default_ttl #=> Integer
@@ -2506,6 +2545,12 @@ module Aws::Lightsail
     #   resp.distribution.tags[0].key #=> String
     #   resp.distribution.tags[0].value #=> String
     #   resp.distribution.viewer_minimum_tls_protocol_version #=> String
+    #   resp.distribution.default_root_object #=> String
+    #   resp.distribution.custom_error_responses #=> Array
+    #   resp.distribution.custom_error_responses[0].error_code #=> Integer
+    #   resp.distribution.custom_error_responses[0].response_code #=> String
+    #   resp.distribution.custom_error_responses[0].response_page_path #=> String
+    #   resp.distribution.custom_error_responses[0].error_caching_min_ttl #=> Integer
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
     #   resp.operation.resource_type #=> String, one of "ContainerService", "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord", "Alarm", "ContactMethod", "Distribution", "Certificate", "Bucket"
@@ -7398,6 +7443,7 @@ module Aws::Lightsail
     #   resp.distributions[0].origin.protocol_policy #=> String, one of "http-only", "https-only"
     #   resp.distributions[0].origin.response_timeout #=> Integer
     #   resp.distributions[0].origin.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
+    #   resp.distributions[0].origin.is_private_origin_access_enabled #=> Boolean
     #   resp.distributions[0].origin_public_dns #=> String
     #   resp.distributions[0].default_cache_behavior.behavior #=> String, one of "dont-cache", "cache"
     #   resp.distributions[0].cache_behavior_settings.default_ttl #=> Integer
@@ -7423,6 +7469,12 @@ module Aws::Lightsail
     #   resp.distributions[0].tags[0].key #=> String
     #   resp.distributions[0].tags[0].value #=> String
     #   resp.distributions[0].viewer_minimum_tls_protocol_version #=> String
+    #   resp.distributions[0].default_root_object #=> String
+    #   resp.distributions[0].custom_error_responses #=> Array
+    #   resp.distributions[0].custom_error_responses[0].error_code #=> Integer
+    #   resp.distributions[0].custom_error_responses[0].response_code #=> String
+    #   resp.distributions[0].custom_error_responses[0].response_page_path #=> String
+    #   resp.distributions[0].custom_error_responses[0].error_caching_min_ttl #=> Integer
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributions AWS API Documentation
@@ -11982,6 +12034,37 @@ module Aws::Lightsail
     #   Set this value to `false` to attach a new certificate to the
     #   distribution.
     #
+    # @option params [Boolean] :enable_private_origin_access
+    #   Specifies whether to enable private origin access for the
+    #   distribution. With private origin access, the distribution can serve
+    #   objects that aren't publicly accessible from a Lightsail bucket.
+    #
+    #   Lightsail grants the distribution permission to read the bucket's
+    #   objects. Enabling private origin access doesn't change the bucket's
+    #   access settings, and you can still retrieve publicly accessible
+    #   objects directly from the bucket's endpoint.
+    #
+    #   <note markdown="1"> When you include this parameter, you must also include the `origin`
+    #   parameter with the resource name, even if the origin is not changing.
+    #
+    #    You can enable private origin access only when the distribution's
+    #   origin is a Lightsail bucket. If the origin is another resource type,
+    #   the request fails.
+    #
+    #    </note>
+    #
+    # @option params [String] :default_root_object
+    #   The object (for example, `index.html`) that the distribution returns
+    #   when a viewer requests the root URL of the distribution (`/`) instead
+    #   of a specific object. The object that you specify must be available
+    #   from the origin.
+    #
+    # @option params [Array<Types::DistributionCustomErrorResponse>] :custom_error_responses
+    #   An array of objects that describe the custom error responses for the
+    #   distribution. With a custom error response, you can specify the page
+    #   to return when the origin responds with a given HTTP error code. You
+    #   can also specify the HTTP status code to send to the viewer.
+    #
     # @return [Types::UpdateDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDistributionResult#operation #operation} => Types::Operation
@@ -12029,6 +12112,16 @@ module Aws::Lightsail
     #     viewer_minimum_tls_protocol_version: "TLSv1.1_2016", # accepts TLSv1.1_2016, TLSv1.2_2018, TLSv1.2_2019, TLSv1.2_2021
     #     certificate_name: "ResourceName",
     #     use_default_certificate: false,
+    #     enable_private_origin_access: false,
+    #     default_root_object: "string",
+    #     custom_error_responses: [
+    #       {
+    #         error_code: 1,
+    #         response_code: "string",
+    #         response_page_path: "string",
+    #         error_caching_min_ttl: 1,
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -12628,7 +12721,7 @@ module Aws::Lightsail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.136.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

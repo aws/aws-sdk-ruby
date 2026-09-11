@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.194.0 (2026-09-11)
+------------------
+
+* Feature - Adds Dolby Vision metadata to Probe results, including profile, level, and presence of the RPU, base layer, and enhancement layer. Adds video sample and display aspect ratios. Adds the UnprocessableEntityException (HTTP 422) error to Probe for recognized but malformed or corrupt inputs.
+
 1.193.0 (2026-09-09)
 ------------------
 

@@ -960,6 +960,9 @@
           "shape": "BadRequestException"
         },
         {
+          "shape": "UnprocessableEntityException"
+        },
+        {
           "shape": "InternalServerErrorException"
         },
         {
@@ -3604,6 +3607,14 @@
           "shape": "ContentLightLevel",
           "locationName": "contentLightLevel"
         },
+        "DisplayAspectRatio": {
+          "shape": "AspectRatio",
+          "locationName": "displayAspectRatio"
+        },
+        "DolbyVision": {
+          "shape": "DolbyVisionMetadata",
+          "locationName": "dolbyVision"
+        },
         "FieldOrder": {
           "shape": "__string",
           "locationName": "fieldOrder"
@@ -3631,6 +3642,10 @@
         "Rotation": {
           "shape": "__integer",
           "locationName": "rotation"
+        },
+        "SampleAspectRatio": {
+          "shape": "AspectRatio",
+          "locationName": "sampleAspectRatio"
         },
         "ScanType": {
           "shape": "__string",
@@ -4671,6 +4686,38 @@
       "enum": [
         "HDR10_NOMAP",
         "HDR10_1000"
+      ]
+    },
+    "DolbyVisionMetadata": {
+      "type": "structure",
+      "members": {
+        "BaseLayer": {
+          "shape": "DolbyVisionPresence",
+          "locationName": "baseLayer"
+        },
+        "EnhancementLayer": {
+          "shape": "DolbyVisionPresence",
+          "locationName": "enhancementLayer"
+        },
+        "Level": {
+          "shape": "__integer",
+          "locationName": "level"
+        },
+        "Profile": {
+          "shape": "__integer",
+          "locationName": "profile"
+        },
+        "Rpu": {
+          "shape": "DolbyVisionPresence",
+          "locationName": "rpu"
+        }
+      }
+    },
+    "DolbyVisionPresence": {
+      "type": "string",
+      "enum": [
+        "PRESENT",
+        "ABSENT"
       ]
     },
     "DolbyVisionProfile": {
@@ -12049,6 +12096,19 @@
         "NONE",
         "HARD"
       ]
+    },
+    "UnprocessableEntityException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "shape": "__string",
+          "locationName": "message"
+        }
+      },
+      "exception": true,
+      "error": {
+        "httpStatusCode": 422
+      }
     },
     "UntagResourceRequest": {
       "type": "structure",

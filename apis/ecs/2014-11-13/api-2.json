@@ -2232,6 +2232,7 @@
         "networkConfiguration":{"shape":"ExpressGatewayServiceNetworkConfiguration"},
         "cpu":{"shape":"String"},
         "memory":{"shape":"String"},
+        "cpuArchitecture":{"shape":"ExpressCpuArchitecture"},
         "scalingTarget":{"shape":"ExpressGatewayScalingTarget"},
         "tags":{"shape":"Tags"},
         "taskDefinitionArn":{"shape":"String"}
@@ -3540,6 +3541,13 @@
         "taskArn":{"shape":"String"}
       }
     },
+    "ExpressCpuArchitecture":{
+      "type":"string",
+      "enum":[
+        "X86_64",
+        "ARM64"
+      ]
+    },
     "ExpressGatewayContainer":{
       "type":"structure",
       "required":["image"],
@@ -3588,6 +3596,7 @@
         "taskDefinitionArn":{"shape":"String"},
         "cpu":{"shape":"String"},
         "memory":{"shape":"String"},
+        "cpuArchitecture":{"shape":"ExpressCpuArchitecture"},
         "networkConfiguration":{"shape":"ExpressGatewayServiceNetworkConfiguration"},
         "healthCheckPath":{"shape":"String"},
         "primaryContainer":{"shape":"ExpressGatewayContainer"},
@@ -6498,6 +6507,7 @@
         "networkConfiguration":{"shape":"ExpressGatewayServiceNetworkConfiguration"},
         "cpu":{"shape":"String"},
         "memory":{"shape":"String"},
+        "cpuArchitecture":{"shape":"ExpressCpuArchitecture"},
         "scalingTarget":{"shape":"ExpressGatewayScalingTarget"},
         "taskDefinitionArn":{"shape":"String"}
       }

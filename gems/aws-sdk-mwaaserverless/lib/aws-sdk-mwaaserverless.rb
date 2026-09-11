@@ -55,7 +55,7 @@ module Aws::MWAAServerless
   autoload :EndpointProvider, 'aws-sdk-mwaaserverless/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mwaaserverless/endpoints'
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.12.0'
 
 end
 

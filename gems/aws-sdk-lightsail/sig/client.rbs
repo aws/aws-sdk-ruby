@@ -413,7 +413,17 @@ module Aws
                                    }
                                  ],
                                  ?certificate_name: ::String,
-                                 ?viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")
+                                 ?viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021"),
+                                 ?enable_private_origin_access: bool,
+                                 ?default_root_object: ::String,
+                                 ?custom_error_responses: Array[
+                                   {
+                                     error_code: ::Integer?,
+                                     response_code: ::String?,
+                                     response_page_path: ::String?,
+                                     error_caching_min_ttl: ::Integer?
+                                   }
+                                 ]
                                ) -> _CreateDistributionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionResponseSuccess
 
@@ -2117,7 +2127,17 @@ module Aws
                                  ?is_enabled: bool,
                                  ?viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021"),
                                  ?certificate_name: ::String,
-                                 ?use_default_certificate: bool
+                                 ?use_default_certificate: bool,
+                                 ?enable_private_origin_access: bool,
+                                 ?default_root_object: ::String,
+                                 ?custom_error_responses: Array[
+                                   {
+                                     error_code: ::Integer?,
+                                     response_code: ::String?,
+                                     response_page_path: ::String?,
+                                     error_caching_min_ttl: ::Integer?
+                                   }
+                                 ]
                                ) -> _UpdateDistributionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDistributionResponseSuccess
 

@@ -2463,6 +2463,188 @@ module Aws::Invoicing
       req.send_request(options)
     end
 
+    # Returns the suppliers configured for a specified procurement portal,
+    # including supplier identifiers and associated metadata. For faster,
+    # more reliable responses, use pagination.
+    #
+    # @option params [required, String] :portal_identifier
+    #   The unique identifier of the procurement portal for which to list
+    #   suppliers. Use the `PortalIdentifier` value returned by
+    #   `ListProcurementPortals`.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You received this token from a
+    #   previous call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned NextToken
+    #   value. Default is 100.
+    #
+    # @return [Types::ListProcurementPortalSuppliersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProcurementPortalSuppliersResponse#procurement_portal_suppliers #procurement_portal_suppliers} => Array&lt;Types::ProcurementPortalSupplier&gt;
+    #   * {Types::ListProcurementPortalSuppliersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: ListProcurementPortalSuppliers
+    #
+    #   resp = client.list_procurement_portal_suppliers({
+    #     portal_identifier: "KXMJQWBRNP", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     procurement_portal_suppliers: [
+    #       {
+    #         environment: "PROD", 
+    #         seller_of_record: "AWS_INC", 
+    #         supplier_identifier: "AN01010639538", 
+    #       }, 
+    #       {
+    #         country_code: "DE", 
+    #         environment: "PROD", 
+    #         seller_of_record: "AWS_EUROPE", 
+    #         supplier_identifier: "AN01401912735", 
+    #       }, 
+    #       {
+    #         environment: "TEST", 
+    #         seller_of_record: "AWS_INC", 
+    #         supplier_identifier: "AN01010639538-T", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_procurement_portal_suppliers({
+    #     portal_identifier: "ProcurementPortalIdString", # required
+    #     next_token: "BasicStringWithoutSpace",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.procurement_portal_suppliers #=> Array
+    #   resp.procurement_portal_suppliers[0].supplier_identifier #=> String
+    #   resp.procurement_portal_suppliers[0].seller_of_record #=> String
+    #   resp.procurement_portal_suppliers[0].country_code #=> String
+    #   resp.procurement_portal_suppliers[0].environment #=> String, one of "PROD", "TEST"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ListProcurementPortalSuppliers AWS API Documentation
+    #
+    # @overload list_procurement_portal_suppliers(params = {})
+    # @param [Hash] params ({})
+    def list_procurement_portal_suppliers(params = {}, options = {})
+      req = build_request(:list_procurement_portal_suppliers, params)
+      req.send_request(options)
+    end
+
+    # Returns the Amazon Web Services-supported procurement portals for
+    # e-invoice delivery and purchase order retrieval. Each entry includes
+    # the portal identifier, name, and default feature configurations, which
+    # define the supported document and attachment types. For faster, more
+    # reliable responses, use pagination.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. You received this token from a
+    #   previous call.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another call with the returned NextToken
+    #   value. Default is 100.
+    #
+    # @return [Types::ListProcurementPortalsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListProcurementPortalsResponse#procurement_portals #procurement_portals} => Array&lt;Types::ProcurementPortal&gt;
+    #   * {Types::ListProcurementPortalsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: ListProcurementPortals
+    #
+    #   resp = client.list_procurement_portals({
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     procurement_portals: [
+    #       {
+    #         default_feature_configurations: {
+    #           invoice_configuration: {
+    #             attachment_types: [
+    #               "INVOICE_PDF", 
+    #               "RFP_PDF", 
+    #             ], 
+    #             document_types: [
+    #               "AWS_CLOUD_INVOICE", 
+    #               "AWS_CLOUD_CREDIT_MEMO", 
+    #               "AWS_MARKETPLACE_INVOICE", 
+    #               "AWS_MARKETPLACE_CREDIT_MEMO", 
+    #               "AWS_REQUEST_FOR_PAYMENT", 
+    #             ], 
+    #           }, 
+    #         }, 
+    #         portal_display_name: "SAP Business Network", 
+    #         portal_identifier: "KXMJQWBRNP", 
+    #         portal_name: "SAP_BUSINESS_NETWORK", 
+    #       }, 
+    #       {
+    #         default_feature_configurations: {
+    #           invoice_configuration: {
+    #             attachment_types: [
+    #               "INVOICE_PDF", 
+    #               "RFP_PDF", 
+    #             ], 
+    #             document_types: [
+    #               "AWS_CLOUD_INVOICE", 
+    #               "AWS_CLOUD_CREDIT_MEMO", 
+    #               "AWS_MARKETPLACE_INVOICE", 
+    #               "AWS_MARKETPLACE_CREDIT_MEMO", 
+    #               "AWS_REQUEST_FOR_PAYMENT", 
+    #             ], 
+    #           }, 
+    #         }, 
+    #         portal_display_name: "Coupa", 
+    #         portal_identifier: "THZVCGFLDY", 
+    #         portal_name: "COUPA", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_procurement_portals({
+    #     next_token: "BasicStringWithoutSpace",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.procurement_portals #=> Array
+    #   resp.procurement_portals[0].portal_identifier #=> String
+    #   resp.procurement_portals[0].portal_name #=> String, one of "SAP_BUSINESS_NETWORK", "COUPA"
+    #   resp.procurement_portals[0].portal_display_name #=> String
+    #   resp.procurement_portals[0].default_feature_configurations.invoice_configuration.document_types #=> Array
+    #   resp.procurement_portals[0].default_feature_configurations.invoice_configuration.document_types[0] #=> String, one of "AWS_CLOUD_INVOICE", "AWS_CLOUD_CREDIT_MEMO", "AWS_MARKETPLACE_INVOICE", "AWS_MARKETPLACE_CREDIT_MEMO", "AWS_REQUEST_FOR_PAYMENT"
+    #   resp.procurement_portals[0].default_feature_configurations.invoice_configuration.attachment_types #=> Array
+    #   resp.procurement_portals[0].default_feature_configurations.invoice_configuration.attachment_types[0] #=> String, one of "INVOICE_PDF", "RFP_PDF"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/ListProcurementPortals AWS API Documentation
+    #
+    # @overload list_procurement_portals(params = {})
+    # @param [Hash] params ({})
+    def list_procurement_portals(params = {}, options = {})
+      req = build_request(:list_procurement_portals, params)
+      req.send_request(options)
+    end
+
     # Lists the tags for a resource.
     #
     # @option params [required, String] :resource_arn
@@ -3073,7 +3255,7 @@ module Aws::Invoicing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-invoicing'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

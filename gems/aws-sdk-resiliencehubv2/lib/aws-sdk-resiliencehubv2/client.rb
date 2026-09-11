@@ -4478,7 +4478,7 @@ module Aws::Resiliencehubv2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resiliencehubv2'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -478,30 +478,30 @@ module Aws::Batch
     # `PENDING`, or `RUNNABLE` state are cancelled and the job status is
     # updated to `FAILED`.
     #
-    # <note markdown="1"> A `PENDING` job is canceled after all dependency jobs are completed.
-    # Therefore, it may take longer than expected to cancel a job in
+    # <note markdown="1"> A `PENDING` job is cancelled after all dependency jobs are completed.
+    # Therefore, it might take longer than expected to cancel a job in
     # `PENDING` status.
     #
     #  When you try to cancel an array parent job in `PENDING`, Batch
-    # attempts to cancel all child jobs. The array parent job is canceled
+    # attempts to cancel all child jobs. The array parent job is cancelled
     # when all child jobs are completed.
     #
     #  </note>
     #
     # Jobs that progressed to the `STARTING` or `RUNNING` state aren't
-    # canceled. However, the API operation still succeeds, even if no job is
-    # canceled. These jobs must be terminated with the TerminateJob
-    # operation.
+    # cancelled. However, the API operation still succeeds, even if no job
+    # is cancelled. These jobs must be terminated with the TerminateJob or
+    # TerminateJobs operation.
     #
     # @option params [required, String] :job_id
     #   The Batch job ID of the job to cancel.
     #
     # @option params [required, String] :reason
-    #   A message to attach to the job that explains the reason for canceling
+    #   A message to attach to the job that explains the reason for cancelling
     #   it. This message is returned by future DescribeJobs operations on the
     #   job. It is also recorded in the Batch activity logs.
     #
-    #   This parameter has as limit of 1024 characters.
+    #   This parameter has a limit of 1024 characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -532,6 +532,98 @@ module Aws::Batch
     # @param [Hash] params ({})
     def cancel_job(params = {}, options = {})
       req = build_request(:cancel_job, params)
+      req.send_request(options)
+    end
+
+    # Cancels up to 50 jobs in an Batch job queue. This is a bulk version of
+    # CancelJob. Jobs that are in a `SUBMITTED`, `PENDING`, or `RUNNABLE`
+    # state are cancelled and the job status is updated to `FAILED`.
+    #
+    # <note markdown="1"> A `PENDING` job is cancelled after all dependency jobs are completed.
+    # Therefore, it might take longer than expected to cancel a job in
+    # `PENDING` status.
+    #
+    #  When you try to cancel an array parent job in `PENDING`, Batch
+    # attempts to cancel all child jobs. The array parent job is cancelled
+    # when all child jobs are completed.
+    #
+    #  </note>
+    #
+    # Jobs that progressed to the `STARTING` or `RUNNING` state aren't
+    # cancelled. These jobs must be terminated with the TerminateJob or
+    # TerminateJobs operation.
+    #
+    # Batch reports the result for each job individually in the response.
+    # Jobs that were processed successfully are reported in the `successful`
+    # list. Jobs that encountered errors are reported in the `errors` list.
+    # The response returns an HTTP status code of `200` even when some jobs
+    # encountered errors, so check the `errors` list. Jobs that can't be
+    # found are treated as successfully processed.
+    #
+    # @option params [required, Array<String>] :jobs
+    #   An array of up to 50 Batch job IDs of the jobs to cancel.
+    #
+    # @option params [required, String] :reason
+    #   A message to attach to the job that explains the reason for cancelling
+    #   it. This message is returned by future DescribeJobs operations on the
+    #   job. It is also recorded in the Batch activity logs.
+    #
+    #   This parameter has a limit of 1024 characters.
+    #
+    # @return [Types::CancelJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelJobsResponse#successful #successful} => Array&lt;String&gt;
+    #   * {Types::CancelJobsResponse#errors #errors} => Array&lt;Types::CancelJobsErrorDetail&gt;
+    #
+    #
+    # @example Example: To cancel multiple jobs
+    #
+    #   # This example cancels the jobs with the specified job IDs.
+    #
+    #   resp = client.cancel_jobs({
+    #     jobs: [
+    #       "1d828f65-7a4d-42e8-996d-3b900ed59dc4", 
+    #       "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e", 
+    #     ], 
+    #     reason: "Cancelling jobs.", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #       {
+    #         code: "ServerException", 
+    #         job: "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e", 
+    #         message: "Failed to read job state. Please retry this job.", 
+    #       }, 
+    #     ], 
+    #     successful: [
+    #       "1d828f65-7a4d-42e8-996d-3b900ed59dc4", 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_jobs({
+    #     jobs: ["String"], # required
+    #     reason: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].job #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/CancelJobs AWS API Documentation
+    #
+    # @overload cancel_jobs(params = {})
+    # @param [Hash] params ({})
+    def cancel_jobs(params = {}, options = {})
+      req = build_request(:cancel_jobs, params)
       req.send_request(options)
     end
 
@@ -4043,6 +4135,8 @@ module Aws::Batch
     #   resp.job_summary_list[0].node_properties.num_nodes #=> Integer
     #   resp.job_summary_list[0].node_properties.node_index #=> Integer
     #   resp.job_summary_list[0].job_definition #=> String
+    #   resp.job_summary_list[0].is_cancelled #=> Boolean
+    #   resp.job_summary_list[0].is_terminated #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListJobs AWS API Documentation
@@ -4438,6 +4532,7 @@ module Aws::Batch
     #   resp.job_summary_list[0].status_reason #=> String
     #   resp.job_summary_list[0].started_at #=> Integer
     #   resp.job_summary_list[0].stopped_at #=> Integer
+    #   resp.job_summary_list[0].is_terminated #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/ListServiceJobs AWS API Documentation
@@ -6352,11 +6447,11 @@ module Aws::Batch
     #   The Batch job ID of the job to terminate.
     #
     # @option params [required, String] :reason
-    #   A message to attach to the job that explains the reason for canceling
-    #   it. This message is returned by future DescribeJobs operations on the
-    #   job. It is also recorded in the Batch activity logs.
+    #   A message to attach to the job that explains the reason for
+    #   terminating it. This message is returned by future DescribeJobs
+    #   operations on the job. It is also recorded in the Batch activity logs.
     #
-    #   This parameter has as limit of 1024 characters.
+    #   This parameter has a limit of 1024 characters.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -6390,6 +6485,85 @@ module Aws::Batch
       req.send_request(options)
     end
 
+    # Terminates up to 50 jobs in a job queue. This is a bulk version of
+    # TerminateJob. Jobs that are in the `STARTING` or `RUNNING` state are
+    # terminated, which causes them to transition to `FAILED`. Jobs that
+    # have not progressed to the `STARTING` state are cancelled.
+    #
+    # Batch reports the result for each job individually in the response.
+    # Jobs that were processed successfully are reported in the `successful`
+    # list. Jobs that encountered errors are reported in the `errors` list.
+    # The response returns an HTTP status code of `200` even when some jobs
+    # encountered errors, so check the `errors` list. Jobs that can't be
+    # found are treated as successfully processed.
+    #
+    # @option params [required, Array<String>] :jobs
+    #   An array of up to 50 Batch job IDs of the jobs to terminate.
+    #
+    # @option params [required, String] :reason
+    #   A message to attach to the job that explains the reason for
+    #   terminating it. This message is returned by future DescribeJobs
+    #   operations on the job. It is also recorded in the Batch activity logs.
+    #
+    #   This parameter has a limit of 1024 characters.
+    #
+    # @return [Types::TerminateJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TerminateJobsResponse#successful #successful} => Array&lt;String&gt;
+    #   * {Types::TerminateJobsResponse#errors #errors} => Array&lt;Types::TerminateJobsErrorDetail&gt;
+    #
+    #
+    # @example Example: To terminate multiple jobs
+    #
+    #   # This example terminates the jobs with the specified job IDs.
+    #
+    #   resp = client.terminate_jobs({
+    #     jobs: [
+    #       "61e743ed-35e4-48da-b2de-5c8333821c84", 
+    #       "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e", 
+    #     ], 
+    #     reason: "Terminating jobs.", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #       {
+    #         code: "ServerException", 
+    #         job: "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e", 
+    #         message: "Failed to read job state. Please retry this job.", 
+    #       }, 
+    #     ], 
+    #     successful: [
+    #       "61e743ed-35e4-48da-b2de-5c8333821c84", 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.terminate_jobs({
+    #     jobs: ["String"], # required
+    #     reason: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].job #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateJobs AWS API Documentation
+    #
+    # @overload terminate_jobs(params = {})
+    # @param [Hash] params ({})
+    def terminate_jobs(params = {}, options = {})
+      req = build_request(:terminate_jobs, params)
+      req.send_request(options)
+    end
+
     # Terminates a service job in a job queue.
     #
     # @option params [required, String] :job_id
@@ -6397,7 +6571,7 @@ module Aws::Batch
     #
     # @option params [required, String] :reason
     #   A message to attach to the service job that explains the reason for
-    #   canceling it. This message is returned by `DescribeServiceJob`
+    #   terminating it. This message is returned by `DescribeServiceJob`
     #   operations on the service job.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -6415,6 +6589,82 @@ module Aws::Batch
     # @param [Hash] params ({})
     def terminate_service_job(params = {}, options = {})
       req = build_request(:terminate_service_job, params)
+      req.send_request(options)
+    end
+
+    # Terminates up to 50 service jobs in a job queue. This is a bulk
+    # version of TerminateServiceJob.
+    #
+    # Batch reports the result for each service job individually in the
+    # response. Service jobs that were processed successfully are reported
+    # in the `successful` list. Service jobs that encountered errors are
+    # reported in the `errors` list. The response returns an HTTP status
+    # code of `200` even when some service jobs encountered errors, so check
+    # the `errors` list. Service jobs that can't be found are treated as
+    # successfully processed.
+    #
+    # @option params [required, Array<String>] :jobs
+    #   An array of up to 50 service job IDs of the service jobs to terminate.
+    #
+    # @option params [required, String] :reason
+    #   A message to attach to the service job that explains the reason for
+    #   terminating it. This message is returned by `DescribeServiceJob`
+    #   operations on the service job.
+    #
+    # @return [Types::TerminateServiceJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TerminateServiceJobsResponse#successful #successful} => Array&lt;String&gt;
+    #   * {Types::TerminateServiceJobsResponse#errors #errors} => Array&lt;Types::TerminateServiceJobsErrorDetail&gt;
+    #
+    #
+    # @example Example: To terminate multiple service jobs
+    #
+    #   # This example terminates the specified service jobs with a reason.
+    #
+    #   resp = client.terminate_service_jobs({
+    #     jobs: [
+    #       "a4d6c728-8ee8-4c65-8e2a-9a5e8f4b7c3d", 
+    #       "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e", 
+    #     ], 
+    #     reason: "Job terminated by user request", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     errors: [
+    #       {
+    #         code: "ServerException", 
+    #         job: "b3d0f26e-6d3a-4a5b-9c2e-7f4a1b2c3d4e", 
+    #         message: "Failed to read job state. Please retry this job.", 
+    #       }, 
+    #     ], 
+    #     successful: [
+    #       "a4d6c728-8ee8-4c65-8e2a-9a5e8f4b7c3d", 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.terminate_service_jobs({
+    #     jobs: ["String"], # required
+    #     reason: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful #=> Array
+    #   resp.successful[0] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].job #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/TerminateServiceJobs AWS API Documentation
+    #
+    # @overload terminate_service_jobs(params = {})
+    # @param [Hash] params ({})
+    def terminate_service_jobs(params = {}, options = {})
+      req = build_request(:terminate_service_jobs, params)
       req.send_request(options)
     end
 
@@ -7114,7 +7364,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.152.0'
+      context[:gem_version] = '1.153.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

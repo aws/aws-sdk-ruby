@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.247.0 (2026-09-11)
+------------------
+
+* Feature - This feature adds support for setting the cpu architecture type that should be used to launch tasks for an Express Gateway Service.
+
 1.246.0 (2026-09-09)
 ------------------
 

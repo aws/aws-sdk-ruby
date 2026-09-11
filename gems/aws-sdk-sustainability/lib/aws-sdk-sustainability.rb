@@ -54,7 +54,7 @@ module Aws::Sustainability
   autoload :EndpointProvider, 'aws-sdk-sustainability/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-sustainability/endpoints'
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end
 

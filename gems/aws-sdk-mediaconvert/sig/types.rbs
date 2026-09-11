@@ -479,6 +479,8 @@ module Aws::MediaConvert
       attr_accessor coded_frame_rate: Types::FrameRate
       attr_accessor color_primaries: ("ITU_709" | "UNSPECIFIED" | "RESERVED" | "ITU_470M" | "ITU_470BG" | "SMPTE_170M" | "SMPTE_240M" | "GENERIC_FILM" | "ITU_2020" | "SMPTE_428_1" | "SMPTE_431_2" | "SMPTE_EG_432_1" | "IPT" | "SMPTE_2067XYZ" | "EBU_3213_E" | "LAST")
       attr_accessor content_light_level: Types::ContentLightLevel
+      attr_accessor display_aspect_ratio: Types::AspectRatio
+      attr_accessor dolby_vision: Types::DolbyVisionMetadata
       attr_accessor field_order: ::String
       attr_accessor hdr_10_plus_presence: ("PRESENT")
       attr_accessor height: ::Integer
@@ -486,6 +488,7 @@ module Aws::MediaConvert
       attr_accessor matrix_coefficients: ("RGB" | "ITU_709" | "UNSPECIFIED" | "RESERVED" | "FCC" | "ITU_470BG" | "SMPTE_170M" | "SMPTE_240M" | "YCgCo" | "ITU_2020_NCL" | "ITU_2020_CL" | "SMPTE_2085" | "CD_NCL" | "CD_CL" | "ITU_2100ICtCp" | "IPT" | "EBU3213" | "LAST")
       attr_accessor profile: ::String
       attr_accessor rotation: ::Integer
+      attr_accessor sample_aspect_ratio: Types::AspectRatio
       attr_accessor scan_type: ::String
       attr_accessor transfer_characteristics: ("ITU_709" | "UNSPECIFIED" | "RESERVED" | "ITU_470M" | "ITU_470BG" | "SMPTE_170M" | "SMPTE_240M" | "LINEAR" | "LOG10_2" | "LOC10_2_5" | "IEC_61966_2_4" | "ITU_1361" | "IEC_61966_2_1" | "ITU_2020_10bit" | "ITU_2020_12bit" | "SMPTE_2084" | "SMPTE_428_1" | "ARIB_B67" | "LAST")
       attr_accessor width: ::Integer
@@ -770,6 +773,15 @@ module Aws::MediaConvert
     class DolbyVisionLevel6Metadata
       attr_accessor max_cll: ::Integer
       attr_accessor max_fall: ::Integer
+      SENSITIVE: []
+    end
+
+    class DolbyVisionMetadata
+      attr_accessor base_layer: ("PRESENT" | "ABSENT")
+      attr_accessor enhancement_layer: ("PRESENT" | "ABSENT")
+      attr_accessor level: ::Integer
+      attr_accessor profile: ::Integer
+      attr_accessor rpu: ("PRESENT" | "ABSENT")
       SENSITIVE: []
     end
 
@@ -2427,6 +2439,11 @@ module Aws::MediaConvert
       attr_accessor scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")
       attr_accessor slow_pal: ("DISABLED" | "ENABLED")
       attr_accessor telecine: ("NONE" | "HARD")
+      SENSITIVE: []
+    end
+
+    class UnprocessableEntityException
+      attr_accessor message: ::String
       SENSITIVE: []
     end
 

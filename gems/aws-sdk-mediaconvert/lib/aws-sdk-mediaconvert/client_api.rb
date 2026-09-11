@@ -234,6 +234,8 @@ module Aws::MediaConvert
     DolbyVisionLevel6Metadata = Shapes::StructureShape.new(name: 'DolbyVisionLevel6Metadata')
     DolbyVisionLevel6Mode = Shapes::StringShape.new(name: 'DolbyVisionLevel6Mode')
     DolbyVisionMapping = Shapes::StringShape.new(name: 'DolbyVisionMapping')
+    DolbyVisionMetadata = Shapes::StructureShape.new(name: 'DolbyVisionMetadata')
+    DolbyVisionPresence = Shapes::StringShape.new(name: 'DolbyVisionPresence')
     DolbyVisionProfile = Shapes::StringShape.new(name: 'DolbyVisionProfile')
     DropFrameTimecode = Shapes::StringShape.new(name: 'DropFrameTimecode')
     DurationControl = Shapes::StructureShape.new(name: 'DurationControl')
@@ -701,6 +703,7 @@ module Aws::MediaConvert
     UncompressedSettings = Shapes::StructureShape.new(name: 'UncompressedSettings')
     UncompressedSlowPal = Shapes::StringShape.new(name: 'UncompressedSlowPal')
     UncompressedTelecine = Shapes::StringShape.new(name: 'UncompressedTelecine')
+    UnprocessableEntityException = Shapes::StructureShape.new(name: 'UnprocessableEntityException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateJobTemplateRequest = Shapes::StructureShape.new(name: 'UpdateJobTemplateRequest')
@@ -1416,6 +1419,8 @@ module Aws::MediaConvert
     CodecMetadata.add_member(:coded_frame_rate, Shapes::ShapeRef.new(shape: FrameRate, location_name: "codedFrameRate"))
     CodecMetadata.add_member(:color_primaries, Shapes::ShapeRef.new(shape: ColorPrimaries, location_name: "colorPrimaries"))
     CodecMetadata.add_member(:content_light_level, Shapes::ShapeRef.new(shape: ContentLightLevel, location_name: "contentLightLevel"))
+    CodecMetadata.add_member(:display_aspect_ratio, Shapes::ShapeRef.new(shape: AspectRatio, location_name: "displayAspectRatio"))
+    CodecMetadata.add_member(:dolby_vision, Shapes::ShapeRef.new(shape: DolbyVisionMetadata, location_name: "dolbyVision"))
     CodecMetadata.add_member(:field_order, Shapes::ShapeRef.new(shape: __string, location_name: "fieldOrder"))
     CodecMetadata.add_member(:hdr_10_plus_presence, Shapes::ShapeRef.new(shape: Hdr10PlusPresence, location_name: "hdr10PlusPresence"))
     CodecMetadata.add_member(:height, Shapes::ShapeRef.new(shape: __integer, location_name: "height"))
@@ -1423,6 +1428,7 @@ module Aws::MediaConvert
     CodecMetadata.add_member(:matrix_coefficients, Shapes::ShapeRef.new(shape: MatrixCoefficients, location_name: "matrixCoefficients"))
     CodecMetadata.add_member(:profile, Shapes::ShapeRef.new(shape: __string, location_name: "profile"))
     CodecMetadata.add_member(:rotation, Shapes::ShapeRef.new(shape: __integer, location_name: "rotation"))
+    CodecMetadata.add_member(:sample_aspect_ratio, Shapes::ShapeRef.new(shape: AspectRatio, location_name: "sampleAspectRatio"))
     CodecMetadata.add_member(:scan_type, Shapes::ShapeRef.new(shape: __string, location_name: "scanType"))
     CodecMetadata.add_member(:transfer_characteristics, Shapes::ShapeRef.new(shape: TransferCharacteristics, location_name: "transferCharacteristics"))
     CodecMetadata.add_member(:width, Shapes::ShapeRef.new(shape: __integer, location_name: "width"))
@@ -1639,6 +1645,13 @@ module Aws::MediaConvert
     DolbyVisionLevel6Metadata.add_member(:max_cll, Shapes::ShapeRef.new(shape: __integerMin0Max65535, location_name: "maxCll"))
     DolbyVisionLevel6Metadata.add_member(:max_fall, Shapes::ShapeRef.new(shape: __integerMin0Max65535, location_name: "maxFall"))
     DolbyVisionLevel6Metadata.struct_class = Types::DolbyVisionLevel6Metadata
+
+    DolbyVisionMetadata.add_member(:base_layer, Shapes::ShapeRef.new(shape: DolbyVisionPresence, location_name: "baseLayer"))
+    DolbyVisionMetadata.add_member(:enhancement_layer, Shapes::ShapeRef.new(shape: DolbyVisionPresence, location_name: "enhancementLayer"))
+    DolbyVisionMetadata.add_member(:level, Shapes::ShapeRef.new(shape: __integer, location_name: "level"))
+    DolbyVisionMetadata.add_member(:profile, Shapes::ShapeRef.new(shape: __integer, location_name: "profile"))
+    DolbyVisionMetadata.add_member(:rpu, Shapes::ShapeRef.new(shape: DolbyVisionPresence, location_name: "rpu"))
+    DolbyVisionMetadata.struct_class = Types::DolbyVisionMetadata
 
     DurationControl.add_member(:integer_duration_maximum_compression_denominator, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "integerDurationMaximumCompressionDenominator"))
     DurationControl.add_member(:integer_duration_maximum_compression_numerator, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "integerDurationMaximumCompressionNumerator"))
@@ -2951,6 +2964,9 @@ module Aws::MediaConvert
     UncompressedSettings.add_member(:telecine, Shapes::ShapeRef.new(shape: UncompressedTelecine, location_name: "telecine"))
     UncompressedSettings.struct_class = Types::UncompressedSettings
 
+    UnprocessableEntityException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
+    UnprocessableEntityException.struct_class = Types::UnprocessableEntityException
+
     UntagResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "arn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -3803,6 +3819,7 @@ module Aws::MediaConvert
         o.input = Shapes::ShapeRef.new(shape: ProbeRequest)
         o.output = Shapes::ShapeRef.new(shape: ProbeResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: UnprocessableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)

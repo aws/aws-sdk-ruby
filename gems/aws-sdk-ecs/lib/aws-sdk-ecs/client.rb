@@ -1446,6 +1446,26 @@ module Aws::ECS
     #   determines the memory allocation for each task in the Express service.
     #   The default value for an express service is 512 MiB.
     #
+    # @option params [String] :cpu_architecture
+    #   The CPU architecture that the tasks in the Express service run on.
+    #   Amazon ECS applies this value to the task definition revision that it
+    #   registers for the service. If you don't specify a value, the default
+    #   is `X86_64`.
+    #
+    #   Valid values:
+    #
+    #   * `X86_64` - The x86 64-bit architecture.
+    #
+    #   * `ARM64` - The 64-bit ARM architecture.
+    #
+    #   Make sure that the container image that you specify supports the
+    #   architecture that you choose. The operating system family for an
+    #   Express service is always `LINUX`.
+    #
+    #   You can't specify `cpuArchitecture` when you also specify
+    #   `taskDefinitionArn`, because this value applies only to a task
+    #   definition that Amazon ECS registers on your behalf.
+    #
     # @option params [Types::ExpressGatewayScalingTarget] :scaling_target
     #   The auto-scaling configuration for the Express service. This defines
     #   how the service automatically adjusts the number of running tasks
@@ -1472,8 +1492,8 @@ module Aws::ECS
     #   task definition must also have `FARGATE` compatibility.
     #
     #   If you provide a task definition ARN, you cannot also specify
-    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`, or
-    #   `memory`.
+    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`,
+    #   `memory`, or `cpuArchitecture`.
     #
     # @return [Types::CreateExpressGatewayServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1518,6 +1538,7 @@ module Aws::ECS
     #     },
     #     cpu: "String",
     #     memory: "String",
+    #     cpu_architecture: "X86_64", # accepts X86_64, ARM64
     #     scaling_target: {
     #       min_task_count: 1,
     #       max_task_count: 1,
@@ -1549,6 +1570,7 @@ module Aws::ECS
     #   resp.service.active_configurations[0].task_definition_arn #=> String
     #   resp.service.active_configurations[0].cpu #=> String
     #   resp.service.active_configurations[0].memory #=> String
+    #   resp.service.active_configurations[0].cpu_architecture #=> String, one of "X86_64", "ARM64"
     #   resp.service.active_configurations[0].network_configuration.security_groups #=> Array
     #   resp.service.active_configurations[0].network_configuration.security_groups[0] #=> String
     #   resp.service.active_configurations[0].network_configuration.subnets #=> Array
@@ -3789,6 +3811,7 @@ module Aws::ECS
     #   resp.service.active_configurations[0].task_definition_arn #=> String
     #   resp.service.active_configurations[0].cpu #=> String
     #   resp.service.active_configurations[0].memory #=> String
+    #   resp.service.active_configurations[0].cpu_architecture #=> String, one of "X86_64", "ARM64"
     #   resp.service.active_configurations[0].network_configuration.security_groups #=> Array
     #   resp.service.active_configurations[0].network_configuration.security_groups[0] #=> String
     #   resp.service.active_configurations[0].network_configuration.subnets #=> Array
@@ -6080,6 +6103,7 @@ module Aws::ECS
     #   resp.service.active_configurations[0].task_definition_arn #=> String
     #   resp.service.active_configurations[0].cpu #=> String
     #   resp.service.active_configurations[0].memory #=> String
+    #   resp.service.active_configurations[0].cpu_architecture #=> String, one of "X86_64", "ARM64"
     #   resp.service.active_configurations[0].network_configuration.security_groups #=> Array
     #   resp.service.active_configurations[0].network_configuration.security_groups[0] #=> String
     #   resp.service.active_configurations[0].network_configuration.subnets #=> Array
@@ -14726,6 +14750,27 @@ module Aws::ECS
     # @option params [String] :memory
     #   The amount of memory (in MiB) used by the task.
     #
+    # @option params [String] :cpu_architecture
+    #   The CPU architecture that the tasks in the Express service run on.
+    #   Amazon ECS applies this value to the task definition revision that it
+    #   registers for the service. If you don't specify a value, the service
+    #   keeps the architecture that it currently runs on.
+    #
+    #   Valid values:
+    #
+    #   * `X86_64` - The x86 64-bit architecture.
+    #
+    #   * `ARM64` - The 64-bit ARM architecture.
+    #
+    #   Changing the architecture starts a new deployment that replaces the
+    #   running tasks. Make sure that the container image that the service
+    #   uses supports the architecture that you choose. The operating system
+    #   family for an Express service is always `LINUX`.
+    #
+    #   You can't specify `cpuArchitecture` when you also specify
+    #   `taskDefinitionArn`, because this value applies only to a task
+    #   definition that Amazon ECS registers on your behalf.
+    #
     # @option params [Types::ExpressGatewayScalingTarget] :scaling_target
     #   The auto-scaling configuration for the Express service.
     #
@@ -14740,8 +14785,8 @@ module Aws::ECS
     #   task definition must also have `FARGATE` compatibility.
     #
     #   If you provide a task definition ARN, you cannot also specify
-    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`, or
-    #   `memory`.
+    #   `primaryContainer`, `executionRoleArn`, `taskRoleArn`, `cpu`,
+    #   `memory`, or `cpuArchitecture`.
     #
     # @return [Types::UpdateExpressGatewayServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14784,6 +14829,7 @@ module Aws::ECS
     #     },
     #     cpu: "String",
     #     memory: "String",
+    #     cpu_architecture: "X86_64", # accepts X86_64, ARM64
     #     scaling_target: {
     #       min_task_count: 1,
     #       max_task_count: 1,
@@ -14806,6 +14852,7 @@ module Aws::ECS
     #   resp.service.target_configuration.task_definition_arn #=> String
     #   resp.service.target_configuration.cpu #=> String
     #   resp.service.target_configuration.memory #=> String
+    #   resp.service.target_configuration.cpu_architecture #=> String, one of "X86_64", "ARM64"
     #   resp.service.target_configuration.network_configuration.security_groups #=> Array
     #   resp.service.target_configuration.network_configuration.security_groups[0] #=> String
     #   resp.service.target_configuration.network_configuration.subnets #=> Array
@@ -16319,7 +16366,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.246.0'
+      context[:gem_version] = '1.247.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

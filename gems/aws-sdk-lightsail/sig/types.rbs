@@ -678,6 +678,9 @@ module Aws::Lightsail
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor certificate_name: ::String
       attr_accessor viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")
+      attr_accessor enable_private_origin_access: bool
+      attr_accessor default_root_object: ::String
+      attr_accessor custom_error_responses: ::Array[Types::DistributionCustomErrorResponse]
       SENSITIVE: []
     end
 
@@ -1214,6 +1217,14 @@ module Aws::Lightsail
       attr_accessor price: ::Float
       attr_accessor transfer_per_month_in_gb: ::Integer
       attr_accessor is_active: bool
+      SENSITIVE: []
+    end
+
+    class DistributionCustomErrorResponse
+      attr_accessor error_code: ::Integer
+      attr_accessor response_code: ::String
+      attr_accessor response_page_path: ::String
+      attr_accessor error_caching_min_ttl: ::Integer
       SENSITIVE: []
     end
 
@@ -2309,6 +2320,8 @@ module Aws::Lightsail
       attr_accessor ip_address_type: ("dualstack" | "ipv4" | "ipv6")
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor viewer_minimum_tls_protocol_version: ::String
+      attr_accessor default_root_object: ::String
+      attr_accessor custom_error_responses: ::Array[Types::DistributionCustomErrorResponse]
       SENSITIVE: []
     end
 
@@ -2492,6 +2505,7 @@ module Aws::Lightsail
       attr_accessor protocol_policy: ("http-only" | "https-only")
       attr_accessor response_timeout: ::Integer
       attr_accessor ip_address_type: ("ipv4" | "ipv6" | "dualstack")
+      attr_accessor is_private_origin_access_enabled: bool
       SENSITIVE: []
     end
 
@@ -3119,6 +3133,9 @@ module Aws::Lightsail
       attr_accessor viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")
       attr_accessor certificate_name: ::String
       attr_accessor use_default_certificate: bool
+      attr_accessor enable_private_origin_access: bool
+      attr_accessor default_root_object: ::String
+      attr_accessor custom_error_responses: ::Array[Types::DistributionCustomErrorResponse]
       SENSITIVE: []
     end
 

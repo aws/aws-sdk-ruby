@@ -73,6 +73,25 @@ module Aws::Batch
     class CancelJobResponse < Aws::EmptyStructure
     end
 
+    class CancelJobsErrorDetail
+      attr_accessor job: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CancelJobsRequest
+      attr_accessor jobs: ::Array[::String]
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class CancelJobsResponse
+      attr_accessor successful: ::Array[::String]
+      attr_accessor errors: ::Array[Types::CancelJobsErrorDetail]
+      SENSITIVE: []
+    end
+
     class CapacityLimit
       attr_accessor max_capacity: ::Integer
       attr_accessor capacity_unit: ::String
@@ -1072,6 +1091,8 @@ module Aws::Batch
       attr_accessor array_properties: Types::ArrayPropertiesSummary
       attr_accessor node_properties: Types::NodePropertiesSummary
       attr_accessor job_definition: ::String
+      attr_accessor is_cancelled: bool
+      attr_accessor is_terminated: bool
       SENSITIVE: []
     end
 
@@ -1559,6 +1580,7 @@ module Aws::Batch
       attr_accessor status_reason: ::String
       attr_accessor started_at: ::Integer
       attr_accessor stopped_at: ::Integer
+      attr_accessor is_terminated: bool
       SENSITIVE: []
     end
 
@@ -1717,6 +1739,25 @@ module Aws::Batch
     class TerminateJobResponse < Aws::EmptyStructure
     end
 
+    class TerminateJobsErrorDetail
+      attr_accessor job: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateJobsRequest
+      attr_accessor jobs: ::Array[::String]
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateJobsResponse
+      attr_accessor successful: ::Array[::String]
+      attr_accessor errors: ::Array[Types::TerminateJobsErrorDetail]
+      SENSITIVE: []
+    end
+
     class TerminateServiceJobRequest
       attr_accessor job_id: ::String
       attr_accessor reason: ::String
@@ -1724,6 +1765,25 @@ module Aws::Batch
     end
 
     class TerminateServiceJobResponse < Aws::EmptyStructure
+    end
+
+    class TerminateServiceJobsErrorDetail
+      attr_accessor job: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateServiceJobsRequest
+      attr_accessor jobs: ::Array[::String]
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
+    class TerminateServiceJobsResponse
+      attr_accessor successful: ::Array[::String]
+      attr_accessor errors: ::Array[Types::TerminateServiceJobsErrorDetail]
+      SENSITIVE: []
     end
 
     class Tmpfs

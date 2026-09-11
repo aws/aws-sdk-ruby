@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.153.0 (2026-09-11)
+------------------
+
+* Feature - Added new bulk job APIs (CancelJobs, TerminateJobs, TerminateServiceJobs) and new fields on ListJobs and ListServiceJobs responses. This allows customers to cancel or terminate multiple jobs in a single request. ListJobs and ListServiceJobs responses now include isCancelled and isTerminated fields.
+
 1.152.0 (2026-09-09)
 ------------------
 

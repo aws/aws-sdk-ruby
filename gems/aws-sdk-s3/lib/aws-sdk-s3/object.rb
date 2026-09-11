@@ -1627,13 +1627,15 @@ module Aws::S3
     #
     #    </note>
     # @option options [Integer] :object_lock_event_hold_duration_days
-    #   The event hold duration in days to apply to the object copy.
+    #   The event hold duration in days to apply to the object copy. You
+    #   cannot specify a duration in both days and years.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
     # @option options [Integer] :object_lock_event_hold_duration_years
-    #   The event hold duration in years to apply to the object copy.
+    #   The event hold duration in years to apply to the object copy. You
+    #   cannot specify a duration in both days and years.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -2587,14 +2589,14 @@ module Aws::S3
     #    </note>
     # @option options [Integer] :object_lock_event_hold_duration_days
     #   Specifies the event hold duration in days to apply to the uploaded
-    #   object.
+    #   object. You cannot specify a duration in both days and years.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
     # @option options [Integer] :object_lock_event_hold_duration_years
     #   Specifies the event hold duration in years to apply to the uploaded
-    #   object.
+    #   object. You cannot specify a duration in both days and years.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
@@ -3320,13 +3322,15 @@ module Aws::S3
     #
     #    </note>
     # @option options [Integer] :object_lock_event_hold_duration_days
-    #   Specifies the event hold duration in days to apply to this object.
+    #   Specifies the event hold duration in days to apply to this object. You
+    #   cannot specify a duration in both days and years.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #
     #    </note>
     # @option options [Integer] :object_lock_event_hold_duration_years
     #   Specifies the event hold duration in years to apply to this object.
+    #   You cannot specify a duration in both days and years.
     #
     #   <note markdown="1"> This functionality is not supported for directory buckets.
     #

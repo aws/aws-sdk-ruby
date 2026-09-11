@@ -55,7 +55,7 @@ module Aws::PartnerCentralRevenueMeasurement
   autoload :EndpointProvider, 'aws-sdk-partnercentralrevenuemeasurement/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-partnercentralrevenuemeasurement/endpoints'
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.3.0'
 
 end
 
