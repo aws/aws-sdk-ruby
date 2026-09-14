@@ -89,16 +89,18 @@ module Aws
     end
 
     it 'populates :web_identity_token from file when valid' do
+      # A missing token file is not considered a non-recoverable error,
+      # so on the initial fetch it surfaces as NoCredentialsError.
       expect {
         AssumeRoleWebIdentityCredentials.new(
           role_arn: 'arn')
-      }.to raise_error(Aws::Errors::MissingWebIdentityTokenFile)
+      }.to raise_error(Aws::Errors::NoCredentialsError)
       expect {
         AssumeRoleWebIdentityCredentials.new(
           role_arn: 'arn',
           web_identity_token_file: '/not/exist/file/foo',
         )
-      }.to raise_error(Aws::Errors::MissingWebIdentityTokenFile)
+      }.to raise_error(Aws::Errors::NoCredentialsError)
 
       token_file.write('token')
       token_file.flush
@@ -186,9 +188,21 @@ module Aws
       end
     end
 
+    it 'raises non-recoverable STS errors immediately instead of backing off' do
+      token_file.write('token')
+      token_file.flush
+      error = STS::Errors::InvalidIdentityToken.new(nil, 'bad token')
+      allow(client).to receive(:assume_role_with_web_identity).and_raise(error)
+      expect do
+        AssumeRoleWebIdentityCredentials.new(
+          role_arn: 'arn',
+          web_identity_token_file: token_file_path
+        )
+      end.to raise_error(STS::Errors::InvalidIdentityToken)
+    end
+
     it 'refreshes asynchronously' do
-      # expiration 6 minutes out, within the async exp time window
-      allow(credentials).to receive(:expiration).and_return(Time.now + (6*60))
+      allow(credentials).to receive(:expiration).and_return(Time.now + (2*60))
       expect(client).to receive(:assume_role_with_web_identity).exactly(2).times
       expect(File).to receive(:read).with(token_file_path).exactly(2).times
       expect(Thread).to receive(:new).and_yield
@@ -201,7 +215,7 @@ module Aws
     end
 
     it 'auto refreshes credentials when near expiration' do
-      allow(credentials).to receive(:expiration).and_return(Time.now)
+      allow(credentials).to receive(:expiration).and_return(Time.now + 30)
       expect(client).to receive(:assume_role_with_web_identity).exactly(4).times
       expect(File).to receive(:read).with(token_file_path).exactly(4).times
 

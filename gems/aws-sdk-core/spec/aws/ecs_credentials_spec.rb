@@ -211,9 +211,11 @@ module Aws
           end
 
           it 'validates the token for carriage return and newline' do
+            # A malformed token is not a non-recoverable error, so on the
+            # initial fetch it surfaces as NoCredentialsError.
             expect do
               ECSCredentials.new(backoff: 0, retries: 0)
-            end.to raise_error(ECSCredentials::InvalidTokenError)
+            end.to raise_error(Aws::Errors::NoCredentialsError)
           end
         end
 
@@ -224,9 +226,11 @@ module Aws
           end
 
           it 'validates the token for carriage return and newline' do
+            # A malformed token is not a non-recoverable error, so on the
+            # initial fetch it surfaces as NoCredentialsError.
             expect do
               ECSCredentials.new(backoff: 0, retries: 0)
-            end.to raise_error(ECSCredentials::InvalidTokenError)
+            end.to raise_error(Aws::Errors::NoCredentialsError)
           end
         end
       end
@@ -355,9 +359,12 @@ module Aws
           expect = test_case['expect']
 
           if expect['type'] == 'error'
+            # Host/URI validation fails at construction (ArgumentError). A token
+            # file read failure happens during the initial fetch and, not being a
+            # SEP non-recoverable error, surfaces as NoCredentialsError.
             error = ArgumentError
             if expect['reason'] =~ /failed to read authorization token/
-              error = ECSCredentials::TokenFileReadError
+              error = Aws::Errors::NoCredentialsError
             end
             expect { ECSCredentials.new }.to raise_error(error)
           elsif expect['type'] == 'success'

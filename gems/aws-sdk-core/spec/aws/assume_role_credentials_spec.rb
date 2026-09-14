@@ -137,8 +137,7 @@ module Aws
     end
 
     it 'refreshes asynchronously' do
-      # expiration 6 minutes out, within the async exp time window
-      allow(credentials).to receive(:expiration).and_return(Time.now + (6*60))
+      allow(credentials).to receive(:expiration).and_return(Time.now + (2*60))
       expect(client).to receive(:assume_role).at_least(2).times
       expect(Thread).to receive(:new).and_yield
       c = AssumeRoleCredentials.new(
@@ -148,7 +147,7 @@ module Aws
     end
 
     it 'refreshes credentials automatically when they are near expiration' do
-      allow(credentials).to receive(:expiration).and_return(Time.now)
+      allow(credentials).to receive(:expiration).and_return(Time.now + 30)
       expect(client).to receive(:assume_role).exactly(4).times
       c = AssumeRoleCredentials.new(
         role_arn: 'arn',
@@ -156,6 +155,22 @@ module Aws
       c.credentials
       c.credentials
       c.credentials
+    end
+
+    it 'raises non-recoverable STS errors immediately instead of backing off' do
+      error = STS::Errors::AccessDenied.new(nil, 'denied')
+      allow(client).to receive(:assume_role).and_raise(error)
+      expect do
+        AssumeRoleCredentials.new(role_arn: 'arn', role_session_name: 'session')
+      end.to raise_error(STS::Errors::AccessDenied)
+    end
+
+    it 'wraps recoverable STS errors as NoCredentialsError on the initial fetch' do
+      error = STS::Errors::ServiceUnavailable.new(nil, 'try later')
+      allow(client).to receive(:assume_role).and_raise(error)
+      expect do
+        AssumeRoleCredentials.new(role_arn: 'arn', role_session_name: 'session')
+      end.to raise_error(Aws::Errors::NoCredentialsError)
     end
 
     it 'calls before_refresh with self' do

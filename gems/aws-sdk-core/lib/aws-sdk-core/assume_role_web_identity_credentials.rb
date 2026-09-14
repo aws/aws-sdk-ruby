@@ -68,7 +68,25 @@ module Aws
     # @return [STS::Client]
     attr_reader :client
 
+    # STS error codes that indicate a misconfiguration (bad policy, rejected
+    # or invalid token, disabled region, etc). Retrying will not resolve them,
+    # so they are raised immediately rather than backed off.
+    # @api private
+    NON_RECOVERABLE_ERROR_CODES = %w[
+      AccessDenied
+      IDPRejectedClaim
+      InvalidIdentityToken
+      MalformedPolicyDocument
+      PackedPolicyTooLarge
+      RegionDisabled
+    ].freeze
+
     private
+
+    def non_recoverable_error?(error)
+      error.is_a?(Aws::Errors::ServiceError) &&
+        NON_RECOVERABLE_ERROR_CODES.include?(error.code)
+    end
 
     def refresh
       # read from token file everytime it refreshes

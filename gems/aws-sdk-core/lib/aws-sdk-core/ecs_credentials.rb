@@ -202,12 +202,6 @@ module Aws
       raise Aws::Errors::MetadataParserError
     end
 
-    # A missing or malformed authorization token file requires user
-    # intervention, so it must be raised immediately rather than retried.
-    def non_recoverable_error?(error)
-      error.is_a?(TokenFileReadError) || error.is_a?(InvalidTokenError)
-    end
-
     def retrieve_credentials
       # Retry loading credentials a configurable number of times if
       # the container credential service is not responding.
