@@ -289,6 +289,11 @@ module Aws
           # Estimated skew needs to be updated on every request
           config.clock_skew.update_estimated_skew(context)
 
+          # A target-service authentication failure invalidates the cached
+          # credentials so the next request refreshes. The rejected request
+          # itself is not retried.
+          invalidate_credentials(context, error_inspector)
+
           return response unless retryable?(context, response, error_inspector)
 
           return response if context.retries >= config.max_attempts - 1
@@ -410,15 +415,19 @@ module Aws
 
         def retry_request(context, error)
           context.retries += 1
-          context.config.credentials.refresh! if refresh_credentials?(context, error)
           context.http_request.body.rewind
           context.http_response.reset
           call(context)
         end
 
-        def refresh_credentials?(context, error)
-          error.expired_credentials? &&
-            context.config.credentials.respond_to?(:refresh!)
+        def invalidate_credentials(context, error_inspector)
+          return unless error_inspector.invalidating_auth_error?
+
+          provider = context.config.credentials
+          signed_with = context[:signing_credentials]
+          return unless provider.respond_to?(:invalidate) && signed_with
+
+          provider.invalidate(signed_with)
         end
 
         def add_retry_headers(context)
@@ -465,6 +474,11 @@ module Aws
               context.config.endpoint_cache.delete(key)
             end
 
+            # A target-service authentication failure invalidates the cached
+            # credentials so the next request refreshes. The rejected request
+            # itself is not retried.
+            invalidate_credentials(context, error_inspector)
+
             retry_if_possible(response, error_inspector)
           else
             response
@@ -489,7 +503,6 @@ module Aws
         def retry_request(context, error)
           delay_retry(context)
           context.retries += 1
-          context.config.credentials.refresh! if refresh_credentials?(context, error)
           context.http_request.body.rewind
           context.http_response.reset
           call(context)
@@ -505,9 +518,14 @@ module Aws
             response_truncatable?(context)
         end
 
-        def refresh_credentials?(context, error)
-          error.expired_credentials? &&
-            context.config.credentials.respond_to?(:refresh!)
+        def invalidate_credentials(context, error_inspector)
+          return unless error_inspector.invalidating_auth_error?
+
+          provider = context.config.credentials
+          signed_with = context[:signing_credentials]
+          return unless provider.respond_to?(:invalidate) && signed_with
+
+          provider.invalidate(signed_with)
         end
 
         def retry_limit(context)
