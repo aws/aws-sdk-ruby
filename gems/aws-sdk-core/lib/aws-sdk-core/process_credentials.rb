@@ -36,6 +36,8 @@ module Aws
       @process = process
       @credentials = credentials_from_process
       @async_refresh = false
+      # The SDK has no visibility into the credential source so static stability must not apply
+      @static_stability = false
       @metrics = ['CREDENTIALS_PROCESS']
       super
     end
@@ -88,11 +90,6 @@ module Aws
 
     def refresh
       @credentials = credentials_from_process
-    end
-
-    def near_expiration?(expiration_length)
-      # are we within 5 minutes of expiration?
-      @expiration && (Time.now.to_i + expiration_length) > @expiration.to_i
     end
   end
 end

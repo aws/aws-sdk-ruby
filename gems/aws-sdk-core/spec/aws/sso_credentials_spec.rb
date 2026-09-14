@@ -173,6 +173,7 @@ module Aws
           expect(SSO::Client).to receive(:new)
                                    .with({region: sso_region, credentials: nil})
                                    .and_return(client)
+          client.stub_responses(:get_role_credentials, sso_resp)
 
           mock_token_file(sso_start_url, cached_token)
 
@@ -184,6 +185,7 @@ module Aws
           expect(SSO::Client).to receive(:new)
                                    .with({region: sso_region, credentials: nil})
                                    .and_return(client)
+          client.stub_responses(:get_role_credentials, sso_resp)
 
           mock_token_file(sso_start_url, cached_token)
 
@@ -237,6 +239,7 @@ module Aws
 
         it 'sets the client when passed in and does not create a new one' do
           test_client = client # force construction
+          test_client.stub_responses(:get_role_credentials, sso_resp)
           expect(SSO::Client).not_to receive(:new)
 
           mock_token_file(sso_start_url, cached_token)
@@ -267,6 +270,13 @@ module Aws
           expect(sso_creds.credentials.session_token).to eq('session')
           expect(sso_creds.credentials.account_id).to eq(sso_account_id)
           expect(sso_creds.expiration).to eq(expiration)
+        end
+
+        it 'raises UnauthorizedException immediately instead of backing off' do
+          client.stub_responses(:get_role_credentials, 'UnauthorizedException')
+          mock_token_file(sso_start_url, cached_token)
+          expect { SSOCredentials.new(sso_opts) }
+            .to raise_error(SSO::Errors::UnauthorizedException)
         end
 
         it 'reads a new token from disc for each refresh' do
