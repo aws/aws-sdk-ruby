@@ -238,6 +238,13 @@ module Aws
       false
     end
 
-    def log_refresh_failure(_error); end
+    def log_refresh_failure(error)
+      seconds = (@next_refresh_allowed_at - Time.now).round
+      warn(
+        "Credential refresh failed: #{error.message}. The SDK will continue " \
+        'using cached credentials. A refresh of these credentials will be ' \
+        "attempted again after #{seconds} seconds."
+      )
+    end
   end
 end

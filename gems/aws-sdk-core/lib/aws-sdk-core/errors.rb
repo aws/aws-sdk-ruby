@@ -16,7 +16,11 @@ module Aws
     # Internal: signals a credential source response whose Expiration is at or
     # before the current time. Handled within the refresh lifecycle and never
     # surfaced to callers.
-    class StaleCredentialsError < RuntimeError; end
+    class StaleCredentialsError < RuntimeError
+      def initialize(*args)
+        super('the credential source returned credentials that are already expired')
+      end
+    end
 
     # The base class for all errors returned by an Amazon Web Service.
     # All ~400 level client errors and ~500 level server errors are raised

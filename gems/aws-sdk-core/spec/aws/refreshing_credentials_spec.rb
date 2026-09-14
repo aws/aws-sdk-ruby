@@ -72,6 +72,7 @@ module Aws
       end
       resolver = klass.new(seed)
       allow(resolver).to receive(:refresh_backoff).and_return(given['refreshBackoffSeconds'] || 300)
+      allow(resolver).to receive(:warn)
       resolver
     end
 
@@ -88,6 +89,31 @@ module Aws
       when 'noCredentialsError'
         expect { resolver.credentials }.to raise_error(Errors::NoCredentialsError)
       when 'nonRecoverableError'
+        expect { resolver.credentials }.to raise_error(RefreshingCredentialsTestError)
+      end
+    end
+
+    describe 'failed refresh messaging' do
+      it 'logs the source error and next-attempt delay when backing off' do
+        resolver = build_resolver(resolver_class, 'cachedCredentials' => 'advisory')
+        allow(resolver).to receive(:refresh_backoff).and_return(300)
+        resolver.expect_response('error', nil)
+
+        expect(resolver).to receive(:warn).with(
+          'Credential refresh failed: recoverable refresh failure. The SDK ' \
+          'will continue using cached credentials. A refresh of these ' \
+          'credentials will be attempted again after 300 seconds.'
+        )
+
+        expect(resolver.credentials.access_key_id).to eq(@seeded_akid)
+      end
+
+      it 'does not log for a non-recoverable error (it is raised instead)' do
+        resolver = build_resolver(resolver_class, 'cachedCredentials' => 'advisory')
+        resolver.expect_response('nonRecoverableError', nil)
+
+        expect(resolver).not_to receive(:warn)
+
         expect { resolver.credentials }.to raise_error(RefreshingCredentialsTestError)
       end
     end
