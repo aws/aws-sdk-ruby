@@ -1095,11 +1095,27 @@ module Aws::CodeDeploy
     #   @return [String]
     #
     # @!attribute [rw] deployment_mode
-    #   The deployment mode to use for the deployment. When set to STANDARD
-    #   (the default), the deployment runs the standard set of deployment
-    #   lifecycle events. When set to RESTART, an EC2/On-premises in-place
-    #   deployment runs a shortened set of lifecycle events to quickly
-    #   restart the application on the target instances.
+    #   The type of deployment to create. Valid values are:
+    #
+    #   * `STANDARD`: Deploys the specified revision. This is the default
+    #     behavior if `deploymentMode` is not specified.
+    #
+    #   * `RESTART`: Restarts the application on the target instances using
+    #     the revision from the deployment group's last successful
+    #     deployment, without downloading a new revision. `RESTART` is
+    #     supported only for EC2/On-premises in-place deployments.
+    #
+    #     When `deploymentMode` is `RESTART`, the following apply:
+    #
+    #     * The call is rejected for Amazon ECS and Lambda deployments.
+    #
+    #     * The `revision` parameter (including its `s3Location` and
+    #       `gitHubLocation`) must not be specified, and is rejected if
+    #       provided. The revision is resolved by the service from the
+    #       deployment group's last successful deployment.
+    #
+    #     * The `updateOutdatedInstancesOnly` parameter must not be set to
+    #       `true`, and is rejected if provided.
     #   @return [String]
     #
     # @!attribute [rw] override_alarm_configuration
@@ -1739,6 +1755,21 @@ module Aws::CodeDeploy
     #     and used as part of the new deployment.
     #   @return [String]
     #
+    # @!attribute [rw] deployment_mode
+    #   The deployment's type. Valid values are:
+    #
+    #   * `STANDARD`: The deployment installed the specified revision.
+    #
+    #   * `RESTART`: The deployment restarted the application on the target
+    #     instances using the revision from the deployment group's last
+    #     successful deployment, without downloading a new revision.
+    #
+    #   This field is absent for deployments created before `deploymentMode`
+    #   existed, and for `STANDARD` deployments. An absent value must not be
+    #   interpreted as `STANDARD`; it simply means no value was recorded
+    #   either way.
+    #   @return [String]
+    #
     # @!attribute [rw] deployment_status_messages
     #   Messages that contain information about the status of a deployment.
     #   @return [Array<String>]
@@ -1790,6 +1821,7 @@ module Aws::CodeDeploy
       :load_balancer_info,
       :additional_deployment_status_info,
       :file_exists_behavior,
+      :deployment_mode,
       :deployment_status_messages,
       :compute_platform,
       :external_id,

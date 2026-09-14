@@ -168,7 +168,8 @@ module Aws
                                        repository_name: ::String
                                      },
                                      ?kms_key_id: ::String,
-                                     client_token: ::String
+                                     client_token: ::String,
+                                     ?dry_run: bool
                                    ) -> _CreateContainerRecipeResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContainerRecipeResponseSuccess
 
@@ -186,7 +187,8 @@ module Aws
                                                  Params::distribution
                                                ],
                                                ?tags: Hash[::String, ::String],
-                                               client_token: ::String
+                                               client_token: ::String,
+                                               ?dry_run: bool
                                              ) -> _CreateDistributionConfigurationResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionConfigurationResponseSuccess
 
@@ -265,7 +267,8 @@ module Aws
                                    ?logging_configuration: {
                                      image_log_group_name: ::String?,
                                      pipeline_log_group_name: ::String?
-                                   }
+                                   },
+                                   ?dry_run: bool
                                  ) -> _CreateImagePipelineResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImagePipelineResponseSuccess
 
@@ -306,7 +309,8 @@ module Aws
                                  },
                                  ?ami_tags: Hash[::String, ::String],
                                  ?ami_watermarks: Array[::String],
-                                 client_token: ::String
+                                 client_token: ::String,
+                                 ?dry_run: bool
                                ) -> _CreateImageRecipeResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateImageRecipeResponseSuccess
 
@@ -345,7 +349,8 @@ module Aws
                                                    host_id: ::String?,
                                                    host_resource_group_arn: ::String?
                                                  },
-                                                 client_token: ::String
+                                                 client_token: ::String,
+                                                 ?dry_run: bool
                                                ) -> _CreateInfrastructureConfigurationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInfrastructureConfigurationResponseSuccess
 
@@ -374,7 +379,8 @@ module Aws
                                        tag_map: Hash[::String, ::String]?
                                      },
                                      ?tags: Hash[::String, ::String],
-                                     client_token: ::String
+                                     client_token: ::String,
+                                     ?dry_run: bool
                                    ) -> _CreateLifecyclePolicyResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLifecyclePolicyResponseSuccess
 
@@ -726,6 +732,8 @@ module Aws
         def end_time: () -> ::String
         def on_failure: () -> ::String
         def timeout_seconds: () -> ::Integer
+        def attempt_number: () -> ::Integer
+        def max_attempts: () -> ::Integer
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Imagebuilder/Client.html#get_workflow_step_execution-instance_method
       def get_workflow_step_execution: (

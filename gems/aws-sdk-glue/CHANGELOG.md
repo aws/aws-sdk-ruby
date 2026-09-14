@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.273.0 (2026-09-14)
+------------------
+
+* Feature - Amazon Glue releasing the new API ListIntegrationTableProperties and adding IntegrationArn to TargetTableConfig
+
 1.272.0 (2026-09-11)
 ------------------
 

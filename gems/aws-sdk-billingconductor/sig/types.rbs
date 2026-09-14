@@ -227,6 +227,7 @@ module Aws::BillingConductor
 
     class CreateTieringInput
       attr_accessor free_tier: Types::CreateFreeTierConfig
+      attr_accessor custom_tiers: ::Array[Types::CustomTier]
       SENSITIVE: []
     end
 
@@ -290,6 +291,13 @@ module Aws::BillingConductor
       attr_accessor computation_rule: ("ITEMIZED" | "CONSOLIDATED")
       attr_accessor presentation_details: Types::PresentationObject
       SENSITIVE: [:name, :description]
+    end
+
+    class CustomTier
+      attr_accessor begin_range_inclusive: ::Float
+      attr_accessor end_range_exclusive: ::Float
+      attr_accessor rate_value: ::Float
+      SENSITIVE: []
     end
 
     class DeleteBillingGroupInput
@@ -713,6 +721,7 @@ module Aws::BillingConductor
 
     class Tiering
       attr_accessor free_tier: Types::FreeTierConfig
+      attr_accessor custom_tiers: ::Array[Types::CustomTier]
       SENSITIVE: []
     end
 
@@ -842,6 +851,7 @@ module Aws::BillingConductor
 
     class UpdateTieringInput
       attr_accessor free_tier: Types::UpdateFreeTierConfig
+      attr_accessor custom_tiers: ::Array[Types::CustomTier]
       SENSITIVE: []
     end
 

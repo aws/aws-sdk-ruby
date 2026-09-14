@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2026-09-14)
+------------------
+
+* Feature - Increased the maximum number of services returned in the supportEligibleSpendByService field of ListEnterpriseSupportLinkedAccountCharges
+
 1.32.0 (2026-09-11)
 ------------------
 

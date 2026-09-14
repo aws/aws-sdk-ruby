@@ -1020,6 +1020,11 @@ module Aws::Glue
     IntegrationSourcePropertiesMap = Shapes::MapShape.new(name: 'IntegrationSourcePropertiesMap')
     IntegrationStatus = Shapes::StringShape.new(name: 'IntegrationStatus')
     IntegrationString = Shapes::StringShape.new(name: 'IntegrationString')
+    IntegrationTableProperties = Shapes::StructureShape.new(name: 'IntegrationTableProperties')
+    IntegrationTablePropertiesFilter = Shapes::StructureShape.new(name: 'IntegrationTablePropertiesFilter')
+    IntegrationTablePropertiesFilterList = Shapes::ListShape.new(name: 'IntegrationTablePropertiesFilterList')
+    IntegrationTablePropertiesFilterValues = Shapes::ListShape.new(name: 'IntegrationTablePropertiesFilterValues')
+    IntegrationTablePropertiesList = Shapes::ListShape.new(name: 'IntegrationTablePropertiesList')
     IntegrationTagsList = Shapes::ListShape.new(name: 'IntegrationTagsList')
     IntegrationTimestamp = Shapes::TimestampShape.new(name: 'IntegrationTimestamp')
     IntegrationType = Shapes::StringShape.new(name: 'IntegrationType')
@@ -1143,6 +1148,8 @@ module Aws::Glue
     ListGlossaryTermsResponse = Shapes::StructureShape.new(name: 'ListGlossaryTermsResponse')
     ListIntegrationResourcePropertiesRequest = Shapes::StructureShape.new(name: 'ListIntegrationResourcePropertiesRequest')
     ListIntegrationResourcePropertiesResponse = Shapes::StructureShape.new(name: 'ListIntegrationResourcePropertiesResponse')
+    ListIntegrationTablePropertiesRequest = Shapes::StructureShape.new(name: 'ListIntegrationTablePropertiesRequest')
+    ListIntegrationTablePropertiesResponse = Shapes::StructureShape.new(name: 'ListIntegrationTablePropertiesResponse')
     ListIterableFormsRequest = Shapes::StructureShape.new(name: 'ListIterableFormsRequest')
     ListIterableFormsResponse = Shapes::StructureShape.new(name: 'ListIterableFormsResponse')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
@@ -1644,9 +1651,9 @@ module Aws::Glue
     StorageDescriptor = Shapes::StructureShape.new(name: 'StorageDescriptor')
     StreamingDataPreviewOptions = Shapes::StructureShape.new(name: 'StreamingDataPreviewOptions')
     String = Shapes::StringShape.new(name: 'String')
-    String1024 = Shapes::StringShape.new(name: 'String1024')
     String128 = Shapes::StringShape.new(name: 'String128')
     String2048 = Shapes::StringShape.new(name: 'String2048')
+    String4096 = Shapes::StringShape.new(name: 'String4096')
     String512 = Shapes::StringShape.new(name: 'String512')
     StringColumnStatisticsData = Shapes::StructureShape.new(name: 'StringColumnStatisticsData')
     StringList = Shapes::ListShape.new(name: 'StringList')
@@ -5761,6 +5768,22 @@ module Aws::Glue
     IntegrationSourcePropertiesMap.key = Shapes::ShapeRef.new(shape: IntegrationString)
     IntegrationSourcePropertiesMap.value = Shapes::ShapeRef.new(shape: IntegrationString)
 
+    IntegrationTableProperties.add_member(:resource_arn, Shapes::ShapeRef.new(shape: String512, required: true, location_name: "ResourceArn"))
+    IntegrationTableProperties.add_member(:table_name, Shapes::ShapeRef.new(shape: String128, required: true, location_name: "TableName"))
+    IntegrationTableProperties.add_member(:source_table_config, Shapes::ShapeRef.new(shape: SourceTableConfig, location_name: "SourceTableConfig"))
+    IntegrationTableProperties.add_member(:target_table_config, Shapes::ShapeRef.new(shape: TargetTableConfig, location_name: "TargetTableConfig"))
+    IntegrationTableProperties.struct_class = Types::IntegrationTableProperties
+
+    IntegrationTablePropertiesFilter.add_member(:name, Shapes::ShapeRef.new(shape: String128, location_name: "Name"))
+    IntegrationTablePropertiesFilter.add_member(:values, Shapes::ShapeRef.new(shape: IntegrationTablePropertiesFilterValues, location_name: "Values"))
+    IntegrationTablePropertiesFilter.struct_class = Types::IntegrationTablePropertiesFilter
+
+    IntegrationTablePropertiesFilterList.member = Shapes::ShapeRef.new(shape: IntegrationTablePropertiesFilter)
+
+    IntegrationTablePropertiesFilterValues.member = Shapes::ShapeRef.new(shape: String128)
+
+    IntegrationTablePropertiesList.member = Shapes::ShapeRef.new(shape: IntegrationTableProperties)
+
     IntegrationTagsList.member = Shapes::ShapeRef.new(shape: Tag)
 
     IntegrationsList.member = Shapes::ShapeRef.new(shape: Integration)
@@ -6248,14 +6271,23 @@ module Aws::Glue
     ListGlossaryTermsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListGlossaryTermsResponse.struct_class = Types::ListGlossaryTermsResponse
 
-    ListIntegrationResourcePropertiesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String1024, location_name: "Marker"))
+    ListIntegrationResourcePropertiesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String4096, location_name: "Marker"))
     ListIntegrationResourcePropertiesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: IntegrationResourcePropertyFilterList, location_name: "Filters"))
     ListIntegrationResourcePropertiesRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegrationInteger, location_name: "MaxRecords"))
     ListIntegrationResourcePropertiesRequest.struct_class = Types::ListIntegrationResourcePropertiesRequest
 
     ListIntegrationResourcePropertiesResponse.add_member(:integration_resource_property_list, Shapes::ShapeRef.new(shape: IntegrationResourcePropertyList, location_name: "IntegrationResourcePropertyList"))
-    ListIntegrationResourcePropertiesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String1024, location_name: "Marker"))
+    ListIntegrationResourcePropertiesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String4096, location_name: "Marker"))
     ListIntegrationResourcePropertiesResponse.struct_class = Types::ListIntegrationResourcePropertiesResponse
+
+    ListIntegrationTablePropertiesRequest.add_member(:marker, Shapes::ShapeRef.new(shape: String4096, location_name: "Marker"))
+    ListIntegrationTablePropertiesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: IntegrationTablePropertiesFilterList, location_name: "Filters"))
+    ListIntegrationTablePropertiesRequest.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegrationInteger, location_name: "MaxRecords"))
+    ListIntegrationTablePropertiesRequest.struct_class = Types::ListIntegrationTablePropertiesRequest
+
+    ListIntegrationTablePropertiesResponse.add_member(:integration_table_properties_list, Shapes::ShapeRef.new(shape: IntegrationTablePropertiesList, location_name: "IntegrationTablePropertiesList"))
+    ListIntegrationTablePropertiesResponse.add_member(:marker, Shapes::ShapeRef.new(shape: String4096, location_name: "Marker"))
+    ListIntegrationTablePropertiesResponse.struct_class = Types::ListIntegrationTablePropertiesResponse
 
     ListIterableFormsRequest.add_member(:asset_identifier, Shapes::ShapeRef.new(shape: AssetId, required: true, location_name: "AssetIdentifier"))
     ListIterableFormsRequest.add_member(:iterable_form_name, Shapes::ShapeRef.new(shape: IterableFormName, required: true, location_name: "IterableFormName"))
@@ -8134,6 +8166,7 @@ module Aws::Glue
     TargetTableConfig.add_member(:unnest_spec, Shapes::ShapeRef.new(shape: UnnestSpec, location_name: "UnnestSpec"))
     TargetTableConfig.add_member(:partition_spec, Shapes::ShapeRef.new(shape: IntegrationPartitionSpecList, location_name: "PartitionSpec"))
     TargetTableConfig.add_member(:target_table_name, Shapes::ShapeRef.new(shape: String128, location_name: "TargetTableName"))
+    TargetTableConfig.add_member(:integration_arn, Shapes::ShapeRef.new(shape: String128, location_name: "IntegrationArn"))
     TargetTableConfig.struct_class = Types::TargetTableConfig
 
     TaskRun.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TransformId"))
@@ -11709,6 +11742,21 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:list_integration_table_properties, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIntegrationTableProperties"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListIntegrationTablePropertiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListIntegrationTablePropertiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)

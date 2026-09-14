@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.257.0 (2026-09-14)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Increases the maximum session token size to 4,096 bytes and removes the packed policy size limit. Adds SessionTokenSize and SessionTokenUtilization fields and a new MinimumSessionTokenSize parameter. PackedPolicySize is deprecated.
+
 3.256.0 (2026-09-11)
 ------------------
 

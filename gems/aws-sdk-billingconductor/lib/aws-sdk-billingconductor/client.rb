@@ -959,9 +959,16 @@ module Aws::BillingConductor
     #     },
     #     billing_entity: "BillingEntity",
     #     tiering: {
-    #       free_tier: { # required
+    #       free_tier: {
     #         activated: false, # required
     #       },
+    #       custom_tiers: [
+    #         {
+    #           begin_range_inclusive: 1.0, # required
+    #           end_range_exclusive: 1.0,
+    #           rate_value: 1.0, # required
+    #         },
+    #       ],
     #     },
     #     usage_type: "UsageType",
     #     operation: "Operation",
@@ -1743,6 +1750,10 @@ module Aws::BillingConductor
     #   resp.pricing_rules[0].last_modified_time #=> Integer
     #   resp.pricing_rules[0].billing_entity #=> String
     #   resp.pricing_rules[0].tiering.free_tier.activated #=> Boolean
+    #   resp.pricing_rules[0].tiering.custom_tiers #=> Array
+    #   resp.pricing_rules[0].tiering.custom_tiers[0].begin_range_inclusive #=> Float
+    #   resp.pricing_rules[0].tiering.custom_tiers[0].end_range_exclusive #=> Float
+    #   resp.pricing_rules[0].tiering.custom_tiers[0].rate_value #=> Float
     #   resp.pricing_rules[0].usage_type #=> String
     #   resp.pricing_rules[0].operation #=> String
     #   resp.next_token #=> String
@@ -2208,9 +2219,16 @@ module Aws::BillingConductor
     #     type: "MARKUP", # accepts MARKUP, DISCOUNT, TIERING
     #     modifier_percentage: 1.0,
     #     tiering: {
-    #       free_tier: { # required
+    #       free_tier: {
     #         activated: false, # required
     #       },
+    #       custom_tiers: [
+    #         {
+    #           begin_range_inclusive: 1.0, # required
+    #           end_range_exclusive: 1.0,
+    #           rate_value: 1.0, # required
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -2227,6 +2245,10 @@ module Aws::BillingConductor
     #   resp.last_modified_time #=> Integer
     #   resp.billing_entity #=> String
     #   resp.tiering.free_tier.activated #=> Boolean
+    #   resp.tiering.custom_tiers #=> Array
+    #   resp.tiering.custom_tiers[0].begin_range_inclusive #=> Float
+    #   resp.tiering.custom_tiers[0].end_range_exclusive #=> Float
+    #   resp.tiering.custom_tiers[0].rate_value #=> Float
     #   resp.usage_type #=> String
     #   resp.operation #=> String
     #
@@ -2257,7 +2279,7 @@ module Aws::BillingConductor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -474,17 +474,19 @@ module Aws::Imagebuilder
 
     # @!group API Operations
 
-    # CancelImageCreation cancels the creation of Image. This operation can
-    # only be used on images in a non-terminal state.
+    # Cancels the creation of an image. This operation can only be used on
+    # images in a non-terminal state.
     #
     # @option params [required, String] :image_build_version_arn
     #   The Amazon Resource Name (ARN) of the image that you want to cancel
     #   creation for.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -521,16 +523,18 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Cancel a specific image lifecycle policy runtime instance.
+    # Cancels a specific image lifecycle policy runtime instance.
     #
     # @option params [required, String] :lifecycle_execution_id
     #   Identifies the specific runtime instance of the image lifecycle to
     #   cancel.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -583,9 +587,9 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any positive
-    #   integer value, including zero, with an upper limit of 2^30-1, or
-    #   1073741823 for each node. Image Builder automatically assigns the
+    #    **Assignment:** For the first three nodes, you can assign any positive
+    #   integer value, including zero. The upper limit is 2^30-1, or
+    #   1073741823, for each node. Image Builder automatically assigns the
     #   build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
@@ -618,9 +622,9 @@ module Aws::Imagebuilder
     #
     # @option params [String] :uri
     #   The `uri` of a YAML component document file. This must be an S3 URL
-    #   (`s3://bucket/key`), and the requester must have permission to access
-    #   the S3 bucket it points to. If you use Amazon S3, you can specify
-    #   component content up to your service quota.
+    #   (`s3://bucket/key`), and you must have permission to access the S3
+    #   bucket it points to. If you use Amazon S3, you can specify component
+    #   content up to your service quota.
     #
     #   Alternatively, you can specify the YAML document inline, using the
     #   component `data` property. You cannot specify both properties.
@@ -639,9 +643,11 @@ module Aws::Imagebuilder
     #   The tags that apply to the component.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -651,10 +657,9 @@ module Aws::Imagebuilder
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Boolean] :dry_run
-    #   Validates the required permissions for the operation and the request
-    #   parameters, without actually making the request, and provides an error
-    #   response. Upon a successful request, the error response is
-    #   `DryRunOperationException`.
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
     #
     # @return [Types::CreateComponentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -721,9 +726,9 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any positive
-    #   integer value, including zero, with an upper limit of 2^30-1, or
-    #   1073741823 for each node. Image Builder automatically assigns the
+    #    **Assignment:** For the first three nodes, you can assign any positive
+    #   integer value, including zero. The upper limit is 2^30-1, or
+    #   1073741823, for each node. Image Builder automatically assigns the
     #   build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
@@ -745,7 +750,7 @@ module Aws::Imagebuilder
     #   blob.
     #
     # @option params [String] :dockerfile_template_uri
-    #   The Amazon S3 URI for the Dockerfile that will be used to build your
+    #   The Amazon S3 URI for the Dockerfile that is used to build your
     #   container image.
     #
     # @option params [String] :platform_override
@@ -778,9 +783,11 @@ module Aws::Imagebuilder
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -788,6 +795,11 @@ module Aws::Imagebuilder
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
     #
     # @return [Types::CreateContainerRecipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -849,6 +861,7 @@ module Aws::Imagebuilder
     #     },
     #     kms_key_id: "NonEmptyString",
     #     client_token: "ClientToken", # required
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -886,9 +899,11 @@ module Aws::Imagebuilder
     #   The tags of the distribution configuration.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -896,6 +911,11 @@ module Aws::Imagebuilder
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
     #
     # @return [Types::CreateDistributionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -976,6 +996,7 @@ module Aws::Imagebuilder
     #       "TagKey" => "TagValue",
     #     },
     #     client_token: "ClientToken", # required
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -993,10 +1014,10 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Creates a new image. This request will create a new image along with
-    # all of the configured output resources defined in the distribution
-    # configuration. You must specify exactly one recipe for your image,
-    # using either a ContainerRecipeArn or an ImageRecipeArn.
+    # Creates a new image along with all configured output resources defined
+    # in the distribution configuration. You must specify exactly one recipe
+    # for your image, using either a ContainerRecipeArn or an
+    # ImageRecipeArn.
     #
     # @option params [String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that defines how
@@ -1019,18 +1040,19 @@ module Aws::Imagebuilder
     #   The image tests configuration of the image.
     #
     # @option params [Boolean] :enhanced_image_metadata_enabled
-    #   Collects additional information about the image being created,
-    #   including the operating system (OS) version and package list. This
-    #   information is used to enhance the overall experience of using EC2
-    #   Image Builder. Enabled by default.
+    #   Specifies whether to collect additional information about the image
+    #   being created, including the operating system (OS) version and package
+    #   list. Defaults to `true`.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags of the image.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1050,7 +1072,7 @@ module Aws::Imagebuilder
     #   that grants Image Builder access to perform workflow actions.
     #
     # @option params [Types::ImageLoggingConfiguration] :logging_configuration
-    #   Define logging configuration for the image build process.
+    #   The logging configuration for the image build process.
     #
     # @return [Types::CreateImageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1120,8 +1142,8 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Creates a new image pipeline. Image pipelines enable you to automate
-    # the creation and distribution of images.
+    # Creates a new image pipeline. Use image pipelines to automate the
+    # creation and distribution of images.
     #
     # @option params [required, String] :name
     #   The name of the image pipeline.
@@ -1130,8 +1152,8 @@ module Aws::Imagebuilder
     #   The description of the image pipeline.
     #
     # @option params [String] :image_recipe_arn
-    #   The Amazon Resource Name (ARN) of the image recipe that will be used
-    #   to configure images created by this image pipeline.
+    #   The Amazon Resource Name (ARN) of the image recipe that configures
+    #   images created by this image pipeline.
     #
     # @option params [String] :container_recipe_arn
     #   The Amazon Resource Name (ARN) of the container recipe that is used to
@@ -1139,21 +1161,19 @@ module Aws::Imagebuilder
     #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
-    #   that will be used to build images created by this image pipeline.
+    #   that builds images created by this image pipeline.
     #
     # @option params [String] :distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration that
-    #   will be used to configure and distribute images created by this image
-    #   pipeline.
+    #   configures and distributes images created by this image pipeline.
     #
     # @option params [Types::ImageTestsConfiguration] :image_tests_configuration
     #   The image test configuration of the image pipeline.
     #
     # @option params [Boolean] :enhanced_image_metadata_enabled
-    #   Collects additional information about the image being created,
-    #   including the operating system (OS) version and package list. This
-    #   information is used to enhance the overall experience of using EC2
-    #   Image Builder. Enabled by default.
+    #   Specifies whether to collect additional information about the image
+    #   being created, including the operating system (OS) version and package
+    #   list. Defaults to `true`.
     #
     # @option params [Types::Schedule] :schedule
     #   The schedule of the image pipeline.
@@ -1168,9 +1188,11 @@ module Aws::Imagebuilder
     #   The tags to be applied to the images produced by this pipeline.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1196,6 +1218,11 @@ module Aws::Imagebuilder
     #   with names starting with `/aws/imagebuilder/` using the service-linked
     #   role. For custom log group names outside of this prefix, you must also
     #   provide an `executionRole`.
+    #
+    # @option params [Boolean] :dry_run
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
     #
     # @return [Types::CreateImagePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1258,6 +1285,7 @@ module Aws::Imagebuilder
     #       image_log_group_name: "LogGroupName",
     #       pipeline_log_group_name: "LogGroupName",
     #     },
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -1292,9 +1320,9 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any positive
-    #   integer value, including zero, with an upper limit of 2^30-1, or
-    #   1073741823 for each node. Image Builder automatically assigns the
+    #    **Assignment:** For the first three nodes, you can assign any positive
+    #   integer value, including zero. The upper limit is 2^30-1, or
+    #   1073741823, for each node. Image Builder automatically assigns the
     #   build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
@@ -1334,8 +1362,7 @@ module Aws::Imagebuilder
     #   The working directory used during build and test workflows.
     #
     # @option params [Types::AdditionalInstanceConfiguration] :additional_instance_configuration
-    #   Specify additional settings and launch scripts for your build
-    #   instances.
+    #   The additional settings and launch scripts for your build instances.
     #
     # @option params [Hash<String,String>] :ami_tags
     #   Tags that are applied to the AMI that Image Builder creates during the
@@ -1353,9 +1380,11 @@ module Aws::Imagebuilder
     #    </note>
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1363,6 +1392,11 @@ module Aws::Imagebuilder
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
     #
     # @return [Types::CreateImageRecipeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1421,6 +1455,7 @@ module Aws::Imagebuilder
     #     },
     #     ami_watermarks: ["AmiWatermarkName"],
     #     client_token: "ClientToken", # required
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -1454,8 +1489,8 @@ module Aws::Imagebuilder
     #
     # @option params [Array<String>] :instance_types
     #   The instance types of the infrastructure configuration. You can
-    #   specify one or more instance types to use for this build. The service
-    #   will pick one of these instance types based on availability.
+    #   specify one or more instance types to use for this build. Image
+    #   Builder picks one of these instance types based on availability.
     #
     # @option params [required, String] :instance_profile_name
     #   The instance profile to associate with the instance used to customize
@@ -1477,14 +1512,14 @@ module Aws::Imagebuilder
     #   log on to and debug the instance used to create your image.
     #
     # @option params [Boolean] :terminate_instance_on_failure
-    #   The terminate instance on failure setting of the infrastructure
-    #   configuration. Set to false if you want Image Builder to retain the
-    #   instance used to configure your AMI if the build or test phase of your
-    #   workflow fails.
+    #   Specifies whether to terminate the instance on failure. Set to false
+    #   if you want Image Builder to retain the instance used to configure
+    #   your AMI if the build or test phase of your workflow fails. Defaults
+    #   to `true`.
     #
     # @option params [String] :sns_topic_arn
-    #   The Amazon Resource Name (ARN) for the SNS topic to which we send
-    #   image build event notifications.
+    #   The Amazon Resource Name (ARN) of the SNS topic to which Image Builder
+    #   sends image build event notifications.
     #
     #   <note markdown="1"> EC2 Image Builder is unable to send notifications to SNS topics that
     #   are encrypted using keys from other accounts. The key that is used to
@@ -1509,12 +1544,14 @@ module Aws::Imagebuilder
     #
     # @option params [Types::Placement] :placement
     #   The instance placement settings that define where the instances that
-    #   are launched from your image will run.
+    #   are launched from your image run.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1522,6 +1559,11 @@ module Aws::Imagebuilder
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
     #
     # @return [Types::CreateInfrastructureConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1564,6 +1606,7 @@ module Aws::Imagebuilder
     #       host_resource_group_arn: "NonEmptyString",
     #     },
     #     client_token: "ClientToken", # required
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -1581,7 +1624,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Create a lifecycle policy resource.
+    # Creates a lifecycle policy resource.
     #
     # @option params [required, String] :name
     #   The name of the lifecycle policy to create.
@@ -1611,9 +1654,11 @@ module Aws::Imagebuilder
     #   Tags to apply to the lifecycle policy resource.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1621,6 +1666,11 @@ module Aws::Imagebuilder
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
     #
     # @return [Types::CreateLifecyclePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1685,6 +1735,7 @@ module Aws::Imagebuilder
     #       "TagKey" => "TagValue",
     #     },
     #     client_token: "ClientToken", # required
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -1701,7 +1752,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Create a new workflow or a new version of an existing workflow.
+    # Creates a new workflow or a new version of an existing workflow.
     #
     # @option params [required, String] :name
     #   The name of the workflow to create.
@@ -1714,9 +1765,9 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any positive
-    #   integer value, including zero, with an upper limit of 2^30-1, or
-    #   1073741823 for each node. Image Builder automatically assigns the
+    #    **Assignment:** For the first three nodes, you can assign any positive
+    #   integer value, including zero. The upper limit is 2^30-1, or
+    #   1073741823, for each node. Image Builder automatically assigns the
     #   build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
@@ -1741,9 +1792,9 @@ module Aws::Imagebuilder
     #
     # @option params [String] :uri
     #   The `uri` of a YAML component document file. This must be an S3 URL
-    #   (`s3://bucket/key`), and the requester must have permission to access
-    #   the S3 bucket it points to. If you use Amazon S3, you can specify
-    #   component content up to your service quota.
+    #   (`s3://bucket/key`), and you must have permission to access the S3
+    #   bucket it points to. If you use Amazon S3, you can specify component
+    #   content up to your service quota.
     #
     #   Alternatively, you can specify the YAML document inline, using the
     #   component `data` property. You cannot specify both properties.
@@ -1762,9 +1813,11 @@ module Aws::Imagebuilder
     #   Tags that apply to the workflow resource.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1778,10 +1831,9 @@ module Aws::Imagebuilder
     #   is responsible.
     #
     # @option params [Boolean] :dry_run
-    #   Validates the required permissions for the operation and the request
-    #   parameters, without actually making the request, and provides an error
-    #   response. Upon a successful request, the error response is
-    #   `DryRunOperationException`.
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
     #
     # @return [Types::CreateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2057,7 +2109,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Delete the specified lifecycle policy resource.
+    # Deletes the specified lifecycle policy resource.
     #
     # @option params [required, String] :lifecycle_policy_arn
     #   The Amazon Resource Name (ARN) of the lifecycle policy resource to
@@ -2138,9 +2190,11 @@ module Aws::Imagebuilder
     #   The tags to apply to the distributed image.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2186,7 +2240,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Gets a component object.
+    # Retrieves a component object.
     #
     # @option params [required, String] :component_build_version_arn
     #   The Amazon Resource Name (ARN) of the component that you want to get.
@@ -2250,7 +2304,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Gets a component policy.
+    # Retrieves a component policy.
     #
     # @option params [required, String] :component_arn
     #   The Amazon Resource Name (ARN) of the component whose policy you want
@@ -2382,7 +2436,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Gets a distribution configuration.
+    # Retrieves a distribution configuration.
     #
     # @option params [required, String] :distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration that
@@ -2464,7 +2518,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Gets an image.
+    # Retrieves an image.
     #
     # @option params [required, String] :image_build_version_arn
     #   The Amazon Resource Name (ARN) of the image that you want to get.
@@ -2493,6 +2547,23 @@ module Aws::Imagebuilder
     #   resp.image.os_version #=> String
     #   resp.image.state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image.state.reason #=> String
+    #   resp.image.state.failure_context.image_status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
+    #   resp.image.state.failure_context.workflow_execution_id #=> String
+    #   resp.image.state.failure_context.workflow_arn #=> String
+    #   resp.image.state.failure_context.step_execution_id #=> String
+    #   resp.image.state.failure_context.failed_step #=> String
+    #   resp.image.state.failure_context.component_failure.component_arn #=> String
+    #   resp.image.state.failure_context.component_failure.phase_name #=> String
+    #   resp.image.state.failure_context.component_failure.step_name #=> String
+    #   resp.image.state.failure_context.component_failure.action #=> String
+    #   resp.image.state.failure_context.component_failure.error_message #=> String
+    #   resp.image.state.failure_context.distribution_failure.error_message #=> String
+    #   resp.image.state.failure_context.distribution_failure.region_failures #=> Array
+    #   resp.image.state.failure_context.distribution_failure.region_failures[0].region #=> String
+    #   resp.image.state.failure_context.distribution_failure.region_failures[0].status #=> String, one of "FAILED", "CANCELLED", "TIMED_OUT"
+    #   resp.image.state.failure_context.distribution_failure.region_failures[0].image_configuration_step #=> String, one of "ASSOCIATE_LICENSES", "UPDATE_LAUNCH_TEMPLATES", "PUT_SSM_PARAMETERS", "UPDATE_FAST_LAUNCH_CONFIGURATIONS", "EXPORT_AMI"
+    #   resp.image.state.failure_context.distribution_failure.region_failures[0].error_message #=> String
+    #   resp.image.state.failure_context.distribution_failure.region_failures[0].target_account_id #=> String
     #   resp.image.image_recipe.arn #=> String
     #   resp.image.image_recipe.type #=> String, one of "AMI", "DOCKER"
     #   resp.image.image_recipe.name #=> String
@@ -2655,6 +2726,23 @@ module Aws::Imagebuilder
     #   resp.image.output_resources.amis[0].description #=> String
     #   resp.image.output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image.output_resources.amis[0].state.reason #=> String
+    #   resp.image.output_resources.amis[0].state.failure_context.image_status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
+    #   resp.image.output_resources.amis[0].state.failure_context.workflow_execution_id #=> String
+    #   resp.image.output_resources.amis[0].state.failure_context.workflow_arn #=> String
+    #   resp.image.output_resources.amis[0].state.failure_context.step_execution_id #=> String
+    #   resp.image.output_resources.amis[0].state.failure_context.failed_step #=> String
+    #   resp.image.output_resources.amis[0].state.failure_context.component_failure.component_arn #=> String
+    #   resp.image.output_resources.amis[0].state.failure_context.component_failure.phase_name #=> String
+    #   resp.image.output_resources.amis[0].state.failure_context.component_failure.step_name #=> String
+    #   resp.image.output_resources.amis[0].state.failure_context.component_failure.action #=> String
+    #   resp.image.output_resources.amis[0].state.failure_context.component_failure.error_message #=> String
+    #   resp.image.output_resources.amis[0].state.failure_context.distribution_failure.error_message #=> String
+    #   resp.image.output_resources.amis[0].state.failure_context.distribution_failure.region_failures #=> Array
+    #   resp.image.output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].region #=> String
+    #   resp.image.output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].status #=> String, one of "FAILED", "CANCELLED", "TIMED_OUT"
+    #   resp.image.output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].image_configuration_step #=> String, one of "ASSOCIATE_LICENSES", "UPDATE_LAUNCH_TEMPLATES", "PUT_SSM_PARAMETERS", "UPDATE_FAST_LAUNCH_CONFIGURATIONS", "EXPORT_AMI"
+    #   resp.image.output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].error_message #=> String
+    #   resp.image.output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].target_account_id #=> String
     #   resp.image.output_resources.amis[0].account_id #=> String
     #   resp.image.output_resources.containers #=> Array
     #   resp.image.output_resources.containers[0].region #=> String
@@ -2696,7 +2784,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Gets an image pipeline.
+    # Retrieves an image pipeline.
     #
     # @option params [required, String] :image_pipeline_arn
     #   The Amazon Resource Name (ARN) of the image pipeline that you want to
@@ -2767,7 +2855,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Gets an image policy.
+    # Retrieves an image policy.
     #
     # @option params [required, String] :image_arn
     #   The Amazon Resource Name (ARN) of the image whose policy you want to
@@ -2798,7 +2886,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Gets an image recipe.
+    # Retrieves an image recipe.
     #
     # @option params [required, String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe that you want to
@@ -2869,7 +2957,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Gets an image recipe policy.
+    # Retrieves an image recipe policy.
     #
     # @option params [required, String] :image_recipe_arn
     #   The Amazon Resource Name (ARN) of the image recipe whose policy you
@@ -2900,7 +2988,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Gets an infrastructure configuration.
+    # Retrieves an infrastructure configuration.
     #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
@@ -2956,12 +3044,11 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Get the runtime information that was logged for a specific runtime
-    # instance of the lifecycle policy.
+    # Retrieves the runtime information for a specific runtime instance of
+    # the lifecycle policy.
     #
     # @option params [required, String] :lifecycle_execution_id
-    #   Use the unique identifier for a runtime instance of the lifecycle
-    #   policy to get runtime details.
+    #   The unique identifier for a runtime instance of the lifecycle policy.
     #
     # @return [Types::GetLifecycleExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2992,7 +3079,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Get details for the specified image lifecycle policy.
+    # Retrieves details for the specified image lifecycle policy.
     #
     # @option params [required, String] :lifecycle_policy_arn
     #   Specifies the Amazon Resource Name (ARN) of the image lifecycle policy
@@ -3056,8 +3143,8 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Verify the subscription and perform resource dependency checks on the
-    # requested Amazon Web Services Marketplace resource. For Amazon Web
+    # Verifies the subscription and performs resource dependency checks on
+    # the requested Amazon Web Services Marketplace resource. For Amazon Web
     # Services Marketplace components, the response contains fields to
     # download the components and their artifacts.
     #
@@ -3102,7 +3189,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Get a workflow resource object.
+    # Retrieves a workflow resource object.
     #
     # @option params [required, String] :workflow_build_version_arn
     #   The Amazon Resource Name (ARN) of the workflow resource that you want
@@ -3155,8 +3242,8 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Get the runtime information that was logged for a specific runtime
-    # instance of the workflow.
+    # Retrieves runtime information for a specific runtime instance of the
+    # workflow.
     #
     # @option params [required, String] :workflow_execution_id
     #   Use the unique identifier for a runtime instance of the workflow to
@@ -3211,8 +3298,8 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Get the runtime information that was logged for a specific runtime
-    # instance of the workflow step.
+    # Retrieves runtime information for a specific runtime instance of the
+    # workflow step.
     #
     # @option params [required, String] :step_execution_id
     #   Use the unique identifier for a specific runtime instance of the
@@ -3237,6 +3324,8 @@ module Aws::Imagebuilder
     #   * {Types::GetWorkflowStepExecutionResponse#end_time #end_time} => String
     #   * {Types::GetWorkflowStepExecutionResponse#on_failure #on_failure} => String
     #   * {Types::GetWorkflowStepExecutionResponse#timeout_seconds #timeout_seconds} => Integer
+    #   * {Types::GetWorkflowStepExecutionResponse#attempt_number #attempt_number} => Integer
+    #   * {Types::GetWorkflowStepExecutionResponse#max_attempts #max_attempts} => Integer
     #
     # @example Request syntax with placeholder values
     #
@@ -3263,6 +3352,8 @@ module Aws::Imagebuilder
     #   resp.end_time #=> String
     #   resp.on_failure #=> String
     #   resp.timeout_seconds #=> Integer
+    #   resp.attempt_number #=> Integer
+    #   resp.max_attempts #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflowStepExecution AWS API Documentation
     #
@@ -3286,11 +3377,10 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Filtering:** With semantic versioning, you have the flexibility to
-    #   use wildcards (x) to specify the most recent versions or nodes when
-    #   selecting the base image or components for your recipe. When you use a
-    #   wildcard in any node, all nodes to the right of the first wildcard
-    #   must also be wildcards.
+    #    **Filtering:** You can use wildcards (x) to specify the most recent
+    #   versions or nodes when selecting the base image or components for your
+    #   recipe. When you use a wildcard in any node, all nodes to the right of
+    #   the first wildcard must also be wildcards.
     #
     #    </note>
     #
@@ -3318,10 +3408,10 @@ module Aws::Imagebuilder
     #   `data` or `uri` can be used to specify the data within the component.
     #
     # @option params [String] :uri
-    #   The uri of the component. Must be an Amazon S3 URL and the requester
-    #   must have permission to access the Amazon S3 bucket. If you use Amazon
-    #   S3, you can specify component content up to your service quota. Either
-    #   `data` or `uri` can be used to specify the data within the component.
+    #   The uri of the component. Must be an Amazon S3 URL and you must have
+    #   permission to access the Amazon S3 bucket. If you use Amazon S3, you
+    #   can specify component content up to your service quota. Either `data`
+    #   or `uri` can be used to specify the data within the component.
     #
     # @option params [String] :kms_key_id
     #   The Amazon Resource Name (ARN) that uniquely identifies the KMS key
@@ -3337,9 +3427,11 @@ module Aws::Imagebuilder
     #   The tags of the component.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3388,7 +3480,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Import a Windows operating system image from a verified Microsoft ISO
+    # Imports a Windows operating system image from a verified Microsoft ISO
     # disk file. The following disk images are supported:
     #
     # * Windows 11 Enterprise
@@ -3427,7 +3519,7 @@ module Aws::Imagebuilder
     #   The `uri` of the ISO disk file that's stored in Amazon S3.
     #
     # @option params [Types::ImageLoggingConfiguration] :logging_configuration
-    #   Define logging configuration for the image build process.
+    #   The logging configuration for the image build process.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags that are attached to image resources created from the import.
@@ -3439,9 +3531,11 @@ module Aws::Imagebuilder
     #   Specifies Windows settings for ISO imports.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3524,9 +3618,9 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any positive
-    #   integer value, including zero, with an upper limit of 2^30-1, or
-    #   1073741823 for each node. Image Builder automatically assigns the
+    #    **Assignment:** For the first three nodes, you can assign any positive
+    #   integer value, including zero. The upper limit is 2^30-1, or
+    #   1073741823, for each node. Image Builder automatically assigns the
     #   build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
@@ -3553,15 +3647,17 @@ module Aws::Imagebuilder
     #   base image for your recipe.
     #
     # @option params [Types::ImageLoggingConfiguration] :logging_configuration
-    #   Define logging configuration for the image build process.
+    #   The logging configuration for the image build process.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags that are attached to the import resources.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -3617,11 +3713,11 @@ module Aws::Imagebuilder
     #   want to list.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListComponentBuildVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3680,11 +3776,10 @@ module Aws::Imagebuilder
     # &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     # assign values for the first three, and can filter on all of them.
     #
-    #  **Filtering:** With semantic versioning, you have the flexibility to
-    # use wildcards (x) to specify the most recent versions or nodes when
-    # selecting the base image or components for your recipe. When you use a
-    # wildcard in any node, all nodes to the right of the first wildcard
-    # must also be wildcards.
+    #  **Filtering:** You can use wildcards (x) to specify the most recent
+    # versions or nodes when selecting the base image or components for your
+    # recipe. When you use a wildcard in any node, all nodes to the right of
+    # the first wildcard must also be wildcards.
     #
     #  </note>
     #
@@ -3714,11 +3809,11 @@ module Aws::Imagebuilder
     #   Returns the list of components for the specified name.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListComponentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3791,11 +3886,11 @@ module Aws::Imagebuilder
     #   * `platform`
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListContainerRecipesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3850,11 +3945,11 @@ module Aws::Imagebuilder
     #   You can filter on `name` to streamline results.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListDistributionConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3921,11 +4016,11 @@ module Aws::Imagebuilder
     #   * `version`
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListImageBuildVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3961,6 +4056,23 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].os_version #=> String
     #   resp.image_summary_list[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image_summary_list[0].state.reason #=> String
+    #   resp.image_summary_list[0].state.failure_context.image_status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
+    #   resp.image_summary_list[0].state.failure_context.workflow_execution_id #=> String
+    #   resp.image_summary_list[0].state.failure_context.workflow_arn #=> String
+    #   resp.image_summary_list[0].state.failure_context.step_execution_id #=> String
+    #   resp.image_summary_list[0].state.failure_context.failed_step #=> String
+    #   resp.image_summary_list[0].state.failure_context.component_failure.component_arn #=> String
+    #   resp.image_summary_list[0].state.failure_context.component_failure.phase_name #=> String
+    #   resp.image_summary_list[0].state.failure_context.component_failure.step_name #=> String
+    #   resp.image_summary_list[0].state.failure_context.component_failure.action #=> String
+    #   resp.image_summary_list[0].state.failure_context.component_failure.error_message #=> String
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.error_message #=> String
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.region_failures #=> Array
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.region_failures[0].region #=> String
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.region_failures[0].status #=> String, one of "FAILED", "CANCELLED", "TIMED_OUT"
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.region_failures[0].image_configuration_step #=> String, one of "ASSOCIATE_LICENSES", "UPDATE_LAUNCH_TEMPLATES", "PUT_SSM_PARAMETERS", "UPDATE_FAST_LAUNCH_CONFIGURATIONS", "EXPORT_AMI"
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.region_failures[0].error_message #=> String
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.region_failures[0].target_account_id #=> String
     #   resp.image_summary_list[0].owner #=> String
     #   resp.image_summary_list[0].date_created #=> String
     #   resp.image_summary_list[0].output_resources.amis #=> Array
@@ -3970,6 +4082,23 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].output_resources.amis[0].description #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image_summary_list[0].output_resources.amis[0].state.reason #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.image_status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.workflow_execution_id #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.workflow_arn #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.step_execution_id #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.failed_step #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.component_failure.component_arn #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.component_failure.phase_name #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.component_failure.step_name #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.component_failure.action #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.component_failure.error_message #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.error_message #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.region_failures #=> Array
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].region #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].status #=> String, one of "FAILED", "CANCELLED", "TIMED_OUT"
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].image_configuration_step #=> String, one of "ASSOCIATE_LICENSES", "UPDATE_LAUNCH_TEMPLATES", "PUT_SSM_PARAMETERS", "UPDATE_FAST_LAUNCH_CONFIGURATIONS", "EXPORT_AMI"
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].error_message #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].target_account_id #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].account_id #=> String
     #   resp.image_summary_list[0].output_resources.containers #=> Array
     #   resp.image_summary_list[0].output_resources.containers[0].region #=> String
@@ -3993,7 +4122,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # List the Packages that are associated with an Image Build Version, as
+    # Lists the packages that are associated with an image build version, as
     # determined by Amazon Web Services Systems Manager Inventory at build
     # time.
     #
@@ -4002,11 +4131,11 @@ module Aws::Imagebuilder
     #   Version ARN
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListImagePackagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4055,11 +4184,11 @@ module Aws::Imagebuilder
     #   * `version`
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListImagePipelineImagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4095,6 +4224,23 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].os_version #=> String
     #   resp.image_summary_list[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image_summary_list[0].state.reason #=> String
+    #   resp.image_summary_list[0].state.failure_context.image_status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
+    #   resp.image_summary_list[0].state.failure_context.workflow_execution_id #=> String
+    #   resp.image_summary_list[0].state.failure_context.workflow_arn #=> String
+    #   resp.image_summary_list[0].state.failure_context.step_execution_id #=> String
+    #   resp.image_summary_list[0].state.failure_context.failed_step #=> String
+    #   resp.image_summary_list[0].state.failure_context.component_failure.component_arn #=> String
+    #   resp.image_summary_list[0].state.failure_context.component_failure.phase_name #=> String
+    #   resp.image_summary_list[0].state.failure_context.component_failure.step_name #=> String
+    #   resp.image_summary_list[0].state.failure_context.component_failure.action #=> String
+    #   resp.image_summary_list[0].state.failure_context.component_failure.error_message #=> String
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.error_message #=> String
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.region_failures #=> Array
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.region_failures[0].region #=> String
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.region_failures[0].status #=> String, one of "FAILED", "CANCELLED", "TIMED_OUT"
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.region_failures[0].image_configuration_step #=> String, one of "ASSOCIATE_LICENSES", "UPDATE_LAUNCH_TEMPLATES", "PUT_SSM_PARAMETERS", "UPDATE_FAST_LAUNCH_CONFIGURATIONS", "EXPORT_AMI"
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.region_failures[0].error_message #=> String
+    #   resp.image_summary_list[0].state.failure_context.distribution_failure.region_failures[0].target_account_id #=> String
     #   resp.image_summary_list[0].owner #=> String
     #   resp.image_summary_list[0].date_created #=> String
     #   resp.image_summary_list[0].output_resources.amis #=> Array
@@ -4104,6 +4250,23 @@ module Aws::Imagebuilder
     #   resp.image_summary_list[0].output_resources.amis[0].description #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].state.status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
     #   resp.image_summary_list[0].output_resources.amis[0].state.reason #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.image_status #=> String, one of "PENDING", "CREATING", "BUILDING", "TESTING", "DISTRIBUTING", "INTEGRATING", "AVAILABLE", "CANCELLED", "FAILED", "DEPRECATED", "DELETED", "DISABLED"
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.workflow_execution_id #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.workflow_arn #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.step_execution_id #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.failed_step #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.component_failure.component_arn #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.component_failure.phase_name #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.component_failure.step_name #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.component_failure.action #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.component_failure.error_message #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.error_message #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.region_failures #=> Array
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].region #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].status #=> String, one of "FAILED", "CANCELLED", "TIMED_OUT"
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].image_configuration_step #=> String, one of "ASSOCIATE_LICENSES", "UPDATE_LAUNCH_TEMPLATES", "PUT_SSM_PARAMETERS", "UPDATE_FAST_LAUNCH_CONFIGURATIONS", "EXPORT_AMI"
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].error_message #=> String
+    #   resp.image_summary_list[0].output_resources.amis[0].state.failure_context.distribution_failure.region_failures[0].target_account_id #=> String
     #   resp.image_summary_list[0].output_resources.amis[0].account_id #=> String
     #   resp.image_summary_list[0].output_resources.containers #=> Array
     #   resp.image_summary_list[0].output_resources.containers[0].region #=> String
@@ -4145,11 +4308,11 @@ module Aws::Imagebuilder
     #   * `status`
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListImagePipelinesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4246,11 +4409,11 @@ module Aws::Imagebuilder
     #   * `platform`
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListImageRecipesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4322,8 +4485,8 @@ module Aws::Imagebuilder
     #   IDs.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListImageScanFindingAggregationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4398,11 +4561,11 @@ module Aws::Imagebuilder
     #   listed.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListImageScanFindingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4492,11 +4655,9 @@ module Aws::Imagebuilder
     # Results.
     #
     # @option params [String] :owner
-    #   The owner defines which images you want to list. By default, this
-    #   request will only show images owned by your account. You can use this
-    #   field to specify if you want to view images owned by yourself, by
-    #   Amazon, or those images that have been shared with you by other
-    #   customers.
+    #   Filters the list to images owned by you, by Amazon, or shared with you
+    #   by other accounts. By default, only your account's images are
+    #   returned.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Use the following filters to streamline results:
@@ -4515,11 +4676,11 @@ module Aws::Imagebuilder
     #   Requests a list of images with a specific recipe name.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @option params [Boolean] :include_deprecated
     #   Includes deprecated images in the response list.
@@ -4579,11 +4740,11 @@ module Aws::Imagebuilder
     #   You can filter on `name` to streamline results.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListInfrastructureConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4637,12 +4798,11 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # List resources that the runtime instance of the image lifecycle
+    # Lists resources that the runtime instance of the image lifecycle
     # identified for lifecycle actions.
     #
     # @option params [required, String] :lifecycle_execution_id
-    #   Use the unique identifier for a runtime instance of the lifecycle
-    #   policy to get runtime details.
+    #   The unique identifier for a runtime instance of the lifecycle policy.
     #
     # @option params [String] :parent_resource_id
     #   You can leave this empty to get a list of Image Builder resources that
@@ -4655,11 +4815,11 @@ module Aws::Imagebuilder
     #   stored in ECR repositories.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListLifecycleExecutionResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4711,14 +4871,14 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Get the lifecycle runtime history for the specified resource.
+    # Retrieves the lifecycle runtime history for the specified resource.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource for which to get a list
@@ -4760,18 +4920,19 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Get a list of lifecycle policies in your Amazon Web Services account.
+    # Retrieves a list of lifecycle policies in your Amazon Web Services
+    # account.
     #
     # @option params [Array<Types::Filter>] :filters
     #   Streamline results based on one of the following values: `Name`,
     #   `Status`.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListLifecyclePoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4848,15 +5009,15 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Get a list of workflow steps that are waiting for action for workflows
-    # in your Amazon Web Services account.
+    # Retrieves a list of workflow steps that are waiting for action for
+    # workflows in your Amazon Web Services account.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListWaitingWorkflowStepsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4900,11 +5061,11 @@ module Aws::Imagebuilder
     #   get a list of build versions.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListWorkflowBuildVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4951,11 +5112,11 @@ module Aws::Imagebuilder
     # specific image build version.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @option params [required, String] :image_build_version_arn
     #   List all workflow runtime instances for the specified image build
@@ -5013,11 +5174,11 @@ module Aws::Imagebuilder
     # workflow that you specify in the request.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @option params [required, String] :workflow_execution_id
     #   The unique identifier that Image Builder assigned to keep track of
@@ -5058,6 +5219,8 @@ module Aws::Imagebuilder
     #   resp.steps[0].outputs #=> String
     #   resp.steps[0].start_time #=> String
     #   resp.steps[0].end_time #=> String
+    #   resp.steps[0].attempt_number #=> Integer
+    #   resp.steps[0].max_attempts #=> Integer
     #   resp.workflow_build_version_arn #=> String
     #   resp.workflow_execution_id #=> String
     #   resp.image_build_version_arn #=> String
@@ -5086,11 +5249,11 @@ module Aws::Imagebuilder
     #   Specify all or part of the workflow name to streamline results.
     #
     # @option params [Integer] :max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #
     # @option params [String] :next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #
     # @return [Types::ListWorkflowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5135,11 +5298,11 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Applies a policy to a component. We recommend that you call the RAM
-    # API [CreateResourceShare][1] to share resources. If you call the Image
-    # Builder API `PutComponentPolicy`, you must also call the RAM API
-    # [PromoteResourceShareCreatedFromPolicy][2] in order for the resource
-    # to be visible to all principals with whom the resource is shared.
+    # Applies a policy to a component. To share resources, call the RAM API
+    # [CreateResourceShare][1]. If you call this API, you must also call the
+    # RAM API [PromoteResourceShareCreatedFromPolicy][2] so that the
+    # resource is visible to all principals with whom the resource is
+    # shared.
     #
     #
     #
@@ -5179,15 +5342,16 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Applies a policy to a container image. We recommend that you call the
-    # RAM API CreateResourceShare
-    # (https://docs.aws.amazon.com//ram/latest/APIReference/API\_CreateResourceShare.html)
-    # to share resources. If you call the Image Builder API
-    # `PutContainerImagePolicy`, you must also call the RAM API
-    # PromoteResourceShareCreatedFromPolicy
-    # (https://docs.aws.amazon.com//ram/latest/APIReference/API\_PromoteResourceShareCreatedFromPolicy.html)
-    # in order for the resource to be visible to all principals with whom
-    # the resource is shared.
+    # Applies a policy to a container image. To share resources, call the
+    # RAM API [CreateResourceShare][1]. If you call this API, you must also
+    # call the RAM API [PromoteResourceShareCreatedFromPolicy][2] so that
+    # the resource is visible to all principals with whom the resource is
+    # shared.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html
+    # [2]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
     #
     # @option params [required, String] :container_recipe_arn
     #   The Amazon Resource Name (ARN) of the container recipe that this
@@ -5222,11 +5386,11 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Applies a policy to an image. We recommend that you call the RAM API
-    # [CreateResourceShare][1] to share resources. If you call the Image
-    # Builder API `PutImagePolicy`, you must also call the RAM API
-    # [PromoteResourceShareCreatedFromPolicy][2] in order for the resource
-    # to be visible to all principals with whom the resource is shared.
+    # Applies a policy to an image. To share resources, call the RAM API
+    # [CreateResourceShare][1]. If you call this API, you must also call the
+    # RAM API [PromoteResourceShareCreatedFromPolicy][2] so that the
+    # resource is visible to all principals with whom the resource is
+    # shared.
     #
     #
     #
@@ -5266,11 +5430,10 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Applies a policy to an image recipe. We recommend that you call the
-    # RAM API [CreateResourceShare][1] to share resources. If you call the
-    # Image Builder API `PutImageRecipePolicy`, you must also call the RAM
-    # API [PromoteResourceShareCreatedFromPolicy][2] in order for the
-    # resource to be visible to all principals with whom the resource is
+    # Applies a policy to an image recipe. To share resources, call the RAM
+    # API [CreateResourceShare][1]. If you call this API, you must also call
+    # the RAM API [PromoteResourceShareCreatedFromPolicy][2] so that the
+    # resource is visible to all principals with whom the resource is
     # shared.
     #
     #
@@ -5311,15 +5474,17 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # RetryImage retries an image distribution without rebuilding the image.
+    # Retries an image distribution or test without rebuilding the image.
     #
     # @option params [required, String] :image_build_version_arn
     #   The source image Amazon Resource Name (ARN) to retry.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5377,9 +5542,11 @@ module Aws::Imagebuilder
     #   step output references.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5426,9 +5593,11 @@ module Aws::Imagebuilder
     #   manually invoke.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5438,8 +5607,8 @@ module Aws::Imagebuilder
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Hash<String,String>] :tags
-    #   Specify tags for Image Builder to apply to the image resource that's
-    #   created When it starts pipeline execution.
+    #   The tags for Image Builder to apply to the image resource that's
+    #   created when pipeline execution starts.
     #
     # @return [Types::StartImagePipelineExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5472,8 +5641,8 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Begin asynchronous resource state update for lifecycle changes to the
-    # specified image resources.
+    # Begins an asynchronous resource state update for lifecycle changes to
+    # the specified image resources.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the image build version to update.
@@ -5510,9 +5679,11 @@ module Aws::Imagebuilder
     #   must be a future time.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5625,7 +5796,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Updates a new distribution configuration. Distribution configurations
+    # Updates a distribution configuration. Distribution configurations
     # define and configure the outputs of your pipeline.
     #
     # @option params [required, String] :distribution_configuration_arn
@@ -5639,9 +5810,11 @@ module Aws::Imagebuilder
     #   The distributions of the distribution configuration.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5743,7 +5916,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Updates an image pipeline. Image pipelines enable you to automate the
+    # Updates an image pipeline. Use image pipelines to automate the
     # creation and distribution of images. You must specify exactly one
     # recipe for your image, using either a `containerRecipeArn` or an
     # `imageRecipeArn`.
@@ -5762,8 +5935,8 @@ module Aws::Imagebuilder
     #   The description of the image pipeline.
     #
     # @option params [String] :image_recipe_arn
-    #   The Amazon Resource Name (ARN) of the image recipe that will be used
-    #   to configure images updated by this image pipeline.
+    #   The Amazon Resource Name (ARN) of the image recipe that configures
+    #   images updated by this image pipeline.
     #
     # @option params [String] :container_recipe_arn
     #   The Amazon Resource Name (ARN) of the container pipeline to update.
@@ -5782,10 +5955,9 @@ module Aws::Imagebuilder
     #   The image test configuration of the image pipeline.
     #
     # @option params [Boolean] :enhanced_image_metadata_enabled
-    #   Collects additional information about the image being created,
-    #   including the operating system (OS) version and package list. This
-    #   information is used to enhance the overall experience of using EC2
-    #   Image Builder. Enabled by default.
+    #   Specifies whether to collect additional information about the image
+    #   being created, including the operating system (OS) version and package
+    #   list. Defaults to `true`.
     #
     # @option params [Types::Schedule] :schedule
     #   The schedule of the image pipeline.
@@ -5794,9 +5966,11 @@ module Aws::Imagebuilder
     #   The status of the image pipeline.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -5897,9 +6071,9 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Updates a new infrastructure configuration. An infrastructure
-    # configuration defines the environment in which your image will be
-    # built and tested.
+    # Updates an infrastructure configuration. An infrastructure
+    # configuration defines the environment in which Image Builder builds
+    # and tests your image.
     #
     # @option params [required, String] :infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
@@ -5910,8 +6084,8 @@ module Aws::Imagebuilder
     #
     # @option params [Array<String>] :instance_types
     #   The instance types of the infrastructure configuration. You can
-    #   specify one or more instance types to use for this build. The service
-    #   will pick one of these instance types based on availability.
+    #   specify one or more instance types to use for this build. Image
+    #   Builder picks one of these instance types based on availability.
     #
     # @option params [required, String] :instance_profile_name
     #   The instance profile to associate with the instance used to customize
@@ -5933,14 +6107,14 @@ module Aws::Imagebuilder
     #   log on to and debug the instance used to create your image.
     #
     # @option params [Boolean] :terminate_instance_on_failure
-    #   The terminate instance on failure setting of the infrastructure
-    #   configuration. Set to false if you want Image Builder to retain the
-    #   instance used to configure your AMI if the build or test phase of your
-    #   workflow fails.
+    #   Specifies whether to terminate the instance on failure. Set to false
+    #   if you want Image Builder to retain the instance used to configure
+    #   your AMI if the build or test phase of your workflow fails. Defaults
+    #   to `true`.
     #
     # @option params [String] :sns_topic_arn
-    #   The Amazon Resource Name (ARN) for the SNS topic to which we send
-    #   image build event notifications.
+    #   The Amazon Resource Name (ARN) of the SNS topic to which Image Builder
+    #   sends image build event notifications.
     #
     #   <note markdown="1"> EC2 Image Builder is unable to send notifications to SNS topics that
     #   are encrypted using keys from other accounts. The key that is used to
@@ -5971,12 +6145,14 @@ module Aws::Imagebuilder
     #
     # @option params [Types::Placement] :placement
     #   The instance placement settings that define where the instances that
-    #   are launched from your image will run.
+    #   are launched from your image run.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -6040,7 +6216,7 @@ module Aws::Imagebuilder
       req.send_request(options)
     end
 
-    # Update the specified lifecycle policy.
+    # Updates the specified lifecycle policy.
     #
     # @option params [required, String] :lifecycle_policy_arn
     #   The Amazon Resource Name (ARN) of the lifecycle policy resource.
@@ -6065,9 +6241,11 @@ module Aws::Imagebuilder
     #   Selection criteria for resources that the lifecycle policy applies to.
     #
     # @option params [required, String] :client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency of
-    #   the request. For more information, see [Ensuring idempotency][1] in
-    #   the *Amazon EC2 API Reference*.
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not return
+    #   an error. For more information, see [Ensuring idempotency][1] in the
+    #   *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -6168,7 +6346,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.111.0'
+      context[:gem_version] = '1.112.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

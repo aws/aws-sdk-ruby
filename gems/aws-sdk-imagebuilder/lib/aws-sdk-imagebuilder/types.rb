@@ -221,8 +221,10 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -271,8 +273,10 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -458,6 +462,46 @@ module Aws::Imagebuilder
     class ComponentConfiguration < Struct.new(
       :component_arn,
       :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the component that caused the image creation
+    # process to fail. The details identify the first step that failed when
+    # the component ran.
+    #
+    # @!attribute [rw] component_arn
+    #   The Amazon Resource Name (ARN) of the component build version that
+    #   failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] phase_name
+    #   The name of the phase in the component document where the failure
+    #   occurred, such as `build`, `validate`, or `test`.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_name
+    #   The name of the step in the component document that failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action that the failed step runs, for example `ExecuteBash`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message from the step that failed. Image Builder truncates
+    #   messages that are longer than 1024 characters. The component log in
+    #   Amazon CloudWatch Logs contains the full output.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ComponentFailureContext AWS API Documentation
+    #
+    class ComponentFailureContext < Struct.new(
+      :component_arn,
+      :phase_name,
+      :step_name,
+      :action,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -650,21 +694,20 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any
-    #   positive integer value, including zero, with an upper limit of
-    #   2^30-1, or 1073741823 for each node. Image Builder automatically
-    #   assigns the build number to the fourth node.
+    #    **Assignment:** For the first three nodes, you can assign any
+    #   positive integer value, including zero. The upper limit is 2^30-1,
+    #   or 1073741823, for each node. Image Builder automatically assigns
+    #   the build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
     #   assignment requirements for the nodes that you can assign. For
     #   example, you might choose a software version pattern, such as 1.0.0,
     #   or a date, such as 2021.01.01.
     #
-    #    **Filtering:** With semantic versioning, you have the flexibility to
-    #   use wildcards (x) to specify the most recent versions or nodes when
-    #   selecting the base image or components for your recipe. When you use
-    #   a wildcard in any node, all nodes to the right of the first wildcard
-    #   must also be wildcards.
+    #    **Filtering:** You can use wildcards (x) to specify the most recent
+    #   versions or nodes when selecting the base image or components for
+    #   your recipe. When you use a wildcard in any node, all nodes to the
+    #   right of the first wildcard must also be wildcards.
     #
     #    </note>
     #   @return [String]
@@ -678,9 +721,9 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] supported_os_versions
-    #   he operating system (OS) version supported by the component. If the
-    #   OS information is available, a prefix match is performed against the
-    #   base image OS version during image recipe creation.
+    #   The operating system (OS) version supported by the component. If OS
+    #   information is available, Image Builder performs a prefix match
+    #   against the base image OS version during image recipe creation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] type
@@ -817,21 +860,20 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any
-    #   positive integer value, including zero, with an upper limit of
-    #   2^30-1, or 1073741823 for each node. Image Builder automatically
-    #   assigns the build number to the fourth node.
+    #    **Assignment:** For the first three nodes, you can assign any
+    #   positive integer value, including zero. The upper limit is 2^30-1,
+    #   or 1073741823, for each node. Image Builder automatically assigns
+    #   the build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
     #   assignment requirements for the nodes that you can assign. For
     #   example, you might choose a software version pattern, such as 1.0.0,
     #   or a date, such as 2021.01.01.
     #
-    #    **Filtering:** With semantic versioning, you have the flexibility to
-    #   use wildcards (x) to specify the most recent versions or nodes when
-    #   selecting the base image or components for your recipe. When you use
-    #   a wildcard in any node, all nodes to the right of the first wildcard
-    #   must also be wildcards.
+    #    **Filtering:** You can use wildcards (x) to specify the most recent
+    #   versions or nodes when selecting the base image or components for
+    #   your recipe. When you use a wildcard in any node, all nodes to the
+    #   right of the first wildcard must also be wildcards.
     #
     #    </note>
     #   @return [String]
@@ -989,10 +1031,10 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any
-    #   positive integer value, including zero, with an upper limit of
-    #   2^30-1, or 1073741823 for each node. Image Builder automatically
-    #   assigns the build number to the fourth node.
+    #    **Assignment:** For the first three nodes, you can assign any
+    #   positive integer value, including zero. The upper limit is 2^30-1,
+    #   or 1073741823, for each node. Image Builder automatically assigns
+    #   the build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
     #   assignment requirements for the nodes that you can assign. For
@@ -1031,9 +1073,9 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] uri
     #   The `uri` of a YAML component document file. This must be an S3 URL
-    #   (`s3://bucket/key`), and the requester must have permission to
-    #   access the S3 bucket it points to. If you use Amazon S3, you can
-    #   specify component content up to your service quota.
+    #   (`s3://bucket/key`), and you must have permission to access the S3
+    #   bucket it points to. If you use Amazon S3, you can specify component
+    #   content up to your service quota.
     #
     #   Alternatively, you can specify the YAML document inline, using the
     #   component `data` property. You cannot specify both properties.
@@ -1055,8 +1097,10 @@ module Aws::Imagebuilder
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1068,10 +1112,9 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Validates the required permissions for the operation and the request
-    #   parameters, without actually making the request, and provides an
-    #   error response. Upon a successful request, the error response is
-    #   `DryRunOperationException`.
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateComponentRequest AWS API Documentation
@@ -1142,10 +1185,10 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any
-    #   positive integer value, including zero, with an upper limit of
-    #   2^30-1, or 1073741823 for each node. Image Builder automatically
-    #   assigns the build number to the fourth node.
+    #    **Assignment:** For the first three nodes, you can assign any
+    #   positive integer value, including zero. The upper limit is 2^30-1,
+    #   or 1073741823, for each node. Image Builder automatically assigns
+    #   the build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
     #   assignment requirements for the nodes that you can assign. For
@@ -1170,7 +1213,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] dockerfile_template_uri
-    #   The Amazon S3 URI for the Dockerfile that will be used to build your
+    #   The Amazon S3 URI for the Dockerfile that is used to build your
     #   container image.
     #   @return [String]
     #
@@ -1212,8 +1255,10 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1223,6 +1268,12 @@ module Aws::Imagebuilder
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateContainerRecipeRequest AWS API Documentation
     #
@@ -1242,7 +1293,8 @@ module Aws::Imagebuilder
       :working_directory,
       :target_repository,
       :kms_key_id,
-      :client_token)
+      :client_token,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1293,8 +1345,10 @@ module Aws::Imagebuilder
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1305,6 +1359,12 @@ module Aws::Imagebuilder
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateDistributionConfigurationRequest AWS API Documentation
     #
     class CreateDistributionConfigurationRequest < Struct.new(
@@ -1312,7 +1372,8 @@ module Aws::Imagebuilder
       :description,
       :distributions,
       :tags,
-      :client_token)
+      :client_token,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1349,8 +1410,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] image_recipe_arn
-    #   The Amazon Resource Name (ARN) of the image recipe that will be used
-    #   to configure images created by this image pipeline.
+    #   The Amazon Resource Name (ARN) of the image recipe that configures
+    #   images created by this image pipeline.
     #   @return [String]
     #
     # @!attribute [rw] container_recipe_arn
@@ -1360,13 +1421,13 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] infrastructure_configuration_arn
     #   The Amazon Resource Name (ARN) of the infrastructure configuration
-    #   that will be used to build images created by this image pipeline.
+    #   that builds images created by this image pipeline.
     #   @return [String]
     #
     # @!attribute [rw] distribution_configuration_arn
     #   The Amazon Resource Name (ARN) of the distribution configuration
-    #   that will be used to configure and distribute images created by this
-    #   image pipeline.
+    #   that configures and distributes images created by this image
+    #   pipeline.
     #   @return [String]
     #
     # @!attribute [rw] image_tests_configuration
@@ -1374,10 +1435,9 @@ module Aws::Imagebuilder
     #   @return [Types::ImageTestsConfiguration]
     #
     # @!attribute [rw] enhanced_image_metadata_enabled
-    #   Collects additional information about the image being created,
-    #   including the operating system (OS) version and package list. This
-    #   information is used to enhance the overall experience of using EC2
-    #   Image Builder. Enabled by default.
+    #   Specifies whether to collect additional information about the image
+    #   being created, including the operating system (OS) version and
+    #   package list. Defaults to `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] schedule
@@ -1397,8 +1457,10 @@ module Aws::Imagebuilder
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1431,6 +1493,12 @@ module Aws::Imagebuilder
     #   prefix, you must also provide an `executionRole`.
     #   @return [Types::PipelineLoggingConfiguration]
     #
+    # @!attribute [rw] dry_run
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateImagePipelineRequest AWS API Documentation
     #
     class CreateImagePipelineRequest < Struct.new(
@@ -1450,7 +1518,8 @@ module Aws::Imagebuilder
       :image_scanning_configuration,
       :workflows,
       :execution_role,
-      :logging_configuration)
+      :logging_configuration,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1494,10 +1563,10 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any
-    #   positive integer value, including zero, with an upper limit of
-    #   2^30-1, or 1073741823 for each node. Image Builder automatically
-    #   assigns the build number to the fourth node.
+    #    **Assignment:** For the first three nodes, you can assign any
+    #   positive integer value, including zero. The upper limit is 2^30-1,
+    #   or 1073741823, for each node. Image Builder automatically assigns
+    #   the build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
     #   assignment requirements for the nodes that you can assign. For
@@ -1543,8 +1612,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] additional_instance_configuration
-    #   Specify additional settings and launch scripts for your build
-    #   instances.
+    #   The additional settings and launch scripts for your build instances.
     #   @return [Types::AdditionalInstanceConfiguration]
     #
     # @!attribute [rw] ami_tags
@@ -1565,8 +1633,10 @@ module Aws::Imagebuilder
     #   @return [Array<String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1576,6 +1646,12 @@ module Aws::Imagebuilder
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateImageRecipeRequest AWS API Documentation
     #
@@ -1591,7 +1667,8 @@ module Aws::Imagebuilder
       :additional_instance_configuration,
       :ami_tags,
       :ami_watermarks,
-      :client_token)
+      :client_token,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1651,10 +1728,9 @@ module Aws::Imagebuilder
     #   @return [Types::ImageTestsConfiguration]
     #
     # @!attribute [rw] enhanced_image_metadata_enabled
-    #   Collects additional information about the image being created,
-    #   including the operating system (OS) version and package list. This
-    #   information is used to enhance the overall experience of using EC2
-    #   Image Builder. Enabled by default.
+    #   Specifies whether to collect additional information about the image
+    #   being created, including the operating system (OS) version and
+    #   package list. Defaults to `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -1662,8 +1738,10 @@ module Aws::Imagebuilder
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1688,7 +1766,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] logging_configuration
-    #   Define logging configuration for the image build process.
+    #   The logging configuration for the image build process.
     #   @return [Types::ImageLoggingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateImageRequest AWS API Documentation
@@ -1749,8 +1827,8 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] instance_types
     #   The instance types of the infrastructure configuration. You can
-    #   specify one or more instance types to use for this build. The
-    #   service will pick one of these instance types based on availability.
+    #   specify one or more instance types to use for this build. Image
+    #   Builder picks one of these instance types based on availability.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_profile_name
@@ -1778,15 +1856,15 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] terminate_instance_on_failure
-    #   The terminate instance on failure setting of the infrastructure
-    #   configuration. Set to false if you want Image Builder to retain the
-    #   instance used to configure your AMI if the build or test phase of
-    #   your workflow fails.
+    #   Specifies whether to terminate the instance on failure. Set to false
+    #   if you want Image Builder to retain the instance used to configure
+    #   your AMI if the build or test phase of your workflow fails. Defaults
+    #   to `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] sns_topic_arn
-    #   The Amazon Resource Name (ARN) for the SNS topic to which we send
-    #   image build event notifications.
+    #   The Amazon Resource Name (ARN) of the SNS topic to which Image
+    #   Builder sends image build event notifications.
     #
     #   <note markdown="1"> EC2 Image Builder is unable to send notifications to SNS topics that
     #   are encrypted using keys from other accounts. The key that is used
@@ -1815,12 +1893,14 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] placement
     #   The instance placement settings that define where the instances that
-    #   are launched from your image will run.
+    #   are launched from your image run.
     #   @return [Types::Placement]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1830,6 +1910,12 @@ module Aws::Imagebuilder
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateInfrastructureConfigurationRequest AWS API Documentation
     #
@@ -1848,7 +1934,8 @@ module Aws::Imagebuilder
       :instance_metadata_options,
       :tags,
       :placement,
-      :client_token)
+      :client_token,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1912,8 +1999,10 @@ module Aws::Imagebuilder
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -1923,6 +2012,12 @@ module Aws::Imagebuilder
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateLifecyclePolicyRequest AWS API Documentation
     #
@@ -1935,7 +2030,8 @@ module Aws::Imagebuilder
       :policy_details,
       :resource_selection,
       :tags,
-      :client_token)
+      :client_token,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1970,10 +2066,10 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any
-    #   positive integer value, including zero, with an upper limit of
-    #   2^30-1, or 1073741823 for each node. Image Builder automatically
-    #   assigns the build number to the fourth node.
+    #    **Assignment:** For the first three nodes, you can assign any
+    #   positive integer value, including zero. The upper limit is 2^30-1,
+    #   or 1073741823, for each node. Image Builder automatically assigns
+    #   the build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
     #   assignment requirements for the nodes that you can assign. For
@@ -2001,9 +2097,9 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] uri
     #   The `uri` of a YAML component document file. This must be an S3 URL
-    #   (`s3://bucket/key`), and the requester must have permission to
-    #   access the S3 bucket it points to. If you use Amazon S3, you can
-    #   specify component content up to your service quota.
+    #   (`s3://bucket/key`), and you must have permission to access the S3
+    #   bucket it points to. If you use Amazon S3, you can specify component
+    #   content up to your service quota.
     #
     #   Alternatively, you can specify the YAML document inline, using the
     #   component `data` property. You cannot specify both properties.
@@ -2025,8 +2121,10 @@ module Aws::Imagebuilder
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -2043,10 +2141,9 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] dry_run
-    #   Validates the required permissions for the operation and the request
-    #   parameters, without actually making the request, and provides an
-    #   error response. Upon a successful request, the error response is
-    #   `DryRunOperationException`.
+    #   Validates the required permissions and request parameters without
+    #   making the request. If validation succeeds, the operation returns a
+    #   `DryRunOperationException` error response.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CreateWorkflowRequest AWS API Documentation
@@ -2480,8 +2577,10 @@ module Aws::Imagebuilder
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -2678,6 +2777,28 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Contains details about a failure that occurred while Image Builder
+    # distributed the image or applied configuration to the distributed
+    # image.
+    #
+    # @!attribute [rw] error_message
+    #   The error message for the distribution failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_failures
+    #   The details about the failure for each Region where the image
+    #   didn't finish distribution or configuration.
+    #   @return [Array<Types::RegionFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/DistributionFailureContext AWS API Documentation
+    #
+    class DistributionFailureContext < Struct.new(
+      :error_message,
+      :region_failures)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The dry run operation of the resource was successful, and no resources
     # or mutations were actually performed due to the dry run flag in the
     # request.
@@ -2696,15 +2817,16 @@ module Aws::Imagebuilder
     # Amazon EBS-specific block device mapping specifications.
     #
     # @!attribute [rw] encrypted
-    #   Use to configure device encryption.
+    #   Specifies whether to encrypt the device.
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_on_termination
-    #   Use to configure delete on termination of the associated device.
+    #   Specifies whether to delete the associated device on termination.
     #   @return [Boolean]
     #
     # @!attribute [rw] iops
-    #   Use to configure device IOPS.
+    #   The IOPS value for the device. Required only when volumeType is io1
+    #   or io2.
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
@@ -2723,11 +2845,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] volume_size
-    #   Use to override the device's volume size.
+    #   Overrides the volume size for the device.
     #   @return [Integer]
     #
     # @!attribute [rw] volume_type
-    #   Use to override the device's volume type.
+    #   Overrides the volume type for the device.
     #   @return [String]
     #
     # @!attribute [rw] throughput
@@ -3259,8 +3381,8 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] lifecycle_execution_id
-    #   Use the unique identifier for a runtime instance of the lifecycle
-    #   policy to get runtime details.
+    #   The unique identifier for a runtime instance of the lifecycle
+    #   policy.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetLifecycleExecutionRequest AWS API Documentation
@@ -3588,6 +3710,19 @@ module Aws::Imagebuilder
     #   action.
     #   @return [Integer]
     #
+    # @!attribute [rw] attempt_number
+    #   The current attempt number for the specified runtime instance of the
+    #   workflow step. The first run is attempt one. The number increases by
+    #   one for each retry.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_attempts
+    #   The maximum number of attempts allowed for the specified runtime
+    #   instance of the workflow step, based on the retry configuration in
+    #   the workflow document. If the step doesn't configure retries, the
+    #   maximum is one attempt.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/GetWorkflowStepExecutionResponse AWS API Documentation
     #
     class GetWorkflowStepExecutionResponse < Struct.new(
@@ -3607,7 +3742,9 @@ module Aws::Imagebuilder
       :start_time,
       :end_time,
       :on_failure,
-      :timeout_seconds)
+      :timeout_seconds,
+      :attempt_number,
+      :max_attempts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3667,21 +3804,20 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any
-    #   positive integer value, including zero, with an upper limit of
-    #   2^30-1, or 1073741823 for each node. Image Builder automatically
-    #   assigns the build number to the fourth node.
+    #    **Assignment:** For the first three nodes, you can assign any
+    #   positive integer value, including zero. The upper limit is 2^30-1,
+    #   or 1073741823, for each node. Image Builder automatically assigns
+    #   the build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
     #   assignment requirements for the nodes that you can assign. For
     #   example, you might choose a software version pattern, such as 1.0.0,
     #   or a date, such as 2021.01.01.
     #
-    #    **Filtering:** With semantic versioning, you have the flexibility to
-    #   use wildcards (x) to specify the most recent versions or nodes when
-    #   selecting the base image or components for your recipe. When you use
-    #   a wildcard in any node, all nodes to the right of the first wildcard
-    #   must also be wildcards.
+    #    **Filtering:** You can use wildcards (x) to specify the most recent
+    #   versions or nodes when selecting the base image or components for
+    #   your recipe. When you use a wildcard in any node, all nodes to the
+    #   right of the first wildcard must also be wildcards.
     #
     #    </note>
     #   @return [String]
@@ -3863,6 +3999,59 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Contains details about the failure when the image creation process
+    # fails. Properties appear in the failure context when the related
+    # information is available for the failure.
+    #
+    # @!attribute [rw] image_status
+    #   The status that the image had when the failure occurred. This
+    #   indicates the stage of the image creation process where the image
+    #   failed, for example `BUILDING` or `DISTRIBUTING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_execution_id
+    #   The unique identifier of the workflow execution that was running
+    #   when the image failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] workflow_arn
+    #   The Amazon Resource Name (ARN) of the workflow build version that
+    #   was running when the image failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_execution_id
+    #   The unique identifier of the workflow step execution that failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] failed_step
+    #   The name of the workflow step that failed, as it appears in the
+    #   workflow document.
+    #   @return [String]
+    #
+    # @!attribute [rw] component_failure
+    #   The details about the component that failed, if the failure occurred
+    #   while a component was running.
+    #   @return [Types::ComponentFailureContext]
+    #
+    # @!attribute [rw] distribution_failure
+    #   The details about the distribution failure, if the failure occurred
+    #   while Image Builder distributed or configured the image.
+    #   @return [Types::DistributionFailureContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageFailureContext AWS API Documentation
+    #
+    class ImageFailureContext < Struct.new(
+      :image_status,
+      :workflow_execution_id,
+      :workflow_arn,
+      :step_execution_id,
+      :failed_step,
+      :component_failure,
+      :distribution_failure)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The logging configuration that's defined for the image. Image Builder
     # uses the defined settings to direct execution log output during image
     # creation.
@@ -3922,10 +4111,9 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] enhanced_image_metadata_enabled
-    #   Collects additional information about the image being created,
-    #   including the operating system (OS) version and package list. This
-    #   information is used to enhance the overall experience of using EC2
-    #   Image Builder. Enabled by default.
+    #   Specifies whether to collect additional information about the image
+    #   being created, including the operating system (OS) version and
+    #   package list. Defaults to `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] image_recipe_arn
@@ -4433,11 +4621,18 @@ module Aws::Imagebuilder
     #   The reason for the status of the image.
     #   @return [String]
     #
+    # @!attribute [rw] failure_context
+    #   The details about the failure, for images that failed to complete.
+    #   Image Builder only sets this property when the image status is
+    #   `FAILED`.
+    #   @return [Types::ImageFailureContext]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageState AWS API Documentation
     #
     class ImageState < Struct.new(
       :status,
-      :reason)
+      :reason,
+      :failure_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4553,9 +4748,9 @@ module Aws::Imagebuilder
     # before distributing it.
     #
     # @!attribute [rw] image_tests_enabled
-    #   Determines if tests should run after building the image. Image
-    #   Builder defaults to enable tests to run following the image build,
-    #   before image distribution.
+    #   Specifies whether tests run after building the image. When enabled,
+    #   tests run after the image build and before image distribution.
+    #   Defaults to `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] timeout_minutes
@@ -4614,21 +4809,20 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any
-    #   positive integer value, including zero, with an upper limit of
-    #   2^30-1, or 1073741823 for each node. Image Builder automatically
-    #   assigns the build number to the fourth node.
+    #    **Assignment:** For the first three nodes, you can assign any
+    #   positive integer value, including zero. The upper limit is 2^30-1,
+    #   or 1073741823, for each node. Image Builder automatically assigns
+    #   the build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
     #   assignment requirements for the nodes that you can assign. For
     #   example, you might choose a software version pattern, such as 1.0.0,
     #   or a date, such as 2021.01.01.
     #
-    #    **Filtering:** With semantic versioning, you have the flexibility to
-    #   use wildcards (x) to specify the most recent versions or nodes when
-    #   selecting the base image or components for your recipe. When you use
-    #   a wildcard in any node, all nodes to the right of the first wildcard
-    #   must also be wildcards.
+    #    **Filtering:** You can use wildcards (x) to specify the most recent
+    #   versions or nodes when selecting the base image or components for
+    #   your recipe. When you use a wildcard in any node, all nodes to the
+    #   right of the first wildcard must also be wildcards.
     #
     #    </note>
     #   @return [String]
@@ -4702,11 +4896,10 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Filtering:** With semantic versioning, you have the flexibility to
-    #   use wildcards (x) to specify the most recent versions or nodes when
-    #   selecting the base image or components for your recipe. When you use
-    #   a wildcard in any node, all nodes to the right of the first wildcard
-    #   must also be wildcards.
+    #    **Filtering:** You can use wildcards (x) to specify the most recent
+    #   versions or nodes when selecting the base image or components for
+    #   your recipe. When you use a wildcard in any node, all nodes to the
+    #   right of the first wildcard must also be wildcards.
     #
     #    </note>
     #   @return [String]
@@ -4742,11 +4935,11 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] uri
-    #   The uri of the component. Must be an Amazon S3 URL and the requester
-    #   must have permission to access the Amazon S3 bucket. If you use
-    #   Amazon S3, you can specify component content up to your service
-    #   quota. Either `data` or `uri` can be used to specify the data within
-    #   the component.
+    #   The uri of the component. Must be an Amazon S3 URL and you must have
+    #   permission to access the Amazon S3 bucket. If you use Amazon S3, you
+    #   can specify component content up to your service quota. Either
+    #   `data` or `uri` can be used to specify the data within the
+    #   component.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -4765,8 +4958,10 @@ module Aws::Imagebuilder
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -4859,7 +5054,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] logging_configuration
-    #   Define logging configuration for the image build process.
+    #   The logging configuration for the image build process.
     #   @return [Types::ImageLoggingConfiguration]
     #
     # @!attribute [rw] tags
@@ -4875,8 +5070,10 @@ module Aws::Imagebuilder
     #   @return [Types::WindowsConfiguration]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -4938,10 +5135,10 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Assignment:** For the first three nodes you can assign any
-    #   positive integer value, including zero, with an upper limit of
-    #   2^30-1, or 1073741823 for each node. Image Builder automatically
-    #   assigns the build number to the fourth node.
+    #    **Assignment:** For the first three nodes, you can assign any
+    #   positive integer value, including zero. The upper limit is 2^30-1,
+    #   or 1073741823, for each node. Image Builder automatically assigns
+    #   the build number to the fourth node.
     #
     #    **Patterns:** You can use any numeric pattern that adheres to the
     #   assignment requirements for the nodes that you can assign. For
@@ -4972,7 +5169,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] logging_configuration
-    #   Define logging configuration for the image build process.
+    #   The logging configuration for the image build process.
     #   @return [Types::ImageLoggingConfiguration]
     #
     # @!attribute [rw] tags
@@ -4980,8 +5177,10 @@ module Aws::Imagebuilder
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -5076,8 +5275,8 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] sns_topic_arn
-    #   The Amazon Resource Name (ARN) for the SNS topic to which we send
-    #   image build event notifications.
+    #   The Amazon Resource Name (ARN) of the SNS topic to which Image
+    #   Builder sends image build event notifications.
     #
     #   <note markdown="1"> EC2 Image Builder is unable to send notifications to SNS topics that
     #   are encrypted using keys from other accounts. The key that is used
@@ -5110,7 +5309,7 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] placement
     #   The instance placement settings that define where the instances that
-    #   are launched from your image will run.
+    #   are launched from your image run.
     #   @return [Types::Placement]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/InfrastructureConfiguration AWS API Documentation
@@ -5177,7 +5376,7 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] placement
     #   The instance placement settings that define where the instances that
-    #   are launched from your image will run.
+    #   are launched from your image run.
     #   @return [Types::Placement]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/InfrastructureConfigurationSummary AWS API Documentation
@@ -5221,15 +5420,15 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] ebs
-    #   Use to manage Amazon EBS-specific configuration for this mapping.
+    #   The Amazon EBS-specific configuration for this mapping.
     #   @return [Types::EbsInstanceBlockDeviceSpecification]
     #
     # @!attribute [rw] virtual_name
-    #   Use to manage instance ephemeral devices.
+    #   The virtual device name for instance ephemeral devices.
     #   @return [String]
     #
     # @!attribute [rw] no_device
-    #   Use to remove a mapping from the base image.
+    #   Specifies a mapping to remove from the base image.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/InstanceBlockDeviceMapping AWS API Documentation
@@ -6100,12 +6299,12 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListComponentBuildVersionsRequest AWS API Documentation
@@ -6172,12 +6371,12 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListComponentsRequest AWS API Documentation
@@ -6242,12 +6441,12 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListContainerRecipesRequest AWS API Documentation
@@ -6291,12 +6490,12 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListDistributionConfigurationsRequest AWS API Documentation
@@ -6354,12 +6553,12 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageBuildVersionsRequest AWS API Documentation
@@ -6404,12 +6603,12 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePackagesRequest AWS API Documentation
@@ -6461,12 +6660,12 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePipelineImagesRequest AWS API Documentation
@@ -6522,12 +6721,12 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImagePipelinesRequest AWS API Documentation
@@ -6583,12 +6782,12 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageRecipesRequest AWS API Documentation
@@ -6638,8 +6837,8 @@ module Aws::Imagebuilder
     #   @return [Types::Filter]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageScanFindingAggregationsRequest AWS API Documentation
@@ -6716,12 +6915,12 @@ module Aws::Imagebuilder
     #   @return [Array<Types::ImageScanFindingsFilter>]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListImageScanFindingsRequest AWS API Documentation
@@ -6761,11 +6960,9 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] owner
-    #   The owner defines which images you want to list. By default, this
-    #   request will only show images owned by your account. You can use
-    #   this field to specify if you want to view images owned by yourself,
-    #   by Amazon, or those images that have been shared with you by other
-    #   customers.
+    #   Filters the list to images owned by you, by Amazon, or shared with
+    #   you by other accounts. By default, only your account's images are
+    #   returned.
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -6787,12 +6984,12 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @!attribute [rw] include_deprecated
@@ -6823,11 +7020,10 @@ module Aws::Imagebuilder
     #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
     #   assign values for the first three, and can filter on all of them.
     #
-    #    **Filtering:** With semantic versioning, you have the flexibility to
-    #   use wildcards (x) to specify the most recent versions or nodes when
-    #   selecting the base image or components for your recipe. When you use
-    #   a wildcard in any node, all nodes to the right of the first wildcard
-    #   must also be wildcards.
+    #    **Filtering:** You can use wildcards (x) to specify the most recent
+    #   versions or nodes when selecting the base image or components for
+    #   your recipe. When you use a wildcard in any node, all nodes to the
+    #   right of the first wildcard must also be wildcards.
     #
     #    </note>
     #   @return [Array<Types::ImageVersion>]
@@ -6854,12 +7050,12 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListInfrastructureConfigurationsRequest AWS API Documentation
@@ -6898,8 +7094,8 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] lifecycle_execution_id
-    #   Use the unique identifier for a runtime instance of the lifecycle
-    #   policy to get runtime details.
+    #   The unique identifier for a runtime instance of the lifecycle
+    #   policy.
     #   @return [String]
     #
     # @!attribute [rw] parent_resource_id
@@ -6914,12 +7110,12 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListLifecycleExecutionResourcesRequest AWS API Documentation
@@ -6965,12 +7161,12 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -7014,12 +7210,12 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListLifecyclePoliciesRequest AWS API Documentation
@@ -7079,12 +7275,12 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWaitingWorkflowStepsRequest AWS API Documentation
@@ -7123,12 +7319,12 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflowBuildVersionsRequest AWS API Documentation
@@ -7163,12 +7359,12 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @!attribute [rw] image_build_version_arn
@@ -7224,12 +7420,12 @@ module Aws::Imagebuilder
     end
 
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @!attribute [rw] workflow_execution_id
@@ -7311,12 +7507,12 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
-    #   Specify the maximum number of items to return in a request.
+    #   The maximum number of items to return in a single request.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start paginating. This is the nextToken
-    #   from a previously truncated response.
+    #   A token to specify where to start paginating. Use the `nextToken`
+    #   value from a previously truncated response.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ListWorkflowsRequest AWS API Documentation
@@ -7697,6 +7893,48 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Contains details about a distribution or image configuration failure
+    # for a single Region.
+    #
+    # @!attribute [rw] region
+    #   The Region where the failure occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The failure status for the Region. Indicates whether the process
+    #   failed, was canceled, or timed out.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_configuration_step
+    #   The image configuration step where the failure occurred. Image
+    #   Builder sets this property when the failure happened during
+    #   post-distribution configuration, such as launch template updates or
+    #   virtual machine (VM) export. This property doesn't appear for
+    #   failures that occurred while Image Builder copied the image to the
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message for the failure in the Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_account_id
+    #   The account ID of the account that the image was distributed to in
+    #   the Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/RegionFailure AWS API Documentation
+    #
+    class RegionFailure < Struct.new(
+      :region,
+      :status,
+      :image_configuration_step,
+      :error_message,
+      :target_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Controls Secure Boot and UEFI data settings for the resulting image
     # during ISO imports. For more information, see [UEFI Secure Boot for
     # Amazon EC2 instances][1] in the <i> <i>Amazon EC2 User Guide</i> </i>.
@@ -7889,8 +8127,10 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -8076,8 +8316,10 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -8217,8 +8459,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] data_type
-    #   The data type specifies what type of value the Parameter contains.
-    #   We recommend that you use data type `aws:ec2:image`.
+    #   The type of value the parameter contains. We recommend the
+    #   `aws:ec2:image` data type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/SsmParameterConfiguration AWS API Documentation
@@ -8237,8 +8479,10 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -8250,8 +8494,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Specify tags for Image Builder to apply to the image resource
-    #   that's created When it starts pipeline execution.
+    #   The tags for Image Builder to apply to the image resource that's
+    #   created when pipeline execution starts.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/StartImagePipelineExecutionRequest AWS API Documentation
@@ -8329,8 +8573,10 @@ module Aws::Imagebuilder
     #   @return [Time]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -8487,8 +8733,10 @@ module Aws::Imagebuilder
     #   @return [Array<Types::Distribution>]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -8543,8 +8791,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] image_recipe_arn
-    #   The Amazon Resource Name (ARN) of the image recipe that will be used
-    #   to configure images updated by this image pipeline.
+    #   The Amazon Resource Name (ARN) of the image recipe that configures
+    #   images updated by this image pipeline.
     #   @return [String]
     #
     # @!attribute [rw] container_recipe_arn
@@ -8568,10 +8816,9 @@ module Aws::Imagebuilder
     #   @return [Types::ImageTestsConfiguration]
     #
     # @!attribute [rw] enhanced_image_metadata_enabled
-    #   Collects additional information about the image being created,
-    #   including the operating system (OS) version and package list. This
-    #   information is used to enhance the overall experience of using EC2
-    #   Image Builder. Enabled by default.
+    #   Specifies whether to collect additional information about the image
+    #   being created, including the operating system (OS) version and
+    #   package list. Defaults to `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] schedule
@@ -8583,8 +8830,10 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -8674,8 +8923,8 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] instance_types
     #   The instance types of the infrastructure configuration. You can
-    #   specify one or more instance types to use for this build. The
-    #   service will pick one of these instance types based on availability.
+    #   specify one or more instance types to use for this build. Image
+    #   Builder picks one of these instance types based on availability.
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_profile_name
@@ -8703,15 +8952,15 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] terminate_instance_on_failure
-    #   The terminate instance on failure setting of the infrastructure
-    #   configuration. Set to false if you want Image Builder to retain the
-    #   instance used to configure your AMI if the build or test phase of
-    #   your workflow fails.
+    #   Specifies whether to terminate the instance on failure. Set to false
+    #   if you want Image Builder to retain the instance used to configure
+    #   your AMI if the build or test phase of your workflow fails. Defaults
+    #   to `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] sns_topic_arn
-    #   The Amazon Resource Name (ARN) for the SNS topic to which we send
-    #   image build event notifications.
+    #   The Amazon Resource Name (ARN) of the SNS topic to which Image
+    #   Builder sends image build event notifications.
     #
     #   <note markdown="1"> EC2 Image Builder is unable to send notifications to SNS topics that
     #   are encrypted using keys from other accounts. The key that is used
@@ -8745,12 +8994,14 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] placement
     #   The instance placement settings that define where the instances that
-    #   are launched from your image will run.
+    #   are launched from your image run.
     #   @return [Types::Placement]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -8836,8 +9087,10 @@ module Aws::Imagebuilder
     #   @return [Types::LifecyclePolicyResourceSelection]
     #
     # @!attribute [rw] client_token
-    #   Unique, case-sensitive identifier you provide to ensure idempotency
-    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   A unique, case-sensitive identifier you provide to ensure that the
+    #   operation completes no more than one time. If this token matches a
+    #   previous request, the service ignores the request, but does not
+    #   return an error. For more information, see [Ensuring idempotency][1]
     #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
@@ -9350,6 +9603,17 @@ module Aws::Imagebuilder
     #   The timestamp when the workflow step finished.
     #   @return [String]
     #
+    # @!attribute [rw] attempt_number
+    #   The current attempt number for the workflow step. The first run is
+    #   attempt one. The number increases by one for each retry.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_attempts
+    #   The maximum number of attempts allowed for the workflow step, based
+    #   on the retry configuration in the workflow document. If the step
+    #   doesn't configure retries, the maximum is one attempt.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/WorkflowStepMetadata AWS API Documentation
     #
     class WorkflowStepMetadata < Struct.new(
@@ -9363,7 +9627,9 @@ module Aws::Imagebuilder
       :inputs,
       :outputs,
       :start_time,
-      :end_time)
+      :end_time,
+      :attempt_number,
+      :max_attempts)
       SENSITIVE = []
       include Aws::Structure
     end

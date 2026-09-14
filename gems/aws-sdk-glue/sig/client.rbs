@@ -3306,6 +3306,24 @@ module Aws
                                                 ) -> _ListIntegrationResourcePropertiesResponseSuccess
                                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIntegrationResourcePropertiesResponseSuccess
 
+      interface _ListIntegrationTablePropertiesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIntegrationTablePropertiesResponse]
+        def integration_table_properties_list: () -> ::Array[Types::IntegrationTableProperties]
+        def marker: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#list_integration_table_properties-instance_method
+      def list_integration_table_properties: (
+                                               ?marker: ::String,
+                                               ?filters: Array[
+                                                 {
+                                                   name: ::String?,
+                                                   values: Array[::String]?
+                                                 }
+                                               ],
+                                               ?max_records: ::Integer
+                                             ) -> _ListIntegrationTablePropertiesResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIntegrationTablePropertiesResponseSuccess
+
       interface _ListIterableFormsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListIterableFormsResponse]
         def items: () -> ::Array[Types::IterableFormListItem]

@@ -856,10 +856,15 @@ module Aws::BillingConductor
     #   The possible Amazon Web Services Free Tier configurations.
     #   @return [Types::CreateFreeTierConfig]
     #
+    # @!attribute [rw] custom_tiers
+    #   The set of custom tiers for the pricing rule.
+    #   @return [Array<Types::CustomTier>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CreateTieringInput AWS API Documentation
     #
     class CreateTieringInput < Struct.new(
-      :free_tier)
+      :free_tier,
+      :custom_tiers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1130,6 +1135,33 @@ module Aws::BillingConductor
       :computation_rule,
       :presentation_details)
       SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # A custom tier for the pricing rule. Each custom tier applies a rate to
+    # the usage that falls within the tier's range.
+    #
+    # @!attribute [rw] begin_range_inclusive
+    #   The inclusive start of the usage range that this tier applies to.
+    #   @return [Float]
+    #
+    # @!attribute [rw] end_range_exclusive
+    #   The exclusive end of the usage range that this tier applies to. If
+    #   you don't specify a value, this tier applies to all usage that is
+    #   greater than or equal to `BeginRangeInclusive`.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rate_value
+    #   The rate that's applied to the usage that falls within this tier.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/CustomTier AWS API Documentation
+    #
+    class CustomTier < Struct.new(
+      :begin_range_inclusive,
+      :end_range_exclusive,
+      :rate_value)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2612,10 +2644,15 @@ module Aws::BillingConductor
     #   The possible Amazon Web Services Free Tier configurations.
     #   @return [Types::FreeTierConfig]
     #
+    # @!attribute [rw] custom_tiers
+    #   The set of custom tiers for the pricing rule.
+    #   @return [Array<Types::CustomTier>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/Tiering AWS API Documentation
     #
     class Tiering < Struct.new(
-      :free_tier)
+      :free_tier,
+      :custom_tiers)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3112,10 +3149,15 @@ module Aws::BillingConductor
     #   The possible Amazon Web Services Free Tier configurations.
     #   @return [Types::UpdateFreeTierConfig]
     #
+    # @!attribute [rw] custom_tiers
+    #   The set of custom tiers for the pricing rule.
+    #   @return [Array<Types::CustomTier>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateTieringInput AWS API Documentation
     #
     class UpdateTieringInput < Struct.new(
-      :free_tier)
+      :free_tier,
+      :custom_tiers)
       SENSITIVE = []
       include Aws::Structure
     end

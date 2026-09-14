@@ -19167,6 +19167,58 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The properties of a single integration table, including the resource
+    # ARN, the table name, and the source or target table configuration.
+    #
+    # @!attribute [rw] resource_arn
+    #   The connection ARN of the source, or the database ARN of the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the source table to be replicated.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_table_config
+    #   A structure for the source table configuration.
+    #   @return [Types::SourceTableConfig]
+    #
+    # @!attribute [rw] target_table_config
+    #   A structure for the target table configuration.
+    #   @return [Types::TargetTableConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationTableProperties AWS API Documentation
+    #
+    class IntegrationTableProperties < Struct.new(
+      :resource_arn,
+      :table_name,
+      :source_table_config,
+      :target_table_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A key-value filter used to narrow the list of integration table
+    # properties returned by ListIntegrationTableProperties. Specify a
+    # filter key and one or more values to match.
+    #
+    # @!attribute [rw] name
+    #   The name of the filter. Supported filter keys are `SourceArn`,
+    #   `TargetArn`, `SourceTableName`, and `TargetTableName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   A list of filter values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationTablePropertiesFilter AWS API Documentation
+    #
+    class IntegrationTablePropertiesFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An internal server error occurred.
     #
     # @!attribute [rw] message
@@ -22035,6 +22087,48 @@ module Aws::Glue
     #
     class ListIntegrationResourcePropertiesResponse < Struct.new(
       :integration_resource_property_list,
+      :marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] marker
+    #   The pagination token for the next page of results. The initial value
+    #   is `null`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A list of filters. Supported filter keys are `SourceArn`,
+    #   `TargetArn`, `SourceTableName`, and `TargetTableName`.
+    #   @return [Array<Types::IntegrationTablePropertiesFilter>]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to return in the response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListIntegrationTablePropertiesRequest AWS API Documentation
+    #
+    class ListIntegrationTablePropertiesRequest < Struct.new(
+      :marker,
+      :filters,
+      :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] integration_table_properties_list
+    #   A list of integration table properties meeting the filter criteria.
+    #   @return [Array<Types::IntegrationTableProperties>]
+    #
+    # @!attribute [rw] marker
+    #   The pagination token for the next page. Returns `null` if there are
+    #   no more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListIntegrationTablePropertiesResponse AWS API Documentation
+    #
+    class ListIntegrationTablePropertiesResponse < Struct.new(
+      :integration_table_properties_list,
       :marker)
       SENSITIVE = []
       include Aws::Structure
@@ -31028,12 +31122,18 @@ module Aws::Glue
     #   The optional name of a target table.
     #   @return [String]
     #
+    # @!attribute [rw] integration_arn
+    #   The ARN of the integration that owns this target table
+    #   configuration.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/TargetTableConfig AWS API Documentation
     #
     class TargetTableConfig < Struct.new(
       :unnest_spec,
       :partition_spec,
-      :target_table_name)
+      :target_table_name,
+      :integration_arn)
       SENSITIVE = []
       include Aws::Structure
     end

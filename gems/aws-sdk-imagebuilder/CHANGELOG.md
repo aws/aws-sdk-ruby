@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2026-09-14)
+------------------
+
+* Feature - This release adds a dryRun option to Image Builder create APIs (except CreateImage), structured failure context on failed images including component and distribution failure details, and step retry attempt tracking.
+
 1.111.0 (2026-09-11)
 ------------------
 

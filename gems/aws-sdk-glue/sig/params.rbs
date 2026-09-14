@@ -266,7 +266,8 @@ module Aws
           conversion_spec: ::String?
         }
       ]?,
-      target_table_name: ::String?
+      target_table_name: ::String?,
+      integration_arn: ::String?
     }
 
       type athena_connector_source = {

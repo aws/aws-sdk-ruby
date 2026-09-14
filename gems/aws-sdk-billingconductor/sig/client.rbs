@@ -227,7 +227,14 @@ module Aws
                                  ?tiering: {
                                    free_tier: {
                                      activated: bool
-                                   }
+                                   }?,
+                                   custom_tiers: Array[
+                                     {
+                                       begin_range_inclusive: ::Float,
+                                       end_range_exclusive: ::Float?,
+                                       rate_value: ::Float
+                                     }
+                                   ]?
                                  },
                                  ?usage_type: ::String,
                                  ?operation: ::String
@@ -640,7 +647,14 @@ module Aws
                                  ?tiering: {
                                    free_tier: {
                                      activated: bool
-                                   }
+                                   }?,
+                                   custom_tiers: Array[
+                                     {
+                                       begin_range_inclusive: ::Float,
+                                       end_range_exclusive: ::Float?,
+                                       rate_value: ::Float
+                                     }
+                                   ]?
                                  }
                                ) -> _UpdatePricingRuleResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePricingRuleResponseSuccess

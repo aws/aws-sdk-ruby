@@ -101,6 +101,11 @@ module Aws::BillingConductor
     CustomLineItemType = Shapes::StringShape.new(name: 'CustomLineItemType')
     CustomLineItemVersionList = Shapes::ListShape.new(name: 'CustomLineItemVersionList')
     CustomLineItemVersionListElement = Shapes::StructureShape.new(name: 'CustomLineItemVersionListElement')
+    CustomTier = Shapes::StructureShape.new(name: 'CustomTier')
+    CustomTierBeginRangeInclusive = Shapes::FloatShape.new(name: 'CustomTierBeginRangeInclusive')
+    CustomTierEndRangeExclusive = Shapes::FloatShape.new(name: 'CustomTierEndRangeExclusive')
+    CustomTierRateValue = Shapes::FloatShape.new(name: 'CustomTierRateValue')
+    CustomTiersList = Shapes::ListShape.new(name: 'CustomTiersList')
     DeleteBillingGroupInput = Shapes::StructureShape.new(name: 'DeleteBillingGroupInput')
     DeleteBillingGroupOutput = Shapes::StructureShape.new(name: 'DeleteBillingGroupOutput')
     DeleteCustomLineItemInput = Shapes::StructureShape.new(name: 'DeleteCustomLineItemInput')
@@ -424,7 +429,8 @@ module Aws::BillingConductor
     CreatePricingRuleOutput.add_member(:arn, Shapes::ShapeRef.new(shape: PricingRuleArn, location_name: "Arn"))
     CreatePricingRuleOutput.struct_class = Types::CreatePricingRuleOutput
 
-    CreateTieringInput.add_member(:free_tier, Shapes::ShapeRef.new(shape: CreateFreeTierConfig, required: true, location_name: "FreeTier"))
+    CreateTieringInput.add_member(:free_tier, Shapes::ShapeRef.new(shape: CreateFreeTierConfig, location_name: "FreeTier"))
+    CreateTieringInput.add_member(:custom_tiers, Shapes::ShapeRef.new(shape: CustomTiersList, location_name: "CustomTiers"))
     CreateTieringInput.struct_class = Types::CreateTieringInput
 
     CustomLineItemArns.member = Shapes::ShapeRef.new(shape: CustomLineItemArn)
@@ -490,6 +496,13 @@ module Aws::BillingConductor
     CustomLineItemVersionListElement.add_member(:computation_rule, Shapes::ShapeRef.new(shape: ComputationRuleEnum, location_name: "ComputationRule"))
     CustomLineItemVersionListElement.add_member(:presentation_details, Shapes::ShapeRef.new(shape: PresentationObject, location_name: "PresentationDetails"))
     CustomLineItemVersionListElement.struct_class = Types::CustomLineItemVersionListElement
+
+    CustomTier.add_member(:begin_range_inclusive, Shapes::ShapeRef.new(shape: CustomTierBeginRangeInclusive, required: true, location_name: "BeginRangeInclusive"))
+    CustomTier.add_member(:end_range_exclusive, Shapes::ShapeRef.new(shape: CustomTierEndRangeExclusive, location_name: "EndRangeExclusive"))
+    CustomTier.add_member(:rate_value, Shapes::ShapeRef.new(shape: CustomTierRateValue, required: true, location_name: "RateValue"))
+    CustomTier.struct_class = Types::CustomTier
+
+    CustomTiersList.member = Shapes::ShapeRef.new(shape: CustomTier)
 
     DeleteBillingGroupInput.add_member(:arn, Shapes::ShapeRef.new(shape: BillingGroupArn, required: true, location_name: "Arn"))
     DeleteBillingGroupInput.struct_class = Types::DeleteBillingGroupInput
@@ -818,7 +831,8 @@ module Aws::BillingConductor
     ThrottlingException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: RetryAfterSeconds, location: "header", location_name: "Retry-After"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    Tiering.add_member(:free_tier, Shapes::ShapeRef.new(shape: FreeTierConfig, required: true, location_name: "FreeTier"))
+    Tiering.add_member(:free_tier, Shapes::ShapeRef.new(shape: FreeTierConfig, location_name: "FreeTier"))
+    Tiering.add_member(:custom_tiers, Shapes::ShapeRef.new(shape: CustomTiersList, location_name: "CustomTiers"))
     Tiering.struct_class = Types::Tiering
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "ResourceArn"))
@@ -916,7 +930,8 @@ module Aws::BillingConductor
     UpdatePricingRuleOutput.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "Operation"))
     UpdatePricingRuleOutput.struct_class = Types::UpdatePricingRuleOutput
 
-    UpdateTieringInput.add_member(:free_tier, Shapes::ShapeRef.new(shape: UpdateFreeTierConfig, required: true, location_name: "FreeTier"))
+    UpdateTieringInput.add_member(:free_tier, Shapes::ShapeRef.new(shape: UpdateFreeTierConfig, location_name: "FreeTier"))
+    UpdateTieringInput.add_member(:custom_tiers, Shapes::ShapeRef.new(shape: CustomTiersList, location_name: "CustomTiers"))
     UpdateTieringInput.struct_class = Types::UpdateTieringInput
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))

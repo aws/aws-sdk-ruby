@@ -3506,6 +3506,7 @@ module Aws::Glue
     #         },
     #       ],
     #       target_table_name: "String128",
+    #       integration_arn: "String128",
     #     },
     #   })
     #
@@ -9565,6 +9566,7 @@ module Aws::Glue
     #   resp.target_table_config.partition_spec[0].function_spec #=> String
     #   resp.target_table_config.partition_spec[0].conversion_spec #=> String
     #   resp.target_table_config.target_table_name #=> String
+    #   resp.target_table_config.integration_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetIntegrationTableProperties AWS API Documentation
     #
@@ -14820,7 +14822,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_integration_resource_properties({
-    #     marker: "String1024",
+    #     marker: "String4096",
     #     filters: [
     #       {
     #         name: "String128",
@@ -14848,6 +14850,67 @@ module Aws::Glue
     # @param [Hash] params ({})
     def list_integration_resource_properties(params = {}, options = {})
       req = build_request(:list_integration_resource_properties, params)
+      req.send_request(options)
+    end
+
+    # Lists the integration table properties in your account. This operation
+    # supports filtering and pagination.
+    #
+    # @option params [String] :marker
+    #   The pagination token for the next page of results. The initial value
+    #   is `null`.
+    #
+    # @option params [Array<Types::IntegrationTablePropertiesFilter>] :filters
+    #   A list of filters. Supported filter keys are `SourceArn`, `TargetArn`,
+    #   `SourceTableName`, and `TargetTableName`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to return in the response.
+    #
+    # @return [Types::ListIntegrationTablePropertiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIntegrationTablePropertiesResponse#integration_table_properties_list #integration_table_properties_list} => Array&lt;Types::IntegrationTableProperties&gt;
+    #   * {Types::ListIntegrationTablePropertiesResponse#marker #marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_integration_table_properties({
+    #     marker: "String4096",
+    #     filters: [
+    #       {
+    #         name: "String128",
+    #         values: ["String128"],
+    #       },
+    #     ],
+    #     max_records: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.integration_table_properties_list #=> Array
+    #   resp.integration_table_properties_list[0].resource_arn #=> String
+    #   resp.integration_table_properties_list[0].table_name #=> String
+    #   resp.integration_table_properties_list[0].source_table_config.fields #=> Array
+    #   resp.integration_table_properties_list[0].source_table_config.fields[0] #=> String
+    #   resp.integration_table_properties_list[0].source_table_config.filter_predicate #=> String
+    #   resp.integration_table_properties_list[0].source_table_config.primary_key #=> Array
+    #   resp.integration_table_properties_list[0].source_table_config.primary_key[0] #=> String
+    #   resp.integration_table_properties_list[0].source_table_config.record_update_field #=> String
+    #   resp.integration_table_properties_list[0].target_table_config.unnest_spec #=> String, one of "TOPLEVEL", "FULL", "NOUNNEST"
+    #   resp.integration_table_properties_list[0].target_table_config.partition_spec #=> Array
+    #   resp.integration_table_properties_list[0].target_table_config.partition_spec[0].field_name #=> String
+    #   resp.integration_table_properties_list[0].target_table_config.partition_spec[0].function_spec #=> String
+    #   resp.integration_table_properties_list[0].target_table_config.partition_spec[0].conversion_spec #=> String
+    #   resp.integration_table_properties_list[0].target_table_config.target_table_name #=> String
+    #   resp.integration_table_properties_list[0].target_table_config.integration_arn #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListIntegrationTableProperties AWS API Documentation
+    #
+    # @overload list_integration_table_properties(params = {})
+    # @param [Hash] params ({})
+    def list_integration_table_properties(params = {}, options = {})
+      req = build_request(:list_integration_table_properties, params)
       req.send_request(options)
     end
 
@@ -20020,6 +20083,7 @@ module Aws::Glue
     #         },
     #       ],
     #       target_table_name: "String128",
+    #       integration_arn: "String128",
     #     },
     #   })
     #
@@ -21102,7 +21166,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.272.0'
+      context[:gem_version] = '1.273.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
