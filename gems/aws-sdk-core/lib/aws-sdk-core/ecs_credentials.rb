@@ -190,37 +190,32 @@ module Aws
     end
 
     def refresh
-      # Retry loading credentials up to 3 times is the instance metadata
-      # service is responding but is returning invalid JSON documents
-      # in response to the GET profile credentials call.
-
-      retry_errors([Aws::Json::ParseError, StandardError], max_retries: 3) do
-        c = Aws::Json.load(get_credentials.to_s)
-        @credentials = Credentials.new(
-          c['AccessKeyId'],
-          c['SecretAccessKey'],
-          c['Token']
-        )
-        @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
+      # Retry loading credentials up to 3 times if the container credential
+      # service is responding but is returning invalid JSON documents in
+      # response to the GET credentials call.
+      c = retry_errors([Aws::Json::ParseError], max_retries: 3) do
+        Aws::Json.load(retrieve_credentials.to_s)
       end
+      @credentials = Credentials.new(c['AccessKeyId'], c['SecretAccessKey'], c['Token'])
+      @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
     rescue Aws::Json::ParseError
       raise Aws::Errors::MetadataParserError
     end
 
-    def get_credentials
-      # Retry loading credentials a configurable number of times if
-      # the instance metadata service is not responding.
+    # A missing or malformed authorization token file requires user
+    # intervention, so it must be raised immediately rather than retried.
+    def non_recoverable_error?(error)
+      error.is_a?(TokenFileReadError) || error.is_a?(InvalidTokenError)
+    end
 
+    def retrieve_credentials
+      # Retry loading credentials a configurable number of times if
+      # the container credential service is not responding.
       retry_errors(NETWORK_ERRORS, max_retries: @retries) do
         open_connection do |conn|
           http_get(conn, @credential_path)
         end
       end
-    rescue TokenFileReadError, InvalidTokenError
-      raise
-    rescue StandardError => e
-      warn("Error retrieving ECS Credentials: #{e.message}")
-      '{}'
     end
 
     def fetch_authorization_token
