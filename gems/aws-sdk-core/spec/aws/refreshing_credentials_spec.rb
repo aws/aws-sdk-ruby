@@ -148,5 +148,114 @@ module Aws
         end
       end
     end
+
+    describe 'concurrency' do
+      let(:gated_resolver_class) do
+        Class.new do
+          include RefreshingCredentials
+
+          attr_reader :source_calls, :entered, :release
+
+          def initialize(seed)
+            @mutex = Mutex.new
+            @static_stability = true
+            @next_refresh_allowed_at = nil
+            @cached_error = nil
+            @cached_error_expires_at = nil
+            @advisory_window = seed[:advisory_window]
+            @credentials = seed[:credentials]
+            @expiration = seed[:expiration]
+            @source_calls = 0
+            @entered = Queue.new
+            @release = Queue.new
+          end
+
+          # Signals that the source has been entered, then blocks until the
+          # test releases it. Runs under the refresh lock, so @source_calls
+          # increments are already serialized.
+          def refresh
+            @source_calls += 1
+            @entered << :in
+            @release.pop
+            @credentials = Credentials.new('FRESH-AKID', 'secret', 'token')
+            @expiration = Time.now + 3600
+          end
+
+          def non_recoverable_error?(_error)
+            false
+          end
+        end
+      end
+
+      def build_gated_resolver(ttl:, advisory_window:)
+        gated_resolver_class.new(
+          credentials: Credentials.new('CACHED-AKID', 'secret', 'token'),
+          expiration: Time.now + ttl,
+          advisory_window: advisory_window
+        )
+      end
+
+      SWARM_SIZE = 8
+
+      it 'advisory: one refresh runs while a swarm of callers get cached creds immediately' do
+        # Inside the advisory window (600s) but outside the mandatory window (60s).
+        resolver = build_gated_resolver(ttl: 300, advisory_window: 600)
+
+        refresher = Thread.new { resolver.credentials }
+        resolver.entered.pop # the refresher now holds the lock inside #refresh
+
+        callers = Array.new(SWARM_SIZE) { Thread.new { resolver.credentials.access_key_id } }
+        results = callers.map(&:value)
+
+        expect(results).to all(eq('CACHED-AKID'))
+        expect(resolver.source_calls).to eq(1) # only the refresher contacted the source
+
+        resolver.release << :go
+        refresher.join
+
+        expect(resolver.source_calls).to eq(1)
+        expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
+      end
+
+      it 'mandatory: one refresh runs while a swarm of callers wait and reuse it' do
+        # Inside the mandatory window (60s).
+        resolver = build_gated_resolver(ttl: 30, advisory_window: 600)
+
+        refresher = Thread.new { resolver.credentials }
+        resolver.entered.pop # the refresher now holds the lock inside #refresh
+
+        waiters = Array.new(SWARM_SIZE) { Thread.new { resolver.credentials.access_key_id } }
+
+        # Give waiters time to queue on the lock
+        sleep 0.1
+        expect(resolver.source_calls).to eq(1)
+
+        resolver.release << :go
+        refresher.join
+        results = waiters.map(&:value)
+
+        # Exactly one source call was made and every waiter reused that result
+        expect(resolver.source_calls).to eq(1)
+        expect(results).to all(eq('FRESH-AKID'))
+      end
+
+      it 'invalidate does not block or interfere while a refresh holds the lock' do
+        resolver = build_gated_resolver(ttl: 30, advisory_window: 600)
+
+        refresher = Thread.new { resolver.credentials }
+        resolver.entered.pop # the refresher now holds the lock inside #refresh
+
+        # invalidate uses try_lock: with the refresh lock held it returns
+        # immediately without waiting and without mutating state.
+        rejected = double('identity', access_key_id: 'CACHED-AKID')
+        expect { resolver.invalidate(rejected) }.not_to raise_error
+
+        resolver.release << :go
+        refresher.join
+
+        expect(resolver.source_calls).to eq(1)
+        expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
+      end
+    end
   end
 end
