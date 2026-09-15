@@ -31,6 +31,12 @@ module Aws
           copier.copy(base_options)
         end
 
+        it 'returns the complete multipart upload response' do
+          resp = copier.copy(base_options)
+
+          expect(resp).not_to be_nil
+        end
+
         it 'respects min_part_size' do
           small_copier = ObjectMultipartCopier.new(client: client, min_part_size: 10 * 1024 * 1024)
 
@@ -78,6 +84,12 @@ module Aws
                 .and_call_original
 
               copier.copy(base_options.merge(tags_directive: 'COPY'))
+            end
+
+            it 'returns the copy response after applying tags' do
+              resp = copier.copy(base_options.merge(tags_directive: 'COPY'))
+
+              expect(resp).not_to be_nil
             end
 
             it 'overrides user-supplied tags' do
@@ -225,6 +237,12 @@ module Aws
                 end
 
               copier.copy(base_options.merge(annotations_directive: 'COPY'))
+            end
+
+            it 'returns the copy response after applying annotations' do
+              resp = copier.copy(base_options.merge(annotations_directive: 'COPY'))
+
+              expect(resp).not_to be_nil
             end
 
             it 'raises on partial failure when applying annotations' do
