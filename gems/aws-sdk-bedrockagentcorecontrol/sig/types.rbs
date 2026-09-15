@@ -652,6 +652,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor platform_version: ::String
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -2305,6 +2306,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor metadata_configuration: Types::RuntimeMetadataConfiguration
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
+      attr_accessor platform_version: ::String
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -5702,6 +5704,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor environment_variables: ::Hash[::String, ::String]
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
+      attr_accessor platform_version: ::String
       attr_accessor client_token: ::String
       SENSITIVE: [:description, :environment_variables]
     end

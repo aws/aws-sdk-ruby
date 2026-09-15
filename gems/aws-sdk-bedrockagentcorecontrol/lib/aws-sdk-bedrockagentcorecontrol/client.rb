@@ -706,6 +706,9 @@ module Aws::BedrockAgentCoreControl
     #   enable you to categorize your resources in different ways, for
     #   example, by purpose, owner, or environment.
     #
+    # @option params [String] :platform_version
+    #   The version of the runtime platform to use for the AgentCore Runtime.
+    #
     # @return [Types::CreateAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAgentRuntimeResponse#agent_runtime_arn #agent_runtime_arn} => String
@@ -851,6 +854,7 @@ module Aws::BedrockAgentCoreControl
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     platform_version: "PlatformVersion",
     #   })
     #
     # @example Response structure
@@ -6895,6 +6899,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetAgentRuntimeResponse#metadata_configuration #metadata_configuration} => Types::RuntimeMetadataConfiguration
     #   * {Types::GetAgentRuntimeResponse#filesystem_configurations #filesystem_configurations} => Array&lt;Types::FilesystemConfiguration&gt;
     #   * {Types::GetAgentRuntimeResponse#capacity_provider_configuration #capacity_provider_configuration} => Types::CapacityProviderConfiguration
+    #   * {Types::GetAgentRuntimeResponse#platform_version #platform_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6988,6 +6993,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.filesystem_configurations[0].capacity_provider_volume.volume_name #=> String
     #   resp.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
     #   resp.capacity_provider_configuration.capacity_provider_arn #=> String
+    #   resp.platform_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntime AWS API Documentation
     #
@@ -12196,6 +12202,10 @@ module Aws::BedrockAgentCoreControl
     # @option params [Types::CapacityProviderConfiguration] :capacity_provider_configuration
     #   The updated capacity provider configuration for the AgentCore Runtime.
     #
+    # @option params [String] :platform_version
+    #   The updated version of the runtime platform to use for the AgentCore
+    #   Runtime.
+    #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -12348,6 +12358,7 @@ module Aws::BedrockAgentCoreControl
     #     capacity_provider_configuration: {
     #       capacity_provider_arn: "CapacityProviderArn", # required
     #     },
+    #     platform_version: "PlatformVersion",
     #     client_token: "ClientToken",
     #   })
     #
@@ -16684,7 +16695,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

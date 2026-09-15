@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2026-09-15)
+------------------
+
+* Feature - Amazon Bedrock AgentCore Runtime now supports specifying the platform version of an agent runtime through the new platformVersion field on CreateAgentRuntime, UpdateAgentRuntime, and GetAgentRuntime.
+
 1.71.0 (2026-09-11)
 ------------------
 

@@ -1010,6 +1010,7 @@ module Aws::BedrockAgentCoreControl
     PaymentsDescription = Shapes::StringShape.new(name: 'PaymentsDescription')
     Period = Shapes::StringShape.new(name: 'Period')
     PermissionsConfiguration = Shapes::StructureShape.new(name: 'PermissionsConfiguration')
+    PlatformVersion = Shapes::StringShape.new(name: 'PlatformVersion')
     Policies = Shapes::ListShape.new(name: 'Policies')
     Policy = Shapes::StructureShape.new(name: 'Policy')
     PolicyArn = Shapes::StringShape.new(name: 'PolicyArn')
@@ -1939,6 +1940,7 @@ module Aws::BedrockAgentCoreControl
     CreateAgentRuntimeRequest.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: FilesystemConfigurations, location_name: "filesystemConfigurations"))
     CreateAgentRuntimeRequest.add_member(:capacity_provider_configuration, Shapes::ShapeRef.new(shape: CapacityProviderConfiguration, location_name: "capacityProviderConfiguration"))
     CreateAgentRuntimeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateAgentRuntimeRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "platformVersion"))
     CreateAgentRuntimeRequest.struct_class = Types::CreateAgentRuntimeRequest
 
     CreateAgentRuntimeResponse.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
@@ -3208,6 +3210,7 @@ module Aws::BedrockAgentCoreControl
     GetAgentRuntimeResponse.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: RuntimeMetadataConfiguration, location_name: "metadataConfiguration"))
     GetAgentRuntimeResponse.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: FilesystemConfigurations, location_name: "filesystemConfigurations"))
     GetAgentRuntimeResponse.add_member(:capacity_provider_configuration, Shapes::ShapeRef.new(shape: CapacityProviderConfiguration, location_name: "capacityProviderConfiguration"))
+    GetAgentRuntimeResponse.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "platformVersion"))
     GetAgentRuntimeResponse.struct_class = Types::GetAgentRuntimeResponse
 
     GetApiKeyCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
@@ -5781,6 +5784,7 @@ module Aws::BedrockAgentCoreControl
     UpdateAgentRuntimeRequest.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: "environmentVariables"))
     UpdateAgentRuntimeRequest.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: FilesystemConfigurations, location_name: "filesystemConfigurations"))
     UpdateAgentRuntimeRequest.add_member(:capacity_provider_configuration, Shapes::ShapeRef.new(shape: CapacityProviderConfiguration, location_name: "capacityProviderConfiguration"))
+    UpdateAgentRuntimeRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "platformVersion"))
     UpdateAgentRuntimeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAgentRuntimeRequest.struct_class = Types::UpdateAgentRuntimeRequest
 

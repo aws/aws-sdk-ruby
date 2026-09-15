@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.167.0 (2026-09-15)
+------------------
+
+* Feature - Added support for 4 new graphics-optimized compute types - Graphics.g7 (2xlarge, 4xlarge, 8xlarge, 12xlarge).
+
 1.166.0 (2026-09-11)
 ------------------
 

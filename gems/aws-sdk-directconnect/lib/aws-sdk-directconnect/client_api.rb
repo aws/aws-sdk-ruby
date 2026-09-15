@@ -32,6 +32,8 @@ module Aws::DirectConnect
     AsPathSegmentList = Shapes::ListShape.new(name: 'AsPathSegmentList')
     AsPathType = Shapes::StringShape.new(name: 'AsPathType')
     AssociateConnectionWithLagRequest = Shapes::StructureShape.new(name: 'AssociateConnectionWithLagRequest')
+    AssociateConnectionsToResiliencyGroupRequest = Shapes::StructureShape.new(name: 'AssociateConnectionsToResiliencyGroupRequest')
+    AssociateConnectionsToResiliencyGroupResult = Shapes::StructureShape.new(name: 'AssociateConnectionsToResiliencyGroupResult')
     AssociateHostedConnectionRequest = Shapes::StructureShape.new(name: 'AssociateHostedConnectionRequest')
     AssociateMacSecKeyRequest = Shapes::StructureShape.new(name: 'AssociateMacSecKeyRequest')
     AssociateMacSecKeyResponse = Shapes::StructureShape.new(name: 'AssociateMacSecKeyResponse')
@@ -39,6 +41,8 @@ module Aws::DirectConnect
     AssociatedCoreNetwork = Shapes::StructureShape.new(name: 'AssociatedCoreNetwork')
     AssociatedGateway = Shapes::StructureShape.new(name: 'AssociatedGateway')
     AssociatedGatewayId = Shapes::StringShape.new(name: 'AssociatedGatewayId')
+    AvailableBillingMode = Shapes::StructureShape.new(name: 'AvailableBillingMode')
+    AvailableBillingModeList = Shapes::ListShape.new(name: 'AvailableBillingModeList')
     AvailableMacSecPortSpeeds = Shapes::ListShape.new(name: 'AvailableMacSecPortSpeeds')
     AvailablePortSpeeds = Shapes::ListShape.new(name: 'AvailablePortSpeeds')
     AwsDevice = Shapes::StringShape.new(name: 'AwsDevice')
@@ -52,6 +56,7 @@ module Aws::DirectConnect
     BGPPeerState = Shapes::StringShape.new(name: 'BGPPeerState')
     BGPStatus = Shapes::StringShape.new(name: 'BGPStatus')
     Bandwidth = Shapes::StringShape.new(name: 'Bandwidth')
+    BillingMode = Shapes::StringShape.new(name: 'BillingMode')
     BooleanFlag = Shapes::BooleanShape.new(name: 'BooleanFlag')
     CIDR = Shapes::StringShape.new(name: 'CIDR')
     Cak = Shapes::StringShape.new(name: 'Cak')
@@ -69,7 +74,11 @@ module Aws::DirectConnect
     ConfirmTransitVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'ConfirmTransitVirtualInterfaceRequest')
     ConfirmTransitVirtualInterfaceResponse = Shapes::StructureShape.new(name: 'ConfirmTransitVirtualInterfaceResponse')
     Connection = Shapes::StructureShape.new(name: 'Connection')
+    ConnectionArn = Shapes::StringShape.new(name: 'ConnectionArn')
     ConnectionId = Shapes::StringShape.new(name: 'ConnectionId')
+    ConnectionIdList = Shapes::ListShape.new(name: 'ConnectionIdList')
+    ConnectionIdentifier = Shapes::StringShape.new(name: 'ConnectionIdentifier')
+    ConnectionIdentifierList = Shapes::ListShape.new(name: 'ConnectionIdentifierList')
     ConnectionList = Shapes::ListShape.new(name: 'ConnectionList')
     ConnectionName = Shapes::StringShape.new(name: 'ConnectionName')
     ConnectionState = Shapes::StringShape.new(name: 'ConnectionState')
@@ -90,6 +99,8 @@ module Aws::DirectConnect
     CreateLagRequest = Shapes::StructureShape.new(name: 'CreateLagRequest')
     CreatePrivateVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'CreatePrivateVirtualInterfaceRequest')
     CreatePublicVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'CreatePublicVirtualInterfaceRequest')
+    CreateResiliencyGroupRequest = Shapes::StructureShape.new(name: 'CreateResiliencyGroupRequest')
+    CreateResiliencyGroupResult = Shapes::StructureShape.new(name: 'CreateResiliencyGroupResult')
     CreateTransitVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'CreateTransitVirtualInterfaceRequest')
     CreateTransitVirtualInterfaceResult = Shapes::StructureShape.new(name: 'CreateTransitVirtualInterfaceResult')
     CustomerAddress = Shapes::StringShape.new(name: 'CustomerAddress')
@@ -106,6 +117,8 @@ module Aws::DirectConnect
     DeleteInterconnectRequest = Shapes::StructureShape.new(name: 'DeleteInterconnectRequest')
     DeleteInterconnectResponse = Shapes::StructureShape.new(name: 'DeleteInterconnectResponse')
     DeleteLagRequest = Shapes::StructureShape.new(name: 'DeleteLagRequest')
+    DeleteResiliencyGroupRequest = Shapes::StructureShape.new(name: 'DeleteResiliencyGroupRequest')
+    DeleteResiliencyGroupResult = Shapes::StructureShape.new(name: 'DeleteResiliencyGroupResult')
     DeleteVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'DeleteVirtualInterfaceRequest')
     DeleteVirtualInterfaceResponse = Shapes::StructureShape.new(name: 'DeleteVirtualInterfaceResponse')
     DescribeConnectionLoaRequest = Shapes::StructureShape.new(name: 'DescribeConnectionLoaRequest')
@@ -152,6 +165,8 @@ module Aws::DirectConnect
     DirectConnectGatewayState = Shapes::StringShape.new(name: 'DirectConnectGatewayState')
     DirectConnectServerException = Shapes::StructureShape.new(name: 'DirectConnectServerException')
     DisassociateConnectionFromLagRequest = Shapes::StructureShape.new(name: 'DisassociateConnectionFromLagRequest')
+    DisassociateConnectionsFromResiliencyGroupRequest = Shapes::StructureShape.new(name: 'DisassociateConnectionsFromResiliencyGroupRequest')
+    DisassociateConnectionsFromResiliencyGroupResult = Shapes::StructureShape.new(name: 'DisassociateConnectionsFromResiliencyGroupResult')
     DisassociateMacSecKeyRequest = Shapes::StructureShape.new(name: 'DisassociateMacSecKeyRequest')
     DisassociateMacSecKeyResponse = Shapes::StructureShape.new(name: 'DisassociateMacSecKeyResponse')
     DuplicateTagKeysException = Shapes::StructureShape.new(name: 'DuplicateTagKeysException')
@@ -163,7 +178,11 @@ module Aws::DirectConnect
     GatewayIdToAssociate = Shapes::StringShape.new(name: 'GatewayIdToAssociate')
     GatewayIdentifier = Shapes::StringShape.new(name: 'GatewayIdentifier')
     GatewayType = Shapes::StringShape.new(name: 'GatewayType')
+    GetResiliencyGroupRequest = Shapes::StructureShape.new(name: 'GetResiliencyGroupRequest')
+    GetResiliencyGroupResult = Shapes::StructureShape.new(name: 'GetResiliencyGroupResult')
     HasLogicalRedundancy = Shapes::StringShape.new(name: 'HasLogicalRedundancy')
+    IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
+    IncludedRegionList = Shapes::ListShape.new(name: 'IncludedRegionList')
     Interconnect = Shapes::StructureShape.new(name: 'Interconnect')
     InterconnectId = Shapes::StringShape.new(name: 'InterconnectId')
     InterconnectList = Shapes::ListShape.new(name: 'InterconnectList')
@@ -178,6 +197,10 @@ module Aws::DirectConnect
     LagState = Shapes::StringShape.new(name: 'LagState')
     Lags = Shapes::StructureShape.new(name: 'Lags')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+    ListResiliencyGroupAssociationsRequest = Shapes::StructureShape.new(name: 'ListResiliencyGroupAssociationsRequest')
+    ListResiliencyGroupAssociationsResult = Shapes::StructureShape.new(name: 'ListResiliencyGroupAssociationsResult')
+    ListResiliencyGroupsRequest = Shapes::StructureShape.new(name: 'ListResiliencyGroupsRequest')
+    ListResiliencyGroupsResult = Shapes::StructureShape.new(name: 'ListResiliencyGroupsResult')
     ListVirtualInterfaceRoutesRequest = Shapes::StructureShape.new(name: 'ListVirtualInterfaceRoutesRequest')
     ListVirtualInterfaceRoutesResponse = Shapes::StructureShape.new(name: 'ListVirtualInterfaceRoutesResponse')
     ListVirtualInterfaceTestHistoryRequest = Shapes::StructureShape.new(name: 'ListVirtualInterfaceTestHistoryRequest')
@@ -220,7 +243,20 @@ module Aws::DirectConnect
     RateLimit = Shapes::StringShape.new(name: 'RateLimit')
     RateLimiterStatus = Shapes::StructureShape.new(name: 'RateLimiterStatus')
     Region = Shapes::StringShape.new(name: 'Region')
+    RequestBillingMode = Shapes::StringShape.new(name: 'RequestBillingMode')
     RequestMACSec = Shapes::BooleanShape.new(name: 'RequestMACSec')
+    ResiliencyGroup = Shapes::StructureShape.new(name: 'ResiliencyGroup')
+    ResiliencyGroupArn = Shapes::StringShape.new(name: 'ResiliencyGroupArn')
+    ResiliencyGroupAssociation = Shapes::StructureShape.new(name: 'ResiliencyGroupAssociation')
+    ResiliencyGroupAssociationList = Shapes::ListShape.new(name: 'ResiliencyGroupAssociationList')
+    ResiliencyGroupAssociationState = Shapes::StringShape.new(name: 'ResiliencyGroupAssociationState')
+    ResiliencyGroupId = Shapes::StringShape.new(name: 'ResiliencyGroupId')
+    ResiliencyGroupName = Shapes::StringShape.new(name: 'ResiliencyGroupName')
+    ResiliencyGroupState = Shapes::StringShape.new(name: 'ResiliencyGroupState')
+    ResiliencyGroupSummary = Shapes::StructureShape.new(name: 'ResiliencyGroupSummary')
+    ResiliencyGroupSummaryList = Shapes::ListShape.new(name: 'ResiliencyGroupSummaryList')
+    ResiliencyGroupType = Shapes::StringShape.new(name: 'ResiliencyGroupType')
+    ResiliencyModel = Shapes::StringShape.new(name: 'ResiliencyModel')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArnList = Shapes::ListShape.new(name: 'ResourceArnList')
     ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
@@ -263,11 +299,15 @@ module Aws::DirectConnect
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateConnectionRequest = Shapes::StructureShape.new(name: 'UpdateConnectionRequest')
+    UpdateConnectionsBillingModeRequest = Shapes::StructureShape.new(name: 'UpdateConnectionsBillingModeRequest')
+    UpdateConnectionsBillingModeResponse = Shapes::StructureShape.new(name: 'UpdateConnectionsBillingModeResponse')
     UpdateDirectConnectGatewayAssociationRequest = Shapes::StructureShape.new(name: 'UpdateDirectConnectGatewayAssociationRequest')
     UpdateDirectConnectGatewayAssociationResult = Shapes::StructureShape.new(name: 'UpdateDirectConnectGatewayAssociationResult')
     UpdateDirectConnectGatewayRequest = Shapes::StructureShape.new(name: 'UpdateDirectConnectGatewayRequest')
     UpdateDirectConnectGatewayResponse = Shapes::StructureShape.new(name: 'UpdateDirectConnectGatewayResponse')
     UpdateLagRequest = Shapes::StructureShape.new(name: 'UpdateLagRequest')
+    UpdateResiliencyGroupRequest = Shapes::StructureShape.new(name: 'UpdateResiliencyGroupRequest')
+    UpdateResiliencyGroupResult = Shapes::StructureShape.new(name: 'UpdateResiliencyGroupResult')
     UpdateVirtualInterfaceAttributesRequest = Shapes::StructureShape.new(name: 'UpdateVirtualInterfaceAttributesRequest')
     VLAN = Shapes::IntegerShape.new(name: 'VLAN')
     Vendor = Shapes::StringShape.new(name: 'Vendor')
@@ -346,6 +386,14 @@ module Aws::DirectConnect
     AssociateConnectionWithLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))
     AssociateConnectionWithLagRequest.struct_class = Types::AssociateConnectionWithLagRequest
 
+    AssociateConnectionsToResiliencyGroupRequest.add_member(:connection_identifiers, Shapes::ShapeRef.new(shape: ConnectionIdentifierList, required: true, location_name: "connectionIdentifiers"))
+    AssociateConnectionsToResiliencyGroupRequest.add_member(:resiliency_group_id, Shapes::ShapeRef.new(shape: ResiliencyGroupId, required: true, location_name: "resiliencyGroupId"))
+    AssociateConnectionsToResiliencyGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken"))
+    AssociateConnectionsToResiliencyGroupRequest.struct_class = Types::AssociateConnectionsToResiliencyGroupRequest
+
+    AssociateConnectionsToResiliencyGroupResult.add_member(:resiliency_group_associations, Shapes::ShapeRef.new(shape: ResiliencyGroupAssociationList, location_name: "resiliencyGroupAssociations"))
+    AssociateConnectionsToResiliencyGroupResult.struct_class = Types::AssociateConnectionsToResiliencyGroupResult
+
     AssociateHostedConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     AssociateHostedConnectionRequest.add_member(:parent_connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "parentConnectionId"))
     AssociateHostedConnectionRequest.struct_class = Types::AssociateHostedConnectionRequest
@@ -374,6 +422,13 @@ module Aws::DirectConnect
     AssociatedGateway.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "ownerAccount"))
     AssociatedGateway.add_member(:region, Shapes::ShapeRef.new(shape: Region, location_name: "region"))
     AssociatedGateway.struct_class = Types::AssociatedGateway
+
+    AvailableBillingMode.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "billingMode"))
+    AvailableBillingMode.add_member(:available_port_speeds, Shapes::ShapeRef.new(shape: AvailablePortSpeeds, location_name: "availablePortSpeeds"))
+    AvailableBillingMode.add_member(:included_regions, Shapes::ShapeRef.new(shape: IncludedRegionList, location_name: "includedRegions"))
+    AvailableBillingMode.struct_class = Types::AvailableBillingMode
+
+    AvailableBillingModeList.member = Shapes::ShapeRef.new(shape: AvailableBillingMode)
 
     AvailableMacSecPortSpeeds.member = Shapes::ShapeRef.new(shape: PortSpeed)
 
@@ -459,7 +514,12 @@ module Aws::DirectConnect
     Connection.add_member(:prefix_pool_size_ipv_6, Shapes::ShapeRef.new(shape: PrefixPoolSize, location_name: "prefixPoolSizeIpv6"))
     Connection.add_member(:prefix_pool_unallocated_count_ipv_4, Shapes::ShapeRef.new(shape: PrefixPoolUnallocatedCount, location_name: "prefixPoolUnallocatedCountIpv4"))
     Connection.add_member(:prefix_pool_unallocated_count_ipv_6, Shapes::ShapeRef.new(shape: PrefixPoolUnallocatedCount, location_name: "prefixPoolUnallocatedCountIpv6"))
+    Connection.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "billingMode"))
     Connection.struct_class = Types::Connection
+
+    ConnectionIdList.member = Shapes::ShapeRef.new(shape: ConnectionId)
+
+    ConnectionIdentifierList.member = Shapes::ShapeRef.new(shape: ConnectionIdentifier)
 
     ConnectionList.member = Shapes::ShapeRef.new(shape: Connection)
 
@@ -481,6 +541,7 @@ module Aws::DirectConnect
     CreateConnectionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateConnectionRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
     CreateConnectionRequest.add_member(:request_mac_sec, Shapes::ShapeRef.new(shape: RequestMACSec, location_name: "requestMACSec"))
+    CreateConnectionRequest.add_member(:billing_mode, Shapes::ShapeRef.new(shape: RequestBillingMode, location_name: "billingMode"))
     CreateConnectionRequest.struct_class = Types::CreateConnectionRequest
 
     CreateDirectConnectGatewayAssociationProposalRequest.add_member(:direct_connect_gateway_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayId, required: true, location_name: "directConnectGatewayId"))
@@ -528,6 +589,7 @@ module Aws::DirectConnect
     CreateLagRequest.add_member(:child_connection_tags, Shapes::ShapeRef.new(shape: TagList, location_name: "childConnectionTags"))
     CreateLagRequest.add_member(:provider_name, Shapes::ShapeRef.new(shape: ProviderName, location_name: "providerName"))
     CreateLagRequest.add_member(:request_mac_sec, Shapes::ShapeRef.new(shape: RequestMACSec, location_name: "requestMACSec"))
+    CreateLagRequest.add_member(:billing_mode, Shapes::ShapeRef.new(shape: RequestBillingMode, location_name: "billingMode"))
     CreateLagRequest.struct_class = Types::CreateLagRequest
 
     CreatePrivateVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
@@ -537,6 +599,15 @@ module Aws::DirectConnect
     CreatePublicVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     CreatePublicVirtualInterfaceRequest.add_member(:new_public_virtual_interface, Shapes::ShapeRef.new(shape: NewPublicVirtualInterface, required: true, location_name: "newPublicVirtualInterface"))
     CreatePublicVirtualInterfaceRequest.struct_class = Types::CreatePublicVirtualInterfaceRequest
+
+    CreateResiliencyGroupRequest.add_member(:resiliency_group_name, Shapes::ShapeRef.new(shape: ResiliencyGroupName, required: true, location_name: "resiliencyGroupName"))
+    CreateResiliencyGroupRequest.add_member(:intended_resiliency_model, Shapes::ShapeRef.new(shape: ResiliencyModel, required: true, location_name: "intendedResiliencyModel"))
+    CreateResiliencyGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken"))
+    CreateResiliencyGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateResiliencyGroupRequest.struct_class = Types::CreateResiliencyGroupRequest
+
+    CreateResiliencyGroupResult.add_member(:resiliency_group, Shapes::ShapeRef.new(shape: ResiliencyGroup, location_name: "resiliencyGroup"))
+    CreateResiliencyGroupResult.struct_class = Types::CreateResiliencyGroupResult
 
     CreateTransitVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     CreateTransitVirtualInterfaceRequest.add_member(:new_transit_virtual_interface, Shapes::ShapeRef.new(shape: NewTransitVirtualInterface, required: true, location_name: "newTransitVirtualInterface"))
@@ -590,6 +661,12 @@ module Aws::DirectConnect
 
     DeleteLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))
     DeleteLagRequest.struct_class = Types::DeleteLagRequest
+
+    DeleteResiliencyGroupRequest.add_member(:resiliency_group_id, Shapes::ShapeRef.new(shape: ResiliencyGroupId, required: true, location_name: "resiliencyGroupId"))
+    DeleteResiliencyGroupRequest.struct_class = Types::DeleteResiliencyGroupRequest
+
+    DeleteResiliencyGroupResult.add_member(:resiliency_group, Shapes::ShapeRef.new(shape: ResiliencyGroup, location_name: "resiliencyGroup"))
+    DeleteResiliencyGroupResult.struct_class = Types::DeleteResiliencyGroupResult
 
     DeleteVirtualInterfaceRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, required: true, location_name: "virtualInterfaceId"))
     DeleteVirtualInterfaceRequest.struct_class = Types::DeleteVirtualInterfaceRequest
@@ -768,6 +845,14 @@ module Aws::DirectConnect
     DisassociateConnectionFromLagRequest.add_member(:lag_id, Shapes::ShapeRef.new(shape: LagId, required: true, location_name: "lagId"))
     DisassociateConnectionFromLagRequest.struct_class = Types::DisassociateConnectionFromLagRequest
 
+    DisassociateConnectionsFromResiliencyGroupRequest.add_member(:connection_identifiers, Shapes::ShapeRef.new(shape: ConnectionIdentifierList, required: true, location_name: "connectionIdentifiers"))
+    DisassociateConnectionsFromResiliencyGroupRequest.add_member(:resiliency_group_id, Shapes::ShapeRef.new(shape: ResiliencyGroupId, required: true, location_name: "resiliencyGroupId"))
+    DisassociateConnectionsFromResiliencyGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken"))
+    DisassociateConnectionsFromResiliencyGroupRequest.struct_class = Types::DisassociateConnectionsFromResiliencyGroupRequest
+
+    DisassociateConnectionsFromResiliencyGroupResult.add_member(:resiliency_group_associations, Shapes::ShapeRef.new(shape: ResiliencyGroupAssociationList, location_name: "resiliencyGroupAssociations"))
+    DisassociateConnectionsFromResiliencyGroupResult.struct_class = Types::DisassociateConnectionsFromResiliencyGroupResult
+
     DisassociateMacSecKeyRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
     DisassociateMacSecKeyRequest.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretARN, required: true, location_name: "secretARN"))
     DisassociateMacSecKeyRequest.struct_class = Types::DisassociateMacSecKeyRequest
@@ -777,6 +862,14 @@ module Aws::DirectConnect
     DisassociateMacSecKeyResponse.struct_class = Types::DisassociateMacSecKeyResponse
 
     DuplicateTagKeysException.struct_class = Types::DuplicateTagKeysException
+
+    GetResiliencyGroupRequest.add_member(:resiliency_group_id, Shapes::ShapeRef.new(shape: ResiliencyGroupId, required: true, location_name: "resiliencyGroupId"))
+    GetResiliencyGroupRequest.struct_class = Types::GetResiliencyGroupRequest
+
+    GetResiliencyGroupResult.add_member(:resiliency_group, Shapes::ShapeRef.new(shape: ResiliencyGroup, location_name: "resiliencyGroup"))
+    GetResiliencyGroupResult.struct_class = Types::GetResiliencyGroupResult
+
+    IncludedRegionList.member = Shapes::ShapeRef.new(shape: Region)
 
     Interconnect.add_member(:interconnect_id, Shapes::ShapeRef.new(shape: InterconnectId, location_name: "interconnectId"))
     Interconnect.add_member(:interconnect_name, Shapes::ShapeRef.new(shape: InterconnectName, location_name: "interconnectName"))
@@ -831,6 +924,7 @@ module Aws::DirectConnect
     Lag.add_member(:prefix_pool_unallocated_count_ipv_4, Shapes::ShapeRef.new(shape: PrefixPoolUnallocatedCount, location_name: "prefixPoolUnallocatedCountIpv4"))
     Lag.add_member(:prefix_pool_unallocated_count_ipv_6, Shapes::ShapeRef.new(shape: PrefixPoolUnallocatedCount, location_name: "prefixPoolUnallocatedCountIpv6"))
     Lag.add_member(:rate_limiter_status, Shapes::ShapeRef.new(shape: RateLimiterStatus, location_name: "rateLimiterStatus"))
+    Lag.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "billingMode"))
     Lag.struct_class = Types::Lag
 
     LagList.member = Shapes::ShapeRef.new(shape: Lag)
@@ -840,6 +934,23 @@ module Aws::DirectConnect
     Lags.struct_class = Types::Lags
 
     LimitExceededException.struct_class = Types::LimitExceededException
+
+    ListResiliencyGroupAssociationsRequest.add_member(:resiliency_group_id, Shapes::ShapeRef.new(shape: ResiliencyGroupId, required: true, location_name: "resiliencyGroupId"))
+    ListResiliencyGroupAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: "maxResults"))
+    ListResiliencyGroupAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListResiliencyGroupAssociationsRequest.struct_class = Types::ListResiliencyGroupAssociationsRequest
+
+    ListResiliencyGroupAssociationsResult.add_member(:items, Shapes::ShapeRef.new(shape: ResiliencyGroupAssociationList, location_name: "items"))
+    ListResiliencyGroupAssociationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListResiliencyGroupAssociationsResult.struct_class = Types::ListResiliencyGroupAssociationsResult
+
+    ListResiliencyGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultSetSize, location_name: "maxResults"))
+    ListResiliencyGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListResiliencyGroupsRequest.struct_class = Types::ListResiliencyGroupsRequest
+
+    ListResiliencyGroupsResult.add_member(:items, Shapes::ShapeRef.new(shape: ResiliencyGroupSummaryList, location_name: "items"))
+    ListResiliencyGroupsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListResiliencyGroupsResult.struct_class = Types::ListResiliencyGroupsResult
 
     ListVirtualInterfaceRoutesRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
     ListVirtualInterfaceRoutesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: RouteFilters, location_name: "filters"))
@@ -874,6 +985,7 @@ module Aws::DirectConnect
     Location.add_member(:available_port_speeds, Shapes::ShapeRef.new(shape: AvailablePortSpeeds, location_name: "availablePortSpeeds"))
     Location.add_member(:available_providers, Shapes::ShapeRef.new(shape: ProviderList, location_name: "availableProviders"))
     Location.add_member(:available_mac_sec_port_speeds, Shapes::ShapeRef.new(shape: AvailableMacSecPortSpeeds, location_name: "availableMacSecPortSpeeds"))
+    Location.add_member(:available_billing_modes, Shapes::ShapeRef.new(shape: AvailableBillingModeList, location_name: "availableBillingModes"))
     Location.struct_class = Types::Location
 
     LocationList.member = Shapes::ShapeRef.new(shape: Location)
@@ -992,6 +1104,32 @@ module Aws::DirectConnect
     RateLimiterStatus.add_member(:total_bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, location_name: "totalBandwidth"))
     RateLimiterStatus.struct_class = Types::RateLimiterStatus
 
+    ResiliencyGroup.add_member(:resiliency_group_id, Shapes::ShapeRef.new(shape: ResiliencyGroupId, location_name: "resiliencyGroupId"))
+    ResiliencyGroup.add_member(:resiliency_group_arn, Shapes::ShapeRef.new(shape: ResiliencyGroupArn, location_name: "resiliencyGroupArn"))
+    ResiliencyGroup.add_member(:resiliency_group_name, Shapes::ShapeRef.new(shape: ResiliencyGroupName, location_name: "resiliencyGroupName"))
+    ResiliencyGroup.add_member(:resiliency_group_type, Shapes::ShapeRef.new(shape: ResiliencyGroupType, location_name: "resiliencyGroupType"))
+    ResiliencyGroup.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "ownerAccount"))
+    ResiliencyGroup.add_member(:state, Shapes::ShapeRef.new(shape: ResiliencyGroupState, location_name: "state"))
+    ResiliencyGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ResiliencyGroup.struct_class = Types::ResiliencyGroup
+
+    ResiliencyGroupAssociation.add_member(:resiliency_group_id, Shapes::ShapeRef.new(shape: ResiliencyGroupId, location_name: "resiliencyGroupId"))
+    ResiliencyGroupAssociation.add_member(:connection_arn, Shapes::ShapeRef.new(shape: ConnectionArn, location_name: "connectionArn"))
+    ResiliencyGroupAssociation.add_member(:state, Shapes::ShapeRef.new(shape: ResiliencyGroupAssociationState, location_name: "state"))
+    ResiliencyGroupAssociation.struct_class = Types::ResiliencyGroupAssociation
+
+    ResiliencyGroupAssociationList.member = Shapes::ShapeRef.new(shape: ResiliencyGroupAssociation)
+
+    ResiliencyGroupSummary.add_member(:resiliency_group_id, Shapes::ShapeRef.new(shape: ResiliencyGroupId, location_name: "resiliencyGroupId"))
+    ResiliencyGroupSummary.add_member(:resiliency_group_arn, Shapes::ShapeRef.new(shape: ResiliencyGroupArn, location_name: "resiliencyGroupArn"))
+    ResiliencyGroupSummary.add_member(:resiliency_group_name, Shapes::ShapeRef.new(shape: ResiliencyGroupName, location_name: "resiliencyGroupName"))
+    ResiliencyGroupSummary.add_member(:resiliency_group_type, Shapes::ShapeRef.new(shape: ResiliencyGroupType, location_name: "resiliencyGroupType"))
+    ResiliencyGroupSummary.add_member(:owner_account, Shapes::ShapeRef.new(shape: OwnerAccount, location_name: "ownerAccount"))
+    ResiliencyGroupSummary.add_member(:state, Shapes::ShapeRef.new(shape: ResiliencyGroupState, location_name: "state"))
+    ResiliencyGroupSummary.struct_class = Types::ResiliencyGroupSummary
+
+    ResiliencyGroupSummaryList.member = Shapes::ShapeRef.new(shape: ResiliencyGroupSummary)
+
     ResourceArnList.member = Shapes::ShapeRef.new(shape: ResourceArn)
 
     ResourceTag.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn"))
@@ -1074,6 +1212,14 @@ module Aws::DirectConnect
     UpdateConnectionRequest.add_member(:encryption_mode, Shapes::ShapeRef.new(shape: EncryptionMode, location_name: "encryptionMode"))
     UpdateConnectionRequest.struct_class = Types::UpdateConnectionRequest
 
+    UpdateConnectionsBillingModeRequest.add_member(:connection_ids, Shapes::ShapeRef.new(shape: ConnectionIdList, required: true, location_name: "connectionIds"))
+    UpdateConnectionsBillingModeRequest.add_member(:billing_mode, Shapes::ShapeRef.new(shape: RequestBillingMode, required: true, location_name: "billingMode"))
+    UpdateConnectionsBillingModeRequest.struct_class = Types::UpdateConnectionsBillingModeRequest
+
+    UpdateConnectionsBillingModeResponse.add_member(:billing_mode, Shapes::ShapeRef.new(shape: BillingMode, location_name: "billingMode"))
+    UpdateConnectionsBillingModeResponse.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionList, location_name: "connections"))
+    UpdateConnectionsBillingModeResponse.struct_class = Types::UpdateConnectionsBillingModeResponse
+
     UpdateDirectConnectGatewayAssociationRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: DirectConnectGatewayAssociationId, location_name: "associationId"))
     UpdateDirectConnectGatewayAssociationRequest.add_member(:add_allowed_prefixes_to_direct_connect_gateway, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "addAllowedPrefixesToDirectConnectGateway"))
     UpdateDirectConnectGatewayAssociationRequest.add_member(:remove_allowed_prefixes_to_direct_connect_gateway, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "removeAllowedPrefixesToDirectConnectGateway"))
@@ -1094,6 +1240,14 @@ module Aws::DirectConnect
     UpdateLagRequest.add_member(:minimum_links, Shapes::ShapeRef.new(shape: Count, location_name: "minimumLinks"))
     UpdateLagRequest.add_member(:encryption_mode, Shapes::ShapeRef.new(shape: EncryptionMode, location_name: "encryptionMode"))
     UpdateLagRequest.struct_class = Types::UpdateLagRequest
+
+    UpdateResiliencyGroupRequest.add_member(:resiliency_group_id, Shapes::ShapeRef.new(shape: ResiliencyGroupId, required: true, location_name: "resiliencyGroupId"))
+    UpdateResiliencyGroupRequest.add_member(:resiliency_group_name, Shapes::ShapeRef.new(shape: ResiliencyGroupName, required: true, location_name: "resiliencyGroupName"))
+    UpdateResiliencyGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken"))
+    UpdateResiliencyGroupRequest.struct_class = Types::UpdateResiliencyGroupRequest
+
+    UpdateResiliencyGroupResult.add_member(:resiliency_group, Shapes::ShapeRef.new(shape: ResiliencyGroup, location_name: "resiliencyGroup"))
+    UpdateResiliencyGroupResult.struct_class = Types::UpdateResiliencyGroupResult
 
     UpdateVirtualInterfaceAttributesRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, required: true, location_name: "virtualInterfaceId"))
     UpdateVirtualInterfaceAttributesRequest.add_member(:mtu, Shapes::ShapeRef.new(shape: MTU, location_name: "mtu"))
@@ -1261,6 +1415,17 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: AssociateConnectionWithLagRequest)
         o.output = Shapes::ShapeRef.new(shape: Connection)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:associate_connections_to_resiliency_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateConnectionsToResiliencyGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateConnectionsToResiliencyGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateConnectionsToResiliencyGroupResult)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
@@ -1448,6 +1613,19 @@ module Aws::DirectConnect
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
 
+      api.add_operation(:create_resiliency_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateResiliencyGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateResiliencyGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateResiliencyGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
       api.add_operation(:create_transit_virtual_interface, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateTransitVirtualInterface"
         o.http_method = "POST"
@@ -1527,6 +1705,16 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteLagRequest)
         o.output = Shapes::ShapeRef.new(shape: Lag)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:delete_resiliency_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResiliencyGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResiliencyGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResiliencyGroupResult)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -1734,12 +1922,52 @@ module Aws::DirectConnect
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
 
+      api.add_operation(:disassociate_connections_from_resiliency_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateConnectionsFromResiliencyGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateConnectionsFromResiliencyGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateConnectionsFromResiliencyGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
       api.add_operation(:disassociate_mac_sec_key, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateMacSecKey"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DisassociateMacSecKeyRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateMacSecKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:get_resiliency_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetResiliencyGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetResiliencyGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetResiliencyGroupResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:list_resiliency_group_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResiliencyGroupAssociations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResiliencyGroupAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResiliencyGroupAssociationsResult)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:list_resiliency_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListResiliencyGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListResiliencyGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListResiliencyGroupsResult)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
@@ -1816,6 +2044,16 @@ module Aws::DirectConnect
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)
 
+      api.add_operation(:update_connections_billing_mode, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConnectionsBillingMode"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConnectionsBillingModeRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConnectionsBillingModeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
       api.add_operation(:update_direct_connect_gateway, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateDirectConnectGateway"
         o.http_method = "POST"
@@ -1842,6 +2080,16 @@ module Aws::DirectConnect
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateLagRequest)
         o.output = Shapes::ShapeRef.new(shape: Lag)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+        o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+      end)
+
+      api.add_operation(:update_resiliency_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateResiliencyGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateResiliencyGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateResiliencyGroupResult)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
         o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
       end)

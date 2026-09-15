@@ -151,7 +151,8 @@ module Aws
                                   ?capacity_provider_configuration: {
                                     capacity_provider_arn: ::String
                                   },
-                                  ?tags: Hash[::String, ::String]
+                                  ?tags: Hash[::String, ::String],
+                                  ?platform_version: ::String
                                 ) -> _CreateAgentRuntimeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentRuntimeResponseSuccess
 
@@ -1403,6 +1404,7 @@ module Aws
         def metadata_configuration: () -> Types::RuntimeMetadataConfiguration
         def filesystem_configurations: () -> ::Array[Types::FilesystemConfiguration]
         def capacity_provider_configuration: () -> Types::CapacityProviderConfiguration
+        def platform_version: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_agent_runtime-instance_method
       def get_agent_runtime: (
@@ -2719,6 +2721,7 @@ module Aws
                                   ?capacity_provider_configuration: {
                                     capacity_provider_arn: ::String
                                   },
+                                  ?platform_version: ::String,
                                   ?client_token: ::String
                                 ) -> _UpdateAgentRuntimeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentRuntimeResponseSuccess

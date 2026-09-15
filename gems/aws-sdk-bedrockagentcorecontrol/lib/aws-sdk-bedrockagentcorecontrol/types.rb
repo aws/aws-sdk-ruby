@@ -2268,6 +2268,11 @@ module Aws::BedrockAgentCoreControl
     #   example, by purpose, owner, or environment.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] platform_version
+    #   The version of the runtime platform to use for the AgentCore
+    #   Runtime.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntimeRequest AWS API Documentation
     #
     class CreateAgentRuntimeRequest < Struct.new(
@@ -2284,7 +2289,8 @@ module Aws::BedrockAgentCoreControl
       :environment_variables,
       :filesystem_configurations,
       :capacity_provider_configuration,
-      :tags)
+      :tags,
+      :platform_version)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -8654,6 +8660,10 @@ module Aws::BedrockAgentCoreControl
     #   The capacity provider configuration for the AgentCore Runtime.
     #   @return [Types::CapacityProviderConfiguration]
     #
+    # @!attribute [rw] platform_version
+    #   The version of the runtime platform used by the AgentCore Runtime.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntimeResponse AWS API Documentation
     #
     class GetAgentRuntimeResponse < Struct.new(
@@ -8677,7 +8687,8 @@ module Aws::BedrockAgentCoreControl
       :request_header_configuration,
       :metadata_configuration,
       :filesystem_configurations,
-      :capacity_provider_configuration)
+      :capacity_provider_configuration,
+      :platform_version)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -20563,6 +20574,11 @@ module Aws::BedrockAgentCoreControl
     #   Runtime.
     #   @return [Types::CapacityProviderConfiguration]
     #
+    # @!attribute [rw] platform_version
+    #   The updated version of the runtime platform to use for the AgentCore
+    #   Runtime.
+    #   @return [String]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -20587,6 +20603,7 @@ module Aws::BedrockAgentCoreControl
       :environment_variables,
       :filesystem_configurations,
       :capacity_provider_configuration,
+      :platform_version,
       :client_token)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
