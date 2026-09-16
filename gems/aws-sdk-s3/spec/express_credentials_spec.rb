@@ -69,7 +69,7 @@ module Aws
       end
 
       it 'refreshes credentials automatically when they are near expiration' do
-        allow(credentials).to receive(:expiration).and_return(Time.now)
+        allow(credentials).to receive(:expiration).and_return(Time.now + 30)
         expect(client).to receive(:create_session).exactly(4).times
         c = ExpressCredentials.new(
           client: client,
