@@ -116,8 +116,6 @@ module Aws
       private
 
       def refresh
-        @before_refresh&.call(self)
-
         resp = @client.get_credentials_for_identity(
           identity_id: identity_id,
           custom_role_arn: @custom_role_arn,
