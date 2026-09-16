@@ -68,6 +68,7 @@ module Aws
 
         put_tags(tag_set, resp, options) if tag_set
         put_annotations(annotations, resp, options) if annotations&.any?
+        resp
       end
 
       private
