@@ -40,6 +40,7 @@ module Aws::ElasticBeanstalk
     ApplicationVersionStatus = Shapes::StringShape.new(name: 'ApplicationVersionStatus')
     ApplyEnvironmentManagedActionRequest = Shapes::StructureShape.new(name: 'ApplyEnvironmentManagedActionRequest')
     ApplyEnvironmentManagedActionResult = Shapes::StructureShape.new(name: 'ApplyEnvironmentManagedActionResult')
+    ArchitectureType = Shapes::StringShape.new(name: 'ArchitectureType')
     AssociateEnvironmentOperationsRoleMessage = Shapes::StructureShape.new(name: 'AssociateEnvironmentOperationsRoleMessage')
     AutoCreateApplication = Shapes::BooleanShape.new(name: 'AutoCreateApplication')
     AutoScalingGroup = Shapes::StructureShape.new(name: 'AutoScalingGroup')
@@ -57,6 +58,7 @@ module Aws::ElasticBeanstalk
     Causes = Shapes::ListShape.new(name: 'Causes')
     CheckDNSAvailabilityMessage = Shapes::StructureShape.new(name: 'CheckDNSAvailabilityMessage')
     CheckDNSAvailabilityResultMessage = Shapes::StructureShape.new(name: 'CheckDNSAvailabilityResultMessage')
+    Cluster = Shapes::StructureShape.new(name: 'Cluster')
     CnameAvailability = Shapes::BooleanShape.new(name: 'CnameAvailability')
     CodeBuildNotInServiceRegionException = Shapes::StructureShape.new(name: 'CodeBuildNotInServiceRegionException', error: {"code" => "CodeBuildNotInServiceRegionException", "httpStatusCode" => 400, "senderFault" => true})
     ComposeEnvironmentsMessage = Shapes::StructureShape.new(name: 'ComposeEnvironmentsMessage')
@@ -157,7 +159,11 @@ module Aws::ElasticBeanstalk
     FileTypeExtension = Shapes::StringShape.new(name: 'FileTypeExtension')
     ForceTerminate = Shapes::BooleanShape.new(name: 'ForceTerminate')
     GroupName = Shapes::StringShape.new(name: 'GroupName')
+    ImageBuildConfiguration = Shapes::StructureShape.new(name: 'ImageBuildConfiguration')
+    ImageBuildType = Shapes::StringShape.new(name: 'ImageBuildType')
+    ImageConfiguration = Shapes::StructureShape.new(name: 'ImageConfiguration')
     ImageId = Shapes::StringShape.new(name: 'ImageId')
+    ImageSource = Shapes::StructureShape.new(name: 'ImageSource')
     IncludeDeleted = Shapes::BooleanShape.new(name: 'IncludeDeleted')
     IncludeDeletedBackTo = Shapes::TimestampShape.new(name: 'IncludeDeletedBackTo')
     Instance = Shapes::StructureShape.new(name: 'Instance')
@@ -377,6 +383,9 @@ module Aws::ElasticBeanstalk
     ApplicationVersionDescription.add_member(:source_build_information, Shapes::ShapeRef.new(shape: SourceBuildInformation, location_name: "SourceBuildInformation"))
     ApplicationVersionDescription.add_member(:build_arn, Shapes::ShapeRef.new(shape: String, location_name: "BuildArn"))
     ApplicationVersionDescription.add_member(:source_bundle, Shapes::ShapeRef.new(shape: S3Location, location_name: "SourceBundle"))
+    ApplicationVersionDescription.add_member(:image_source, Shapes::ShapeRef.new(shape: ImageSource, location_name: "ImageSource"))
+    ApplicationVersionDescription.add_member(:image_build_configuration, Shapes::ShapeRef.new(shape: ImageBuildConfiguration, location_name: "ImageBuildConfiguration"))
+    ApplicationVersionDescription.add_member(:process, Shapes::ShapeRef.new(shape: ApplicationVersionProccess, location_name: "Process"))
     ApplicationVersionDescription.add_member(:date_created, Shapes::ShapeRef.new(shape: CreationDate, location_name: "DateCreated"))
     ApplicationVersionDescription.add_member(:date_updated, Shapes::ShapeRef.new(shape: UpdateDate, location_name: "DateUpdated"))
     ApplicationVersionDescription.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationVersionStatus, location_name: "Status"))
@@ -447,6 +456,9 @@ module Aws::ElasticBeanstalk
     CheckDNSAvailabilityResultMessage.add_member(:available, Shapes::ShapeRef.new(shape: CnameAvailability, location_name: "Available"))
     CheckDNSAvailabilityResultMessage.add_member(:fully_qualified_cname, Shapes::ShapeRef.new(shape: DNSCname, location_name: "FullyQualifiedCNAME"))
     CheckDNSAvailabilityResultMessage.struct_class = Types::CheckDNSAvailabilityResultMessage
+
+    Cluster.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ClusterArn"))
+    Cluster.struct_class = Types::Cluster
 
     CodeBuildNotInServiceRegionException.struct_class = Types::CodeBuildNotInServiceRegionException
 
@@ -522,6 +534,7 @@ module Aws::ElasticBeanstalk
     CreateApplicationVersionMessage.add_member(:auto_create_application, Shapes::ShapeRef.new(shape: AutoCreateApplication, location_name: "AutoCreateApplication"))
     CreateApplicationVersionMessage.add_member(:process, Shapes::ShapeRef.new(shape: ApplicationVersionProccess, location_name: "Process"))
     CreateApplicationVersionMessage.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateApplicationVersionMessage.add_member(:image_configuration, Shapes::ShapeRef.new(shape: ImageConfiguration, location_name: "ImageConfiguration"))
     CreateApplicationVersionMessage.struct_class = Types::CreateApplicationVersionMessage
 
     CreateConfigurationTemplateMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
@@ -761,6 +774,7 @@ module Aws::ElasticBeanstalk
 
     EnvironmentResourceDescription.add_member(:environment_name, Shapes::ShapeRef.new(shape: EnvironmentName, location_name: "EnvironmentName"))
     EnvironmentResourceDescription.add_member(:auto_scaling_groups, Shapes::ShapeRef.new(shape: AutoScalingGroupList, location_name: "AutoScalingGroups"))
+    EnvironmentResourceDescription.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
     EnvironmentResourceDescription.add_member(:instances, Shapes::ShapeRef.new(shape: InstanceList, location_name: "Instances"))
     EnvironmentResourceDescription.add_member(:launch_configurations, Shapes::ShapeRef.new(shape: LaunchConfigurationList, location_name: "LaunchConfigurations"))
     EnvironmentResourceDescription.add_member(:launch_templates, Shapes::ShapeRef.new(shape: LaunchTemplateList, location_name: "LaunchTemplates"))
@@ -796,6 +810,22 @@ module Aws::ElasticBeanstalk
     EventDescriptionsMessage.add_member(:events, Shapes::ShapeRef.new(shape: EventDescriptionList, location_name: "Events"))
     EventDescriptionsMessage.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     EventDescriptionsMessage.struct_class = Types::EventDescriptionsMessage
+
+    ImageBuildConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: ImageBuildType, location_name: "Type"))
+    ImageBuildConfiguration.add_member(:dockerfile_location, Shapes::ShapeRef.new(shape: String, location_name: "DockerfileLocation"))
+    ImageBuildConfiguration.add_member(:buildpack, Shapes::ShapeRef.new(shape: String, location_name: "Buildpack"))
+    ImageBuildConfiguration.add_member(:architecture, Shapes::ShapeRef.new(shape: ArchitectureType, location_name: "Architecture"))
+    ImageBuildConfiguration.add_member(:code_build_service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CodeBuildServiceRole"))
+    ImageBuildConfiguration.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "ComputeType"))
+    ImageBuildConfiguration.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: BoxedInt, location_name: "TimeoutInMinutes"))
+    ImageBuildConfiguration.struct_class = Types::ImageBuildConfiguration
+
+    ImageConfiguration.add_member(:source, Shapes::ShapeRef.new(shape: ImageSource, location_name: "Source"))
+    ImageConfiguration.add_member(:build, Shapes::ShapeRef.new(shape: ImageBuildConfiguration, location_name: "Build"))
+    ImageConfiguration.struct_class = Types::ImageConfiguration
+
+    ImageSource.add_member(:uri, Shapes::ShapeRef.new(shape: String, location_name: "Uri"))
+    ImageSource.struct_class = Types::ImageSource
 
     Instance.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
     Instance.struct_class = Types::Instance

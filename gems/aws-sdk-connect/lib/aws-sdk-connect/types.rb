@@ -4068,6 +4068,47 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about a reference when the `referenceType` is
+    # `CONTACT_ANALYSIS`. Otherwise, null.
+    #
+    # @!attribute [rw] name
+    #   Identifier of the contact analysis reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The location path of the contact analysis reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Status of the contact analysis reference type.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the contact analysis reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] analytics_mode
+    #   The analytics mode of the contact analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_redacted
+    #   Indicates whether sensitive data has been redacted from the contact
+    #   analysis.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactAnalysisReference AWS API Documentation
+    #
+    class ContactAnalysisReference < Struct.new(
+      :name,
+      :value,
+      :status,
+      :arn,
+      :analytics_mode,
+      :is_redacted)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The contact configuration for push notification registration.
     #
     # @!attribute [rw] contact_id
@@ -29766,6 +29807,11 @@ module Aws::Connect
     #   Otherwise, null.
     #   @return [Types::EmailReference]
     #
+    # @!attribute [rw] contact_analysis
+    #   Information about a reference when the `referenceType` is
+    #   `CONTACT_ANALYSIS`. Otherwise, null.
+    #   @return [Types::ContactAnalysisReference]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReferenceSummary AWS API Documentation
     #
     class ReferenceSummary < Struct.new(
@@ -29779,6 +29825,7 @@ module Aws::Connect
       :number,
       :date,
       :email,
+      :contact_analysis,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -29794,6 +29841,7 @@ module Aws::Connect
       class Number < ReferenceSummary; end
       class Date < ReferenceSummary; end
       class Email < ReferenceSummary; end
+      class ContactAnalysis < ReferenceSummary; end
       class Unknown < ReferenceSummary; end
     end
 

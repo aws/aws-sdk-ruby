@@ -16559,6 +16559,12 @@ module Aws::Connect
     #   resp.reference_summary_list[0].date.value #=> String
     #   resp.reference_summary_list[0].email.name #=> String
     #   resp.reference_summary_list[0].email.value #=> String
+    #   resp.reference_summary_list[0].contact_analysis.name #=> String
+    #   resp.reference_summary_list[0].contact_analysis.value #=> String
+    #   resp.reference_summary_list[0].contact_analysis.status #=> String, one of "AVAILABLE", "DELETED", "APPROVED", "REJECTED", "PROCESSING", "FAILED"
+    #   resp.reference_summary_list[0].contact_analysis.arn #=> String
+    #   resp.reference_summary_list[0].contact_analysis.analytics_mode #=> String, one of "PostContact", "RealTime", "ContactLens", "AutomatedInteraction"
+    #   resp.reference_summary_list[0].contact_analysis.is_redacted #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactReferences AWS API Documentation
@@ -31536,7 +31542,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.278.0'
+      context[:gem_version] = '1.279.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

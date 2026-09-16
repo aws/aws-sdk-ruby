@@ -984,6 +984,16 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ContactAnalysisReference
+      attr_accessor name: ::String
+      attr_accessor value: ::String
+      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor arn: ::String
+      attr_accessor analytics_mode: ("PostContact" | "RealTime" | "ContactLens" | "AutomatedInteraction")
+      attr_accessor is_redacted: bool
+      SENSITIVE: []
+    end
+
     class ContactConfiguration
       attr_accessor contact_id: ::String
       attr_accessor participant_role: ("AGENT" | "CUSTOMER" | "SYSTEM" | "CUSTOM_BOT" | "SUPERVISOR")
@@ -6909,6 +6919,7 @@ module Aws::Connect
       attr_accessor number: Types::NumberReference
       attr_accessor date: Types::DateReference
       attr_accessor email: Types::EmailReference
+      attr_accessor contact_analysis: Types::ContactAnalysisReference
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -6931,6 +6942,8 @@ module Aws::Connect
       class Date < ReferenceSummary
       end
       class Email < ReferenceSummary
+      end
+      class ContactAnalysis < ReferenceSummary
       end
       class Unknown < ReferenceSummary
       end

@@ -1835,6 +1835,46 @@ module Aws
                            ) -> _SearchProfilesResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchProfilesResponseSuccess
 
+      interface _SearchRecommendationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SearchRecommendationsResponse]
+        def profile_id: () -> ::String
+        def recommendations: () -> ::Array[Types::Recommendation]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CustomerProfiles/Client.html#search_recommendations-instance_method
+      def search_recommendations: (
+                                    domain_name: ::String,
+                                    key_name: ::String,
+                                    key_values: Array[::String],
+                                    recommender: {
+                                      name: ::String,
+                                      filters: Array[
+                                        {
+                                          name: ::String?,
+                                          values: Hash[::String, ::String]?
+                                        }
+                                      ]?,
+                                      promotional_filters: Array[
+                                        {
+                                          name: ::String?,
+                                          values: Hash[::String, ::String]?,
+                                          promotion_name: ::String?,
+                                          percent_promoted_items: ::Integer?
+                                        }
+                                      ]?
+                                    },
+                                    ?candidate_ids: Array[::String],
+                                    ?context: Hash[::String, ::String],
+                                    ?diversity: {
+                                      enabled: bool,
+                                      values: Hash[::String, ::Integer]?
+                                    },
+                                    ?metadata: {
+                                      columns: Array[::String]?
+                                    },
+                                    ?max_recommendations: ::Integer
+                                  ) -> _SearchRecommendationsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchRecommendationsResponseSuccess
+
       interface _StartRecommenderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartRecommenderResponse]
       end

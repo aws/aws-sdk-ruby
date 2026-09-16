@@ -7419,6 +7419,132 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Retrieves recommendations for a profile in a specific domain. The
+    # profile is identified using a search key, which consists of a
+    # `KeyName` and a `KeyValues` list. The `KeyName` can be a predefined
+    # key (for example, `_profileId`, `_phone`, `_email`) or a
+    # custom-defined key.
+    #
+    # The search key must match exactly one profile. If no profile matches
+    # the search key, the operation returns a `ResourceNotFoundException`.
+    # If more than one profile matches the search key, the operation returns
+    # a `BadRequestException`. You can use the SearchProfiles API to review
+    # the matching profiles.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :key_name
+    #   A searchable identifier of a customer profile. You can use a
+    #   predefined key, such as `_profileId`, `_phone`, or `_email`, or a
+    #   custom-defined key.
+    #
+    # @option params [required, Array<String>] :key_values
+    #   A list of key values. Provide one value for each field of the search
+    #   key.
+    #
+    # @option params [required, Types::Recommender] :recommender
+    #   The recommender used to generate the recommendations.
+    #
+    # @option params [Array<String>] :candidate_ids
+    #   A list of item IDs to rank for the user. Use this when you want to
+    #   re-rank a specific set of items rather than getting recommendations
+    #   from the full item catalog. Required for personalized-ranking use
+    #   cases.
+    #
+    # @option params [Hash<String,String>] :context
+    #   The contextual metadata used to provide dynamic runtime information to
+    #   tailor recommendations.
+    #
+    # @option params [Types::RecommendationDiversityConfig] :diversity
+    #   Runtime diversity configuration for this request. Enables
+    #   diversity-aware recommendations and optionally supplies values for
+    #   placeholder-based diversity caps configured on the recommender.
+    #
+    # @option params [Types::RecommendationMetadata] :metadata
+    #   Configuration for metadata to include in recommendation responses.
+    #
+    # @option params [Integer] :max_recommendations
+    #   The maximum number of recommendations to return. The default value is
+    #   5.
+    #
+    # @return [Types::SearchRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchRecommendationsResponse#profile_id #profile_id} => String
+    #   * {Types::SearchRecommendationsResponse#recommendations #recommendations} => Array&lt;Types::Recommendation&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_recommendations({
+    #     domain_name: "name", # required
+    #     key_name: "name", # required
+    #     key_values: ["string1To255"], # required
+    #     recommender: { # required
+    #       name: "name", # required
+    #       filters: [
+    #         {
+    #           name: "name",
+    #           values: {
+    #             "RecommenderFilterAttributeName" => "RecommenderFilterAttributeValue",
+    #           },
+    #         },
+    #       ],
+    #       promotional_filters: [
+    #         {
+    #           name: "name",
+    #           values: {
+    #             "RecommenderFilterAttributeName" => "RecommenderFilterAttributeValue",
+    #           },
+    #           promotion_name: "name",
+    #           percent_promoted_items: 1,
+    #         },
+    #       ],
+    #     },
+    #     candidate_ids: ["string1To255"],
+    #     context: {
+    #       "ContextKey" => "string1To255",
+    #     },
+    #     diversity: {
+    #       enabled: false, # required
+    #       values: {
+    #         "DiversityPlaceholderName" => 1,
+    #       },
+    #     },
+    #     metadata: {
+    #       columns: ["MetadataColumnName"],
+    #     },
+    #     max_recommendations: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.profile_id #=> String
+    #   resp.recommendations #=> Array
+    #   resp.recommendations[0].catalog_item.id #=> String
+    #   resp.recommendations[0].catalog_item.name #=> String
+    #   resp.recommendations[0].catalog_item.code #=> String
+    #   resp.recommendations[0].catalog_item.type #=> String
+    #   resp.recommendations[0].catalog_item.category #=> String
+    #   resp.recommendations[0].catalog_item.description #=> String
+    #   resp.recommendations[0].catalog_item.additional_information #=> String
+    #   resp.recommendations[0].catalog_item.image_link #=> String
+    #   resp.recommendations[0].catalog_item.link #=> String
+    #   resp.recommendations[0].catalog_item.created_at #=> Time
+    #   resp.recommendations[0].catalog_item.updated_at #=> Time
+    #   resp.recommendations[0].catalog_item.price #=> String
+    #   resp.recommendations[0].catalog_item.attributes #=> Hash
+    #   resp.recommendations[0].catalog_item.attributes["string1To255"] #=> String
+    #   resp.recommendations[0].score #=> Float
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/SearchRecommendations AWS API Documentation
+    #
+    # @overload search_recommendations(params = {})
+    # @param [Hash] params ({})
+    def search_recommendations(params = {}, options = {})
+      req = build_request(:search_recommendations, params)
+      req.send_request(options)
+    end
+
     # Starts a recommender that was previously stopped. Starting a
     # recommender resumes its ability to generate recommendations.
     #
@@ -8390,7 +8516,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

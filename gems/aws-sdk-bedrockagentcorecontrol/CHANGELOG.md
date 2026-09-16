@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2026-09-16)
+------------------
+
+* Feature - Adds support for a new DELETE FAILED status for Bedrock AgentCore Runtimes and Bedrock AgentCore Runtime Endpoints.
+
 1.72.0 (2026-09-15)
 ------------------
 

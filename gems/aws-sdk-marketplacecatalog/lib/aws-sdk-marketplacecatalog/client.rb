@@ -1214,6 +1214,12 @@ module Aws::MarketplaceCatalog
     #         reseller_role: {
     #           value_list: ["ChannelPartner"], # accepts ChannelPartner, Distributor
     #         },
+    #         source_authorization: {
+    #           value_list: ["ResaleAuthorizationSourceAuthorizationString"],
+    #         },
+    #         issuer_account_id: {
+    #           value_list: ["ResaleAuthorizationIssuerAccountIdString"],
+    #         },
     #       },
     #       machine_learning_product_filters: {
     #         entity_id: {
@@ -1285,7 +1291,7 @@ module Aws::MarketplaceCatalog
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       resale_authorization_sort: {
-    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ProductName, ManufacturerAccountId, ManufacturerLegalName, ResellerAccountID, ResellerLegalName, Status, OfferExtendedStatus, CreatedDate, AvailabilityEndDate, LastModifiedDate
+    #         sort_by: "EntityId", # accepts EntityId, Name, ProductId, ProductName, ManufacturerAccountId, ManufacturerLegalName, ResellerAccountID, ResellerLegalName, Status, OfferExtendedStatus, CreatedDate, AvailabilityEndDate, LastModifiedDate, ResellerRole, SourceAuthorization, IssuerAccountId
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #       machine_learning_product_sort: {
@@ -1342,6 +1348,8 @@ module Aws::MarketplaceCatalog
     #   resp.entity_summary_list[0].resale_authorization_summary.created_date #=> String
     #   resp.entity_summary_list[0].resale_authorization_summary.availability_end_date #=> String
     #   resp.entity_summary_list[0].resale_authorization_summary.reseller_role #=> String, one of "ChannelPartner", "Distributor"
+    #   resp.entity_summary_list[0].resale_authorization_summary.source_authorization #=> String
+    #   resp.entity_summary_list[0].resale_authorization_summary.issuer_account_id #=> String
     #   resp.entity_summary_list[0].machine_learning_product_summary.product_title #=> String
     #   resp.entity_summary_list[0].machine_learning_product_summary.visibility #=> String, one of "Limited", "Public", "Restricted", "Draft"
     #   resp.entity_summary_list[0].offer_set_summary.name #=> String
@@ -1633,7 +1641,7 @@ module Aws::MarketplaceCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

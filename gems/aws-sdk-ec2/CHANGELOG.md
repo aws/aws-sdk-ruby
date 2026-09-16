@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.649.0 (2026-09-16)
+------------------
+
+* Feature - Releasing new EC2 R9g and R9gd memory-optimized instances powered by AWS Graviton5 processors, with up to 25 percent better compute performance than R8g instances, faster DDR5 memory, and up to 100 Gbps network and 72 Gbps EBS bandwidth. R9gd instances additionally provide local NVMe SSD storage.
+
 1.648.0 (2026-09-11)
 ------------------
 

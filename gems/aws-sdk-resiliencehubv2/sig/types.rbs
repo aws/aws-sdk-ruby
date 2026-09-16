@@ -127,6 +127,7 @@ module Aws::Resiliencehubv2
       attr_accessor multi_az: Types::MultiAzTargets
       attr_accessor multi_region: Types::MultiRegionTargets
       attr_accessor data_recovery: Types::DataRecoveryTargets
+      attr_accessor sharing_enabled: bool
       attr_accessor kms_key_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
@@ -371,6 +372,12 @@ module Aws::Resiliencehubv2
       SENSITIVE: []
     end
 
+    class DependencyInsight
+      attr_accessor category: ("CROSS_REGION" | "NEW_DEPENDENCY" | "THIRD_PARTY" | "UNEVEN_USAGE" | "AWS_SERVICE")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
     class DependencySummary
       attr_accessor dependency_id: ::String
       attr_accessor service_arn: ::String
@@ -479,6 +486,21 @@ module Aws::Resiliencehubv2
       attr_accessor status: ("OPEN" | "RESOLVED" | "IRRELEVANT")
       attr_accessor policy_component: ("AVAILABILITY_SLO" | "MULTI_AZ_DISASTER_RECOVERY" | "MULTI_REGION_DISASTER_RECOVERY" | "DATA_RECOVERY")
       attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetDependencyInsightsRequest
+      attr_accessor service_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetDependencyInsightsResponse
+      attr_accessor overview: ::String
+      attr_accessor insights: ::Array[Types::DependencyInsight]
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor error_code: ("INSUFFICIENT_DATA" | "LLM_GENERATION_FAILED" | "INTERNAL_ERROR")
+      attr_accessor error_message: ::String
       SENSITIVE: []
     end
 
@@ -705,6 +727,7 @@ module Aws::Resiliencehubv2
     end
 
     class ListPoliciesRequest
+      attr_accessor account_id: ::String
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -712,6 +735,22 @@ module Aws::Resiliencehubv2
 
     class ListPoliciesResponse
       attr_accessor policy_summaries: ::Array[Types::PolicySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicyEventsRequest
+      attr_accessor policy_arn: ::String
+      attr_accessor event_types: ::Array[("POLICY_ATTACHED_TO_SERVICE" | "POLICY_DETACHED_FROM_SERVICE" | "POLICY_SHARING_REVOKED" | "POLICY_DELETED")]
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicyEventsResponse
+      attr_accessor events: ::Array[Types::PolicyEvent]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1039,12 +1078,73 @@ module Aws::Resiliencehubv2
       attr_accessor multi_az: Types::MultiAzTargets
       attr_accessor multi_region: Types::MultiRegionTargets
       attr_accessor data_recovery: Types::DataRecoveryTargets
+      attr_accessor sharing_enabled: bool
+      attr_accessor organization_id: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor associated_service_count: ::Integer
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:tags]
+    end
+
+    class PolicyAttachedToServiceMetadata
+      attr_accessor service_arn: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyDeletedMetadata
+      attr_accessor affected_service_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class PolicyDetachedFromServiceMetadata
+      attr_accessor service_arn: ::String
+      attr_accessor account_id: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyEvent
+      attr_accessor event_id: ::String
+      attr_accessor timestamp: ::Time
+      attr_accessor event_type: ("POLICY_ATTACHED_TO_SERVICE" | "POLICY_DETACHED_FROM_SERVICE" | "POLICY_SHARING_REVOKED" | "POLICY_DELETED")
+      attr_accessor policy_arn: ::String
+      attr_accessor actor: Types::EventActor
+      attr_accessor event_details: Types::PolicyEventDetails
+      SENSITIVE: []
+    end
+
+    class PolicyEventDetails
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor event_metadata: Types::PolicyEventMetadata
+      SENSITIVE: []
+    end
+
+    class PolicyEventMetadata
+      attr_accessor policy_attached_to_service: Types::PolicyAttachedToServiceMetadata
+      attr_accessor policy_detached_from_service: Types::PolicyDetachedFromServiceMetadata
+      attr_accessor policy_sharing_revoked: Types::PolicySharingRevokedMetadata
+      attr_accessor policy_deleted: Types::PolicyDeletedMetadata
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class PolicyAttachedToService < PolicyEventMetadata
+      end
+      class PolicyDetachedFromService < PolicyEventMetadata
+      end
+      class PolicySharingRevoked < PolicyEventMetadata
+      end
+      class PolicyDeleted < PolicyEventMetadata
+      end
+      class Unknown < PolicyEventMetadata
+      end
+    end
+
+    class PolicySharingRevokedMetadata
+      attr_accessor affected_service_count: ::Integer
+      SENSITIVE: []
     end
 
     class PolicySummary
@@ -1054,6 +1154,8 @@ module Aws::Resiliencehubv2
       attr_accessor multi_az: Types::MultiAzTargets
       attr_accessor multi_region: Types::MultiRegionTargets
       attr_accessor data_recovery: Types::DataRecoveryTargets
+      attr_accessor sharing_enabled: bool
+      attr_accessor organization_id: ::String
       attr_accessor associated_service_count: ::Integer
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
@@ -1368,12 +1470,17 @@ module Aws::Resiliencehubv2
     class ServicePolicyAssociatedMetadata
       attr_accessor policy_name: ::String
       attr_accessor policy_arn: ::String
+      attr_accessor policy_owner_account_id: ::String
+      attr_accessor policy_source: ("SELF" | "CROSS_ACCOUNT")
       SENSITIVE: []
     end
 
     class ServicePolicyDisassociatedMetadata
       attr_accessor policy_name: ::String
       attr_accessor policy_arn: ::String
+      attr_accessor policy_owner_account_id: ::String
+      attr_accessor policy_source: ("SELF" | "CROSS_ACCOUNT")
+      attr_accessor reason: ("REPLACED_BY_UPDATE" | "SHARING_REVOKED" | "POLICY_DELETED")
       SENSITIVE: []
     end
 
@@ -1471,6 +1578,17 @@ module Aws::Resiliencehubv2
       attr_accessor value: ::Float
       attr_accessor policy_name: ::String
       attr_accessor source: ("SELF" | "CROSS_ACCOUNT")
+      SENSITIVE: []
+    end
+
+    class StartDependencyInsightsRequest
+      attr_accessor service_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartDependencyInsightsResponse
+      attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
       SENSITIVE: []
     end
 
@@ -1978,6 +2096,7 @@ module Aws::Resiliencehubv2
       attr_accessor multi_az: Types::MultiAzTargets
       attr_accessor multi_region: Types::MultiRegionTargets
       attr_accessor data_recovery: Types::DataRecoveryTargets
+      attr_accessor sharing_enabled: bool
       SENSITIVE: []
     end
 

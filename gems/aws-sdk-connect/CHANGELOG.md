@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.279.0 (2026-09-16)
+------------------
+
+* Feature - Adds support for ContactAnalysis via ListContactReferences.
+
 1.278.0 (2026-09-11)
 ------------------
 

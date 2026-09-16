@@ -864,7 +864,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_id #=> String
     #   resp.agent_runtime_version #=> String
     #   resp.created_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntime AWS API Documentation
     #
@@ -932,7 +932,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_arn #=> String
     #   resp.agent_runtime_id #=> String
     #   resp.endpoint_name #=> String
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntimeEndpoint AWS API Documentation
@@ -5609,7 +5609,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.agent_runtime_id #=> String
     #   resp.agent_runtime_version #=> String
     #
@@ -5654,7 +5654,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @example Response structure
     #
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.agent_runtime_id #=> String
     #   resp.endpoint_name #=> String
     #
@@ -6923,7 +6923,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.network_configuration.network_mode_config.subnets #=> Array
     #   resp.network_configuration.network_mode_config.subnets[0] #=> String
     #   resp.network_configuration.network_mode_config.require_service_s3_endpoint #=> Boolean
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.lifecycle_configuration.idle_runtime_session_timeout #=> Integer
     #   resp.lifecycle_configuration.max_lifetime #=> Integer
     #   resp.failure_reason #=> String
@@ -7041,7 +7041,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_endpoint_arn #=> String
     #   resp.agent_runtime_arn #=> String
     #   resp.description #=> String
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #   resp.failure_reason #=> String
@@ -9600,7 +9600,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.runtime_endpoints[0].target_version #=> String
     #   resp.runtime_endpoints[0].agent_runtime_endpoint_arn #=> String
     #   resp.runtime_endpoints[0].agent_runtime_arn #=> String
-    #   resp.runtime_endpoints[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.runtime_endpoints[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.runtime_endpoints[0].id #=> String
     #   resp.runtime_endpoints[0].description #=> String
     #   resp.runtime_endpoints[0].created_at #=> Time
@@ -9651,7 +9651,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtimes[0].agent_runtime_name #=> String
     #   resp.agent_runtimes[0].description #=> String
     #   resp.agent_runtimes[0].last_updated_at #=> Time
-    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentRuntimeVersions AWS API Documentation
@@ -9704,7 +9704,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtimes #=> Array
     #   resp.agent_runtimes[0].agent_runtime_arn #=> String
     #   resp.agent_runtimes[0].agent_runtime_version #=> String
-    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentRuntimeVersionsByCapacityProvider AWS API Documentation
@@ -9747,7 +9747,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtimes[0].agent_runtime_name #=> String
     #   resp.agent_runtimes[0].description #=> String
     #   resp.agent_runtimes[0].last_updated_at #=> Time
-    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.agent_runtimes[0].status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListAgentRuntimes AWS API Documentation
@@ -12370,7 +12370,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_version #=> String
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateAgentRuntime AWS API Documentation
     #
@@ -12429,7 +12429,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.target_version #=> String
     #   resp.agent_runtime_endpoint_arn #=> String
     #   resp.agent_runtime_arn #=> String
-    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
+    #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING", "DELETE_FAILED"
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #
@@ -16695,7 +16695,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

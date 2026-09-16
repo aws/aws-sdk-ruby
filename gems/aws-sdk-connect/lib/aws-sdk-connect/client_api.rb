@@ -287,6 +287,7 @@ module Aws::Connect
     ConnectionData = Shapes::StructureShape.new(name: 'ConnectionData')
     Contact = Shapes::StructureShape.new(name: 'Contact')
     ContactAnalysis = Shapes::StructureShape.new(name: 'ContactAnalysis')
+    ContactAnalysisReference = Shapes::StructureShape.new(name: 'ContactAnalysisReference')
     ContactConfiguration = Shapes::StructureShape.new(name: 'ContactConfiguration')
     ContactDataRequest = Shapes::StructureShape.new(name: 'ContactDataRequest')
     ContactDataRequestList = Shapes::ListShape.new(name: 'ContactDataRequestList')
@@ -3199,6 +3200,14 @@ module Aws::Connect
 
     ContactAnalysis.add_member(:transcript, Shapes::ShapeRef.new(shape: Transcript, location_name: "Transcript"))
     ContactAnalysis.struct_class = Types::ContactAnalysis
+
+    ContactAnalysisReference.add_member(:name, Shapes::ShapeRef.new(shape: ReferenceKey, location_name: "Name"))
+    ContactAnalysisReference.add_member(:value, Shapes::ShapeRef.new(shape: ReferenceValue, location_name: "Value"))
+    ContactAnalysisReference.add_member(:status, Shapes::ShapeRef.new(shape: ReferenceStatus, location_name: "Status"))
+    ContactAnalysisReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    ContactAnalysisReference.add_member(:analytics_mode, Shapes::ShapeRef.new(shape: AnalyticsMode, location_name: "AnalyticsMode"))
+    ContactAnalysisReference.add_member(:is_redacted, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsRedacted"))
+    ContactAnalysisReference.struct_class = Types::ContactAnalysisReference
 
     ContactConfiguration.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
     ContactConfiguration.add_member(:participant_role, Shapes::ShapeRef.new(shape: ParticipantRole, location_name: "ParticipantRole"))
@@ -7881,6 +7890,7 @@ module Aws::Connect
     ReferenceSummary.add_member(:number, Shapes::ShapeRef.new(shape: NumberReference, location_name: "Number"))
     ReferenceSummary.add_member(:date, Shapes::ShapeRef.new(shape: DateReference, location_name: "Date"))
     ReferenceSummary.add_member(:email, Shapes::ShapeRef.new(shape: EmailReference, location_name: "Email"))
+    ReferenceSummary.add_member(:contact_analysis, Shapes::ShapeRef.new(shape: ContactAnalysisReference, location_name: "ContactAnalysis"))
     ReferenceSummary.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ReferenceSummary.add_member_subclass(:url, Types::ReferenceSummary::Url)
     ReferenceSummary.add_member_subclass(:attachment, Types::ReferenceSummary::Attachment)
@@ -7892,6 +7902,7 @@ module Aws::Connect
     ReferenceSummary.add_member_subclass(:number, Types::ReferenceSummary::Number)
     ReferenceSummary.add_member_subclass(:date, Types::ReferenceSummary::Date)
     ReferenceSummary.add_member_subclass(:email, Types::ReferenceSummary::Email)
+    ReferenceSummary.add_member_subclass(:contact_analysis, Types::ReferenceSummary::ContactAnalysis)
     ReferenceSummary.add_member_subclass(:unknown, Types::ReferenceSummary::Unknown)
     ReferenceSummary.struct_class = Types::ReferenceSummary
 

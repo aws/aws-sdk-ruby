@@ -556,15 +556,13 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
+    # The operations role feature of Elastic Beanstalk is in beta release
+    # and is subject to change.
+    #
     # Add or change the operations role used by an environment. After this
     # call is made, Elastic Beanstalk uses the associated operations role
     # for permissions to downstream services during subsequent calls acting
-    # on this environment. For more information, see [Operations roles][1]
-    # in the *AWS Elastic Beanstalk Developer Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
+    # on this environment.
     #
     # @option params [required, String] :environment_name
     #   The name of the environment to which to set the operations role.
@@ -828,16 +826,15 @@ module Aws::ElasticBeanstalk
 
     # Creates an application version for the specified application. You can
     # create an application version from a source bundle in Amazon S3, a
-    # commit in AWS CodeCommit, or the output of an AWS CodeBuild build as
-    # follows:
+    # commit in CodeCommit, or the output of an CodeBuild build as follows:
     #
-    # Specify a commit in an AWS CodeCommit repository with
+    # Specify a commit in an CodeCommit repository with
     # `SourceBuildInformation`.
     #
-    # Specify a build in an AWS CodeBuild with `SourceBuildInformation` and
+    # Specify a build in an CodeBuild with `SourceBuildInformation` and
     # `BuildConfiguration`.
     #
-    # Specify a source bundle in S3 with `SourceBundle`
+    # Specify a source bundle in Amazon S3 with `SourceBundle`
     #
     # Omit both `SourceBuildInformation` and `SourceBundle` to use the
     # default sample application.
@@ -858,15 +855,15 @@ module Aws::ElasticBeanstalk
     #   A label identifying this version.
     #
     #   Constraint: Must be unique per application. If an application version
-    #   already exists with this label for the specified application, AWS
-    #   Elastic Beanstalk returns an `InvalidParameterValue` error.
+    #   already exists with this label for the specified application, Elastic
+    #   Beanstalk returns an `InvalidParameterValue` error.
     #
     # @option params [String] :description
     #   A description of this application version.
     #
     # @option params [Types::SourceBuildInformation] :source_build_information
-    #   Specify a commit in an AWS CodeCommit Git repository to use as the
-    #   source code for the application version.
+    #   Specify a commit in an CodeCommit Git repository to use as the source
+    #   code for the application version.
     #
     # @option params [Types::S3Location] :source_bundle
     #   The Amazon S3 bucket and key that identify the location of the source
@@ -874,15 +871,25 @@ module Aws::ElasticBeanstalk
     #
     #   <note markdown="1"> The Amazon S3 bucket must be in the same region as the environment.
     #
+    #    Unless you're specifying a source bundle in the bucket that Elastic
+    #   Beanstalk manages in your account, you must assign a custom policy to
+    #   your user, and grant `Allow` permission to the `s3:Get*` actions on
+    #   your S3 object resource, for example,
+    #   `arn:aws:s3:::your-bucket/your-source-bundle-object`.
+    #
     #    </note>
     #
-    #   Specify a source bundle in S3 or a commit in an AWS CodeCommit
+    #   Specify a source bundle in Amazon S3 or a commit in an CodeCommit
     #   repository (with `SourceBuildInformation`), but not both. If neither
     #   `SourceBundle` nor `SourceBuildInformation` are provided, Elastic
     #   Beanstalk uses a sample application.
     #
     # @option params [Types::BuildConfiguration] :build_configuration
-    #   Settings for an AWS CodeBuild build.
+    #   Settings for an CodeBuild build.
+    #
+    #   Don't specify `BuildConfiguration` together with
+    #   `ImageConfiguration`, which configures a container image build
+    #   instead.
     #
     # @option params [Boolean] :auto_create_application
     #   Set to `true` to create an application with the specified name if it
@@ -895,8 +902,8 @@ module Aws::ElasticBeanstalk
     #   issues prior to deploying the application version to an environment.
     #
     #   You must turn processing on for application versions that you create
-    #   using AWS CodeBuild or AWS CodeCommit. For application versions built
-    #   from a source bundle in Amazon S3, processing is optional.
+    #   using CodeBuild or CodeCommit. For application versions built from a
+    #   source bundle in Amazon S3, processing is optional.
     #
     #   <note markdown="1"> The `Process` option validates Elastic Beanstalk configuration files.
     #   It doesn't validate your application's configuration files, like
@@ -909,6 +916,16 @@ module Aws::ElasticBeanstalk
     #
     #   Elastic Beanstalk applies these tags only to the application version.
     #   Environments that use the application version don't inherit the tags.
+    #
+    # @option params [Types::ImageConfiguration] :image_configuration
+    #   The source of the container image for this application version. You
+    #   can specify an image that you built and pushed to a container registry
+    #   yourself, or settings for Elastic Beanstalk to build one from your
+    #   source bundle. Specify exactly one of the `Source` and `Build`
+    #   members.
+    #
+    #   Don't specify `ImageConfiguration` together with
+    #   `BuildConfiguration`, which configures an CodeBuild build instead.
     #
     # @return [Types::ApplicationVersionDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -976,6 +993,20 @@ module Aws::ElasticBeanstalk
     #         value: "TagValue",
     #       },
     #     ],
+    #     image_configuration: {
+    #       source: {
+    #         uri: "String",
+    #       },
+    #       build: {
+    #         type: "docker", # accepts docker, buildpack
+    #         dockerfile_location: "String",
+    #         buildpack: "String",
+    #         architecture: "amd64", # accepts amd64, arm64
+    #         code_build_service_role: "NonEmptyString",
+    #         compute_type: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
+    #         timeout_in_minutes: 1,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -990,6 +1021,15 @@ module Aws::ElasticBeanstalk
     #   resp.application_version.build_arn #=> String
     #   resp.application_version.source_bundle.s3_bucket #=> String
     #   resp.application_version.source_bundle.s3_key #=> String
+    #   resp.application_version.image_source.uri #=> String
+    #   resp.application_version.image_build_configuration.type #=> String, one of "docker", "buildpack"
+    #   resp.application_version.image_build_configuration.dockerfile_location #=> String
+    #   resp.application_version.image_build_configuration.buildpack #=> String
+    #   resp.application_version.image_build_configuration.architecture #=> String, one of "amd64", "arm64"
+    #   resp.application_version.image_build_configuration.code_build_service_role #=> String
+    #   resp.application_version.image_build_configuration.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
+    #   resp.application_version.image_build_configuration.timeout_in_minutes #=> Integer
+    #   resp.application_version.process #=> Boolean
     #   resp.application_version.date_created #=> Time
     #   resp.application_version.date_updated #=> Time
     #   resp.application_version.status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing", "Building"
@@ -1003,8 +1043,8 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Creates an AWS Elastic Beanstalk configuration template, associated
-    # with a specific Elastic Beanstalk application. You define application
+    # Creates an Elastic Beanstalk configuration template, associated with a
+    # specific Elastic Beanstalk application. You define application
     # configuration settings in a configuration template. You can then use
     # the configuration template to deploy different versions of the
     # application with the same configuration settings.
@@ -1036,7 +1076,7 @@ module Aws::ElasticBeanstalk
     #   system, runtime, and application server for a configuration template.
     #   It also determines the set of configuration options as well as the
     #   possible and default values. For more information, see [Supported
-    #   Platforms][1] in the *AWS Elastic Beanstalk Developer Guide*.
+    #   Platforms][1] in the *Elastic Beanstalk Developer Guide*.
     #
     #   You must specify `SolutionStackName` if you don't specify
     #   `PlatformArn`, `EnvironmentId`, or `SourceConfiguration`.
@@ -1051,7 +1091,7 @@ module Aws::ElasticBeanstalk
     #
     # @option params [String] :platform_arn
     #   The Amazon Resource Name (ARN) of the custom platform. For more
-    #   information, see [ Custom Platforms][1] in the *AWS Elastic Beanstalk
+    #   information, see [ Custom Platforms][1] in the *Elastic Beanstalk
     #   Developer Guide*.
     #
     #   <note markdown="1"> If you specify `PlatformArn`, then don't specify `SolutionStackName`.
@@ -1090,7 +1130,7 @@ module Aws::ElasticBeanstalk
     #   instance type. If specified, these values override the values obtained
     #   from the solution stack or the source configuration template. For a
     #   complete list of Elastic Beanstalk configuration options, see [Option
-    #   Values][1] in the *AWS Elastic Beanstalk Developer Guide*.
+    #   Values][1] in the *Elastic Beanstalk Developer Guide*.
     #
     #
     #
@@ -1188,7 +1228,7 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Launches an AWS Elastic Beanstalk environment for the specified
+    # Launches an Elastic Beanstalk environment for the specified
     # application using the specified configuration.
     #
     # @option params [required, String] :application_name
@@ -1229,9 +1269,9 @@ module Aws::ElasticBeanstalk
     # @option params [Types::EnvironmentTier] :tier
     #   Specifies the tier to use in creating this environment. The
     #   environment tier that you choose determines whether Elastic Beanstalk
-    #   provisions resources to support a web application that handles HTTP(S)
-    #   requests or a web application that handles background-processing
-    #   tasks.
+    #   provisions resources on Amazon EC2 instances or on an Amazon EKS
+    #   cluster, and, for Amazon EC2, whether the environment serves HTTP(S)
+    #   requests or processes background tasks from a queue.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Specifies the tags applied to resources in the environment.
@@ -1256,8 +1296,8 @@ module Aws::ElasticBeanstalk
     #   use with the environment. If specified, Elastic Beanstalk sets the
     #   configuration values to the default values associated with the
     #   specified solution stack. For a list of current solution stacks, see
-    #   [Elastic Beanstalk Supported Platforms][1] in the *AWS Elastic
-    #   Beanstalk Platforms* guide.
+    #   [Elastic Beanstalk Supported Platforms][1] in the *Elastic Beanstalk
+    #   Platforms* guide.
     #
     #   <note markdown="1"> If you specify `SolutionStackName`, don't specify `PlatformArn` or
     #   `TemplateName`.
@@ -1271,7 +1311,7 @@ module Aws::ElasticBeanstalk
     # @option params [String] :platform_arn
     #   The Amazon Resource Name (ARN) of the custom platform to use with the
     #   environment. For more information, see [Custom Platforms][1] in the
-    #   *AWS Elastic Beanstalk Developer Guide*.
+    #   *Elastic Beanstalk Developer Guide*.
     #
     #   <note markdown="1"> If you specify `PlatformArn`, don't specify `SolutionStackName`.
     #
@@ -1282,7 +1322,7 @@ module Aws::ElasticBeanstalk
     #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/custom-platforms.html
     #
     # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
-    #   If specified, AWS Elastic Beanstalk sets the specified configuration
+    #   If specified, Elastic Beanstalk sets the specified configuration
     #   options to the requested value in the configuration set for the new
     #   environment. These override the values obtained from the solution
     #   stack or the configuration template.
@@ -1292,17 +1332,15 @@ module Aws::ElasticBeanstalk
     #   configuration set for this new environment.
     #
     # @option params [String] :operations_role
+    #   The operations role feature of Elastic Beanstalk is in beta release
+    #   and is subject to change.
+    #
     #   The Amazon Resource Name (ARN) of an existing IAM role to be used as
     #   the environment's operations role. If specified, Elastic Beanstalk
     #   uses the operations role for permissions to downstream services during
     #   this call and during subsequent calls acting on this environment. To
     #   specify an operations role, you must have the `iam:PassRole`
-    #   permission for the role. For more information, see [Operations
-    #   roles][1] in the *AWS Elastic Beanstalk Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
+    #   permission for the role.
     #
     # @return [Types::EnvironmentDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1780,10 +1818,33 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Returns attributes related to AWS Elastic Beanstalk that are
-    # associated with the calling AWS account.
+    # Returns attributes related to Elastic Beanstalk that are associated
+    # with the calling Amazon Web Services account.
     #
     # The result currently has one set of attributes—resource quotas.
+    #
+    # This action only returns information about resources that the calling
+    # principle has IAM permissions to access. For example, consider a case
+    # where a user only has permission to access one of three resources.
+    # When the user calls the this action, the response will only include
+    # the one resource that the user has permission to access instead of all
+    # three resources. If the user doesn’t have access to any of the
+    # resources an empty result is returned.
+    #
+    # <note markdown="1"> The [AWSElasticBeanstalkReadOnly][1] managed policy allows operators
+    # to view information about resources related to Elastic Beanstalk. For
+    # more information, see [ Managing Elastic Beanstalk user policies][2]
+    # in the *Elastic Beanstalk Developer Guide*. For detailed instructions
+    # to attach a policy to a user or group, see the section [ Controlling
+    # access with managed policies][3] in the same topic.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+    # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
     #
     # @return [Types::DescribeAccountAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1807,6 +1868,29 @@ module Aws::ElasticBeanstalk
     end
 
     # Retrieve a list of application versions.
+    #
+    # This action only returns information about resources that the calling
+    # principle has IAM permissions to access. For example, consider a case
+    # where a user only has permission to access one of three resources.
+    # When the user calls the this action, the response will only include
+    # the one resource that the user has permission to access instead of all
+    # three resources. If the user doesn’t have access to any of the
+    # resources an empty result is returned.
+    #
+    # <note markdown="1"> The [AWSElasticBeanstalkReadOnly][1] managed policy allows operators
+    # to view information about resources related to Elastic Beanstalk. For
+    # more information, see [ Managing Elastic Beanstalk user policies][2]
+    # in the *Elastic Beanstalk Developer Guide*. For detailed instructions
+    # to attach a policy to a user or group, see the section [ Controlling
+    # access with managed policies][3] in the same topic.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+    # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
     #
     # @option params [String] :application_name
     #   Specify an application name to show only application versions for that
@@ -1896,6 +1980,15 @@ module Aws::ElasticBeanstalk
     #   resp.application_versions[0].build_arn #=> String
     #   resp.application_versions[0].source_bundle.s3_bucket #=> String
     #   resp.application_versions[0].source_bundle.s3_key #=> String
+    #   resp.application_versions[0].image_source.uri #=> String
+    #   resp.application_versions[0].image_build_configuration.type #=> String, one of "docker", "buildpack"
+    #   resp.application_versions[0].image_build_configuration.dockerfile_location #=> String
+    #   resp.application_versions[0].image_build_configuration.buildpack #=> String
+    #   resp.application_versions[0].image_build_configuration.architecture #=> String, one of "amd64", "arm64"
+    #   resp.application_versions[0].image_build_configuration.code_build_service_role #=> String
+    #   resp.application_versions[0].image_build_configuration.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
+    #   resp.application_versions[0].image_build_configuration.timeout_in_minutes #=> Integer
+    #   resp.application_versions[0].process #=> Boolean
     #   resp.application_versions[0].date_created #=> Time
     #   resp.application_versions[0].date_updated #=> Time
     #   resp.application_versions[0].status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing", "Building"
@@ -1912,9 +2005,33 @@ module Aws::ElasticBeanstalk
 
     # Returns the descriptions of existing applications.
     #
+    # This action only returns information about applications that the
+    # calling principle has IAM permissions to access. For example, consider
+    # a case where a user only has permission to access two of three
+    # applications. When the user calls the *DescribeApplications* action,
+    # the response will only include the two applications that the user has
+    # permission to access instead of all three applications. If the user
+    # doesn’t have access to any of the applications an empty result is
+    # returned.
+    #
+    # <note markdown="1"> The *AWSElasticBeanstalkReadOnly* managed policy allows operators to
+    # view information about resources related to Elastic Beanstalk
+    # environments. For more information, see [ Managing Elastic Beanstalk
+    # user policies][1] in the *Elastic Beanstalk Developer Guide*. For
+    # detailed instructions to attach a policy to a user or group, see the
+    # section [ Controlling access with managed policies][2] in the same
+    # topic.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
+    #
     # @option params [Array<String>] :application_names
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to only include those with the specified names.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions to
+    #   only include those with the specified names.
     #
     # @return [Types::ApplicationDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2006,6 +2123,29 @@ module Aws::ElasticBeanstalk
     # stack defines. The description includes the values the options, their
     # default values, and an indication of the required action on a running
     # environment if an option value is changed.
+    #
+    # This action only returns information about resources that the calling
+    # principle has IAM permissions to access. For example, consider a case
+    # where a user only has permission to access one of three resources.
+    # When the user calls the this action, the response will only include
+    # the one resource that the user has permission to access instead of all
+    # three resources. If the user doesn’t have access to any of the
+    # resources an empty result is returned.
+    #
+    # <note markdown="1"> The [AWSElasticBeanstalkReadOnly][1] managed policy allows operators
+    # to view information about resources related to Elastic Beanstalk. For
+    # more information, see [ Managing Elastic Beanstalk user policies][2]
+    # in the *Elastic Beanstalk Developer Guide*. For detailed instructions
+    # to attach a policy to a user or group, see the section [ Controlling
+    # access with managed policies][3] in the same topic.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+    # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
     #
     # @option params [String] :application_name
     #   The name of the application associated with the configuration template
@@ -2128,11 +2268,34 @@ module Aws::ElasticBeanstalk
     # a draft configuration of an environment that is either in the process
     # of deployment or that failed to deploy.
     #
+    # This action only returns information about resources that the calling
+    # principle has IAM permissions to access. For example, consider a case
+    # where a user only has permission to access one of three resources.
+    # When the user calls the this action, the response will only include
+    # the one resource that the user has permission to access instead of all
+    # three resources. If the user doesn’t have access to any of the
+    # resources an empty result is returned.
+    #
+    # <note markdown="1"> The [AWSElasticBeanstalkReadOnly][1] managed policy allows operators
+    # to view information about resources related to Elastic Beanstalk. For
+    # more information, see [ Managing Elastic Beanstalk user policies][2]
+    # in the *Elastic Beanstalk Developer Guide*. For detailed instructions
+    # to attach a policy to a user or group, see the section [ Controlling
+    # access with managed policies][3] in the same topic.
+    #
+    #  </note>
+    #
     # Related Topics
     #
     # * DeleteEnvironmentConfiguration
     #
     # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+    # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
     #
     # @option params [required, String] :application_name
     #   The application for the environment or configuration template.
@@ -2141,17 +2304,16 @@ module Aws::ElasticBeanstalk
     #   The name of the configuration template to describe.
     #
     #   Conditional: You must specify either this parameter or an
-    #   EnvironmentName, but not both. If you specify both, AWS Elastic
-    #   Beanstalk returns an `InvalidParameterCombination` error. If you do
-    #   not specify either, AWS Elastic Beanstalk returns a
-    #   `MissingRequiredParameter` error.
+    #   EnvironmentName, but not both. If you specify both, Elastic Beanstalk
+    #   returns an `InvalidParameterCombination` error. If you do not specify
+    #   either, Elastic Beanstalk returns a `MissingRequiredParameter` error.
     #
     # @option params [String] :environment_name
     #   The name of the environment to describe.
     #
     #   Condition: You must specify either this or a TemplateName, but not
-    #   both. If you specify both, AWS Elastic Beanstalk returns an
-    #   `InvalidParameterCombination` error. If you do not specify either, AWS
+    #   both. If you specify both, Elastic Beanstalk returns an
+    #   `InvalidParameterCombination` error. If you do not specify either,
     #   Elastic Beanstalk returns `MissingRequiredParameter` error.
     #
     # @return [Types::ConfigurationSettingsDescriptions] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2246,7 +2408,31 @@ module Aws::ElasticBeanstalk
 
     # Returns information about the overall health of the specified
     # environment. The **DescribeEnvironmentHealth** operation is only
-    # available with AWS Elastic Beanstalk Enhanced Health.
+    # available with Elastic Beanstalk Enhanced Health.
+    #
+    # This action only returns information about environments that the
+    # calling principle has IAM permissions to access. For example, consider
+    # a case where a user only has permission to access one of three
+    # environments. When the user calls this action, the response will only
+    # include the one environment that the user has permission to access
+    # instead of all three environments. If the user doesn’t have access to
+    # any of the environments an empty result is returned.
+    #
+    # <note markdown="1"> The [AWSElasticBeanstalkReadOnly][1] managed policy allows operators
+    # to view information about resources related to Elastic Beanstalk
+    # environments. For more information, see [ Managing Elastic Beanstalk
+    # user policies][2] in the *Elastic Beanstalk Developer Guide*. For
+    # detailed instructions to attach a policy to a user or group, see the
+    # section [ Controlling access with managed policies][3] in the same
+    # topic.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+    # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
     #
     # @option params [String] :environment_name
     #   Specify the environment by name.
@@ -2429,6 +2615,30 @@ module Aws::ElasticBeanstalk
 
     # Lists an environment's upcoming and in-progress managed actions.
     #
+    # This action only returns information about environments that the
+    # calling principle has IAM permissions to access. For example, consider
+    # a case where a user only has permission to access one of three
+    # environments. When the user calls this action, the response will only
+    # include the one environment that the user has permission to access
+    # instead of all three environments. If the user doesn’t have access to
+    # any of the environments an empty result is returned.
+    #
+    # <note markdown="1"> The [AWSElasticBeanstalkReadOnly][1] managed policy allows operators
+    # to view information about resources related to Elastic Beanstalk
+    # environments. For more information, see [ Managing Elastic Beanstalk
+    # user policies][2] in the *Elastic Beanstalk Developer Guide*. For
+    # detailed instructions to attach a policy to a user or group, see the
+    # section [ Controlling access with managed policies][3] in the same
+    # topic.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+    # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
+    #
     # @option params [String] :environment_name
     #   The name of the target environment.
     #
@@ -2468,20 +2678,22 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Returns AWS resources for this environment.
+    # Returns Amazon Web Services resources for this environment.
     #
     # @option params [String] :environment_id
-    #   The ID of the environment to retrieve AWS resource usage data.
+    #   The ID of the environment to retrieve Amazon Web Services resource
+    #   usage data.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @option params [String] :environment_name
-    #   The name of the environment to retrieve AWS resource usage data.
+    #   The name of the environment to retrieve Amazon Web Services resource
+    #   usage data.
     #
     #   Condition: You must specify either this or an EnvironmentId, or both.
-    #   If you do not specify either, AWS Elastic Beanstalk returns
+    #   If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @return [Types::EnvironmentResourceDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2540,6 +2752,7 @@ module Aws::ElasticBeanstalk
     #   resp.environment_resources.environment_name #=> String
     #   resp.environment_resources.auto_scaling_groups #=> Array
     #   resp.environment_resources.auto_scaling_groups[0].name #=> String
+    #   resp.environment_resources.cluster.cluster_arn #=> String
     #   resp.environment_resources.instances #=> Array
     #   resp.environment_resources.instances[0].id #=> String
     #   resp.environment_resources.launch_configurations #=> Array
@@ -2565,23 +2778,46 @@ module Aws::ElasticBeanstalk
 
     # Returns descriptions for existing environments.
     #
+    # This action only returns information about environments that the
+    # calling principle has IAM permissions to access. For example, consider
+    # a case where a user only has permission to access one of three
+    # environments. When the user calls the *DescribeEnvironments* action,
+    # the response will only include the one environment that the user has
+    # permission to access instead of all three environments. If the user
+    # doesn’t have access to any of the environments an empty result is
+    # returned.
+    #
+    # <note markdown="1"> The [AWSElasticBeanstalkReadOnly][1] managed policy allows operators
+    # to view information about resources related to Elastic Beanstalk
+    # environments. For more information, see [ Managing Elastic Beanstalk
+    # user policies][2] in the *Elastic Beanstalk Developer Guide*. For
+    # detailed instructions to attach a policy to a user or group, see the
+    # section [ Controlling access with managed policies][3] in the same
+    # topic.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+    # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
+    #
     # @option params [String] :application_name
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to include only those that are associated with this
-    #   application.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions to
+    #   include only those that are associated with this application.
     #
     # @option params [String] :version_label
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to include only those that are associated with this
-    #   application version.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions to
+    #   include only those that are associated with this application version.
     #
     # @option params [Array<String>] :environment_ids
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to include only those that have the specified IDs.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions to
+    #   include only those that have the specified IDs.
     #
     # @option params [Array<String>] :environment_names
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to include only those that have the specified names.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions to
+    #   include only those that have the specified names.
     #
     # @option params [Boolean] :include_deleted
     #   Indicates whether to include deleted environments:
@@ -2716,39 +2952,59 @@ module Aws::ElasticBeanstalk
     # Returns list of event descriptions matching criteria up to the last 6
     # weeks.
     #
-    # <note markdown="1"> This action returns the most recent 1,000 events from the specified
+    # This action returns the most recent 1,000 events from the specified
     # `NextToken`.
+    #
+    # This action only returns information about resources that the calling
+    # principle has IAM permissions to access. For example, consider a case
+    # where a user only has permission to access one of three resources.
+    # When the user calls the this action, the response will only include
+    # the one resource that the user has permission to access instead of all
+    # three resources. If the user doesn’t have access to any of the
+    # resources an empty result is returned.
+    #
+    # <note markdown="1"> The [AWSElasticBeanstalkReadOnly][1] managed policy allows operators
+    # to view information about resources related to Elastic Beanstalk. For
+    # more information, see [ Managing Elastic Beanstalk user policies][2]
+    # in the *Elastic Beanstalk Developer Guide*. For detailed instructions
+    # to attach a policy to a user or group, see the section [ Controlling
+    # access with managed policies][3] in the same topic.
     #
     #  </note>
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+    # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
+    #
     # @option params [String] :application_name
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to include only those associated with this application.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions to
+    #   include only those associated with this application.
     #
     # @option params [String] :version_label
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to those associated with this application version.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions to
+    #   those associated with this application version.
     #
     # @option params [String] :template_name
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to those that are associated with this environment
-    #   configuration.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions to
+    #   those that are associated with this environment configuration.
     #
     # @option params [String] :environment_id
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to those associated with this environment.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions to
+    #   those associated with this environment.
     #
     # @option params [String] :environment_name
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to those associated with this environment.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions to
+    #   those associated with this environment.
     #
     # @option params [String] :platform_arn
-    #   The ARN of a custom platform version. If specified, AWS Elastic
-    #   Beanstalk restricts the returned descriptions to those associated with
-    #   this custom platform version.
+    #   The ARN of a custom platform version. If specified, Elastic Beanstalk
+    #   restricts the returned descriptions to those associated with this
+    #   custom platform version.
     #
     # @option params [String] :request_id
-    #   If specified, AWS Elastic Beanstalk restricts the described events to
+    #   If specified, Elastic Beanstalk restricts the described events to
     #   include only those associated with this request ID.
     #
     # @option params [String] :severity
@@ -2756,13 +3012,12 @@ module Aws::ElasticBeanstalk
     #   only those with the specified severity or higher.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to those that occur on or after this time.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions to
+    #   those that occur on or after this time.
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to those that occur up to, but not including, the
-    #   `EndTime`.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions to
+    #   those that occur up to, but not including, the `EndTime`.
     #
     # @option params [Integer] :max_records
     #   Specifies the maximum number of events that can be returned, beginning
@@ -2866,18 +3121,39 @@ module Aws::ElasticBeanstalk
     end
 
     # Retrieves detailed information about the health of instances in your
-    # AWS Elastic Beanstalk. This operation requires [enhanced health
-    # reporting][1].
+    # Elastic Beanstalk environments. This operation requires [enhanced
+    # health reporting][1].
+    #
+    # This action only returns information about environments that the
+    # calling principle has IAM permissions to access. For example, consider
+    # a case where a user only has permission to access one of three
+    # environments. When the user calls this action, the response will only
+    # include the one environment that the user has permission to access
+    # instead of all three environments. If the user doesn’t have access to
+    # any of the environments an empty result is returned.
+    #
+    # <note markdown="1"> The [AWSElasticBeanstalkReadOnly][2] managed policy allows operators
+    # to view information about resources related to Elastic Beanstalk
+    # environments. For more information, see [ Managing Elastic Beanstalk
+    # user policies][3] in the *Elastic Beanstalk Developer Guide*. For
+    # detailed instructions to attach a policy to a user or group, see the
+    # section [ Controlling access with managed policies][4] in the same
+    # topic.
+    #
+    #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
+    # [2]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [4]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
     #
     # @option params [String] :environment_name
-    #   Specify the AWS Elastic Beanstalk environment by name.
+    #   Specify the Elastic Beanstalk environment by name.
     #
     # @option params [String] :environment_id
-    #   Specify the AWS Elastic Beanstalk environment by ID.
+    #   Specify the Elastic Beanstalk environment by ID.
     #
     # @option params [Array<String>] :attribute_names
     #   Specifies the response elements you wish to receive. To retrieve all
@@ -3021,11 +3297,31 @@ module Aws::ElasticBeanstalk
     # of platform versions.
     #
     # For definitions of platform version and other platform-related terms,
-    # see [AWS Elastic Beanstalk Platforms Glossary][1].
+    # see [Elastic Beanstalk Platforms Glossary][1].
+    #
+    # This action only returns information about resources that the calling
+    # principle has IAM permissions to access. For example, consider a case
+    # where a user only has permission to access one of three resources.
+    # When the user calls the this action, the response will only include
+    # the one resource that the user has permission to access instead of all
+    # three resources. If the user doesn’t have access to any of the
+    # resources an empty result is returned.
+    #
+    # <note markdown="1"> The [AWSElasticBeanstalkReadOnly][2] managed policy allows operators
+    # to view information about resources related to Elastic Beanstalk. For
+    # more information, see [ Managing Elastic Beanstalk user policies][3]
+    # in the *Elastic Beanstalk Developer Guide*. For detailed instructions
+    # to attach a policy to a user or group, see the section [ Controlling
+    # access with managed policies][4] in the same topic.
+    #
+    #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html
+    # [2]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [4]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
     #
     # @option params [String] :platform_arn
     #   The ARN of the platform version.
@@ -3081,15 +3377,13 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
+    # The operations role feature of Elastic Beanstalk is in beta release
+    # and is subject to change.
+    #
     # Disassociate the operations role from an environment. After this call
     # is made, Elastic Beanstalk uses the caller's permissions for
     # permissions to downstream services during subsequent calls acting on
-    # this environment. For more information, see [Operations roles][1] in
-    # the *AWS Elastic Beanstalk Developer Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
+    # this environment.
     #
     # @option params [required, String] :environment_name
     #   The name of the environment from which to disassociate the operations
@@ -3114,6 +3408,29 @@ module Aws::ElasticBeanstalk
 
     # Returns a list of the available solution stack names, with the public
     # version first and then in reverse chronological order.
+    #
+    # This action only returns information about resources that the calling
+    # principle has IAM permissions to access. For example, consider a case
+    # where a user only has permission to access one of three resources.
+    # When the user calls the this action, the response will only include
+    # the one resource that the user has permission to access instead of all
+    # three resources. If the user doesn’t have access to any of the
+    # resources an empty result is returned.
+    #
+    # <note markdown="1"> The [AWSElasticBeanstalkReadOnly][1] managed policy allows operators
+    # to view information about resources related to Elastic Beanstalk. For
+    # more information, see [ Managing Elastic Beanstalk user policies][2]
+    # in the *Elastic Beanstalk Developer Guide*. For detailed instructions
+    # to attach a policy to a user or group, see the section [ Controlling
+    # access with managed policies][3] in the same topic.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+    # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
     #
     # @return [Types::ListAvailableSolutionStacksResultMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3189,15 +3506,36 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Lists the platform branches available for your account in an AWS
-    # Region. Provides summary information about each platform branch.
+    # Lists the platform branches available for your account in an Amazon
+    # Web Services Region. Provides summary information about each platform
+    # branch.
     #
     # For definitions of platform branch and other platform-related terms,
-    # see [AWS Elastic Beanstalk Platforms Glossary][1].
+    # see [Elastic Beanstalk Platforms Glossary][1].
+    #
+    # This action only returns information about resources that the calling
+    # principle has IAM permissions to access. For example, consider a case
+    # where a user only has permission to access one of three resources.
+    # When the user calls the this action, the response will only include
+    # the one resource that the user has permission to access instead of all
+    # three resources. If the user doesn’t have access to any of the
+    # resources an empty result is returned.
+    #
+    # <note markdown="1"> The [AWSElasticBeanstalkReadOnly][2] managed policy allows operators
+    # to view information about resources related to Elastic Beanstalk. For
+    # more information, see [ Managing Elastic Beanstalk user policies][3]
+    # in the *Elastic Beanstalk Developer Guide*. For detailed instructions
+    # to attach a policy to a user or group, see the section [ Controlling
+    # access with managed policies][4] in the same topic.
+    #
+    #  </note>
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html
+    # [2]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [4]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
     #
     # @option params [Array<Types::SearchFilter>] :filters
     #   Criteria for restricting the resulting list of platform branches. The
@@ -3287,17 +3625,38 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Lists the platform versions available for your account in an AWS
-    # Region. Provides summary information about each platform version.
-    # Compare to DescribePlatformVersion, which provides full details about
-    # a single platform version.
+    # Lists the platform versions available for your account in an Amazon
+    # Web Services Region. Provides summary information about each platform
+    # version. Compare to DescribePlatformVersion, which provides full
+    # details about a single platform version.
+    #
+    # This action only returns information about platform versions that the
+    # calling principle has IAM permissions to access. For example, consider
+    # a case where a user only has permission to access one of ten platform
+    # versions. When the user calls the *ListPlatformVersions* action, the
+    # response will only include the one platform version that the user has
+    # permission to access instead of all ten platform versions. If the user
+    # doesn’t have access to any of the platform versions an empty result is
+    # returned.
+    #
+    # <note markdown="1"> The *AWSElasticBeanstalkReadOnly* managed policy allows operators to
+    # view information about resources related to Elastic Beanstalk
+    # environments. For more information, see [ Managing Elastic Beanstalk
+    # user policies][1] in the *Elastic Beanstalk Developer Guide*. For
+    # detailed instructions to attach a policy to a user or group, see the
+    # section [ Controlling access with managed policies][2] in the same
+    # topic.
+    #
+    #  </note>
     #
     # For definitions of platform version and other platform-related terms,
-    # see [AWS Elastic Beanstalk Platforms Glossary][1].
+    # see [Elastic Beanstalk Platforms Glossary][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html
+    # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [2]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html
     #
     # @option params [Array<Types::PlatformFilter>] :filters
     #   Criteria for restricting the resulting list of platform versions. The
@@ -3363,16 +3722,36 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Return the tags applied to an AWS Elastic Beanstalk resource. The
-    # response contains a list of tag key-value pairs.
+    # Return the tags applied to an Elastic Beanstalk resource. The response
+    # contains a list of tag key-value pairs.
     #
     # Elastic Beanstalk supports tagging of all of its resources. For
     # details about resource tagging, see [Tagging Application
     # Resources][1].
     #
+    # This action only returns information about resources that the calling
+    # principle has IAM permissions to access. For example, consider a case
+    # where a user only has permission to access one of three resources.
+    # When the user calls the this action, the response will only include
+    # the one resource that the user has permission to access instead of all
+    # three resources. If the user doesn’t have access to any of the
+    # resources an empty result is returned.
+    #
+    # <note markdown="1"> The [AWSElasticBeanstalkReadOnly][2] managed policy allows operators
+    # to view information about resources related to Elastic Beanstalk. For
+    # more information, see [ Managing Elastic Beanstalk user policies][3]
+    # in the *Elastic Beanstalk Developer Guide*. For detailed instructions
+    # to attach a policy to a user or group, see the section [ Controlling
+    # access with managed policies][4] in the same topic.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications-tagging-resources.html
+    # [2]: https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSElasticBeanstalkReadOnly.html
+    # [3]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html
+    # [4]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/AWSHowTo.iam.managed-policies.html#iam-userpolicies-managed
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resouce for which a tag list is
@@ -3407,22 +3786,22 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Deletes and recreates all of the AWS resources (for example: the Auto
-    # Scaling group, load balancer, etc.) for a specified environment and
-    # forces a restart.
+    # Deletes and recreates all of the Amazon Web Services resources (for
+    # example: the Auto Scaling group, load balancer, etc.) for a specified
+    # environment and forces a restart.
     #
     # @option params [String] :environment_id
     #   The ID of the environment to rebuild.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @option params [String] :environment_name
     #   The name of the environment to rebuild.
     #
     #   Condition: You must specify either this or an EnvironmentId, or both.
-    #   If you do not specify either, AWS Elastic Beanstalk returns
+    #   If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -3483,7 +3862,7 @@ module Aws::ElasticBeanstalk
     #   `InvalidParameterValue` error.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @option params [String] :environment_name
@@ -3493,7 +3872,7 @@ module Aws::ElasticBeanstalk
     #   `InvalidParameterValue` error.
     #
     #   Condition: You must specify either this or an EnvironmentId, or both.
-    #   If you do not specify either, AWS Elastic Beanstalk returns
+    #   If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @option params [required, String] :info_type
@@ -3535,14 +3914,14 @@ module Aws::ElasticBeanstalk
     #   The ID of the environment to restart the server for.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @option params [String] :environment_name
     #   The name of the environment to restart the server for.
     #
     #   Condition: You must specify either this or an EnvironmentId, or both.
-    #   If you do not specify either, AWS Elastic Beanstalk returns
+    #   If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -3588,7 +3967,7 @@ module Aws::ElasticBeanstalk
     #   error.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @option params [String] :environment_name
@@ -3598,7 +3977,7 @@ module Aws::ElasticBeanstalk
     #   error.
     #
     #   Condition: You must specify either this or an EnvironmentId, or both.
-    #   If you do not specify either, AWS Elastic Beanstalk returns
+    #   If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @option params [required, String] :info_type
@@ -3724,28 +4103,29 @@ module Aws::ElasticBeanstalk
     #   The ID of the environment to terminate.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @option params [String] :environment_name
     #   The name of the environment to terminate.
     #
     #   Condition: You must specify either this or an EnvironmentId, or both.
-    #   If you do not specify either, AWS Elastic Beanstalk returns
+    #   If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @option params [Boolean] :terminate_resources
-    #   Indicates whether the associated AWS resources should shut down when
-    #   the environment is terminated:
+    #   Indicates whether the associated Amazon Web Services resources should
+    #   shut down when the environment is terminated:
     #
-    #   * `true`: The specified environment as well as the associated AWS
-    #     resources, such as Auto Scaling group and LoadBalancer, are
-    #     terminated.
+    #   * `true`: The specified environment as well as the associated Amazon
+    #     Web Services resources, such as Auto Scaling group and LoadBalancer,
+    #     are terminated.
     #
-    #   * `false`: AWS Elastic Beanstalk resource management is removed from
-    #     the environment, but the AWS resources continue to operate.
+    #   * `false`: Elastic Beanstalk resource management is removed from the
+    #     environment, but the Amazon Web Services resources continue to
+    #     operate.
     #
-    #   For more information, see the [ AWS Elastic Beanstalk User Guide. ][1]
+    #   For more information, see the [ Elastic Beanstalk User Guide. ][1]
     #
     #   Default: `true`
     #
@@ -3876,7 +4256,7 @@ module Aws::ElasticBeanstalk
     # @option params [String] :description
     #   A new description for the application.
     #
-    #   Default: If not specified, AWS Elastic Beanstalk does not update the
+    #   Default: If not specified, Elastic Beanstalk does not update the
     #   description.
     #
     # @return [Types::ApplicationDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4074,6 +4454,15 @@ module Aws::ElasticBeanstalk
     #   resp.application_version.build_arn #=> String
     #   resp.application_version.source_bundle.s3_bucket #=> String
     #   resp.application_version.source_bundle.s3_key #=> String
+    #   resp.application_version.image_source.uri #=> String
+    #   resp.application_version.image_build_configuration.type #=> String, one of "docker", "buildpack"
+    #   resp.application_version.image_build_configuration.dockerfile_location #=> String
+    #   resp.application_version.image_build_configuration.buildpack #=> String
+    #   resp.application_version.image_build_configuration.architecture #=> String, one of "amd64", "arm64"
+    #   resp.application_version.image_build_configuration.code_build_service_role #=> String
+    #   resp.application_version.image_build_configuration.compute_type #=> String, one of "BUILD_GENERAL1_SMALL", "BUILD_GENERAL1_MEDIUM", "BUILD_GENERAL1_LARGE"
+    #   resp.application_version.image_build_configuration.timeout_in_minutes #=> Integer
+    #   resp.application_version.process #=> Boolean
     #   resp.application_version.date_created #=> Time
     #   resp.application_version.date_updated #=> Time
     #   resp.application_version.status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing", "Building"
@@ -4223,8 +4612,7 @@ module Aws::ElasticBeanstalk
     # in the running environment.
     #
     # Attempting to update both the release and configuration is not allowed
-    # and AWS Elastic Beanstalk returns an `InvalidParameterCombination`
-    # error.
+    # and Elastic Beanstalk returns an `InvalidParameterCombination` error.
     #
     # When updating the configuration settings to a new template or
     # individual settings, a draft configuration is created and
@@ -4237,20 +4625,20 @@ module Aws::ElasticBeanstalk
     # @option params [String] :environment_id
     #   The ID of the environment to update.
     #
-    #   If no environment with this ID exists, AWS Elastic Beanstalk returns
-    #   an `InvalidParameterValue` error.
+    #   If no environment with this ID exists, Elastic Beanstalk returns an
+    #   `InvalidParameterValue` error.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @option params [String] :environment_name
     #   The name of the environment to update. If no environment with this
-    #   name exists, AWS Elastic Beanstalk returns an `InvalidParameterValue`
+    #   name exists, Elastic Beanstalk returns an `InvalidParameterValue`
     #   error.
     #
     #   Condition: You must specify either this or an EnvironmentId, or both.
-    #   If you do not specify either, AWS Elastic Beanstalk returns
+    #   If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #
     # @option params [String] :group_name
@@ -4264,24 +4652,24 @@ module Aws::ElasticBeanstalk
     #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
     #
     # @option params [String] :description
-    #   If this parameter is specified, AWS Elastic Beanstalk updates the
+    #   If this parameter is specified, Elastic Beanstalk updates the
     #   description of this environment.
     #
     # @option params [Types::EnvironmentTier] :tier
     #   This specifies the tier to use to update the environment.
     #
     #   Condition: At this time, if you change the tier version, name, or
-    #   type, AWS Elastic Beanstalk returns `InvalidParameterValue` error.
+    #   type, Elastic Beanstalk returns `InvalidParameterValue` error.
     #
     # @option params [String] :version_label
-    #   If this parameter is specified, AWS Elastic Beanstalk deploys the
-    #   named application version to the environment. If no such application
-    #   version is found, returns an `InvalidParameterValue` error.
+    #   If this parameter is specified, Elastic Beanstalk deploys the named
+    #   application version to the environment. If no such application version
+    #   is found, returns an `InvalidParameterValue` error.
     #
     # @option params [String] :template_name
-    #   If this parameter is specified, AWS Elastic Beanstalk deploys this
+    #   If this parameter is specified, Elastic Beanstalk deploys this
     #   configuration template to the environment. If no such configuration
-    #   template is found, AWS Elastic Beanstalk returns an
+    #   template is found, Elastic Beanstalk returns an
     #   `InvalidParameterValue` error.
     #
     # @option params [String] :solution_stack_name
@@ -4292,7 +4680,7 @@ module Aws::ElasticBeanstalk
     #   The ARN of the platform, if used.
     #
     # @option params [Array<Types::ConfigurationOptionSetting>] :option_settings
-    #   If specified, AWS Elastic Beanstalk updates the configuration set
+    #   If specified, Elastic Beanstalk updates the configuration set
     #   associated with the running environment and sets the specified
     #   configuration options to the requested value.
     #
@@ -4480,17 +4868,17 @@ module Aws::ElasticBeanstalk
       req.send_request(options)
     end
 
-    # Update the list of tags applied to an AWS Elastic Beanstalk resource.
-    # Two lists can be passed: `TagsToAdd` for tags to add or update, and
+    # Update the list of tags applied to an Elastic Beanstalk resource. Two
+    # lists can be passed: `TagsToAdd` for tags to add or update, and
     # `TagsToRemove`.
     #
     # Elastic Beanstalk supports tagging of all of its resources. For
     # details about resource tagging, see [Tagging Application
     # Resources][1].
     #
-    # If you create a custom IAM user policy to control permission to this
-    # operation, specify one of the following two virtual actions (or both)
-    # instead of the API operation name:
+    # If you create a custom policy to control permission to this operation,
+    # specify one of the following two virtual actions (or both) instead of
+    # the API operation name:
     #
     # elasticbeanstalk:AddTags
     #
@@ -4655,7 +5043,7 @@ module Aws::ElasticBeanstalk
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

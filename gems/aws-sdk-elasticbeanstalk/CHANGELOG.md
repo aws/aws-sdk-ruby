@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2026-09-16)
+------------------
+
+* Feature - Adds support to create and manage Elastic Beanstalk Cluster Environments.
+
 1.108.0 (2026-09-11)
 ------------------
 

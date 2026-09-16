@@ -2990,6 +2990,15 @@ module Aws::MarketplaceCatalog
     #   Allows filtering on the `ResellerRole` of a ResaleAuthorization.
     #   @return [Types::ResaleAuthorizationResellerRoleFilter]
     #
+    # @!attribute [rw] source_authorization
+    #   Allows filtering on the `SourceAuthorization` of a
+    #   ResaleAuthorization.
+    #   @return [Types::ResaleAuthorizationSourceAuthorizationFilter]
+    #
+    # @!attribute [rw] issuer_account_id
+    #   Allows filtering on the `IssuerAccountId` of a ResaleAuthorization.
+    #   @return [Types::ResaleAuthorizationIssuerAccountIdFilter]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ResaleAuthorizationFilters AWS API Documentation
     #
     class ResaleAuthorizationFilters < Struct.new(
@@ -3006,7 +3015,24 @@ module Aws::MarketplaceCatalog
       :status,
       :offer_extended_status,
       :last_modified_date,
-      :reseller_role)
+      :reseller_role,
+      :source_authorization,
+      :issuer_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows filtering on the `IssuerAccountId` of a ResaleAuthorization.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `IssuerAccountId` of a ResaleAuthorization
+    #   with list input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ResaleAuthorizationIssuerAccountIdFilter AWS API Documentation
+    #
+    class ResaleAuthorizationIssuerAccountIdFilter < Struct.new(
+      :value_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3247,6 +3273,22 @@ module Aws::MarketplaceCatalog
       include Aws::Structure
     end
 
+    # Allows filtering on the `SourceAuthorization` of a
+    # ResaleAuthorization.
+    #
+    # @!attribute [rw] value_list
+    #   Allows filtering on the `SourceAuthorization` of a
+    #   ResaleAuthorization with list input.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ResaleAuthorizationSourceAuthorizationFilter AWS API Documentation
+    #
+    class ResaleAuthorizationSourceAuthorizationFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Allows filtering on the `Status` of a ResaleAuthorization.
     #
     # @!attribute [rw] value_list
@@ -3312,6 +3354,14 @@ module Aws::MarketplaceCatalog
     #   The reseller role of the ResaleAuthorization.
     #   @return [String]
     #
+    # @!attribute [rw] source_authorization
+    #   The source authorization of the ResaleAuthorization.
+    #   @return [String]
+    #
+    # @!attribute [rw] issuer_account_id
+    #   The issuer account ID of the ResaleAuthorization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ResaleAuthorizationSummary AWS API Documentation
     #
     class ResaleAuthorizationSummary < Struct.new(
@@ -3326,7 +3376,9 @@ module Aws::MarketplaceCatalog
       :offer_extended_status,
       :created_date,
       :availability_end_date,
-      :reseller_role)
+      :reseller_role,
+      :source_authorization,
+      :issuer_account_id)
       SENSITIVE = []
       include Aws::Structure
     end

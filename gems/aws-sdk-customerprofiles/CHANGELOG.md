@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2026-09-16)
+------------------
+
+* Feature - This release introduces the SearchRecommendations API, which retrieves recommendations for a profile identified by a search key.
+
 1.95.0 (2026-09-11)
 ------------------
 

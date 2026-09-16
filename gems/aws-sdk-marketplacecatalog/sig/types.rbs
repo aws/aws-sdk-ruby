@@ -866,6 +866,13 @@ module Aws::MarketplaceCatalog
       attr_accessor offer_extended_status: Types::ResaleAuthorizationOfferExtendedStatusFilter
       attr_accessor last_modified_date: Types::ResaleAuthorizationLastModifiedDateFilter
       attr_accessor reseller_role: Types::ResaleAuthorizationResellerRoleFilter
+      attr_accessor source_authorization: Types::ResaleAuthorizationSourceAuthorizationFilter
+      attr_accessor issuer_account_id: Types::ResaleAuthorizationIssuerAccountIdFilter
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationIssuerAccountIdFilter
+      attr_accessor value_list: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -933,8 +940,13 @@ module Aws::MarketplaceCatalog
     end
 
     class ResaleAuthorizationSort
-      attr_accessor sort_by: ("EntityId" | "Name" | "ProductId" | "ProductName" | "ManufacturerAccountId" | "ManufacturerLegalName" | "ResellerAccountID" | "ResellerLegalName" | "Status" | "OfferExtendedStatus" | "CreatedDate" | "AvailabilityEndDate" | "LastModifiedDate")
+      attr_accessor sort_by: ("EntityId" | "Name" | "ProductId" | "ProductName" | "ManufacturerAccountId" | "ManufacturerLegalName" | "ResellerAccountID" | "ResellerLegalName" | "Status" | "OfferExtendedStatus" | "CreatedDate" | "AvailabilityEndDate" | "LastModifiedDate" | "ResellerRole" | "SourceAuthorization" | "IssuerAccountId")
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class ResaleAuthorizationSourceAuthorizationFilter
+      attr_accessor value_list: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -956,6 +968,8 @@ module Aws::MarketplaceCatalog
       attr_accessor created_date: ::String
       attr_accessor availability_end_date: ::String
       attr_accessor reseller_role: ("ChannelPartner" | "Distributor")
+      attr_accessor source_authorization: ::String
+      attr_accessor issuer_account_id: ::String
       SENSITIVE: []
     end
 

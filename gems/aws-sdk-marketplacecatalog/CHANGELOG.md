@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2026-09-16)
+------------------
+
+* Feature - This release enhances the ListEntities API to support issuerAccountId and SourceAuthorization filter for ResaleAuthorization entity.
+
 1.86.0 (2026-09-11)
 ------------------
 

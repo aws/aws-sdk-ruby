@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.232.1 (2026-09-16)
+------------------
+
 * Issue - Return the copy response from multipart `copy_to`/`copy_from` instead of `nil` on success.
 
 1.232.0 (2026-09-11)

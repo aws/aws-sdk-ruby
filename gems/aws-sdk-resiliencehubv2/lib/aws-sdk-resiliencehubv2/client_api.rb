@@ -102,6 +102,11 @@ module Aws::Resiliencehubv2
     DependencyDiscoveryConfigMessageString = Shapes::StringShape.new(name: 'DependencyDiscoveryConfigMessageString')
     DependencyDiscoveryInput = Shapes::StringShape.new(name: 'DependencyDiscoveryInput')
     DependencyDiscoveryStatus = Shapes::StringShape.new(name: 'DependencyDiscoveryStatus')
+    DependencyInsight = Shapes::StructureShape.new(name: 'DependencyInsight')
+    DependencyInsightDescriptionString = Shapes::StringShape.new(name: 'DependencyInsightDescriptionString')
+    DependencyInsightsErrorCode = Shapes::StringShape.new(name: 'DependencyInsightsErrorCode')
+    DependencyInsightsList = Shapes::ListShape.new(name: 'DependencyInsightsList')
+    DependencyInsightsStatus = Shapes::StringShape.new(name: 'DependencyInsightsStatus')
     DependencySummary = Shapes::StructureShape.new(name: 'DependencySummary')
     DependencySummaryList = Shapes::ListShape.new(name: 'DependencySummaryList')
     DisasterRecoverySource = Shapes::StructureShape.new(name: 'DisasterRecoverySource')
@@ -137,6 +142,10 @@ module Aws::Resiliencehubv2
     FindingSummary = Shapes::StructureShape.new(name: 'FindingSummary')
     FindingsList = Shapes::ListShape.new(name: 'FindingsList')
     FunctionsList = Shapes::ListShape.new(name: 'FunctionsList')
+    GetDependencyInsightsRequest = Shapes::StructureShape.new(name: 'GetDependencyInsightsRequest')
+    GetDependencyInsightsResponse = Shapes::StructureShape.new(name: 'GetDependencyInsightsResponse')
+    GetDependencyInsightsResponseErrorMessageString = Shapes::StringShape.new(name: 'GetDependencyInsightsResponseErrorMessageString')
+    GetDependencyInsightsResponseOverviewString = Shapes::StringShape.new(name: 'GetDependencyInsightsResponseOverviewString')
     GetFailureModeFindingRequest = Shapes::StructureShape.new(name: 'GetFailureModeFindingRequest')
     GetFailureModeFindingResponse = Shapes::StructureShape.new(name: 'GetFailureModeFindingResponse')
     GetPolicyRequest = Shapes::StructureShape.new(name: 'GetPolicyRequest')
@@ -166,6 +175,7 @@ module Aws::Resiliencehubv2
     InputSourceSummary = Shapes::StructureShape.new(name: 'InputSourceSummary')
     InputSourceSummaryList = Shapes::ListShape.new(name: 'InputSourceSummaryList')
     InputSourceType = Shapes::StringShape.new(name: 'InputSourceType')
+    InsightsCategory = Shapes::StringShape.new(name: 'InsightsCategory')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
@@ -181,6 +191,8 @@ module Aws::Resiliencehubv2
     ListInputSourcesResponse = Shapes::StructureShape.new(name: 'ListInputSourcesResponse')
     ListPoliciesRequest = Shapes::StructureShape.new(name: 'ListPoliciesRequest')
     ListPoliciesResponse = Shapes::StructureShape.new(name: 'ListPoliciesResponse')
+    ListPolicyEventsRequest = Shapes::StructureShape.new(name: 'ListPolicyEventsRequest')
+    ListPolicyEventsResponse = Shapes::StructureShape.new(name: 'ListPolicyEventsResponse')
     ListReportsRequest = Shapes::StructureShape.new(name: 'ListReportsRequest')
     ListReportsResponse = Shapes::StructureShape.new(name: 'ListReportsResponse')
     ListResolvedTestRunTargetResourcesRequest = Shapes::StructureShape.new(name: 'ListResolvedTestRunTargetResourcesRequest')
@@ -243,7 +255,18 @@ module Aws::Resiliencehubv2
     ParameterValue = Shapes::StringShape.new(name: 'ParameterValue')
     PermissionModel = Shapes::StructureShape.new(name: 'PermissionModel')
     Policy = Shapes::StructureShape.new(name: 'Policy')
+    PolicyAttachedToServiceMetadata = Shapes::StructureShape.new(name: 'PolicyAttachedToServiceMetadata')
     PolicyComponent = Shapes::StringShape.new(name: 'PolicyComponent')
+    PolicyDeletedMetadata = Shapes::StructureShape.new(name: 'PolicyDeletedMetadata')
+    PolicyDetachedFromServiceMetadata = Shapes::StructureShape.new(name: 'PolicyDetachedFromServiceMetadata')
+    PolicyDisassociationReason = Shapes::StringShape.new(name: 'PolicyDisassociationReason')
+    PolicyEvent = Shapes::StructureShape.new(name: 'PolicyEvent')
+    PolicyEventDetails = Shapes::StructureShape.new(name: 'PolicyEventDetails')
+    PolicyEventList = Shapes::ListShape.new(name: 'PolicyEventList')
+    PolicyEventMetadata = Shapes::UnionShape.new(name: 'PolicyEventMetadata')
+    PolicyEventType = Shapes::StringShape.new(name: 'PolicyEventType')
+    PolicyEventTypeList = Shapes::ListShape.new(name: 'PolicyEventTypeList')
+    PolicySharingRevokedMetadata = Shapes::StructureShape.new(name: 'PolicySharingRevokedMetadata')
     PolicySummary = Shapes::StructureShape.new(name: 'PolicySummary')
     PolicySummaryList = Shapes::ListShape.new(name: 'PolicySummaryList')
     PolicyValueSource = Shapes::StringShape.new(name: 'PolicyValueSource')
@@ -328,6 +351,8 @@ module Aws::Resiliencehubv2
     ServiceWorkflowUpdatedMetadata = Shapes::StructureShape.new(name: 'ServiceWorkflowUpdatedMetadata')
     SloSource = Shapes::StructureShape.new(name: 'SloSource')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    StartDependencyInsightsRequest = Shapes::StructureShape.new(name: 'StartDependencyInsightsRequest')
+    StartDependencyInsightsResponse = Shapes::StructureShape.new(name: 'StartDependencyInsightsResponse')
     StartFailureModeAssessmentRequest = Shapes::StructureShape.new(name: 'StartFailureModeAssessmentRequest')
     StartFailureModeAssessmentResponse = Shapes::StructureShape.new(name: 'StartFailureModeAssessmentResponse')
     StartTestRunRequest = Shapes::StructureShape.new(name: 'StartTestRunRequest')
@@ -557,6 +582,7 @@ module Aws::Resiliencehubv2
     CreatePolicyRequest.add_member(:multi_az, Shapes::ShapeRef.new(shape: MultiAzTargets, location_name: "multiAz"))
     CreatePolicyRequest.add_member(:multi_region, Shapes::ShapeRef.new(shape: MultiRegionTargets, location_name: "multiRegion"))
     CreatePolicyRequest.add_member(:data_recovery, Shapes::ShapeRef.new(shape: DataRecoveryTargets, location_name: "dataRecovery"))
+    CreatePolicyRequest.add_member(:sharing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "sharingEnabled"))
     CreatePolicyRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     CreatePolicyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreatePolicyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -727,6 +753,12 @@ module Aws::Resiliencehubv2
     DependencyDiscoveryConfig.add_member(:message, Shapes::ShapeRef.new(shape: DependencyDiscoveryConfigMessageString, location_name: "message"))
     DependencyDiscoveryConfig.struct_class = Types::DependencyDiscoveryConfig
 
+    DependencyInsight.add_member(:category, Shapes::ShapeRef.new(shape: InsightsCategory, required: true, location_name: "category"))
+    DependencyInsight.add_member(:description, Shapes::ShapeRef.new(shape: DependencyInsightDescriptionString, required: true, location_name: "description"))
+    DependencyInsight.struct_class = Types::DependencyInsight
+
+    DependencyInsightsList.member = Shapes::ShapeRef.new(shape: DependencyInsight)
+
     DependencySummary.add_member(:dependency_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "dependencyId"))
     DependencySummary.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "serviceArn"))
     DependencySummary.add_member(:dependency_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "dependencyName"))
@@ -834,6 +866,17 @@ module Aws::Resiliencehubv2
     FindingsList.member = Shapes::ShapeRef.new(shape: FindingSummary)
 
     FunctionsList.member = Shapes::ShapeRef.new(shape: EntityId)
+
+    GetDependencyInsightsRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "serviceArn"))
+    GetDependencyInsightsRequest.struct_class = Types::GetDependencyInsightsRequest
+
+    GetDependencyInsightsResponse.add_member(:overview, Shapes::ShapeRef.new(shape: GetDependencyInsightsResponseOverviewString, location_name: "overview"))
+    GetDependencyInsightsResponse.add_member(:insights, Shapes::ShapeRef.new(shape: DependencyInsightsList, location_name: "insights"))
+    GetDependencyInsightsResponse.add_member(:status, Shapes::ShapeRef.new(shape: DependencyInsightsStatus, required: true, location_name: "status"))
+    GetDependencyInsightsResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    GetDependencyInsightsResponse.add_member(:error_code, Shapes::ShapeRef.new(shape: DependencyInsightsErrorCode, location_name: "errorCode"))
+    GetDependencyInsightsResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: GetDependencyInsightsResponseErrorMessageString, location_name: "errorMessage"))
+    GetDependencyInsightsResponse.struct_class = Types::GetDependencyInsightsResponse
 
     GetFailureModeFindingRequest.add_member(:finding_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "querystring", location_name: "findingId"))
     GetFailureModeFindingRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "serviceArn"))
@@ -993,6 +1036,7 @@ module Aws::Resiliencehubv2
     ListInputSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListInputSourcesResponse.struct_class = Types::ListInputSourcesResponse
 
+    ListPoliciesRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location: "querystring", location_name: "accountId"))
     ListPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListPoliciesRequest.struct_class = Types::ListPoliciesRequest
@@ -1000,6 +1044,18 @@ module Aws::Resiliencehubv2
     ListPoliciesResponse.add_member(:policy_summaries, Shapes::ShapeRef.new(shape: PolicySummaryList, required: true, location_name: "policySummaries"))
     ListPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPoliciesResponse.struct_class = Types::ListPoliciesResponse
+
+    ListPolicyEventsRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "querystring", location_name: "policyArn"))
+    ListPolicyEventsRequest.add_member(:event_types, Shapes::ShapeRef.new(shape: PolicyEventTypeList, location: "querystring", location_name: "eventTypes"))
+    ListPolicyEventsRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "startTime"))
+    ListPolicyEventsRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "endTime"))
+    ListPolicyEventsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPolicyEventsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPolicyEventsRequest.struct_class = Types::ListPolicyEventsRequest
+
+    ListPolicyEventsResponse.add_member(:events, Shapes::ShapeRef.new(shape: PolicyEventList, required: true, location_name: "events"))
+    ListPolicyEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPolicyEventsResponse.struct_class = Types::ListPolicyEventsResponse
 
     ListReportsRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, location: "querystring", location_name: "serviceArn"))
     ListReportsRequest.add_member(:report_type, Shapes::ShapeRef.new(shape: ReportType, location: "querystring", location_name: "reportType"))
@@ -1236,6 +1292,8 @@ module Aws::Resiliencehubv2
     Policy.add_member(:multi_az, Shapes::ShapeRef.new(shape: MultiAzTargets, location_name: "multiAz"))
     Policy.add_member(:multi_region, Shapes::ShapeRef.new(shape: MultiRegionTargets, location_name: "multiRegion"))
     Policy.add_member(:data_recovery, Shapes::ShapeRef.new(shape: DataRecoveryTargets, location_name: "dataRecovery"))
+    Policy.add_member(:sharing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "sharingEnabled"))
+    Policy.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "organizationId"))
     Policy.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     Policy.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     Policy.add_member(:associated_service_count, Shapes::ShapeRef.new(shape: Integer, location_name: "associatedServiceCount"))
@@ -1243,12 +1301,57 @@ module Aws::Resiliencehubv2
     Policy.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     Policy.struct_class = Types::Policy
 
+    PolicyAttachedToServiceMetadata.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "serviceArn"))
+    PolicyAttachedToServiceMetadata.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    PolicyAttachedToServiceMetadata.struct_class = Types::PolicyAttachedToServiceMetadata
+
+    PolicyDeletedMetadata.add_member(:affected_service_count, Shapes::ShapeRef.new(shape: Integer, location_name: "affectedServiceCount"))
+    PolicyDeletedMetadata.struct_class = Types::PolicyDeletedMetadata
+
+    PolicyDetachedFromServiceMetadata.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "serviceArn"))
+    PolicyDetachedFromServiceMetadata.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
+    PolicyDetachedFromServiceMetadata.struct_class = Types::PolicyDetachedFromServiceMetadata
+
+    PolicyEvent.add_member(:event_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "eventId"))
+    PolicyEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timestamp"))
+    PolicyEvent.add_member(:event_type, Shapes::ShapeRef.new(shape: PolicyEventType, required: true, location_name: "eventType"))
+    PolicyEvent.add_member(:policy_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "policyArn"))
+    PolicyEvent.add_member(:actor, Shapes::ShapeRef.new(shape: EventActor, required: true, location_name: "actor"))
+    PolicyEvent.add_member(:event_details, Shapes::ShapeRef.new(shape: PolicyEventDetails, required: true, location_name: "eventDetails"))
+    PolicyEvent.struct_class = Types::PolicyEvent
+
+    PolicyEventDetails.add_member(:title, Shapes::ShapeRef.new(shape: String, required: true, location_name: "title"))
+    PolicyEventDetails.add_member(:description, Shapes::ShapeRef.new(shape: String, required: true, location_name: "description"))
+    PolicyEventDetails.add_member(:event_metadata, Shapes::ShapeRef.new(shape: PolicyEventMetadata, location_name: "eventMetadata"))
+    PolicyEventDetails.struct_class = Types::PolicyEventDetails
+
+    PolicyEventList.member = Shapes::ShapeRef.new(shape: PolicyEvent)
+
+    PolicyEventMetadata.add_member(:policy_attached_to_service, Shapes::ShapeRef.new(shape: PolicyAttachedToServiceMetadata, location_name: "policyAttachedToService"))
+    PolicyEventMetadata.add_member(:policy_detached_from_service, Shapes::ShapeRef.new(shape: PolicyDetachedFromServiceMetadata, location_name: "policyDetachedFromService"))
+    PolicyEventMetadata.add_member(:policy_sharing_revoked, Shapes::ShapeRef.new(shape: PolicySharingRevokedMetadata, location_name: "policySharingRevoked"))
+    PolicyEventMetadata.add_member(:policy_deleted, Shapes::ShapeRef.new(shape: PolicyDeletedMetadata, location_name: "policyDeleted"))
+    PolicyEventMetadata.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PolicyEventMetadata.add_member_subclass(:policy_attached_to_service, Types::PolicyEventMetadata::PolicyAttachedToService)
+    PolicyEventMetadata.add_member_subclass(:policy_detached_from_service, Types::PolicyEventMetadata::PolicyDetachedFromService)
+    PolicyEventMetadata.add_member_subclass(:policy_sharing_revoked, Types::PolicyEventMetadata::PolicySharingRevoked)
+    PolicyEventMetadata.add_member_subclass(:policy_deleted, Types::PolicyEventMetadata::PolicyDeleted)
+    PolicyEventMetadata.add_member_subclass(:unknown, Types::PolicyEventMetadata::Unknown)
+    PolicyEventMetadata.struct_class = Types::PolicyEventMetadata
+
+    PolicyEventTypeList.member = Shapes::ShapeRef.new(shape: PolicyEventType)
+
+    PolicySharingRevokedMetadata.add_member(:affected_service_count, Shapes::ShapeRef.new(shape: Integer, location_name: "affectedServiceCount"))
+    PolicySharingRevokedMetadata.struct_class = Types::PolicySharingRevokedMetadata
+
     PolicySummary.add_member(:policy_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "policyArn"))
     PolicySummary.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "name"))
     PolicySummary.add_member(:availability_slo, Shapes::ShapeRef.new(shape: AvailabilitySlo, location_name: "availabilitySlo"))
     PolicySummary.add_member(:multi_az, Shapes::ShapeRef.new(shape: MultiAzTargets, location_name: "multiAz"))
     PolicySummary.add_member(:multi_region, Shapes::ShapeRef.new(shape: MultiRegionTargets, location_name: "multiRegion"))
     PolicySummary.add_member(:data_recovery, Shapes::ShapeRef.new(shape: DataRecoveryTargets, location_name: "dataRecovery"))
+    PolicySummary.add_member(:sharing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "sharingEnabled"))
+    PolicySummary.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "organizationId"))
     PolicySummary.add_member(:associated_service_count, Shapes::ShapeRef.new(shape: Integer, location_name: "associatedServiceCount"))
     PolicySummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     PolicySummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
@@ -1503,10 +1606,15 @@ module Aws::Resiliencehubv2
 
     ServicePolicyAssociatedMetadata.add_member(:policy_name, Shapes::ShapeRef.new(shape: String, location_name: "policyName"))
     ServicePolicyAssociatedMetadata.add_member(:policy_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "policyArn"))
+    ServicePolicyAssociatedMetadata.add_member(:policy_owner_account_id, Shapes::ShapeRef.new(shape: String, location_name: "policyOwnerAccountId"))
+    ServicePolicyAssociatedMetadata.add_member(:policy_source, Shapes::ShapeRef.new(shape: PolicyValueSource, location_name: "policySource"))
     ServicePolicyAssociatedMetadata.struct_class = Types::ServicePolicyAssociatedMetadata
 
     ServicePolicyDisassociatedMetadata.add_member(:policy_name, Shapes::ShapeRef.new(shape: String, location_name: "policyName"))
     ServicePolicyDisassociatedMetadata.add_member(:policy_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "policyArn"))
+    ServicePolicyDisassociatedMetadata.add_member(:policy_owner_account_id, Shapes::ShapeRef.new(shape: String, location_name: "policyOwnerAccountId"))
+    ServicePolicyDisassociatedMetadata.add_member(:policy_source, Shapes::ShapeRef.new(shape: PolicyValueSource, location_name: "policySource"))
+    ServicePolicyDisassociatedMetadata.add_member(:reason, Shapes::ShapeRef.new(shape: PolicyDisassociationReason, location_name: "reason"))
     ServicePolicyDisassociatedMetadata.struct_class = Types::ServicePolicyDisassociatedMetadata
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -1587,6 +1695,13 @@ module Aws::Resiliencehubv2
     SloSource.add_member(:policy_name, Shapes::ShapeRef.new(shape: EntityName, location_name: "policyName"))
     SloSource.add_member(:source, Shapes::ShapeRef.new(shape: PolicyValueSource, location_name: "source"))
     SloSource.struct_class = Types::SloSource
+
+    StartDependencyInsightsRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "serviceArn"))
+    StartDependencyInsightsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    StartDependencyInsightsRequest.struct_class = Types::StartDependencyInsightsRequest
+
+    StartDependencyInsightsResponse.add_member(:status, Shapes::ShapeRef.new(shape: DependencyInsightsStatus, required: true, location_name: "status"))
+    StartDependencyInsightsResponse.struct_class = Types::StartDependencyInsightsResponse
 
     StartFailureModeAssessmentRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "serviceArn"))
     StartFailureModeAssessmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -2001,6 +2116,7 @@ module Aws::Resiliencehubv2
     UpdatePolicyRequest.add_member(:multi_az, Shapes::ShapeRef.new(shape: MultiAzTargets, location_name: "multiAz"))
     UpdatePolicyRequest.add_member(:multi_region, Shapes::ShapeRef.new(shape: MultiRegionTargets, location_name: "multiRegion"))
     UpdatePolicyRequest.add_member(:data_recovery, Shapes::ShapeRef.new(shape: DataRecoveryTargets, location_name: "dataRecovery"))
+    UpdatePolicyRequest.add_member(:sharing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "sharingEnabled"))
     UpdatePolicyRequest.struct_class = Types::UpdatePolicyRequest
 
     UpdatePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "policy"))
@@ -2378,6 +2494,19 @@ module Aws::Resiliencehubv2
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:get_dependency_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetDependencyInsights"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/get-dependency-insights"
+        o.input = Shapes::ShapeRef.new(shape: GetDependencyInsightsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetDependencyInsightsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:get_failure_mode_finding, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetFailureModeFinding"
         o.http_method = "GET"
@@ -2597,6 +2726,24 @@ module Aws::Resiliencehubv2
         o.input = Shapes::ShapeRef.new(shape: ListPoliciesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPoliciesResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_policy_events, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPolicyEvents"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/list-policy-events"
+        o.input = Shapes::ShapeRef.new(shape: ListPolicyEventsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPolicyEventsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
@@ -2946,6 +3093,20 @@ module Aws::Resiliencehubv2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:start_dependency_insights, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartDependencyInsights"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/start-dependency-insights"
+        o.input = Shapes::ShapeRef.new(shape: StartDependencyInsightsRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartDependencyInsightsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 

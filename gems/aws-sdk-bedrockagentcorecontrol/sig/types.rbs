@@ -62,7 +62,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor agent_runtime_name: ::String
       attr_accessor description: ::String
       attr_accessor last_updated_at: ::Time
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: [:description]
     end
 
@@ -86,7 +86,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor target_version: ::String
       attr_accessor agent_runtime_endpoint_arn: ::String
       attr_accessor agent_runtime_arn: ::String
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor id: ::String
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
@@ -97,7 +97,7 @@ module Aws::BedrockAgentCoreControl
     class AgentRuntimeVersionSummary
       attr_accessor agent_runtime_arn: ::String
       attr_accessor agent_runtime_version: ::String
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -632,7 +632,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor agent_runtime_arn: ::String
       attr_accessor agent_runtime_id: ::String
       attr_accessor endpoint_name: ::String
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       SENSITIVE: [:endpoint_name]
     end
@@ -662,7 +662,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor agent_runtime_id: ::String
       attr_accessor agent_runtime_version: ::String
       attr_accessor created_at: ::Time
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -1532,7 +1532,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class DeleteAgentRuntimeEndpointResponse
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor agent_runtime_id: ::String
       attr_accessor endpoint_name: ::String
       SENSITIVE: [:endpoint_name]
@@ -1546,7 +1546,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class DeleteAgentRuntimeResponse
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor agent_runtime_id: ::String
       attr_accessor agent_runtime_version: ::String
       SENSITIVE: []
@@ -2269,7 +2269,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor agent_runtime_endpoint_arn: ::String
       attr_accessor agent_runtime_arn: ::String
       attr_accessor description: ::String
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor failure_reason: ::String
@@ -2293,7 +2293,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor last_updated_at: ::Time
       attr_accessor role_arn: ::String
       attr_accessor network_configuration: Types::NetworkConfiguration
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor lifecycle_configuration: Types::LifecycleConfiguration
       attr_accessor failure_reason: ::String
       attr_accessor description: ::String
@@ -5684,7 +5684,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor target_version: ::String
       attr_accessor agent_runtime_endpoint_arn: ::String
       attr_accessor agent_runtime_arn: ::String
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
@@ -5716,7 +5716,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor agent_runtime_version: ::String
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
-      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING")
+      attr_accessor status: ("CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "READY" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: []
     end
 

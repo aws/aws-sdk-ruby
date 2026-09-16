@@ -107,7 +107,7 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    # Application request metrics for an AWS Elastic Beanstalk environment.
+    # Application request metrics for an Elastic Beanstalk environment.
     #
     # @!attribute [rw] duration
     #   The amount of time that the metrics cover (usually 10 seconds). For
@@ -144,7 +144,7 @@ module Aws::ElasticBeanstalk
 
     # The resource lifecycle configuration for an application. Defines
     # lifecycle settings for resources that belong to the application, and
-    # the service role that AWS Elastic Beanstalk assumes in order to apply
+    # the service role that Elastic Beanstalk assumes in order to apply
     # lifecycle settings. The version lifecycle configuration defines
     # lifecycle settings for application versions.
     #
@@ -213,18 +213,40 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] source_build_information
-    #   If the version's source code was retrieved from AWS CodeCommit, the
+    #   If the version's source code was retrieved from CodeCommit, the
     #   location of the source code for the application version.
     #   @return [Types::SourceBuildInformation]
     #
     # @!attribute [rw] build_arn
-    #   Reference to the artifact from the AWS CodeBuild build.
+    #   Reference to the artifact from the CodeBuild build.
     #   @return [String]
     #
     # @!attribute [rw] source_bundle
     #   The storage location of the application version's source bundle in
     #   Amazon S3.
     #   @return [Types::S3Location]
+    #
+    # @!attribute [rw] image_source
+    #   The location of the container image for the application version.
+    #
+    #   For an application version created from an image you provide, this
+    #   is that image. For one that Elastic Beanstalk builds from your
+    #   source bundle, Elastic Beanstalk fills this in with the image it
+    #   pushed after the build succeeds.
+    #   @return [Types::ImageSource]
+    #
+    # @!attribute [rw] image_build_configuration
+    #   The settings that Elastic Beanstalk uses to build a container image
+    #   from the source bundle of the application version. Not present for
+    #   an application version created from an image you provide.
+    #   @return [Types::ImageBuildConfiguration]
+    #
+    # @!attribute [rw] process
+    #   Indicates whether Elastic Beanstalk pre-processed and validated the
+    #   environment manifest (`env.yaml`) and configuration files
+    #   (`*.config` files in the `.ebextensions` folder) in the source
+    #   bundle of the application version.
+    #   @return [Boolean]
     #
     # @!attribute [rw] date_created
     #   The creation date of the application version.
@@ -248,13 +270,13 @@ module Aws::ElasticBeanstalk
     #   * `Processing` – Elastic Beanstalk is currently processing the
     #     application version.
     #
-    #   * `Building` – Application version is currently undergoing an AWS
+    #   * `Building` – Application version is currently undergoing an
     #     CodeBuild build.
     #
     #   * `Processed` – Elastic Beanstalk was successfully pre-processed and
     #     validated.
     #
-    #   * `Failed` – Either the AWS CodeBuild build failed or configuration
+    #   * `Failed` – Either the CodeBuild build failed or configuration
     #     files didn't pass validation. This application version isn't
     #     usable.
     #   @return [String]
@@ -269,6 +291,9 @@ module Aws::ElasticBeanstalk
       :source_build_information,
       :build_arn,
       :source_bundle,
+      :image_source,
+      :image_build_configuration,
+      :process,
       :date_created,
       :date_updated,
       :status)
@@ -428,7 +453,7 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    # Settings for an AWS CodeBuild build.
+    # Settings for an CodeBuild build.
     #
     # @!attribute [rw] artifact_name
     #   The name of the artifact of the CodeBuild build. If provided,
@@ -440,9 +465,9 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] code_build_service_role
-    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
-    #   Management (IAM) role that enables AWS CodeBuild to interact with
-    #   dependent AWS services on behalf of the AWS account.
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that enables CodeBuild to interact with dependent Amazon
+    #   Web Services service on behalf of the Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] compute_type
@@ -463,8 +488,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] timeout_in_minutes
-    #   How long in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to
-    #   wait until timing out any related build that does not get marked as
+    #   How long in minutes, from 5 to 480 (8 hours), for CodeBuild to wait
+    #   until timing out any related build that does not get marked as
     #   completed. The default is 60 minutes.
     #   @return [Integer]
     #
@@ -601,7 +626,21 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    # AWS CodeBuild is not available in the specified region.
+    # Describes the Amazon EKS cluster that an environment runs on.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the Amazon EKS cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/Cluster AWS API Documentation
+    #
+    class Cluster < Struct.new(
+      :cluster_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # CodeBuild is not available in the specified region.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CodeBuildNotInServiceRegionException AWS API Documentation
     #
@@ -646,8 +685,8 @@ module Aws::ElasticBeanstalk
     # Describes the possible values for a configuration option.
     #
     # @!attribute [rw] namespace
-    #   A unique namespace identifying the option's associated AWS
-    #   resource.
+    #   A unique namespace identifying the option's associated Amazon Web
+    #   Services resource.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -666,7 +705,7 @@ module Aws::ElasticBeanstalk
     #     application availability.
     #
     #   * `RestartEnvironment` : The environment is entirely restarted, all
-    #     AWS resources are deleted and recreated, and the environment is
+    #     A resources are deleted and recreated, and the environment is
     #     unavailable during the process.
     #
     #   * `RestartApplicationServer` : The environment is available the
@@ -752,7 +791,7 @@ module Aws::ElasticBeanstalk
 
     # A specification identifying an individual configuration option along
     # with its current value. For a list of possible namespaces and option
-    # values, see [Option Values][1] in the *AWS Elastic Beanstalk Developer
+    # values, see [Option Values][1] in the *Elastic Beanstalk Developer
     # Guide*.
     #
     #
@@ -765,8 +804,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   A unique namespace that identifies the option's associated AWS
-    #   resource.
+    #   A unique namespace that identifies the option's associated Amazon
+    #   Web Services resource.
     #   @return [String]
     #
     # @!attribute [rw] option_name
@@ -964,8 +1003,8 @@ module Aws::ElasticBeanstalk
     #
     #   Constraint: Must be unique per application. If an application
     #   version already exists with this label for the specified
-    #   application, AWS Elastic Beanstalk returns an
-    #   `InvalidParameterValue` error.
+    #   application, Elastic Beanstalk returns an `InvalidParameterValue`
+    #   error.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -973,7 +1012,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] source_build_information
-    #   Specify a commit in an AWS CodeCommit Git repository to use as the
+    #   Specify a commit in an CodeCommit Git repository to use as the
     #   source code for the application version.
     #   @return [Types::SourceBuildInformation]
     #
@@ -983,16 +1022,26 @@ module Aws::ElasticBeanstalk
     #
     #   <note markdown="1"> The Amazon S3 bucket must be in the same region as the environment.
     #
+    #    Unless you're specifying a source bundle in the bucket that Elastic
+    #   Beanstalk manages in your account, you must assign a custom policy
+    #   to your user, and grant `Allow` permission to the `s3:Get*` actions
+    #   on your S3 object resource, for example,
+    #   `arn:aws:s3:::your-bucket/your-source-bundle-object`.
+    #
     #    </note>
     #
-    #   Specify a source bundle in S3 or a commit in an AWS CodeCommit
+    #   Specify a source bundle in Amazon S3 or a commit in an CodeCommit
     #   repository (with `SourceBuildInformation`), but not both. If neither
     #   `SourceBundle` nor `SourceBuildInformation` are provided, Elastic
     #   Beanstalk uses a sample application.
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] build_configuration
-    #   Settings for an AWS CodeBuild build.
+    #   Settings for an CodeBuild build.
+    #
+    #   Don't specify `BuildConfiguration` together with
+    #   `ImageConfiguration`, which configures a container image build
+    #   instead.
     #   @return [Types::BuildConfiguration]
     #
     # @!attribute [rw] auto_create_application
@@ -1008,8 +1057,8 @@ module Aws::ElasticBeanstalk
     #   environment.
     #
     #   You must turn processing on for application versions that you create
-    #   using AWS CodeBuild or AWS CodeCommit. For application versions
-    #   built from a source bundle in Amazon S3, processing is optional.
+    #   using CodeBuild or CodeCommit. For application versions built from a
+    #   source bundle in Amazon S3, processing is optional.
     #
     #   <note markdown="1"> The `Process` option validates Elastic Beanstalk configuration
     #   files. It doesn't validate your application's configuration files,
@@ -1026,6 +1075,17 @@ module Aws::ElasticBeanstalk
     #   inherit the tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] image_configuration
+    #   The source of the container image for this application version. You
+    #   can specify an image that you built and pushed to a container
+    #   registry yourself, or settings for Elastic Beanstalk to build one
+    #   from your source bundle. Specify exactly one of the `Source` and
+    #   `Build` members.
+    #
+    #   Don't specify `ImageConfiguration` together with
+    #   `BuildConfiguration`, which configures an CodeBuild build instead.
+    #   @return [Types::ImageConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateApplicationVersionMessage AWS API Documentation
     #
     class CreateApplicationVersionMessage < Struct.new(
@@ -1037,7 +1097,8 @@ module Aws::ElasticBeanstalk
       :build_configuration,
       :auto_create_application,
       :process,
-      :tags)
+      :tags,
+      :image_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1062,8 +1123,8 @@ module Aws::ElasticBeanstalk
     #   operating system, runtime, and application server for a
     #   configuration template. It also determines the set of configuration
     #   options as well as the possible and default values. For more
-    #   information, see [Supported Platforms][1] in the *AWS Elastic
-    #   Beanstalk Developer Guide*.
+    #   information, see [Supported Platforms][1] in the *Elastic Beanstalk
+    #   Developer Guide*.
     #
     #   You must specify `SolutionStackName` if you don't specify
     #   `PlatformArn`, `EnvironmentId`, or `SourceConfiguration`.
@@ -1079,8 +1140,8 @@ module Aws::ElasticBeanstalk
     #
     # @!attribute [rw] platform_arn
     #   The Amazon Resource Name (ARN) of the custom platform. For more
-    #   information, see [ Custom Platforms][1] in the *AWS Elastic
-    #   Beanstalk Developer Guide*.
+    #   information, see [ Custom Platforms][1] in the *Elastic Beanstalk
+    #   Developer Guide*.
     #
     #   <note markdown="1"> If you specify `PlatformArn`, then don't specify
     #   `SolutionStackName`.
@@ -1124,8 +1185,8 @@ module Aws::ElasticBeanstalk
     #   instance type. If specified, these values override the values
     #   obtained from the solution stack or the source configuration
     #   template. For a complete list of Elastic Beanstalk configuration
-    #   options, see [Option Values][1] in the *AWS Elastic Beanstalk
-    #   Developer Guide*.
+    #   options, see [Option Values][1] in the *Elastic Beanstalk Developer
+    #   Guide*.
     #
     #
     #
@@ -1196,9 +1257,9 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] tier
     #   Specifies the tier to use in creating this environment. The
     #   environment tier that you choose determines whether Elastic
-    #   Beanstalk provisions resources to support a web application that
-    #   handles HTTP(S) requests or a web application that handles
-    #   background-processing tasks.
+    #   Beanstalk provisions resources on Amazon EC2 instances or on an
+    #   Amazon EKS cluster, and, for Amazon EC2, whether the environment
+    #   serves HTTP(S) requests or processes background tasks from a queue.
     #   @return [Types::EnvironmentTier]
     #
     # @!attribute [rw] tags
@@ -1227,8 +1288,8 @@ module Aws::ElasticBeanstalk
     #   to use with the environment. If specified, Elastic Beanstalk sets
     #   the configuration values to the default values associated with the
     #   specified solution stack. For a list of current solution stacks, see
-    #   [Elastic Beanstalk Supported Platforms][1] in the *AWS Elastic
-    #   Beanstalk Platforms* guide.
+    #   [Elastic Beanstalk Supported Platforms][1] in the *Elastic Beanstalk
+    #   Platforms* guide.
     #
     #   <note markdown="1"> If you specify `SolutionStackName`, don't specify `PlatformArn` or
     #   `TemplateName`.
@@ -1243,7 +1304,7 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] platform_arn
     #   The Amazon Resource Name (ARN) of the custom platform to use with
     #   the environment. For more information, see [Custom Platforms][1] in
-    #   the *AWS Elastic Beanstalk Developer Guide*.
+    #   the *Elastic Beanstalk Developer Guide*.
     #
     #   <note markdown="1"> If you specify `PlatformArn`, don't specify `SolutionStackName`.
     #
@@ -1255,7 +1316,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] option_settings
-    #   If specified, AWS Elastic Beanstalk sets the specified configuration
+    #   If specified, Elastic Beanstalk sets the specified configuration
     #   options to the requested value in the configuration set for the new
     #   environment. These override the values obtained from the solution
     #   stack or the configuration template.
@@ -1267,18 +1328,15 @@ module Aws::ElasticBeanstalk
     #   @return [Array<Types::OptionSpecification>]
     #
     # @!attribute [rw] operations_role
+    #   The operations role feature of Elastic Beanstalk is in beta release
+    #   and is subject to change.
+    #
     #   The Amazon Resource Name (ARN) of an existing IAM role to be used as
     #   the environment's operations role. If specified, Elastic Beanstalk
     #   uses the operations role for permissions to downstream services
     #   during this call and during subsequent calls acting on this
     #   environment. To specify an operations role, you must have the
-    #   `iam:PassRole` permission for the role. For more information, see
-    #   [Operations roles][1] in the *AWS Elastic Beanstalk Developer
-    #   Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
+    #   `iam:PassRole` permission for the role.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/CreateEnvironmentMessage AWS API Documentation
@@ -1546,7 +1604,7 @@ module Aws::ElasticBeanstalk
 
     # @!attribute [rw] resource_quotas
     #   The Elastic Beanstalk resource quotas associated with the calling
-    #   AWS account.
+    #   Amazon Web Services account.
     #   @return [Types::ResourceQuotas]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeAccountAttributesResult AWS API Documentation
@@ -1598,8 +1656,8 @@ module Aws::ElasticBeanstalk
     # Request to describe one or more applications.
     #
     # @!attribute [rw] application_names
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to only include those with the specified names.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions
+    #   to only include those with the specified names.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeApplicationsMessage AWS API Documentation
@@ -1667,9 +1725,9 @@ module Aws::ElasticBeanstalk
     #   The name of the configuration template to describe.
     #
     #   Conditional: You must specify either this parameter or an
-    #   EnvironmentName, but not both. If you specify both, AWS Elastic
+    #   EnvironmentName, but not both. If you specify both, Elastic
     #   Beanstalk returns an `InvalidParameterCombination` error. If you do
-    #   not specify either, AWS Elastic Beanstalk returns a
+    #   not specify either, Elastic Beanstalk returns a
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
@@ -1677,9 +1735,9 @@ module Aws::ElasticBeanstalk
     #   The name of the environment to describe.
     #
     #   Condition: You must specify either this or a TemplateName, but not
-    #   both. If you specify both, AWS Elastic Beanstalk returns an
+    #   both. If you specify both, Elastic Beanstalk returns an
     #   `InvalidParameterCombination` error. If you do not specify either,
-    #   AWS Elastic Beanstalk returns `MissingRequiredParameter` error.
+    #   Elastic Beanstalk returns `MissingRequiredParameter` error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DescribeConfigurationSettingsMessage AWS API Documentation
@@ -1722,7 +1780,7 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    # Health details for an AWS Elastic Beanstalk environment.
+    # Health details for an Elastic Beanstalk environment.
     #
     # @!attribute [rw] environment_name
     #   The environment's name.
@@ -1874,18 +1932,20 @@ module Aws::ElasticBeanstalk
     # Request to describe the resources in an environment.
     #
     # @!attribute [rw] environment_id
-    #   The ID of the environment to retrieve AWS resource usage data.
+    #   The ID of the environment to retrieve Amazon Web Services resource
+    #   usage data.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
-    #   The name of the environment to retrieve AWS resource usage data.
+    #   The name of the environment to retrieve Amazon Web Services resource
+    #   usage data.
     #
     #   Condition: You must specify either this or an EnvironmentId, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
@@ -1901,25 +1961,24 @@ module Aws::ElasticBeanstalk
     # Request to describe one or more environments.
     #
     # @!attribute [rw] application_name
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to include only those that are associated with this
-    #   application.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions
+    #   to include only those that are associated with this application.
     #   @return [String]
     #
     # @!attribute [rw] version_label
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to include only those that are associated with this
-    #   application version.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions
+    #   to include only those that are associated with this application
+    #   version.
     #   @return [String]
     #
     # @!attribute [rw] environment_ids
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to include only those that have the specified IDs.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions
+    #   to include only those that have the specified IDs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] environment_names
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to include only those that have the specified names.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions
+    #   to include only those that have the specified names.
     #   @return [Array<String>]
     #
     # @!attribute [rw] include_deleted
@@ -1970,40 +2029,39 @@ module Aws::ElasticBeanstalk
     # Request to retrieve a list of events for an environment.
     #
     # @!attribute [rw] application_name
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to include only those associated with this application.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions
+    #   to include only those associated with this application.
     #   @return [String]
     #
     # @!attribute [rw] version_label
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to those associated with this application version.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions
+    #   to those associated with this application version.
     #   @return [String]
     #
     # @!attribute [rw] template_name
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to those that are associated with this environment
-    #   configuration.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions
+    #   to those that are associated with this environment configuration.
     #   @return [String]
     #
     # @!attribute [rw] environment_id
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to those associated with this environment.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions
+    #   to those associated with this environment.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to those associated with this environment.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions
+    #   to those associated with this environment.
     #   @return [String]
     #
     # @!attribute [rw] platform_arn
-    #   The ARN of a custom platform version. If specified, AWS Elastic
+    #   The ARN of a custom platform version. If specified, Elastic
     #   Beanstalk restricts the returned descriptions to those associated
     #   with this custom platform version.
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   If specified, AWS Elastic Beanstalk restricts the described events
-    #   to include only those associated with this request ID.
+    #   If specified, Elastic Beanstalk restricts the described events to
+    #   include only those associated with this request ID.
     #   @return [String]
     #
     # @!attribute [rw] severity
@@ -2012,14 +2070,13 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] start_time
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to those that occur on or after this time.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions
+    #   to those that occur on or after this time.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
-    #   If specified, AWS Elastic Beanstalk restricts the returned
-    #   descriptions to those that occur up to, but not including, the
-    #   `EndTime`.
+    #   If specified, Elastic Beanstalk restricts the returned descriptions
+    #   to those that occur up to, but not including, the `EndTime`.
     #   @return [Time]
     #
     # @!attribute [rw] max_records
@@ -2054,11 +2111,11 @@ module Aws::ElasticBeanstalk
     # Parameters for a call to `DescribeInstancesHealth`.
     #
     # @!attribute [rw] environment_name
-    #   Specify the AWS Elastic Beanstalk environment by name.
+    #   Specify the Elastic Beanstalk environment by name.
     #   @return [String]
     #
     # @!attribute [rw] environment_id
-    #   Specify the AWS Elastic Beanstalk environment by ID.
+    #   Specify the Elastic Beanstalk environment by ID.
     #   @return [String]
     #
     # @!attribute [rw] attribute_names
@@ -2082,7 +2139,7 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    # Detailed health information about the Amazon EC2 instances in an AWS
+    # Detailed health information about the Amazon EC2 instances in an
     # Elastic Beanstalk environment.
     #
     # @!attribute [rw] instance_health_list
@@ -2220,7 +2277,16 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] status
     #   The current operational status of the environment:
     #
+    #   * `Aborting`: Environment is in the process of aborting a
+    #     deployment.
+    #
     #   * `Launching`: Environment is in the process of initial deployment.
+    #
+    #   * `LinkingFrom`: Environment is in the process of being linked to by
+    #     another environment. See [Environment links][1] for details.
+    #
+    #   * `LinkingTo`: Environment is in the process of linking to another
+    #     environment. See [Environment links][1] for details.
     #
     #   * `Updating`: Environment is in the process of updating its
     #     configuration settings or application version.
@@ -2231,6 +2297,10 @@ module Aws::ElasticBeanstalk
     #   * `Terminating`: Environment is in the shut-down process.
     #
     #   * `Terminated`: Environment is not running.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-links.html
     #   @return [String]
     #
     # @!attribute [rw] abortable_operation_in_progress
@@ -2243,8 +2313,8 @@ module Aws::ElasticBeanstalk
     #   @return [Boolean]
     #
     # @!attribute [rw] health
-    #   Describes the health status of the environment. AWS Elastic
-    #   Beanstalk indicates the failure levels for a running environment:
+    #   Describes the health status of the environment. Elastic Beanstalk
+    #   indicates the failure levels for a running environment:
     #
     #   * `Red`: Indicates the environment is not responsive. Occurs when
     #     three or more consecutive failures occur for an environment.
@@ -2274,7 +2344,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] resources
-    #   The description of the AWS resources used by this environment.
+    #   The description of the Amazon Web Services resources used by this
+    #   environment.
     #   @return [Types::EnvironmentResourcesDescription]
     #
     # @!attribute [rw] tier
@@ -2291,13 +2362,11 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] operations_role
+    #   The operations role feature of Elastic Beanstalk is in beta release
+    #   and is subject to change.
+    #
     #   The Amazon Resource Name (ARN) of the environment's operations
-    #   role. For more information, see [Operations roles][1] in the *AWS
-    #   Elastic Beanstalk Developer Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
+    #   role.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/EnvironmentDescription AWS API Documentation
@@ -2407,8 +2476,8 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    # Describes the AWS resources in use by this environment. This data is
-    # live.
+    # Describes the Amazon Web Services resources in use by this
+    # environment. This data is live.
     #
     # @!attribute [rw] environment_name
     #   The name of the environment.
@@ -2417,6 +2486,11 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] auto_scaling_groups
     #   The `AutoScalingGroups` used by this environment.
     #   @return [Array<Types::AutoScalingGroup>]
+    #
+    # @!attribute [rw] cluster
+    #   The Amazon EKS cluster that this environment runs on. This member is
+    #   present only for environments in the *Cluster* tier.
+    #   @return [Types::Cluster]
     #
     # @!attribute [rw] instances
     #   The Amazon EC2 instances used by this environment.
@@ -2447,6 +2521,7 @@ module Aws::ElasticBeanstalk
     class EnvironmentResourceDescription < Struct.new(
       :environment_name,
       :auto_scaling_groups,
+      :cluster,
       :instances,
       :launch_configurations,
       :launch_templates,
@@ -2471,8 +2546,8 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    # Describes the AWS resources in use by this environment. This data is
-    # not live data.
+    # Describes the Amazon Web Services resources in use by this
+    # environment. This data is not live data.
     #
     # @!attribute [rw] load_balancer
     #   Describes the LoadBalancer.
@@ -2493,9 +2568,12 @@ module Aws::ElasticBeanstalk
     #
     #   Valid values:
     #
-    #   * For *Web server tier* – `WebServer`
+    #   * For *Standard-mode EC2-based web server* – `WebServer`
     #
-    #   * For *Worker tier* – `Worker`
+    #   * For *Standard-mode EC2-based backend application with Amazon SQS*
+    #     – `Worker`
+    #
+    #   * For *Cluster-mode Amazon EKS-based applications* – `Cluster`
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -2506,6 +2584,8 @@ module Aws::ElasticBeanstalk
     #   * For *Web server tier* – `Standard`
     #
     #   * For *Worker tier* – `SQS/HTTP`
+    #
+    #   * For *Cluster tier* – `EKS`
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -2605,6 +2685,143 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
+    # Settings that Elastic Beanstalk uses to build a container image from
+    # the source bundle of an application version.
+    #
+    # @!attribute [rw] type
+    #   How Elastic Beanstalk builds the container image. Elastic Beanstalk
+    #   rejects a `Build` that doesn't specify it.
+    #
+    #   Valid values:
+    #
+    #   * `docker` – Elastic Beanstalk builds the image from a Dockerfile in
+    #     your source bundle. Specify the Dockerfile with
+    #     `DockerfileLocation`.
+    #
+    #   * `buildpack` – Elastic Beanstalk builds the image with a Cloud
+    #     Native Buildpacks builder. Specify the builder with `Buildpack`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dockerfile_location
+    #   The path to the Dockerfile within the source bundle, relative to the
+    #   root of the source bundle. For example, `backend/Dockerfile`.
+    #
+    #   Elastic Beanstalk uses this member only when `Type` is `docker`. If
+    #   you don't specify it, Elastic Beanstalk uses the Dockerfile at the
+    #   root of the source bundle.
+    #   @return [String]
+    #
+    # @!attribute [rw] buildpack
+    #   The Cloud Native Buildpacks builder image that Elastic Beanstalk
+    #   uses to build the container image. For example,
+    #   `paketobuildpacks/builder-jammy-base`.
+    #
+    #   This member is required when `Type` is `buildpack`. Elastic
+    #   Beanstalk doesn't provide a default builder.
+    #   @return [String]
+    #
+    # @!attribute [rw] architecture
+    #   The processor architecture that Elastic Beanstalk builds the
+    #   container image for. The architecture must match the architecture of
+    #   the instances in the environment that you deploy the application
+    #   version to.
+    #
+    #   Valid values:
+    #
+    #   * `amd64` – x86-64 instances. This is the default.
+    #
+    #   * `arm64` – Amazon Web Services Graviton instances.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_build_service_role
+    #   The Amazon Resource Name (ARN) of the Identity and Access Management
+    #   (IAM) role that CodeBuild assumes to run the build in your Amazon
+    #   Web Services account. Elastic Beanstalk rejects a `Build` that
+    #   doesn't specify this role.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_type
+    #   The size of the compute resources that run the build. If you don't
+    #   specify it, Elastic Beanstalk uses `BUILD_GENERAL1_MEDIUM`.
+    #
+    #   Valid values:
+    #
+    #   * `BUILD_GENERAL1_SMALL` – Use up to 3 GB memory and 2 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_MEDIUM` – Use up to 7 GB memory and 4 vCPUs for
+    #     builds.
+    #
+    #   * `BUILD_GENERAL1_LARGE` – Use up to 15 GB memory and 8 vCPUs for
+    #     builds.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_in_minutes
+    #   How long, in minutes from 5 to 480 (8 hours), Elastic Beanstalk
+    #   waits before stopping a build that hasn't completed. The default is
+    #   60 minutes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ImageBuildConfiguration AWS API Documentation
+    #
+    class ImageBuildConfiguration < Struct.new(
+      :type,
+      :dockerfile_location,
+      :buildpack,
+      :architecture,
+      :code_build_service_role,
+      :compute_type,
+      :timeout_in_minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source of the container image for an application version: an image
+    # that you built and pushed to a container registry yourself, or
+    # settings for Elastic Beanstalk to build one from your source bundle.
+    #
+    # @!attribute [rw] source
+    #   The location of a container image that you built and pushed to a
+    #   container registry yourself. Elastic Beanstalk deploys the image
+    #   without a build step.
+    #
+    #   If you specify `Source`, don't specify `Build` or the request's
+    #   `SourceBundle` parameter.
+    #   @return [Types::ImageSource]
+    #
+    # @!attribute [rw] build
+    #   Settings that Elastic Beanstalk uses to build a container image from
+    #   the source bundle of the application version.
+    #
+    #   If you specify `Build`, also specify the request's `SourceBundle`
+    #   parameter, and don't specify `Source`.
+    #   @return [Types::ImageBuildConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ImageConfiguration AWS API Documentation
+    #
+    class ImageConfiguration < Struct.new(
+      :source,
+      :build)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The location of a container image.
+    #
+    # @!attribute [rw] uri
+    #   The URI of the container image, including the registry, the
+    #   repository, and the image tag or digest. For example,
+    #   `111122223333.dkr.ecr.us-east-1.amazonaws.com/my-repository:latest`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ImageSource AWS API Documentation
+    #
+    class ImageSource < Struct.new(
+      :uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The description of an Amazon EC2 instance.
     #
     # @!attribute [rw] id
@@ -2627,13 +2844,13 @@ module Aws::ElasticBeanstalk
     # [1]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
     #
     # @!attribute [rw] no_data
-    #   **Grey.** AWS Elastic Beanstalk and the health agent are reporting
-    #   no data on an instance.
+    #   **Grey.** Elastic Beanstalk and the health agent are reporting no
+    #   data on an instance.
     #   @return [Integer]
     #
     # @!attribute [rw] unknown
-    #   **Grey.** AWS Elastic Beanstalk and the health agent are reporting
-    #   an insufficient amount of data on an instance.
+    #   **Grey.** Elastic Beanstalk and the health agent are reporting an
+    #   insufficient amount of data on an instance.
     #   @return [Integer]
     #
     # @!attribute [rw] pending
@@ -2681,7 +2898,7 @@ module Aws::ElasticBeanstalk
     end
 
     # The specified account does not have sufficient privileges for one or
-    # more AWS services.
+    # more Amazon Web Services services.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/InsufficientPrivilegesException AWS API Documentation
     #
@@ -2780,7 +2997,7 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    # A list of available AWS Elastic Beanstalk solution stacks.
+    # A list of available Elastic Beanstalk solution stacks.
     #
     # @!attribute [rw] solution_stacks
     #   A list of available solution stacks.
@@ -3177,8 +3394,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   A unique namespace identifying the option's associated AWS
-    #   resource.
+    #   A unique namespace identifying the option's associated Amazon Web
+    #   Services resource.
     #   @return [String]
     #
     # @!attribute [rw] option_name
@@ -3246,7 +3463,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] platform_owner
-    #   The AWS account ID of the person who created the platform version.
+    #   The Amazon Web Services account ID of the person who created the
+    #   platform version.
     #   @return [String]
     #
     # @!attribute [rw] platform_name
@@ -3456,7 +3674,8 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] platform_owner
-    #   The AWS account ID of the person who created the platform version.
+    #   The Amazon Web Services account ID of the person who created the
+    #   platform version.
     #   @return [String]
     #
     # @!attribute [rw] platform_status
@@ -3556,7 +3775,7 @@ module Aws::ElasticBeanstalk
     #   The ID of the environment to rebuild.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
@@ -3564,7 +3783,7 @@ module Aws::ElasticBeanstalk
     #   The name of the environment to rebuild.
     #
     #   Condition: You must specify either this or an EnvironmentId, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
@@ -3587,7 +3806,7 @@ module Aws::ElasticBeanstalk
     #   `InvalidParameterValue` error.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
@@ -3598,7 +3817,7 @@ module Aws::ElasticBeanstalk
     #   `InvalidParameterValue` error.
     #
     #   Condition: You must specify either this or an EnvironmentId, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
@@ -3623,13 +3842,13 @@ module Aws::ElasticBeanstalk
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
 
-    # The AWS Elastic Beanstalk quota information for a single resource type
-    # in an AWS account. It reflects the resource's limits for this
-    # account.
+    # The Elastic Beanstalk quota information for a single resource type in
+    # an Amazon Web Services account. It reflects the resource's limits for
+    # this account.
     #
     # @!attribute [rw] maximum
     #   The maximum number of instances of this Elastic Beanstalk resource
-    #   type that an AWS account can use.
+    #   type that an Amazon Web Services account can use.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ResourceQuota AWS API Documentation
@@ -3640,28 +3859,30 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    # A set of per-resource AWS Elastic Beanstalk quotas associated with an
-    # AWS account. They reflect Elastic Beanstalk resource limits for this
-    # account.
+    # A set of per-resource Elastic Beanstalk quotas associated with an
+    # Amazon Web Services account. They reflect Elastic Beanstalk resource
+    # limits for this account.
     #
     # @!attribute [rw] application_quota
-    #   The quota for applications in the AWS account.
+    #   The quota for applications in the Amazon Web Services account.
     #   @return [Types::ResourceQuota]
     #
     # @!attribute [rw] application_version_quota
-    #   The quota for application versions in the AWS account.
+    #   The quota for application versions in the Amazon Web Services
+    #   account.
     #   @return [Types::ResourceQuota]
     #
     # @!attribute [rw] environment_quota
-    #   The quota for environments in the AWS account.
+    #   The quota for environments in the Amazon Web Services account.
     #   @return [Types::ResourceQuota]
     #
     # @!attribute [rw] configuration_template_quota
-    #   The quota for configuration templates in the AWS account.
+    #   The quota for configuration templates in the Amazon Web Services
+    #   account.
     #   @return [Types::ResourceQuota]
     #
     # @!attribute [rw] custom_platform_quota
-    #   The quota for custom platforms in the AWS account.
+    #   The quota for custom platforms in the Amazon Web Services account.
     #   @return [Types::ResourceQuota]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ResourceQuotas AWS API Documentation
@@ -3705,7 +3926,7 @@ module Aws::ElasticBeanstalk
     #   The ID of the environment to restart the server for.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
@@ -3713,7 +3934,7 @@ module Aws::ElasticBeanstalk
     #   The name of the environment to restart the server for.
     #
     #   Condition: You must specify either this or an EnvironmentId, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
@@ -3735,7 +3956,7 @@ module Aws::ElasticBeanstalk
     #   error.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
@@ -3746,7 +3967,7 @@ module Aws::ElasticBeanstalk
     #   error.
     #
     #   Condition: You must specify either this or an EnvironmentId, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
@@ -4151,7 +4372,7 @@ module Aws::ElasticBeanstalk
     #   The ID of the environment to terminate.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
@@ -4159,23 +4380,23 @@ module Aws::ElasticBeanstalk
     #   The name of the environment to terminate.
     #
     #   Condition: You must specify either this or an EnvironmentId, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
     # @!attribute [rw] terminate_resources
-    #   Indicates whether the associated AWS resources should shut down when
-    #   the environment is terminated:
+    #   Indicates whether the associated Amazon Web Services resources
+    #   should shut down when the environment is terminated:
     #
-    #   * `true`: The specified environment as well as the associated AWS
-    #     resources, such as Auto Scaling group and LoadBalancer, are
-    #     terminated.
+    #   * `true`: The specified environment as well as the associated Amazon
+    #     Web Services resources, such as Auto Scaling group and
+    #     LoadBalancer, are terminated.
     #
-    #   * `false`: AWS Elastic Beanstalk resource management is removed from
-    #     the environment, but the AWS resources continue to operate.
+    #   * `false`: Elastic Beanstalk resource management is removed from the
+    #     environment, but the Amazon Web Services resources continue to
+    #     operate.
     #
-    #   For more information, see the [ AWS Elastic Beanstalk User Guide.
-    #   ][1]
+    #   For more information, see the [ Elastic Beanstalk User Guide. ][1]
     #
     #   Default: `true`
     #
@@ -4275,7 +4496,7 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] description
     #   A new description for the application.
     #
-    #   Default: If not specified, AWS Elastic Beanstalk does not update the
+    #   Default: If not specified, Elastic Beanstalk does not update the
     #   description.
     #   @return [String]
     #
@@ -4391,21 +4612,21 @@ module Aws::ElasticBeanstalk
     # @!attribute [rw] environment_id
     #   The ID of the environment to update.
     #
-    #   If no environment with this ID exists, AWS Elastic Beanstalk returns
-    #   an `InvalidParameterValue` error.
+    #   If no environment with this ID exists, Elastic Beanstalk returns an
+    #   `InvalidParameterValue` error.
     #
     #   Condition: You must specify either this or an EnvironmentName, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
     # @!attribute [rw] environment_name
     #   The name of the environment to update. If no environment with this
-    #   name exists, AWS Elastic Beanstalk returns an
-    #   `InvalidParameterValue` error.
+    #   name exists, Elastic Beanstalk returns an `InvalidParameterValue`
+    #   error.
     #
     #   Condition: You must specify either this or an EnvironmentId, or
-    #   both. If you do not specify either, AWS Elastic Beanstalk returns
+    #   both. If you do not specify either, Elastic Beanstalk returns
     #   `MissingRequiredParameter` error.
     #   @return [String]
     #
@@ -4422,7 +4643,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   If this parameter is specified, AWS Elastic Beanstalk updates the
+    #   If this parameter is specified, Elastic Beanstalk updates the
     #   description of this environment.
     #   @return [String]
     #
@@ -4430,19 +4651,19 @@ module Aws::ElasticBeanstalk
     #   This specifies the tier to use to update the environment.
     #
     #   Condition: At this time, if you change the tier version, name, or
-    #   type, AWS Elastic Beanstalk returns `InvalidParameterValue` error.
+    #   type, Elastic Beanstalk returns `InvalidParameterValue` error.
     #   @return [Types::EnvironmentTier]
     #
     # @!attribute [rw] version_label
-    #   If this parameter is specified, AWS Elastic Beanstalk deploys the
-    #   named application version to the environment. If no such application
+    #   If this parameter is specified, Elastic Beanstalk deploys the named
+    #   application version to the environment. If no such application
     #   version is found, returns an `InvalidParameterValue` error.
     #   @return [String]
     #
     # @!attribute [rw] template_name
-    #   If this parameter is specified, AWS Elastic Beanstalk deploys this
+    #   If this parameter is specified, Elastic Beanstalk deploys this
     #   configuration template to the environment. If no such configuration
-    #   template is found, AWS Elastic Beanstalk returns an
+    #   template is found, Elastic Beanstalk returns an
     #   `InvalidParameterValue` error.
     #   @return [String]
     #
@@ -4456,7 +4677,7 @@ module Aws::ElasticBeanstalk
     #   @return [String]
     #
     # @!attribute [rw] option_settings
-    #   If specified, AWS Elastic Beanstalk updates the configuration set
+    #   If specified, Elastic Beanstalk updates the configuration set
     #   associated with the running environment and sets the specified
     #   configuration options to the requested value.
     #   @return [Array<Types::ConfigurationOptionSetting>]

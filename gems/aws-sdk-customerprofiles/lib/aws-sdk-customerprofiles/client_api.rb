@@ -322,6 +322,7 @@ module Aws::CustomerProfiles
     JobScheduleTime = Shapes::StringShape.new(name: 'JobScheduleTime')
     JobStats = Shapes::StructureShape.new(name: 'JobStats')
     KeyMap = Shapes::MapShape.new(name: 'KeyMap')
+    KeyValuesList = Shapes::ListShape.new(name: 'KeyValuesList')
     KmsArn = Shapes::StringShape.new(name: 'KmsArn')
     LayoutItem = Shapes::StructureShape.new(name: 'LayoutItem')
     LayoutList = Shapes::ListShape.new(name: 'LayoutList')
@@ -474,7 +475,9 @@ module Aws::CustomerProfiles
     ReadinessStatus = Shapes::StringShape.new(name: 'ReadinessStatus')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
     RecommendationDiversityConfig = Shapes::StructureShape.new(name: 'RecommendationDiversityConfig')
+    RecommendationMetadata = Shapes::StructureShape.new(name: 'RecommendationMetadata')
     Recommendations = Shapes::ListShape.new(name: 'Recommendations')
+    Recommender = Shapes::StructureShape.new(name: 'Recommender')
     RecommenderConfig = Shapes::StructureShape.new(name: 'RecommenderConfig')
     RecommenderConfigTrainingFrequencyInteger = Shapes::IntegerShape.new(name: 'RecommenderConfigTrainingFrequencyInteger')
     RecommenderContext = Shapes::MapShape.new(name: 'RecommenderContext')
@@ -526,6 +529,8 @@ module Aws::CustomerProfiles
     Scope = Shapes::StringShape.new(name: 'Scope')
     SearchProfilesRequest = Shapes::StructureShape.new(name: 'SearchProfilesRequest')
     SearchProfilesResponse = Shapes::StructureShape.new(name: 'SearchProfilesResponse')
+    SearchRecommendationsRequest = Shapes::StructureShape.new(name: 'SearchRecommendationsRequest')
+    SearchRecommendationsResponse = Shapes::StructureShape.new(name: 'SearchRecommendationsResponse')
     SegmentDefinitionArn = Shapes::StringShape.new(name: 'SegmentDefinitionArn')
     SegmentDefinitionItem = Shapes::StructureShape.new(name: 'SegmentDefinitionItem')
     SegmentDefinitionsList = Shapes::ListShape.new(name: 'SegmentDefinitionsList')
@@ -1994,6 +1999,8 @@ module Aws::CustomerProfiles
     KeyMap.key = Shapes::ShapeRef.new(shape: name)
     KeyMap.value = Shapes::ShapeRef.new(shape: ObjectTypeKeyList)
 
+    KeyValuesList.member = Shapes::ShapeRef.new(shape: string1To255)
+
     LayoutItem.add_member(:layout_definition_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "LayoutDefinitionName"))
     LayoutItem.add_member(:description, Shapes::ShapeRef.new(shape: sensitiveText, required: true, location_name: "Description"))
     LayoutItem.add_member(:display_name, Shapes::ShapeRef.new(shape: displayName, required: true, location_name: "DisplayName"))
@@ -2647,7 +2654,15 @@ module Aws::CustomerProfiles
     RecommendationDiversityConfig.add_member(:values, Shapes::ShapeRef.new(shape: DiversityValuesMap, location_name: "Values"))
     RecommendationDiversityConfig.struct_class = Types::RecommendationDiversityConfig
 
+    RecommendationMetadata.add_member(:columns, Shapes::ShapeRef.new(shape: MetadataColumnsList, location_name: "Columns"))
+    RecommendationMetadata.struct_class = Types::RecommendationMetadata
+
     Recommendations.member = Shapes::ShapeRef.new(shape: Recommendation)
+
+    Recommender.add_member(:name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "Name"))
+    Recommender.add_member(:filters, Shapes::ShapeRef.new(shape: RecommenderFilters, location_name: "Filters"))
+    Recommender.add_member(:promotional_filters, Shapes::ShapeRef.new(shape: RecommenderPromotionalFilters, location_name: "PromotionalFilters"))
+    Recommender.struct_class = Types::Recommender
 
     RecommenderConfig.add_member(:events_config, Shapes::ShapeRef.new(shape: EventsConfig, location_name: "EventsConfig"))
     RecommenderConfig.add_member(:training_frequency, Shapes::ShapeRef.new(shape: RecommenderConfigTrainingFrequencyInteger, location_name: "TrainingFrequency"))
@@ -2809,6 +2824,21 @@ module Aws::CustomerProfiles
     SearchProfilesResponse.add_member(:items, Shapes::ShapeRef.new(shape: ProfileList, location_name: "Items"))
     SearchProfilesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
     SearchProfilesResponse.struct_class = Types::SearchProfilesResponse
+
+    SearchRecommendationsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    SearchRecommendationsRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: name, required: true, location_name: "KeyName"))
+    SearchRecommendationsRequest.add_member(:key_values, Shapes::ShapeRef.new(shape: KeyValuesList, required: true, location_name: "KeyValues"))
+    SearchRecommendationsRequest.add_member(:recommender, Shapes::ShapeRef.new(shape: Recommender, required: true, location_name: "Recommender"))
+    SearchRecommendationsRequest.add_member(:candidate_ids, Shapes::ShapeRef.new(shape: CandidateIdList, location_name: "CandidateIds"))
+    SearchRecommendationsRequest.add_member(:context, Shapes::ShapeRef.new(shape: RecommenderContext, location_name: "Context"))
+    SearchRecommendationsRequest.add_member(:diversity, Shapes::ShapeRef.new(shape: RecommendationDiversityConfig, location_name: "Diversity"))
+    SearchRecommendationsRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: RecommendationMetadata, location_name: "Metadata"))
+    SearchRecommendationsRequest.add_member(:max_recommendations, Shapes::ShapeRef.new(shape: maxSize500, location_name: "MaxRecommendations"))
+    SearchRecommendationsRequest.struct_class = Types::SearchRecommendationsRequest
+
+    SearchRecommendationsResponse.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, location_name: "ProfileId"))
+    SearchRecommendationsResponse.add_member(:recommendations, Shapes::ShapeRef.new(shape: Recommendations, location_name: "Recommendations"))
+    SearchRecommendationsResponse.struct_class = Types::SearchRecommendationsResponse
 
     SegmentDefinitionItem.add_member(:segment_definition_name, Shapes::ShapeRef.new(shape: name, location_name: "SegmentDefinitionName"))
     SegmentDefinitionItem.add_member(:display_name, Shapes::ShapeRef.new(shape: string1To255, location_name: "DisplayName"))
@@ -4551,6 +4581,19 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/domains/{DomainName}/profiles/search"
         o.input = Shapes::ShapeRef.new(shape: SearchProfilesRequest)
         o.output = Shapes::ShapeRef.new(shape: SearchProfilesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:search_recommendations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchRecommendations"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/recommendations"
+        o.input = Shapes::ShapeRef.new(shape: SearchRecommendationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchRecommendationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

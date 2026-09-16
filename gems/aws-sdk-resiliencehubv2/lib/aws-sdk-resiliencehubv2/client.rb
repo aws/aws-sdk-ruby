@@ -606,6 +606,11 @@ module Aws::Resiliencehubv2
     # @option params [Types::DataRecoveryTargets] :data_recovery
     #   The data recovery targets for the resilience policy.
     #
+    # @option params [Boolean] :sharing_enabled
+    #   Specifies whether cross-account sharing is enabled for the policy.
+    #   Only a delegated administrator or the management account can enable
+    #   sharing.
+    #
     # @option params [String] :kms_key_id
     #   KMS key identifier — accepts key ID, key ARN, alias name, or alias
     #   ARN.
@@ -644,6 +649,7 @@ module Aws::Resiliencehubv2
     #     data_recovery: {
     #       time_between_backups_in_minutes: 1,
     #     },
+    #     sharing_enabled: false,
     #     kms_key_id: "KmsKeyId",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -664,6 +670,8 @@ module Aws::Resiliencehubv2
     #   resp.policy.multi_region.rpo_in_minutes #=> Integer
     #   resp.policy.multi_region.disaster_recovery_approach #=> String, one of "ACTIVE_ACTIVE", "HOT_STANDBY", "WARM_STANDBY", "PILOT_LIGHT", "BACKUP_AND_RESTORE"
     #   resp.policy.data_recovery.time_between_backups_in_minutes #=> Integer
+    #   resp.policy.sharing_enabled #=> Boolean
+    #   resp.policy.organization_id #=> String
     #   resp.policy.kms_key_id #=> String
     #   resp.policy.tags #=> Hash
     #   resp.policy.tags["TagKey"] #=> String
@@ -1514,6 +1522,52 @@ module Aws::Resiliencehubv2
       req.send_request(options)
     end
 
+    # Retrieves the dependency insights generated for a service. The
+    # response reports the current generation status; insights are populated
+    # once generation has completed. If generation failed, the response
+    # includes an error code, whose possible values are listed under the
+    # response's errorCode field, and a message describing the cause. To
+    # use this operation, you must have the
+    # `resiliencehub:GetDependencyInsights` permission on the service.
+    #
+    # @option params [required, String] :service_arn
+    #   ARN identifier.
+    #
+    # @return [Types::GetDependencyInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDependencyInsightsResponse#overview #overview} => String
+    #   * {Types::GetDependencyInsightsResponse#insights #insights} => Array&lt;Types::DependencyInsight&gt;
+    #   * {Types::GetDependencyInsightsResponse#status #status} => String
+    #   * {Types::GetDependencyInsightsResponse#created_at #created_at} => Time
+    #   * {Types::GetDependencyInsightsResponse#error_code #error_code} => String
+    #   * {Types::GetDependencyInsightsResponse#error_message #error_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_dependency_insights({
+    #     service_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.overview #=> String
+    #   resp.insights #=> Array
+    #   resp.insights[0].category #=> String, one of "CROSS_REGION", "NEW_DEPENDENCY", "THIRD_PARTY", "UNEVEN_USAGE", "AWS_SERVICE"
+    #   resp.insights[0].description #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
+    #   resp.created_at #=> Time
+    #   resp.error_code #=> String, one of "INSUFFICIENT_DATA", "LLM_GENERATION_FAILED", "INTERNAL_ERROR"
+    #   resp.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/GetDependencyInsights AWS API Documentation
+    #
+    # @overload get_dependency_insights(params = {})
+    # @param [Hash] params ({})
+    def get_dependency_insights(params = {}, options = {})
+      req = build_request(:get_dependency_insights, params)
+      req.send_request(options)
+    end
+
     # Retrieves a finding by findingId.
     #
     # @option params [required, String] :finding_id
@@ -1594,6 +1648,8 @@ module Aws::Resiliencehubv2
     #   resp.policy.multi_region.rpo_in_minutes #=> Integer
     #   resp.policy.multi_region.disaster_recovery_approach #=> String, one of "ACTIVE_ACTIVE", "HOT_STANDBY", "WARM_STANDBY", "PILOT_LIGHT", "BACKUP_AND_RESTORE"
     #   resp.policy.data_recovery.time_between_backups_in_minutes #=> Integer
+    #   resp.policy.sharing_enabled #=> Boolean
+    #   resp.policy.organization_id #=> String
     #   resp.policy.kms_key_id #=> String
     #   resp.policy.tags #=> Hash
     #   resp.policy.tags["TagKey"] #=> String
@@ -2159,6 +2215,8 @@ module Aws::Resiliencehubv2
     #   resp.policy.multi_region.rpo_in_minutes #=> Integer
     #   resp.policy.multi_region.disaster_recovery_approach #=> String, one of "ACTIVE_ACTIVE", "HOT_STANDBY", "WARM_STANDBY", "PILOT_LIGHT", "BACKUP_AND_RESTORE"
     #   resp.policy.data_recovery.time_between_backups_in_minutes #=> Integer
+    #   resp.policy.sharing_enabled #=> Boolean
+    #   resp.policy.organization_id #=> String
     #   resp.policy.kms_key_id #=> String
     #   resp.policy.tags #=> Hash
     #   resp.policy.tags["TagKey"] #=> String
@@ -2504,6 +2562,10 @@ module Aws::Resiliencehubv2
 
     # Lists resilience policies.
     #
+    # @option params [String] :account_id
+    #   The identifier of the account that owns the policies to include in the
+    #   results.
+    #
     # @option params [Integer] :max_results
     #   Pagination page size.
     #
@@ -2520,6 +2582,7 @@ module Aws::Resiliencehubv2
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_policies({
+    #     account_id: "AccountId",
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -2537,6 +2600,8 @@ module Aws::Resiliencehubv2
     #   resp.policy_summaries[0].multi_region.rpo_in_minutes #=> Integer
     #   resp.policy_summaries[0].multi_region.disaster_recovery_approach #=> String, one of "ACTIVE_ACTIVE", "HOT_STANDBY", "WARM_STANDBY", "PILOT_LIGHT", "BACKUP_AND_RESTORE"
     #   resp.policy_summaries[0].data_recovery.time_between_backups_in_minutes #=> Integer
+    #   resp.policy_summaries[0].sharing_enabled #=> Boolean
+    #   resp.policy_summaries[0].organization_id #=> String
     #   resp.policy_summaries[0].associated_service_count #=> Integer
     #   resp.policy_summaries[0].created_at #=> Time
     #   resp.policy_summaries[0].updated_at #=> Time
@@ -2548,6 +2613,76 @@ module Aws::Resiliencehubv2
     # @param [Hash] params ({})
     def list_policies(params = {}, options = {})
       req = build_request(:list_policies, params)
+      req.send_request(options)
+    end
+
+    # Lists events for a resilience policy, including services that started
+    # or stopped using it, changes to cross-account sharing, and deletion of
+    # the policy.
+    #
+    # @option params [required, String] :policy_arn
+    #   ARN identifier.
+    #
+    # @option params [Array<String>] :event_types
+    #   The type of events to include in the results.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   The start time for filtering events.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   The end time for filtering events.
+    #
+    # @option params [Integer] :max_results
+    #   Pagination page size.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @return [Types::ListPolicyEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPolicyEventsResponse#events #events} => Array&lt;Types::PolicyEvent&gt;
+    #   * {Types::ListPolicyEventsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_policy_events({
+    #     policy_arn: "Arn", # required
+    #     event_types: ["POLICY_ATTACHED_TO_SERVICE"], # accepts POLICY_ATTACHED_TO_SERVICE, POLICY_DETACHED_FROM_SERVICE, POLICY_SHARING_REVOKED, POLICY_DELETED
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.events #=> Array
+    #   resp.events[0].event_id #=> String
+    #   resp.events[0].timestamp #=> Time
+    #   resp.events[0].event_type #=> String, one of "POLICY_ATTACHED_TO_SERVICE", "POLICY_DETACHED_FROM_SERVICE", "POLICY_SHARING_REVOKED", "POLICY_DELETED"
+    #   resp.events[0].policy_arn #=> String
+    #   resp.events[0].actor.type #=> String, one of "USER", "SYSTEM"
+    #   resp.events[0].actor.principal_id #=> String
+    #   resp.events[0].actor.account_id #=> String
+    #   resp.events[0].actor.user_name #=> String
+    #   resp.events[0].event_details.title #=> String
+    #   resp.events[0].event_details.description #=> String
+    #   resp.events[0].event_details.event_metadata.policy_attached_to_service.service_arn #=> String
+    #   resp.events[0].event_details.event_metadata.policy_attached_to_service.account_id #=> String
+    #   resp.events[0].event_details.event_metadata.policy_detached_from_service.service_arn #=> String
+    #   resp.events[0].event_details.event_metadata.policy_detached_from_service.account_id #=> String
+    #   resp.events[0].event_details.event_metadata.policy_sharing_revoked.affected_service_count #=> Integer
+    #   resp.events[0].event_details.event_metadata.policy_deleted.affected_service_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/ListPolicyEvents AWS API Documentation
+    #
+    # @overload list_policy_events(params = {})
+    # @param [Hash] params ({})
+    def list_policy_events(params = {}, options = {})
+      req = build_request(:list_policy_events, params)
       req.send_request(options)
     end
 
@@ -2736,7 +2871,7 @@ module Aws::Resiliencehubv2
     #   ARN identifier.
     #
     # @option params [Array<String>] :event_types
-    #   Filter events by type.
+    #   The type of events to include in the results.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The start time for filtering events.
@@ -2796,8 +2931,13 @@ module Aws::Resiliencehubv2
     #   resp.events[0].event_details.event_metadata.service_workflow_updated.service_function_name #=> String
     #   resp.events[0].event_details.event_metadata.service_policy_associated.policy_name #=> String
     #   resp.events[0].event_details.event_metadata.service_policy_associated.policy_arn #=> String
+    #   resp.events[0].event_details.event_metadata.service_policy_associated.policy_owner_account_id #=> String
+    #   resp.events[0].event_details.event_metadata.service_policy_associated.policy_source #=> String, one of "SELF", "CROSS_ACCOUNT"
     #   resp.events[0].event_details.event_metadata.service_policy_disassociated.policy_name #=> String
     #   resp.events[0].event_details.event_metadata.service_policy_disassociated.policy_arn #=> String
+    #   resp.events[0].event_details.event_metadata.service_policy_disassociated.policy_owner_account_id #=> String
+    #   resp.events[0].event_details.event_metadata.service_policy_disassociated.policy_source #=> String, one of "SELF", "CROSS_ACCOUNT"
+    #   resp.events[0].event_details.event_metadata.service_policy_disassociated.reason #=> String, one of "REPLACED_BY_UPDATE", "SHARING_REVOKED", "POLICY_DELETED"
     #   resp.events[0].event_details.event_metadata.service_function_created.service_function_id #=> String
     #   resp.events[0].event_details.event_metadata.service_function_created.service_function_name #=> String
     #   resp.events[0].event_details.event_metadata.service_function_updated.service_function_id #=> String
@@ -3027,7 +3167,7 @@ module Aws::Resiliencehubv2
     #   ARN identifier.
     #
     # @option params [Array<String>] :event_types
-    #   Filter events by type.
+    #   The type of events to include in the results.
     #
     # @option params [Time,DateTime,Date,Integer,String] :start_time
     #   The start time for filtering events.
@@ -3690,6 +3830,45 @@ module Aws::Resiliencehubv2
       req.send_request(options)
     end
 
+    # Starts generating dependency insights for a service. Generation runs
+    # asynchronously; the response returns the initial status, and you
+    # retrieve the results with GetDependencyInsights. To use this
+    # operation, you must have the `resiliencehub:StartDependencyInsights`
+    # permission on the service.
+    #
+    # @option params [required, String] :service_arn
+    #   ARN identifier.
+    #
+    # @option params [String] :client_token
+    #   Idempotency token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartDependencyInsightsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartDependencyInsightsResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_dependency_insights({
+    #     service_arn: "Arn", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/resiliencehubv2-2026-02-17/StartDependencyInsights AWS API Documentation
+    #
+    # @overload start_dependency_insights(params = {})
+    # @param [Hash] params ({})
+    def start_dependency_insights(params = {}, options = {})
+      req = build_request(:start_dependency_insights, params)
+      req.send_request(options)
+    end
+
     # Starts a failure mode assessment.
     #
     # @option params [required, String] :service_arn
@@ -4030,6 +4209,10 @@ module Aws::Resiliencehubv2
     # @option params [Types::DataRecoveryTargets] :data_recovery
     #   The updated data recovery targets for the policy.
     #
+    # @option params [Boolean] :sharing_enabled
+    #   Specifies whether cross-account sharing is enabled for the policy.
+    #   Disabling sharing stops member services from using the policy.
+    #
     # @return [Types::UpdatePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePolicyResponse#policy #policy} => Types::Policy
@@ -4055,6 +4238,7 @@ module Aws::Resiliencehubv2
     #     data_recovery: {
     #       time_between_backups_in_minutes: 1,
     #     },
+    #     sharing_enabled: false,
     #   })
     #
     # @example Response structure
@@ -4070,6 +4254,8 @@ module Aws::Resiliencehubv2
     #   resp.policy.multi_region.rpo_in_minutes #=> Integer
     #   resp.policy.multi_region.disaster_recovery_approach #=> String, one of "ACTIVE_ACTIVE", "HOT_STANDBY", "WARM_STANDBY", "PILOT_LIGHT", "BACKUP_AND_RESTORE"
     #   resp.policy.data_recovery.time_between_backups_in_minutes #=> Integer
+    #   resp.policy.sharing_enabled #=> Boolean
+    #   resp.policy.organization_id #=> String
     #   resp.policy.kms_key_id #=> String
     #   resp.policy.tags #=> Hash
     #   resp.policy.tags["TagKey"] #=> String
@@ -4478,7 +4664,7 @@ module Aws::Resiliencehubv2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-resiliencehubv2'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

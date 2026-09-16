@@ -251,6 +251,9 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationEntityIdFilterValueList = Shapes::ListShape.new(name: 'ResaleAuthorizationEntityIdFilterValueList')
     ResaleAuthorizationEntityIdString = Shapes::StringShape.new(name: 'ResaleAuthorizationEntityIdString')
     ResaleAuthorizationFilters = Shapes::StructureShape.new(name: 'ResaleAuthorizationFilters')
+    ResaleAuthorizationIssuerAccountIdFilter = Shapes::StructureShape.new(name: 'ResaleAuthorizationIssuerAccountIdFilter')
+    ResaleAuthorizationIssuerAccountIdFilterValueList = Shapes::ListShape.new(name: 'ResaleAuthorizationIssuerAccountIdFilterValueList')
+    ResaleAuthorizationIssuerAccountIdString = Shapes::StringShape.new(name: 'ResaleAuthorizationIssuerAccountIdString')
     ResaleAuthorizationLastModifiedDateFilter = Shapes::StructureShape.new(name: 'ResaleAuthorizationLastModifiedDateFilter')
     ResaleAuthorizationLastModifiedDateFilterDateRange = Shapes::StructureShape.new(name: 'ResaleAuthorizationLastModifiedDateFilterDateRange')
     ResaleAuthorizationManufacturerAccountIdFilter = Shapes::StructureShape.new(name: 'ResaleAuthorizationManufacturerAccountIdFilter')
@@ -289,6 +292,9 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationResellerRoleString = Shapes::StringShape.new(name: 'ResaleAuthorizationResellerRoleString')
     ResaleAuthorizationSort = Shapes::StructureShape.new(name: 'ResaleAuthorizationSort')
     ResaleAuthorizationSortBy = Shapes::StringShape.new(name: 'ResaleAuthorizationSortBy')
+    ResaleAuthorizationSourceAuthorizationFilter = Shapes::StructureShape.new(name: 'ResaleAuthorizationSourceAuthorizationFilter')
+    ResaleAuthorizationSourceAuthorizationFilterValueList = Shapes::ListShape.new(name: 'ResaleAuthorizationSourceAuthorizationFilterValueList')
+    ResaleAuthorizationSourceAuthorizationString = Shapes::StringShape.new(name: 'ResaleAuthorizationSourceAuthorizationString')
     ResaleAuthorizationStatusFilter = Shapes::StructureShape.new(name: 'ResaleAuthorizationStatusFilter')
     ResaleAuthorizationStatusFilterValueList = Shapes::ListShape.new(name: 'ResaleAuthorizationStatusFilterValueList')
     ResaleAuthorizationStatusString = Shapes::StringShape.new(name: 'ResaleAuthorizationStatusString')
@@ -1028,7 +1034,14 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationFilters.add_member(:offer_extended_status, Shapes::ShapeRef.new(shape: ResaleAuthorizationOfferExtendedStatusFilter, location_name: "OfferExtendedStatus"))
     ResaleAuthorizationFilters.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: ResaleAuthorizationLastModifiedDateFilter, location_name: "LastModifiedDate"))
     ResaleAuthorizationFilters.add_member(:reseller_role, Shapes::ShapeRef.new(shape: ResaleAuthorizationResellerRoleFilter, location_name: "ResellerRole"))
+    ResaleAuthorizationFilters.add_member(:source_authorization, Shapes::ShapeRef.new(shape: ResaleAuthorizationSourceAuthorizationFilter, location_name: "SourceAuthorization"))
+    ResaleAuthorizationFilters.add_member(:issuer_account_id, Shapes::ShapeRef.new(shape: ResaleAuthorizationIssuerAccountIdFilter, location_name: "IssuerAccountId"))
     ResaleAuthorizationFilters.struct_class = Types::ResaleAuthorizationFilters
+
+    ResaleAuthorizationIssuerAccountIdFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: ResaleAuthorizationIssuerAccountIdFilterValueList, location_name: "ValueList"))
+    ResaleAuthorizationIssuerAccountIdFilter.struct_class = Types::ResaleAuthorizationIssuerAccountIdFilter
+
+    ResaleAuthorizationIssuerAccountIdFilterValueList.member = Shapes::ShapeRef.new(shape: ResaleAuthorizationIssuerAccountIdString)
 
     ResaleAuthorizationLastModifiedDateFilter.add_member(:date_range, Shapes::ShapeRef.new(shape: ResaleAuthorizationLastModifiedDateFilterDateRange, location_name: "DateRange"))
     ResaleAuthorizationLastModifiedDateFilter.struct_class = Types::ResaleAuthorizationLastModifiedDateFilter
@@ -1093,6 +1106,11 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationSort.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     ResaleAuthorizationSort.struct_class = Types::ResaleAuthorizationSort
 
+    ResaleAuthorizationSourceAuthorizationFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: ResaleAuthorizationSourceAuthorizationFilterValueList, location_name: "ValueList"))
+    ResaleAuthorizationSourceAuthorizationFilter.struct_class = Types::ResaleAuthorizationSourceAuthorizationFilter
+
+    ResaleAuthorizationSourceAuthorizationFilterValueList.member = Shapes::ShapeRef.new(shape: ResaleAuthorizationSourceAuthorizationString)
+
     ResaleAuthorizationStatusFilter.add_member(:value_list, Shapes::ShapeRef.new(shape: ResaleAuthorizationStatusFilterValueList, location_name: "ValueList"))
     ResaleAuthorizationStatusFilter.struct_class = Types::ResaleAuthorizationStatusFilter
 
@@ -1110,6 +1128,8 @@ module Aws::MarketplaceCatalog
     ResaleAuthorizationSummary.add_member(:created_date, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "CreatedDate"))
     ResaleAuthorizationSummary.add_member(:availability_end_date, Shapes::ShapeRef.new(shape: DateTimeISO8601, location_name: "AvailabilityEndDate"))
     ResaleAuthorizationSummary.add_member(:reseller_role, Shapes::ShapeRef.new(shape: ResaleAuthorizationResellerRoleString, location_name: "ResellerRole"))
+    ResaleAuthorizationSummary.add_member(:source_authorization, Shapes::ShapeRef.new(shape: ResaleAuthorizationSourceAuthorizationString, location_name: "SourceAuthorization"))
+    ResaleAuthorizationSummary.add_member(:issuer_account_id, Shapes::ShapeRef.new(shape: ResaleAuthorizationIssuerAccountIdString, location_name: "IssuerAccountId"))
     ResaleAuthorizationSummary.struct_class = Types::ResaleAuthorizationSummary
 
     ResourceIdList.member = Shapes::ShapeRef.new(shape: ResourceId)
