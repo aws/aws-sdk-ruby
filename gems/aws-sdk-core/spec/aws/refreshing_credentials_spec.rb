@@ -118,6 +118,29 @@ module Aws
       end
     end
 
+    describe 'advisory window configuration' do
+      let(:validating_resolver_class) do
+        Class.new do
+          include RefreshingCredentials
+
+          def refresh
+            @credentials = Credentials.new('AKID', 'secret', 'token')
+            @expiration = Time.now + 3600
+          end
+        end
+      end
+
+      it 'rejects an advisory window smaller than the mandatory window' do
+        expect { validating_resolver_class.new(advisory_refresh_window: 30) }
+          .to raise_error(ArgumentError, /must be at least the mandatory refresh window/)
+      end
+
+      it 'accepts an advisory window at or above the mandatory window' do
+        expect { validating_resolver_class.new(advisory_refresh_window: 60) }
+          .not_to raise_error
+      end
+    end
+
     tests = JSON.load_file(File.join(File.dirname(__FILE__), 'refreshing_credentials_tests.json'))
 
     tests.each_with_index do |test, index|

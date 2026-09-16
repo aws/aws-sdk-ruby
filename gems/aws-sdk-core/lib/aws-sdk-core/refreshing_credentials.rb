@@ -30,6 +30,12 @@ module Aws
         @before_refresh = options.delete(:before_refresh)
         @configured_advisory_window = options.delete(:advisory_refresh_window)
       end
+      # mandatory refresh window must not exceed the advisory window
+      if @configured_advisory_window && @configured_advisory_window < MANDATORY_REFRESH_WINDOW
+        raise ArgumentError,
+              "advisory_refresh_window (#{@configured_advisory_window}) must be at least " \
+              "the mandatory refresh window (#{MANDATORY_REFRESH_WINDOW} seconds)"
+      end
       @static_stability = true if @static_stability.nil?
       @next_refresh_allowed_at = nil
       @cached_error = nil
