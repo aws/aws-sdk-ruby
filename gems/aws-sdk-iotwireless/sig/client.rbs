@@ -1021,6 +1021,18 @@ module Aws
                                      assist_altitude: ::Float?,
                                      use_2_d_solver: bool?
                                    },
+                                   ?gnss_multi_frame: {
+                                     captures: Array[
+                                       {
+                                         payload: ::String,
+                                         capture_time: ::Float?
+                                       }
+                                     ],
+                                     capture_time_accuracy: ::Float?,
+                                     assist_position: Array[::Float]?,
+                                     assist_altitude: ::Float?,
+                                     use_2_d_solver: bool?
+                                   },
                                    ?timestamp: ::Time,
                                    ?advanced_configuration: {
                                      wi_fi_cellular: {

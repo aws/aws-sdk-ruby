@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2026-09-17)
+------------------
+
+* Feature - Added support for attachments on managed notification events. Added support to access and subscribe sensitive managed notification events.
+
 1.26.0 (2026-09-11)
 ------------------
 

@@ -1443,7 +1443,13 @@ module Aws
                                           time_range: {
                                             start_time: ::Time?,
                                             end_time: ::Time?
-                                          }?
+                                          }?,
+                                          session_trace_ids: Array[
+                                            {
+                                              session_id: ::String,
+                                              trace_ids: Array[::String]
+                                            }
+                                          ]?
                                         }?
                                       }?,
                                       online_evaluation_config_source: {

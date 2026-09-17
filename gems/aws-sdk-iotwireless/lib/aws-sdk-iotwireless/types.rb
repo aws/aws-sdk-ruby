@@ -90,11 +90,13 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # Optional configuration to customize location estimates.
+    # Optional configuration for customizing position estimates, including
+    # parameters that affect the accuracy and uncertainty of WiFi and
+    # cellular-based location estimates.
     #
     # @!attribute [rw] wi_fi_cellular
-    #   Configuration for WiFi and cellular-based payloads for location
-    #   estimates.
+    #   Configuration for WiFi and cellular-based location estimate payloads
+    #   resolved by HERE's solvers.
     #   @return [Types::WiFiCellular]
     #
     class AdvancedConfiguration < Struct.new(
@@ -2374,8 +2376,16 @@ module Aws::IoTWireless
     # @!attribute [rw] gnss
     #   Retrieves an estimated device position by resolving the global
     #   navigation satellite system (GNSS) scan data. The position is
-    #   resolved using the GNSS solver powered by LoRa Cloud.
+    #   resolved using the GNSS solver powered by LoRa Cloud. This field is
+    #   mutually exclusive with the GnssMultiFrame field.
     #   @return [Types::Gnss]
+    #
+    # @!attribute [rw] gnss_multi_frame
+    #   Retrieves an estimated device position by resolving multiple global
+    #   navigation satellite system (GNSS) scan captures. The position is
+    #   resolved using the multi-frame GNSS solver powered by LoRa Cloud.
+    #   This field is mutually exclusive with the Gnss field.
+    #   @return [Types::GnssMultiFrame]
     #
     # @!attribute [rw] timestamp
     #   Optional information that specifies the time when the position
@@ -2385,8 +2395,7 @@ module Aws::IoTWireless
     #   @return [Time]
     #
     # @!attribute [rw] advanced_configuration
-    #   Optional configuration to customize position estimates. If not
-    #   provided, defaults are applied.
+    #   Optional configuration for customizing position measurement data.
     #   @return [Types::AdvancedConfiguration]
     #
     class GetPositionEstimateRequest < Struct.new(
@@ -2394,6 +2403,7 @@ module Aws::IoTWireless
       :cell_towers,
       :ip,
       :gnss,
+      :gnss_multi_frame,
       :timestamp,
       :advanced_configuration)
       SENSITIVE = []
@@ -3134,6 +3144,71 @@ module Aws::IoTWireless
     class Gnss < Struct.new(
       :payload,
       :capture_time,
+      :capture_time_accuracy,
+      :assist_position,
+      :assist_altitude,
+      :use_2_d_solver)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single GNSS scan capture containing the scan payload and optional
+    # capture time.
+    #
+    # @!attribute [rw] payload
+    #   Payload that contains the GNSS scan result, or NAV message, in
+    #   hexadecimal notation.
+    #   @return [String]
+    #
+    # @!attribute [rw] capture_time
+    #   Optional parameter that gives an estimate of the time when the GNSS
+    #   scan information is taken, in seconds GPS time (GPST). If capture
+    #   time is not specified, the local server time is used.
+    #   @return [Float]
+    #
+    class GnssCapture < Struct.new(
+      :payload,
+      :capture_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Global navigation satellite system (GNSS) multi-frame object used for
+    # positioning. Contains multiple GNSS scan captures that are combined by
+    # the solver.
+    #
+    # @!attribute [rw] captures
+    #   List of GNSS scan captures. Each capture contains a payload from a
+    #   single GNSS scan. The number of captures must be 2, 4, 8, 16, or 32.
+    #   @return [Array<Types::GnssCapture>]
+    #
+    # @!attribute [rw] capture_time_accuracy
+    #   Optional value that gives the capture time estimate accuracy, in
+    #   seconds. If capture time accuracy is not specified, default value of
+    #   300 is used.
+    #   @return [Float]
+    #
+    # @!attribute [rw] assist_position
+    #   Optional assistance position information, specified using latitude
+    #   and longitude values in degrees. The coordinates are inside the
+    #   WGS84 reference frame.
+    #   @return [Array<Float>]
+    #
+    # @!attribute [rw] assist_altitude
+    #   Optional assistance altitude, which is the altitude of the device at
+    #   capture time, specified in meters above the WGS84 reference
+    #   ellipsoid. This parameter is required when Use2DSolver is enabled.
+    #   @return [Float]
+    #
+    # @!attribute [rw] use_2_d_solver
+    #   Optional parameter that forces 2D solve, which modifies the
+    #   positioning algorithm to a 2D solution problem. When this parameter
+    #   is specified, the assistance altitude should have an accuracy of at
+    #   least 10 meters.
+    #   @return [Boolean]
+    #
+    class GnssMultiFrame < Struct.new(
+      :captures,
       :capture_time_accuracy,
       :assist_position,
       :assist_altitude,
@@ -7276,12 +7351,20 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # Configuration for WiFi and cellular location payloads.
+    # Configuration for WiFi and cellular location payloads. Contains the
+    # confidence level that determines the size of the uncertainty radius in
+    # the position estimate.
     #
     # @!attribute [rw] confidence_percent
-    #   Confidence level for WiFi and cellular position estimates, expressed
-    #   as a percentage. Valid range: 50–99 inclusive. Defaults to 68 if not
-    #   specified.
+    #   The confidence level for WiFi and cellular position estimates,
+    #   expressed as a percentage. This value determines the size of the
+    #   confidence area or uncertainty radius for the estimated position. A
+    #   higher confidence level produces a larger uncertainty radius, while
+    #   a lower confidence level produces a smaller, more precise radius.
+    #
+    #   Valid range: 50 to 99 inclusive. If not specified, the default value
+    #   of 68 is used, which corresponds to approximately one standard
+    #   deviation of the normal distribution.
     #   @return [Integer]
     #
     class WiFiCellular < Struct.new(

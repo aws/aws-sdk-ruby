@@ -311,6 +311,7 @@ module Aws::BedrockAgentCore
     class CloudWatchFilterConfig
       attr_accessor session_ids: ::Array[::String]
       attr_accessor time_range: Types::SessionFilterConfig
+      attr_accessor session_trace_ids: ::Array[Types::SessionTraceIds]
       SENSITIVE: []
     end
 
@@ -2908,6 +2909,12 @@ module Aws::BedrockAgentCore
       attr_accessor session_id: ::String
       attr_accessor actor_id: ::String
       attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class SessionTraceIds
+      attr_accessor session_id: ::String
+      attr_accessor trace_ids: ::Array[::String]
       SENSITIVE: []
     end
 

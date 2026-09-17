@@ -6483,6 +6483,10 @@ module Aws::SESV2
     #   The recipient's ISP (e.g., `Gmail`, `Yahoo`, etc.).
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tenant_name
+    #   The name of the tenant used when sending the message.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] last_delivery_event
     #   The last delivery-related event for the email, where the ordering is
     #   as follows: `SEND` &lt; `BOUNCE` &lt; `DELIVERY` &lt; `COMPLAINT`.
@@ -6507,6 +6511,7 @@ module Aws::SESV2
       :destination,
       :subject,
       :isp,
+      :tenant_name,
       :last_delivery_event,
       :last_engagement_event)
       SENSITIVE = [:from_email_address, :destination, :subject]

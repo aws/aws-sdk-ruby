@@ -1753,6 +1753,10 @@ module Aws::BedrockAgentCore
     #   resp.data_source_config.cloud_watch_logs.filter_config.session_ids[0] #=> String
     #   resp.data_source_config.cloud_watch_logs.filter_config.time_range.start_time #=> Time
     #   resp.data_source_config.cloud_watch_logs.filter_config.time_range.end_time #=> Time
+    #   resp.data_source_config.cloud_watch_logs.filter_config.session_trace_ids #=> Array
+    #   resp.data_source_config.cloud_watch_logs.filter_config.session_trace_ids[0].session_id #=> String
+    #   resp.data_source_config.cloud_watch_logs.filter_config.session_trace_ids[0].trace_ids #=> Array
+    #   resp.data_source_config.cloud_watch_logs.filter_config.session_trace_ids[0].trace_ids[0] #=> String
     #   resp.data_source_config.online_evaluation_config_source.online_evaluation_config_arn #=> String
     #   resp.data_source_config.online_evaluation_config_source.time_range.start_time #=> Time
     #   resp.data_source_config.online_evaluation_config_source.time_range.end_time #=> Time
@@ -5452,6 +5456,12 @@ module Aws::BedrockAgentCore
     #             start_time: Time.now,
     #             end_time: Time.now,
     #           },
+    #           session_trace_ids: [
+    #             {
+    #               session_id: "String", # required
+    #               trace_ids: ["TraceId"], # required
+    #             },
+    #           ],
     #         },
     #       },
     #       online_evaluation_config_source: {
@@ -6556,7 +6566,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

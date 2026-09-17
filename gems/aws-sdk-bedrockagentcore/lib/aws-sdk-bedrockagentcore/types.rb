@@ -940,11 +940,18 @@ module Aws::BedrockAgentCore
     #   The time range filter for selecting sessions to evaluate.
     #   @return [Types::SessionFilterConfig]
     #
+    # @!attribute [rw] session_trace_ids
+    #   A list of session and trace ID pairs that restrict evaluation to
+    #   specific traces within a session. If specified, only the listed
+    #   traces are evaluated instead of the entire session.
+    #   @return [Array<Types::SessionTraceIds>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CloudWatchFilterConfig AWS API Documentation
     #
     class CloudWatchFilterConfig < Struct.new(
       :session_ids,
-      :time_range)
+      :time_range,
+      :session_trace_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9611,6 +9618,28 @@ module Aws::BedrockAgentCore
       :session_id,
       :actor_id,
       :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A pairing of a session with the specific trace IDs to evaluate within
+    # that session. Use this to evaluate individual traces rather than an
+    # entire session.
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the session that contains the traces to
+    #   evaluate.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_ids
+    #   The list of trace IDs within the session to evaluate.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SessionTraceIds AWS API Documentation
+    #
+    class SessionTraceIds < Struct.new(
+      :session_id,
+      :trace_ids)
       SENSITIVE = []
       include Aws::Structure
     end

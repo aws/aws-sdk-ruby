@@ -20319,7 +20319,7 @@ module Aws::Connect
     #
     #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
     #
-    # @option params [required, String] :replica_alias
+    # @option params [String] :replica_alias
     #   The alias for the replicated instance. The `ReplicaAlias` must be
     #   unique.
     #
@@ -20334,7 +20334,7 @@ module Aws::Connect
     #     instance_id: "ACGRInstanceIdOrArn", # required
     #     replica_region: "AwsRegion", # required
     #     client_token: "ClientToken",
-    #     replica_alias: "DirectoryAlias", # required
+    #     replica_alias: "DirectoryAlias",
     #   })
     #
     # @example Response structure
@@ -31542,7 +31542,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.279.0'
+      context[:gem_version] = '1.280.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

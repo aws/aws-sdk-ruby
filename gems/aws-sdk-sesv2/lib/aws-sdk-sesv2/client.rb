@@ -1459,6 +1459,7 @@ module Aws::SESV2
     #           destination: ["InsightsEmailAddress"],
     #           subject: ["EmailSubject"],
     #           isp: ["Isp"],
+    #           tenant_name: ["TenantName"],
     #           last_delivery_event: ["SEND"], # accepts SEND, DELIVERY, TRANSIENT_BOUNCE, PERMANENT_BOUNCE, UNDETERMINED_BOUNCE, COMPLAINT
     #           last_engagement_event: ["OPEN"], # accepts OPEN, CLICK
     #         },
@@ -1467,6 +1468,7 @@ module Aws::SESV2
     #           destination: ["InsightsEmailAddress"],
     #           subject: ["EmailSubject"],
     #           isp: ["Isp"],
+    #           tenant_name: ["TenantName"],
     #           last_delivery_event: ["SEND"], # accepts SEND, DELIVERY, TRANSIENT_BOUNCE, PERMANENT_BOUNCE, UNDETERMINED_BOUNCE, COMPLAINT
     #           last_engagement_event: ["OPEN"], # accepts OPEN, CLICK
     #         },
@@ -3122,6 +3124,8 @@ module Aws::SESV2
     #   resp.export_data_source.message_insights_data_source.include.subject[0] #=> String
     #   resp.export_data_source.message_insights_data_source.include.isp #=> Array
     #   resp.export_data_source.message_insights_data_source.include.isp[0] #=> String
+    #   resp.export_data_source.message_insights_data_source.include.tenant_name #=> Array
+    #   resp.export_data_source.message_insights_data_source.include.tenant_name[0] #=> String
     #   resp.export_data_source.message_insights_data_source.include.last_delivery_event #=> Array
     #   resp.export_data_source.message_insights_data_source.include.last_delivery_event[0] #=> String, one of "SEND", "DELIVERY", "TRANSIENT_BOUNCE", "PERMANENT_BOUNCE", "UNDETERMINED_BOUNCE", "COMPLAINT"
     #   resp.export_data_source.message_insights_data_source.include.last_engagement_event #=> Array
@@ -3134,6 +3138,8 @@ module Aws::SESV2
     #   resp.export_data_source.message_insights_data_source.exclude.subject[0] #=> String
     #   resp.export_data_source.message_insights_data_source.exclude.isp #=> Array
     #   resp.export_data_source.message_insights_data_source.exclude.isp[0] #=> String
+    #   resp.export_data_source.message_insights_data_source.exclude.tenant_name #=> Array
+    #   resp.export_data_source.message_insights_data_source.exclude.tenant_name[0] #=> String
     #   resp.export_data_source.message_insights_data_source.exclude.last_delivery_event #=> Array
     #   resp.export_data_source.message_insights_data_source.exclude.last_delivery_event[0] #=> String, one of "SEND", "DELIVERY", "TRANSIENT_BOUNCE", "PERMANENT_BOUNCE", "UNDETERMINED_BOUNCE", "COMPLAINT"
     #   resp.export_data_source.message_insights_data_source.exclude.last_engagement_event #=> Array
@@ -6658,7 +6664,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

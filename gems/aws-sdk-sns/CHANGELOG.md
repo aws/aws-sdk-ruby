@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2026-09-17)
+------------------
+
+* Feature - SNS API reference documentation update
+
 1.120.0 (2026-09-11)
 ------------------
 

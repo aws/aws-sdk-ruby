@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2026-09-17)
+------------------
+
+* Feature - Batch evaluation now supports evaluating specific traces within a session. Each session can specify up to 100 trace IDs to evaluate.
+
 1.55.0 (2026-09-11)
 ------------------
 

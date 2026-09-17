@@ -89296,10 +89296,10 @@ module Aws::EC2
     end
 
     # @!attribute [rw] valid
-    #   The operation returns `true` if the specified security groups can be
-    #   associated with a single network interface without exceeding the
-    #   quotas. It returns an error if associating the security groups would
-    #   exceed a quota.
+    #   Specifies whether the specified security groups can be associated
+    #   with a single network interface without exceeding the quotas. If
+    #   associating the security groups would exceed a quota, the operation
+    #   returns an error.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ValidateSecurityGroupQuotasForInterfaceResult AWS API Documentation

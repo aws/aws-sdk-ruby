@@ -77,6 +77,21 @@ module Aws::SocialMessaging
       include Aws::Structure
     end
 
+    # Your request has conflicting operations. This can occur if you're
+    # trying to perform more than one operation on the same resource at the
+    # same time.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The ID of the WhatsApp Business Account to create a dataset for,
     #   formatted as `waba-01234567890123456789012345678901`.
@@ -132,12 +147,7 @@ module Aws::SocialMessaging
     #   @return [String]
     #
     # @!attribute [rw] endpoint_uri
-    #   Optional HTTPS endpoint for a dynamic Flow, registered with Meta as
-    #   the Flow's endpoint\_uri and called by Meta directly. When omitted,
-    #   the Flow has no endpoint (static Flow). Meta only calls the endpoint
-    #   when the Flow JSON also declares data\_api\_version. To verify that
-    #   requests originate from Meta, attach your own Meta app via
-    #   UpdateWhatsAppFlow.
+    #   The HTTPS endpoint that Meta calls for a data exchange Flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/CreateWhatsAppFlowInput AWS API Documentation
@@ -497,11 +507,17 @@ module Aws::SocialMessaging
     #   `waba-01234567890123456789012345678901`.
     #   @return [String]
     #
+    # @!attribute [rw] call_settings
+    #   The calling settings configured for the phone number. This value is
+    #   absent when calling is not configured.
+    #   @return [Types::WhatsAppCallSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetLinkedWhatsAppBusinessAccountPhoneNumberOutput AWS API Documentation
     #
     class GetLinkedWhatsAppBusinessAccountPhoneNumberOutput < Struct.new(
       :phone_number,
-      :linked_whats_app_business_account_id)
+      :linked_whats_app_business_account_id,
+      :call_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -520,11 +536,12 @@ module Aws::SocialMessaging
     end
 
     # @!attribute [rw] business_public_key
-    #   The stored RSA business public key (PEM), if present.
+    #   The stored PEM-encoded 2048-bit RSA public key.
     #   @return [String]
     #
     # @!attribute [rw] business_public_key_signature_status
-    #   Meta's signing status: "VALID" \| "MISMATCH".
+    #   The signature status of the stored business public key. Valid values
+    #   are VALID and MISMATCH.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetWhatsAppBusinessPublicKeyOutput AWS API Documentation
@@ -532,6 +549,50 @@ module Aws::SocialMessaging
     class GetWhatsAppBusinessPublicKeyOutput < Struct.new(
       :business_public_key,
       :business_public_key_signature_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origination_phone_number_id
+    #   The unique identifier of the business phone number for which to
+    #   retrieve the calling permission. The phone number identifiers are
+    #   formatted as `phone-number-id-01234567890123456789012345678901`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_phone_number
+    #   The end user's phone number, in E.164 format, for which to retrieve
+    #   the calling permission.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_user_bsuid
+    #   The business-scoped user identifier (BSUID) of the end user for
+    #   which to retrieve the calling permission.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetWhatsAppCallPermissionInput AWS API Documentation
+    #
+    class GetWhatsAppCallPermissionInput < Struct.new(
+      :origination_phone_number_id,
+      :destination_phone_number,
+      :end_user_bsuid)
+      SENSITIVE = [:destination_phone_number, :end_user_bsuid]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission
+    #   The current calling permission state for the end user.
+    #   @return [Types::WhatsAppCallPermission]
+    #
+    # @!attribute [rw] actions
+    #   The calling actions the business can take with the end user, and any
+    #   limits that apply to each action.
+    #   @return [Array<Types::WhatsAppCallPermissionAction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetWhatsAppCallPermissionOutput AWS API Documentation
+    #
+    class GetWhatsAppCallPermissionOutput < Struct.new(
+      :permission,
+      :actions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -584,7 +645,7 @@ module Aws::SocialMessaging
     #   @return [String]
     #
     # @!attribute [rw] endpoint_uri
-    #   The endpoint URI for data exchange Flows, if configured.
+    #   The HTTPS endpoint that Meta calls for a data exchange Flow.
     #   @return [String]
     #
     # @!attribute [rw] preview
@@ -1709,12 +1770,13 @@ module Aws::SocialMessaging
     #   @return [String]
     #
     # @!attribute [rw] business_public_key
-    #   PEM-encoded RSA public key. Mutually exclusive with kmsKeyArn.
+    #   The PEM-encoded 2048-bit RSA public key to set. Mutually exclusive
+    #   with `kmsKeyArn`.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
-    #   Customer-managed KMS asymmetric RSA key ARN. Mutually exclusive with
-    #   businessPublicKey.
+    #   The ARN of a customer managed asymmetric RSA key in Amazon Web
+    #   Services KMS. Mutually exclusive with `businessPublicKey`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/PutWhatsAppBusinessPublicKeyInput AWS API Documentation
@@ -1800,6 +1862,44 @@ module Aws::SocialMessaging
     class S3PresignedUrl < Struct.new(
       :url,
       :headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] origination_phone_number_id
+    #   The unique identifier of the origination phone number for the call.
+    #   The phone number identifiers are formatted as
+    #   `phone-number-id-01234567890123456789012345678901`. Use
+    #   `GetLinkedWhatsAppBusinessAccount` to find a phone number's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] meta_api_version
+    #   The version of the Meta Graph API to use for the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] call_event
+    #   The call event payload to send, as a JSON blob in the format defined
+    #   by the Meta calling API.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/SendWhatsAppCallEventInput AWS API Documentation
+    #
+    class SendWhatsAppCallEventInput < Struct.new(
+      :origination_phone_number_id,
+      :meta_api_version,
+      :call_event)
+      SENSITIVE = [:call_event]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] call_id
+    #   The unique identifier that Meta assigns to the call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/SendWhatsAppCallEventOutput AWS API Documentation
+    #
+    class SendWhatsAppCallEventOutput < Struct.new(
+      :call_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2031,6 +2131,37 @@ module Aws::SocialMessaging
     end
 
     # @!attribute [rw] id
+    #   The unique identifier of the phone number to update. The phone
+    #   number identifiers are formatted as
+    #   `phone-number-id-01234567890123456789012345678901`.
+    #   @return [String]
+    #
+    # @!attribute [rw] call_settings
+    #   The calling settings to apply to the phone number.
+    #   @return [Types::WhatsAppCallSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput AWS API Documentation
+    #
+    class UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput < Struct.new(
+      :id,
+      :call_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] phone_number_id
+    #   The unique identifier of the phone number that was updated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput AWS API Documentation
+    #
+    class UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput < Struct.new(
+      :phone_number_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
     #   The ID of the WhatsApp Business Account associated with this Flow.
     #   @return [String]
     #
@@ -2082,20 +2213,11 @@ module Aws::SocialMessaging
     #   @return [Array<String>]
     #
     # @!attribute [rw] endpoint_uri
-    #   Optional HTTPS endpoint for a dynamic Flow, registered with Meta as
-    #   the Flow's endpoint\_uri and called by Meta directly. When omitted,
-    #   the Flow's endpoint is unchanged.
+    #   The updated HTTPS endpoint for a data exchange Flow.
     #   @return [String]
     #
     # @!attribute [rw] meta_app_id
-    #   Optional Meta app ID to attach to the Flow. Meta signs data-exchange
-    #   requests with the attached app's secret, so attaching your own app
-    #   is what enables X-Hub-Signature-256 and flow\_token\_signature
-    #   verification at your endpoint. Meta requires the app to be owned by
-    #   the same business that owns the WABA. Attaching your own app is
-    #   one-way: the service's app cannot be re-attached afterwards. When
-    #   omitted, the attached app is unchanged. (Set via update because Meta
-    #   ignores application\_id at creation time.)
+    #   The ID of the Meta application to attach to the Flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/UpdateWhatsAppFlowInput AWS API Documentation
@@ -2319,6 +2441,182 @@ module Aws::SocialMessaging
       include Aws::Structure
     end
 
+    # The operating hours during which a business phone number accepts
+    # WhatsApp calls, including the time zone, weekly schedule, and any
+    # holiday overrides.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether call hours are enforced. When disabled, the
+    #   business accepts calls at any time.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] timezone
+    #   The IANA time zone in which the operating hours are interpreted,
+    #   such as `America/New_York`.
+    #   @return [String]
+    #
+    # @!attribute [rw] weekly_operating_hours
+    #   The weekly schedule of hours during which the business accepts
+    #   calls.
+    #   @return [Array<Types::WhatsAppWeeklyOperatingHoursEntry>]
+    #
+    # @!attribute [rw] holiday_schedule
+    #   Date-specific overrides to the weekly operating hours, such as
+    #   holidays.
+    #   @return [Array<Types::WhatsAppHolidayScheduleEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/WhatsAppCallHours AWS API Documentation
+    #
+    class WhatsAppCallHours < Struct.new(
+      :enabled,
+      :timezone,
+      :weekly_operating_hours,
+      :holiday_schedule)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The current calling permission state for a business phone number and a
+    # specific WhatsApp end user.
+    #
+    # @!attribute [rw] status
+    #   The permission status for the end user.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration_time
+    #   The time when a temporary permission expires. This value is absent
+    #   for permanent permissions and when there is no permission.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/WhatsAppCallPermission AWS API Documentation
+    #
+    class WhatsAppCallPermission < Struct.new(
+      :status,
+      :expiration_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a single calling action the business can take with an end
+    # user, including whether the action is currently allowed and any limits
+    # that apply to it. Returned as an item in the actions list from
+    # `GetWhatsAppCallPermission`.
+    #
+    # @!attribute [rw] action_name
+    #   The name of the calling action.
+    #   @return [String]
+    #
+    # @!attribute [rw] can_perform_action
+    #   Specifies whether the business can currently perform the action.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] limits
+    #   The time-bound limits that apply to the action.
+    #   @return [Array<Types::WhatsAppCallPermissionLimit>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/WhatsAppCallPermissionAction AWS API Documentation
+    #
+    class WhatsAppCallPermissionAction < Struct.new(
+      :action_name,
+      :can_perform_action,
+      :limits)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A time-bound restriction on a calling action, such as the number of
+    # calls allowed within a time period.
+    #
+    # @!attribute [rw] time_period
+    #   The time period over which the limit applies, as an ISO 8601
+    #   duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_allowed
+    #   The maximum number of times the action is allowed within the time
+    #   period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] current_usage
+    #   The number of times the action has been used within the current time
+    #   period.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] limit_expiration_time
+    #   The time when the limit resets. This value is present only when the
+    #   current usage has reached the maximum allowed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/WhatsAppCallPermissionLimit AWS API Documentation
+    #
+    class WhatsAppCallPermissionLimit < Struct.new(
+      :time_period,
+      :max_allowed,
+      :current_usage,
+      :limit_expiration_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The calling configuration for a WhatsApp business phone number.
+    #
+    # @!attribute [rw] call_enabled
+    #   Specifies whether calling is enabled for the phone number.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] call_hours
+    #   The hours during which the business accepts calls on the phone
+    #   number.
+    #   @return [Types::WhatsAppCallHours]
+    #
+    # @!attribute [rw] call_icon_visibility
+    #   The visibility setting for the call icon shown to end users in
+    #   WhatsApp.
+    #   @return [String]
+    #
+    # @!attribute [rw] callback_permission_status
+    #   The callback permission status for the phone number.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/WhatsAppCallSettings AWS API Documentation
+    #
+    class WhatsAppCallSettings < Struct.new(
+      :call_enabled,
+      :call_hours,
+      :call_icon_visibility,
+      :callback_permission_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A date-specific override to the weekly operating hours, such as a
+    # holiday.
+    #
+    # @!attribute [rw] date
+    #   The date that the override applies to, in ISO 8601 format
+    #   (`YYYY-MM-DD`).
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time of day when the business begins accepting calls on the
+    #   override date.
+    #   @return [Types::WhatsAppTimeOfDay]
+    #
+    # @!attribute [rw] end_time
+    #   The time of day when the business stops accepting calls on the
+    #   override date.
+    #   @return [Types::WhatsAppTimeOfDay]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/WhatsAppHolidayScheduleEntry AWS API Documentation
+    #
+    class WhatsAppHolidayScheduleEntry < Struct.new(
+      :date,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of your WhatsApp phone number.
     #
     # @!attribute [rw] arn
@@ -2497,6 +2795,50 @@ module Aws::SocialMessaging
       :associate_in_progress_token,
       :linked_accounts_with_incomplete_setup)
       SENSITIVE = [:associate_in_progress_token]
+      include Aws::Structure
+    end
+
+    # A time of day, expressed as an hour and minute.
+    #
+    # @!attribute [rw] hours
+    #   The hour of the day, from 0 to 23.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minutes
+    #   The minute of the hour, from 0 to 59.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/WhatsAppTimeOfDay AWS API Documentation
+    #
+    class WhatsAppTimeOfDay < Struct.new(
+      :hours,
+      :minutes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single entry in a weekly calling schedule, defining the open and
+    # close times for one day of the week.
+    #
+    # @!attribute [rw] day_of_week
+    #   The day of the week that the entry applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_time
+    #   The time of day when the business begins accepting calls.
+    #   @return [Types::WhatsAppTimeOfDay]
+    #
+    # @!attribute [rw] close_time
+    #   The time of day when the business stops accepting calls.
+    #   @return [Types::WhatsAppTimeOfDay]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/WhatsAppWeeklyOperatingHoursEntry AWS API Documentation
+    #
+    class WhatsAppWeeklyOperatingHoursEntry < Struct.new(
+      :day_of_week,
+      :open_time,
+      :close_time)
+      SENSITIVE = []
       include Aws::Structure
     end
 

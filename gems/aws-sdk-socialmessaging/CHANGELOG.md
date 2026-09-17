@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2026-09-17)
+------------------
+
+* Feature - Add support for WhatsApp Calling APIs.
+
 1.32.0 (2026-09-11)
 ------------------
 

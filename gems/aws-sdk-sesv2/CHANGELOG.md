@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2026-09-17)
+------------------
+
+* Feature - Added support to query the tenant name for BatchGetMetricData and CreateExportJob APIs to filter metrics and messages at the tenant level.
+
 1.109.0 (2026-09-11)
 ------------------
 

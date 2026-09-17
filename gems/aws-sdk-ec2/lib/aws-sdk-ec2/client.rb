@@ -19617,7 +19617,7 @@ module Aws::EC2
     #
     #   resp = client.create_vpc_endpoint({
     #     dry_run: false,
-    #     vpc_endpoint_type: "Interface", # accepts Interface, Gateway, GatewayLoadBalancer, Resource, ServiceNetwork
+    #     vpc_endpoint_type: "Interface", # accepts Interface, Gateway, GatewayLoadBalancer, Resource, ServiceNetwork, Tunnel
     #     vpc_id: "VpcId", # required
     #     service_name: "String",
     #     policy_document: "String",
@@ -19659,7 +19659,7 @@ module Aws::EC2
     # @example Response structure
     #
     #   resp.vpc_endpoint.vpc_endpoint_id #=> String
-    #   resp.vpc_endpoint.vpc_endpoint_type #=> String, one of "Interface", "Gateway", "GatewayLoadBalancer", "Resource", "ServiceNetwork"
+    #   resp.vpc_endpoint.vpc_endpoint_type #=> String, one of "Interface", "Gateway", "GatewayLoadBalancer", "Resource", "ServiceNetwork", "Tunnel"
     #   resp.vpc_endpoint.vpc_id #=> String
     #   resp.vpc_endpoint.service_name #=> String
     #   resp.vpc_endpoint.state #=> String, one of "PendingAcceptance", "Pending", "Available", "Deleting", "Deleted", "Rejected", "Failed", "Expired", "Partial"
@@ -19704,8 +19704,8 @@ module Aws::EC2
     #   resp.vpc_endpoint.resource_configuration_arn #=> String
     #   resp.vpc_endpoint.service_region #=> String
     #   resp.vpc_endpoint.payer_responsibilities #=> Array
-    #   resp.vpc_endpoint.payer_responsibilities[0].scope #=> String, one of "vpc-endpoint-charges"
-    #   resp.vpc_endpoint.payer_responsibilities[0].payer_responsibility_type #=> String, one of "vpc-endpoint-account", "vpc-endpoint-service-account"
+    #   resp.vpc_endpoint.payer_responsibilities[0].scope #=> String, one of "vpc-endpoint-charges", "resource-gateway-charges"
+    #   resp.vpc_endpoint.payer_responsibilities[0].payer_responsibility_type #=> String, one of "vpc-endpoint-account", "resource-gateway-account", "vpc-endpoint-service-account"
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateVpcEndpoint AWS API Documentation
@@ -48316,8 +48316,8 @@ module Aws::EC2
     #   resp.vpc_endpoint_connections[0].tags[0].value #=> String
     #   resp.vpc_endpoint_connections[0].vpc_endpoint_region #=> String
     #   resp.vpc_endpoint_connections[0].payer_responsibilities #=> Array
-    #   resp.vpc_endpoint_connections[0].payer_responsibilities[0].scope #=> String, one of "vpc-endpoint-charges"
-    #   resp.vpc_endpoint_connections[0].payer_responsibilities[0].payer_responsibility_type #=> String, one of "vpc-endpoint-account", "vpc-endpoint-service-account"
+    #   resp.vpc_endpoint_connections[0].payer_responsibilities[0].scope #=> String, one of "vpc-endpoint-charges", "resource-gateway-charges"
+    #   resp.vpc_endpoint_connections[0].payer_responsibilities[0].payer_responsibility_type #=> String, one of "vpc-endpoint-account", "resource-gateway-account", "vpc-endpoint-service-account"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnections AWS API Documentation
@@ -48722,7 +48722,7 @@ module Aws::EC2
     #
     #   resp.vpc_endpoints #=> Array
     #   resp.vpc_endpoints[0].vpc_endpoint_id #=> String
-    #   resp.vpc_endpoints[0].vpc_endpoint_type #=> String, one of "Interface", "Gateway", "GatewayLoadBalancer", "Resource", "ServiceNetwork"
+    #   resp.vpc_endpoints[0].vpc_endpoint_type #=> String, one of "Interface", "Gateway", "GatewayLoadBalancer", "Resource", "ServiceNetwork", "Tunnel"
     #   resp.vpc_endpoints[0].vpc_id #=> String
     #   resp.vpc_endpoints[0].service_name #=> String
     #   resp.vpc_endpoints[0].state #=> String, one of "PendingAcceptance", "Pending", "Available", "Deleting", "Deleted", "Rejected", "Failed", "Expired", "Partial"
@@ -48767,8 +48767,8 @@ module Aws::EC2
     #   resp.vpc_endpoints[0].resource_configuration_arn #=> String
     #   resp.vpc_endpoints[0].service_region #=> String
     #   resp.vpc_endpoints[0].payer_responsibilities #=> Array
-    #   resp.vpc_endpoints[0].payer_responsibilities[0].scope #=> String, one of "vpc-endpoint-charges"
-    #   resp.vpc_endpoints[0].payer_responsibilities[0].payer_responsibility_type #=> String, one of "vpc-endpoint-account", "vpc-endpoint-service-account"
+    #   resp.vpc_endpoints[0].payer_responsibilities[0].scope #=> String, one of "vpc-endpoint-charges", "resource-gateway-charges"
+    #   resp.vpc_endpoints[0].payer_responsibilities[0].payer_responsibility_type #=> String, one of "vpc-endpoint-account", "resource-gateway-account", "vpc-endpoint-service-account"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpoints AWS API Documentation
@@ -67794,16 +67794,16 @@ module Aws::EC2
     #     dry_run: false,
     #     service_id: "VpcEndpointServiceId",
     #     vpc_endpoint_id: "VpcEndpointId", # required
-    #     payer_responsibility: "vpc-endpoint-account", # required, accepts vpc-endpoint-account, vpc-endpoint-service-account
-    #     scope: "vpc-endpoint-charges", # required, accepts vpc-endpoint-charges
+    #     payer_responsibility: "vpc-endpoint-account", # required, accepts vpc-endpoint-account, resource-gateway-account, vpc-endpoint-service-account
+    #     scope: "vpc-endpoint-charges", # required, accepts vpc-endpoint-charges, resource-gateway-charges
     #   })
     #
     # @example Response structure
     #
     #   resp.vpc_endpoint_id #=> String
     #   resp.payer_responsibilities #=> Array
-    #   resp.payer_responsibilities[0].scope #=> String, one of "vpc-endpoint-charges"
-    #   resp.payer_responsibilities[0].payer_responsibility_type #=> String, one of "vpc-endpoint-account", "vpc-endpoint-service-account"
+    #   resp.payer_responsibilities[0].scope #=> String, one of "vpc-endpoint-charges", "resource-gateway-charges"
+    #   resp.payer_responsibilities[0].payer_responsibility_type #=> String, one of "vpc-endpoint-account", "resource-gateway-account", "vpc-endpoint-service-account"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointPayerResponsibility AWS API Documentation
     #
@@ -77312,8 +77312,8 @@ module Aws::EC2
 
     # Validates whether the specified security groups can be associated with
     # a single network interface. The operation checks Amazon Virtual
-    # Private Cloud (Amazon VPC) quotas for inbound or outbound rules per
-    # security group and security groups per network interface. Only
+    # Private Cloud (Amazon VPC) quotas. It checks inbound or outbound rules
+    # per security group and security groups per network interface. Only
     # authorized AWS services can call this operation.
     #
     # For more information about security group quotas, see [Amazon VPC
@@ -77432,7 +77432,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.649.0'
+      context[:gem_version] = '1.650.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.163.0 (2026-09-17)
+------------------
+
+* Feature - This change surfaces AI Protection resources on existing public IAM attack sequences. Customers will now see which model was accessed and whether a guardrail intervened as part of the credential-compromise sequence.
+
 1.162.0 (2026-09-11)
 ------------------
 

@@ -20,14 +20,14 @@ Feature: Smoke tests for Notifications
     Then I expect an error was not raised
 
   @notifications @smoke
-  Scenario: ListNotificationEventsSuccess
+  Scenario: ListNotificationHubsSuccess
     Given I create a 'Aws::Notifications' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_notification_events' with params:
+    When I call the operation 'list_notification_hubs' with params:
       """
-{"include_child_events":true,"max_results":3}
+{"max_results":3}
       """
     Then I expect an error was not raised
 
@@ -44,13 +44,13 @@ Feature: Smoke tests for Notifications
     Then I expect an error was not raised
 
   @notifications @smoke
-  Scenario: ListNotificationHubsSuccess
+  Scenario: ListNotificationEventsSuccess
     Given I create a 'Aws::Notifications' client with config:
       """
 {"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
       """
-    When I call the operation 'list_notification_hubs' with params:
+    When I call the operation 'list_notification_events' with params:
       """
-{"max_results":3}
+{"include_child_events":true,"max_results":3}
       """
     Then I expect an error was not raised

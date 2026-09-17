@@ -3917,7 +3917,7 @@ module Aws::EC2
 
     class CreateVpcEndpointRequest
       attr_accessor dry_run: bool
-      attr_accessor vpc_endpoint_type: ("Interface" | "Gateway" | "GatewayLoadBalancer" | "Resource" | "ServiceNetwork")
+      attr_accessor vpc_endpoint_type: ("Interface" | "Gateway" | "GatewayLoadBalancer" | "Resource" | "ServiceNetwork" | "Tunnel")
       attr_accessor vpc_id: ::String
       attr_accessor service_name: ::String
       attr_accessor policy_document: ::String
@@ -14979,8 +14979,8 @@ module Aws::EC2
       attr_accessor dry_run: bool
       attr_accessor service_id: ::String
       attr_accessor vpc_endpoint_id: ::String
-      attr_accessor payer_responsibility: ("vpc-endpoint-account" | "vpc-endpoint-service-account")
-      attr_accessor scope: ("vpc-endpoint-charges")
+      attr_accessor payer_responsibility: ("vpc-endpoint-account" | "resource-gateway-account" | "vpc-endpoint-service-account")
+      attr_accessor scope: ("vpc-endpoint-charges" | "resource-gateway-charges")
       SENSITIVE: []
     end
 
@@ -15714,8 +15714,8 @@ module Aws::EC2
     end
 
     class PayerResponsibilityEntry
-      attr_accessor scope: ("vpc-endpoint-charges")
-      attr_accessor payer_responsibility_type: ("vpc-endpoint-account" | "vpc-endpoint-service-account")
+      attr_accessor scope: ("vpc-endpoint-charges" | "resource-gateway-charges")
+      attr_accessor payer_responsibility_type: ("vpc-endpoint-account" | "resource-gateway-account" | "vpc-endpoint-service-account")
       SENSITIVE: []
     end
 
@@ -19805,7 +19805,7 @@ module Aws::EC2
 
     class VpcEndpoint
       attr_accessor vpc_endpoint_id: ::String
-      attr_accessor vpc_endpoint_type: ("Interface" | "Gateway" | "GatewayLoadBalancer" | "Resource" | "ServiceNetwork")
+      attr_accessor vpc_endpoint_type: ("Interface" | "Gateway" | "GatewayLoadBalancer" | "Resource" | "ServiceNetwork" | "Tunnel")
       attr_accessor vpc_id: ::String
       attr_accessor service_name: ::String
       attr_accessor state: ("PendingAcceptance" | "Pending" | "Available" | "Deleting" | "Deleted" | "Rejected" | "Failed" | "Expired" | "Partial")

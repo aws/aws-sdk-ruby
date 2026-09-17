@@ -147,9 +147,9 @@ module Aws
         def arn: () -> ::String
         def resource_gateway_id: () -> ::String
         def resource_configuration_group_id: () -> ::String
-        def type: () -> ("GROUP" | "CHILD" | "SINGLE" | "ARN")
+        def type: () -> ("GROUP" | "CHILD" | "SINGLE" | "ARN" | "CIDR")
         def port_ranges: () -> ::Array[::String]
-        def protocol: () -> ("TCP")
+        def protocol: () -> ("TCP" | "TCP_UDP")
         def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
         def resource_configuration_definition: () -> Types::ResourceConfigurationDefinition
         def allow_association_to_shareable_service_network: () -> bool
@@ -163,9 +163,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_resource_configuration-instance_method
       def create_resource_configuration: (
                                            name: ::String,
-                                           type: ("GROUP" | "CHILD" | "SINGLE" | "ARN"),
+                                           type: ("GROUP" | "CHILD" | "SINGLE" | "ARN" | "CIDR"),
                                            ?port_ranges: Array[::String],
-                                           ?protocol: ("TCP"),
+                                           ?protocol: ("TCP" | "TCP_UDP"),
                                            ?resource_gateway_identifier: ::String,
                                            ?resource_configuration_group_identifier: ::String,
                                            ?resource_configuration_definition: Params::resource_configuration_definition,
@@ -613,10 +613,10 @@ module Aws
         def arn: () -> ::String
         def resource_gateway_id: () -> ::String
         def resource_configuration_group_id: () -> ::String
-        def type: () -> ("GROUP" | "CHILD" | "SINGLE" | "ARN")
+        def type: () -> ("GROUP" | "CHILD" | "SINGLE" | "ARN" | "CIDR")
         def allow_association_to_shareable_service_network: () -> bool
         def port_ranges: () -> ::Array[::String]
-        def protocol: () -> ("TCP")
+        def protocol: () -> ("TCP" | "TCP_UDP")
         def custom_domain_name: () -> ::String
         def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
         def resource_configuration_definition: () -> Types::ResourceConfigurationDefinition
@@ -1158,10 +1158,10 @@ module Aws
         def arn: () -> ::String
         def resource_gateway_id: () -> ::String
         def resource_configuration_group_id: () -> ::String
-        def type: () -> ("GROUP" | "CHILD" | "SINGLE" | "ARN")
+        def type: () -> ("GROUP" | "CHILD" | "SINGLE" | "ARN" | "CIDR")
         def port_ranges: () -> ::Array[::String]
         def allow_association_to_shareable_service_network: () -> bool
-        def protocol: () -> ("TCP")
+        def protocol: () -> ("TCP" | "TCP_UDP")
         def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
         def resource_configuration_definition: () -> Types::ResourceConfigurationDefinition
       end

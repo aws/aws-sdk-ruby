@@ -790,19 +790,34 @@ module Aws::VPCLattice
     #
     #   * **ARN** - An Amazon Web Services resource.
     #
+    #   * **CIDR** - A network segment, expressed as a range of IP addresses
+    #     (a CIDR block). Use this type to share a portion of your network
+    #     rather than an individual resource. A consumer accesses the
+    #     resources within the CIDR range through a `Tunnel` VPC endpoint. You
+    #     can't add a CIDR resource configuration to a service network. A
+    #     CIDR resource configuration must be associated with a resource
+    #     gateway whose DNS resolution is set to `IN_VPC`.
+    #
     # @option params [Array<String>] :port_ranges
-    #   (SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to
-    #   access a resource configuration (for example: 1-65535). You can
-    #   separate port ranges using commas (for example: 1,2,22-30).
+    #   (SINGLE, GROUP, CHILD, CIDR) The port ranges that a consumer can use
+    #   to access a resource configuration (for example: 1-65535). You can
+    #   separate port ranges using commas (for example: 1,2,22-30). To resolve
+    #   DNS through a CIDR resource configuration, include port 53 in the port
+    #   ranges.
     #
     # @option params [String] :protocol
-    #   (SINGLE, GROUP) The protocol accepted by the resource configuration.
+    #   (SINGLE, GROUP, CIDR) The protocol accepted by the resource
+    #   configuration. The default is `TCP`. `TCP_UDP` is supported only for
+    #   CIDR resource configurations; specify it for a CIDR resource
+    #   configuration to allow DNS resolution, which uses UDP.
     #
     # @option params [String] :resource_gateway_identifier
-    #   (SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to
-    #   connect to the resource configuration. For a child resource
+    #   (SINGLE, GROUP, ARN, CIDR) The ID or ARN of the resource gateway used
+    #   to connect to the resource configuration. For a child resource
     #   configuration, this value is inherited from the parent resource
-    #   configuration.
+    #   configuration. For a CIDR resource configuration, the associated
+    #   resource gateway must have its DNS resolution set to `IN_VPC` so that
+    #   DNS queries resolve in the context of your VPC.
     #
     # @option params [String] :resource_configuration_group_identifier
     #   (CHILD) The ID or ARN of the parent resource configuration of type
@@ -820,6 +835,16 @@ module Aws::VPCLattice
     #
     #   * **IP address** - For IPv4 and IPv6, only IP addresses in the VPC are
     #     supported.
+    #
+    #   * **CIDR range** - For a resource configuration of type CIDR, specify
+    #     a `cidrResource` with one or more `cidrRanges` (for example,
+    #     `10.0.0.0/16`) that cover the IP addresses of the resources you want
+    #     to make accessible. You can specify up to 10 ranges, using IPv4,
+    #     IPv6, or both, and each range must include a prefix length. To
+    #     represent your entire network, specify `0.0.0.0/0` (IPv4) or `::/0`
+    #     (IPv6) as the only range. You can't use reserved ranges such as
+    #     `169.254.0.0/16`, `100.64.0.0/10`, `224.0.0.0/4`, `fe80::/10`, or
+    #     `ff00::/8`.
     #
     # @option params [Boolean] :allow_association_to_shareable_service_network
     #   (SINGLE, GROUP, ARN) Specifies whether the resource configuration can
@@ -876,9 +901,9 @@ module Aws::VPCLattice
     #
     #   resp = client.create_resource_configuration({
     #     name: "ResourceConfigurationName", # required
-    #     type: "GROUP", # required, accepts GROUP, CHILD, SINGLE, ARN
+    #     type: "GROUP", # required, accepts GROUP, CHILD, SINGLE, ARN, CIDR
     #     port_ranges: ["PortRange"],
-    #     protocol: "TCP", # accepts TCP
+    #     protocol: "TCP", # accepts TCP, TCP_UDP
     #     resource_gateway_identifier: "ResourceGatewayIdentifier",
     #     resource_configuration_group_identifier: "ResourceConfigurationIdentifier",
     #     resource_configuration_definition: {
@@ -891,6 +916,9 @@ module Aws::VPCLattice
     #       },
     #       arn_resource: {
     #         arn: "WildcardArn",
+    #       },
+    #       cidr_resource: {
+    #         cidr_ranges: ["CidrRange"],
     #       },
     #     },
     #     allow_association_to_shareable_service_network: false,
@@ -910,15 +938,17 @@ module Aws::VPCLattice
     #   resp.arn #=> String
     #   resp.resource_gateway_id #=> String
     #   resp.resource_configuration_group_id #=> String
-    #   resp.type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN"
+    #   resp.type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN", "CIDR"
     #   resp.port_ranges #=> Array
     #   resp.port_ranges[0] #=> String
-    #   resp.protocol #=> String, one of "TCP"
+    #   resp.protocol #=> String, one of "TCP", "TCP_UDP"
     #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.resource_configuration_definition.dns_resource.domain_name #=> String
     #   resp.resource_configuration_definition.dns_resource.ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
     #   resp.resource_configuration_definition.ip_resource.ip_address #=> String
     #   resp.resource_configuration_definition.arn_resource.arn #=> String
+    #   resp.resource_configuration_definition.cidr_resource.cidr_ranges #=> Array
+    #   resp.resource_configuration_definition.cidr_resource.cidr_ranges[0] #=> String
     #   resp.allow_association_to_shareable_service_network #=> Boolean
     #   resp.created_at #=> Time
     #   resp.failure_reason #=> String
@@ -993,15 +1023,19 @@ module Aws::VPCLattice
     #
     # @option params [String] :resource_config_dns_resolution
     #   Indicates how DNS is resolved for resource configurations associated
-    #   to this resource gateway. ResourceConfigDnsResolution is set at
-    #   creation time and cannot be changed.
+    #   with this resource gateway. This value is set when you create the
+    #   resource gateway and can't be changed afterward. The default is
+    #   `PUBLIC`.
     #
     #   * `IN_VPC` - DNS resolution occurs privately within the resource
     #     gateway's VPC. DNS queries for resources behind this resource
     #     gateway resolve using the DNS resolvers defined in the VPC's DHCP
     #     option sets. Use this when your resource domain names are hosted in
     #     private Route 53 hosted zones or on-premises DNS servers reachable
-    #     from the VPC.
+    #     from the VPC. A CIDR resource configuration requires a resource
+    #     gateway that uses `IN_VPC`, and an `IN_VPC` resource gateway can't
+    #     be used for ARN resource configurations, so a single resource
+    #     gateway can't serve both ARN and CIDR resource configurations.
     #
     #   * `PUBLIC` - DNS resolution occurs against public DNS resolvers. DNS
     #     queries for resources behind this resource gateway resolve using
@@ -2465,17 +2499,19 @@ module Aws::VPCLattice
     #   resp.arn #=> String
     #   resp.resource_gateway_id #=> String
     #   resp.resource_configuration_group_id #=> String
-    #   resp.type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN"
+    #   resp.type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN", "CIDR"
     #   resp.allow_association_to_shareable_service_network #=> Boolean
     #   resp.port_ranges #=> Array
     #   resp.port_ranges[0] #=> String
-    #   resp.protocol #=> String, one of "TCP"
+    #   resp.protocol #=> String, one of "TCP", "TCP_UDP"
     #   resp.custom_domain_name #=> String
     #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.resource_configuration_definition.dns_resource.domain_name #=> String
     #   resp.resource_configuration_definition.dns_resource.ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
     #   resp.resource_configuration_definition.ip_resource.ip_address #=> String
     #   resp.resource_configuration_definition.arn_resource.arn #=> String
+    #   resp.resource_configuration_definition.cidr_resource.cidr_ranges #=> Array
+    #   resp.resource_configuration_definition.cidr_resource.cidr_ranges[0] #=> String
     #   resp.created_at #=> Time
     #   resp.amazon_managed #=> Boolean
     #   resp.failure_reason #=> String
@@ -3182,7 +3218,7 @@ module Aws::VPCLattice
     #   resp.items[0].arn #=> String
     #   resp.items[0].resource_gateway_id #=> String
     #   resp.items[0].resource_configuration_group_id #=> String
-    #   resp.items[0].type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN"
+    #   resp.items[0].type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN", "CIDR"
     #   resp.items[0].status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.items[0].amazon_managed #=> Boolean
     #   resp.items[0].created_at #=> Time
@@ -3252,6 +3288,9 @@ module Aws::VPCLattice
     #   resp.items[0].vpc_endpoint_owner #=> String
     #   resp.items[0].created_by #=> String
     #   resp.items[0].created_at #=> Time
+    #   resp.items[0].payer_responsibility #=> Array
+    #   resp.items[0].payer_responsibility[0].scope #=> String, one of "ResourceGatewayCharges"
+    #   resp.items[0].payer_responsibility[0].payer_responsibility_type #=> String, one of "VpcEndpointAccount", "ResourceGatewayAccount"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/ListResourceEndpointAssociations AWS API Documentation
@@ -4234,6 +4273,9 @@ module Aws::VPCLattice
     #       arn_resource: {
     #         arn: "WildcardArn",
     #       },
+    #       cidr_resource: {
+    #         cidr_ranges: ["CidrRange"],
+    #       },
     #     },
     #     allow_association_to_shareable_service_network: false,
     #     port_ranges: ["PortRange"],
@@ -4246,16 +4288,18 @@ module Aws::VPCLattice
     #   resp.arn #=> String
     #   resp.resource_gateway_id #=> String
     #   resp.resource_configuration_group_id #=> String
-    #   resp.type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN"
+    #   resp.type #=> String, one of "GROUP", "CHILD", "SINGLE", "ARN", "CIDR"
     #   resp.port_ranges #=> Array
     #   resp.port_ranges[0] #=> String
     #   resp.allow_association_to_shareable_service_network #=> Boolean
-    #   resp.protocol #=> String, one of "TCP"
+    #   resp.protocol #=> String, one of "TCP", "TCP_UDP"
     #   resp.status #=> String, one of "ACTIVE", "CREATE_IN_PROGRESS", "UPDATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
     #   resp.resource_configuration_definition.dns_resource.domain_name #=> String
     #   resp.resource_configuration_definition.dns_resource.ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
     #   resp.resource_configuration_definition.ip_resource.ip_address #=> String
     #   resp.resource_configuration_definition.arn_resource.arn #=> String
+    #   resp.resource_configuration_definition.cidr_resource.cidr_ranges #=> Array
+    #   resp.resource_configuration_definition.cidr_resource.cidr_ranges[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/UpdateResourceConfiguration AWS API Documentation
     #
@@ -4680,7 +4724,7 @@ module Aws::VPCLattice
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-vpclattice'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

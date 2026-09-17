@@ -60,6 +60,9 @@ module Aws
       }?,
       arn_resource: {
         arn: ::String?
+      }?,
+      cidr_resource: {
+        cidr_ranges: Array[::String]?
       }?
     }
 

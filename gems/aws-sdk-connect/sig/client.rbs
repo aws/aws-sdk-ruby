@@ -3798,7 +3798,7 @@ module Aws
                                 instance_id: ::String,
                                 replica_region: ::String,
                                 ?client_token: ::String,
-                                replica_alias: ::String
+                                ?replica_alias: ::String
                               ) -> _ReplicateInstanceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReplicateInstanceResponseSuccess
 

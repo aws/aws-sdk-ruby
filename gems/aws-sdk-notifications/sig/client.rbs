@@ -94,7 +94,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#associate_managed_notification_account_contact-instance_method
       def associate_managed_notification_account_contact: (
                                                             contact_identifier: ("ACCOUNT_PRIMARY" | "ACCOUNT_ALTERNATE_BILLING" | "ACCOUNT_ALTERNATE_OPERATIONS" | "ACCOUNT_ALTERNATE_SECURITY"),
-                                                            managed_notification_configuration_arn: ::String
+                                                            managed_notification_configuration_arn: ::String,
+                                                            ?is_sensitive_events_subscribed: bool
                                                           ) -> _AssociateManagedNotificationAccountContactResponseSuccess
                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateManagedNotificationAccountContactResponseSuccess
 
@@ -104,7 +105,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#associate_managed_notification_additional_channel-instance_method
       def associate_managed_notification_additional_channel: (
                                                                channel_arn: ::String,
-                                                               managed_notification_configuration_arn: ::String
+                                                               managed_notification_configuration_arn: ::String,
+                                                               ?is_sensitive_events_subscribed: bool
                                                              ) -> _AssociateManagedNotificationAdditionalChannelResponseSuccess
                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateManagedNotificationAdditionalChannelResponseSuccess
 
@@ -416,7 +418,8 @@ module Aws
                                               ?max_results: ::Integer,
                                               ?next_token: ::String,
                                               ?organizational_unit_id: ::String,
-                                              ?related_account: ::String
+                                              ?related_account: ::String,
+                                              ?include_sensitive_events: bool
                                             ) -> _ListManagedNotificationEventsResponseSuccess
                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListManagedNotificationEventsResponseSuccess
 
@@ -552,6 +555,17 @@ module Aws
                                ?regions: Array[::String]
                              ) -> _UpdateEventRuleResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventRuleResponseSuccess
+
+      interface _UpdateManagedNotificationChannelAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateManagedNotificationChannelAssociationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Notifications/Client.html#update_managed_notification_channel_association-instance_method
+      def update_managed_notification_channel_association: (
+                                                             managed_notification_configuration_arn: ::String,
+                                                             channel_identifier: ::String,
+                                                             ?is_sensitive_events_subscribed: bool
+                                                           ) -> _UpdateManagedNotificationChannelAssociationResponseSuccess
+                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateManagedNotificationChannelAssociationResponseSuccess
 
       interface _UpdateNotificationConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNotificationConfigurationResponse]

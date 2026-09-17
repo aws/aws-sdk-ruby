@@ -256,6 +256,13 @@ module Aws::GuardDuty
       SENSITIVE: []
     end
 
+    class BedrockGuardrailResource
+      attr_accessor version: ::String
+      attr_accessor guardrail_action: ("GUARDRAIL_INTERVENED" | "NONE")
+      attr_accessor guardrail_source: ("INPUT" | "OUTPUT")
+      SENSITIVE: []
+    end
+
     class BlockPublicAccess
       attr_accessor ignore_public_acls: bool
       attr_accessor restrict_public_buckets: bool
@@ -2597,6 +2604,7 @@ module Aws::GuardDuty
       attr_accessor ec2_vpc: Types::Ec2Vpc
       attr_accessor ec2_image: Types::Ec2Image
       attr_accessor cloudformation_stack: Types::CloudformationStack
+      attr_accessor bedrock_guardrail: Types::BedrockGuardrailResource
       SENSITIVE: []
     end
 
@@ -2624,7 +2632,7 @@ module Aws::GuardDuty
       attr_accessor uid: ::String
       attr_accessor name: ::String
       attr_accessor account_id: ::String
-      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_NETWORK_INTERFACE" | "S3_BUCKET" | "S3_OBJECT" | "ACCESS_KEY" | "EKS_CLUSTER" | "KUBERNETES_WORKLOAD" | "CONTAINER" | "ECS_CLUSTER" | "ECS_TASK" | "AUTOSCALING_AUTO_SCALING_GROUP" | "IAM_INSTANCE_PROFILE" | "CLOUDFORMATION_STACK" | "EC2_LAUNCH_TEMPLATE" | "EC2_VPC" | "EC2_IMAGE")
+      attr_accessor resource_type: ("EC2_INSTANCE" | "EC2_NETWORK_INTERFACE" | "S3_BUCKET" | "S3_OBJECT" | "ACCESS_KEY" | "EKS_CLUSTER" | "KUBERNETES_WORKLOAD" | "CONTAINER" | "ECS_CLUSTER" | "ECS_TASK" | "AUTOSCALING_AUTO_SCALING_GROUP" | "IAM_INSTANCE_PROFILE" | "CLOUDFORMATION_STACK" | "EC2_LAUNCH_TEMPLATE" | "EC2_VPC" | "EC2_IMAGE" | "BEDROCK_CUSTOM_MODEL" | "BEDROCK_IMPORTED_MODEL" | "BEDROCK_PROVISIONED_MODEL" | "BEDROCK_CUSTOM_MODEL_DEPLOYMENT" | "BEDROCK_INFERENCE_PROFILE" | "BEDROCK_APPLICATION_INFERENCE_PROFILE" | "BEDROCK_PROMPT" | "BEDROCK_PROMPT_ROUTER" | "BEDROCK_GUARDRAIL" | "SAGEMAKER_ENDPOINT")
       attr_accessor region: ::String
       attr_accessor service: ::String
       attr_accessor cloud_partition: ::String

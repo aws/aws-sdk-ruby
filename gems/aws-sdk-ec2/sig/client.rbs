@@ -4020,7 +4020,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#create_vpc_endpoint-instance_method
       def create_vpc_endpoint: (
                                  ?dry_run: bool,
-                                 ?vpc_endpoint_type: ("Interface" | "Gateway" | "GatewayLoadBalancer" | "Resource" | "ServiceNetwork"),
+                                 ?vpc_endpoint_type: ("Interface" | "Gateway" | "GatewayLoadBalancer" | "Resource" | "ServiceNetwork" | "Tunnel"),
                                  vpc_id: ::String,
                                  ?service_name: ::String,
                                  ?policy_document: ::String,
@@ -13131,8 +13131,8 @@ module Aws
                                                       ?dry_run: bool,
                                                       ?service_id: ::String,
                                                       vpc_endpoint_id: ::String,
-                                                      payer_responsibility: ("vpc-endpoint-account" | "vpc-endpoint-service-account"),
-                                                      scope: ("vpc-endpoint-charges")
+                                                      payer_responsibility: ("vpc-endpoint-account" | "resource-gateway-account" | "vpc-endpoint-service-account"),
+                                                      scope: ("vpc-endpoint-charges" | "resource-gateway-charges")
                                                     ) -> _ModifyVpcEndpointPayerResponsibilityResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyVpcEndpointPayerResponsibilityResponseSuccess
 

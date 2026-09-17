@@ -7917,7 +7917,7 @@ module Aws::Connect
     ReplicateInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ACGRInstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
     ReplicateInstanceRequest.add_member(:replica_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "ReplicaRegion"))
     ReplicateInstanceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
-    ReplicateInstanceRequest.add_member(:replica_alias, Shapes::ShapeRef.new(shape: DirectoryAlias, required: true, location_name: "ReplicaAlias"))
+    ReplicateInstanceRequest.add_member(:replica_alias, Shapes::ShapeRef.new(shape: DirectoryAlias, location_name: "ReplicaAlias"))
     ReplicateInstanceRequest.struct_class = Types::ReplicateInstanceRequest
 
     ReplicateInstanceResponse.add_member(:id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "Id"))

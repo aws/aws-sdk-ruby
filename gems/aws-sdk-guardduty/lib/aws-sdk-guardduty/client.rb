@@ -4725,7 +4725,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.detection.sequence.resources[0].uid #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].name #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].account_id #=> String
-    #   resp.findings[0].service.detection.sequence.resources[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_NETWORK_INTERFACE", "S3_BUCKET", "S3_OBJECT", "ACCESS_KEY", "EKS_CLUSTER", "KUBERNETES_WORKLOAD", "CONTAINER", "ECS_CLUSTER", "ECS_TASK", "AUTOSCALING_AUTO_SCALING_GROUP", "IAM_INSTANCE_PROFILE", "CLOUDFORMATION_STACK", "EC2_LAUNCH_TEMPLATE", "EC2_VPC", "EC2_IMAGE"
+    #   resp.findings[0].service.detection.sequence.resources[0].resource_type #=> String, one of "EC2_INSTANCE", "EC2_NETWORK_INTERFACE", "S3_BUCKET", "S3_OBJECT", "ACCESS_KEY", "EKS_CLUSTER", "KUBERNETES_WORKLOAD", "CONTAINER", "ECS_CLUSTER", "ECS_TASK", "AUTOSCALING_AUTO_SCALING_GROUP", "IAM_INSTANCE_PROFILE", "CLOUDFORMATION_STACK", "EC2_LAUNCH_TEMPLATE", "EC2_VPC", "EC2_IMAGE", "BEDROCK_CUSTOM_MODEL", "BEDROCK_IMPORTED_MODEL", "BEDROCK_PROVISIONED_MODEL", "BEDROCK_CUSTOM_MODEL_DEPLOYMENT", "BEDROCK_INFERENCE_PROFILE", "BEDROCK_APPLICATION_INFERENCE_PROFILE", "BEDROCK_PROMPT", "BEDROCK_PROMPT_ROUTER", "BEDROCK_GUARDRAIL", "SAGEMAKER_ENDPOINT"
     #   resp.findings[0].service.detection.sequence.resources[0].region #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].service #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].cloud_partition #=> String
@@ -4812,6 +4812,9 @@ module Aws::GuardDuty
     #   resp.findings[0].service.detection.sequence.resources[0].data.ec2_image.ec2_instance_uids[0] #=> String
     #   resp.findings[0].service.detection.sequence.resources[0].data.cloudformation_stack.ec2_instance_uids #=> Array
     #   resp.findings[0].service.detection.sequence.resources[0].data.cloudformation_stack.ec2_instance_uids[0] #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.bedrock_guardrail.version #=> String
+    #   resp.findings[0].service.detection.sequence.resources[0].data.bedrock_guardrail.guardrail_action #=> String, one of "GUARDRAIL_INTERVENED", "NONE"
+    #   resp.findings[0].service.detection.sequence.resources[0].data.bedrock_guardrail.guardrail_source #=> String, one of "INPUT", "OUTPUT"
     #   resp.findings[0].service.detection.sequence.endpoints #=> Array
     #   resp.findings[0].service.detection.sequence.endpoints[0].id #=> String
     #   resp.findings[0].service.detection.sequence.endpoints[0].ip #=> String
@@ -9732,7 +9735,7 @@ module Aws::GuardDuty
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.162.0'
+      context[:gem_version] = '1.163.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

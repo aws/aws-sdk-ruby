@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.280.0 (2026-09-17)
+------------------
+
+* Feature - Made the replicaAlias attribute optional in the ReplicateInstance API to support Global routing for Amazon Connect Global Resiliency (ACGR) instances. This change maintains backward compatibility. When onboarding to ACGR without Global routing, you must specify a custom replicaAlias in your API call
+
 1.279.0 (2026-09-16)
 ------------------
 

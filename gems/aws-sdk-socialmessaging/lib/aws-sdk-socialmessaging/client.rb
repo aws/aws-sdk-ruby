@@ -620,12 +620,7 @@ module Aws::SocialMessaging
     #   to clone.
     #
     # @option params [String] :endpoint_uri
-    #   Optional HTTPS endpoint for a dynamic Flow, registered with Meta as
-    #   the Flow's endpoint\_uri and called by Meta directly. When omitted,
-    #   the Flow has no endpoint (static Flow). Meta only calls the endpoint
-    #   when the Flow JSON also declares data\_api\_version. To verify that
-    #   requests originate from Meta, attach your own Meta app via
-    #   UpdateWhatsAppFlow.
+    #   The HTTPS endpoint that Meta calls for a data exchange Flow.
     #
     # @return [Types::CreateWhatsAppFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1040,6 +1035,7 @@ module Aws::SocialMessaging
     #
     #   * {Types::GetLinkedWhatsAppBusinessAccountPhoneNumberOutput#phone_number #phone_number} => Types::WhatsAppPhoneNumberDetail
     #   * {Types::GetLinkedWhatsAppBusinessAccountPhoneNumberOutput#linked_whats_app_business_account_id #linked_whats_app_business_account_id} => String
+    #   * {Types::GetLinkedWhatsAppBusinessAccountPhoneNumberOutput#call_settings #call_settings} => Types::WhatsAppCallSettings
     #
     # @example Request syntax with placeholder values
     #
@@ -1058,6 +1054,23 @@ module Aws::SocialMessaging
     #   resp.phone_number.quality_rating #=> String
     #   resp.phone_number.data_localization_region #=> String
     #   resp.linked_whats_app_business_account_id #=> String
+    #   resp.call_settings.call_enabled #=> Boolean
+    #   resp.call_settings.call_hours.enabled #=> Boolean
+    #   resp.call_settings.call_hours.timezone #=> String
+    #   resp.call_settings.call_hours.weekly_operating_hours #=> Array
+    #   resp.call_settings.call_hours.weekly_operating_hours[0].day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.call_settings.call_hours.weekly_operating_hours[0].open_time.hours #=> Integer
+    #   resp.call_settings.call_hours.weekly_operating_hours[0].open_time.minutes #=> Integer
+    #   resp.call_settings.call_hours.weekly_operating_hours[0].close_time.hours #=> Integer
+    #   resp.call_settings.call_hours.weekly_operating_hours[0].close_time.minutes #=> Integer
+    #   resp.call_settings.call_hours.holiday_schedule #=> Array
+    #   resp.call_settings.call_hours.holiday_schedule[0].date #=> String
+    #   resp.call_settings.call_hours.holiday_schedule[0].start_time.hours #=> Integer
+    #   resp.call_settings.call_hours.holiday_schedule[0].start_time.minutes #=> Integer
+    #   resp.call_settings.call_hours.holiday_schedule[0].end_time.hours #=> Integer
+    #   resp.call_settings.call_hours.holiday_schedule[0].end_time.minutes #=> Integer
+    #   resp.call_settings.call_icon_visibility #=> String
+    #   resp.call_settings.callback_permission_status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetLinkedWhatsAppBusinessAccountPhoneNumber AWS API Documentation
     #
@@ -1097,6 +1110,59 @@ module Aws::SocialMessaging
     # @param [Hash] params ({})
     def get_whats_app_business_public_key(params = {}, options = {})
       req = build_request(:get_whats_app_business_public_key, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the current calling permission for a WhatsApp end user,
+    # along with the calling actions the business is allowed to take with
+    # that user. Provide the destination phone number or the business-scoped
+    # user ID to identify the end user.
+    #
+    # @option params [required, String] :origination_phone_number_id
+    #   The unique identifier of the business phone number for which to
+    #   retrieve the calling permission. The phone number identifiers are
+    #   formatted as `phone-number-id-01234567890123456789012345678901`.
+    #
+    # @option params [String] :destination_phone_number
+    #   The end user's phone number, in E.164 format, for which to retrieve
+    #   the calling permission.
+    #
+    # @option params [String] :end_user_bsuid
+    #   The business-scoped user identifier (BSUID) of the end user for which
+    #   to retrieve the calling permission.
+    #
+    # @return [Types::GetWhatsAppCallPermissionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWhatsAppCallPermissionOutput#permission #permission} => Types::WhatsAppCallPermission
+    #   * {Types::GetWhatsAppCallPermissionOutput#actions #actions} => Array&lt;Types::WhatsAppCallPermissionAction&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_whats_app_call_permission({
+    #     origination_phone_number_id: "WhatsAppPhoneNumberId", # required
+    #     destination_phone_number: "WhatsAppDestinationPhoneNumber",
+    #     end_user_bsuid: "WhatsAppBusinessScopedUserId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permission.status #=> String
+    #   resp.permission.expiration_time #=> Time
+    #   resp.actions #=> Array
+    #   resp.actions[0].action_name #=> String
+    #   resp.actions[0].can_perform_action #=> Boolean
+    #   resp.actions[0].limits #=> Array
+    #   resp.actions[0].limits[0].time_period #=> String
+    #   resp.actions[0].limits[0].max_allowed #=> Integer
+    #   resp.actions[0].limits[0].current_usage #=> Integer
+    #   resp.actions[0].limits[0].limit_expiration_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetWhatsAppCallPermission AWS API Documentation
+    #
+    # @overload get_whats_app_call_permission(params = {})
+    # @param [Hash] params ({})
+    def get_whats_app_call_permission(params = {}, options = {})
+      req = build_request(:get_whats_app_call_permission, params)
       req.send_request(options)
     end
 
@@ -1753,11 +1819,12 @@ module Aws::SocialMessaging
     #   business public key.
     #
     # @option params [String] :business_public_key
-    #   PEM-encoded RSA public key. Mutually exclusive with kmsKeyArn.
+    #   The PEM-encoded 2048-bit RSA public key to set. Mutually exclusive
+    #   with `kmsKeyArn`.
     #
     # @option params [String] :kms_key_arn
-    #   Customer-managed KMS asymmetric RSA key ARN. Mutually exclusive with
-    #   businessPublicKey.
+    #   The ARN of a customer managed asymmetric RSA key in Amazon Web
+    #   Services KMS. Mutually exclusive with `businessPublicKey`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1775,6 +1842,50 @@ module Aws::SocialMessaging
     # @param [Hash] params ({})
     def put_whats_app_business_public_key(params = {}, options = {})
       req = build_request(:put_whats_app_business_public_key, params)
+      req.send_request(options)
+    end
+
+    # Sends a WhatsApp calling event, such as connecting or terminating a
+    # call, for a business phone number. This operation passes the event
+    # through to Meta. To use this operation, the origination phone number
+    # must belong to a WhatsApp Business Account that is linked to your
+    # Amazon Web Services account.
+    #
+    # @option params [required, String] :origination_phone_number_id
+    #   The unique identifier of the origination phone number for the call.
+    #   The phone number identifiers are formatted as
+    #   `phone-number-id-01234567890123456789012345678901`. Use
+    #   `GetLinkedWhatsAppBusinessAccount` to find a phone number's ID.
+    #
+    # @option params [required, String] :meta_api_version
+    #   The version of the Meta Graph API to use for the request.
+    #
+    # @option params [required, String, StringIO, File] :call_event
+    #   The call event payload to send, as a JSON blob in the format defined
+    #   by the Meta calling API.
+    #
+    # @return [Types::SendWhatsAppCallEventOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendWhatsAppCallEventOutput#call_id #call_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_whats_app_call_event({
+    #     origination_phone_number_id: "WhatsAppPhoneNumberId", # required
+    #     meta_api_version: "String", # required
+    #     call_event: "data", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.call_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/SendWhatsAppCallEvent AWS API Documentation
+    #
+    # @overload send_whats_app_call_event(params = {})
+    # @param [Hash] params ({})
+    def send_whats_app_call_event(params = {}, options = {})
+      req = build_request(:send_whats_app_call_event, params)
       req.send_request(options)
     end
 
@@ -1955,6 +2066,76 @@ module Aws::SocialMessaging
       req.send_request(options)
     end
 
+    # Updates the calling settings for a linked WhatsApp business phone
+    # number, such as whether calling is enabled and the hours during which
+    # the business accepts calls.
+    #
+    # @option params [required, String] :id
+    #   The unique identifier of the phone number to update. The phone number
+    #   identifiers are formatted as
+    #   `phone-number-id-01234567890123456789012345678901`.
+    #
+    # @option params [required, Types::WhatsAppCallSettings] :call_settings
+    #   The calling settings to apply to the phone number.
+    #
+    # @return [Types::UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput#phone_number_id #phone_number_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_linked_whats_app_business_account_phone_number({
+    #     id: "WhatsAppPhoneNumberId", # required
+    #     call_settings: { # required
+    #       call_enabled: false, # required
+    #       call_hours: {
+    #         enabled: false, # required
+    #         timezone: "IanaTimezone", # required
+    #         weekly_operating_hours: [ # required
+    #           {
+    #             day_of_week: "MONDAY", # required, accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #             open_time: { # required
+    #               hours: 1, # required
+    #               minutes: 1, # required
+    #             },
+    #             close_time: { # required
+    #               hours: 1, # required
+    #               minutes: 1, # required
+    #             },
+    #           },
+    #         ],
+    #         holiday_schedule: [
+    #           {
+    #             date: "WhatsAppDate", # required
+    #             start_time: { # required
+    #               hours: 1, # required
+    #               minutes: 1, # required
+    #             },
+    #             end_time: { # required
+    #               hours: 1, # required
+    #               minutes: 1, # required
+    #             },
+    #           },
+    #         ],
+    #       },
+    #       call_icon_visibility: "WhatsAppCallIconVisibility",
+    #       callback_permission_status: "WhatsAppCallbackPermissionStatus",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.phone_number_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/UpdateLinkedWhatsAppBusinessAccountPhoneNumber AWS API Documentation
+    #
+    # @overload update_linked_whats_app_business_account_phone_number(params = {})
+    # @param [Hash] params ({})
+    def update_linked_whats_app_business_account_phone_number(params = {}, options = {})
+      req = build_request(:update_linked_whats_app_business_account_phone_number, params)
+      req.send_request(options)
+    end
+
     # Updates the metadata of a WhatsApp Flow, such as its name or
     # categories. This does not update the Flow JSON definition. Use
     # [UpdateWhatsAppFlowAssets][1] to update the Flow JSON.
@@ -1976,19 +2157,10 @@ module Aws::SocialMessaging
     #   The updated categories for the Flow.
     #
     # @option params [String] :endpoint_uri
-    #   Optional HTTPS endpoint for a dynamic Flow, registered with Meta as
-    #   the Flow's endpoint\_uri and called by Meta directly. When omitted,
-    #   the Flow's endpoint is unchanged.
+    #   The updated HTTPS endpoint for a data exchange Flow.
     #
     # @option params [String] :meta_app_id
-    #   Optional Meta app ID to attach to the Flow. Meta signs data-exchange
-    #   requests with the attached app's secret, so attaching your own app is
-    #   what enables X-Hub-Signature-256 and flow\_token\_signature
-    #   verification at your endpoint. Meta requires the app to be owned by
-    #   the same business that owns the WABA. Attaching your own app is
-    #   one-way: the service's app cannot be re-attached afterwards. When
-    #   omitted, the attached app is unchanged. (Set via update because Meta
-    #   ignores application\_id at creation time.)
+    #   The ID of the Meta application to attach to the Flow.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2126,7 +2298,7 @@ module Aws::SocialMessaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-socialmessaging'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.33.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

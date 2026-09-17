@@ -788,6 +788,7 @@ module Aws::IoTWireless
       attr_accessor cell_towers: Types::CellTowers
       attr_accessor ip: Types::Ip
       attr_accessor gnss: Types::Gnss
+      attr_accessor gnss_multi_frame: Types::GnssMultiFrame
       attr_accessor timestamp: ::Time
       attr_accessor advanced_configuration: Types::AdvancedConfiguration
       SENSITIVE: []
@@ -1018,6 +1019,21 @@ module Aws::IoTWireless
     class Gnss
       attr_accessor payload: ::String
       attr_accessor capture_time: ::Float
+      attr_accessor capture_time_accuracy: ::Float
+      attr_accessor assist_position: ::Array[::Float]
+      attr_accessor assist_altitude: ::Float
+      attr_accessor use_2_d_solver: bool
+      SENSITIVE: []
+    end
+
+    class GnssCapture
+      attr_accessor payload: ::String
+      attr_accessor capture_time: ::Float
+      SENSITIVE: []
+    end
+
+    class GnssMultiFrame
+      attr_accessor captures: ::Array[Types::GnssCapture]
       attr_accessor capture_time_accuracy: ::Float
       attr_accessor assist_position: ::Array[::Float]
       attr_accessor assist_altitude: ::Float

@@ -135,11 +135,18 @@ module Aws::Notifications
     #   Contact.
     #   @return [String]
     #
+    # @!attribute [rw] is_sensitive_events_subscribed
+    #   Specifies whether this contact is subscribed to sensitive events.
+    #   The `notifications:SubscribeSensitiveEvents` permission controls
+    #   access to sensitive events. Defaults to false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/AssociateManagedNotificationAccountContactRequest AWS API Documentation
     #
     class AssociateManagedNotificationAccountContactRequest < Struct.new(
       :contact_identifier,
-      :managed_notification_configuration_arn)
+      :managed_notification_configuration_arn,
+      :is_sensitive_events_subscribed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -162,11 +169,18 @@ module Aws::Notifications
     #   Channel.
     #   @return [String]
     #
+    # @!attribute [rw] is_sensitive_events_subscribed
+    #   Specifies whether this channel is subscribed to sensitive events.
+    #   The `notifications:SubscribeSensitiveEvents` permission controls
+    #   access to sensitive events. Defaults to false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/AssociateManagedNotificationAdditionalChannelRequest AWS API Documentation
     #
     class AssociateManagedNotificationAdditionalChannelRequest < Struct.new(
       :channel_arn,
-      :managed_notification_configuration_arn)
+      :managed_notification_configuration_arn,
+      :is_sensitive_events_subscribed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -398,7 +412,7 @@ module Aws::Notifications
     class DeleteNotificationConfigurationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] notification_hub_region
-    #   The `NotificationConfiguration` Region.
+    #   The `NotificationHub` Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/DeregisterNotificationHubRequest AWS API Documentation
@@ -410,11 +424,11 @@ module Aws::Notifications
     end
 
     # @!attribute [rw] notification_hub_region
-    #   The `NotificationConfiguration` Region.
+    #   The `NotificationHub` Region.
     #   @return [String]
     #
     # @!attribute [rw] status_summary
-    #   `NotificationConfiguration` status information.
+    #   `NotificationHub` status information.
     #   @return [Types::NotificationHubStatusSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/DeregisterNotificationHubResponse AWS API Documentation
@@ -1370,6 +1384,13 @@ module Aws::Notifications
     #   Notification Events.
     #   @return [String]
     #
+    # @!attribute [rw] include_sensitive_events
+    #   Specifies whether to include sensitive events in the result. By
+    #   default, only non-sensitive events are returned. The
+    #   `notifications:AccessSensitiveEvents` permission controls access to
+    #   sensitive events.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ListManagedNotificationEventsRequest AWS API Documentation
     #
     class ListManagedNotificationEventsRequest < Struct.new(
@@ -1380,7 +1401,8 @@ module Aws::Notifications
       :max_results,
       :next_token,
       :organizational_unit_id,
-      :related_account)
+      :related_account,
+      :include_sensitive_events)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1797,19 +1819,26 @@ module Aws::Notifications
     #       ^
     #   @return [String]
     #
+    # @!attribute [rw] is_sensitive_events_subscribed
+    #   Specifies whether this channel association is subscribed to
+    #   sensitive events. Defaults to false for associations created without
+    #   the flag.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ManagedNotificationChannelAssociationSummary AWS API Documentation
     #
     class ManagedNotificationChannelAssociationSummary < Struct.new(
       :channel_identifier,
       :channel_type,
-      :override_option)
+      :override_option,
+      :is_sensitive_events_subscribed)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # A ManagedNotificationChildEvent is a notification-focused
-    # representation of an event. They contain semantic information used to
-    # create aggregated or non-aggregated end-user notifications.
+    # A notification-focused representation of an event. They contain
+    # semantic information used to create aggregated or non-aggregated
+    # end-user notifications.
     #
     # @!attribute [rw] schema_version
     #   The schema version of the Managed Notification Child Event.
@@ -2187,6 +2216,10 @@ module Aws::Notifications
     #   belongs to.
     #   @return [String]
     #
+    # @!attribute [rw] attachments
+    #   A list of files attached to the notification event.
+    #   @return [Array<Types::NotificationEventAttachment>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/ManagedNotificationEvent AWS API Documentation
     #
     class ManagedNotificationEvent < Struct.new(
@@ -2202,7 +2235,8 @@ module Aws::Notifications
       :start_time,
       :end_time,
       :text_parts,
-      :organizational_unit_id)
+      :organizational_unit_id,
+      :attachments)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2476,6 +2510,13 @@ module Aws::Notifications
     #   A complete summary with all possible relevant information.
     #   @return [String]
     #
+    # @!attribute [rw] markup_description
+    #   A rich description in Portable Text format, which you can convert to
+    #   markup formats such as HTML, Markdown, or plain text. Channels that
+    #   don't support rich rendering ignore this field and use the plain
+    #   text components instead.
+    #   @return [String]
+    #
     # @!attribute [rw] dimensions
     #   A list of properties in key-value pairs. Pairs are shown in order of
     #   importance from most important to least important. Channels may
@@ -2492,6 +2533,7 @@ module Aws::Notifications
       :headline,
       :paragraph_summary,
       :complete_description,
+      :markup_description,
       :dimensions)
       SENSITIVE = []
       include Aws::Structure
@@ -2732,6 +2774,32 @@ module Aws::Notifications
       :media,
       :organizational_unit_id)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A file attached to a notification event.
+    #
+    # @!attribute [rw] display_name
+    #   The name of the attachment that recipients see.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_download_url
+    #   A temporary URL for downloading the attachment. The URL expires
+    #   shortly after it's issued.
+    #   @return [String]
+    #
+    # @!attribute [rw] content_type
+    #   The MIME content type of the attachment, for example
+    #   `application/pdf`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/NotificationEventAttachment AWS API Documentation
+    #
+    class NotificationEventAttachment < Struct.new(
+      :display_name,
+      :attachment_download_url,
+      :content_type)
+      SENSITIVE = [:attachment_download_url]
       include Aws::Structure
     end
 
@@ -2998,8 +3066,8 @@ module Aws::Notifications
     #   @return [String]
     #
     # @!attribute [rw] status_summary
-    #   Provides additional information about the current
-    #   `NotificationConfiguration` status information.
+    #   Provides additional information about the current `NotificationHub`
+    #   status information.
     #   @return [Types::NotificationHubStatusSummary]
     #
     # @!attribute [rw] creation_time
@@ -3423,6 +3491,41 @@ module Aws::Notifications
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] managed_notification_configuration_arn
+    #   The Amazon Resource Name (ARN) of the
+    #   `ManagedNotificationConfiguration` whose Channel association
+    #   property you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_identifier
+    #   The identifier of the channel association to update. You can specify
+    #   one of the following:
+    #
+    #   * An Account contact identifier.
+    #
+    #   * A Channel ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_sensitive_events_subscribed
+    #   Specifies whether the association is subscribed to sensitive events.
+    #   The `notifications:SubscribeSensitiveEvents` permission controls
+    #   access to sensitive events.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/UpdateManagedNotificationChannelAssociationRequest AWS API Documentation
+    #
+    class UpdateManagedNotificationChannelAssociationRequest < Struct.new(
+      :managed_notification_configuration_arn,
+      :channel_identifier,
+      :is_sensitive_events_subscribed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/notifications-2018-05-10/UpdateManagedNotificationChannelAssociationResponse AWS API Documentation
+    #
+    class UpdateManagedNotificationChannelAssociationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) used to update the

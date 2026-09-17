@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2026-09-17)
+------------------
+
+* Feature - Adding support for CIDR Resource Configuration
+
 1.55.0 (2026-09-11)
 ------------------
 

@@ -699,6 +699,8 @@ module Aws::BedrockAgentCore
     SessionStatus = Shapes::StringShape.new(name: 'SessionStatus')
     SessionSummary = Shapes::StructureShape.new(name: 'SessionSummary')
     SessionSummaryList = Shapes::ListShape.new(name: 'SessionSummaryList')
+    SessionTraceIds = Shapes::StructureShape.new(name: 'SessionTraceIds')
+    SessionTraceIdsList = Shapes::ListShape.new(name: 'SessionTraceIdsList')
     SessionType = Shapes::StringShape.new(name: 'SessionType')
     SkillDefinition = Shapes::StructureShape.new(name: 'SkillDefinition')
     SkillMdDefinition = Shapes::StructureShape.new(name: 'SkillMdDefinition')
@@ -794,6 +796,7 @@ module Aws::BedrockAgentCore
     TopK = Shapes::IntegerShape.new(name: 'TopK')
     TopP = Shapes::FloatShape.new(name: 'TopP')
     TraceId = Shapes::StringShape.new(name: 'TraceId')
+    TraceIdList = Shapes::ListShape.new(name: 'TraceIdList')
     TraceIds = Shapes::ListShape.new(name: 'TraceIds')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     Unit = Shapes::StructureShape.new(name: 'Unit')
@@ -1049,6 +1052,7 @@ module Aws::BedrockAgentCore
 
     CloudWatchFilterConfig.add_member(:session_ids, Shapes::ShapeRef.new(shape: CloudWatchFilterConfigSessionIdsList, location_name: "sessionIds"))
     CloudWatchFilterConfig.add_member(:time_range, Shapes::ShapeRef.new(shape: SessionFilterConfig, location_name: "timeRange"))
+    CloudWatchFilterConfig.add_member(:session_trace_ids, Shapes::ShapeRef.new(shape: SessionTraceIdsList, location_name: "sessionTraceIds"))
     CloudWatchFilterConfig.struct_class = Types::CloudWatchFilterConfig
 
     CloudWatchFilterConfigSessionIdsList.member = Shapes::ShapeRef.new(shape: String)
@@ -3034,6 +3038,12 @@ module Aws::BedrockAgentCore
 
     SessionSummaryList.member = Shapes::ShapeRef.new(shape: SessionSummary)
 
+    SessionTraceIds.add_member(:session_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "sessionId"))
+    SessionTraceIds.add_member(:trace_ids, Shapes::ShapeRef.new(shape: TraceIdList, required: true, location_name: "traceIds"))
+    SessionTraceIds.struct_class = Types::SessionTraceIds
+
+    SessionTraceIdsList.member = Shapes::ShapeRef.new(shape: SessionTraceIds)
+
     SkillDefinition.add_member(:schema_version, Shapes::ShapeRef.new(shape: SchemaVersion, location_name: "schemaVersion"))
     SkillDefinition.add_member(:inline_content, Shapes::ShapeRef.new(shape: InlineContent, location_name: "inlineContent"))
     SkillDefinition.struct_class = Types::SkillDefinition
@@ -3345,6 +3355,8 @@ module Aws::BedrockAgentCore
     ToolsFileSystemConfiguration.struct_class = Types::ToolsFileSystemConfiguration
 
     ToolsFileSystemConfigurations.member = Shapes::ShapeRef.new(shape: ToolsFileSystemConfiguration)
+
+    TraceIdList.member = Shapes::ShapeRef.new(shape: TraceId)
 
     TraceIds.member = Shapes::ShapeRef.new(shape: TraceId)
 

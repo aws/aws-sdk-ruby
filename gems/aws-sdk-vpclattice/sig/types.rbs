@@ -43,6 +43,11 @@ module Aws::VPCLattice
       SENSITIVE: []
     end
 
+    class CidrResource
+      attr_accessor cidr_ranges: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
@@ -94,9 +99,9 @@ module Aws::VPCLattice
 
     class CreateResourceConfigurationRequest
       attr_accessor name: ::String
-      attr_accessor type: ("GROUP" | "CHILD" | "SINGLE" | "ARN")
+      attr_accessor type: ("GROUP" | "CHILD" | "SINGLE" | "ARN" | "CIDR")
       attr_accessor port_ranges: ::Array[::String]
-      attr_accessor protocol: ("TCP")
+      attr_accessor protocol: ("TCP" | "TCP_UDP")
       attr_accessor resource_gateway_identifier: ::String
       attr_accessor resource_configuration_group_identifier: ::String
       attr_accessor resource_configuration_definition: Types::ResourceConfigurationDefinition
@@ -115,9 +120,9 @@ module Aws::VPCLattice
       attr_accessor arn: ::String
       attr_accessor resource_gateway_id: ::String
       attr_accessor resource_configuration_group_id: ::String
-      attr_accessor type: ("GROUP" | "CHILD" | "SINGLE" | "ARN")
+      attr_accessor type: ("GROUP" | "CHILD" | "SINGLE" | "ARN" | "CIDR")
       attr_accessor port_ranges: ::Array[::String]
-      attr_accessor protocol: ("TCP")
+      attr_accessor protocol: ("TCP" | "TCP_UDP")
       attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
       attr_accessor resource_configuration_definition: Types::ResourceConfigurationDefinition
       attr_accessor allow_association_to_shareable_service_network: bool
@@ -583,10 +588,10 @@ module Aws::VPCLattice
       attr_accessor arn: ::String
       attr_accessor resource_gateway_id: ::String
       attr_accessor resource_configuration_group_id: ::String
-      attr_accessor type: ("GROUP" | "CHILD" | "SINGLE" | "ARN")
+      attr_accessor type: ("GROUP" | "CHILD" | "SINGLE" | "ARN" | "CIDR")
       attr_accessor allow_association_to_shareable_service_network: bool
       attr_accessor port_ranges: ::Array[::String]
-      attr_accessor protocol: ("TCP")
+      attr_accessor protocol: ("TCP" | "TCP_UDP")
       attr_accessor custom_domain_name: ::String
       attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
       attr_accessor resource_configuration_definition: Types::ResourceConfigurationDefinition
@@ -1101,6 +1106,12 @@ module Aws::VPCLattice
       end
     end
 
+    class PayerResponsibilityEntry
+      attr_accessor scope: ("ResourceGatewayCharges")
+      attr_accessor payer_responsibility_type: ("VpcEndpointAccount" | "ResourceGatewayAccount")
+      SENSITIVE: []
+    end
+
     class PutAuthPolicyRequest
       attr_accessor resource_identifier: ::String
       attr_accessor policy: ::String
@@ -1138,6 +1149,7 @@ module Aws::VPCLattice
       attr_accessor dns_resource: Types::DnsResource
       attr_accessor ip_resource: Types::IpResource
       attr_accessor arn_resource: Types::ArnResource
+      attr_accessor cidr_resource: Types::CidrResource
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1146,6 +1158,8 @@ module Aws::VPCLattice
       class IpResource < ResourceConfigurationDefinition
       end
       class ArnResource < ResourceConfigurationDefinition
+      end
+      class CidrResource < ResourceConfigurationDefinition
       end
       class Unknown < ResourceConfigurationDefinition
       end
@@ -1157,7 +1171,7 @@ module Aws::VPCLattice
       attr_accessor arn: ::String
       attr_accessor resource_gateway_id: ::String
       attr_accessor resource_configuration_group_id: ::String
-      attr_accessor type: ("GROUP" | "CHILD" | "SINGLE" | "ARN")
+      attr_accessor type: ("GROUP" | "CHILD" | "SINGLE" | "ARN" | "CIDR")
       attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
       attr_accessor amazon_managed: bool
       attr_accessor created_at: ::Time
@@ -1178,6 +1192,7 @@ module Aws::VPCLattice
       attr_accessor vpc_endpoint_owner: ::String
       attr_accessor created_by: ::String
       attr_accessor created_at: ::Time
+      attr_accessor payer_responsibility: ::Array[Types::PayerResponsibilityEntry]
       SENSITIVE: []
     end
 
@@ -1514,10 +1529,10 @@ module Aws::VPCLattice
       attr_accessor arn: ::String
       attr_accessor resource_gateway_id: ::String
       attr_accessor resource_configuration_group_id: ::String
-      attr_accessor type: ("GROUP" | "CHILD" | "SINGLE" | "ARN")
+      attr_accessor type: ("GROUP" | "CHILD" | "SINGLE" | "ARN" | "CIDR")
       attr_accessor port_ranges: ::Array[::String]
       attr_accessor allow_association_to_shareable_service_network: bool
-      attr_accessor protocol: ("TCP")
+      attr_accessor protocol: ("TCP" | "TCP_UDP")
       attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
       attr_accessor resource_configuration_definition: Types::ResourceConfigurationDefinition
       SENSITIVE: []

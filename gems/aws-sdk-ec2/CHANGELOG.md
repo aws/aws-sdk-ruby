@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.650.0 (2026-09-17)
+------------------
+
+* Feature - Adding support for "Tunnel" VPC Endpoint
+
 1.649.0 (2026-09-16)
 ------------------
 
