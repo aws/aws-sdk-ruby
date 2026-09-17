@@ -11,36 +11,33 @@ module Aws
         Retries::ErrorInspector.new(error, http_status_code)
       end
 
-      describe '#expired_credentials?' do
-        expired_credentials_errors = [
-          RetryErrorsSvc::Errors::UnrecognizedClientException,
-          RetryErrorsSvc::Errors::InvalidClientTokenId,
-          RetryErrorsSvc::Errors::InvalidAccessKeyId,
-          RetryErrorsSvc::Errors::AuthFailure,
-          RetryErrorsSvc::Errors::InvalidIdentityToken,
+      describe '#invalidating_auth_error?' do
+        invalidating_errors = [
           RetryErrorsSvc::Errors::ExpiredToken,
-          RetryErrorsSvc::Errors::ExpiredTokenException
+          RetryErrorsSvc::Errors::InvalidToken
         ]
 
-        expired_credentials_errors.each do |e|
+        invalidating_errors.each do |e|
           it "returns true for #{e.name}" do
-            expect(inspector(e).expired_credentials?).to be(true)
+            expect(inspector(e).invalidating_auth_error?).to be(true)
           end
         end
 
-        it 'returns true for error types that match /expired/' do
+        it 'returns false for authorization errors like AccessDenied' do
           expect(
-            inspector(
-              RetryErrorsSvc::Errors::SomethingExpiredError
-            ).expired_credentials?
-          ).to be(true)
+            inspector(RetryErrorsSvc::Errors::AccessDenied).invalidating_auth_error?
+          ).to be(false)
+        end
+
+        it 'returns false for other credential errors not named by the SEP' do
+          expect(
+            inspector(RetryErrorsSvc::Errors::ExpiredTokenException).invalidating_auth_error?
+          ).to be(false)
         end
 
         it 'returns false for other errors' do
           expect(
-            inspector(
-              RetryErrorsSvc::Errors::SomeRandomError
-            ).expired_credentials?
+            inspector(RetryErrorsSvc::Errors::SomeRandomError).invalidating_auth_error?
           ).to be(false)
         end
       end

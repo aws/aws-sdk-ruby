@@ -5,6 +5,23 @@ module Aws
 
     class NonSupportedRubyVersionError < RuntimeError; end
 
+    # Raised when no credentials have been obtained and the initial fetch
+    # from the credential source failed.
+    class NoCredentialsError < RuntimeError
+      def initialize(*args)
+        super('unable to obtain credentials from the credential source')
+      end
+    end
+
+    # Internal: signals a credential source response whose Expiration is at or
+    # before the current time. Handled within the refresh lifecycle and never
+    # surfaced to callers.
+    class StaleCredentialsError < RuntimeError
+      def initialize(*args)
+        super('the credential source returned credentials that are already expired')
+      end
+    end
+
     # The base class for all errors returned by an Amazon Web Service.
     # All ~400 level client errors and ~500 level server errors are raised
     # as service errors.  This indicates it was an error returned from the

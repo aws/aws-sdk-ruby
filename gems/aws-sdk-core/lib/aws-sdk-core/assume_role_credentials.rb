@@ -60,7 +60,25 @@ module Aws
     # @return [Hash]
     attr_reader :assume_role_params
 
+    # STS error codes that indicate a misconfiguration (bad policy, denied
+    # access, disabled region, etc). Retrying will not resolve them, so they
+    # are raised immediately rather than backed off.
+    # @api private
+    NON_RECOVERABLE_ERROR_CODES = %w[
+      AccessDenied
+      IDPRejectedClaim
+      InvalidIdentityToken
+      MalformedPolicyDocument
+      PackedPolicyTooLarge
+      RegionDisabled
+    ].freeze
+
     private
+
+    def non_recoverable_error?(error)
+      error.is_a?(Aws::Errors::ServiceError) &&
+        NON_RECOVERABLE_ERROR_CODES.include?(error.code)
+    end
 
     def refresh
       resp = @client.assume_role(@assume_role_params)
