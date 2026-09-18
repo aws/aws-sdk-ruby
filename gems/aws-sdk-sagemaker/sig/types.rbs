@@ -6152,7 +6152,7 @@ module Aws::SageMaker
     end
 
     class GetSearchSuggestionsRequest
-      attr_accessor resource: ("TrainingJob" | "Experiment" | "ExperimentTrial" | "ExperimentTrialComponent" | "Endpoint" | "Model" | "ModelPackage" | "ModelPackageGroup" | "Pipeline" | "PipelineExecution" | "FeatureGroup" | "FeatureMetadata" | "Image" | "ImageVersion" | "Project" | "HyperParameterTuningJob" | "ModelCard" | "PipelineVersion" | "Job")
+      attr_accessor resource: ("TrainingJob" | "Experiment" | "ExperimentTrial" | "ExperimentTrialComponent" | "Endpoint" | "Model" | "ModelPackage" | "ModelPackageGroup" | "Pipeline" | "PipelineExecution" | "FeatureGroup" | "FeatureMetadata" | "Image" | "ImageVersion" | "Project" | "HyperParameterTuningJob" | "ModelCard" | "PipelineVersion" | "Job" | "HubContent")
       attr_accessor suggestion_query: Types::SuggestionQuery
       SENSITIVE: []
     end
@@ -6187,6 +6187,31 @@ module Aws::SageMaker
 
     class HubAccessConfig
       attr_accessor hub_content_arn: ::String
+      SENSITIVE: []
+    end
+
+    class HubContent
+      attr_accessor hub_content_name: ::String
+      attr_accessor hub_content_arn: ::String
+      attr_accessor hub_content_version: ::String
+      attr_accessor hub_content_type: ("Model" | "Notebook" | "ModelReference" | "DataSet" | "JsonDoc")
+      attr_accessor document_schema_version: ::String
+      attr_accessor hub_name: ::String
+      attr_accessor hub_arn: ::String
+      attr_accessor hub_content_display_name: ::String
+      attr_accessor hub_content_description: ::String
+      attr_accessor hub_content_markdown: ::String
+      attr_accessor hub_content_document: ::String
+      attr_accessor sage_maker_public_hub_content_arn: ::String
+      attr_accessor reference_min_version: ::String
+      attr_accessor support_status: ("Supported" | "Deprecated" | "Restricted")
+      attr_accessor hub_content_search_keywords: ::Array[::String]
+      attr_accessor hub_content_dependencies: ::Array[Types::HubContentDependency]
+      attr_accessor hub_content_status: ("Available" | "Importing" | "Deleting" | "ImportFailed" | "DeleteFailed" | "PendingImport" | "PendingDelete")
+      attr_accessor failure_reason: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor last_modified_time: ::Time
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 
@@ -10803,11 +10828,12 @@ module Aws::SageMaker
       attr_accessor model_card: Types::ModelCard
       attr_accessor model: Types::ModelDashboardModel
       attr_accessor job: Types::Job
+      attr_accessor hub_content: Types::HubContent
       SENSITIVE: []
     end
 
     class SearchRequest
-      attr_accessor resource: ("TrainingJob" | "Experiment" | "ExperimentTrial" | "ExperimentTrialComponent" | "Endpoint" | "Model" | "ModelPackage" | "ModelPackageGroup" | "Pipeline" | "PipelineExecution" | "FeatureGroup" | "FeatureMetadata" | "Image" | "ImageVersion" | "Project" | "HyperParameterTuningJob" | "ModelCard" | "PipelineVersion" | "Job")
+      attr_accessor resource: ("TrainingJob" | "Experiment" | "ExperimentTrial" | "ExperimentTrialComponent" | "Endpoint" | "Model" | "ModelPackage" | "ModelPackageGroup" | "Pipeline" | "PipelineExecution" | "FeatureGroup" | "FeatureMetadata" | "Image" | "ImageVersion" | "Project" | "HyperParameterTuningJob" | "ModelCard" | "PipelineVersion" | "Job" | "HubContent")
       attr_accessor search_expression: Types::SearchExpression
       attr_accessor sort_by: ::String
       attr_accessor sort_order: ("Ascending" | "Descending")

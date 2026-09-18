@@ -1346,6 +1346,7 @@ module Aws::SageMaker
     Horovod = Shapes::BooleanShape.new(name: 'Horovod')
     HubAccessConfig = Shapes::StructureShape.new(name: 'HubAccessConfig')
     HubArn = Shapes::StringShape.new(name: 'HubArn')
+    HubContent = Shapes::StructureShape.new(name: 'HubContent')
     HubContentArn = Shapes::StringShape.new(name: 'HubContentArn')
     HubContentDependency = Shapes::StructureShape.new(name: 'HubContentDependency')
     HubContentDependencyList = Shapes::ListShape.new(name: 'HubContentDependencyList')
@@ -8078,6 +8079,29 @@ module Aws::SageMaker
     HubAccessConfig.add_member(:hub_content_arn, Shapes::ShapeRef.new(shape: HubContentArn, required: true, location_name: "HubContentArn"))
     HubAccessConfig.struct_class = Types::HubAccessConfig
 
+    HubContent.add_member(:hub_content_name, Shapes::ShapeRef.new(shape: HubContentName, required: true, location_name: "HubContentName"))
+    HubContent.add_member(:hub_content_arn, Shapes::ShapeRef.new(shape: HubContentArn, required: true, location_name: "HubContentArn"))
+    HubContent.add_member(:hub_content_version, Shapes::ShapeRef.new(shape: HubContentVersion, required: true, location_name: "HubContentVersion"))
+    HubContent.add_member(:hub_content_type, Shapes::ShapeRef.new(shape: HubContentType, required: true, location_name: "HubContentType"))
+    HubContent.add_member(:document_schema_version, Shapes::ShapeRef.new(shape: DocumentSchemaVersion, required: true, location_name: "DocumentSchemaVersion"))
+    HubContent.add_member(:hub_name, Shapes::ShapeRef.new(shape: HubName, required: true, location_name: "HubName"))
+    HubContent.add_member(:hub_arn, Shapes::ShapeRef.new(shape: HubArn, required: true, location_name: "HubArn"))
+    HubContent.add_member(:hub_content_display_name, Shapes::ShapeRef.new(shape: HubContentDisplayName, location_name: "HubContentDisplayName"))
+    HubContent.add_member(:hub_content_description, Shapes::ShapeRef.new(shape: HubContentDescription, location_name: "HubContentDescription"))
+    HubContent.add_member(:hub_content_markdown, Shapes::ShapeRef.new(shape: HubContentMarkdown, location_name: "HubContentMarkdown"))
+    HubContent.add_member(:hub_content_document, Shapes::ShapeRef.new(shape: HubContentDocument, location_name: "HubContentDocument"))
+    HubContent.add_member(:sage_maker_public_hub_content_arn, Shapes::ShapeRef.new(shape: SageMakerPublicHubContentArn, location_name: "SageMakerPublicHubContentArn"))
+    HubContent.add_member(:reference_min_version, Shapes::ShapeRef.new(shape: ReferenceMinVersion, location_name: "ReferenceMinVersion"))
+    HubContent.add_member(:support_status, Shapes::ShapeRef.new(shape: HubContentSupportStatus, location_name: "SupportStatus"))
+    HubContent.add_member(:hub_content_search_keywords, Shapes::ShapeRef.new(shape: HubContentSearchKeywordList, location_name: "HubContentSearchKeywords"))
+    HubContent.add_member(:hub_content_dependencies, Shapes::ShapeRef.new(shape: HubContentDependencyList, location_name: "HubContentDependencies"))
+    HubContent.add_member(:hub_content_status, Shapes::ShapeRef.new(shape: HubContentStatus, required: true, location_name: "HubContentStatus"))
+    HubContent.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+    HubContent.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "CreationTime"))
+    HubContent.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    HubContent.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    HubContent.struct_class = Types::HubContent
+
     HubContentDependency.add_member(:dependency_origin_path, Shapes::ShapeRef.new(shape: DependencyOriginPath, location_name: "DependencyOriginPath"))
     HubContentDependency.add_member(:dependency_copy_path, Shapes::ShapeRef.new(shape: DependencyCopyPath, location_name: "DependencyCopyPath"))
     HubContentDependency.struct_class = Types::HubContentDependency
@@ -11899,6 +11923,7 @@ module Aws::SageMaker
     SearchRecord.add_member(:model_card, Shapes::ShapeRef.new(shape: ModelCard, location_name: "ModelCard"))
     SearchRecord.add_member(:model, Shapes::ShapeRef.new(shape: ModelDashboardModel, location_name: "Model"))
     SearchRecord.add_member(:job, Shapes::ShapeRef.new(shape: Job, location_name: "Job"))
+    SearchRecord.add_member(:hub_content, Shapes::ShapeRef.new(shape: HubContent, location_name: "HubContent"))
     SearchRecord.struct_class = Types::SearchRecord
 
     SearchRequest.add_member(:resource, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "Resource"))

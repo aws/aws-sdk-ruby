@@ -65,6 +65,7 @@ module Aws::TranscribeService
     DescribeLanguageModelRequest = Shapes::StructureShape.new(name: 'DescribeLanguageModelRequest')
     DescribeLanguageModelResponse = Shapes::StructureShape.new(name: 'DescribeLanguageModelResponse')
     DurationInSeconds = Shapes::FloatShape.new(name: 'DurationInSeconds')
+    EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     GetCallAnalyticsCategoryRequest = Shapes::StructureShape.new(name: 'GetCallAnalyticsCategoryRequest')
     GetCallAnalyticsCategoryResponse = Shapes::StructureShape.new(name: 'GetCallAnalyticsCategoryResponse')
@@ -162,6 +163,7 @@ module Aws::TranscribeService
     Phrases = Shapes::ListShape.new(name: 'Phrases')
     PiiEntityType = Shapes::StringShape.new(name: 'PiiEntityType')
     PiiEntityTypes = Shapes::ListShape.new(name: 'PiiEntityTypes')
+    PrintableNonEmptyString = Shapes::StringShape.new(name: 'PrintableNonEmptyString')
     Pronouns = Shapes::StringShape.new(name: 'Pronouns')
     RedactionOutput = Shapes::StringShape.new(name: 'RedactionOutput')
     RedactionType = Shapes::StringShape.new(name: 'RedactionType')
@@ -216,6 +218,8 @@ module Aws::TranscribeService
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateCallAnalyticsCategoryRequest = Shapes::StructureShape.new(name: 'UpdateCallAnalyticsCategoryRequest')
     UpdateCallAnalyticsCategoryResponse = Shapes::StructureShape.new(name: 'UpdateCallAnalyticsCategoryResponse')
+    UpdateLanguageModelRequest = Shapes::StructureShape.new(name: 'UpdateLanguageModelRequest')
+    UpdateLanguageModelResponse = Shapes::StructureShape.new(name: 'UpdateLanguageModelResponse')
     UpdateMedicalVocabularyRequest = Shapes::StructureShape.new(name: 'UpdateMedicalVocabularyRequest')
     UpdateMedicalVocabularyResponse = Shapes::StructureShape.new(name: 'UpdateMedicalVocabularyResponse')
     UpdateVocabularyFilterRequest = Shapes::StructureShape.new(name: 'UpdateVocabularyFilterRequest')
@@ -334,6 +338,7 @@ module Aws::TranscribeService
     CreateLanguageModelRequest.add_member(:base_model_name, Shapes::ShapeRef.new(shape: BaseModelName, required: true, location_name: "BaseModelName"))
     CreateLanguageModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
     CreateLanguageModelRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
+    CreateLanguageModelRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     CreateLanguageModelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateLanguageModelRequest.struct_class = Types::CreateLanguageModelRequest
 
@@ -363,6 +368,7 @@ module Aws::TranscribeService
     CreateVocabularyFilterRequest.add_member(:vocabulary_filter_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "VocabularyFilterFileUri"))
     CreateVocabularyFilterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateVocabularyFilterRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
+    CreateVocabularyFilterRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     CreateVocabularyFilterRequest.struct_class = Types::CreateVocabularyFilterRequest
 
     CreateVocabularyFilterResponse.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location_name: "VocabularyFilterName"))
@@ -376,6 +382,7 @@ module Aws::TranscribeService
     CreateVocabularyRequest.add_member(:vocabulary_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "VocabularyFileUri"))
     CreateVocabularyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateVocabularyRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
+    CreateVocabularyRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     CreateVocabularyRequest.struct_class = Types::CreateVocabularyRequest
 
     CreateVocabularyResponse.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
@@ -421,6 +428,10 @@ module Aws::TranscribeService
 
     DescribeLanguageModelResponse.add_member(:language_model, Shapes::ShapeRef.new(shape: LanguageModel, location_name: "LanguageModel"))
     DescribeLanguageModelResponse.struct_class = Types::DescribeLanguageModelResponse
+
+    EncryptionConfiguration.add_member(:kms_encryption_context, Shapes::ShapeRef.new(shape: KMSEncryptionContextMap, location_name: "KMSEncryptionContext"))
+    EncryptionConfiguration.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKeyId, required: true, location_name: "KMSKey"))
+    EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
 
     GetCallAnalyticsCategoryRequest.add_member(:category_name, Shapes::ShapeRef.new(shape: CategoryName, required: true, location_name: "CategoryName"))
     GetCallAnalyticsCategoryRequest.struct_class = Types::GetCallAnalyticsCategoryRequest
@@ -470,6 +481,8 @@ module Aws::TranscribeService
     GetVocabularyFilterResponse.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     GetVocabularyFilterResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
     GetVocabularyFilterResponse.add_member(:download_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "DownloadUri"))
+    GetVocabularyFilterResponse.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
+    GetVocabularyFilterResponse.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     GetVocabularyFilterResponse.struct_class = Types::GetVocabularyFilterResponse
 
     GetVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
@@ -481,6 +494,8 @@ module Aws::TranscribeService
     GetVocabularyResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
     GetVocabularyResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     GetVocabularyResponse.add_member(:download_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "DownloadUri"))
+    GetVocabularyResponse.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
+    GetVocabularyResponse.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     GetVocabularyResponse.struct_class = Types::GetVocabularyResponse
 
     InputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "S3Uri"))
@@ -502,8 +517,8 @@ module Aws::TranscribeService
     JobExecutionSettings.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
     JobExecutionSettings.struct_class = Types::JobExecutionSettings
 
-    KMSEncryptionContextMap.key = Shapes::ShapeRef.new(shape: NonEmptyString)
-    KMSEncryptionContextMap.value = Shapes::ShapeRef.new(shape: NonEmptyString)
+    KMSEncryptionContextMap.key = Shapes::ShapeRef.new(shape: PrintableNonEmptyString)
+    KMSEncryptionContextMap.value = Shapes::ShapeRef.new(shape: PrintableNonEmptyString)
 
     LanguageCodeItem.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
     LanguageCodeItem.add_member(:duration_in_seconds, Shapes::ShapeRef.new(shape: DurationInSeconds, location_name: "DurationInSeconds"))
@@ -528,6 +543,7 @@ module Aws::TranscribeService
     LanguageModel.add_member(:upgrade_availability, Shapes::ShapeRef.new(shape: Boolean, location_name: "UpgradeAvailability"))
     LanguageModel.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
     LanguageModel.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
+    LanguageModel.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     LanguageModel.struct_class = Types::LanguageModel
 
     LanguageOptions.member = Shapes::ShapeRef.new(shape: LanguageCode)
@@ -974,6 +990,16 @@ module Aws::TranscribeService
     UpdateCallAnalyticsCategoryResponse.add_member(:category_properties, Shapes::ShapeRef.new(shape: CategoryProperties, location_name: "CategoryProperties"))
     UpdateCallAnalyticsCategoryResponse.struct_class = Types::UpdateCallAnalyticsCategoryResponse
 
+    UpdateLanguageModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, required: true, location_name: "ModelName"))
+    UpdateLanguageModelRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
+    UpdateLanguageModelRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    UpdateLanguageModelRequest.struct_class = Types::UpdateLanguageModelRequest
+
+    UpdateLanguageModelResponse.add_member(:model_name, Shapes::ShapeRef.new(shape: ModelName, location_name: "ModelName"))
+    UpdateLanguageModelResponse.add_member(:model_status, Shapes::ShapeRef.new(shape: ModelStatus, location_name: "ModelStatus"))
+    UpdateLanguageModelResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastModifiedTime"))
+    UpdateLanguageModelResponse.struct_class = Types::UpdateLanguageModelResponse
+
     UpdateMedicalVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
     UpdateMedicalVocabularyRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
     UpdateMedicalVocabularyRequest.add_member(:vocabulary_file_uri, Shapes::ShapeRef.new(shape: Uri, required: true, location_name: "VocabularyFileUri"))
@@ -989,6 +1015,7 @@ module Aws::TranscribeService
     UpdateVocabularyFilterRequest.add_member(:words, Shapes::ShapeRef.new(shape: Words, location_name: "Words"))
     UpdateVocabularyFilterRequest.add_member(:vocabulary_filter_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "VocabularyFilterFileUri"))
     UpdateVocabularyFilterRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
+    UpdateVocabularyFilterRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     UpdateVocabularyFilterRequest.struct_class = Types::UpdateVocabularyFilterRequest
 
     UpdateVocabularyFilterResponse.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: VocabularyFilterName, location_name: "VocabularyFilterName"))
@@ -1001,6 +1028,7 @@ module Aws::TranscribeService
     UpdateVocabularyRequest.add_member(:phrases, Shapes::ShapeRef.new(shape: Phrases, location_name: "Phrases"))
     UpdateVocabularyRequest.add_member(:vocabulary_file_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "VocabularyFileUri"))
     UpdateVocabularyRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: DataAccessRoleArn, location_name: "DataAccessRoleArn"))
+    UpdateVocabularyRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     UpdateVocabularyRequest.struct_class = Types::UpdateVocabularyRequest
 
     UpdateVocabularyResponse.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "VocabularyName"))
@@ -1570,6 +1598,19 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:update_language_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLanguageModel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLanguageModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLanguageModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:update_medical_vocabulary, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateMedicalVocabulary"
         o.http_method = "POST"
@@ -1606,6 +1647,7 @@ module Aws::TranscribeService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end
 

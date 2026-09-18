@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2026-09-18)
+------------------
+
+* Feature - Amazon Connect AI Agents now support multi-agent orchestration and structured JSON input and output messaging for orchestration agents.
+
 1.61.0 (2026-09-11)
 ------------------
 

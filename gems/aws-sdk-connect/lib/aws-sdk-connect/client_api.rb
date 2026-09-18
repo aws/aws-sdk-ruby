@@ -18,6 +18,8 @@ module Aws::Connect
     ACGRInstanceIdOrArn = Shapes::StringShape.new(name: 'ACGRInstanceIdOrArn')
     ACGRTrafficDistributionGroupArn = Shapes::StringShape.new(name: 'ACGRTrafficDistributionGroupArn')
     ACGRTrafficDistributionGroupId = Shapes::StringShape.new(name: 'ACGRTrafficDistributionGroupId')
+    AIAgent = Shapes::StructureShape.new(name: 'AIAgent')
+    AIAgentType = Shapes::StringShape.new(name: 'AIAgentType')
     ARN = Shapes::StringShape.new(name: 'ARN')
     AWSAccountId = Shapes::StringShape.new(name: 'AWSAccountId')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
@@ -85,6 +87,7 @@ module Aws::Connect
     AliasArn = Shapes::StringShape.new(name: 'AliasArn')
     AliasConfiguration = Shapes::StructureShape.new(name: 'AliasConfiguration')
     AliasConfigurationList = Shapes::ListShape.new(name: 'AliasConfigurationList')
+    AllowedAIAgents = Shapes::ListShape.new(name: 'AllowedAIAgents')
     AllowedAccessControlTags = Shapes::MapShape.new(name: 'AllowedAccessControlTags')
     AllowedCapabilities = Shapes::StructureShape.new(name: 'AllowedCapabilities')
     AllowedExtension = Shapes::StructureShape.new(name: 'AllowedExtension')
@@ -1267,6 +1270,8 @@ module Aws::Connect
     ListRulesResponse = Shapes::StructureShape.new(name: 'ListRulesResponse')
     ListSecurityKeysRequest = Shapes::StructureShape.new(name: 'ListSecurityKeysRequest')
     ListSecurityKeysResponse = Shapes::StructureShape.new(name: 'ListSecurityKeysResponse')
+    ListSecurityProfileAIAgentsRequest = Shapes::StructureShape.new(name: 'ListSecurityProfileAIAgentsRequest')
+    ListSecurityProfileAIAgentsResponse = Shapes::StructureShape.new(name: 'ListSecurityProfileAIAgentsResponse')
     ListSecurityProfileApplicationsRequest = Shapes::StructureShape.new(name: 'ListSecurityProfileApplicationsRequest')
     ListSecurityProfileApplicationsResponse = Shapes::StructureShape.new(name: 'ListSecurityProfileApplicationsResponse')
     ListSecurityProfileFlowModulesRequest = Shapes::StructureShape.new(name: 'ListSecurityProfileFlowModulesRequest')
@@ -2373,6 +2378,10 @@ module Aws::Connect
     resourceArnListMaxLimit100 = Shapes::ListShape.new(name: 'resourceArnListMaxLimit100')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
 
+    AIAgent.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    AIAgent.add_member(:type, Shapes::ShapeRef.new(shape: AIAgentType, location_name: "Type"))
+    AIAgent.struct_class = Types::AIAgent
+
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
@@ -2535,6 +2544,8 @@ module Aws::Connect
     AliasConfiguration.struct_class = Types::AliasConfiguration
 
     AliasConfigurationList.member = Shapes::ShapeRef.new(shape: AliasConfiguration)
+
+    AllowedAIAgents.member = Shapes::ShapeRef.new(shape: AIAgent)
 
     AllowedAccessControlTags.key = Shapes::ShapeRef.new(shape: SecurityProfilePolicyKey)
     AllowedAccessControlTags.value = Shapes::ShapeRef.new(shape: SecurityProfilePolicyValue)
@@ -3890,6 +3901,7 @@ module Aws::Connect
     CreateSecurityProfileRequest.add_member(:hierarchy_restricted_resources, Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceList, location_name: "HierarchyRestrictedResources"))
     CreateSecurityProfileRequest.add_member(:allowed_access_control_hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "AllowedAccessControlHierarchyGroupId"))
     CreateSecurityProfileRequest.add_member(:allowed_flow_modules, Shapes::ShapeRef.new(shape: AllowedFlowModules, location_name: "AllowedFlowModules"))
+    CreateSecurityProfileRequest.add_member(:allowed_ai_agents, Shapes::ShapeRef.new(shape: AllowedAIAgents, location_name: "AllowedAIAgents"))
     CreateSecurityProfileRequest.add_member(:granular_access_control_configuration, Shapes::ShapeRef.new(shape: GranularAccessControlConfiguration, location_name: "GranularAccessControlConfiguration"))
     CreateSecurityProfileRequest.struct_class = Types::CreateSecurityProfileRequest
 
@@ -6773,6 +6785,18 @@ module Aws::Connect
     ListSecurityKeysResponse.add_member(:security_keys, Shapes::ShapeRef.new(shape: SecurityKeysList, location_name: "SecurityKeys"))
     ListSecurityKeysResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListSecurityKeysResponse.struct_class = Types::ListSecurityKeysResponse
+
+    ListSecurityProfileAIAgentsRequest.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, required: true, location: "uri", location_name: "SecurityProfileId"))
+    ListSecurityProfileAIAgentsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListSecurityProfileAIAgentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListSecurityProfileAIAgentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult1000, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListSecurityProfileAIAgentsRequest.struct_class = Types::ListSecurityProfileAIAgentsRequest
+
+    ListSecurityProfileAIAgentsResponse.add_member(:allowed_ai_agents, Shapes::ShapeRef.new(shape: AllowedAIAgents, location_name: "AllowedAIAgents"))
+    ListSecurityProfileAIAgentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSecurityProfileAIAgentsResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ListSecurityProfileAIAgentsResponse.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    ListSecurityProfileAIAgentsResponse.struct_class = Types::ListSecurityProfileAIAgentsResponse
 
     ListSecurityProfileApplicationsRequest.add_member(:security_profile_id, Shapes::ShapeRef.new(shape: SecurityProfileId, required: true, location: "uri", location_name: "SecurityProfileId"))
     ListSecurityProfileApplicationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
@@ -9738,6 +9762,7 @@ module Aws::Connect
     UpdateSecurityProfileRequest.add_member(:hierarchy_restricted_resources, Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceList, location_name: "HierarchyRestrictedResources"))
     UpdateSecurityProfileRequest.add_member(:allowed_access_control_hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "AllowedAccessControlHierarchyGroupId"))
     UpdateSecurityProfileRequest.add_member(:allowed_flow_modules, Shapes::ShapeRef.new(shape: AllowedFlowModules, location_name: "AllowedFlowModules"))
+    UpdateSecurityProfileRequest.add_member(:allowed_ai_agents, Shapes::ShapeRef.new(shape: AllowedAIAgents, location_name: "AllowedAIAgents"))
     UpdateSecurityProfileRequest.add_member(:granular_access_control_configuration, Shapes::ShapeRef.new(shape: GranularAccessControlConfiguration, location_name: "GranularAccessControlConfiguration"))
     UpdateSecurityProfileRequest.struct_class = Types::UpdateSecurityProfileRequest
 
@@ -13920,6 +13945,25 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_security_profile_ai_agents, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSecurityProfileAIAgents"
+        o.http_method = "GET"
+        o.http_request_uri = "/security-profiles-ai-agents/{InstanceId}/{SecurityProfileId}"
+        o.input = Shapes::ShapeRef.new(shape: ListSecurityProfileAIAgentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSecurityProfileAIAgentsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

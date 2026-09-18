@@ -8765,6 +8765,7 @@ module Aws::Glue
     #   * {Types::GetDataQualityRuleRecommendationRunResponse#created_ruleset_name #created_ruleset_name} => String
     #   * {Types::GetDataQualityRuleRecommendationRunResponse#data_quality_security_configuration #data_quality_security_configuration} => String
     #   * {Types::GetDataQualityRuleRecommendationRunResponse#additional_run_options #additional_run_options} => Types::DataQualityRuleRecommendationRunAdditionalRunOptions
+    #   * {Types::GetDataQualityRuleRecommendationRunResponse#recommendation_mode #recommendation_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -8801,6 +8802,7 @@ module Aws::Glue
     #   resp.created_ruleset_name #=> String
     #   resp.data_quality_security_configuration #=> String
     #   resp.additional_run_options.custom_log_group_prefix #=> String
+    #   resp.recommendation_mode #=> String, one of "BASIC", "ADVANCED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleRecommendationRun AWS API Documentation
     #
@@ -14285,6 +14287,7 @@ module Aws::Glue
     #   resp.runs[0].data_source.data_quality_glue_table.additional_options["NameString"] #=> String
     #   resp.runs[0].data_source.data_quality_glue_table.pre_processing_query #=> String
     #   resp.runs[0].created_ruleset_name #=> String
+    #   resp.runs[0].recommendation_mode #=> String, one of "BASIC", "ADVANCED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityRuleRecommendationRuns AWS API Documentation
@@ -17707,7 +17710,14 @@ module Aws::Glue
     #   The data source (Glue table) associated with this run.
     #
     # @option params [required, String] :role
-    #   An IAM role supplied to encrypt the results of the run.
+    #   The IAM role that Glue assumes to access resources for the run.
+    #
+    #   For more information, see [Configure IAM permissions for Glue Data
+    #   Quality][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/data-quality-authorization.html
     #
     # @option params [Integer] :number_of_workers
     #   The number of `G.1X` workers to be used in the run. The default is 5.
@@ -17731,6 +17741,11 @@ module Aws::Glue
     #
     # @option params [Types::DataQualityRuleRecommendationRunAdditionalRunOptions] :additional_run_options
     #   Additional run options you can specify for a recommendation run.
+    #
+    # @option params [String] :recommendation_mode
+    #   The mode that Glue Data Quality uses to recommend rules.
+    #
+    #   The default is `BASIC`.
     #
     # @return [Types::StartDataQualityRuleRecommendationRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -17769,6 +17784,7 @@ module Aws::Glue
     #     additional_run_options: {
     #       custom_log_group_prefix: "GenericString",
     #     },
+    #     recommendation_mode: "BASIC", # accepts BASIC, ADVANCED
     #   })
     #
     # @example Response structure
@@ -21166,7 +21182,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.273.0'
+      context[:gem_version] = '1.274.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

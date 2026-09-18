@@ -1399,6 +1399,7 @@ module Aws::Glue
     RecipeStep = Shapes::StructureShape.new(name: 'RecipeStep')
     RecipeSteps = Shapes::ListShape.new(name: 'RecipeSteps')
     RecipeVersion = Shapes::StringShape.new(name: 'RecipeVersion')
+    RecommendationMode = Shapes::StringShape.new(name: 'RecommendationMode')
     Record = Shapes::DocumentShape.new(name: 'Record', document: true)
     Records = Shapes::ListShape.new(name: 'Records')
     RecordsCount = Shapes::IntegerShape.new(name: 'RecordsCount')
@@ -3681,6 +3682,7 @@ module Aws::Glue
     DataQualityRuleRecommendationRunDescription.add_member(:started_on, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedOn"))
     DataQualityRuleRecommendationRunDescription.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
     DataQualityRuleRecommendationRunDescription.add_member(:created_ruleset_name, Shapes::ShapeRef.new(shape: NameString, location_name: "CreatedRulesetName"))
+    DataQualityRuleRecommendationRunDescription.add_member(:recommendation_mode, Shapes::ShapeRef.new(shape: RecommendationMode, location_name: "RecommendationMode"))
     DataQualityRuleRecommendationRunDescription.struct_class = Types::DataQualityRuleRecommendationRunDescription
 
     DataQualityRuleRecommendationRunFilter.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "DataSource"))
@@ -4797,6 +4799,7 @@ module Aws::Glue
     GetDataQualityRuleRecommendationRunResponse.add_member(:created_ruleset_name, Shapes::ShapeRef.new(shape: NameString, location_name: "CreatedRulesetName"))
     GetDataQualityRuleRecommendationRunResponse.add_member(:data_quality_security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "DataQualitySecurityConfiguration"))
     GetDataQualityRuleRecommendationRunResponse.add_member(:additional_run_options, Shapes::ShapeRef.new(shape: DataQualityRuleRecommendationRunAdditionalRunOptions, location_name: "AdditionalRunOptions"))
+    GetDataQualityRuleRecommendationRunResponse.add_member(:recommendation_mode, Shapes::ShapeRef.new(shape: RecommendationMode, location_name: "RecommendationMode"))
     GetDataQualityRuleRecommendationRunResponse.struct_class = Types::GetDataQualityRuleRecommendationRunResponse
 
     GetDataQualityRulesetEvaluationRunRequest.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "RunId"))
@@ -7788,6 +7791,7 @@ module Aws::Glue
     StartDataQualityRuleRecommendationRunRequest.add_member(:data_quality_security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "DataQualitySecurityConfiguration"))
     StartDataQualityRuleRecommendationRunRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: HashString, location_name: "ClientToken"))
     StartDataQualityRuleRecommendationRunRequest.add_member(:additional_run_options, Shapes::ShapeRef.new(shape: DataQualityRuleRecommendationRunAdditionalRunOptions, location_name: "AdditionalRunOptions"))
+    StartDataQualityRuleRecommendationRunRequest.add_member(:recommendation_mode, Shapes::ShapeRef.new(shape: RecommendationMode, location_name: "RecommendationMode"))
     StartDataQualityRuleRecommendationRunRequest.struct_class = Types::StartDataQualityRuleRecommendationRunRequest
 
     StartDataQualityRuleRecommendationRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "RunId"))

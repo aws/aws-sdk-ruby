@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.651.0 (2026-09-18)
+------------------
+
+* Feature - This release adds documentation for the T8i instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs.
+
 1.650.0 (2026-09-17)
 ------------------
 

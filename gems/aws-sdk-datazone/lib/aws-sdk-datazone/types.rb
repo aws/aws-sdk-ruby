@@ -5022,6 +5022,10 @@ module Aws::DataZone
     #   The description of the notebook.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the notebook.
+    #   @return [String]
+    #
     # @!attribute [rw] metadata
     #   The metadata for the notebook, specified as key-value pairs. You can
     #   specify up to 50 entries, with keys up to 128 characters and values
@@ -5049,6 +5053,7 @@ module Aws::DataZone
       :owning_project_identifier,
       :name,
       :description,
+      :type,
       :metadata,
       :parameters,
       :client_token)
@@ -5078,6 +5083,10 @@ module Aws::DataZone
     #
     # @!attribute [rw] status
     #   The status of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the notebook.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -5145,6 +5154,7 @@ module Aws::DataZone
       :domain_id,
       :cell_order,
       :status,
+      :type,
       :description,
       :created_at,
       :created_by,
@@ -11483,6 +11493,10 @@ module Aws::DataZone
     #   The status of the notebook.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the notebook.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the notebook.
     #   @return [String]
@@ -11548,6 +11562,7 @@ module Aws::DataZone
       :domain_id,
       :cell_order,
       :status,
+      :type,
       :description,
       :created_at,
       :created_by,
@@ -15774,6 +15789,10 @@ module Aws::DataZone
     #   The status to filter notebooks by.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type to filter notebooks by.
+    #   @return [String]
+    #
     # @!attribute [rw] next_token
     #   When the number of notebooks is greater than the default value for
     #   the `MaxResults` parameter, or if you explicitly specify a value for
@@ -15792,6 +15811,7 @@ module Aws::DataZone
       :sort_order,
       :sort_by,
       :status,
+      :type,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -17510,6 +17530,10 @@ module Aws::DataZone
     #   The status of the notebook.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the notebook.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the notebook.
     #   @return [String]
@@ -17538,6 +17562,7 @@ module Aws::DataZone
       :owning_project_id,
       :domain_id,
       :status,
+      :type,
       :description,
       :created_at,
       :created_by,
@@ -24773,6 +24798,10 @@ module Aws::DataZone
     #   The updated ordered list of cells in the notebook.
     #   @return [Array<Types::CellInformation>]
     #
+    # @!attribute [rw] type
+    #   The updated type of the notebook.
+    #   @return [String]
+    #
     # @!attribute [rw] metadata
     #   The updated metadata for the notebook, specified as key-value pairs.
     #   @return [Hash<String,String>]
@@ -24803,6 +24832,7 @@ module Aws::DataZone
       :status,
       :name,
       :cell_order,
+      :type,
       :metadata,
       :parameters,
       :environment_configuration,
@@ -24833,6 +24863,10 @@ module Aws::DataZone
     #
     # @!attribute [rw] status
     #   The status of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the notebook.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -24900,6 +24934,7 @@ module Aws::DataZone
       :domain_id,
       :cell_order,
       :status,
+      :type,
       :description,
       :created_at,
       :created_by,

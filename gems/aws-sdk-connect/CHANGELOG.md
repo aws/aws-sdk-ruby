@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.281.0 (2026-09-18)
+------------------
+
+* Feature - This release adds the ListSecurityProfileAIAgents API and updates the CreateSecurityProfile and UpdateSecurityProfile APIs to support the AllowedAIAgents field on security profiles, allowing customers to manage the 3P AI agents associated with a security profile for Agent-to-Agent interactions.
+
 1.280.0 (2026-09-17)
 ------------------
 

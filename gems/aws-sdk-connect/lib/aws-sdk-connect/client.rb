@@ -5370,6 +5370,9 @@ module Aws::Connect
     # @option params [Array<Types::FlowModule>] :allowed_flow_modules
     #   A list of Flow Modules an AI Agent can invoke as a tool.
     #
+    # @option params [Array<Types::AIAgent>] :allowed_ai_agents
+    #   A list of AI agents that the security profile will give access to.
+    #
     # @option params [Types::GranularAccessControlConfiguration] :granular_access_control_configuration
     #   The granular access control configuration for the security profile,
     #   including data table permissions.
@@ -5406,6 +5409,12 @@ module Aws::Connect
     #       {
     #         type: "MCP", # accepts MCP
     #         flow_module_id: "FlowModuleId",
+    #       },
+    #     ],
+    #     allowed_ai_agents: [
+    #       {
+    #         arn: "ARN",
+    #         type: "THIRD_PARTY", # accepts THIRD_PARTY
     #       },
     #     ],
     #     granular_access_control_configuration: {
@@ -18899,6 +18908,64 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Returns a list of the allowed AI agents in a specific security
+    # profile.
+    #
+    # @option params [required, String] :security_profile_id
+    #   The identifier for the security profle.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListSecurityProfileAIAgentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSecurityProfileAIAgentsResponse#allowed_ai_agents #allowed_ai_agents} => Array&lt;Types::AIAgent&gt;
+    #   * {Types::ListSecurityProfileAIAgentsResponse#next_token #next_token} => String
+    #   * {Types::ListSecurityProfileAIAgentsResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::ListSecurityProfileAIAgentsResponse#last_modified_region #last_modified_region} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_security_profile_ai_agents({
+    #     security_profile_id: "SecurityProfileId", # required
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.allowed_ai_agents #=> Array
+    #   resp.allowed_ai_agents[0].arn #=> String
+    #   resp.allowed_ai_agents[0].type #=> String, one of "THIRD_PARTY"
+    #   resp.next_token #=> String
+    #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileAIAgents AWS API Documentation
+    #
+    # @overload list_security_profile_ai_agents(params = {})
+    # @param [Hash] params ({})
+    def list_security_profile_ai_agents(params = {}, options = {})
+      req = build_request(:list_security_profile_ai_agents, params)
+      req.send_request(options)
+    end
+
     # Returns a list of third-party applications or MCP Servers in a
     # specific security profile.
     #
@@ -30291,6 +30358,9 @@ module Aws::Connect
     # @option params [Array<Types::FlowModule>] :allowed_flow_modules
     #   A list of Flow Modules an AI Agent can invoke as a tool
     #
+    # @option params [Array<Types::AIAgent>] :allowed_ai_agents
+    #   A list of AI agents that the security profile will give access to.
+    #
     # @option params [Types::GranularAccessControlConfiguration] :granular_access_control_configuration
     #   The granular access control configuration for the security profile,
     #   including data table permissions.
@@ -30321,6 +30391,12 @@ module Aws::Connect
     #       {
     #         type: "MCP", # accepts MCP
     #         flow_module_id: "FlowModuleId",
+    #       },
+    #     ],
+    #     allowed_ai_agents: [
+    #       {
+    #         arn: "ARN",
+    #         type: "THIRD_PARTY", # accepts THIRD_PARTY
     #       },
     #     ],
     #     granular_access_control_configuration: {
@@ -31542,7 +31618,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.280.0'
+      context[:gem_version] = '1.281.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

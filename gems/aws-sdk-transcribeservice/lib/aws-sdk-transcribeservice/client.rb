@@ -773,6 +773,11 @@ module Aws::TranscribeService
     #   locations for training and tuning data, the ARN you use must have
     #   permissions to access both locations.
     #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Specifies the encryption configuration for your custom language model.
+    #   Your model artifacts are encrypted with the specified KMS key or with
+    #   an AWS-owned key if a key is not supplied.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   Adds one or more custom tags, each in the form of a key:value pair, to
     #   a new custom language model at the time you create this new model.
@@ -802,6 +807,12 @@ module Aws::TranscribeService
     #       s3_uri: "Uri", # required
     #       tuning_data_s3_uri: "Uri",
     #       data_access_role_arn: "DataAccessRoleArn", # required
+    #     },
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString",
+    #       },
+    #       kms_key: "KMSKeyId", # required
     #     },
     #     tags: [
     #       {
@@ -1013,9 +1024,10 @@ module Aws::TranscribeService
     # @option params [String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #   access the Amazon S3 bucket that contains your input files (in this
-    #   case, your custom vocabulary). If the role that you specify doesn’t
-    #   have the appropriate permissions to access the specified Amazon S3
-    #   location, your request fails.
+    #   case, your custom vocabulary). If you include
+    #   `EncryptionConfiguration` in your request, this role must also have
+    #   permissions to access the specified KMS key. If the role that you
+    #   specify doesn’t have the appropriate permissions, your request fails.
     #
     #   IAM role ARNs have the format
     #   `arn:partition:iam::account:role/role-name-with-path`. For example:
@@ -1026,6 +1038,11 @@ module Aws::TranscribeService
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Specifies the encryption configuration for your custom vocabulary.
+    #   Your vocabulary artifacts are encrypted with the specified KMS key or
+    #   with an AWS-owned key if a key is not supplied.
     #
     # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1049,6 +1066,12 @@ module Aws::TranscribeService
     #       },
     #     ],
     #     data_access_role_arn: "DataAccessRoleArn",
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString",
+    #       },
+    #       kms_key: "KMSKeyId", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1157,9 +1180,10 @@ module Aws::TranscribeService
     # @option params [String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #   access the Amazon S3 bucket that contains your input files (in this
-    #   case, your custom vocabulary filter). If the role that you specify
-    #   doesn’t have the appropriate permissions to access the specified
-    #   Amazon S3 location, your request fails.
+    #   case, your custom vocabulary filter). If you include
+    #   `EncryptionConfiguration` in your request, this role must also have
+    #   permissions to access the specified KMS key. If the role that you
+    #   specify doesn’t have the appropriate permissions, your request fails.
     #
     #   IAM role ARNs have the format
     #   `arn:partition:iam::account:role/role-name-with-path`. For example:
@@ -1170,6 +1194,11 @@ module Aws::TranscribeService
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Specifies the encryption configuration for your custom vocabulary
+    #   filter. Your vocabulary filter artifacts are encrypted with the
+    #   specified KMS key or with an AWS-owned key if a key is not supplied.
     #
     # @return [Types::CreateVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1191,6 +1220,12 @@ module Aws::TranscribeService
     #       },
     #     ],
     #     data_access_role_arn: "DataAccessRoleArn",
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString",
+    #       },
+    #       kms_key: "KMSKeyId", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1472,6 +1507,9 @@ module Aws::TranscribeService
     #   resp.language_model.input_data_config.s3_uri #=> String
     #   resp.language_model.input_data_config.tuning_data_s3_uri #=> String
     #   resp.language_model.input_data_config.data_access_role_arn #=> String
+    #   resp.language_model.encryption_configuration.kms_encryption_context #=> Hash
+    #   resp.language_model.encryption_configuration.kms_encryption_context["PrintableNonEmptyString"] #=> String
+    #   resp.language_model.encryption_configuration.kms_key #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1959,6 +1997,8 @@ module Aws::TranscribeService
     #   * {Types::GetVocabularyResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::GetVocabularyResponse#failure_reason #failure_reason} => String
     #   * {Types::GetVocabularyResponse#download_uri #download_uri} => String
+    #   * {Types::GetVocabularyResponse#data_access_role_arn #data_access_role_arn} => String
+    #   * {Types::GetVocabularyResponse#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -1974,6 +2014,10 @@ module Aws::TranscribeService
     #   resp.last_modified_time #=> Time
     #   resp.failure_reason #=> String
     #   resp.download_uri #=> String
+    #   resp.data_access_role_arn #=> String
+    #   resp.encryption_configuration.kms_encryption_context #=> Hash
+    #   resp.encryption_configuration.kms_encryption_context["PrintableNonEmptyString"] #=> String
+    #   resp.encryption_configuration.kms_key #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2003,6 +2047,8 @@ module Aws::TranscribeService
     #   * {Types::GetVocabularyFilterResponse#language_code #language_code} => String
     #   * {Types::GetVocabularyFilterResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::GetVocabularyFilterResponse#download_uri #download_uri} => String
+    #   * {Types::GetVocabularyFilterResponse#data_access_role_arn #data_access_role_arn} => String
+    #   * {Types::GetVocabularyFilterResponse#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -2016,6 +2062,10 @@ module Aws::TranscribeService
     #   resp.language_code #=> String, one of "af-ZA", "ar-AE", "ar-SA", "am-ET", "cy-GB", "da-DK", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-MX", "es-US", "fa-AF", "fa-IR", "fr-CA", "fr-FR", "ga-IE", "gd-GB", "he-IL", "hi-IN", "ht-HT", "id-ID", "it-IT", "ja-JP", "jv-ID", "km-KH", "ko-KR", "my-MM", "ms-MY", "nl-NL", "pt-BR", "pt-PT", "ru-RU", "ta-IN", "te-IN", "tr-TR", "zh-CN", "zh-TW", "th-TH", "en-ZA", "en-NZ", "vi-VN", "sv-SE", "ab-GE", "ast-ES", "az-AZ", "ba-RU", "be-BY", "bg-BG", "bn-IN", "bs-BA", "ca-ES", "ckb-IQ", "ckb-IR", "cs-CZ", "cy-WL", "el-GR", "et-EE", "et-ET", "eu-ES", "fi-FI", "gl-ES", "gu-IN", "ha-NG", "hr-HR", "hu-HU", "hy-AM", "is-IS", "ka-GE", "kab-DZ", "kk-KZ", "kn-IN", "ky-KG", "lg-IN", "lt-LT", "lv-LV", "mhr-RU", "mi-NZ", "mk-MK", "ml-IN", "mn-MN", "mr-IN", "mt-MT", "no-NO", "ne-NP", "or-IN", "pa-IN", "pl-PL", "ps-AF", "ro-RO", "rw-RW", "si-LK", "sk-SK", "sl-SI", "so-SO", "sq-AL", "sr-RS", "su-ID", "sw-BI", "sw-KE", "sw-RW", "sw-TZ", "sw-UG", "tl-PH", "tt-RU", "ug-CN", "uk-UA", "uz-UZ", "wo-SN", "zh-HK", "zu-ZA"
     #   resp.last_modified_time #=> Time
     #   resp.download_uri #=> String
+    #   resp.data_access_role_arn #=> String
+    #   resp.encryption_configuration.kms_encryption_context #=> Hash
+    #   resp.encryption_configuration.kms_encryption_context["PrintableNonEmptyString"] #=> String
+    #   resp.encryption_configuration.kms_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/GetVocabularyFilter AWS API Documentation
     #
@@ -2260,6 +2310,9 @@ module Aws::TranscribeService
     #   resp.models[0].input_data_config.s3_uri #=> String
     #   resp.models[0].input_data_config.tuning_data_s3_uri #=> String
     #   resp.models[0].input_data_config.data_access_role_arn #=> String
+    #   resp.models[0].encryption_configuration.kms_encryption_context #=> Hash
+    #   resp.models[0].encryption_configuration.kms_encryption_context["PrintableNonEmptyString"] #=> String
+    #   resp.models[0].encryption_configuration.kms_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ListLanguageModels AWS API Documentation
     #
@@ -3165,7 +3218,7 @@ module Aws::TranscribeService
     #     output_bucket_name: "OutputBucketName", # required
     #     output_encryption_kms_key_id: "KMSKeyId",
     #     kms_encryption_context: {
-    #       "NonEmptyString" => "NonEmptyString",
+    #       "PrintableNonEmptyString" => "PrintableNonEmptyString",
     #     },
     #     data_access_role_arn: "DataAccessRoleArn", # required
     #     settings: { # required
@@ -3472,7 +3525,7 @@ module Aws::TranscribeService
     #     output_key: "OutputKey",
     #     output_encryption_kms_key_id: "KMSKeyId",
     #     kms_encryption_context: {
-    #       "NonEmptyString" => "NonEmptyString",
+    #       "PrintableNonEmptyString" => "PrintableNonEmptyString",
     #     },
     #     settings: {
     #       show_speaker_labels: false,
@@ -3903,7 +3956,7 @@ module Aws::TranscribeService
     #     output_key: "OutputKey",
     #     output_encryption_kms_key_id: "KMSKeyId",
     #     kms_encryption_context: {
-    #       "NonEmptyString" => "NonEmptyString",
+    #       "PrintableNonEmptyString" => "PrintableNonEmptyString",
     #     },
     #     settings: {
     #       vocabulary_name: "VocabularyName",
@@ -4285,6 +4338,78 @@ module Aws::TranscribeService
       req.send_request(options)
     end
 
+    # Updates the encryption configuration for an existing custom language
+    # model. You can use this operation to change the KMS key used to
+    # encrypt your model artifacts. The model artifacts are re-encrypted in
+    # place. No model training is required.
+    #
+    # Your custom language model must not be in the `IN_PROGRESS` state when
+    # you call this operation. You cannot submit another update while a
+    # previous update is in progress. Use to check the current state of your
+    # model.
+    #
+    # Your custom language model remains available for transcription jobs
+    # while the update is being processed.
+    #
+    # @option params [required, String] :model_name
+    #   The name of the custom language model you want to update. Model names
+    #   are case sensitive.
+    #
+    # @option params [String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of an IAM role. If you include
+    #   `EncryptionConfiguration` in your request, this role must have
+    #   permissions to access the specified KMS key. If the role that you
+    #   specify doesn't have the appropriate permissions, your request fails.
+    #
+    #   IAM role ARNs have the format
+    #   `arn:partition:iam::account:role/role-name-with-path`. For example:
+    #   `arn:aws:iam::111122223333:role/Admin`.
+    #
+    #   For more information, see [IAM ARNs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Specifies the new encryption configuration for your custom language
+    #   model. The model artifacts are re-encrypted in place using the
+    #   specified KMS key or with an AWS-owned key if a key is not supplied.
+    #
+    # @return [Types::UpdateLanguageModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLanguageModelResponse#model_name #model_name} => String
+    #   * {Types::UpdateLanguageModelResponse#model_status #model_status} => String
+    #   * {Types::UpdateLanguageModelResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_language_model({
+    #     model_name: "ModelName", # required
+    #     data_access_role_arn: "DataAccessRoleArn",
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString",
+    #       },
+    #       kms_key: "KMSKeyId", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_name #=> String
+    #   resp.model_status #=> String, one of "IN_PROGRESS", "FAILED", "COMPLETED"
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateLanguageModel AWS API Documentation
+    #
+    # @overload update_language_model(params = {})
+    # @param [Hash] params ({})
+    def update_language_model(params = {}, options = {})
+      req = build_request(:update_language_model, params)
+      req.send_request(options)
+    end
+
     # Updates an existing custom medical vocabulary with new values. This
     # operation overwrites all existing information with your new values;
     # you cannot append new terms onto an existing custom vocabulary.
@@ -4341,6 +4466,10 @@ module Aws::TranscribeService
     # overwrites all existing information with your new values; you cannot
     # append new terms onto an existing custom vocabulary.
     #
+    # Your custom vocabulary must be in a terminal state (`READY` or
+    # `FAILED`) before you can update it. You must include either `Phrases`
+    # or `VocabularyFileUri` in your request.
+    #
     # @option params [required, String] :vocabulary_name
     #   The name of the custom vocabulary you want to update. Custom
     #   vocabulary names are case sensitive.
@@ -4396,9 +4525,10 @@ module Aws::TranscribeService
     # @option params [String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #   access the Amazon S3 bucket that contains your input files (in this
-    #   case, your custom vocabulary). If the role that you specify doesn’t
-    #   have the appropriate permissions to access the specified Amazon S3
-    #   location, your request fails.
+    #   case, your custom vocabulary). If you include
+    #   `EncryptionConfiguration` in your request, this role must also have
+    #   permissions to access the specified KMS key. If the role that you
+    #   specify doesn’t have the appropriate permissions, your request fails.
     #
     #   IAM role ARNs have the format
     #   `arn:partition:iam::account:role/role-name-with-path`. For example:
@@ -4409,6 +4539,11 @@ module Aws::TranscribeService
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Specifies the new encryption configuration for your custom vocabulary.
+    #   The vocabulary artifacts are re-encrypted in place using the specified
+    #   KMS key or with an AWS-owned key if a key is not supplied.
     #
     # @return [Types::UpdateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4425,6 +4560,12 @@ module Aws::TranscribeService
     #     phrases: ["Phrase"],
     #     vocabulary_file_uri: "Uri",
     #     data_access_role_arn: "DataAccessRoleArn",
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString",
+    #       },
+    #       kms_key: "KMSKeyId", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -4446,6 +4587,9 @@ module Aws::TranscribeService
     # Updates an existing custom vocabulary filter with a new list of words.
     # The new list you provide overwrites all previous entries; you cannot
     # append new terms onto an existing custom vocabulary filter.
+    #
+    # You must include either `Words` or `VocabularyFilterFileUri` in your
+    # request.
     #
     # @option params [required, String] :vocabulary_filter_name
     #   The name of the custom vocabulary filter you want to update. Custom
@@ -4485,9 +4629,10 @@ module Aws::TranscribeService
     # @option params [String] :data_access_role_arn
     #   The Amazon Resource Name (ARN) of an IAM role that has permissions to
     #   access the Amazon S3 bucket that contains your input files (in this
-    #   case, your custom vocabulary filter). If the role that you specify
-    #   doesn’t have the appropriate permissions to access the specified
-    #   Amazon S3 location, your request fails.
+    #   case, your custom vocabulary filter). If you include
+    #   `EncryptionConfiguration` in your request, this role must also have
+    #   permissions to access the specified KMS key. If the role that you
+    #   specify doesn’t have the appropriate permissions, your request fails.
     #
     #   IAM role ARNs have the format
     #   `arn:partition:iam::account:role/role-name-with-path`. For example:
@@ -4498,6 +4643,12 @@ module Aws::TranscribeService
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   Specifies the new encryption configuration for your custom vocabulary
+    #   filter. The vocabulary filter artifacts are re-encrypted in place
+    #   using the specified KMS key or with an AWS-owned key if a key is not
+    #   supplied.
     #
     # @return [Types::UpdateVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4512,6 +4663,12 @@ module Aws::TranscribeService
     #     words: ["Word"],
     #     vocabulary_filter_file_uri: "Uri",
     #     data_access_role_arn: "DataAccessRoleArn",
+    #     encryption_configuration: {
+    #       kms_encryption_context: {
+    #         "PrintableNonEmptyString" => "PrintableNonEmptyString",
+    #       },
+    #       kms_key: "KMSKeyId", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -4547,7 +4704,7 @@ module Aws::TranscribeService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.145.0'
+      context[:gem_version] = '1.146.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

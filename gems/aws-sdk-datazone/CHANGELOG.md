@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2026-09-18)
+------------------
+
+* Feature - Adds support for specifying Notebook type
+
 1.90.0 (2026-09-11)
 ------------------
 

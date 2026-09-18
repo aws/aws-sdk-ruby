@@ -532,6 +532,10 @@ module Aws::AppIntegrationsService
     # @option params [String] :application_type
     #   The type of application.
     #
+    # @option params [Types::AuthConfig] :auth_config
+    #   The authentication settings that Connect Customer uses when calling
+    #   the external application.
+    #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateApplicationResponse#arn #arn} => String
@@ -600,7 +604,11 @@ module Aws::AppIntegrationsService
     #       allow: ["IframePermission"],
     #       sandbox: ["IframePermission"],
     #     },
-    #     application_type: "STANDARD", # accepts STANDARD, SERVICE, MCP_SERVER
+    #     application_type: "STANDARD", # accepts STANDARD, SERVICE, MCP_SERVER, A2A_SERVER
+    #     auth_config: {
+    #       auth_type: "API_KEY", # accepts API_KEY
+    #       credential_provider_identifier: "Arn",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1023,6 +1031,7 @@ module Aws::AppIntegrationsService
     #   * {Types::GetApplicationResponse#application_config #application_config} => Types::ApplicationConfig
     #   * {Types::GetApplicationResponse#iframe_config #iframe_config} => Types::IframeConfig
     #   * {Types::GetApplicationResponse#application_type #application_type} => String
+    #   * {Types::GetApplicationResponse#auth_config #auth_config} => Types::AuthConfig
     #
     #
     # @example Example: To get an application
@@ -1081,7 +1090,9 @@ module Aws::AppIntegrationsService
     #   resp.iframe_config.allow[0] #=> String
     #   resp.iframe_config.sandbox #=> Array
     #   resp.iframe_config.sandbox[0] #=> String
-    #   resp.application_type #=> String, one of "STANDARD", "SERVICE", "MCP_SERVER"
+    #   resp.application_type #=> String, one of "STANDARD", "SERVICE", "MCP_SERVER", "A2A_SERVER"
+    #   resp.auth_config.auth_type #=> String, one of "API_KEY"
+    #   resp.auth_config.credential_provider_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetApplication AWS API Documentation
     #
@@ -1312,7 +1323,7 @@ module Aws::AppIntegrationsService
     #   resp = client.list_applications({
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     application_type: "STANDARD", # accepts STANDARD, SERVICE, MCP_SERVER
+    #     application_type: "STANDARD", # accepts STANDARD, SERVICE, MCP_SERVER, A2A_SERVER
     #   })
     #
     # @example Response structure
@@ -1325,7 +1336,7 @@ module Aws::AppIntegrationsService
     #   resp.applications[0].created_time #=> Time
     #   resp.applications[0].last_modified_time #=> Time
     #   resp.applications[0].is_service #=> Boolean
-    #   resp.applications[0].application_type #=> String, one of "STANDARD", "SERVICE", "MCP_SERVER"
+    #   resp.applications[0].application_type #=> String, one of "STANDARD", "SERVICE", "MCP_SERVER", "A2A_SERVER"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/ListApplications AWS API Documentation
@@ -1675,6 +1686,10 @@ module Aws::AppIntegrationsService
     # @option params [String] :application_type
     #   The type of application.
     #
+    # @option params [Types::AuthConfig] :auth_config
+    #   The authentication settings that Connect Customer uses when calling
+    #   the external application.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -1728,7 +1743,11 @@ module Aws::AppIntegrationsService
     #       allow: ["IframePermission"],
     #       sandbox: ["IframePermission"],
     #     },
-    #     application_type: "STANDARD", # accepts STANDARD, SERVICE, MCP_SERVER
+    #     application_type: "STANDARD", # accepts STANDARD, SERVICE, MCP_SERVER, A2A_SERVER
+    #     auth_config: {
+    #       auth_type: "API_KEY", # accepts API_KEY
+    #       credential_provider_identifier: "Arn",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/UpdateApplication AWS API Documentation
@@ -1871,7 +1890,7 @@ module Aws::AppIntegrationsService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.74.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.274.0 (2026-09-18)
+------------------
+
+* Feature - Introducing AWS Glue Data Quality advanced rule recommendations for faster recommendations. This capability uses Amazon Athena to analyze a sample of table data and Amazon Bedrock to recommend DQDL rules.
+
 1.273.0 (2026-09-14)
 ------------------
 

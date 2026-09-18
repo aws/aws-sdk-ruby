@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.394.0 (2026-09-18)
+------------------
+
+* Feature - Adds support for the hub content resource in SageMaker Search.
+
 1.393.0 (2026-09-11)
 ------------------
 

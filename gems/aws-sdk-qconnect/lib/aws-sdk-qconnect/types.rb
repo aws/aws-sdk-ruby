@@ -934,6 +934,38 @@ module Aws::QConnect
       include Aws::Structure
     end
 
+    # A union that identifies a collaborator agent to engage. Specify either
+    # an Amazon Connect AI Agent or a third-party agent.
+    #
+    # @note AgentTarget is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AgentTarget is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AgentTarget corresponding to the set member.
+    #
+    # @!attribute [rw] ai_agent_id
+    #   The identifier of an Amazon Connect AI Agent to use as the
+    #   collaborator agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_id
+    #   The identifier of a third-party agent to use as the collaborator
+    #   agent.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/AgentTarget AWS API Documentation
+    #
+    class AgentTarget < Struct.new(
+      :ai_agent_id,
+      :application_id,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AiAgentId < AgentTarget; end
+      class ApplicationId < AgentTarget; end
+      class Unknown < AgentTarget; end
+    end
+
     # Content association data for a [step-by-step guide][1].
     #
     #
@@ -941,7 +973,7 @@ module Aws::QConnect
     # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/step-by-step-guided-experiences.html
     #
     # @!attribute [rw] flow_id
-    #   The Amazon Resource Name (ARN) of an Amazon Connect flow.
+    #   The Amazon Resource Name (ARN) of an Connect Customer flow.
     #   Step-by-step guides are a type of flow.
     #   @return [String]
     #
@@ -1712,7 +1744,7 @@ module Aws::QConnect
     # @note Configuration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Configuration corresponding to the set member.
     #
     # @!attribute [rw] connect_configuration
-    #   The configuration information of the Amazon Connect data source.
+    #   The configuration information of the Connect Customer data source.
     #   @return [Types::ConnectConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/Configuration AWS API Documentation
@@ -1744,10 +1776,10 @@ module Aws::QConnect
       include Aws::Structure
     end
 
-    # The configuration information of the Amazon Connect data source.
+    # The configuration information of the Connect Customer data source.
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -3225,7 +3257,7 @@ module Aws::QConnect
     #   @return [Boolean]
     #
     # @!attribute [rw] channels
-    #   The Amazon Connect channels this quick response applies to.
+    #   The Connect Customer channels this quick response applies to.
     #   @return [Array<String>]
     #
     # @!attribute [rw] language
@@ -3328,8 +3360,8 @@ module Aws::QConnect
     #   @return [Hash<String,Types::AIAgentConfigurationData>]
     #
     # @!attribute [rw] contact_arn
-    #   The Amazon Resource Name (ARN) of the email contact in Amazon
-    #   Connect. Used to retrieve email content and establish session
+    #   The Amazon Resource Name (ARN) of the email contact in Connect
+    #   Customer. Used to retrieve email content and establish session
     #   context for AI-powered email assistance.
     #   @return [String]
     #
@@ -3859,6 +3891,27 @@ module Aws::QConnect
       :message_template_id,
       :version_number)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A collaborator agent configuration in which the Orchestration AI Agent
+    # invokes the collaborator, resuming when the collaborator returns.
+    #
+    # @!attribute [rw] agent_target
+    #   The collaborator agent to delegate to.
+    #   @return [Types::AgentTarget]
+    #
+    # @!attribute [rw] instruction
+    #   The instruction that tells the Orchestration AI Agent when and how
+    #   to delegate to this collaborator agent.
+    #   @return [Types::MultiAgentInstruction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/DelegateAgentConfiguration AWS API Documentation
+    #
+    class DelegateAgentConfiguration < Struct.new(
+      :agent_target,
+      :instruction)
+      SENSITIVE = [:instruction]
       include Aws::Structure
     end
 
@@ -5391,8 +5444,8 @@ module Aws::QConnect
     #   Connect users.
     #
     #   * When setting `criteria` to `RoutingProfileArn`, you need to
-    #     provide a list of ARNs of [Amazon Connect routing profiles][1] as
-    #     values of this parameter.
+    #     provide a list of ARNs of [Connect Customer routing profiles][1]
+    #     as values of this parameter.
     #
     #   ^
     #
@@ -5692,7 +5745,8 @@ module Aws::QConnect
     #
     #       The SIN is formatted as three groups of three digits, such as
     #       <i> 123-456-789</i>. A SIN can be validated through a simple
-    #       check-digit process called the [Luhn algorithm][2] .
+    #       check-digit process called the Luhn algorithm. For more
+    #       information, see [Luhn algorithm][2] on the Wikipedia website.
     #   * **UK Specific**
     #
     #     * **UK\_NATIONAL\_HEALTH\_SERVICE\_NUMBER**
@@ -5842,6 +5896,42 @@ module Aws::QConnect
     class GuardrailWordConfig < Struct.new(
       :text)
       SENSITIVE = [:text]
+      include Aws::Structure
+    end
+
+    # A collaborator agent configuration in which the Orchestration AI Agent
+    # transfers control of the conversation to the collaborator agent.
+    #
+    # @!attribute [rw] agent_target
+    #   The collaborator agent to hand off to.
+    #   @return [Types::AgentTarget]
+    #
+    # @!attribute [rw] instruction
+    #   The instruction that tells the Orchestration AI Agent when and how
+    #   to hand off to this collaborator agent.
+    #   @return [Types::MultiAgentInstruction]
+    #
+    # @!attribute [rw] audio_streaming_enabled
+    #   Specifies whether the caller's audio is streamed directly to the
+    #   collaborator agent and the collaborator's audio response is played
+    #   back during the handoff. This applies only to voice handoffs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] immediate_handoff
+    #   Specifies whether the conversation is handed off to this
+    #   collaborator agent immediately on the first turn, without any
+    #   orchestration reasoning. At most one handoff in an AI Agent's
+    #   configuration can set this to `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/HandoffAgentConfiguration AWS API Documentation
+    #
+    class HandoffAgentConfiguration < Struct.new(
+      :agent_target,
+      :instruction,
+      :audio_streaming_enabled,
+      :immediate_handoff)
+      SENSITIVE = [:instruction]
       include Aws::Structure
     end
 
@@ -7307,18 +7397,26 @@ module Aws::QConnect
     #   The result of tool usage in the message.
     #   @return [Types::ToolUseResultData]
     #
+    # @!attribute [rw] data
+    #   The message data as a structured JSON document. This is the payload
+    #   for a message of type `DATA`, and must be a JSON object at the root
+    #   level.
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MessageData AWS API Documentation
     #
     class MessageData < Struct.new(
       :text,
       :tool_use_result,
+      :data,
       :unknown)
-      SENSITIVE = []
+      SENSITIVE = [:data]
       include Aws::Structure
       include Aws::Structure::Union
 
       class Text < MessageData; end
       class ToolUseResult < MessageData; end
+      class Data < MessageData; end
       class Unknown < MessageData; end
     end
 
@@ -8125,6 +8223,61 @@ module Aws::QConnect
       include Aws::Structure
     end
 
+    # A union that configures a single collaborator agent for an
+    # Orchestration AI Agent, as either a delegate or a handoff.
+    #
+    # @note MultiAgentConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note MultiAgentConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MultiAgentConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] delegate_agent_configuration
+    #   Configures the collaborator agent as a delegate that the
+    #   Orchestration AI Agent invokes while retaining control of the
+    #   conversation.
+    #   @return [Types::DelegateAgentConfiguration]
+    #
+    # @!attribute [rw] handoff_agent_configuration
+    #   Configures the collaborator agent as a handoff target that the
+    #   Orchestration AI Agent transfers control of the conversation to.
+    #   @return [Types::HandoffAgentConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MultiAgentConfiguration AWS API Documentation
+    #
+    class MultiAgentConfiguration < Struct.new(
+      :delegate_agent_configuration,
+      :handoff_agent_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DelegateAgentConfiguration < MultiAgentConfiguration; end
+      class HandoffAgentConfiguration < MultiAgentConfiguration; end
+      class Unknown < MultiAgentConfiguration; end
+    end
+
+    # The instruction that guides how the Orchestration AI Agent works with
+    # a collaborator agent.
+    #
+    # @!attribute [rw] instruction
+    #   The natural-language instruction that tells the Orchestration AI
+    #   Agent when and how to engage the collaborator agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] examples
+    #   Example interactions that illustrate when the Orchestration AI Agent
+    #   should engage the collaborator agent.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/MultiAgentInstruction AWS API Documentation
+    #
+    class MultiAgentInstruction < Struct.new(
+      :instruction,
+      :examples)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for AI Agents of type `NOTE_TAKING`.
     #
     # @!attribute [rw] note_taking_ai_prompt_id
@@ -8288,6 +8441,12 @@ module Aws::QConnect
     #   The tool configurations used by the Orchestration AI Agent.
     #   @return [Array<Types::ToolConfiguration>]
     #
+    # @!attribute [rw] multi_agent_configurations
+    #   The collaborator agents that the Orchestration AI Agent can work
+    #   with. Each entry defines another agent that the orchestrator either
+    #   delegates to or hands the conversation off to.
+    #   @return [Array<Types::MultiAgentConfiguration>]
+    #
     # @!attribute [rw] connect_instance_arn
     #   The Amazon Resource Name (ARN) of the Amazon Connect instance used
     #   by the Orchestration AI Agent.
@@ -8297,15 +8456,31 @@ module Aws::QConnect
     #   The locale setting for the Orchestration AI Agent.
     #   @return [String]
     #
+    # @!attribute [rw] input_schemas
+    #   The JSON schemas that define the structure of the structured data
+    #   input accepted by the Orchestration AI Agent. The data in a `DATA`
+    #   message sent to the agent is validated against these schemas. You
+    #   can specify at most one schema.
+    #   @return [Array<Hash,Array,String,Numeric,Boolean>]
+    #
+    # @!attribute [rw] output_schemas
+    #   The JSON schemas that define the structure of the structured output
+    #   generated by the Orchestration AI Agent. You can specify at most one
+    #   schema.
+    #   @return [Array<Hash,Array,String,Numeric,Boolean>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/OrchestrationAIAgentConfiguration AWS API Documentation
     #
     class OrchestrationAIAgentConfiguration < Struct.new(
       :orchestration_ai_prompt_id,
       :orchestration_ai_guardrail_id,
       :tool_configurations,
+      :multi_agent_configurations,
       :connect_instance_arn,
-      :locale)
-      SENSITIVE = []
+      :locale,
+      :input_schemas,
+      :output_schemas)
+      SENSITIVE = [:input_schemas, :output_schemas]
       include Aws::Structure
     end
 
@@ -9076,8 +9251,8 @@ module Aws::QConnect
     #   @return [Boolean]
     #
     # @!attribute [rw] channels
-    #   The Amazon Connect contact channels this quick response applies to.
-    #   The supported contact channel types include `Chat`.
+    #   The Connect Customer contact channels this quick response applies
+    #   to. The supported contact channel types include `Chat`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] language
@@ -9390,8 +9565,8 @@ module Aws::QConnect
     #   @return [String]
     #
     # @!attribute [rw] channels
-    #   The Amazon Connect contact channels this quick response applies to.
-    #   The supported contact channel types include `Chat`.
+    #   The Connect Customer contact channels this quick response applies
+    #   to. The supported contact channel types include `Chat`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] language
@@ -9499,8 +9674,8 @@ module Aws::QConnect
     #   @return [Boolean]
     #
     # @!attribute [rw] channels
-    #   The Amazon Connect contact channels this quick response applies to.
-    #   The supported contact channel types include `Chat`.
+    #   The Connect Customer contact channels this quick response applies
+    #   to. The supported contact channel types include `Chat`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -10242,7 +10417,7 @@ module Aws::QConnect
     #   @return [Integer]
     #
     # @!attribute [rw] attributes
-    #   The [user-defined Amazon Connect contact attributes][1] to be
+    #   The [user-defined Connect Customer contact attributes][1] to be
     #   resolved when search results are returned.
     #
     #
@@ -10884,6 +11059,22 @@ module Aws::QConnect
     #   AI agent orchestrator use case
     #   @return [String]
     #
+    # @!attribute [rw] interaction_mode
+    #   How the orchestrator engaged the collaborator agent. Present on
+    #   spans that invoke a collaborator agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_agent_id
+    #   Identifier of the collaborator agent being invoked. For first-party
+    #   collaborators this is the Amazon Connect AI agent ID; for
+    #   third-party collaborators this is the external application ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] return_reason
+    #   Reason a sub-agent returned control to the calling agent. Present on
+    #   return\_to\_agent spans.
+    #   @return [String]
+    #
     # @!attribute [rw] request_model
     #   LLM model ID for request (e.g., anthropic.claude-3-sonnet)
     #   @return [String]
@@ -10988,6 +11179,9 @@ module Aws::QConnect
       :ai_agent_version,
       :ai_agent_invoker,
       :ai_agent_orchestrator_use_case,
+      :interaction_mode,
+      :target_agent_id,
+      :return_reason,
       :request_model,
       :request_max_tokens,
       :temperature,
@@ -12408,8 +12602,8 @@ module Aws::QConnect
     #   @return [Boolean]
     #
     # @!attribute [rw] channels
-    #   The Amazon Connect contact channels this quick response applies to.
-    #   The supported contact channel types include `Chat`.
+    #   The Connect Customer contact channels this quick response applies
+    #   to. The supported contact channel types include `Chat`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] language

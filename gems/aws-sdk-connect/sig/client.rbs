@@ -1125,6 +1125,12 @@ module Aws
                                          flow_module_id: ::String?
                                        }
                                      ],
+                                     ?allowed_ai_agents: Array[
+                                       {
+                                         arn: ::String?,
+                                         type: ("THIRD_PARTY")?
+                                       }
+                                     ],
                                      ?granular_access_control_configuration: Params::granular_access_control_configuration
                                    ) -> _CreateSecurityProfileResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSecurityProfileResponseSuccess
@@ -3448,6 +3454,22 @@ module Aws
                                 ?max_results: ::Integer
                               ) -> _ListSecurityKeysResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityKeysResponseSuccess
+
+      interface _ListSecurityProfileAIAgentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSecurityProfileAIAgentsResponse]
+        def allowed_ai_agents: () -> ::Array[Types::AIAgent]
+        def next_token: () -> ::String
+        def last_modified_time: () -> ::Time
+        def last_modified_region: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_security_profile_ai_agents-instance_method
+      def list_security_profile_ai_agents: (
+                                             security_profile_id: ::String,
+                                             instance_id: ::String,
+                                             ?next_token: ::String,
+                                             ?max_results: ::Integer
+                                           ) -> _ListSecurityProfileAIAgentsResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSecurityProfileAIAgentsResponseSuccess
 
       interface _ListSecurityProfileApplicationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListSecurityProfileApplicationsResponse]
@@ -5867,6 +5889,12 @@ module Aws
                                        {
                                          type: ("MCP")?,
                                          flow_module_id: ::String?
+                                       }
+                                     ],
+                                     ?allowed_ai_agents: Array[
+                                       {
+                                         arn: ::String?,
+                                         type: ("THIRD_PARTY")?
                                        }
                                      ],
                                      ?granular_access_control_configuration: Params::granular_access_control_configuration

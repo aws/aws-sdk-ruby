@@ -251,6 +251,20 @@ module Aws::QConnect
       SENSITIVE: [:first_name, :last_name]
     end
 
+    class AgentTarget
+      attr_accessor ai_agent_id: ::String
+      attr_accessor application_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class AiAgentId < AgentTarget
+      end
+      class ApplicationId < AgentTarget
+      end
+      class Unknown < AgentTarget
+      end
+    end
+
     class AmazonConnectGuideAssociationData
       attr_accessor flow_id: ::String
       SENSITIVE: []
@@ -977,6 +991,12 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class DelegateAgentConfiguration
+      attr_accessor agent_target: Types::AgentTarget
+      attr_accessor instruction: Types::MultiAgentInstruction
+      SENSITIVE: [:instruction]
+    end
+
     class DeleteAIAgentRequest
       attr_accessor assistant_id: ::String
       attr_accessor ai_agent_id: ::String
@@ -1406,7 +1426,7 @@ module Aws::QConnect
     end
 
     class GetNextMessageResponse
-      attr_accessor type: ("TEXT" | "TOOL_USE_RESULT")
+      attr_accessor type: ("TEXT" | "TOOL_USE_RESULT" | "DATA")
       attr_accessor response: Types::MessageOutput
       attr_accessor request_message_id: ::String
       attr_accessor conversation_state: Types::ConversationState
@@ -1510,6 +1530,14 @@ module Aws::QConnect
     class GuardrailWordConfig
       attr_accessor text: ::String
       SENSITIVE: [:text]
+    end
+
+    class HandoffAgentConfiguration
+      attr_accessor agent_target: Types::AgentTarget
+      attr_accessor instruction: Types::MultiAgentInstruction
+      attr_accessor audio_streaming_enabled: bool
+      attr_accessor immediate_handoff: bool
+      SENSITIVE: [:instruction]
     end
 
     class HierarchicalChunkingConfiguration
@@ -1913,12 +1941,15 @@ module Aws::QConnect
     class MessageData
       attr_accessor text: Types::TextMessage
       attr_accessor tool_use_result: Types::ToolUseResultData
+      attr_accessor data: untyped
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:data]
 
       class Text < MessageData
       end
       class ToolUseResult < MessageData
+      end
+      class Data < MessageData
       end
       class Unknown < MessageData
       end
@@ -2125,6 +2156,26 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class MultiAgentConfiguration
+      attr_accessor delegate_agent_configuration: Types::DelegateAgentConfiguration
+      attr_accessor handoff_agent_configuration: Types::HandoffAgentConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DelegateAgentConfiguration < MultiAgentConfiguration
+      end
+      class HandoffAgentConfiguration < MultiAgentConfiguration
+      end
+      class Unknown < MultiAgentConfiguration
+      end
+    end
+
+    class MultiAgentInstruction
+      attr_accessor instruction: ::String
+      attr_accessor examples: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class NoteTakingAIAgentConfiguration
       attr_accessor note_taking_ai_prompt_id: ::String
       attr_accessor note_taking_ai_guardrail_id: ::String
@@ -2180,8 +2231,11 @@ module Aws::QConnect
       attr_accessor orchestration_ai_prompt_id: ::String
       attr_accessor orchestration_ai_guardrail_id: ::String
       attr_accessor tool_configurations: ::Array[Types::ToolConfiguration]
+      attr_accessor multi_agent_configurations: ::Array[Types::MultiAgentConfiguration]
       attr_accessor connect_instance_arn: ::String
       attr_accessor locale: ::String
+      attr_accessor input_schemas: ::Array[untyped]
+      attr_accessor output_schemas: ::Array[untyped]
       SENSITIVE: []
     end
 
@@ -2756,7 +2810,7 @@ module Aws::QConnect
     class SendMessageRequest
       attr_accessor assistant_id: ::String
       attr_accessor session_id: ::String
-      attr_accessor type: ("TEXT" | "TOOL_USE_RESULT")
+      attr_accessor type: ("TEXT" | "TOOL_USE_RESULT" | "DATA")
       attr_accessor message: Types::MessageInput
       attr_accessor ai_agent_id: ::String
       attr_accessor conversation_context: Types::ConversationContext
@@ -2868,6 +2922,9 @@ module Aws::QConnect
       attr_accessor ai_agent_version: ::Integer
       attr_accessor ai_agent_invoker: ::String
       attr_accessor ai_agent_orchestrator_use_case: ::String
+      attr_accessor interaction_mode: ("DELEGATE" | "HANDOFF")
+      attr_accessor target_agent_id: ::String
+      attr_accessor return_reason: ("COMPLETE" | "COMPLETE_WITH_ERROR" | "ESCALATE" | "OUT_OF_DOMAIN")
       attr_accessor request_model: ::String
       attr_accessor request_max_tokens: ::Integer
       attr_accessor temperature: ::Float

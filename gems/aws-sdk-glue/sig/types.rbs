@@ -2095,6 +2095,7 @@ module Aws::Glue
       attr_accessor started_on: ::Time
       attr_accessor data_source: Types::DataSource
       attr_accessor created_ruleset_name: ::String
+      attr_accessor recommendation_mode: ("BASIC" | "ADVANCED")
       SENSITIVE: []
     end
 
@@ -3546,6 +3547,7 @@ module Aws::Glue
       attr_accessor created_ruleset_name: ::String
       attr_accessor data_quality_security_configuration: ::String
       attr_accessor additional_run_options: Types::DataQualityRuleRecommendationRunAdditionalRunOptions
+      attr_accessor recommendation_mode: ("BASIC" | "ADVANCED")
       SENSITIVE: []
     end
 
@@ -7232,6 +7234,7 @@ module Aws::Glue
       attr_accessor data_quality_security_configuration: ::String
       attr_accessor client_token: ::String
       attr_accessor additional_run_options: Types::DataQualityRuleRecommendationRunAdditionalRunOptions
+      attr_accessor recommendation_mode: ("BASIC" | "ADVANCED")
       SENSITIVE: []
     end
 

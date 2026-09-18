@@ -28385,6 +28385,125 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Contains information about a hub content resource, including its name,
+    # version, type, associated documents, dependencies, and status, as
+    # returned by a search result.
+    #
+    # @!attribute [rw] hub_content_name
+    #   The name of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_arn
+    #   The Amazon Resource Name (ARN) of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_version
+    #   The version of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_type
+    #   The type of hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_schema_version
+    #   The document schema version for the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_name
+    #   The name of the hub that contains the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_arn
+    #   The Amazon Resource Name (ARN) of the hub that contains the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_display_name
+    #   The display name of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_description
+    #   A description of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_markdown
+    #   A string that provides a description of the hub content. This string
+    #   can include links, tables, and standard markdown formatting.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_document
+    #   The hub content document that describes information about the hub
+    #   content such as type, associated containers, scripts, and more.
+    #   @return [String]
+    #
+    # @!attribute [rw] sage_maker_public_hub_content_arn
+    #   The Amazon Resource Name (ARN) of the public hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_min_version
+    #   The minimum version of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_status
+    #   The support status of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] hub_content_search_keywords
+    #   The searchable keywords for the hub content.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] hub_content_dependencies
+    #   The location of any dependencies that the hub content has, such as
+    #   scripts, model artifacts, datasets, or notebooks.
+    #   @return [Array<Types::HubContentDependency>]
+    #
+    # @!attribute [rw] hub_content_status
+    #   The status of the hub content.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reason
+    #   The failure reason if importing hub content failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The date and time that hub content was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last modified time of the hub content.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   Any tags associated with the hub content.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/HubContent AWS API Documentation
+    #
+    class HubContent < Struct.new(
+      :hub_content_name,
+      :hub_content_arn,
+      :hub_content_version,
+      :hub_content_type,
+      :document_schema_version,
+      :hub_name,
+      :hub_arn,
+      :hub_content_display_name,
+      :hub_content_description,
+      :hub_content_markdown,
+      :hub_content_document,
+      :sage_maker_public_hub_content_arn,
+      :reference_min_version,
+      :support_status,
+      :hub_content_search_keywords,
+      :hub_content_dependencies,
+      :hub_content_status,
+      :failure_reason,
+      :creation_time,
+      :last_modified_time,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Any dependencies related to hub content, such as scripts, model
     # artifacts, datasets, or notebooks.
     #
@@ -50930,6 +51049,10 @@ module Aws::SageMaker
     #   The properties of a job.
     #   @return [Types::Job]
     #
+    # @!attribute [rw] hub_content
+    #   The properties of a hub content resource.
+    #   @return [Types::HubContent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SearchRecord AWS API Documentation
     #
     class SearchRecord < Struct.new(
@@ -50949,7 +51072,8 @@ module Aws::SageMaker
       :hyper_parameter_tuning_job,
       :model_card,
       :model,
-      :job)
+      :job,
+      :hub_content)
       SENSITIVE = []
       include Aws::Structure
     end

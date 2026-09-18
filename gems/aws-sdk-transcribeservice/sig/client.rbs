@@ -117,6 +117,10 @@ module Aws
                                      tuning_data_s3_uri: ::String?,
                                      data_access_role_arn: ::String
                                    },
+                                   ?encryption_configuration: {
+                                     kms_encryption_context: Hash[::String, ::String]?,
+                                     kms_key: ::String
+                                   },
                                    ?tags: Array[
                                      {
                                        key: ::String,
@@ -168,7 +172,11 @@ module Aws
                                    value: ::String
                                  }
                                ],
-                               ?data_access_role_arn: ::String
+                               ?data_access_role_arn: ::String,
+                               ?encryption_configuration: {
+                                 kms_encryption_context: Hash[::String, ::String]?,
+                                 kms_key: ::String
+                               }
                              ) -> _CreateVocabularyResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVocabularyResponseSuccess
 
@@ -190,7 +198,11 @@ module Aws
                                           value: ::String
                                         }
                                       ],
-                                      ?data_access_role_arn: ::String
+                                      ?data_access_role_arn: ::String,
+                                      ?encryption_configuration: {
+                                        kms_encryption_context: Hash[::String, ::String]?,
+                                        kms_key: ::String
+                                      }
                                     ) -> _CreateVocabularyFilterResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVocabularyFilterResponseSuccess
 
@@ -337,6 +349,8 @@ module Aws
         def last_modified_time: () -> ::Time
         def failure_reason: () -> ::String
         def download_uri: () -> ::String
+        def data_access_role_arn: () -> ::String
+        def encryption_configuration: () -> Types::EncryptionConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#get_vocabulary-instance_method
       def get_vocabulary: (
@@ -350,6 +364,8 @@ module Aws
         def language_code: () -> ("af-ZA" | "ar-AE" | "ar-SA" | "am-ET" | "cy-GB" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-MX" | "es-US" | "fa-AF" | "fa-IR" | "fr-CA" | "fr-FR" | "ga-IE" | "gd-GB" | "he-IL" | "hi-IN" | "ht-HT" | "id-ID" | "it-IT" | "ja-JP" | "jv-ID" | "km-KH" | "ko-KR" | "my-MM" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-EE" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "ne-NP" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sq-AL" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zh-HK" | "zu-ZA")
         def last_modified_time: () -> ::Time
         def download_uri: () -> ::String
+        def data_access_role_arn: () -> ::String
+        def encryption_configuration: () -> Types::EncryptionConfiguration
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#get_vocabulary_filter-instance_method
       def get_vocabulary_filter: (
@@ -735,6 +751,23 @@ module Aws
                                           ) -> _UpdateCallAnalyticsCategoryResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCallAnalyticsCategoryResponseSuccess
 
+      interface _UpdateLanguageModelResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLanguageModelResponse]
+        def model_name: () -> ::String
+        def model_status: () -> ("IN_PROGRESS" | "FAILED" | "COMPLETED")
+        def last_modified_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/TranscribeService/Client.html#update_language_model-instance_method
+      def update_language_model: (
+                                   model_name: ::String,
+                                   ?data_access_role_arn: ::String,
+                                   ?encryption_configuration: {
+                                     kms_encryption_context: Hash[::String, ::String]?,
+                                     kms_key: ::String
+                                   }
+                                 ) -> _UpdateLanguageModelResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLanguageModelResponseSuccess
+
       interface _UpdateMedicalVocabularyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateMedicalVocabularyResponse]
         def vocabulary_name: () -> ::String
@@ -763,7 +796,11 @@ module Aws
                                language_code: ("af-ZA" | "ar-AE" | "ar-SA" | "am-ET" | "cy-GB" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-MX" | "es-US" | "fa-AF" | "fa-IR" | "fr-CA" | "fr-FR" | "ga-IE" | "gd-GB" | "he-IL" | "hi-IN" | "ht-HT" | "id-ID" | "it-IT" | "ja-JP" | "jv-ID" | "km-KH" | "ko-KR" | "my-MM" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-EE" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "ne-NP" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sq-AL" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zh-HK" | "zu-ZA"),
                                ?phrases: Array[::String],
                                ?vocabulary_file_uri: ::String,
-                               ?data_access_role_arn: ::String
+                               ?data_access_role_arn: ::String,
+                               ?encryption_configuration: {
+                                 kms_encryption_context: Hash[::String, ::String]?,
+                                 kms_key: ::String
+                               }
                              ) -> _UpdateVocabularyResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVocabularyResponseSuccess
 
@@ -778,7 +815,11 @@ module Aws
                                       vocabulary_filter_name: ::String,
                                       ?words: Array[::String],
                                       ?vocabulary_filter_file_uri: ::String,
-                                      ?data_access_role_arn: ::String
+                                      ?data_access_role_arn: ::String,
+                                      ?encryption_configuration: {
+                                        kms_encryption_context: Hash[::String, ::String]?,
+                                        kms_key: ::String
+                                      }
                                     ) -> _UpdateVocabularyFilterResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVocabularyFilterResponseSuccess
 

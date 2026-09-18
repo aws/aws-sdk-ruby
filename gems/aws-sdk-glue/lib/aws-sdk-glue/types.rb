@@ -9116,6 +9116,12 @@ module Aws::Glue
     #   The name of the ruleset that was created by the recommendation run.
     #   @return [String]
     #
+    # @!attribute [rw] recommendation_mode
+    #   The mode that Glue Data Quality uses to recommend rules.
+    #
+    #   The default is `BASIC`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRuleRecommendationRunDescription AWS API Documentation
     #
     class DataQualityRuleRecommendationRunDescription < Struct.new(
@@ -9123,7 +9129,8 @@ module Aws::Glue
       :status,
       :started_on,
       :data_source,
-      :created_ruleset_name)
+      :created_ruleset_name,
+      :recommendation_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14202,7 +14209,7 @@ module Aws::Glue
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] role
-    #   An IAM role supplied to encrypt the results of the run.
+    #   The IAM role that Glue assumes to access resources for the run.
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -14260,6 +14267,12 @@ module Aws::Glue
     #   Additional run options you can specify for a recommendation run.
     #   @return [Types::DataQualityRuleRecommendationRunAdditionalRunOptions]
     #
+    # @!attribute [rw] recommendation_mode
+    #   The mode that Glue Data Quality uses to recommend rules.
+    #
+    #   The default is `BASIC`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityRuleRecommendationRunResponse AWS API Documentation
     #
     class GetDataQualityRuleRecommendationRunResponse < Struct.new(
@@ -14277,7 +14290,8 @@ module Aws::Glue
       :recommended_ruleset,
       :created_ruleset_name,
       :data_quality_security_configuration,
-      :additional_run_options)
+      :additional_run_options,
+      :recommendation_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29169,7 +29183,14 @@ module Aws::Glue
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] role
-    #   An IAM role supplied to encrypt the results of the run.
+    #   The IAM role that Glue assumes to access resources for the run.
+    #
+    #   For more information, see [Configure IAM permissions for Glue Data
+    #   Quality][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/data-quality-authorization.html
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -29202,6 +29223,12 @@ module Aws::Glue
     #   Additional run options you can specify for a recommendation run.
     #   @return [Types::DataQualityRuleRecommendationRunAdditionalRunOptions]
     #
+    # @!attribute [rw] recommendation_mode
+    #   The mode that Glue Data Quality uses to recommend rules.
+    #
+    #   The default is `BASIC`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartDataQualityRuleRecommendationRunRequest AWS API Documentation
     #
     class StartDataQualityRuleRecommendationRunRequest < Struct.new(
@@ -29212,7 +29239,8 @@ module Aws::Glue
       :created_ruleset_name,
       :data_quality_security_configuration,
       :client_token,
-      :additional_run_options)
+      :additional_run_options,
+      :recommendation_mode)
       SENSITIVE = []
       include Aws::Structure
     end

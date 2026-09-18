@@ -1374,6 +1374,7 @@ module Aws::DataZone
       attr_accessor owning_project_identifier: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
@@ -1387,6 +1388,7 @@ module Aws::DataZone
       attr_accessor domain_id: ::String
       attr_accessor cell_order: ::Array[Types::CellInformation]
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -3112,6 +3114,7 @@ module Aws::DataZone
       attr_accessor domain_id: ::String
       attr_accessor cell_order: ::Array[Types::CellInformation]
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -4200,6 +4203,7 @@ module Aws::DataZone
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
       attr_accessor sort_by: ("CREATED_AT" | "UPDATED_AT")
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -4672,6 +4676,7 @@ module Aws::DataZone
       attr_accessor owning_project_id: ::String
       attr_accessor domain_id: ::String
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -6717,6 +6722,7 @@ module Aws::DataZone
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
       attr_accessor name: ::String
       attr_accessor cell_order: ::Array[Types::CellInformation]
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor environment_configuration: Types::EnvironmentConfig
@@ -6731,6 +6737,7 @@ module Aws::DataZone
       attr_accessor domain_id: ::String
       attr_accessor cell_order: ::Array[Types::CellInformation]
       attr_accessor status: ("ACTIVE" | "ARCHIVED" | "SYNC_IN_PROGRESS" | "SYNC_FAILED")
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String

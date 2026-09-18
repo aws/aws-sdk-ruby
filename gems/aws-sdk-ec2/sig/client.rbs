@@ -10356,7 +10356,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#get_default_credit_specification-instance_method
       def get_default_credit_specification: (
                                               ?dry_run: bool,
-                                              instance_family: ("t2" | "t3" | "t3a" | "t4g")
+                                              instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i")
                                             ) -> _GetDefaultCreditSpecificationResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDefaultCreditSpecificationResponseSuccess
 
@@ -11833,7 +11833,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#modify_default_credit_specification-instance_method
       def modify_default_credit_specification: (
                                                  ?dry_run: bool,
-                                                 instance_family: ("t2" | "t3" | "t3a" | "t4g"),
+                                                 instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i"),
                                                  cpu_credits: ::String
                                                ) -> _ModifyDefaultCreditSpecificationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDefaultCreditSpecificationResponseSuccess

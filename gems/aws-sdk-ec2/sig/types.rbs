@@ -10182,7 +10182,7 @@ module Aws::EC2
 
     class GetDefaultCreditSpecificationRequest
       attr_accessor dry_run: bool
-      attr_accessor instance_family: ("t2" | "t3" | "t3a" | "t4g")
+      attr_accessor instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i")
       SENSITIVE: []
     end
 
@@ -11947,7 +11947,7 @@ module Aws::EC2
     end
 
     class InstanceFamilyCreditSpecification
-      attr_accessor instance_family: ("t2" | "t3" | "t3a" | "t4g")
+      attr_accessor instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i")
       attr_accessor cpu_credits: ::String
       SENSITIVE: []
     end
@@ -13942,7 +13942,7 @@ module Aws::EC2
 
     class ModifyDefaultCreditSpecificationRequest
       attr_accessor dry_run: bool
-      attr_accessor instance_family: ("t2" | "t3" | "t3a" | "t4g")
+      attr_accessor instance_family: ("t2" | "t3" | "t3a" | "t4g" | "t8i")
       attr_accessor cpu_credits: ::String
       SENSITIVE: []
     end

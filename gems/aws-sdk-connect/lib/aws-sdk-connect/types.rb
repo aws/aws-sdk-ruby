@@ -10,6 +10,26 @@
 module Aws::Connect
   module Types
 
+    # Information about an AI agent that a security profile allows access to
+    # for Agent-to-Agent authorization.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the AI agent.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the AI agent. The valid value is `THIRD_PARTY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AIAgent AWS API Documentation
+    #
+    class AIAgent < Struct.new(
+      :arn,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You do not have sufficient permissions to perform this action.
     #
     # @!attribute [rw] message
@@ -7758,6 +7778,10 @@ module Aws::Connect
     #   A list of Flow Modules an AI Agent can invoke as a tool.
     #   @return [Array<Types::FlowModule>]
     #
+    # @!attribute [rw] allowed_ai_agents
+    #   A list of AI agents that the security profile will give access to.
+    #   @return [Array<Types::AIAgent>]
+    #
     # @!attribute [rw] granular_access_control_configuration
     #   The granular access control configuration for the security profile,
     #   including data table permissions.
@@ -7777,6 +7801,7 @@ module Aws::Connect
       :hierarchy_restricted_resources,
       :allowed_access_control_hierarchy_group_id,
       :allowed_flow_modules,
+      :allowed_ai_agents,
       :granular_access_control_configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -24651,6 +24676,69 @@ module Aws::Connect
     #   The maximum number of results to return per page.
     #   @return [Integer]
     #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileAIAgentsRequest AWS API Documentation
+    #
+    class ListSecurityProfileAIAgentsRequest < Struct.new(
+      :security_profile_id,
+      :instance_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] allowed_ai_agents
+    #   A list of the allowed AI agents and their types.
+    #   @return [Array<Types::AIAgent>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when this resource was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where this resource was last
+    #   modified.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileAIAgentsResponse AWS API Documentation
+    #
+    class ListSecurityProfileAIAgentsResponse < Struct.new(
+      :allowed_ai_agents,
+      :next_token,
+      :last_modified_time,
+      :last_modified_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] security_profile_id
+    #   The identifier for the security profle.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Connect Customer instance. You can [find the
+    #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListSecurityProfileApplicationsRequest AWS API Documentation
     #
     class ListSecurityProfileApplicationsRequest < Struct.new(
@@ -39437,6 +39525,10 @@ module Aws::Connect
     #   A list of Flow Modules an AI Agent can invoke as a tool
     #   @return [Array<Types::FlowModule>]
     #
+    # @!attribute [rw] allowed_ai_agents
+    #   A list of AI agents that the security profile will give access to.
+    #   @return [Array<Types::AIAgent>]
+    #
     # @!attribute [rw] granular_access_control_configuration
     #   The granular access control configuration for the security profile,
     #   including data table permissions.
@@ -39455,6 +39547,7 @@ module Aws::Connect
       :hierarchy_restricted_resources,
       :allowed_access_control_hierarchy_group_id,
       :allowed_flow_modules,
+      :allowed_ai_agents,
       :granular_access_control_configuration)
       SENSITIVE = []
       include Aws::Structure

@@ -54829,12 +54829,12 @@ module Aws::EC2
     #
     #   resp = client.get_default_credit_specification({
     #     dry_run: false,
-    #     instance_family: "t2", # required, accepts t2, t3, t3a, t4g
+    #     instance_family: "t2", # required, accepts t2, t3, t3a, t4g, t8i
     #   })
     #
     # @example Response structure
     #
-    #   resp.instance_family_credit_specification.instance_family #=> String, one of "t2", "t3", "t3a", "t4g"
+    #   resp.instance_family_credit_specification.instance_family #=> String, one of "t2", "t3", "t3a", "t4g", "t8i"
     #   resp.instance_family_credit_specification.cpu_credits #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetDefaultCreditSpecification AWS API Documentation
@@ -61627,13 +61627,13 @@ module Aws::EC2
     #
     #   resp = client.modify_default_credit_specification({
     #     dry_run: false,
-    #     instance_family: "t2", # required, accepts t2, t3, t3a, t4g
+    #     instance_family: "t2", # required, accepts t2, t3, t3a, t4g, t8i
     #     cpu_credits: "String", # required
     #   })
     #
     # @example Response structure
     #
-    #   resp.instance_family_credit_specification.instance_family #=> String, one of "t2", "t3", "t3a", "t4g"
+    #   resp.instance_family_credit_specification.instance_family #=> String, one of "t2", "t3", "t3a", "t4g", "t8i"
     #   resp.instance_family_credit_specification.cpu_credits #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyDefaultCreditSpecification AWS API Documentation
@@ -77314,7 +77314,7 @@ module Aws::EC2
     # a single network interface. The operation checks Amazon Virtual
     # Private Cloud (Amazon VPC) quotas. It checks inbound or outbound rules
     # per security group and security groups per network interface. Only
-    # authorized AWS services can call this operation.
+    # authorized Amazon Web Services services can call this operation.
     #
     # For more information about security group quotas, see [Amazon VPC
     # quotas][1] in the *Amazon VPC User Guide*.
@@ -77432,7 +77432,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.650.0'
+      context[:gem_version] = '1.651.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

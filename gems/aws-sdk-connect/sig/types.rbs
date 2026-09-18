@@ -8,6 +8,12 @@
 module Aws::Connect
   module Types
 
+    class AIAgent
+      attr_accessor arn: ::String
+      attr_accessor type: ("THIRD_PARTY")
+      SENSITIVE: []
+    end
+
     class AccessDeniedException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1819,6 +1825,7 @@ module Aws::Connect
       attr_accessor hierarchy_restricted_resources: ::Array[::String]
       attr_accessor allowed_access_control_hierarchy_group_id: ::String
       attr_accessor allowed_flow_modules: ::Array[Types::FlowModule]
+      attr_accessor allowed_ai_agents: ::Array[Types::AIAgent]
       attr_accessor granular_access_control_configuration: Types::GranularAccessControlConfiguration
       SENSITIVE: []
     end
@@ -5583,6 +5590,22 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ListSecurityProfileAIAgentsRequest
+      attr_accessor security_profile_id: ::String
+      attr_accessor instance_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSecurityProfileAIAgentsResponse
+      attr_accessor allowed_ai_agents: ::Array[Types::AIAgent]
+      attr_accessor next_token: ::String
+      attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
+      SENSITIVE: []
+    end
+
     class ListSecurityProfileApplicationsRequest
       attr_accessor security_profile_id: ::String
       attr_accessor instance_id: ::String
@@ -9220,6 +9243,7 @@ module Aws::Connect
       attr_accessor hierarchy_restricted_resources: ::Array[::String]
       attr_accessor allowed_access_control_hierarchy_group_id: ::String
       attr_accessor allowed_flow_modules: ::Array[Types::FlowModule]
+      attr_accessor allowed_ai_agents: ::Array[Types::AIAgent]
       attr_accessor granular_access_control_configuration: Types::GranularAccessControlConfiguration
       SENSITIVE: []
     end
