@@ -124,12 +124,14 @@ module Aws
 
     private
 
-    # An expired, missing, or malformed cached SSO token (surfaced as
-    # InvalidSSOCredentials) and an UnauthorizedException from the SSO service
-    # both require the customer to re-run `aws sso login`, so they are raised
-    # immediately rather than retried with backoff.
+    # An expired, missing, or malformed cached SSO token (InvalidSSOCredentials
+    # for legacy profiles, InvalidSSOToken for sso_session profiles) and an
+    # UnauthorizedException from the SSO service all require the customer to
+    # re-run `aws sso login`, so they are raised immediately rather than
+    # retried with backoff.
     def non_recoverable_error?(error)
       error.is_a?(Errors::InvalidSSOCredentials) ||
+        error.is_a?(Errors::InvalidSSOToken) ||
         error.is_a?(SSO::Errors::UnauthorizedException)
     end
 

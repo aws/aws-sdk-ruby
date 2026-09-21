@@ -139,6 +139,16 @@ module Aws
 
           sso_creds.credentials
         end
+
+        it 'raises InvalidSSOToken immediately when the token expires on a later refresh' do
+          sso_creds = SSOCredentials.new(sso_opts)
+          allow(Time).to receive(:now).and_return(expiration + 60)
+          allow(token_provider).to receive(:token)
+            .and_raise(Errors::InvalidSSOToken.new(SSOCredentials::SSO_LOGIN_GUIDANCE))
+
+          expect { sso_creds.credentials }.to raise_error(Errors::InvalidSSOToken)
+          expect(sso_creds.rate_limited?).to be(false)
+        end
       end
 
       describe '#expiration' do
