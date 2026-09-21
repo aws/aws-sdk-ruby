@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.395.0 (2026-09-21)
+------------------
+
+* Feature - Add support for r6i, m8i, c8i, r8i instance types in Training and Processing
+
 1.394.0 (2026-09-18)
 ------------------
 

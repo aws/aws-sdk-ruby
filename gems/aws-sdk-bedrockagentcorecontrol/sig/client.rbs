@@ -689,6 +689,9 @@ module Aws
                             ?allowed_tools: Array[::String],
                             ?memory: Params::harness_memory_configuration,
                             ?truncation: Params::harness_truncation_configuration,
+                            ?hooks: Array[
+                              Params::harness_hook
+                            ],
                             ?max_iterations: ::Integer,
                             ?max_tokens: ::Integer,
                             ?timeout_seconds: ::Integer,
@@ -3073,6 +3076,9 @@ module Aws
                               optional_value: Params::harness_memory_configuration?
                             },
                             ?truncation: Params::harness_truncation_configuration,
+                            ?hooks: Array[
+                              Params::harness_hook
+                            ],
                             ?max_iterations: ::Integer,
                             ?max_tokens: ::Integer,
                             ?timeout_seconds: ::Integer

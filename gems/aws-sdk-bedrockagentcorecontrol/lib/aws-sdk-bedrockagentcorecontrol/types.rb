@@ -3949,6 +3949,10 @@ module Aws::BedrockAgentCoreControl
     #   it exceeds model limits.
     #   @return [Types::HarnessTruncationConfiguration]
     #
+    # @!attribute [rw] hooks
+    #   The lifecycle hooks to run at defined points in the agent loop.
+    #   @return [Array<Types::HarnessHook>]
+    #
     # @!attribute [rw] max_iterations
     #   The maximum number of iterations the agent loop can execute per
     #   invocation.
@@ -3985,6 +3989,7 @@ module Aws::BedrockAgentCoreControl
       :allowed_tools,
       :memory,
       :truncation,
+      :hooks,
       :max_iterations,
       :max_tokens,
       :timeout_seconds,
@@ -11403,6 +11408,10 @@ module Aws::BedrockAgentCoreControl
     #   memory.
     #   @return [Types::HarnessMemoryConfiguration]
     #
+    # @!attribute [rw] hooks
+    #   The lifecycle hooks configured for the harness.
+    #   @return [Array<Types::HarnessHook>]
+    #
     # @!attribute [rw] max_iterations
     #   The maximum number of iterations in the agent loop allowed before
     #   exiting per invocation.
@@ -11443,11 +11452,50 @@ module Aws::BedrockAgentCoreControl
       :environment_variables,
       :authorizer_configuration,
       :memory,
+      :hooks,
       :max_iterations,
       :max_tokens,
       :timeout_seconds,
       :failure_reason)
       SENSITIVE = [:environment_variables]
+      include Aws::Structure
+    end
+
+    # The configuration for a hook that runs after an invocation completes.
+    #
+    # @!attribute [rw] name
+    #   The name of the hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target that receives the hook event.
+    #   @return [Types::HarnessHookTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessAfterInvocationHook AWS API Documentation
+    #
+    class HarnessAfterInvocationHook < Struct.new(
+      :name,
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a hook that runs after a tool call completes.
+    #
+    # @!attribute [rw] name
+    #   The name of the hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target that receives the hook event.
+    #   @return [Types::HarnessHookTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessAfterToolCallHook AWS API Documentation
+    #
+    class HarnessAfterToolCallHook < Struct.new(
+      :name,
+      :target)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -11661,6 +11709,44 @@ module Aws::BedrockAgentCoreControl
       :top_p,
       :api_format,
       :additional_params)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a hook that runs before an invocation begins.
+    #
+    # @!attribute [rw] name
+    #   The name of the hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target that receives the hook event.
+    #   @return [Types::HarnessHookTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessBeforeInvocationHook AWS API Documentation
+    #
+    class HarnessBeforeInvocationHook < Struct.new(
+      :name,
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a hook that runs before the agent calls a tool.
+    #
+    # @!attribute [rw] name
+    #   The name of the hook.
+    #   @return [String]
+    #
+    # @!attribute [rw] target
+    #   The target that receives the hook event.
+    #   @return [Types::HarnessHookTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessBeforeToolCallHook AWS API Documentation
+    #
+    class HarnessBeforeToolCallHook < Struct.new(
+      :name,
+      :target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11890,6 +11976,140 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A lifecycle hook configuration. Specify one hook type.
+    #
+    # @note HarnessHook is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note HarnessHook is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of HarnessHook corresponding to the set member.
+    #
+    # @!attribute [rw] before_invocation
+    #   A hook that runs before an invocation begins.
+    #   @return [Types::HarnessBeforeInvocationHook]
+    #
+    # @!attribute [rw] after_invocation
+    #   A hook that runs after an invocation completes.
+    #   @return [Types::HarnessAfterInvocationHook]
+    #
+    # @!attribute [rw] before_tool_call
+    #   A hook that runs before the agent calls a tool.
+    #   @return [Types::HarnessBeforeToolCallHook]
+    #
+    # @!attribute [rw] after_tool_call
+    #   A hook that runs after a tool call completes.
+    #   @return [Types::HarnessAfterToolCallHook]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessHook AWS API Documentation
+    #
+    class HarnessHook < Struct.new(
+      :before_invocation,
+      :after_invocation,
+      :before_tool_call,
+      :after_tool_call,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class BeforeInvocation < HarnessHook; end
+      class AfterInvocation < HarnessHook; end
+      class BeforeToolCall < HarnessHook; end
+      class AfterToolCall < HarnessHook; end
+      class Unknown < HarnessHook; end
+    end
+
+    # The configuration for an Amazon EventBridge hook target.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Amazon EventBridge event bus to send hook events to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessHookEventBridgeTarget AWS API Documentation
+    #
+    class HarnessHookEventBridgeTarget < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an AWS Lambda hook target.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Lambda function to invoke.
+    #   @return [String]
+    #
+    # @!attribute [rw] timeout_seconds
+    #   The maximum number of seconds to wait for the Lambda function
+    #   response. The default is 60 seconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failure_mode
+    #   The behavior when the Lambda function times out, returns an error,
+    #   or returns an invalid response. The default is `DENY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessHookLambdaTarget AWS API Documentation
+    #
+    class HarnessHookLambdaTarget < Struct.new(
+      :arn,
+      :timeout_seconds,
+      :failure_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for an Amazon SNS hook target.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the Amazon SNS topic to publish hook events to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessHookSnsTarget AWS API Documentation
+    #
+    class HarnessHookSnsTarget < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The target that receives lifecycle hook events. Specify one target
+    # type.
+    #
+    # @note HarnessHookTarget is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note HarnessHookTarget is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of HarnessHookTarget corresponding to the set member.
+    #
+    # @!attribute [rw] lambda
+    #   A Lambda hook target that invokes an AWS Lambda function
+    #   synchronously and waits for its response.
+    #   @return [Types::HarnessHookLambdaTarget]
+    #
+    # @!attribute [rw] sns
+    #   An Amazon SNS hook target that publishes the hook event without
+    #   waiting for a response.
+    #   @return [Types::HarnessHookSnsTarget]
+    #
+    # @!attribute [rw] event_bridge
+    #   An Amazon EventBridge hook target that sends the hook event without
+    #   waiting for a response.
+    #   @return [Types::HarnessHookEventBridgeTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/HarnessHookTarget AWS API Documentation
+    #
+    class HarnessHookTarget < Struct.new(
+      :lambda,
+      :sns,
+      :event_bridge,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Lambda < HarnessHookTarget; end
+      class Sns < HarnessHookTarget; end
+      class EventBridge < HarnessHookTarget; end
+      class Unknown < HarnessHookTarget; end
+    end
+
     # Configuration for an inline function tool. When the agent calls this
     # tool, the tool call is returned to the caller for external execution.
     #
@@ -12078,6 +12298,10 @@ module Aws::BedrockAgentCoreControl
     #   The ARN of your OpenAI API key on AgentCore Identity.
     #   @return [String]
     #
+    # @!attribute [rw] api_base
+    #   Optional custom endpoint URL for an OpenAI-compatible endpoint.
+    #   @return [String]
+    #
     # @!attribute [rw] max_tokens
     #   The maximum number of tokens to allow in the generated response per
     #   model call.
@@ -12105,12 +12329,13 @@ module Aws::BedrockAgentCoreControl
     class HarnessOpenAiModelConfig < Struct.new(
       :model_id,
       :api_key_arn,
+      :api_base,
       :max_tokens,
       :temperature,
       :top_p,
       :api_format,
       :additional_params)
-      SENSITIVE = []
+      SENSITIVE = [:api_base]
       include Aws::Structure
     end
 
@@ -21892,6 +22117,12 @@ module Aws::BedrockAgentCoreControl
     #   not specified, the existing value is retained.
     #   @return [Types::HarnessTruncationConfiguration]
     #
+    # @!attribute [rw] hooks
+    #   The lifecycle hooks to run at defined points in the agent loop. If
+    #   specified, this replaces all existing hooks. If not specified, the
+    #   existing hooks are retained.
+    #   @return [Array<Types::HarnessHook>]
+    #
     # @!attribute [rw] max_iterations
     #   The maximum number of iterations the agent loop can execute per
     #   invocation. If not specified, the existing value is retained.
@@ -21925,6 +22156,7 @@ module Aws::BedrockAgentCoreControl
       :allowed_tools,
       :memory,
       :truncation,
+      :hooks,
       :max_iterations,
       :max_tokens,
       :timeout_seconds)

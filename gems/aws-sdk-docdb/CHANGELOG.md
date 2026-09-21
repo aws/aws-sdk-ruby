@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2026-09-21)
+------------------
+
+* Feature - Add support for CopyTagsToSnapshot field in CreateDbCluster, ModifyDbCluster, RestoreDbClusterFromSnapshot and RestoreDbClusterToPointInTime for DocumentDB.
+
 1.109.0 (2026-09-11)
 ------------------
 

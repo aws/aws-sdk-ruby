@@ -207,8 +207,8 @@ module Aws::DocDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
-    # [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    # [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html
+    # [2]: https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html
     #
     # @!attribute [rw] ca_identifier
     #   The CA identifier of the CA certificate used for the DB instance's
@@ -698,8 +698,8 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html
-    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/event-auditing.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/devguide/profiling.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] deletion_protection
@@ -782,8 +782,13 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
     #   @return [String]
+    #
+    # @!attribute [rw] copy_tags_to_snapshot
+    #   Specifies whether to copy all tags from the DB cluster to snapshots
+    #   of the DB cluster. The default is not to copy them.
+    #   @return [Boolean]
     #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
@@ -818,6 +823,7 @@ module Aws::DocDB
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :network_type,
+      :copy_tags_to_snapshot,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -1033,7 +1039,7 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
@@ -1059,8 +1065,8 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
-    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/CreateDBInstanceMessage AWS API Documentation
@@ -1503,8 +1509,13 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
     #   @return [String]
+    #
+    # @!attribute [rw] copy_tags_to_snapshot
+    #   Specifies whether to copy all tags from the DB cluster to snapshots
+    #   of the DB cluster. The default is not to copy them.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DBCluster AWS API Documentation
     #
@@ -1545,7 +1556,8 @@ module Aws::DocDB
       :storage_type,
       :serverless_v2_scaling_configuration,
       :master_user_secret,
-      :network_type)
+      :network_type,
+      :copy_tags_to_snapshot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2010,8 +2022,8 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
-    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] supports_certificate_rotation_without_restart
@@ -4551,8 +4563,13 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
     #   @return [String]
+    #
+    # @!attribute [rw] copy_tags_to_snapshot
+    #   Specifies whether to copy all tags from the DB cluster to snapshots
+    #   of the DB cluster. The default is not to copy them.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
@@ -4576,7 +4593,8 @@ module Aws::DocDB
       :manage_master_user_password,
       :master_user_secret_kms_key_id,
       :rotate_master_user_password,
-      :network_type)
+      :network_type,
+      :copy_tags_to_snapshot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4787,7 +4805,7 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/performance-insights.html
     #   @return [Boolean]
     #
     # @!attribute [rw] performance_insights_kms_key_id
@@ -4821,8 +4839,8 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/ca_cert_rotation.html
-    #   [2]: https://docs.aws.amazon.com/documentdb/latest/developerguide/security.encryption.ssl.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/ca_cert_rotation.html
+    #   [2]: https://docs.aws.amazon.com/documentdb/latest/devguide/security.encryption.ssl.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ModifyDBInstanceMessage AWS API Documentation
@@ -5687,8 +5705,14 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
     #   @return [String]
+    #
+    # @!attribute [rw] copy_tags_to_snapshot
+    #   Specifies whether to copy all tags from the restored DB cluster to
+    #   snapshots of the restored DB cluster. The default is not to copy
+    #   them.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
@@ -5708,7 +5732,8 @@ module Aws::DocDB
       :db_cluster_parameter_group_name,
       :serverless_v2_scaling_configuration,
       :storage_type,
-      :network_type)
+      :network_type,
+      :copy_tags_to_snapshot)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5895,8 +5920,14 @@ module Aws::DocDB
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/documentdb/latest/developerguide/vpc-clusters.html
+    #   [1]: https://docs.aws.amazon.com/documentdb/latest/devguide/vpc-clusters.html
     #   @return [String]
+    #
+    # @!attribute [rw] copy_tags_to_snapshot
+    #   Specifies whether to copy all tags from the restored DB cluster to
+    #   snapshots of the restored DB cluster. The default is not to copy
+    #   them.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
@@ -5915,7 +5946,8 @@ module Aws::DocDB
       :deletion_protection,
       :serverless_v2_scaling_configuration,
       :storage_type,
-      :network_type)
+      :network_type,
+      :copy_tags_to_snapshot)
       SENSITIVE = []
       include Aws::Structure
     end

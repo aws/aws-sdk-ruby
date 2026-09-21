@@ -591,6 +591,8 @@ module Aws::BedrockAgentCoreControl
     GoogleOauth2ProviderConfigInput = Shapes::StructureShape.new(name: 'GoogleOauth2ProviderConfigInput')
     GoogleOauth2ProviderConfigOutput = Shapes::StructureShape.new(name: 'GoogleOauth2ProviderConfigOutput')
     Harness = Shapes::StructureShape.new(name: 'Harness')
+    HarnessAfterInvocationHook = Shapes::StructureShape.new(name: 'HarnessAfterInvocationHook')
+    HarnessAfterToolCallHook = Shapes::StructureShape.new(name: 'HarnessAfterToolCallHook')
     HarnessAgentCoreBrowserConfig = Shapes::StructureShape.new(name: 'HarnessAgentCoreBrowserConfig')
     HarnessAgentCoreCodeInterpreterConfig = Shapes::StructureShape.new(name: 'HarnessAgentCoreCodeInterpreterConfig')
     HarnessAgentCoreGatewayConfig = Shapes::StructureShape.new(name: 'HarnessAgentCoreGatewayConfig')
@@ -606,6 +608,8 @@ module Aws::BedrockAgentCoreControl
     HarnessAwsSkillPaths = Shapes::ListShape.new(name: 'HarnessAwsSkillPaths')
     HarnessBedrockApiFormat = Shapes::StringShape.new(name: 'HarnessBedrockApiFormat')
     HarnessBedrockModelConfig = Shapes::StructureShape.new(name: 'HarnessBedrockModelConfig')
+    HarnessBeforeInvocationHook = Shapes::StructureShape.new(name: 'HarnessBeforeInvocationHook')
+    HarnessBeforeToolCallHook = Shapes::StructureShape.new(name: 'HarnessBeforeToolCallHook')
     HarnessBrowserArn = Shapes::StringShape.new(name: 'HarnessBrowserArn')
     HarnessCodeInterpreterArn = Shapes::StringShape.new(name: 'HarnessCodeInterpreterArn')
     HarnessDisabledMemoryConfiguration = Shapes::StructureShape.new(name: 'HarnessDisabledMemoryConfiguration')
@@ -618,11 +622,22 @@ module Aws::BedrockAgentCoreControl
     HarnessEnvironmentArtifact = Shapes::UnionShape.new(name: 'HarnessEnvironmentArtifact')
     HarnessEnvironmentProvider = Shapes::UnionShape.new(name: 'HarnessEnvironmentProvider')
     HarnessEnvironmentProviderRequest = Shapes::UnionShape.new(name: 'HarnessEnvironmentProviderRequest')
+    HarnessEventBridgeBusArn = Shapes::StringShape.new(name: 'HarnessEventBridgeBusArn')
     HarnessGatewayOutboundAuth = Shapes::UnionShape.new(name: 'HarnessGatewayOutboundAuth')
     HarnessGeminiModelConfig = Shapes::StructureShape.new(name: 'HarnessGeminiModelConfig')
+    HarnessHook = Shapes::UnionShape.new(name: 'HarnessHook')
+    HarnessHookEventBridgeTarget = Shapes::StructureShape.new(name: 'HarnessHookEventBridgeTarget')
+    HarnessHookFailureMode = Shapes::StringShape.new(name: 'HarnessHookFailureMode')
+    HarnessHookLambdaTarget = Shapes::StructureShape.new(name: 'HarnessHookLambdaTarget')
+    HarnessHookLambdaTargetTimeoutSecondsInteger = Shapes::IntegerShape.new(name: 'HarnessHookLambdaTargetTimeoutSecondsInteger')
+    HarnessHookName = Shapes::StringShape.new(name: 'HarnessHookName')
+    HarnessHookSnsTarget = Shapes::StructureShape.new(name: 'HarnessHookSnsTarget')
+    HarnessHookTarget = Shapes::UnionShape.new(name: 'HarnessHookTarget')
+    HarnessHooks = Shapes::ListShape.new(name: 'HarnessHooks')
     HarnessId = Shapes::StringShape.new(name: 'HarnessId')
     HarnessInlineFunctionConfig = Shapes::StructureShape.new(name: 'HarnessInlineFunctionConfig')
     HarnessInlineFunctionDescription = Shapes::StringShape.new(name: 'HarnessInlineFunctionDescription')
+    HarnessLambdaFunctionArn = Shapes::StringShape.new(name: 'HarnessLambdaFunctionArn')
     HarnessLiteLlmApiBase = Shapes::StringShape.new(name: 'HarnessLiteLlmApiBase')
     HarnessLiteLlmModelConfig = Shapes::StructureShape.new(name: 'HarnessLiteLlmModelConfig')
     HarnessManagedMemoryConfiguration = Shapes::StructureShape.new(name: 'HarnessManagedMemoryConfiguration')
@@ -632,6 +647,7 @@ module Aws::BedrockAgentCoreControl
     HarnessMemoryConfiguration = Shapes::UnionShape.new(name: 'HarnessMemoryConfiguration')
     HarnessModelConfiguration = Shapes::UnionShape.new(name: 'HarnessModelConfiguration')
     HarnessName = Shapes::StringShape.new(name: 'HarnessName')
+    HarnessOpenAiApiBase = Shapes::StringShape.new(name: 'HarnessOpenAiApiBase')
     HarnessOpenAiApiFormat = Shapes::StringShape.new(name: 'HarnessOpenAiApiFormat')
     HarnessOpenAiModelConfig = Shapes::StructureShape.new(name: 'HarnessOpenAiModelConfig')
     HarnessRemoteMcpConfig = Shapes::StructureShape.new(name: 'HarnessRemoteMcpConfig')
@@ -646,6 +662,7 @@ module Aws::BedrockAgentCoreControl
     HarnessSkillS3Uri = Shapes::StringShape.new(name: 'HarnessSkillS3Uri')
     HarnessSkills = Shapes::ListShape.new(name: 'HarnessSkills')
     HarnessSlidingWindowConfiguration = Shapes::StructureShape.new(name: 'HarnessSlidingWindowConfiguration')
+    HarnessSnsTopicArn = Shapes::StringShape.new(name: 'HarnessSnsTopicArn')
     HarnessStatus = Shapes::StringShape.new(name: 'HarnessStatus')
     HarnessSummaries = Shapes::ListShape.new(name: 'HarnessSummaries')
     HarnessSummarizationConfiguration = Shapes::StructureShape.new(name: 'HarnessSummarizationConfiguration')
@@ -2235,6 +2252,7 @@ module Aws::BedrockAgentCoreControl
     CreateHarnessRequest.add_member(:allowed_tools, Shapes::ShapeRef.new(shape: HarnessAllowedTools, location_name: "allowedTools"))
     CreateHarnessRequest.add_member(:memory, Shapes::ShapeRef.new(shape: HarnessMemoryConfiguration, location_name: "memory"))
     CreateHarnessRequest.add_member(:truncation, Shapes::ShapeRef.new(shape: HarnessTruncationConfiguration, location_name: "truncation"))
+    CreateHarnessRequest.add_member(:hooks, Shapes::ShapeRef.new(shape: HarnessHooks, location_name: "hooks"))
     CreateHarnessRequest.add_member(:max_iterations, Shapes::ShapeRef.new(shape: Integer, location_name: "maxIterations"))
     CreateHarnessRequest.add_member(:max_tokens, Shapes::ShapeRef.new(shape: Integer, location_name: "maxTokens"))
     CreateHarnessRequest.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "timeoutSeconds"))
@@ -3753,11 +3771,20 @@ module Aws::BedrockAgentCoreControl
     Harness.add_member(:environment_variables, Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: "environmentVariables"))
     Harness.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
     Harness.add_member(:memory, Shapes::ShapeRef.new(shape: HarnessMemoryConfiguration, location_name: "memory"))
+    Harness.add_member(:hooks, Shapes::ShapeRef.new(shape: HarnessHooks, location_name: "hooks"))
     Harness.add_member(:max_iterations, Shapes::ShapeRef.new(shape: Integer, location_name: "maxIterations"))
     Harness.add_member(:max_tokens, Shapes::ShapeRef.new(shape: Integer, location_name: "maxTokens"))
     Harness.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "timeoutSeconds"))
     Harness.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
     Harness.struct_class = Types::Harness
+
+    HarnessAfterInvocationHook.add_member(:name, Shapes::ShapeRef.new(shape: HarnessHookName, required: true, location_name: "name"))
+    HarnessAfterInvocationHook.add_member(:target, Shapes::ShapeRef.new(shape: HarnessHookTarget, required: true, location_name: "target"))
+    HarnessAfterInvocationHook.struct_class = Types::HarnessAfterInvocationHook
+
+    HarnessAfterToolCallHook.add_member(:name, Shapes::ShapeRef.new(shape: HarnessHookName, required: true, location_name: "name"))
+    HarnessAfterToolCallHook.add_member(:target, Shapes::ShapeRef.new(shape: HarnessHookTarget, required: true, location_name: "target"))
+    HarnessAfterToolCallHook.struct_class = Types::HarnessAfterToolCallHook
 
     HarnessAgentCoreBrowserConfig.add_member(:browser_arn, Shapes::ShapeRef.new(shape: HarnessBrowserArn, location_name: "browserArn"))
     HarnessAgentCoreBrowserConfig.struct_class = Types::HarnessAgentCoreBrowserConfig
@@ -3807,6 +3834,14 @@ module Aws::BedrockAgentCoreControl
     HarnessBedrockModelConfig.add_member(:api_format, Shapes::ShapeRef.new(shape: HarnessBedrockApiFormat, location_name: "apiFormat"))
     HarnessBedrockModelConfig.add_member(:additional_params, Shapes::ShapeRef.new(shape: Document, location_name: "additionalParams"))
     HarnessBedrockModelConfig.struct_class = Types::HarnessBedrockModelConfig
+
+    HarnessBeforeInvocationHook.add_member(:name, Shapes::ShapeRef.new(shape: HarnessHookName, required: true, location_name: "name"))
+    HarnessBeforeInvocationHook.add_member(:target, Shapes::ShapeRef.new(shape: HarnessHookTarget, required: true, location_name: "target"))
+    HarnessBeforeInvocationHook.struct_class = Types::HarnessBeforeInvocationHook
+
+    HarnessBeforeToolCallHook.add_member(:name, Shapes::ShapeRef.new(shape: HarnessHookName, required: true, location_name: "name"))
+    HarnessBeforeToolCallHook.add_member(:target, Shapes::ShapeRef.new(shape: HarnessHookTarget, required: true, location_name: "target"))
+    HarnessBeforeToolCallHook.struct_class = Types::HarnessBeforeToolCallHook
 
     HarnessDisabledMemoryConfiguration.struct_class = Types::HarnessDisabledMemoryConfiguration
 
@@ -3862,6 +3897,41 @@ module Aws::BedrockAgentCoreControl
     HarnessGeminiModelConfig.add_member(:additional_params, Shapes::ShapeRef.new(shape: Document, location_name: "additionalParams"))
     HarnessGeminiModelConfig.struct_class = Types::HarnessGeminiModelConfig
 
+    HarnessHook.add_member(:before_invocation, Shapes::ShapeRef.new(shape: HarnessBeforeInvocationHook, location_name: "beforeInvocation"))
+    HarnessHook.add_member(:after_invocation, Shapes::ShapeRef.new(shape: HarnessAfterInvocationHook, location_name: "afterInvocation"))
+    HarnessHook.add_member(:before_tool_call, Shapes::ShapeRef.new(shape: HarnessBeforeToolCallHook, location_name: "beforeToolCall"))
+    HarnessHook.add_member(:after_tool_call, Shapes::ShapeRef.new(shape: HarnessAfterToolCallHook, location_name: "afterToolCall"))
+    HarnessHook.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    HarnessHook.add_member_subclass(:before_invocation, Types::HarnessHook::BeforeInvocation)
+    HarnessHook.add_member_subclass(:after_invocation, Types::HarnessHook::AfterInvocation)
+    HarnessHook.add_member_subclass(:before_tool_call, Types::HarnessHook::BeforeToolCall)
+    HarnessHook.add_member_subclass(:after_tool_call, Types::HarnessHook::AfterToolCall)
+    HarnessHook.add_member_subclass(:unknown, Types::HarnessHook::Unknown)
+    HarnessHook.struct_class = Types::HarnessHook
+
+    HarnessHookEventBridgeTarget.add_member(:arn, Shapes::ShapeRef.new(shape: HarnessEventBridgeBusArn, required: true, location_name: "arn"))
+    HarnessHookEventBridgeTarget.struct_class = Types::HarnessHookEventBridgeTarget
+
+    HarnessHookLambdaTarget.add_member(:arn, Shapes::ShapeRef.new(shape: HarnessLambdaFunctionArn, required: true, location_name: "arn"))
+    HarnessHookLambdaTarget.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: HarnessHookLambdaTargetTimeoutSecondsInteger, location_name: "timeoutSeconds"))
+    HarnessHookLambdaTarget.add_member(:failure_mode, Shapes::ShapeRef.new(shape: HarnessHookFailureMode, location_name: "failureMode"))
+    HarnessHookLambdaTarget.struct_class = Types::HarnessHookLambdaTarget
+
+    HarnessHookSnsTarget.add_member(:arn, Shapes::ShapeRef.new(shape: HarnessSnsTopicArn, required: true, location_name: "arn"))
+    HarnessHookSnsTarget.struct_class = Types::HarnessHookSnsTarget
+
+    HarnessHookTarget.add_member(:lambda, Shapes::ShapeRef.new(shape: HarnessHookLambdaTarget, location_name: "lambda"))
+    HarnessHookTarget.add_member(:sns, Shapes::ShapeRef.new(shape: HarnessHookSnsTarget, location_name: "sns"))
+    HarnessHookTarget.add_member(:event_bridge, Shapes::ShapeRef.new(shape: HarnessHookEventBridgeTarget, location_name: "eventBridge"))
+    HarnessHookTarget.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    HarnessHookTarget.add_member_subclass(:lambda, Types::HarnessHookTarget::Lambda)
+    HarnessHookTarget.add_member_subclass(:sns, Types::HarnessHookTarget::Sns)
+    HarnessHookTarget.add_member_subclass(:event_bridge, Types::HarnessHookTarget::EventBridge)
+    HarnessHookTarget.add_member_subclass(:unknown, Types::HarnessHookTarget::Unknown)
+    HarnessHookTarget.struct_class = Types::HarnessHookTarget
+
+    HarnessHooks.member = Shapes::ShapeRef.new(shape: HarnessHook)
+
     HarnessInlineFunctionConfig.add_member(:description, Shapes::ShapeRef.new(shape: HarnessInlineFunctionDescription, required: true, location_name: "description"))
     HarnessInlineFunctionConfig.add_member(:input_schema, Shapes::ShapeRef.new(shape: SensitiveJson, required: true, location_name: "inputSchema"))
     HarnessInlineFunctionConfig.struct_class = Types::HarnessInlineFunctionConfig
@@ -3907,6 +3977,7 @@ module Aws::BedrockAgentCoreControl
 
     HarnessOpenAiModelConfig.add_member(:model_id, Shapes::ShapeRef.new(shape: ModelId, required: true, location_name: "modelId"))
     HarnessOpenAiModelConfig.add_member(:api_key_arn, Shapes::ShapeRef.new(shape: ApiKeyArn, required: true, location_name: "apiKeyArn"))
+    HarnessOpenAiModelConfig.add_member(:api_base, Shapes::ShapeRef.new(shape: HarnessOpenAiApiBase, location_name: "apiBase"))
     HarnessOpenAiModelConfig.add_member(:max_tokens, Shapes::ShapeRef.new(shape: MaxTokens, location_name: "maxTokens"))
     HarnessOpenAiModelConfig.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
     HarnessOpenAiModelConfig.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
@@ -6029,6 +6100,7 @@ module Aws::BedrockAgentCoreControl
     UpdateHarnessRequest.add_member(:allowed_tools, Shapes::ShapeRef.new(shape: HarnessAllowedTools, location_name: "allowedTools"))
     UpdateHarnessRequest.add_member(:memory, Shapes::ShapeRef.new(shape: UpdatedHarnessMemoryConfiguration, location_name: "memory"))
     UpdateHarnessRequest.add_member(:truncation, Shapes::ShapeRef.new(shape: HarnessTruncationConfiguration, location_name: "truncation"))
+    UpdateHarnessRequest.add_member(:hooks, Shapes::ShapeRef.new(shape: HarnessHooks, location_name: "hooks"))
     UpdateHarnessRequest.add_member(:max_iterations, Shapes::ShapeRef.new(shape: Integer, location_name: "maxIterations"))
     UpdateHarnessRequest.add_member(:max_tokens, Shapes::ShapeRef.new(shape: Integer, location_name: "maxTokens"))
     UpdateHarnessRequest.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "timeoutSeconds"))
@@ -8828,6 +8900,7 @@ module Aws::BedrockAgentCoreControl
         o.http_request_uri = "/harnesses/{harnessId}"
         o.input = Shapes::ShapeRef.new(shape: UpdateHarnessRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateHarnessResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

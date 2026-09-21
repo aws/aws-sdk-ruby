@@ -315,6 +315,12 @@ module Aws::BedrockAgentCore
     HarnessEndpointName = Shapes::StringShape.new(name: 'HarnessEndpointName')
     HarnessGatewayOutboundAuth = Shapes::UnionShape.new(name: 'HarnessGatewayOutboundAuth')
     HarnessGeminiModelConfig = Shapes::StructureShape.new(name: 'HarnessGeminiModelConfig')
+    HarnessHookDecision = Shapes::StringShape.new(name: 'HarnessHookDecision')
+    HarnessHookEvent = Shapes::StructureShape.new(name: 'HarnessHookEvent')
+    HarnessHookEventId = Shapes::StringShape.new(name: 'HarnessHookEventId')
+    HarnessHookEventReasonString = Shapes::StringShape.new(name: 'HarnessHookEventReasonString')
+    HarnessHookEventType = Shapes::StringShape.new(name: 'HarnessHookEventType')
+    HarnessHookName = Shapes::StringShape.new(name: 'HarnessHookName')
     HarnessInlineFunctionConfig = Shapes::StructureShape.new(name: 'HarnessInlineFunctionConfig')
     HarnessInlineFunctionDescription = Shapes::StringShape.new(name: 'HarnessInlineFunctionDescription')
     HarnessLiteLlmApiBase = Shapes::StringShape.new(name: 'HarnessLiteLlmApiBase')
@@ -325,6 +331,7 @@ module Aws::BedrockAgentCore
     HarnessMessages = Shapes::ListShape.new(name: 'HarnessMessages')
     HarnessMetadataEvent = Shapes::StructureShape.new(name: 'HarnessMetadataEvent')
     HarnessModelConfiguration = Shapes::UnionShape.new(name: 'HarnessModelConfiguration')
+    HarnessOpenAiApiBase = Shapes::StringShape.new(name: 'HarnessOpenAiApiBase')
     HarnessOpenAiApiFormat = Shapes::StringShape.new(name: 'HarnessOpenAiApiFormat')
     HarnessOpenAiModelConfig = Shapes::StructureShape.new(name: 'HarnessOpenAiModelConfig')
     HarnessReasoningContentBlock = Shapes::UnionShape.new(name: 'HarnessReasoningContentBlock')
@@ -1905,6 +1912,13 @@ module Aws::BedrockAgentCore
     HarnessGeminiModelConfig.add_member(:additional_params, Shapes::ShapeRef.new(shape: Document, location_name: "additionalParams"))
     HarnessGeminiModelConfig.struct_class = Types::HarnessGeminiModelConfig
 
+    HarnessHookEvent.add_member(:hook_event_id, Shapes::ShapeRef.new(shape: HarnessHookEventId, required: true, location_name: "hookEventId"))
+    HarnessHookEvent.add_member(:name, Shapes::ShapeRef.new(shape: HarnessHookName, required: true, location_name: "name"))
+    HarnessHookEvent.add_member(:type, Shapes::ShapeRef.new(shape: HarnessHookEventType, required: true, location_name: "type"))
+    HarnessHookEvent.add_member(:decision, Shapes::ShapeRef.new(shape: HarnessHookDecision, location_name: "decision"))
+    HarnessHookEvent.add_member(:reason, Shapes::ShapeRef.new(shape: HarnessHookEventReasonString, location_name: "reason"))
+    HarnessHookEvent.struct_class = Types::HarnessHookEvent
+
     HarnessInlineFunctionConfig.add_member(:description, Shapes::ShapeRef.new(shape: HarnessInlineFunctionDescription, required: true, location_name: "description"))
     HarnessInlineFunctionConfig.add_member(:input_schema, Shapes::ShapeRef.new(shape: SensitiveJson, required: true, location_name: "inputSchema"))
     HarnessInlineFunctionConfig.struct_class = Types::HarnessInlineFunctionConfig
@@ -1948,6 +1962,7 @@ module Aws::BedrockAgentCore
 
     HarnessOpenAiModelConfig.add_member(:model_id, Shapes::ShapeRef.new(shape: ModelId, required: true, location_name: "modelId"))
     HarnessOpenAiModelConfig.add_member(:api_key_arn, Shapes::ShapeRef.new(shape: ApiKeyArn, required: true, location_name: "apiKeyArn"))
+    HarnessOpenAiModelConfig.add_member(:api_base, Shapes::ShapeRef.new(shape: HarnessOpenAiApiBase, location_name: "apiBase"))
     HarnessOpenAiModelConfig.add_member(:max_tokens, Shapes::ShapeRef.new(shape: MaxTokens, location_name: "maxTokens"))
     HarnessOpenAiModelConfig.add_member(:temperature, Shapes::ShapeRef.new(shape: Temperature, location_name: "temperature"))
     HarnessOpenAiModelConfig.add_member(:top_p, Shapes::ShapeRef.new(shape: TopP, location_name: "topP"))
@@ -2293,6 +2308,7 @@ module Aws::BedrockAgentCore
     InvokeHarnessStreamOutput.add_member(:internal_server_exception, Shapes::ShapeRef.new(shape: InternalServerException, location_name: "internalServerException"))
     InvokeHarnessStreamOutput.add_member(:validation_exception, Shapes::ShapeRef.new(shape: ValidationException, location_name: "validationException"))
     InvokeHarnessStreamOutput.add_member(:runtime_client_error, Shapes::ShapeRef.new(shape: RuntimeClientError, location_name: "runtimeClientError"))
+    InvokeHarnessStreamOutput.add_member(:hook_event, Shapes::ShapeRef.new(shape: HarnessHookEvent, event: true, location_name: "hookEvent"))
     InvokeHarnessStreamOutput.struct_class = Types::InvokeHarnessStreamOutput
 
     KeyList.member = Shapes::ShapeRef.new(shape: String)

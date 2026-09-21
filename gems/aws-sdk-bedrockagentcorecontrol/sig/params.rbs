@@ -583,6 +583,7 @@ module Aws
       type harness_open_ai_model_config = {
       model_id: ::String,
       api_key_arn: ::String,
+      api_base: ::String?,
       max_tokens: ::Integer?,
       temperature: ::Float?,
       top_p: ::Float?,
@@ -721,6 +722,47 @@ module Aws
       type harness_truncation_configuration = {
       strategy: ("sliding_window" | "summarization" | "none"),
       config: Params::harness_truncation_strategy_configuration?
+    }
+
+      type harness_hook_target = {
+      lambda: {
+        arn: ::String,
+        timeout_seconds: ::Integer?,
+        failure_mode: ("allow" | "deny")?
+      }?,
+      sns: {
+        arn: ::String
+      }?,
+      event_bridge: {
+        arn: ::String
+      }?
+    }
+
+      type harness_before_invocation_hook = {
+      name: ::String,
+      target: Params::harness_hook_target
+    }
+
+      type harness_after_invocation_hook = {
+      name: ::String,
+      target: Params::harness_hook_target
+    }
+
+      type harness_before_tool_call_hook = {
+      name: ::String,
+      target: Params::harness_hook_target
+    }
+
+      type harness_after_tool_call_hook = {
+      name: ::String,
+      target: Params::harness_hook_target
+    }
+
+      type harness_hook = {
+      before_invocation: Params::harness_before_invocation_hook?,
+      after_invocation: Params::harness_after_invocation_hook?,
+      before_tool_call: Params::harness_before_tool_call_hook?,
+      after_tool_call: Params::harness_after_tool_call_hook?
     }
 
       type memory_record_schema = {

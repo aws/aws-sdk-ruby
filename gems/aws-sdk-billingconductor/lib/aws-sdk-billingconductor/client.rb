@@ -1246,6 +1246,41 @@ module Aws::BillingConductor
       req.send_request(options)
     end
 
+    # Retrieves the auto billing group creation preference for a billing
+    # transfer.
+    #
+    # @option params [required, String] :responsibility_transfer_arn
+    #   The Amazon Resource Name (ARN) of the billing transfer whose
+    #   preference you want to retrieve.
+    #
+    # @return [Types::GetBillingTransferPreferenceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetBillingTransferPreferenceOutput#responsibility_transfer_arn #responsibility_transfer_arn} => String
+    #   * {Types::GetBillingTransferPreferenceOutput#auto_billing_transfer_billing_group_creation #auto_billing_transfer_billing_group_creation} => Types::AutoTransferBillingGroupCreationPreference
+    #   * {Types::GetBillingTransferPreferenceOutput#last_modified_time #last_modified_time} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_billing_transfer_preference({
+    #     responsibility_transfer_arn: "ResponsibilityTransferArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.responsibility_transfer_arn #=> String
+    #   resp.auto_billing_transfer_billing_group_creation.enabled #=> Boolean
+    #   resp.auto_billing_transfer_billing_group_creation.pricing_plan_arn #=> String
+    #   resp.last_modified_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/GetBillingTransferPreference AWS API Documentation
+    #
+    # @overload get_billing_transfer_preference(params = {})
+    # @param [Hash] params ({})
+    def get_billing_transfer_preference(params = {}, options = {})
+      req = build_request(:get_billing_transfer_preference, params)
+      req.send_request(options)
+    end
+
     # This is a paginated call to list linked accounts that are linked to
     # the payer account for the specified time period. If no information is
     # provided, the current billing period is used. The response will
@@ -2040,6 +2075,69 @@ module Aws::BillingConductor
       req.send_request(options)
     end
 
+    # Sets the auto billing group creation preference for a billing
+    # transfer. When the preference is enabled, Billing Conductor
+    # automatically creates an indirect billing transfer billing group in
+    # your account, with the pricing plan that you specify, for each account
+    # that transfers its bill to the bill source account of this billing
+    # transfer. The preference applies only to billing groups that are
+    # created after you enable it.
+    #
+    # Enabling the preference requires the `iam:CreateServiceLinkedRole`
+    # permission. While a pricing plan is specified in an enabled
+    # preference, you can't delete that pricing plan.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you specify to ensure
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes no more than one time. With an idempotent request, if the
+    #   original request completes successfully, any subsequent retries
+    #   complete successfully without performing any further actions.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :responsibility_transfer_arn
+    #   The Amazon Resource Name (ARN) of the billing transfer whose
+    #   preference you want to set.
+    #
+    # @option params [required, Types::AutoTransferBillingGroupCreationPreference] :auto_billing_transfer_billing_group_creation
+    #   The auto billing group creation preference to set for the billing
+    #   transfer.
+    #
+    # @return [Types::UpdateBillingTransferPreferenceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBillingTransferPreferenceOutput#responsibility_transfer_arn #responsibility_transfer_arn} => String
+    #   * {Types::UpdateBillingTransferPreferenceOutput#auto_billing_transfer_billing_group_creation #auto_billing_transfer_billing_group_creation} => Types::AutoTransferBillingGroupCreationPreference
+    #   * {Types::UpdateBillingTransferPreferenceOutput#last_modified_time #last_modified_time} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_billing_transfer_preference({
+    #     client_token: "ClientToken",
+    #     responsibility_transfer_arn: "ResponsibilityTransferArn", # required
+    #     auto_billing_transfer_billing_group_creation: { # required
+    #       enabled: false, # required
+    #       pricing_plan_arn: "PricingPlanArn",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.responsibility_transfer_arn #=> String
+    #   resp.auto_billing_transfer_billing_group_creation.enabled #=> Boolean
+    #   resp.auto_billing_transfer_billing_group_creation.pricing_plan_arn #=> String
+    #   resp.last_modified_time #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billingconductor-2021-07-30/UpdateBillingTransferPreference AWS API Documentation
+    #
+    # @overload update_billing_transfer_preference(params = {})
+    # @param [Hash] params ({})
+    def update_billing_transfer_preference(params = {}, options = {})
+      req = build_request(:update_billing_transfer_preference, params)
+      req.send_request(options)
+    end
+
     # Update an existing custom line item in the current or previous billing
     # period.
     #
@@ -2279,7 +2377,7 @@ module Aws::BillingConductor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-billingconductor'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

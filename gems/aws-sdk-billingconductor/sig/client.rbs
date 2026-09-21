@@ -325,6 +325,18 @@ module Aws
                                          ) -> _GetBillingGroupCostReportResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBillingGroupCostReportResponseSuccess
 
+      interface _GetBillingTransferPreferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetBillingTransferPreferenceOutput]
+        def responsibility_transfer_arn: () -> ::String
+        def auto_billing_transfer_billing_group_creation: () -> Types::AutoTransferBillingGroupCreationPreference
+        def last_modified_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#get_billing_transfer_preference-instance_method
+      def get_billing_transfer_preference: (
+                                             responsibility_transfer_arn: ::String
+                                           ) -> _GetBillingTransferPreferenceResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBillingTransferPreferenceResponseSuccess
+
       interface _ListAccountAssociationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAccountAssociationsOutput]
         def linked_accounts: () -> ::Array[Types::AccountAssociationsListElement]
@@ -566,6 +578,23 @@ module Aws
                                   }
                                 ) -> _UpdateBillingGroupResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBillingGroupResponseSuccess
+
+      interface _UpdateBillingTransferPreferenceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateBillingTransferPreferenceOutput]
+        def responsibility_transfer_arn: () -> ::String
+        def auto_billing_transfer_billing_group_creation: () -> Types::AutoTransferBillingGroupCreationPreference
+        def last_modified_time: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BillingConductor/Client.html#update_billing_transfer_preference-instance_method
+      def update_billing_transfer_preference: (
+                                                ?client_token: ::String,
+                                                responsibility_transfer_arn: ::String,
+                                                auto_billing_transfer_billing_group_creation: {
+                                                  enabled: bool,
+                                                  pricing_plan_arn: ::String?
+                                                }
+                                              ) -> _UpdateBillingTransferPreferenceResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBillingTransferPreferenceResponseSuccess
 
       interface _UpdateCustomLineItemResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCustomLineItemOutput]

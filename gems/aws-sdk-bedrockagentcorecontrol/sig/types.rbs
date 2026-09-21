@@ -1011,6 +1011,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor allowed_tools: ::Array[::String]
       attr_accessor memory: Types::HarnessMemoryConfiguration
       attr_accessor truncation: Types::HarnessTruncationConfiguration
+      attr_accessor hooks: ::Array[Types::HarnessHook]
       attr_accessor max_iterations: ::Integer
       attr_accessor max_tokens: ::Integer
       attr_accessor timeout_seconds: ::Integer
@@ -2991,11 +2992,24 @@ module Aws::BedrockAgentCoreControl
       attr_accessor environment_variables: ::Hash[::String, ::String]
       attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
       attr_accessor memory: Types::HarnessMemoryConfiguration
+      attr_accessor hooks: ::Array[Types::HarnessHook]
       attr_accessor max_iterations: ::Integer
       attr_accessor max_tokens: ::Integer
       attr_accessor timeout_seconds: ::Integer
       attr_accessor failure_reason: ::String
       SENSITIVE: [:environment_variables]
+    end
+
+    class HarnessAfterInvocationHook
+      attr_accessor name: ::String
+      attr_accessor target: Types::HarnessHookTarget
+      SENSITIVE: []
+    end
+
+    class HarnessAfterToolCallHook
+      attr_accessor name: ::String
+      attr_accessor target: Types::HarnessHookTarget
+      SENSITIVE: []
     end
 
     class HarnessAgentCoreBrowserConfig
@@ -3053,6 +3067,18 @@ module Aws::BedrockAgentCoreControl
       attr_accessor top_p: ::Float
       attr_accessor api_format: ("converse_stream" | "responses" | "chat_completions")
       attr_accessor additional_params: untyped
+      SENSITIVE: []
+    end
+
+    class HarnessBeforeInvocationHook
+      attr_accessor name: ::String
+      attr_accessor target: Types::HarnessHookTarget
+      SENSITIVE: []
+    end
+
+    class HarnessBeforeToolCallHook
+      attr_accessor name: ::String
+      attr_accessor target: Types::HarnessHookTarget
       SENSITIVE: []
     end
 
@@ -3135,6 +3161,60 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class HarnessHook
+      attr_accessor before_invocation: Types::HarnessBeforeInvocationHook
+      attr_accessor after_invocation: Types::HarnessAfterInvocationHook
+      attr_accessor before_tool_call: Types::HarnessBeforeToolCallHook
+      attr_accessor after_tool_call: Types::HarnessAfterToolCallHook
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class BeforeInvocation < HarnessHook
+      end
+      class AfterInvocation < HarnessHook
+      end
+      class BeforeToolCall < HarnessHook
+      end
+      class AfterToolCall < HarnessHook
+      end
+      class Unknown < HarnessHook
+      end
+    end
+
+    class HarnessHookEventBridgeTarget
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class HarnessHookLambdaTarget
+      attr_accessor arn: ::String
+      attr_accessor timeout_seconds: ::Integer
+      attr_accessor failure_mode: ("allow" | "deny")
+      SENSITIVE: []
+    end
+
+    class HarnessHookSnsTarget
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class HarnessHookTarget
+      attr_accessor lambda: Types::HarnessHookLambdaTarget
+      attr_accessor sns: Types::HarnessHookSnsTarget
+      attr_accessor event_bridge: Types::HarnessHookEventBridgeTarget
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Lambda < HarnessHookTarget
+      end
+      class Sns < HarnessHookTarget
+      end
+      class EventBridge < HarnessHookTarget
+      end
+      class Unknown < HarnessHookTarget
+      end
+    end
+
     class HarnessInlineFunctionConfig
       attr_accessor description: ::String
       attr_accessor input_schema: untyped
@@ -3200,12 +3280,13 @@ module Aws::BedrockAgentCoreControl
     class HarnessOpenAiModelConfig
       attr_accessor model_id: ::String
       attr_accessor api_key_arn: ::String
+      attr_accessor api_base: ::String
       attr_accessor max_tokens: ::Integer
       attr_accessor temperature: ::Float
       attr_accessor top_p: ::Float
       attr_accessor api_format: ("chat_completions" | "responses")
       attr_accessor additional_params: untyped
-      SENSITIVE: []
+      SENSITIVE: [:api_base]
     end
 
     class HarnessRemoteMcpConfig
@@ -5999,6 +6080,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor allowed_tools: ::Array[::String]
       attr_accessor memory: Types::UpdatedHarnessMemoryConfiguration
       attr_accessor truncation: Types::HarnessTruncationConfiguration
+      attr_accessor hooks: ::Array[Types::HarnessHook]
       attr_accessor max_iterations: ::Integer
       attr_accessor max_tokens: ::Integer
       attr_accessor timeout_seconds: ::Integer
