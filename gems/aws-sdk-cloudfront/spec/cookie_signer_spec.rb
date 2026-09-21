@@ -92,6 +92,53 @@ module Aws
           expect(cookie['CloudFront-Key-Pair-Id']).to eq('CF_KEYPAIR_ID')
         end
       end
+
+      # test vectors from the CloudFront URL and Cookie Signer SEP
+      describe 'SEP test cases' do
+        let(:key_dir) { File.dirname(__FILE__) }
+        let(:expires) { 1_767_290_400 }
+
+        def rsa_signer(hash_algorithm = nil)
+          CookieSigner.new(key_pair_id: 'K1TESTKEY', private_key_path: "#{key_dir}/sep_rsa_key", hash_algorithm: hash_algorithm)
+        end
+
+        it 'canned-policy-cookies' do
+          cookies = rsa_signer.signed_cookie('https://d111111abcdef8.cloudfront.net/image.jpg', expires: expires)
+          expect(cookies).to eq(
+            'CloudFront-Expires' => '1767290400',
+            'CloudFront-Signature' => 'iONoMLnhiCy9q1~WB9GkR2DiHz18I85i3o6kZ64REf-fCSOg-AyXEZiq7fJuS~DT-kbZXjVpgIQqI4sCTcBW9XpO6dyJ5sh8Igk3V~OVncS9acGVnI~ZhHBWiGhU8GmkEMAhn6R2RGO-wKGClrXdJGEUE26XoALdHUzHbmU6AGI_',
+            'CloudFront-Key-Pair-Id' => 'K1TESTKEY'
+          )
+        end
+
+        it 'canned-policy-cookies-sha256' do
+          cookies = rsa_signer('SHA256').signed_cookie('https://d111111abcdef8.cloudfront.net/image.jpg', expires: expires)
+          expect(cookies).to eq(
+            'CloudFront-Expires' => '1767290400',
+            'CloudFront-Signature' => 'LiC~LakvNvZtR~AsTcirQ0CAsy-YIZmpHmI9uImK4xJmrhVdJULhWmRt3bXO7qqw2gJDECZN-xC~bKWEKcJ9Vgs1IgpRdMkY6XGDKZ1XHBdNbd~0v5UiRf4zXwVMRqoynkQPQcihkze7RkDBsOoYHh9jDdtO1iDm0QZ1Qp~cxro_',
+            'CloudFront-Key-Pair-Id' => 'K1TESTKEY',
+            'CloudFront-Hash-Algorithm' => 'SHA256'
+          )
+        end
+
+        it 'custom-policy-cookies' do
+          policy = %({"Statement":[{"Resource":"https://d111111abcdef8.cloudfront.net/*","Condition":{"DateLessThan":{"AWS:EpochTime":#{expires}},"IpAddress":{"AWS:SourceIp":"10.0.0.0/8"}}}]})
+          cookies = rsa_signer.signed_cookie(nil, policy: policy)
+          expect(cookies).to eq(
+            'CloudFront-Policy' => 'eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kMTExMTExYWJjZGVmOC5jbG91ZGZyb250Lm5ldC8qIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzY3MjkwNDAwfSwiSXBBZGRyZXNzIjp7IkFXUzpTb3VyY2VJcCI6IjEwLjAuMC4wLzgifX19XX0_',
+            'CloudFront-Signature' => 'r28Jnd0t9aq7cu0k9jGWl4L0YsRxgueZtGRw5oEEspU9-eIPGM~ZGMQh36~5HpKC5c67cZjDgJcsqrCacmTHMZZx613gbeYAsx2-hEatU8URiuNHnVp4hPV3HqtbuZ6Din9iEZUpOBYVg6DWGEFJRCQ7SPouBhhJdYDZZOPHGpA_',
+            'CloudFront-Key-Pair-Id' => 'K1TESTKEY'
+          )
+        end
+
+        it 'custom-policy-cookies-sha256' do
+          policy = %({"Statement":[{"Resource":"https://d111111abcdef8.cloudfront.net/*","Condition":{"DateLessThan":{"AWS:EpochTime":#{expires}},"IpAddress":{"AWS:SourceIp":"10.0.0.0/8"}}}]})
+          cookies = rsa_signer('SHA256').signed_cookie(nil, policy: policy)
+          expect(cookies['CloudFront-Signature']).to eq('OzeonPh-NS8g3trdsFAo5LrMBEx1ef05GvdmWuLai6AaBLP63PVJRUGySYmGfQ-NqQ02geWzo7aZS7XFtkr4X1z9VTbQMfmzZftbuRXoP5ZDhFzVnSX3DeoEW8jP3BrOLHJsKwFCY5alIR4zO6LpqFmR5vVmqMYpRcbafg3~X18_')
+          expect(cookies['CloudFront-Hash-Algorithm']).to eq('SHA256')
+          expect(cookies).to_not have_key('CloudFront-Expires')
+        end
+      end
     end
   end
 end

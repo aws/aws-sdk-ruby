@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - CloudFront signers now support SHA-256 signatures via the `:hash_algorithm` option (`'SHA1'` or `'SHA256'`, defaults to `'SHA1'`). Signers also validate that the private key is RSA or ECDSA (P-256) and raise a clear error otherwise.
+
 1.154.0 (2026-09-11)
 ------------------
 
