@@ -1794,11 +1794,14 @@ module Aws::SSOAdmin
     #
     #   * {Types::DescribeInstanceResponse#instance_arn #instance_arn} => String
     #   * {Types::DescribeInstanceResponse#identity_store_id #identity_store_id} => String
+    #   * {Types::DescribeInstanceResponse#identity_store_arn #identity_store_arn} => String
     #   * {Types::DescribeInstanceResponse#owner_account_id #owner_account_id} => String
     #   * {Types::DescribeInstanceResponse#name #name} => String
     #   * {Types::DescribeInstanceResponse#created_date #created_date} => Time
     #   * {Types::DescribeInstanceResponse#status #status} => String
     #   * {Types::DescribeInstanceResponse#status_reason #status_reason} => String
+    #   * {Types::DescribeInstanceResponse#primary_region #primary_region} => String
+    #   * {Types::DescribeInstanceResponse#regions #regions} => Array&lt;Types::RegionMetadata&gt;
     #   * {Types::DescribeInstanceResponse#encryption_configuration_details #encryption_configuration_details} => Types::EncryptionConfigurationDetails
     #   * {Types::DescribeInstanceResponse#permission_sets_enabled #permission_sets_enabled} => Boolean
     #
@@ -1812,11 +1815,18 @@ module Aws::SSOAdmin
     #
     #   resp.instance_arn #=> String
     #   resp.identity_store_id #=> String
+    #   resp.identity_store_arn #=> String
     #   resp.owner_account_id #=> String
     #   resp.name #=> String
     #   resp.created_date #=> Time
     #   resp.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_IN_PROGRESS", "ACTIVE"
     #   resp.status_reason #=> String
+    #   resp.primary_region #=> String
+    #   resp.regions #=> Array
+    #   resp.regions[0].region_name #=> String
+    #   resp.regions[0].status #=> String, one of "ACTIVE", "ADDING", "REMOVING"
+    #   resp.regions[0].added_date #=> Time
+    #   resp.regions[0].is_primary_region #=> Boolean
     #   resp.encryption_configuration_details.key_type #=> String, one of "AWS_OWNED_KMS_KEY", "CUSTOMER_MANAGED_KEY"
     #   resp.encryption_configuration_details.kms_key_arn #=> String
     #   resp.encryption_configuration_details.encryption_status #=> String, one of "UPDATING", "ENABLED", "UPDATE_FAILED"
@@ -3173,6 +3183,7 @@ module Aws::SSOAdmin
     #   resp.instances #=> Array
     #   resp.instances[0].instance_arn #=> String
     #   resp.instances[0].identity_store_id #=> String
+    #   resp.instances[0].identity_store_arn #=> String
     #   resp.instances[0].owner_account_id #=> String
     #   resp.instances[0].name #=> String
     #   resp.instances[0].created_date #=> Time
@@ -4350,7 +4361,7 @@ module Aws::SSOAdmin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ssoadmin'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

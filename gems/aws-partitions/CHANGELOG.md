@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.1288.0 (2026-09-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::CloudWatchOmni`.
+
 1.1287.0 (2026-09-14)
 ------------------
 

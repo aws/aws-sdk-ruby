@@ -4770,6 +4770,18 @@ module Aws::Glue
     #         last_refresh_type: "FULL", # accepts FULL, INCREMENTAL
     #         sub_objects: ["ArnString"],
     #         sub_object_version_ids: [1],
+    #         sub_objects_statistics: [
+    #           {
+    #             source_type: "HIVE_PARQUET", # accepts HIVE_PARQUET, HIVE_ORC, HIVE_CSV, HIVE_JSON, PLAIN_PARQUET, ICEBERG
+    #             glue_version_id: "NullableString",
+    #             partition_count: 1,
+    #             file_count: 1,
+    #             total_file_bytes: 1,
+    #           },
+    #         ],
+    #         spark_pipeline_info: {
+    #           "SparkPipelineInfoKey" => "SparkPipelineInfoValue",
+    #         },
     #       },
     #     },
     #     partition_indexes: [
@@ -11518,6 +11530,12 @@ module Aws::Glue
     #   resp.table.view_definition.sub_objects[0] #=> String
     #   resp.table.view_definition.sub_object_version_ids #=> Array
     #   resp.table.view_definition.sub_object_version_ids[0] #=> Integer
+    #   resp.table.view_definition.sub_objects_statistics #=> Array
+    #   resp.table.view_definition.sub_objects_statistics[0].source_type #=> String, one of "HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"
+    #   resp.table.view_definition.sub_objects_statistics[0].glue_version_id #=> String
+    #   resp.table.view_definition.sub_objects_statistics[0].partition_count #=> Integer
+    #   resp.table.view_definition.sub_objects_statistics[0].file_count #=> Integer
+    #   resp.table.view_definition.sub_objects_statistics[0].total_file_bytes #=> Integer
     #   resp.table.view_definition.representations #=> Array
     #   resp.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table.view_definition.representations[0].dialect_version #=> String
@@ -11525,6 +11543,8 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].view_expanded_text #=> String
     #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table.view_definition.spark_pipeline_info #=> Hash
+    #   resp.table.view_definition.spark_pipeline_info["SparkPipelineInfoKey"] #=> String
     #   resp.table.is_multi_dialect_view #=> Boolean
     #   resp.table.is_materialized_view #=> Boolean
     #   resp.table.iceberg_table_metadata.format_version #=> String
@@ -11792,6 +11812,12 @@ module Aws::Glue
     #   resp.table_version.table.view_definition.sub_objects[0] #=> String
     #   resp.table_version.table.view_definition.sub_object_version_ids #=> Array
     #   resp.table_version.table.view_definition.sub_object_version_ids[0] #=> Integer
+    #   resp.table_version.table.view_definition.sub_objects_statistics #=> Array
+    #   resp.table_version.table.view_definition.sub_objects_statistics[0].source_type #=> String, one of "HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"
+    #   resp.table_version.table.view_definition.sub_objects_statistics[0].glue_version_id #=> String
+    #   resp.table_version.table.view_definition.sub_objects_statistics[0].partition_count #=> Integer
+    #   resp.table_version.table.view_definition.sub_objects_statistics[0].file_count #=> Integer
+    #   resp.table_version.table.view_definition.sub_objects_statistics[0].total_file_bytes #=> Integer
     #   resp.table_version.table.view_definition.representations #=> Array
     #   resp.table_version.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table_version.table.view_definition.representations[0].dialect_version #=> String
@@ -11799,6 +11825,8 @@ module Aws::Glue
     #   resp.table_version.table.view_definition.representations[0].view_expanded_text #=> String
     #   resp.table_version.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_version.table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_version.table.view_definition.spark_pipeline_info #=> Hash
+    #   resp.table_version.table.view_definition.spark_pipeline_info["SparkPipelineInfoKey"] #=> String
     #   resp.table_version.table.is_multi_dialect_view #=> Boolean
     #   resp.table_version.table.is_materialized_view #=> Boolean
     #   resp.table_version.table.iceberg_table_metadata.format_version #=> String
@@ -11990,6 +12018,12 @@ module Aws::Glue
     #   resp.table_versions[0].table.view_definition.sub_objects[0] #=> String
     #   resp.table_versions[0].table.view_definition.sub_object_version_ids #=> Array
     #   resp.table_versions[0].table.view_definition.sub_object_version_ids[0] #=> Integer
+    #   resp.table_versions[0].table.view_definition.sub_objects_statistics #=> Array
+    #   resp.table_versions[0].table.view_definition.sub_objects_statistics[0].source_type #=> String, one of "HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"
+    #   resp.table_versions[0].table.view_definition.sub_objects_statistics[0].glue_version_id #=> String
+    #   resp.table_versions[0].table.view_definition.sub_objects_statistics[0].partition_count #=> Integer
+    #   resp.table_versions[0].table.view_definition.sub_objects_statistics[0].file_count #=> Integer
+    #   resp.table_versions[0].table.view_definition.sub_objects_statistics[0].total_file_bytes #=> Integer
     #   resp.table_versions[0].table.view_definition.representations #=> Array
     #   resp.table_versions[0].table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table_versions[0].table.view_definition.representations[0].dialect_version #=> String
@@ -11997,6 +12031,8 @@ module Aws::Glue
     #   resp.table_versions[0].table.view_definition.representations[0].view_expanded_text #=> String
     #   resp.table_versions[0].table.view_definition.representations[0].validation_connection #=> String
     #   resp.table_versions[0].table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_versions[0].table.view_definition.spark_pipeline_info #=> Hash
+    #   resp.table_versions[0].table.view_definition.spark_pipeline_info["SparkPipelineInfoKey"] #=> String
     #   resp.table_versions[0].table.is_multi_dialect_view #=> Boolean
     #   resp.table_versions[0].table.is_materialized_view #=> Boolean
     #   resp.table_versions[0].table.iceberg_table_metadata.format_version #=> String
@@ -12220,6 +12256,12 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.sub_objects[0] #=> String
     #   resp.table_list[0].view_definition.sub_object_version_ids #=> Array
     #   resp.table_list[0].view_definition.sub_object_version_ids[0] #=> Integer
+    #   resp.table_list[0].view_definition.sub_objects_statistics #=> Array
+    #   resp.table_list[0].view_definition.sub_objects_statistics[0].source_type #=> String, one of "HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"
+    #   resp.table_list[0].view_definition.sub_objects_statistics[0].glue_version_id #=> String
+    #   resp.table_list[0].view_definition.sub_objects_statistics[0].partition_count #=> Integer
+    #   resp.table_list[0].view_definition.sub_objects_statistics[0].file_count #=> Integer
+    #   resp.table_list[0].view_definition.sub_objects_statistics[0].total_file_bytes #=> Integer
     #   resp.table_list[0].view_definition.representations #=> Array
     #   resp.table_list[0].view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
@@ -12227,6 +12269,8 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].view_expanded_text #=> String
     #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_list[0].view_definition.spark_pipeline_info #=> Hash
+    #   resp.table_list[0].view_definition.spark_pipeline_info["SparkPipelineInfoKey"] #=> String
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
     #   resp.table_list[0].is_materialized_view #=> Boolean
     #   resp.table_list[0].iceberg_table_metadata.format_version #=> String
@@ -12999,6 +13043,12 @@ module Aws::Glue
     #   resp.table.view_definition.sub_objects[0] #=> String
     #   resp.table.view_definition.sub_object_version_ids #=> Array
     #   resp.table.view_definition.sub_object_version_ids[0] #=> Integer
+    #   resp.table.view_definition.sub_objects_statistics #=> Array
+    #   resp.table.view_definition.sub_objects_statistics[0].source_type #=> String, one of "HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"
+    #   resp.table.view_definition.sub_objects_statistics[0].glue_version_id #=> String
+    #   resp.table.view_definition.sub_objects_statistics[0].partition_count #=> Integer
+    #   resp.table.view_definition.sub_objects_statistics[0].file_count #=> Integer
+    #   resp.table.view_definition.sub_objects_statistics[0].total_file_bytes #=> Integer
     #   resp.table.view_definition.representations #=> Array
     #   resp.table.view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table.view_definition.representations[0].dialect_version #=> String
@@ -13006,6 +13056,8 @@ module Aws::Glue
     #   resp.table.view_definition.representations[0].view_expanded_text #=> String
     #   resp.table.view_definition.representations[0].validation_connection #=> String
     #   resp.table.view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table.view_definition.spark_pipeline_info #=> Hash
+    #   resp.table.view_definition.spark_pipeline_info["SparkPipelineInfoKey"] #=> String
     #   resp.table.is_multi_dialect_view #=> Boolean
     #   resp.table.is_materialized_view #=> Boolean
     #   resp.table.iceberg_table_metadata.format_version #=> String
@@ -17456,6 +17508,12 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.sub_objects[0] #=> String
     #   resp.table_list[0].view_definition.sub_object_version_ids #=> Array
     #   resp.table_list[0].view_definition.sub_object_version_ids[0] #=> Integer
+    #   resp.table_list[0].view_definition.sub_objects_statistics #=> Array
+    #   resp.table_list[0].view_definition.sub_objects_statistics[0].source_type #=> String, one of "HIVE_PARQUET", "HIVE_ORC", "HIVE_CSV", "HIVE_JSON", "PLAIN_PARQUET", "ICEBERG"
+    #   resp.table_list[0].view_definition.sub_objects_statistics[0].glue_version_id #=> String
+    #   resp.table_list[0].view_definition.sub_objects_statistics[0].partition_count #=> Integer
+    #   resp.table_list[0].view_definition.sub_objects_statistics[0].file_count #=> Integer
+    #   resp.table_list[0].view_definition.sub_objects_statistics[0].total_file_bytes #=> Integer
     #   resp.table_list[0].view_definition.representations #=> Array
     #   resp.table_list[0].view_definition.representations[0].dialect #=> String, one of "REDSHIFT", "ATHENA", "SPARK"
     #   resp.table_list[0].view_definition.representations[0].dialect_version #=> String
@@ -17463,6 +17521,8 @@ module Aws::Glue
     #   resp.table_list[0].view_definition.representations[0].view_expanded_text #=> String
     #   resp.table_list[0].view_definition.representations[0].validation_connection #=> String
     #   resp.table_list[0].view_definition.representations[0].is_stale #=> Boolean
+    #   resp.table_list[0].view_definition.spark_pipeline_info #=> Hash
+    #   resp.table_list[0].view_definition.spark_pipeline_info["SparkPipelineInfoKey"] #=> String
     #   resp.table_list[0].is_multi_dialect_view #=> Boolean
     #   resp.table_list[0].is_materialized_view #=> Boolean
     #   resp.table_list[0].iceberg_table_metadata.format_version #=> String
@@ -20764,6 +20824,18 @@ module Aws::Glue
     #         last_refresh_type: "FULL", # accepts FULL, INCREMENTAL
     #         sub_objects: ["ArnString"],
     #         sub_object_version_ids: [1],
+    #         sub_objects_statistics: [
+    #           {
+    #             source_type: "HIVE_PARQUET", # accepts HIVE_PARQUET, HIVE_ORC, HIVE_CSV, HIVE_JSON, PLAIN_PARQUET, ICEBERG
+    #             glue_version_id: "NullableString",
+    #             partition_count: 1,
+    #             file_count: 1,
+    #             total_file_bytes: 1,
+    #           },
+    #         ],
+    #         spark_pipeline_info: {
+    #           "SparkPipelineInfoKey" => "SparkPipelineInfoValue",
+    #         },
     #       },
     #     },
     #     skip_archive: false,
@@ -21182,7 +21254,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.274.0'
+      context[:gem_version] = '1.275.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

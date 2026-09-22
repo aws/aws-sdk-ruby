@@ -30365,6 +30365,48 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Statistics for one sub-object referenced by a materialized view,
+    # recorded when the materialized view was created or last fully
+    # refreshed. These values describe what that refresh selected from the
+    # sub-object, which can be a subset of the table when the materialized
+    # view's definition limits the data it reads. The fields present depend
+    # on the sub-object's format.
+    #
+    # @!attribute [rw] source_type
+    #   The source type of the sub-object (for example, its table format),
+    #   which identifies the sub-object.
+    #   @return [String]
+    #
+    # @!attribute [rw] glue_version_id
+    #   The Glue version ID of the sub-object that the statistics were
+    #   captured for.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_count
+    #   The number of sub-object partitions selected for that refresh. Not
+    #   present for unpartitioned sub-objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] file_count
+    #   The number of sub-object data files selected for that refresh.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_file_bytes
+    #   The total size, in bytes, of the data files counted by `FileCount`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SubObjectStatistics AWS API Documentation
+    #
+    class SubObjectStatistics < Struct.new(
+      :source_type,
+      :glue_version_id,
+      :partition_count,
+      :file_count,
+      :total_file_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A structure specifying the dialect and dialect version used by the
     # query engine.
     #
@@ -33747,9 +33789,21 @@ module Aws::Glue
     #   materialized view.
     #   @return [Array<Integer>]
     #
+    # @!attribute [rw] sub_objects_statistics
+    #   Statistics captured for each sub-object referenced by the
+    #   materialized view as of its most recent refresh, such as the source
+    #   type, Glue version ID, and the partition, file, and byte counts.
+    #   Each entry describes one sub-object, identified by its source type.
+    #   @return [Array<Types::SubObjectStatistics>]
+    #
     # @!attribute [rw] representations
     #   A list of representations.
     #   @return [Array<Types::ViewRepresentation>]
+    #
+    # @!attribute [rw] spark_pipeline_info
+    #   A map of key-value pairs containing Spark Declarative Pipelines
+    #   (SDP) information for the materialized view.
+    #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewDefinition AWS API Documentation
     #
@@ -33762,7 +33816,9 @@ module Aws::Glue
       :last_refresh_type,
       :sub_objects,
       :sub_object_version_ids,
-      :representations)
+      :sub_objects_statistics,
+      :representations,
+      :spark_pipeline_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33814,6 +33870,18 @@ module Aws::Glue
     #   materialized view.
     #   @return [Array<Integer>]
     #
+    # @!attribute [rw] sub_objects_statistics
+    #   Statistics for each sub-object referenced by the materialized view,
+    #   such as the source type, Glue version ID, and the partition, file,
+    #   and byte counts. Each entry describes one sub-object, identified by
+    #   its source type.
+    #   @return [Array<Types::SubObjectStatistics>]
+    #
+    # @!attribute [rw] spark_pipeline_info
+    #   A map of key-value pairs containing Spark Declarative Pipelines
+    #   (SDP) information for the materialized view.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ViewDefinitionInput AWS API Documentation
     #
     class ViewDefinitionInput < Struct.new(
@@ -33825,7 +33893,9 @@ module Aws::Glue
       :refresh_seconds,
       :last_refresh_type,
       :sub_objects,
-      :sub_object_version_ids)
+      :sub_object_version_ids,
+      :sub_objects_statistics,
+      :spark_pipeline_info)
       SENSITIVE = []
       include Aws::Structure
     end

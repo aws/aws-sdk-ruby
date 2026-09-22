@@ -266,6 +266,9 @@
   "CloudWatchLogs": {
     "models": "logs/2014-03-28"
   },
+  "CloudWatchOmni": {
+    "models": "cloudwatchomni/2025-01-01"
+  },
   "CloudWatchRUM": {
     "models": "rum/2018-05-10"
   },

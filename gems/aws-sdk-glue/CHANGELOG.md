@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.275.0 (2026-09-22)
+------------------
+
+* Feature - Adding two new fields for Glue Materialized Views feature - (1) SubObjectsStatistics and (2) SparkPipelineInfo.
+
 1.274.0 (2026-09-18)
 ------------------
 

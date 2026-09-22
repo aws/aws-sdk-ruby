@@ -1805,7 +1805,17 @@ module Aws
       refresh_seconds: ::Integer?,
       last_refresh_type: ("FULL" | "INCREMENTAL")?,
       sub_objects: Array[::String]?,
-      sub_object_version_ids: Array[::Integer]?
+      sub_object_version_ids: Array[::Integer]?,
+      sub_objects_statistics: Array[
+        {
+          source_type: ("HIVE_PARQUET" | "HIVE_ORC" | "HIVE_CSV" | "HIVE_JSON" | "PLAIN_PARQUET" | "ICEBERG")?,
+          glue_version_id: ::String?,
+          partition_count: ::Integer?,
+          file_count: ::Integer?,
+          total_file_bytes: ::Integer?
+        }
+      ]?,
+      spark_pipeline_info: Hash[::String, ::String]?
     }
 
       type table_input = {

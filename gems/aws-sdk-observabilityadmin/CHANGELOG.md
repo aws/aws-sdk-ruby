@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2026-09-22)
+------------------
+
+* Feature - Amazon CloudWatch Omni is now generally available, an AI-powered unified observability for AI agents, applications, and infrastructure. Centralization now supports context graph for multi-account resource discovery, and dataset integrations makes logs available in CloudWatch datasets.
+
 1.39.0 (2026-09-11)
 ------------------
 

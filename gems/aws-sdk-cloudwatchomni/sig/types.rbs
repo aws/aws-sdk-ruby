@@ -1,0 +1,1459 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::CloudWatchOmni
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessGrant
+      attr_accessor grant_id: ::String
+      attr_accessor grant_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor account_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor principal: Types::AccessGrantPrincipal
+      attr_accessor permission: ("SPACE_ADMIN" | "READ" | "READ_WRITE_DELETE" | "CUSTOM")
+      attr_accessor grant_type: ("SERVICE_MANAGED" | "CUSTOMER_MANAGED")
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor space_id: ::String
+      attr_accessor scoped_actions: ::Array[Types::ScopedActions]
+      SENSITIVE: []
+    end
+
+    class AccessGrantPrincipal
+      attr_accessor principal_type: ("IDC_USER" | "IDC_GROUP" | "IAM_USER" | "IAM_ROLE" | "IAM_ROOT" | "ACCESS_PROFILE" | "ALERT" | "AGENT")
+      attr_accessor principal_id: ::String
+      attr_accessor principal_attributes: ::Array[Types::AccessGrantPrincipalAttribute]
+      SENSITIVE: []
+    end
+
+    class AccessGrantPrincipalAttribute
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class AccessGrantSummary
+      attr_accessor grant_id: ::String
+      attr_accessor grant_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor principal: Types::AccessGrantPrincipal
+      attr_accessor permission: ("SPACE_ADMIN" | "READ" | "READ_WRITE_DELETE" | "CUSTOM")
+      attr_accessor grant_type: ("SERVICE_MANAGED" | "CUSTOMER_MANAGED")
+      attr_accessor space_id: ::String
+      SENSITIVE: []
+    end
+
+    class AccessProfile
+      attr_accessor profile_id: ::String
+      attr_accessor space_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor assume_status: ("ALLOWED" | "DENIED")
+      attr_accessor profile_type: ("SERVICE_MANAGED" | "CUSTOMER_MANAGED")
+      SENSITIVE: []
+    end
+
+    class AccessProfileSummary
+      attr_accessor profile_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor profile_type: ("SERVICE_MANAGED" | "CUSTOMER_MANAGED")
+      SENSITIVE: []
+    end
+
+    class Alert
+      attr_accessor name: ::String
+      attr_accessor alert_id: ::String
+      attr_accessor description: ::String
+      attr_accessor account_id: ::String
+      attr_accessor space_id: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor rule: Types::Rule
+      attr_accessor notification_status: ("ENABLED" | "DISABLED")
+      attr_accessor state: Types::AlertStateInfo
+      attr_accessor notification_rules: ::Array[Types::NotificationRule]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor alert_arn: ::String
+      SENSITIVE: []
+    end
+
+    class AlertCondition
+      attr_accessor threshold_mode: ("COUNT_OF_RESULTS" | "FIELD_VALUE")
+      attr_accessor threshold_field: ::String
+      attr_accessor comparator: ("GT" | "LT" | "GTE" | "LTE")
+      attr_accessor warning_threshold: ::Float
+      attr_accessor critical_threshold: ::Float
+      SENSITIVE: []
+    end
+
+    class AlertEvaluation
+      attr_accessor interval_seconds: ::Integer
+      attr_accessor pending_duration_seconds: ::Integer
+      attr_accessor recovery_duration_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class AlertFilterCriteria
+      attr_accessor names: ::Array[::String]
+      attr_accessor name_prefix: ::String
+      attr_accessor ids: ::Array[::String]
+      attr_accessor state_value: ::Array[("OK" | "WARNING" | "CRITICAL" | "NODATA")]
+      attr_accessor notifications_enabled: bool
+      SENSITIVE: []
+    end
+
+    class AlertRuleQuery
+      attr_accessor language: ("SQL" | "PROMQL")
+      attr_accessor expression: ::String
+      SENSITIVE: []
+    end
+
+    class AlertStateData
+      attr_accessor threshold_breached: ::Float
+      SENSITIVE: []
+    end
+
+    class AlertStateInfo
+      attr_accessor value: ("OK" | "WARNING" | "CRITICAL" | "NODATA")
+      attr_accessor transitioned_at: ::Time
+      attr_accessor contributor_summary: Types::ContributorSummary
+      attr_accessor data: Types::AlertStateData
+      SENSITIVE: []
+    end
+
+    class AlertSummary
+      attr_accessor name: ::String
+      attr_accessor alert_id: ::String
+      attr_accessor space_id: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor notification_status: ("ENABLED" | "DISABLED")
+      attr_accessor state: Types::AlertStateInfo
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor alert_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ApiKeyCredential
+      attr_accessor api_key_value: ::String
+      SENSITIVE: [:api_key_value]
+    end
+
+    class AwsCredentials
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      attr_accessor expiration: ::Time
+      SENSITIVE: [:access_key_id, :secret_access_key, :session_token]
+    end
+
+    class ConflictException
+      attr_accessor message: ::String
+      attr_accessor conflict_type: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class ContributorSummary
+      attr_accessor warning_count: ::Integer
+      attr_accessor critical_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class CreateAccessGrantInput
+      attr_accessor domain_id: ::String
+      attr_accessor space_id: ::String
+      attr_accessor name: ::String
+      attr_accessor principal: Types::AccessGrantPrincipal
+      attr_accessor permission: ("SPACE_ADMIN" | "READ" | "READ_WRITE_DELETE" | "CUSTOM")
+      attr_accessor scoped_actions: ::Array[Types::ScopedActions]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessGrantOutput
+      attr_accessor access_grant: Types::AccessGrant
+      SENSITIVE: []
+    end
+
+    class CreateAccessProfileInput
+      attr_accessor space_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAccessProfileOutput
+      attr_accessor access_profile: Types::AccessProfile
+      SENSITIVE: []
+    end
+
+    class CreateAlertInput
+      attr_accessor space_id: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor rule: Types::Rule
+      attr_accessor notifications_enabled: bool
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor notification_rules: ::Array[Types::NotificationRule]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAlertOutput
+      attr_accessor alert_arn: ::String
+      attr_accessor alert: Types::Alert
+      SENSITIVE: []
+    end
+
+    class CreateDomainAccessGrantForOrganizationInput
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      attr_accessor principal: Types::OrganizationAccessGrantPrincipal
+      attr_accessor permission: ("ADMIN")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainAccessGrantForOrganizationOutput
+      attr_accessor access_grant: Types::OrganizationAccessGrant
+      SENSITIVE: []
+    end
+
+    class CreateDomainForOrganizationInput
+      attr_accessor name: ::String
+      attr_accessor identity_providers: ::Array[("IAM" | "IDC")]
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
+      attr_accessor domain_access_role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainForOrganizationOutput
+      attr_accessor organization_domain: Types::OrganizationDomain
+      SENSITIVE: []
+    end
+
+    class CreateDomainInput
+      attr_accessor name: ::String
+      attr_accessor identity_providers: ::Array[("IAM" | "IDC")]
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDomainOutput
+      attr_accessor domain: Types::Domain
+      SENSITIVE: []
+    end
+
+    class CreateIntegrationInput
+      attr_accessor integration_type: ("AWS_CONFIG_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION")
+      attr_accessor name: ::String
+      attr_accessor credential: Types::IntegrationCredential
+      attr_accessor integration_attributes: ::Hash[::String, ::String]
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIntegrationOutput
+      attr_accessor integration: Types::Integration
+      SENSITIVE: []
+    end
+
+    class CreateOmniDashboardInput
+      attr_accessor space_id: ::String
+      attr_accessor name: ::String
+      attr_accessor body: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOmniDashboardOutput
+      attr_accessor omni_dashboard: Types::OmniDashboard
+      SENSITIVE: []
+    end
+
+    class CreateOneTimeDeepLinkCodeInput
+      attr_accessor domain_id: ::String
+      attr_accessor ttl_seconds: ::Integer
+      attr_accessor redirect_url: ::String
+      SENSITIVE: []
+    end
+
+    class CreateOneTimeDeepLinkCodeOutput
+      attr_accessor code: ::String
+      attr_accessor deep_link_url: ::String
+      attr_accessor expires_at: ::Time
+      SENSITIVE: [:code, :deep_link_url]
+    end
+
+    class CreateSpaceInput
+      attr_accessor name: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor agent_core_evaluation_role_arn: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateSpaceOutput
+      attr_accessor space: Types::Space
+      SENSITIVE: []
+    end
+
+    class CreateViewRequest
+      attr_accessor name: ::String
+      attr_accessor definition: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateViewResponse
+      attr_accessor name: ::String
+      attr_accessor type: ("USER" | "MANAGED")
+      attr_accessor description: ::String
+      attr_accessor definition: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessGrantInput
+      attr_accessor grant_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessGrantOutput < Aws::EmptyStructure
+    end
+
+    class DeleteAccessProfileInput
+      attr_accessor space_id: ::String
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAccessProfileOutput < Aws::EmptyStructure
+    end
+
+    class DeleteAlertInput
+      attr_accessor space_id: ::String
+      attr_accessor alert_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteAlertOutput < Aws::EmptyStructure
+    end
+
+    class DeleteDomainAccessGrantForOrganizationInput
+      attr_accessor grant_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainAccessGrantForOrganizationOutput < Aws::EmptyStructure
+    end
+
+    class DeleteDomainForOrganizationInput
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainForOrganizationOutput < Aws::EmptyStructure
+    end
+
+    class DeleteDomainInput
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDomainOutput < Aws::EmptyStructure
+    end
+
+    class DeleteIntegrationInput
+      attr_accessor identifier: Types::IntegrationIdentifier
+      SENSITIVE: []
+    end
+
+    class DeleteIntegrationOutput < Aws::EmptyStructure
+    end
+
+    class DeleteOmniDashboardInput
+      attr_accessor space_id: ::String
+      attr_accessor dashboard_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteOmniDashboardOutput < Aws::EmptyStructure
+    end
+
+    class DeleteSpaceInput
+      attr_accessor space_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteSpaceOutput < Aws::EmptyStructure
+    end
+
+    class DeleteViewRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteViewResponse < Aws::EmptyStructure
+    end
+
+    class Domain
+      attr_accessor domain_id: ::String
+      attr_accessor domain_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor identity_providers: ::Array[("IAM" | "IDC")]
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
+      attr_accessor domain_endpoint_url: ::String
+      attr_accessor custom_endpoint_urls: ::Array[::String]
+      attr_accessor identity_center_application_arn: ::String
+      attr_accessor region: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("ACTIVE")
+      SENSITIVE: []
+    end
+
+    class DomainSummary
+      attr_accessor domain_id: ::String
+      attr_accessor domain_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor identity_center_instance_arn: ::String
+      attr_accessor region: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("ACTIVE")
+      SENSITIVE: []
+    end
+
+    class Edge
+      attr_accessor edge_id: ::String
+      attr_accessor from: ::String
+      attr_accessor to: ::String
+      attr_accessor edge_type: ("CALLS" | "ACCESSES" | "RUNS_ON")
+      attr_accessor operations: ::Array[::String]
+      attr_accessor edge_properties: Types::EdgeProperties
+      attr_accessor telemetry_attributes: ::Hash[::String, ::String]
+      attr_accessor signal_types: ::Array[("LOGS" | "METRICS" | "TRACES" | "CONFIG" | "UNKNOWN")]
+      attr_accessor sources: ::Array[("VPC_FLOW_LOG" | "CLOUDTRAIL" | "IAM_POLICY" | "CODE_SEMANTICS" | "TELEMETRY" | "AZURE_VNET_FLOW_LOG" | "ELB_ACCESS_LOG" | "CLOUDFRONT_ACCESS_LOG" | "S3_ACCESS_LOG" | "WAF_ACCESS_LOG" | "AWS_INTEGRATION" | "CONFIG")]
+      attr_accessor metadata: Types::Metadata
+      attr_accessor first_observed_at: ::Time
+      attr_accessor last_observed_at: ::Time
+      SENSITIVE: []
+    end
+
+    class EdgeFilters
+      attr_accessor edge_id: ::String
+      attr_accessor from: ::String
+      attr_accessor to: ::String
+      attr_accessor edge_type: ("CALLS" | "ACCESSES" | "RUNS_ON")
+      attr_accessor operations: ::Array[::String]
+      attr_accessor telemetry_attributes: ::Array[Types::KeyFilter]
+      attr_accessor sources: ::Array[("VPC_FLOW_LOG" | "CLOUDTRAIL" | "IAM_POLICY" | "CODE_SEMANTICS" | "TELEMETRY" | "AZURE_VNET_FLOW_LOG" | "ELB_ACCESS_LOG" | "CLOUDFRONT_ACCESS_LOG" | "S3_ACCESS_LOG" | "WAF_ACCESS_LOG" | "AWS_INTEGRATION" | "CONFIG")]
+      SENSITIVE: []
+    end
+
+    class EdgeProperties
+      attr_accessor protocol: ::String
+      attr_accessor source_port: ::String
+      attr_accessor destination_port: ::String
+      attr_accessor blocked: bool
+      attr_accessor error_code: ::String
+      attr_accessor http_status_code: ::String
+      attr_accessor http_method: ::String
+      attr_accessor service_initiated: bool
+      attr_accessor traffic_stats: Types::EdgeTrafficStats
+      SENSITIVE: []
+    end
+
+    class EdgeTrafficStats
+      attr_accessor bytes: ::Integer
+      attr_accessor packets: ::Integer
+      attr_accessor flows: ::Integer
+      attr_accessor sent_bytes: ::Integer
+      attr_accessor received_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class EncryptionConfiguration
+      attr_accessor encryption_strategy: ("AWS_OWNED" | "CUSTOMER_MANAGED")
+      attr_accessor kms_key_arn: ::String
+      SENSITIVE: []
+    end
+
+    class Field
+      attr_accessor name: ::String
+      attr_accessor children: ::Array[Types::Field]
+      SENSITIVE: []
+    end
+
+    class GetAccessGrantInput
+      attr_accessor grant_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessGrantOutput
+      attr_accessor access_grant: Types::AccessGrant
+      SENSITIVE: []
+    end
+
+    class GetAccessProfileInput
+      attr_accessor space_id: ::String
+      attr_accessor profile_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAccessProfileOutput
+      attr_accessor access_profile: Types::AccessProfile
+      SENSITIVE: []
+    end
+
+    class GetAlertInput
+      attr_accessor space_id: ::String
+      attr_accessor alert_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetAlertOutput
+      attr_accessor alert: Types::Alert
+      SENSITIVE: []
+    end
+
+    class GetContextGraphInput
+      attr_accessor node_filters: Types::NodeFilters
+      attr_accessor edge_filters: Types::EdgeFilters
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor depth: ::Integer
+      attr_accessor max_results: ::Integer
+      attr_accessor max_edges_per_node: ::Integer
+      attr_accessor include_metadata: bool
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetContextGraphOutput
+      attr_accessor nodes: ::Array[Types::Node]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainAccessGrantForOrganizationInput
+      attr_accessor grant_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainAccessGrantForOrganizationOutput
+      attr_accessor access_grant: Types::OrganizationAccessGrant
+      SENSITIVE: []
+    end
+
+    class GetDomainForOrganizationInput
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainForOrganizationOutput
+      attr_accessor organization_domain: Types::OrganizationDomain
+      SENSITIVE: []
+    end
+
+    class GetDomainInput
+      attr_accessor domain_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetDomainOutput
+      attr_accessor domain: Types::Domain
+      SENSITIVE: []
+    end
+
+    class GetIntegrationInput
+      attr_accessor identifier: Types::IntegrationIdentifier
+      SENSITIVE: []
+    end
+
+    class GetIntegrationOutput
+      attr_accessor integration: Types::Integration
+      SENSITIVE: []
+    end
+
+    class GetIntelligenceConfigurationInput < Aws::EmptyStructure
+    end
+
+    class GetIntelligenceConfigurationOutput
+      attr_accessor account_id: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetOmniDashboardInput
+      attr_accessor space_id: ::String
+      attr_accessor dashboard_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetOmniDashboardOutput
+      attr_accessor omni_dashboard: Types::OmniDashboard
+      SENSITIVE: []
+    end
+
+    class GetSpaceCredentialsForOrganizationInput
+      attr_accessor context: Types::SpaceCredentialRequestContext
+      attr_accessor credential_type: ("SPACE_OPERATION")
+      SENSITIVE: []
+    end
+
+    class GetSpaceCredentialsForOrganizationOutput
+      attr_accessor credentials: Types::AwsCredentials
+      SENSITIVE: [:credentials]
+    end
+
+    class GetSpaceInput
+      attr_accessor space_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetSpaceOutput
+      attr_accessor space: Types::Space
+      SENSITIVE: []
+    end
+
+    class GetTelemetryQueryResultsRequest
+      attr_accessor query_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetTelemetryQueryResultsResponse
+      attr_accessor status: ("Running" | "Failed" | "Complete" | "Cancelled")
+      attr_accessor rows: ::Array[::Hash[::String, ::String]]
+      attr_accessor next_token: ::String
+      attr_accessor statistics: Types::QueryStatistics
+      SENSITIVE: []
+    end
+
+    class GetViewRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetViewResponse
+      attr_accessor name: ::String
+      attr_accessor type: ("USER" | "MANAGED")
+      attr_accessor description: ::String
+      attr_accessor definition: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityCenterConfiguration
+      attr_accessor identity_center_instance_arn: ::String
+      SENSITIVE: []
+    end
+
+    class IdentityProviderConfiguration
+      attr_accessor identity_center_configuration: Types::IdentityCenterConfiguration
+      SENSITIVE: []
+    end
+
+    class Integration
+      attr_accessor integration_id: ::String
+      attr_accessor integration_arn: ::String
+      attr_accessor integration_type: ("AWS_CONFIG_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION")
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "DELETED" | "PENDING" | "PENDING_OAUTH" | "ERROR" | "FAILED")
+      attr_accessor auth_type: ("NONE" | "OAUTH2" | "API_KEY")
+      attr_accessor credential_arn: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor integration_attributes: ::Hash[::String, ::String]
+      attr_accessor authorization_url: ::String
+      attr_accessor error_message: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor scope: ("ACCOUNT" | "ORGANIZATION")
+      SENSITIVE: []
+    end
+
+    class IntegrationCredential
+      attr_accessor oauth_code_credential: Types::OAuthCodeCredential
+      attr_accessor oauth_client_credential: Types::OAuthClientCredential
+      attr_accessor api_key_credential: Types::ApiKeyCredential
+      attr_accessor unknown: untyped
+      SENSITIVE: [:oauth_code_credential, :oauth_client_credential, :api_key_credential]
+
+      class OauthCodeCredential < IntegrationCredential
+      end
+      class OauthClientCredential < IntegrationCredential
+      end
+      class ApiKeyCredential < IntegrationCredential
+      end
+      class Unknown < IntegrationCredential
+      end
+    end
+
+    class IntegrationIdentifier
+      attr_accessor integration_id: ::String
+      attr_accessor integration_arn: ::String
+      attr_accessor integration_name: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class IntegrationId < IntegrationIdentifier
+      end
+      class IntegrationArn < IntegrationIdentifier
+      end
+      class IntegrationName < IntegrationIdentifier
+      end
+      class Unknown < IntegrationIdentifier
+      end
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class KeyFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ListAccessGrantsInput
+      attr_accessor domain_id: ::String
+      attr_accessor space_id: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("IDC_USER" | "IDC_GROUP" | "IAM_USER" | "IAM_ROLE" | "IAM_ROOT" | "ACCESS_PROFILE" | "ALERT" | "AGENT")
+      attr_accessor permission: ("SPACE_ADMIN" | "READ" | "READ_WRITE_DELETE" | "CUSTOM")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccessGrantsOutput
+      attr_accessor items: ::Array[Types::AccessGrantSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAccessProfilesInput
+      attr_accessor space_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAccessProfilesOutput
+      attr_accessor items: ::Array[Types::AccessProfileSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAlertsInput
+      attr_accessor space_id: ::String
+      attr_accessor filter_criteria: Types::AlertFilterCriteria
+      attr_accessor sort_by: ("NAME" | "STATE")
+      attr_accessor sort_order: ("ASC" | "DESC")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListAlertsOutput
+      attr_accessor items: ::Array[Types::AlertSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainAccessGrantsForOrganizationInput
+      attr_accessor domain_id: ::String
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("IDC_USER" | "IDC_GROUP" | "IAM_USER" | "IAM_ROLE" | "IAM_ROOT")
+      attr_accessor permission: ("ADMIN")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDomainAccessGrantsForOrganizationOutput
+      attr_accessor items: ::Array[Types::OrganizationAccessGrantSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDomainsInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDomainsOutput
+      attr_accessor items: ::Array[Types::DomainSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIntegrationsInput
+      attr_accessor integration_type: ("AWS_CONFIG_SLREC" | "SLACK" | "EXTERNAL_AGENT" | "AWS_INTEGRATION")
+      attr_accessor status: ("ACTIVE" | "DELETED" | "PENDING" | "PENDING_OAUTH" | "ERROR" | "FAILED")
+      attr_accessor name: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIntegrationsOutput
+      attr_accessor items: ::Array[Types::Integration]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOmniDashboardsInput
+      attr_accessor space_id: ::String
+      attr_accessor name_prefix: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListOmniDashboardsOutput
+      attr_accessor items: ::Array[Types::OmniDashboardSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSpacesForOrganizationInput
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSpacesForOrganizationOutput
+      attr_accessor items: ::Array[Types::SpaceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListSpacesInput
+      attr_accessor domain_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListSpacesOutput
+      attr_accessor items: ::Array[Types::SpaceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTelemetryFieldsRequest
+      attr_accessor data_set_name: ::String
+      attr_accessor telemetry_type: ("LOGS" | "TRACES")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTelemetryFieldsResponse
+      attr_accessor fields: ::Array[Types::Field]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTelemetryQuerySessionsRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListTelemetryQuerySessionsResponse
+      attr_accessor sessions: ::Array[Types::SessionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListViewsRequest
+      attr_accessor type: ("USER" | "MANAGED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListViewsResponse
+      attr_accessor items: ::Array[Types::ViewSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class LogMetadata
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class Metadata
+      attr_accessor metrics: ::Array[Types::MetricMetadata]
+      attr_accessor semantics: Types::NodeSemantics
+      attr_accessor logs: ::Array[Types::LogMetadata]
+      attr_accessor traces: ::Array[Types::TraceMetadata]
+      SENSITIVE: []
+    end
+
+    class MetricMetadata
+      attr_accessor name: ::String
+      attr_accessor namespace: ::String
+      attr_accessor preferred_stat: ::String
+      attr_accessor metric_type: ::String
+      attr_accessor attributes: ::Hash[::String, ::String]
+      attr_accessor semantics: Types::MetricSemantics
+      SENSITIVE: []
+    end
+
+    class MetricSemantics
+      attr_accessor description: ::String
+      attr_accessor unit: ::String
+      SENSITIVE: []
+    end
+
+    class NoData
+      attr_accessor treat_as: ("OK" | "WARNING" | "CRITICAL" | "NODATA")
+      SENSITIVE: []
+    end
+
+    class Node
+      attr_accessor node_id: ::String
+      attr_accessor node_type: ("SERVICE" | "RESOURCE" | "REMOTE_SERVICE")
+      attr_accessor name: ::String
+      attr_accessor alternate_names: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor node_properties: Types::NodeProperties
+      attr_accessor telemetry_attributes: ::Hash[::String, ::String]
+      attr_accessor operation_details: ::Hash[::String, ::Array[::Hash[::String, ::String]]]
+      attr_accessor signal_types: ::Array[("LOGS" | "METRICS" | "TRACES" | "CONFIG" | "UNKNOWN")]
+      attr_accessor sources: ::Array[("VPC_FLOW_LOG" | "CLOUDTRAIL" | "IAM_POLICY" | "CODE_SEMANTICS" | "TELEMETRY" | "AZURE_VNET_FLOW_LOG" | "ELB_ACCESS_LOG" | "CLOUDFRONT_ACCESS_LOG" | "S3_ACCESS_LOG" | "WAF_ACCESS_LOG" | "AWS_INTEGRATION" | "CONFIG")]
+      attr_accessor metadata: Types::Metadata
+      attr_accessor first_observed_at: ::Time
+      attr_accessor last_observed_at: ::Time
+      attr_accessor edges: ::Array[Types::Edge]
+      SENSITIVE: []
+    end
+
+    class NodeFilters
+      attr_accessor node_id: ::String
+      attr_accessor node_type: ("SERVICE" | "RESOURCE" | "REMOTE_SERVICE")
+      attr_accessor name: ::String
+      attr_accessor tags: ::Array[Types::KeyFilter]
+      attr_accessor telemetry_attributes: ::Array[Types::KeyFilter]
+      attr_accessor region: ::Array[::String]
+      attr_accessor cloud_provider: ::Array[::String]
+      attr_accessor source_account_id: ::Array[::String]
+      attr_accessor namespace: ::Array[::String]
+      attr_accessor category: ::Array[("GEN_AI_AGENT" | "GEN_AI_MODEL" | "DATABASE" | "MESSAGING_QUEUE" | "COMPUTE" | "STORAGE" | "NETWORK")]
+      attr_accessor stage: ::Array[::String]
+      attr_accessor sources: ::Array[("VPC_FLOW_LOG" | "CLOUDTRAIL" | "IAM_POLICY" | "CODE_SEMANTICS" | "TELEMETRY" | "AZURE_VNET_FLOW_LOG" | "ELB_ACCESS_LOG" | "CLOUDFRONT_ACCESS_LOG" | "S3_ACCESS_LOG" | "WAF_ACCESS_LOG" | "AWS_INTEGRATION" | "CONFIG")]
+      SENSITIVE: []
+    end
+
+    class NodeProperties
+      attr_accessor region: ::String
+      attr_accessor cloud_provider: ::String
+      attr_accessor source_account_id: ::String
+      attr_accessor namespace: ::String
+      attr_accessor category: ("GEN_AI_AGENT" | "GEN_AI_MODEL" | "DATABASE" | "MESSAGING_QUEUE" | "COMPUTE" | "STORAGE" | "NETWORK")
+      attr_accessor stage: ::String
+      SENSITIVE: []
+    end
+
+    class NodeSemantics
+      attr_accessor purpose: ::String
+      attr_accessor language: ::String
+      attr_accessor framework: ::String
+      attr_accessor kind: ::String
+      attr_accessor repository: ::String
+      SENSITIVE: []
+    end
+
+    class NotificationRule
+      attr_accessor trigger: Types::NotificationTrigger
+      attr_accessor target: Types::NotificationTarget
+      SENSITIVE: []
+    end
+
+    class NotificationTarget
+      attr_accessor type: ("sns" | "slack" | "pagerduty")
+      attr_accessor arn: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class NotificationTrigger
+      attr_accessor state_values: ::Array[("OK" | "WARNING" | "CRITICAL" | "NODATA")]
+      SENSITIVE: []
+    end
+
+    class OAuthClientCredential
+      attr_accessor client_id: ::String
+      attr_accessor client_secret: ::String
+      attr_accessor provider_id: ::String
+      SENSITIVE: [:client_secret]
+    end
+
+    class OAuthCodeCredential
+      attr_accessor auth_code: ::String
+      SENSITIVE: []
+    end
+
+    class OmniDashboard
+      attr_accessor dashboard_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor body: ::String
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class OmniDashboardSummary
+      attr_accessor dashboard_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor name: ::String
+      attr_accessor created_by: ::String
+      attr_accessor description: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class OrganizationAccessGrant
+      attr_accessor grant_id: ::String
+      attr_accessor grant_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor principal: Types::OrganizationAccessGrantPrincipal
+      attr_accessor permission: ("ADMIN")
+      attr_accessor grant_type: ("SERVICE_MANAGED" | "CUSTOMER_MANAGED")
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class OrganizationAccessGrantPrincipal
+      attr_accessor principal_type: ("IDC_USER" | "IDC_GROUP" | "IAM_USER" | "IAM_ROLE" | "IAM_ROOT")
+      attr_accessor principal_id: ::String
+      attr_accessor principal_attributes: ::Array[Types::AccessGrantPrincipalAttribute]
+      SENSITIVE: []
+    end
+
+    class OrganizationAccessGrantSummary
+      attr_accessor grant_id: ::String
+      attr_accessor grant_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor principal: Types::OrganizationAccessGrantPrincipal
+      attr_accessor permission: ("ADMIN")
+      attr_accessor grant_type: ("SERVICE_MANAGED" | "CUSTOMER_MANAGED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class OrganizationDomain
+      attr_accessor domain_id: ::String
+      attr_accessor domain_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor domain_endpoint_url: ::String
+      attr_accessor custom_endpoint_urls: ::Array[::String]
+      attr_accessor organization_id: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor identity_providers: ::Array[("IAM" | "IDC")]
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
+      attr_accessor identity_center_application_arn: ::String
+      attr_accessor region: ::String
+      attr_accessor status: ("ACTIVE")
+      attr_accessor domain_access_role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PartialResults
+      attr_accessor partial_results_detected: bool
+      SENSITIVE: []
+    end
+
+    class PrincipalSearchResult
+      attr_accessor principal_id: ::String
+      attr_accessor principal_type: ("USER" | "GROUP")
+      attr_accessor display_name: ::String
+      attr_accessor user_name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class PutIntelligenceConfigurationInput
+      attr_accessor kms_key_arn: ::String
+      attr_accessor remove_kms_key: bool
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class PutIntelligenceConfigurationOutput
+      attr_accessor account_id: ::String
+      attr_accessor kms_key_arn: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class QueryStatistics
+      attr_accessor bytes_scanned: ::Float
+      attr_accessor percent_complete: ::Integer
+      attr_accessor records_scanned: ::Integer
+      attr_accessor records_matched: ::Integer
+      attr_accessor partial_results: Types::PartialResults
+      SENSITIVE: []
+    end
+
+    class ResourceNotFoundException
+      attr_accessor message: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceScope
+      attr_accessor resource_type: ::String
+      attr_accessor resource_arns: ::Array[::String]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor signal_types: ::Array[("LOGS" | "TRACES")]
+      attr_accessor row_scope_groups: ::Array[::Array[Types::RowScope]]
+      SENSITIVE: []
+    end
+
+    class RowScope
+      attr_accessor field: ::String
+      attr_accessor operator: ("IN")
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class Rule
+      attr_accessor telemetry_rule: Types::TelemetryRule
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class TelemetryRule < Rule
+      end
+      class Unknown < Rule
+      end
+    end
+
+    class ScopedActions
+      attr_accessor actions: ::Array[::String]
+      attr_accessor resources: ::Array[Types::ResourceScope]
+      attr_accessor context_conditions: ::Hash[::String, ::Array[::String]]
+      SENSITIVE: []
+    end
+
+    class SearchPrincipalsInput
+      attr_accessor domain_id: ::String
+      attr_accessor search_query: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class SearchPrincipalsOutput
+      attr_accessor results: ::Array[Types::PrincipalSearchResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ServiceQuotaExceededException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class SessionSummary
+      attr_accessor session_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_activity_at: ::Time
+      attr_accessor session_name: ::String
+      SENSITIVE: []
+    end
+
+    class Space
+      attr_accessor space_id: ::String
+      attr_accessor name: ::String
+      attr_accessor space_arn: ::String
+      attr_accessor domain_arn: ::String
+      attr_accessor region: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor data_access_role_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor agent_core_evaluation_role_arn: ::String
+      attr_accessor status: ("ACTIVE" | "SUSPENDED" | "MOVING")
+      attr_accessor status_reason: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class SpaceCredentialRequestContext
+      attr_accessor space_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor target_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class SpaceSummary
+      attr_accessor space_id: ::String
+      attr_accessor name: ::String
+      attr_accessor space_arn: ::String
+      attr_accessor domain_arn: ::String
+      attr_accessor region: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor status: ("ACTIVE" | "SUSPENDED" | "MOVING")
+      attr_accessor status_reason: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StartTelemetryQueryRequest
+      attr_accessor query_string: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartTelemetryQueryResponse
+      attr_accessor query_id: ::String
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartTelemetryQuerySessionRequest
+      attr_accessor session_name: ::String
+      SENSITIVE: []
+    end
+
+    class StartTelemetryQuerySessionResponse
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopTelemetryQueryRequest
+      attr_accessor query_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopTelemetryQueryResponse < Aws::EmptyStructure
+    end
+
+    class StopTelemetryQuerySessionRequest
+      attr_accessor session_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopTelemetryQuerySessionResponse < Aws::EmptyStructure
+    end
+
+    class TelemetryRule
+      attr_accessor query: Types::AlertRuleQuery
+      attr_accessor condition: Types::AlertCondition
+      attr_accessor evaluation: Types::AlertEvaluation
+      attr_accessor no_data: Types::NoData
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
+    class TraceMetadata
+      attr_accessor attributes: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class UpdateAccessProfileInput
+      attr_accessor space_id: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateAccessProfileOutput
+      attr_accessor access_profile: Types::AccessProfile
+      SENSITIVE: []
+    end
+
+    class UpdateAlertInput
+      attr_accessor space_id: ::String
+      attr_accessor alert_id: ::String
+      attr_accessor profile_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor rule: Types::Rule
+      attr_accessor notifications_enabled: bool
+      attr_accessor notification_rules: ::Array[Types::NotificationRule]
+      SENSITIVE: []
+    end
+
+    class UpdateAlertOutput < Aws::EmptyStructure
+    end
+
+    class UpdateDomainForOrganizationInput
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      attr_accessor identity_providers: ::Array[("IAM" | "IDC")]
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateDomainForOrganizationOutput
+      attr_accessor organization_domain: Types::OrganizationDomain
+      SENSITIVE: []
+    end
+
+    class UpdateDomainInput
+      attr_accessor domain_id: ::String
+      attr_accessor name: ::String
+      attr_accessor identity_providers: ::Array[("IAM" | "IDC")]
+      attr_accessor identity_provider_configuration: Types::IdentityProviderConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateDomainOutput
+      attr_accessor domain: Types::Domain
+      SENSITIVE: []
+    end
+
+    class UpdateIntegrationInput
+      attr_accessor identifier: Types::IntegrationIdentifier
+      attr_accessor credential: Types::IntegrationCredential
+      attr_accessor integration_attributes: ::Hash[::String, ::String]
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateIntegrationOutput
+      attr_accessor integration: Types::Integration
+      SENSITIVE: []
+    end
+
+    class UpdateOmniDashboardInput
+      attr_accessor space_id: ::String
+      attr_accessor dashboard_id: ::String
+      attr_accessor body: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOmniDashboardOutput
+      attr_accessor omni_dashboard: Types::OmniDashboard
+      SENSITIVE: []
+    end
+
+    class UpdateSpaceInput
+      attr_accessor space_id: ::String
+      attr_accessor name: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      SENSITIVE: []
+    end
+
+    class UpdateSpaceOutput
+      attr_accessor space: Types::Space
+      SENSITIVE: []
+    end
+
+    class UpdateViewRequest
+      attr_accessor name: ::String
+      attr_accessor definition: ::String
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateViewResponse
+      attr_accessor name: ::String
+      attr_accessor type: ("USER" | "MANAGED")
+      attr_accessor description: ::String
+      attr_accessor definition: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      attr_accessor error_code: ::String
+      SENSITIVE: []
+    end
+
+    class ViewSummary
+      attr_accessor name: ::String
+      attr_accessor type: ("USER" | "MANAGED")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+  end
+end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.652.0 (2026-09-22)
+------------------
+
+* Feature - Amazon EC2 now supports quote-based start date changes for future-dated Capacity Reservations
+
 1.651.0 (2026-09-18)
 ------------------
 

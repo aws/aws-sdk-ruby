@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.272.0 (2026-09-22)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-cloudwatchomni` gem.
+
 3.271.0 (2026-08-25)
 ------------------
 

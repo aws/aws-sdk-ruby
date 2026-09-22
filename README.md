@@ -683,6 +683,7 @@ RubyGems.org page under "LINKS" section.
 | Braket                                                | Aws::Braket                              | aws-sdk-braket                              | 2019-09-01  |
 | CloudWatch Observability Access Manager               | Aws::OAM                                 | aws-sdk-oam                                 | 2022-06-10  |
 | CloudWatch Observability Admin Service                | Aws::ObservabilityAdmin                  | aws-sdk-observabilityadmin                  | 2018-05-10  |
+| CloudWatch Omni                                       | Aws::CloudWatchOmni                      | aws-sdk-cloudwatchomni                      | 2025-01-01  |
 | CloudWatch RUM                                        | Aws::CloudWatchRUM                       | aws-sdk-cloudwatchrum                       | 2018-05-10  |
 | CodeArtifact                                          | Aws::CodeArtifact                        | aws-sdk-codeartifact                        | 2018-09-22  |
 | Compute Optimizer Automation                          | Aws::ComputeOptimizerAutomation          | aws-sdk-computeoptimizerautomation          | 2025-09-22  |

@@ -7538,6 +7538,15 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class SubObjectStatistics
+      attr_accessor source_type: ("HIVE_PARQUET" | "HIVE_ORC" | "HIVE_CSV" | "HIVE_JSON" | "PLAIN_PARQUET" | "ICEBERG")
+      attr_accessor glue_version_id: ::String
+      attr_accessor partition_count: ::Integer
+      attr_accessor file_count: ::Integer
+      attr_accessor total_file_bytes: ::Integer
+      SENSITIVE: []
+    end
+
     class SupportedDialect
       attr_accessor dialect: ("REDSHIFT" | "ATHENA" | "SPARK")
       attr_accessor dialect_version: ::String
@@ -8405,7 +8414,9 @@ module Aws::Glue
       attr_accessor last_refresh_type: ("FULL" | "INCREMENTAL")
       attr_accessor sub_objects: ::Array[::String]
       attr_accessor sub_object_version_ids: ::Array[::Integer]
+      attr_accessor sub_objects_statistics: ::Array[Types::SubObjectStatistics]
       attr_accessor representations: ::Array[Types::ViewRepresentation]
+      attr_accessor spark_pipeline_info: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -8419,6 +8430,8 @@ module Aws::Glue
       attr_accessor last_refresh_type: ("FULL" | "INCREMENTAL")
       attr_accessor sub_objects: ::Array[::String]
       attr_accessor sub_object_version_ids: ::Array[::Integer]
+      attr_accessor sub_objects_statistics: ::Array[Types::SubObjectStatistics]
+      attr_accessor spark_pipeline_info: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 

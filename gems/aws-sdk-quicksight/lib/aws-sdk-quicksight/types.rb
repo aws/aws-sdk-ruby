@@ -6701,6 +6701,460 @@ module Aws::QuickSight
     #   The ability to use New Relic actions.
     #   @return [String]
     #
+    # @!attribute [rw] pager_duty_agent_action
+    #   The ability to perform actions using PagerDuty Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_pager_duty_agent_action
+    #   The ability to create and update PagerDuty Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_pager_duty_agent_action
+    #   The ability to share PagerDuty Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_pager_duty_agent_action
+    #   The ability to use PagerDuty Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] visier_agent_action
+    #   The ability to perform actions using Visier Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_visier_agent_action
+    #   The ability to create and update Visier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_visier_agent_action
+    #   The ability to share Visier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_visier_agent_action
+    #   The ability to use Visier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] zoom_action
+    #   The ability to perform actions using Zoom connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_zoom_action
+    #   The ability to create and update Zoom actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_zoom_action
+    #   The ability to share Zoom actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_zoom_action
+    #   The ability to use Zoom actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] snow_flake_action
+    #   The ability to perform actions using Snowflake Cortex Agent
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_snow_flake_action
+    #   The ability to create and update Snowflake Cortex Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_snow_flake_action
+    #   The ability to share Snowflake Cortex Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_snow_flake_action
+    #   The ability to use Snowflake Cortex Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] zapier_action
+    #   The ability to perform actions using Zapier Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_zapier_action
+    #   The ability to create and update Zapier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_zapier_action
+    #   The ability to share Zapier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_zapier_action
+    #   The ability to use Zapier Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] airtable_action
+    #   The ability to perform actions using Airtable connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_airtable_action
+    #   The ability to create and update Airtable actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_airtable_action
+    #   The ability to share Airtable actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_airtable_action
+    #   The ability to use Airtable actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] dropbox_action
+    #   The ability to perform actions using Dropbox connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_dropbox_action
+    #   The ability to create and update Dropbox actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_dropbox_action
+    #   The ability to share Dropbox actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_dropbox_action
+    #   The ability to use Dropbox actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] gmail_action
+    #   The ability to perform actions using Gmail connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_gmail_action
+    #   The ability to create and update Gmail actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_gmail_action
+    #   The ability to share Gmail actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_gmail_action
+    #   The ability to use Gmail actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_analytics_action
+    #   The ability to perform actions using Google Analytics connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_analytics_action
+    #   The ability to create and update Google Analytics actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_analytics_action
+    #   The ability to share Google Analytics actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_analytics_action
+    #   The ability to use Google Analytics actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_docs_action
+    #   The ability to perform actions using Google Docs connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_docs_action
+    #   The ability to create and update Google Docs actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_docs_action
+    #   The ability to share Google Docs actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_docs_action
+    #   The ability to use Google Docs actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_drive_action
+    #   The ability to perform actions using Google Drive connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_drive_action
+    #   The ability to create and update Google Drive actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_drive_action
+    #   The ability to share Google Drive actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_drive_action
+    #   The ability to use Google Drive actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_meet_action
+    #   The ability to perform actions using Google Meet connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_meet_action
+    #   The ability to create and update Google Meet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_meet_action
+    #   The ability to share Google Meet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_meet_action
+    #   The ability to use Google Meet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_sheets_action
+    #   The ability to perform actions using Google Sheets connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_sheets_action
+    #   The ability to create and update Google Sheets actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_sheets_action
+    #   The ability to share Google Sheets actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_sheets_action
+    #   The ability to use Google Sheets actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_slides_action
+    #   The ability to perform actions using Google Slides connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_slides_action
+    #   The ability to create and update Google Slides actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_slides_action
+    #   The ability to share Google Slides actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_slides_action
+    #   The ability to use Google Slides actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_books_action
+    #   The ability to perform actions using QuickBooks connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_quick_books_action
+    #   The ability to create and update QuickBooks actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_quick_books_action
+    #   The ability to share QuickBooks actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_quick_books_action
+    #   The ability to use QuickBooks actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] figma_action
+    #   The ability to perform actions using Figma connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_figma_action
+    #   The ability to create and update Figma actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_figma_action
+    #   The ability to share Figma actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_figma_action
+    #   The ability to use Figma actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] whats_app_action
+    #   The ability to perform actions using WhatsApp connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_whats_app_action
+    #   The ability to create and update WhatsApp actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_whats_app_action
+    #   The ability to share WhatsApp actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_whats_app_action
+    #   The ability to use WhatsApp actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] google_chat_action
+    #   The ability to perform actions using Google Chat connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_google_chat_action
+    #   The ability to create and update Google Chat actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_google_chat_action
+    #   The ability to share Google Chat actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_google_chat_action
+    #   The ability to use Google Chat actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] one_note_action
+    #   The ability to perform actions using Microsoft OneNote connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_one_note_action
+    #   The ability to create and update Microsoft OneNote actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_one_note_action
+    #   The ability to share Microsoft OneNote actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_one_note_action
+    #   The ability to use Microsoft OneNote actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] shopify_action
+    #   The ability to perform actions using Shopify connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_shopify_action
+    #   The ability to create and update Shopify actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_shopify_action
+    #   The ability to share Shopify actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_shopify_action
+    #   The ability to use Shopify actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] adobe_action
+    #   The ability to perform actions using Adobe Marketing Agent
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_adobe_action
+    #   The ability to create and update Adobe Marketing Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_adobe_action
+    #   The ability to share Adobe Marketing Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_adobe_action
+    #   The ability to use Adobe Marketing Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] cisco_webex_vidcast_action
+    #   The ability to perform actions using Cisco Webex Video Messaging
+    #   Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_cisco_webex_vidcast_action
+    #   The ability to create and update Cisco Webex Video Messaging Agent
+    #   actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_cisco_webex_vidcast_action
+    #   The ability to share Cisco Webex Video Messaging Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_cisco_webex_vidcast_action
+    #   The ability to use Cisco Webex Video Messaging Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] cisco_webex_meetings_action
+    #   The ability to perform actions using Cisco Webex Meetings
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_cisco_webex_meetings_action
+    #   The ability to create and update Cisco Webex Meetings actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_cisco_webex_meetings_action
+    #   The ability to share Cisco Webex Meetings actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_cisco_webex_meetings_action
+    #   The ability to use Cisco Webex Meetings actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] dun_and_bradstreet_action
+    #   The ability to perform actions using Dun and Bradstreet connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_dun_and_bradstreet_action
+    #   The ability to create and update Dun and Bradstreet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_dun_and_bradstreet_action
+    #   The ability to share Dun and Bradstreet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_dun_and_bradstreet_action
+    #   The ability to use Dun and Bradstreet actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] hg_insights_action
+    #   The ability to perform actions using HG Insights Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_hg_insights_action
+    #   The ability to create and update HG Insights Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_hg_insights_action
+    #   The ability to share HG Insights Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_hg_insights_action
+    #   The ability to use HG Insights Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] zoom_info_action
+    #   The ability to perform actions using ZoomInfo Agent connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_zoom_info_action
+    #   The ability to create and update ZoomInfo Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_zoom_info_action
+    #   The ability to share ZoomInfo Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_zoom_info_action
+    #   The ability to use ZoomInfo Agent actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] moodys_action
+    #   The ability to perform actions using Moody's GenAI Ready Data
+    #   connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_moodys_action
+    #   The ability to create and update Moody's GenAI Ready Data actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_moodys_action
+    #   The ability to share Moody's GenAI Ready Data actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_moodys_action
+    #   The ability to use Moody's GenAI Ready Data actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] bee_action
+    #   The ability to perform actions using Bee connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_bee_action
+    #   The ability to create and update Bee actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_bee_action
+    #   The ability to share Bee actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_bee_action
+    #   The ability to use Bee actions.
+    #   @return [String]
+    #
     # @!attribute [rw] topic
     #   The ability to perform Topic-related actions.
     #   @return [String]
@@ -7073,6 +7527,118 @@ module Aws::QuickSight
       :create_and_update_new_relic_action,
       :share_new_relic_action,
       :use_new_relic_action,
+      :pager_duty_agent_action,
+      :create_and_update_pager_duty_agent_action,
+      :share_pager_duty_agent_action,
+      :use_pager_duty_agent_action,
+      :visier_agent_action,
+      :create_and_update_visier_agent_action,
+      :share_visier_agent_action,
+      :use_visier_agent_action,
+      :zoom_action,
+      :create_and_update_zoom_action,
+      :share_zoom_action,
+      :use_zoom_action,
+      :snow_flake_action,
+      :create_and_update_snow_flake_action,
+      :share_snow_flake_action,
+      :use_snow_flake_action,
+      :zapier_action,
+      :create_and_update_zapier_action,
+      :share_zapier_action,
+      :use_zapier_action,
+      :airtable_action,
+      :create_and_update_airtable_action,
+      :share_airtable_action,
+      :use_airtable_action,
+      :dropbox_action,
+      :create_and_update_dropbox_action,
+      :share_dropbox_action,
+      :use_dropbox_action,
+      :gmail_action,
+      :create_and_update_gmail_action,
+      :share_gmail_action,
+      :use_gmail_action,
+      :google_analytics_action,
+      :create_and_update_google_analytics_action,
+      :share_google_analytics_action,
+      :use_google_analytics_action,
+      :google_docs_action,
+      :create_and_update_google_docs_action,
+      :share_google_docs_action,
+      :use_google_docs_action,
+      :google_drive_action,
+      :create_and_update_google_drive_action,
+      :share_google_drive_action,
+      :use_google_drive_action,
+      :google_meet_action,
+      :create_and_update_google_meet_action,
+      :share_google_meet_action,
+      :use_google_meet_action,
+      :google_sheets_action,
+      :create_and_update_google_sheets_action,
+      :share_google_sheets_action,
+      :use_google_sheets_action,
+      :google_slides_action,
+      :create_and_update_google_slides_action,
+      :share_google_slides_action,
+      :use_google_slides_action,
+      :quick_books_action,
+      :create_and_update_quick_books_action,
+      :share_quick_books_action,
+      :use_quick_books_action,
+      :figma_action,
+      :create_and_update_figma_action,
+      :share_figma_action,
+      :use_figma_action,
+      :whats_app_action,
+      :create_and_update_whats_app_action,
+      :share_whats_app_action,
+      :use_whats_app_action,
+      :google_chat_action,
+      :create_and_update_google_chat_action,
+      :share_google_chat_action,
+      :use_google_chat_action,
+      :one_note_action,
+      :create_and_update_one_note_action,
+      :share_one_note_action,
+      :use_one_note_action,
+      :shopify_action,
+      :create_and_update_shopify_action,
+      :share_shopify_action,
+      :use_shopify_action,
+      :adobe_action,
+      :create_and_update_adobe_action,
+      :share_adobe_action,
+      :use_adobe_action,
+      :cisco_webex_vidcast_action,
+      :create_and_update_cisco_webex_vidcast_action,
+      :share_cisco_webex_vidcast_action,
+      :use_cisco_webex_vidcast_action,
+      :cisco_webex_meetings_action,
+      :create_and_update_cisco_webex_meetings_action,
+      :share_cisco_webex_meetings_action,
+      :use_cisco_webex_meetings_action,
+      :dun_and_bradstreet_action,
+      :create_and_update_dun_and_bradstreet_action,
+      :share_dun_and_bradstreet_action,
+      :use_dun_and_bradstreet_action,
+      :hg_insights_action,
+      :create_and_update_hg_insights_action,
+      :share_hg_insights_action,
+      :use_hg_insights_action,
+      :zoom_info_action,
+      :create_and_update_zoom_info_action,
+      :share_zoom_info_action,
+      :use_zoom_info_action,
+      :moodys_action,
+      :create_and_update_moodys_action,
+      :share_moodys_action,
+      :use_moodys_action,
+      :bee_action,
+      :create_and_update_bee_action,
+      :share_bee_action,
+      :use_bee_action,
       :topic,
       :edit_visual_with_q,
       :build_calculated_field_with_q,

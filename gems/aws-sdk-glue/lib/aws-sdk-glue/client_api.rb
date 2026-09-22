@@ -1259,6 +1259,7 @@ module Aws::Glue
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
+    NullableLong = Shapes::IntegerShape.new(name: 'NullableLong')
     NullableString = Shapes::StringShape.new(name: 'NullableString')
     NumberTargetPartitionsString = Shapes::StringShape.new(name: 'NumberTargetPartitionsString')
     OAuth2ClientApplication = Shapes::StructureShape.new(name: 'OAuth2ClientApplication')
@@ -1580,6 +1581,9 @@ module Aws::Glue
     SparkConnectEndpointUrl = Shapes::StringShape.new(name: 'SparkConnectEndpointUrl')
     SparkConnectorSource = Shapes::StructureShape.new(name: 'SparkConnectorSource')
     SparkConnectorTarget = Shapes::StructureShape.new(name: 'SparkConnectorTarget')
+    SparkPipelineInfoKey = Shapes::StringShape.new(name: 'SparkPipelineInfoKey')
+    SparkPipelineInfoMap = Shapes::MapShape.new(name: 'SparkPipelineInfoMap')
+    SparkPipelineInfoValue = Shapes::StringShape.new(name: 'SparkPipelineInfoValue')
     SparkSQL = Shapes::StructureShape.new(name: 'SparkSQL')
     Spigot = Shapes::StructureShape.new(name: 'Spigot')
     SplitFields = Shapes::StructureShape.new(name: 'SplitFields')
@@ -1659,6 +1663,9 @@ module Aws::Glue
     StringColumnStatisticsData = Shapes::StructureShape.new(name: 'StringColumnStatisticsData')
     StringList = Shapes::ListShape.new(name: 'StringList')
     StringToStringMap = Shapes::MapShape.new(name: 'StringToStringMap')
+    SubObjectSourceType = Shapes::StringShape.new(name: 'SubObjectSourceType')
+    SubObjectStatistics = Shapes::StructureShape.new(name: 'SubObjectStatistics')
+    SubObjectsStatisticsList = Shapes::ListShape.new(name: 'SubObjectsStatisticsList')
     SupportedDialect = Shapes::StructureShape.new(name: 'SupportedDialect')
     Table = Shapes::StructureShape.new(name: 'Table')
     TableAttributes = Shapes::StringShape.new(name: 'TableAttributes')
@@ -7722,6 +7729,9 @@ module Aws::Glue
     SparkConnectorTarget.add_member(:output_schemas, Shapes::ShapeRef.new(shape: GlueSchemas, location_name: "OutputSchemas"))
     SparkConnectorTarget.struct_class = Types::SparkConnectorTarget
 
+    SparkPipelineInfoMap.key = Shapes::ShapeRef.new(shape: SparkPipelineInfoKey)
+    SparkPipelineInfoMap.value = Shapes::ShapeRef.new(shape: SparkPipelineInfoValue)
+
     SparkSQL.add_member(:name, Shapes::ShapeRef.new(shape: NodeName, required: true, location_name: "Name"))
     SparkSQL.add_member(:inputs, Shapes::ShapeRef.new(shape: ManyInputs, required: true, location_name: "Inputs"))
     SparkSQL.add_member(:sql_query, Shapes::ShapeRef.new(shape: SqlQuery, required: true, location_name: "SqlQuery"))
@@ -8021,6 +8031,15 @@ module Aws::Glue
 
     StringToStringMap.key = Shapes::ShapeRef.new(shape: NullableString)
     StringToStringMap.value = Shapes::ShapeRef.new(shape: NullableString)
+
+    SubObjectStatistics.add_member(:source_type, Shapes::ShapeRef.new(shape: SubObjectSourceType, location_name: "SourceType"))
+    SubObjectStatistics.add_member(:glue_version_id, Shapes::ShapeRef.new(shape: NullableString, location_name: "GlueVersionId"))
+    SubObjectStatistics.add_member(:partition_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "PartitionCount"))
+    SubObjectStatistics.add_member(:file_count, Shapes::ShapeRef.new(shape: NullableLong, location_name: "FileCount"))
+    SubObjectStatistics.add_member(:total_file_bytes, Shapes::ShapeRef.new(shape: NullableLong, location_name: "TotalFileBytes"))
+    SubObjectStatistics.struct_class = Types::SubObjectStatistics
+
+    SubObjectsStatisticsList.member = Shapes::ShapeRef.new(shape: SubObjectStatistics)
 
     SupportedDialect.add_member(:dialect, Shapes::ShapeRef.new(shape: ViewDialect, location_name: "Dialect"))
     SupportedDialect.add_member(:dialect_version, Shapes::ShapeRef.new(shape: ViewDialectVersionString, location_name: "DialectVersion"))
@@ -8714,7 +8733,9 @@ module Aws::Glue
     ViewDefinition.add_member(:last_refresh_type, Shapes::ShapeRef.new(shape: LastRefreshType, location_name: "LastRefreshType"))
     ViewDefinition.add_member(:sub_objects, Shapes::ShapeRef.new(shape: ViewSubObjectsList, location_name: "SubObjects"))
     ViewDefinition.add_member(:sub_object_version_ids, Shapes::ShapeRef.new(shape: ViewSubObjectVersionIdsList, location_name: "SubObjectVersionIds"))
+    ViewDefinition.add_member(:sub_objects_statistics, Shapes::ShapeRef.new(shape: SubObjectsStatisticsList, location_name: "SubObjectsStatistics"))
     ViewDefinition.add_member(:representations, Shapes::ShapeRef.new(shape: ViewRepresentationList, location_name: "Representations"))
+    ViewDefinition.add_member(:spark_pipeline_info, Shapes::ShapeRef.new(shape: SparkPipelineInfoMap, location_name: "SparkPipelineInfo"))
     ViewDefinition.struct_class = Types::ViewDefinition
 
     ViewDefinitionInput.add_member(:is_protected, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "IsProtected"))
@@ -8726,6 +8747,8 @@ module Aws::Glue
     ViewDefinitionInput.add_member(:last_refresh_type, Shapes::ShapeRef.new(shape: LastRefreshType, location_name: "LastRefreshType"))
     ViewDefinitionInput.add_member(:sub_objects, Shapes::ShapeRef.new(shape: ViewSubObjectsList, location_name: "SubObjects"))
     ViewDefinitionInput.add_member(:sub_object_version_ids, Shapes::ShapeRef.new(shape: ViewSubObjectVersionIdsList, location_name: "SubObjectVersionIds"))
+    ViewDefinitionInput.add_member(:sub_objects_statistics, Shapes::ShapeRef.new(shape: SubObjectsStatisticsList, location_name: "SubObjectsStatistics"))
+    ViewDefinitionInput.add_member(:spark_pipeline_info, Shapes::ShapeRef.new(shape: SparkPipelineInfoMap, location_name: "SparkPipelineInfo"))
     ViewDefinitionInput.struct_class = Types::ViewDefinitionInput
 
     ViewRepresentation.add_member(:dialect, Shapes::ShapeRef.new(shape: ViewDialect, location_name: "Dialect"))

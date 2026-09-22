@@ -6718,6 +6718,36 @@ module Aws::EC2
     #   with the source reservation for interruptible Capacity Reservations.
     #   @return [Types::InterruptionInfo]
     #
+    # @!attribute [rw] adjustment_status
+    #   The status of the most recent modification to the Capacity
+    #   Reservation. A Capacity Reservation can have one of the following
+    #   adjustment statuses:
+    #
+    #   * `requested` - The modification was requested and is being
+    #     processed.
+    #
+    #   * `applied` - The modification was applied to the Capacity
+    #     Reservation.
+    #
+    #   * `rejected` - The modification was not applied and the Capacity
+    #     Reservation keeps its existing configuration.
+    #
+    #   This field is not returned if the Capacity Reservation has never
+    #   been modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] adjustment_details
+    #   The configuration that the Capacity Reservation will have after the
+    #   requested adjustment is applied.
+    #   @return [Types::CapacityReservationAdjustmentDetails]
+    #
+    # @!attribute [rw] original_start_date
+    #   The start date that you originally requested for the Capacity
+    #   Reservation, in the ISO8601 format in the UTC time zone
+    #   (`YYYY-MM-DDThh:mm:ss.sssZ`). This value doesn't change when you
+    #   push out the start date.
+    #   @return [Time]
+    #
     # @!attribute [rw] zero_size_preference
     #   The zero-size preference configured for the interruptible Capacity
     #   Reservation. A value of `retain` keeps the interruptible Capacity
@@ -6760,7 +6790,56 @@ module Aws::EC2
       :interruptible,
       :interruptible_capacity_allocation,
       :interruption_info,
+      :adjustment_status,
+      :adjustment_details,
+      :original_start_date,
       :zero_size_preference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration that a Capacity Reservation will have
+    # after a pending adjustment is applied.
+    #
+    # @!attribute [rw] start_date
+    #   The start date that the Capacity Reservation will have after the
+    #   adjustment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The end date that the Capacity Reservation will have after the
+    #   adjustment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] commitment_end_date
+    #   The date and time at which the commitment duration will expire after
+    #   the adjustment.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_type
+    #   Indicates the way in which the Capacity Reservation will end after
+    #   the adjustment. Possible values are:
+    #
+    #   * `unlimited` - The Capacity Reservation remains active until you
+    #     explicitly cancel it.
+    #
+    #   * `limited` - The Capacity Reservation expires automatically at the
+    #     date and time given by `endDate`.
+    #   @return [String]
+    #
+    # @!attribute [rw] commitment_duration
+    #   The commitment duration, in seconds, that the Capacity Reservation
+    #   will have after the adjustment.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationAdjustmentDetails AWS API Documentation
+    #
+    class CapacityReservationAdjustmentDetails < Struct.new(
+      :start_date,
+      :end_date,
+      :commitment_end_date,
+      :end_date_type,
+      :commitment_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6888,11 +6967,19 @@ module Aws::EC2
     #   Reservation before this date and time.
     #   @return [Time]
     #
+    # @!attribute [rw] commitment_duration
+    #   The commitment duration, in seconds, for the future-dated Capacity
+    #   Reservation. This is the minimum duration for which you commit to
+    #   having the Capacity Reservation in the `active` state in your
+    #   account after it has been delivered.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationCommitmentInfo AWS API Documentation
     #
     class CapacityReservationCommitmentInfo < Struct.new(
       :committed_instance_count,
-      :commitment_end_date)
+      :commitment_end_date,
+      :commitment_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7126,6 +7213,66 @@ module Aws::EC2
       :availability_zone,
       :tenancy,
       :availability_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a Capacity Reservation modification quote, which provides
+    # the terms for changing the start date or the commitment of a
+    # future-dated Capacity Reservation.
+    #
+    # @!attribute [rw] capacity_reservation_modification_quote_id
+    #   The ID of the modification quote.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation associated with the modification
+    #   quote.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The date and time at which the modification quote was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] expiration_time
+    #   The date and time at which the modification quote expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] quote_state
+    #   The state of the modification quote itself. Possible values are:
+    #
+    #   * `active` - The quote can still be used.
+    #
+    #   * `expired` - The quote can no longer be used. A quote becomes
+    #     `expired` at its `expirationTime`.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_configuration
+    #   The configuration that the Capacity Reservation has at the time the
+    #   quote was generated.
+    #   @return [Types::ModificationQuoteCurrentConfiguration]
+    #
+    # @!attribute [rw] modification_terms
+    #   The terms of the modification, including the configuration that the
+    #   Capacity Reservation will have if you accept them by using
+    #   `ModifyCapacityReservation`.
+    #   @return [Types::ModificationTerms]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the modification quote.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityReservationModificationQuote AWS API Documentation
+    #
+    class CapacityReservationModificationQuote < Struct.new(
+      :capacity_reservation_modification_quote_id,
+      :capacity_reservation_id,
+      :create_time,
+      :expiration_time,
+      :quote_state,
+      :current_configuration,
+      :modification_terms,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9933,6 +10080,65 @@ module Aws::EC2
     #
     class CreateCapacityReservationCancellationQuoteResult < Struct.new(
       :capacity_reservation_cancellation_quote)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation_id
+    #   The ID of the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_start_date
+    #   The requested new start date for the Capacity Reservation, in the
+    #   ISO8601 format in the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   The new start date must be later than the current start date and
+    #   within the cumulative 30-day pushout limit.
+    #   @return [Time]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. For more information, see [Ensure
+    #   Idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   The tags to apply to the date change quote.
+    #   @return [Array<Types::TagSpecification>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservationDateChangeQuoteRequest AWS API Documentation
+    #
+    class CreateCapacityReservationDateChangeQuoteRequest < Struct.new(
+      :capacity_reservation_id,
+      :new_start_date,
+      :client_token,
+      :tag_specifications,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation_modification_quote
+    #   Information about the Capacity Reservation date change quote.
+    #   @return [Types::CapacityReservationModificationQuote]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateCapacityReservationDateChangeQuoteResult AWS API Documentation
+    #
+    class CreateCapacityReservationDateChangeQuoteResult < Struct.new(
+      :capacity_reservation_modification_quote)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24317,6 +24523,65 @@ module Aws::EC2
     #
     class DescribeCapacityReservationCancellationQuotesResult < Struct.new(
       :capacity_reservation_cancellation_quotes,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation_modification_quote_ids
+    #   The IDs of the date change quotes to describe.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters. Filter names and values are case-sensitive.
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservationDateChangeQuotesRequest AWS API Documentation
+    #
+    class DescribeCapacityReservationDateChangeQuotesRequest < Struct.new(
+      :capacity_reservation_modification_quote_ids,
+      :max_results,
+      :next_token,
+      :dry_run,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] capacity_reservation_modification_quotes
+    #   Information about the Capacity Reservation date change quotes.
+    #   @return [Array<Types::CapacityReservationModificationQuote>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeCapacityReservationDateChangeQuotesResult AWS API Documentation
+    #
+    class DescribeCapacityReservationDateChangeQuotesResult < Struct.new(
+      :capacity_reservation_modification_quotes,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -64306,6 +64571,84 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes the configuration that a Capacity Reservation has at the
+    # time a modification quote is generated.
+    #
+    # @!attribute [rw] instance_count
+    #   The number of instances in the Capacity Reservation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] reservation_state
+    #   The current state of the Capacity Reservation.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The start date that the Capacity Reservation has before the quoted
+    #   modification is applied.
+    #   @return [Time]
+    #
+    # @!attribute [rw] original_start_date
+    #   The start date that the Capacity Reservation was originally
+    #   requested with. This value does not change when you push out the
+    #   start date.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModificationQuoteCurrentConfiguration AWS API Documentation
+    #
+    class ModificationQuoteCurrentConfiguration < Struct.new(
+      :instance_count,
+      :reservation_state,
+      :start_date,
+      :original_start_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the changes that a Capacity Reservation modification quote
+    # will apply to a Capacity Reservation.
+    #
+    # @!attribute [rw] new_commitment_end_date
+    #   The date and time at which the commitment duration will expire after
+    #   the modification, in the ISO8601 format in the UTC time zone
+    #   (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] new_start_date
+    #   The start date that the Capacity Reservation will have after the
+    #   modification, in the ISO8601 format in the UTC time zone
+    #   (`YYYY-MM-DDThh:mm:ss.sssZ`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] new_commitment_duration
+    #   The commitment duration, in seconds, that the Capacity Reservation
+    #   will have after the modification.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModificationReservationUpdate AWS API Documentation
+    #
+    class ModificationReservationUpdate < Struct.new(
+      :new_commitment_end_date,
+      :new_start_date,
+      :new_commitment_duration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the terms of a Capacity Reservation modification quote.
+    #
+    # @!attribute [rw] reservation_update
+    #   The changes that will be applied to the Capacity Reservation if you
+    #   accept the modification terms.
+    #   @return [Types::ModificationReservationUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModificationTerms AWS API Documentation
+    #
+    class ModificationTerms < Struct.new(
+      :reservation_update)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -64746,6 +65089,27 @@ module Aws::EC2
     #   completely idle (zero usage).
     #   @return [String]
     #
+    # @!attribute [rw] accept_modification_terms
+    #   Indicates that you accept the modification terms of the quote
+    #   identified by `QuoteId`. To apply a quoted modification, set this
+    #   parameter to `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] start_date
+    #   The new start date for the Capacity Reservation, in the ISO8601
+    #   format in the UTC time zone (`YYYY-MM-DDThh:mm:ss.sssZ`). Applies to
+    #   future-dated Capacity Reservations only. Requires a quote from
+    #   `CreateCapacityReservationDateChangeQuote`; pass the quote ID in
+    #   `QuoteId` with `AcceptModificationTerms` set to `true`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] quote_id
+    #   The ID of the quote that describes the modification you want to
+    #   apply. Generate a quote by using
+    #   `CreateCapacityReservationDateChangeQuote`. The quote must be in the
+    #   `active` state, and each quote can be used only once.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyCapacityReservationRequest AWS API Documentation
     #
     class ModifyCapacityReservationRequest < Struct.new(
@@ -64756,7 +65120,10 @@ module Aws::EC2
       :accept,
       :dry_run,
       :additional_info,
-      :instance_match_criteria)
+      :instance_match_criteria,
+      :accept_modification_terms,
+      :start_date,
+      :quote_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -64766,10 +65133,23 @@ module Aws::EC2
     #   error.
     #   @return [Boolean]
     #
+    # @!attribute [rw] adjustment_status
+    #   The status of the requested modification. For a description of each
+    #   possible value, see the `adjustmentStatus` field of the
+    #   `CapacityReservation` data type.
+    #   @return [String]
+    #
+    # @!attribute [rw] adjustment_details
+    #   The configuration that the Capacity Reservation will have after the
+    #   adjustment is applied.
+    #   @return [Types::CapacityReservationAdjustmentDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyCapacityReservationResult AWS API Documentation
     #
     class ModifyCapacityReservationResult < Struct.new(
-      :return)
+      :return,
+      :adjustment_status,
+      :adjustment_details)
       SENSITIVE = []
       include Aws::Structure
     end

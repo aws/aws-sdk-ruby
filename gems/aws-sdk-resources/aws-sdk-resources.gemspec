@@ -97,6 +97,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-cloudwatch', '~> 1')
   spec.add_dependency('aws-sdk-cloudwatchevents', '~> 1')
   spec.add_dependency('aws-sdk-cloudwatchlogs', '~> 1')
+  spec.add_dependency('aws-sdk-cloudwatchomni', '~> 1')
   spec.add_dependency('aws-sdk-cloudwatchrum', '~> 1')
   spec.add_dependency('aws-sdk-codeartifact', '~> 1')
   spec.add_dependency('aws-sdk-codebuild', '~> 1')

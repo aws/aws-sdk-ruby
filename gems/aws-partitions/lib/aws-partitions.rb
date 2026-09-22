@@ -326,6 +326,7 @@ module Aws
             'CloudWatch' => 'monitoring',
             'CloudWatchEvents' => 'events',
             'CloudWatchLogs' => 'logs',
+            'CloudWatchOmni' => 'cloudwatch-omni',
             'CloudWatchRUM' => 'rum',
             'CodeArtifact' => 'codeartifact',
             'CodeBuild' => 'codebuild',
