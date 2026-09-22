@@ -8,6 +8,7 @@ require 'openssl'
 module Aws
   module CloudFront
     module Signer
+      # @api private
       SUPPORTED_HASH_ALGORITHMS = %w[SHA1 SHA256].freeze
 
       # @option options [String] :key_pair_id
@@ -82,7 +83,7 @@ module Aws
       def signature(params = {})
         signature_content = {}
         if params[:policy]
-          policy = params[:policy].gsub('/\s/s', '')
+          policy = params[:policy].gsub(/\s/, '')
           signature_content['Policy'] = encode(policy)
         elsif params[:resource] && params[:expires]
           policy = canned_policy(params[:resource], params[:expires])

@@ -73,6 +73,17 @@ module Aws
           expect(url).to eq(expected_url)
         end
 
+        it 'minifies the custom policy before signing' do
+          policy = {
+            'Statement' => [
+              'Resource' => 'images/image.jpg',
+              'Condition' => { 'DateLessThan' => { 'AWS:EpochTime' => expires } }
+            ]
+          }
+          url = 'http://abc.cloudfront.net/images/image.jpg'
+          expect(signer.signed_url(url, policy: JSON.pretty_generate(policy))).to eq(signer.signed_url(url, policy: policy.to_json))
+        end
+
         it 'can generate signed urls with canned policy' do
           url = signer.signed_url('https://abc.cloudfront.net/images/image.jpg?color=red', expires: expires)
           expected_url = 'https://abc.cloudfront.net/images/image.jpg?'\
