@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Ensure the internally-created executor is shutdown on error in `TransferManager` methods, preventing leaked worker threads on multipart transfer failures (#3419).
+
 1.232.1 (2026-09-16)
 ------------------
 
