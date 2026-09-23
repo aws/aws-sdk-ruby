@@ -42,6 +42,7 @@ require_relative 'aws-sdk-core/static_credentials_provider'
 
 # Protocol Codecs
 
+require_relative 'aws-sdk-core/extension'
 require_relative 'aws-sdk-core/query'
 require_relative 'aws-sdk-core/rest'
 
