@@ -6,45 +6,32 @@ module Aws
       module Response
         # @api private
         class Body
-          include Smithy::Schema::Shapes
-
-          def initialize(codec, ref)
+          def initialize(codec, shape)
             @codec = codec
-            @ref = ref
+            @shape = shape
+            @has_members = shape.respond_to?(:members) && !shape.members.empty?
           end
 
-          def apply(body, target) # rubocop:disable Metrics/AbcSize
+          def apply(body, target)
+            name, member, payload_type, = HTTP_EXTENSION.payload_member(@shape)
             # When string, blob, or enum as a payload, use value directly
-            if string_or_blob_payload?
+            if payload_type == :raw
               # Empty blob payloads are omitted
-              target[@ref.target[:http_payload]] = body unless empty_blob_payload?(body)
+              target[name] = body unless empty_blob_payload?(body, member)
             # Otherwise, parse the payload member
-            elsif @ref.target[:http_payload_member]
-              parsed = parse(@ref.target[:http_payload_member], body.read)
-              target[@ref.target[:http_payload]] = parsed if parsed && !parsed.empty?
-            elsif !@ref.target.members.empty?
-              parse(@ref, body.read, target)
+            elsif member
+              parsed = parse(member, body.read)
+              target[name] = parsed if parsed && !parsed.empty?
+            elsif @has_members
+              parse(@shape, body.read, target)
             end
           end
 
           private
 
-          def string_or_blob_payload?
-            return false unless @ref.target[:http_payload_member]
-
-            payload = @ref.target[:http_payload_member].target
-            payload.is_a?(StringShape) || payload.is_a?(BlobShape) || payload.is_a?(EnumShape)
-          end
-
-          def empty_blob_payload?(body)
-            non_streaming_blob_payload? && empty_body?(body)
-          end
-
-          def non_streaming_blob_payload?
-            return false unless @ref.target[:http_payload_member]
-
-            payload = @ref.target[:http_payload_member].target
-            payload.is_a?(BlobShape) && !payload.traits.key?('smithy.api#streaming')
+          def empty_blob_payload?(body, member)
+            member && SCHEMA_EXTENSION.target_shape(member) == SCHEMA_EXTENSION::SHAPE_BLOB &&
+              !SCHEMA_EXTENSION.streaming?(member.target) && empty_body?(body)
           end
 
           def empty_body?(body)

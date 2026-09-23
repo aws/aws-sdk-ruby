@@ -58,7 +58,7 @@ module Aws
         code = error_code(context, body)
         parse_error_data(context, body, code)
       rescue Smithy::Xml::ParseError
-        [http_status_error_code(context), http_status_error_code(context), Smithy::Schema::EmptyStructure.new]
+        [http_status_error_code(context), http_status_error_code(context), EMPTY_STRUCTURE.new]
       end
 
       def error_code(context, body)
@@ -70,14 +70,12 @@ module Aws
       end
 
       def parse_error_data(context, body, code)
-        context.operation.errors.each do |shape|
-          next unless code == shape.target.name
+        shape = SCHEMA_EXTENSION.error_index(context.operation)[code]
+        return [code, code, EMPTY_STRUCTURE.new] unless shape
 
-          data = error_data(@codec, shape, body)
-          Rest::Response::Headers.new(shape).apply(context.http_response, data)
-          return [shape.target.name, code, data]
-        end
-        [code, code, Smithy::Schema::EmptyStructure.new]
+        data = error_data(@codec, shape, body)
+        Rest::Response::Headers.new(shape).apply(context.http_response, data)
+        [shape.target.name, code, data]
       end
 
       def error_data(codec, shape, body)
@@ -87,7 +85,7 @@ module Aws
         if (matches = body.match(%r{<Error>(.+?)</Error>}))
           codec.parse(shape, "<#{shape.target.name}>#{matches[1]}</#{shape.target.name}>")
         else
-          Smithy::Schema::EmptyStructure.new
+          EMPTY_STRUCTURE.new
         end
       end
 

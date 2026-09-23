@@ -21,7 +21,7 @@ module Aws
           private
 
           def apply_http_method(context)
-            context.http_request.http_method = context.operation.traits['smithy.api#http']['method']
+            context.http_request.http_method = HTTP_EXTENSION.fetch(context.operation)[:method]
           end
 
           def apply_headers(context)
@@ -33,27 +33,14 @@ module Aws
           end
 
           def apply_endpoint(context)
-            Endpoint.new(context.operation).apply(context.http_request, context.params)
+            Endpoint.new(context.operation, context.operation.input).apply(context.http_request, context.params)
           end
 
           def apply_content_type_header(context)
-            if (payload_member = context.operation.input[:http_payload_member])
-              context.http_request.headers['Content-Type'] ||= payload_content_type(context, payload_member.target)
+            if (_name, _member, _type, content_type = HTTP_EXTENSION.payload_member(context.operation.input))
+              context.http_request.headers['Content-Type'] ||= content_type || default_content_type(context)
             elsif known_body?(context)
               context.http_request.headers['Content-Type'] ||= default_content_type(context)
-            end
-          end
-
-          def payload_content_type(context, payload)
-            if (media_type = payload.traits['smithy.api#mediaType'])
-              media_type
-            elsif payload.is_a?(Smithy::Schema::Shapes::BlobShape)
-              'application/octet-stream'
-            elsif payload.is_a?(Smithy::Schema::Shapes::StringShape) ||
-                  payload.is_a?(Smithy::Schema::Shapes::EnumShape)
-              'text/plain'
-            else
-              default_content_type(context)
             end
           end
 

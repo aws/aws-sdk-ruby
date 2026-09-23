@@ -6,22 +6,17 @@ module Aws
       module Response
         # @api private
         class Headers
-          include Smithy::Schema::Shapes
-
-          def initialize(ref)
-            @ref = ref
+          def initialize(shape)
+            @shape = shape
           end
 
           def apply(http_resp, target)
-            @ref.target.members.each do |name, member|
-              member_traits = member.traits
-              if member_traits.key?('smithy.api#httpHeader')
-                header = member_traits['smithy.api#httpHeader']
-                extract_header(http_resp.headers, header, member, name, target)
-              elsif member_traits.key?('smithy.api#httpPrefixHeaders')
-                header_prefix = member_traits['smithy.api#httpPrefixHeaders']
-                extract_prefix_header(http_resp.headers, header_prefix, name, target)
-              end
+            metadata = HTTP_EXTENSION.fetch(@shape)
+            metadata.fetch(:header_members, []).each do |name, member, header|
+              extract_header(http_resp.headers, header, member, name, target)
+            end
+            if (name, _, prefix = metadata[:prefix_header_member])
+              extract_prefix_header(http_resp.headers, prefix, name, target)
             end
           end
 
@@ -46,12 +41,14 @@ module Aws
           def value(ref, value)
             shape = ref.target
             case shape
-            when BooleanShape then value == 'true'
-            when FloatShape then float(value)
-            when IntegerShape, IntEnumShape then value.to_i
-            when ListShape then list(shape.member, value)
-            when StringShape, EnumShape then string(shape, value)
-            when TimestampShape then timestamp(value)
+            when ::Smithy::Schema::Shapes::BooleanShape then value == 'true'
+            when ::Smithy::Schema::Shapes::FloatShape then float(value)
+            when ::Smithy::Schema::Shapes::IntegerShape,
+                 ::Smithy::Schema::Shapes::IntEnumShape then value.to_i
+            when ::Smithy::Schema::Shapes::ListShape then list(shape.member, value)
+            when ::Smithy::Schema::Shapes::StringShape,
+                 ::Smithy::Schema::Shapes::EnumShape then string(shape, value)
+            when ::Smithy::Schema::Shapes::TimestampShape then timestamp(value)
             else value
             end
           end
@@ -69,8 +66,10 @@ module Aws
           def list(ref, value)
             shape = ref.target
             case shape
-            when StringShape then HeaderListParser.parse_string_list(value)
-            when TimestampShape then HeaderListParser.parse_timestamp_list(ref, shape, value)
+            when ::Smithy::Schema::Shapes::StringShape
+              HeaderListParser.parse_string_list(value)
+            when ::Smithy::Schema::Shapes::TimestampShape
+              HeaderListParser.parse_timestamp_list(ref, shape, value)
             else value.split(', ').map { |v| value(ref, v) }
             end
           end

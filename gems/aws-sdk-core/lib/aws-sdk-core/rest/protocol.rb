@@ -13,10 +13,11 @@ module Aws
         # Serialize the request into the REST wire format.
         # @param [HandlerContext] context
         def build_request(context) # rubocop:disable Metrics/AbcSize
-          context.http_request.http_method = context.operation.traits['smithy.api#http']['method']
+          context.http_request.http_method = HTTP_EXTENSION.fetch(context.operation)[:method]
           Rest::Request::Headers.new(context.operation.input).apply(context.http_request, context.params)
           Rest::Request::Body.new(@codec, context.operation.input).apply(context.http_request, context.params)
-          Rest::Request::Endpoint.new(context.operation).apply(context.http_request, context.params)
+          endpoint = Rest::Request::Endpoint.new(context.operation, context.operation.input)
+          endpoint.apply(context.http_request, context.params)
           apply_content_type_header(context)
         end
 
@@ -50,23 +51,10 @@ module Aws
         private
 
         def apply_content_type_header(context)
-          if (payload_member = context.operation.input[:http_payload_member])
-            context.http_request.headers['Content-Type'] ||= payload_content_type(payload_member.target)
+          if (_name, _member, _type, content_type = HTTP_EXTENSION.payload_member(context.operation.input))
+            context.http_request.headers['Content-Type'] ||= content_type || self.class::CONTENT_TYPE
           elsif known_body?(context)
             context.http_request.headers['Content-Type'] ||= self.class::CONTENT_TYPE
-          end
-        end
-
-        def payload_content_type(payload)
-          if (media_type = payload.traits['smithy.api#mediaType'])
-            media_type
-          elsif payload.is_a?(Smithy::Schema::Shapes::BlobShape)
-            'application/octet-stream'
-          elsif payload.is_a?(Smithy::Schema::Shapes::StringShape) ||
-                payload.is_a?(Smithy::Schema::Shapes::EnumShape)
-            'text/plain'
-          else
-            self.class::CONTENT_TYPE
           end
         end
 
@@ -84,16 +72,9 @@ module Aws
           "HTTP#{context.http_response.status_code}Error"
         end
 
-        # TODO: the stubbed status_code lookup here is not exercised by protocol tests
-        #  (they assert data round-trips, not the stubbed status_code, and no test model
-        #  uses httpResponseCode). Fix the lookup and add stubbed-protocol coverage
         def apply_status_code(http_resp, operation, data)
-          operation.output.members.each do |member_name, member_ref|
-            code = member_ref.traits.dig('smithy.api#http', 'code')
-            next unless code
-
-            http_resp.status_code = data[member_name] if data.key?(member_name)
-          end
+          name, = HTTP_EXTENSION.response_code_member(operation.output)
+          http_resp.status_code = data[name] if name && data.key?(name)
         end
 
         def apply_stub_headers(http_resp, operation, data)

@@ -38,8 +38,8 @@ module Aws
           def build(params)
             # keys in query maps must NOT override other keys
             query_keys = query_keys(params)
-            parts = params.map do |(member_ref, param_value)|
-              build_part(member_ref, param_value, query_keys)
+            parts = params.map do |member_ref, param_value, query_name|
+              build_part(member_ref, param_value, query_keys, query_name)
             end
             parts.reject { |p| p.nil? || p.empty? }.join('&')
           end
@@ -48,15 +48,15 @@ module Aws
 
           def query_keys(params)
             keys = Set.new
-            params.each do |(member_ref, _)|
-              name = member_ref.traits['smithy.api#httpQuery'] || member_ref.name
+            params.each do |member_ref, _, query_name|
+              name = query_name || member_ref.name
               keys << name unless member_ref.target.is_a?(MapShape)
             end
             keys
           end
 
-          def build_part(member_ref, param_value, query_keys)
-            name = member_ref.traits['smithy.api#httpQuery'] || member_ref.name
+          def build_part(member_ref, param_value, query_keys, query_name)
+            name = query_name || member_ref.name
             case member_ref.target
             # supported scalar types
             when *SUPPORTED_TYPES

@@ -6,35 +6,31 @@ module Aws
       module Request
         # @api private
         class Headers
-          include Smithy::Schema::Shapes
-
-          def initialize(ref)
-            @ref = ref
+          def initialize(shape)
+            @shape = shape
           end
 
           def apply(request_or_response, params)
-            @ref.target.members.each do |member_name, member_ref|
+            metadata = HTTP_EXTENSION.fetch(@shape)
+            metadata.fetch(:header_members, []).each do |member_name, member_ref, header_name|
               value = params[member_name]
               next if value.nil?
 
-              member_traits = member_ref.traits
-              if member_traits.key?('smithy.api#httpHeader')
-                header_name = member_traits['smithy.api#httpHeader']
-                apply_header(request_or_response.headers, header_name, member_ref, value)
-              elsif member_traits.key?('smithy.api#httpPrefixHeaders')
-                header_prefix = member_traits['smithy.api#httpPrefixHeaders']
-                apply_prefix_header(request_or_response.headers, header_prefix, value)
-              end
+              apply_header(request_or_response.headers, header_name, member_ref, value)
+            end
+
+            if (name, _, prefix = metadata[:prefix_header_member]) && (values = params[name])
+              apply_prefix_header(request_or_response.headers, prefix, values)
             end
           end
 
           private
 
           def apply_header(headers, header_name, member_ref, value)
-            case member_ref.target
-            when ListShape then list(headers, header_name, member_ref, value)
-            when StringShape then string(headers, header_name, member_ref.target, value)
-            when TimestampShape then headers[header_name] = timestamp(member_ref, value)
+            case SCHEMA_EXTENSION.target_shape(member_ref)
+            when SCHEMA_EXTENSION::SHAPE_LIST then list(headers, header_name, member_ref, value)
+            when SCHEMA_EXTENSION::SHAPE_STRING then string(headers, header_name, member_ref.target, value)
+            when SCHEMA_EXTENSION::SHAPE_TIMESTAMP then headers[header_name] = timestamp(member_ref, value)
             else default(headers, header_name, value)
             end
           end
@@ -48,10 +44,10 @@ module Aws
           def list(headers, header_name, ref, values)
             return if values.nil?
 
-            member_ref = ref.target.member
+            member_ref, member_shape = SCHEMA_EXTENSION.list_member(ref.target)
             values = values.collect do |value|
-              case member_ref.target
-              when TimestampShape
+              case member_shape
+              when SCHEMA_EXTENSION::SHAPE_TIMESTAMP
                 timestamp(member_ref, value).to_s
               else
                 escape_header_list_string(value.to_s)
@@ -61,7 +57,7 @@ module Aws
           end
 
           def string(headers, header_name, shape, value)
-            if shape.traits.key?('smithy.api#mediaType')
+            if SCHEMA_EXTENSION.media_type(shape)
               headers[header_name] = Base64.strict_encode64(value)
             else
               default(headers, header_name, value)
@@ -69,8 +65,7 @@ module Aws
           end
 
           def timestamp(ref, value)
-            trait = 'smithy.api#timestampFormat'
-            case ref.traits[trait] || ref.target.traits[trait]
+            case SCHEMA_EXTENSION.timestamp_format(ref)
             when 'date-time' then value.utc.iso8601
             when 'epoch-seconds' then value.to_i
             else

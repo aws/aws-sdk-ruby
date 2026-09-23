@@ -3,6 +3,7 @@
 module Aws
   module Core
     SCHEMA_EXTENSION = Smithy::Schema::Extension
+    HTTP_EXTENSION = Smithy::Client::HttpExtension
     EMPTY_STRUCTURE = Smithy::Schema::EmptyStructure
 
     # Cached AWS service metadata.
